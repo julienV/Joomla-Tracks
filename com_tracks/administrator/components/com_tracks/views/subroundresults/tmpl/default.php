@@ -21,6 +21,72 @@ $user 	=& JFactory::getUser();
 
 JHTML::_('behavior.tooltip');
 ?>
+<style>
+.search-item {
+    font:normal 11px tahoma, arial, helvetica, sans-serif;
+    padding:3px 10px 3px 10px;
+    border:1px solid #fff;
+    border-bottom:1px solid #eeeeee;
+    white-space:normal;
+    color:#555;
+}
+.search-item h3 {
+    display:block;
+    font:inherit;
+    font-weight:bold;
+    color:#222;
+}
+
+.search-item h3 span {
+    float: right;
+    font-weight:normal;
+    margin:0 0 5px 5px;
+    width:100px;
+    display:block;
+    clear:none;
+}
+</style>
+<script type="text/javascript" src="<?php echo $this->site_url;?>administrator/components/com_tracks/ext/adapter/ext/ext-base.js"></script>
+<script type="text/javascript" src="<?php echo $this->site_url;?>administrator/components/com_tracks/ext/ext-all.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->site_url;?>administrator/components/com_tracks/ext/resources/css/ext-all.css" />
+<script type="text/javascript">
+Ext.onReady(function() {
+	Ext.QuickTips.init();
+	var search = new Ext.form.ComboBox({
+		name: "quick_add",
+		allowBlank: true,
+		store: new Ext.data.Store({
+			proxy: new Ext.data.HttpProxy({
+				url: "<?php echo $this->site_url;?>administrator/index.php?option=com_tracks&controller=quickadd&task=search"
+			}),
+			reader: new Ext.data.JsonReader({
+				root: "rows",
+				totalProperty: "totalCount",
+				id: "id"
+			}, [
+				{name: "name", mapping: "name"},
+				{name: "id", mapping: "id"},
+				{name: "nickname", mapping: "nickname"}
+			])
+		}),
+		tpl: new Ext.XTemplate(
+			'<tpl for="."><div class="search-item">',
+			'<h3>{name}</h3>',
+			'Nickname: {nickname}',
+			'</div></tpl>'
+		),
+		itemSelector: "div.search-item",
+		valueField: "id",
+		displayField: "name",
+		hiddenName: "quick_add",
+		forceSelection: false,
+		typeAhead: false,
+		loadingText: "Searching...",
+		hideTrigger: true,
+		applyTo: "quickadd"
+	});
+});
+</script>
 
 <script language="javascript" type="text/javascript">
 function submitbutton(pressbutton)
@@ -35,6 +101,17 @@ function submitbutton(pressbutton)
 </script>
 
 <div id="tracksmain">
+<form action="<?php echo $this->site_url; ?>administrator/index.php?option=com_tracks&controller=quickadd&task=add" method="post">
+<input type="hidden" name="srid" value="<?php echo $this->subround_id; ?>" />
+<table>
+	<tr>
+		<td>Quick Add:</td>
+		<td><input type="textbox" name="quickadd" id="quickadd" /></td>
+		<td><input type="submit" name="submit" value="Add" /></td>
+	</tr>
+</table>
+</form>
+<br />
 <form action="<?php echo $this->request_url; ?>" method="post" name="adminForm">
 <div id="editcell">
 	<table class="adminlist">

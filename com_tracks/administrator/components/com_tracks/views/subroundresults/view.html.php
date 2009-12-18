@@ -35,6 +35,7 @@ class TracksViewSubroundResults extends TracksView
 		
 		// Set toolbar items for the page
 		JToolBarHelper::title(   JText::_( 'Sub-round results: ').$subround->roundname.' - '.$subround->subroundname , 'generic.png' );
+		//JToolBarHelper::custom('massadd', 'default', 'default', JText::_('Mass Add'), false);
     JToolBarHelper::custom('back', 'back.png', 'back.png', JTEXT::_('back'), false); 
 		JToolBarHelper::save( 'saveranks', 'Save' );
 		JToolBarHelper::editListX();
@@ -72,6 +73,7 @@ class TracksViewSubroundResults extends TracksView
 		$this->assignRef('subround_id',	JRequest::getVar('srid',0));
 		$this->assignRef('pagination',	$pagination);
 		$this->assignRef('request_url',	$uri->toString());
+		$this->assignRef('site_url',	$mainframe->getSiteURL());
 
 		parent::display($tpl);
 	}
