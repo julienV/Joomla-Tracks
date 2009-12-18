@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+    <layout title="Standard team display layout">
+        <message>
+        <![CDATA[Displays a team details]]>
+        </message>
+    </layout>
+    <state>
+        <name>Standard team display layout</name>
+        <description>Select a team</description>
+        <url addpath="/administrator/components/com_tracks/elements">
+            <param name="t" type="tsql" default="" label="Select a round" description="" query="SELECT id AS t, name AS text FROM #__tracks_teams ORDER BY name ASC" />
+        </url>
+        <params>
+        </params>
+    </state>
+</metadata>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="Standard project individuals ranking layout">
+		<message>
+			<![CDATA[Displays project individuals]]>
+		</message>
+	</layout>
+	<state>
+		<name>Standard project individuals layout</name>
+		<description>Select a project</description>
+		<url addpath="/administrator/components/com_tracks/elements">
+			<param name="p" type="tsql" default=""
+				label="Select a project" description="Select a project"
+				query="SELECT id AS p, name AS text FROM #__tracks_projects ORDER BY name ASC" />
+		</url>
+		<params>
+      <param name="showteams" type="radio" default="1" label="Display teams in rankings" description="" >
+			  <option value="0">No</option>
+			  <option value="1">Yes</option>
+			</param>
+    </params>
+	</state>
+</metadata>

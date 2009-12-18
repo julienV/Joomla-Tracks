@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+    <layout title="DEFAULT ROUNDS LAYOUT">
+        <message>
+        <![CDATA[DEFAULT ROUNDS LAYOUT TIP]]>
+        </message>
+    </layout>
+    <state>
+        <name>DEFAULT ROUNDS LAYOUT</name>
+        <description>DEFAULT ROUNDS LAYOUT TIP</description>
+    </state>
+</metadata>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+  <layout title="Standard project round result layout">
+    <message>
+      <![CDATA[Displays a round result]]>
+    </message>
+  </layout>
+  <state>
+    <name>Standard project round result layout</name>
+    <description>Select a project round</description>
+    <url addpath="/administrator/components/com_tracks/elements">
+        <!-- work in progress -->
+        <param name="pr" type="projectround" default=""
+          label="Select a project round" description="Select a project round" />
+        <!-- 
+      <param type="text" name="pr" default="" label="Project round id" description="Please provide the project round id" />
+       --> 
+    </url>
+    <params>
+      <param name="showteams" type="radio" default="1" label="Display teams in rankings" description="" >
+        <option value="0">No</option>
+        <option value="1">Yes</option>
+      </param>
+      <param name="subround_order" type="radio" default="0" label="Ordering for sub rounds" description="" >
+        <option value="0">Ascending</option>
+        <option value="1">Descending</option>
+      </param>
+    </params>
+  </state>
+</metadata>

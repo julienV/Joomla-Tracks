@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+    <layout title="DEFAULT PROJECTS LAYOUT">
+        <message>
+        <![CDATA[DEFAULT PROJECTS LAYOUT TIP]]>
+        </message>
+    </layout>
+    <state>
+        <name>DEFAULT PROJECTS LAYOUT</name>
+        <description>DEFAULT PROJECTS LAYOUT TIP</description>
+	    <params>
+	      <param name="order" type="list" default="0" label="Criteria for ordering" description="Chose how to order projects" >
+	        <option value="0">By season, competition, project</option>
+	        <option value="1">By competition, season, project</option>
+	        <option value="2">By project</option>
+	      </param>
+	      <param name="order_dir" type="list" default="0" label="Direction" description="Direction for ordering" >
+	        <option value="ASC">Asc</option>
+	        <option value="DESC">Desc</option>
+	      </param>
+	    </params>
+    </state>
+</metadata>

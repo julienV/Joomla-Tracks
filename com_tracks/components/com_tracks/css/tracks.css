@@ -1,0 +1,106 @@
+@CHARSET "UTF-8";
+
+table.raceResults th {
+border-bottom:1px solid #ECECEC;
+padding-bottom:4px;
+text-align:left;
+}
+
+table.raceResults th, table.raceResults td {
+background-color:#FFFFFF;
+border-collapse:collapse;
+font-size:1.2em;
+line-height:1.2em;
+margin:0pt 0pt 1px;
+padding:2px 10px;
+}
+
+table#tracksprofile th {
+	text-align: right;
+	width: 140px;
+	font-weight: bold;
+	background-color: #F6F6F6;
+} 
+
+#tracks ul.individualsGallery {
+	list-style-image:none;
+	list-style-position:outside;
+	list-style-type:none;
+}
+
+#tracks ul.individualsGallery li {
+  background:#ECECEC none repeat scroll 0% 0%;
+	color:#FFFFFF;
+	float:left;
+	margin:0pt 5px 5px 0pt;
+}
+
+#tracks ul.individualsGallery li div {
+	background:#FFFFFF none repeat scroll 0% 0%;
+  text-align:center;
+	margin:5px;
+}
+
+#tracks ul.individualsGallery .pic {
+  height:150px;
+  max-width:150px;
+}
+
+#tracks ul.individualsGallery li div p {
+	margin:0pt;
+	padding:5px;
+  text-align:left;
+}
+
+#tracks ul.individualsGallery li div {
+  color:#014D93;
+}
+
+#tracks ul.individualsGallery li div p span {
+  /*display:block;*/
+}
+
+#tracks ul.individualsGallery li div p span.individualnumber {
+  display:block;
+  float:left;
+  font-size:1.4em;
+  font-weight:bold;
+  margin-right: 5px;
+}
+
+#tracks .clear {
+  clear:both;
+}
+
+#individualdetails {
+  /*clear:both;*/
+}
+
+div#tracks .copyright {
+font-size: 0.9em; text-align: center;
+margin: 1em 0;
+color: #aaa;
+}
+
+div#tracks table#namelist td {
+  vertical-align: top;
+}
+
+div#tracks table#namelist .letter {
+  font-size: 1.5em;
+  font-weight: bold;
+  padding:5px;
+}
+
+div#individualpic img, div#teampic img{
+  border:1px;
+  float:left;
+}
+
+#individualresults h3 {
+  margin-top:10px;
+}
+
+#tracks .icalbutton {
+  text-align:center;
+}

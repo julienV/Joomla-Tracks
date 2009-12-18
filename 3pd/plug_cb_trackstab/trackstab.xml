@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbinstall version="1.0" type="plugin" group="user">
+	<name>Tracks Tab</name>
+	<author>Julien Vonthron</author>
+	<creationDate>2008-08-13</creationDate>
+	<copyright>(C) 2008 jlv-solutions.com</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2</license>
+	<authorEmail>jlv@jlv-solutions.com</authorEmail>
+	<authorUrl>www.jlv-solutions.com</authorUrl>
+	<version>1.0</version>
+	<description>Provides an User Tab that shows tracks data for the user.</description>
+	<files>
+		<filename plugin="trackstab">trackstab.php</filename>
+		<filename>index.html</filename>
+	</files>
+    <params>
+    </params>	
+    <tabs>
+    	<tab name="_UE_TRACKSTAB" description="" class="getTracksTab" cbfields="0">
+			<params>
+	      <param type="radio" name="show_history" default="1" label="Show history" description="">
+	        <option value="0">No</option>
+	        <option value="1">Yes</option>
+	      </param>
+        <param name="@spacer" type="spacer" default="" label="History settings" description="" />
+        <param type="radio" name="show_number" default="1" label="Show individual number" description="">
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </param>
+        <param type="radio" name="show_team" default="1" label="Show team" description="">
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </param>
+        <param type="radio" name="show_season" default="1" label="Show season" description="">
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </param>
+        <param type="radio" name="show_rank" default="1" label="Show rank" description="">
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </param>
+        <param type="radio" name="show_points" default="1" label="Show points" description="">
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </param>
+        <param type="radio" name="show_wins" default="1" label="Show wins" description="">
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </param>
+        <param type="radio" name="show_bestrank" default="1" label="Show best rank" description="">
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </param>
+			</params>
+			<fields>
+			</fields>
+		</tab>
+    </tabs>   
+    <install>
+    	<queries>
+    	</queries>
+    </install>
+    <uninstall>
+        <queries>
+    	</queries>
+    </uninstall>
+	<database>
+	</database>
+</cbinstall>

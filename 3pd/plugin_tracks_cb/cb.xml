@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE install PUBLIC 
+  "-//Joomla! 1.5//DTD plugin 1.0//EN" "http://dev.joomla.org/xml/1.5/plugin-install.dtd">
+<install version="1.5" type="plugin" group="tracks" method="upgrade">
+  <name>Community builder integration for tracks plugin</name>
+  <creationDate>July 2009</creationDate>
+  <author>Julien Vonthron</author>
+  <authorEmail>jlv@jlv-solutions.com</authorEmail>
+  <authorUrl>http://www.jlv-solutions.com</authorUrl> 
+  <copyright>(C) 2008-2009 Julien Vonthron. All rights reserved.</copyright>
+  <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+  <version>1.0</version>
+  <description>PLUGIN DESC</description>
+  
+  <files>
+    <filename plugin="cb">cb.php</filename>
+  </files>
+    
+  <languages>
+    <language tag="en-GB">languages/en-GB.plg_tracks_cb.ini</language>
+  </languages>
+
+</install>

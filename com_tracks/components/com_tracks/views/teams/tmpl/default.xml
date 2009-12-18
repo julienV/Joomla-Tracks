@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+    <layout title="DEFAULT TEAMS LAYOUT">
+        <message>
+        <![CDATA[DEFAULT TEAMS LAYOUT TIP]]>
+        </message>
+    </layout>
+    <state>
+        <name>DEFAULT TEAMS LAYOUT</name>
+        <description>DEFAULT TEAMS LAYOUT TIP</description>
+    </state>
+</metadata>

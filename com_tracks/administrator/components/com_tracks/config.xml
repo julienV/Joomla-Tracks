@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <params>
+    <param type="radio" name="user_registration" default="0" label="Allow users registration:" description="Allow user to create a tracks profile ?">
+      <option value="0">No</option>
+      <option value="1">Yes</option>
+    </param>        
+    <param type="text" name="image_max_size" default="120" label="MAXIMAGESIZE" description="MAXIMAGESIZEDESC" />
+    
+    <param type="spacer" default="INDIVIDUAL VIEW SETTINGS" />
+      <param type="radio" name="indview_showresults" default="1" label="SHOW INDIVIDUAL RESULTS" description="SHOW INDIVIDUAL RESULTS DESC">
+	      <option value="0">No</option>
+	      <option value="1">Yes</option>
+	    </param>
+      <param type="radio" name="indview_results_showteam" default="1" label="INDIVIDUAL RESULTS SHOW TEAM" description="INDIVIDUAL RESULTS SHOW TEAM DESC">
+        <option value="0">No</option>
+        <option value="1">Yes</option>
+      </param>
+	    <param type="radio" name="indview_results_showproject" default="1" label="INDIVIDUAL RESULTS SHOW PROJECT" description="INDIVIDUAL RESULTS SHOW PROJECT DESC">
+	      <option value="0">No</option>
+	      <option value="1">Yes</option>
+	    </param>
+	    <param type="radio" name="indview_results_showcompetition" default="0" label="INDIVIDUAL RESULTS SHOW COMPETITION" description="INDIVIDUAL RESULTS SHOW COMPETITION DESC">
+	      <option value="0">No</option>
+	      <option value="1">Yes</option>
+	    </param>
+	    <param type="radio" name="indview_results_showseason" default="0" label="INDIVIDUAL RESULTS SHOW SEASON" description="INDIVIDUAL RESULTS SHOW SEASON DESC">
+	      <option value="0">No</option>
+	      <option value="1">Yes</option>
+	    </param>
+	    <param type="radio" name="indview_results_showrace" default="1" label="INDIVIDUAL RESULTS SHOW RACE" description="INDIVIDUAL RESULTS SHOW RACE DESC">
+	      <option value="0">No</option>
+	      <option value="1">Yes</option>
+	    </param>
+      <param type="radio" name="indview_results_onlypointssubrounds" default="1" label="INDIVIDUAL RESULTS SHOW ONLY POINTS SUBROUND" description="INDIVIDUAL RESULTS SHOW ONLY POINTS SUBROUND">
+        <option value="0">No</option>
+        <option value="1">Yes</option>
+      </param>
+	    <param type="radio" name="indview_results_showperformance" default="1" label="INDIVIDUAL RESULTS SHOW PERFORMANCE" description="INDIVIDUAL RESULTS SHOW PERFORMANCE DESC">
+	      <option value="0">No</option>
+	      <option value="1">Yes</option>
+	    </param>
+	    <param type="radio" name="indview_results_showrank" default="1" label="INDIVIDUAL RESULTS SHOW RANK" description="INDIVIDUAL RESULTS SHOW RANK DESC">
+	      <option value="0">No</option>
+	      <option value="1">Yes</option>
+	    </param>
+  </params>
+</root>

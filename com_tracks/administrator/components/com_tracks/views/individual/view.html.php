@@ -1,0 +1,97 @@
+<?php
+/**
+* @version    $Id: view.html.php 128 2008-06-06 08:08:04Z julienv $ 
+* @package    JoomlaTracks
+* @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
+* @license		GNU/GPL, see LICENSE.php
+* Joomla Tracks is free software. This version may have been modified pursuant
+* to the GNU General Public License, and as distributed it includes or
+* is derivative of works licensed under the GNU General Public License or
+* other free or open source software licenses.
+* See COPYRIGHT.php for copyright notices and details.
+*/
+
+// Check to ensure this file is included in Joomla!
+defined('_JEXEC') or die();
+
+jimport( 'joomla.application.component.view');
+
+require_once (JPATH_COMPONENT.DS.'abstract'.DS.'tracksview.php');
+require_once (JPATH_COMPONENT.DS.'helpers'.DS.'imageselect.php');
+require_once(JPATH_COMPONENT_SITE.DS.'helpers'.DS.'countries.php');
+
+/**
+ * HTML View class for the Tracks component
+ *
+ * @static
+ * @package		Tracks
+ * @since 0.1
+ */
+class TracksViewIndividual extends TracksView
+{
+	function display($tpl = null)
+	{
+		global $mainframe;
+
+		if($this->getLayout() == 'form') {
+			$this->_displayForm($tpl);
+			return;
+		}
+
+		//get the object
+		$object =& $this->get('data');
+		
+		parent::display($tpl);
+	}
+
+	function _displayForm($tpl)
+	{
+		global $mainframe, $option;
+
+		$db		=& JFactory::getDBO();
+		$uri 	=& JFactory::getURI();
+		$user 	=& JFactory::getUser();
+		$model	=& $this->getModel();
+
+		$lists = array();
+		//get the project
+		$object	=& $this->get('data');
+		$isNew		= ($object->id < 1);
+
+		// fail if checked out not by 'me'
+		if ($model->isCheckedOut( $user->get('id') )) {
+			$msg = JText::sprintf( 'DESCBEINGEDITTED', JText::_( 'The Individual' ), $object->name );
+			$mainframe->redirect( 'index.php?option='. $option, $msg );
+		}
+
+		// Edit or Create?
+		if (!$isNew)
+		{
+			$model->checkout( $user->get('id') );
+		}
+		
+		// users list
+    $lists['users'] = TracksHelper::usersSelect('user_id', $object->user_id, 1, NULL, 'name', 0);
+    
+    // countries
+    $countries = array();
+    $countries[] = JHTML::_('select.option', '', JTEXT::_('Select country'));
+    $countries = array_merge($countries, Countries::getCountryOptions());
+    $lists['countries'] = JHTML::_('select.genericlist', $countries, 'country_code', '', 'value', 'text', $object->country_code);
+		
+		//editor
+		$editor =& JFactory::getEditor();
+		
+		$imageselect = ImageSelect::getSelector('picture', 'picture_preview', 'individuals', $object->picture);
+    $miniimageselect = ImageSelect::getSelector('picture_small', 'mini_picture_preview', 'individuals_small', $object->picture_small);
+		
+    $this->assignRef( 'editor', $editor );   
+		$this->assignRef( 'lists', $lists);
+		$this->assignRef( 'object', $object);
+    $this->assignRef( 'imageselect', $imageselect);
+    $this->assignRef( 'miniimageselect', $miniimageselect);
+
+		parent::display($tpl);
+	}
+}
+?>
