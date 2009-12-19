@@ -73,65 +73,11 @@ class TracksControllerQuickAdd extends BaseController
 
 		// assign the individual to the subround.
 		if (is_numeric($individual) && is_numeric($srid)) {
-			$table = $this->_assignTable($srid);
-			$db->setQuery("INSERT INTO #__tracks_rounds_results (individual_id, subround_id, performance) VALUES (".$individual.", ".$srid.", ".$table.")");
+			$db->setQuery("INSERT INTO #__tracks_rounds_results (individual_id, subround_id) VALUES (".$individual.", ".$srid.")");
 			$db->query();
 		}
 
 		$this->setRedirect("index.php?option=com_tracks&view=subroundresults&srid=".$srid);
-	}
-
-	function _assignTable($srid) 
-	{
-		$db = &JFactory::getDBO();
-		$query = "SELECT performance, COUNT(performance) as counter ";
-		$query .= "FROM #__tracks_rounds_results ";
-		$query .= "WHERE subround_id = ".$srid." ";
-		$query .= "GROUP BY performance ";
-		$db->setQuery($query);
-		$results = $db->loadObjectList();
-
-		// fill the tables with the default 1-6 tables.
-		$tables = array_fill(1, 4, 0);
-
-		// grab the amount of people at each table.
-		foreach ($results as $result) {
-			if ($result->performance == "") continue;
-			$tables[$result->performance] = $result->counter;
-		}
-
-		// grab the max table number in use so far.
-		$max = max(array_keys($tables));
-
-		// grab the tables that aren't full.
-		$available = array();
-		foreach ($tables as $key => $value) {
-			if ($value < 8) {
-				$available[] = $key;
-			}
-		}
-
-		// if max is odd, add one on as we increment in pairs.
-		if ($max & 1) {
-			$max++;
-			$available[] = $max;
-		} else {
-			if (!key_exists($max - 1, $tables)) {
-				$available[] = $max -1;
-			}
-		}
-
-		// if there are no empty tables, add 2 new ones.
-		if (empty($available)) {
-			$max += 2;
-			$available = array($max - 1, $max);
-		} elseif (count($available) == 1) {
-			return $available[0];
-		}
-
-		$table = mt_rand(0, count($available) - 1);
-		$table = $available[$table];
-		return $table;
 	}
 }
 
