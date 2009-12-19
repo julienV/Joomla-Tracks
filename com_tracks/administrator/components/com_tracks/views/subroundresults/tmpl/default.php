@@ -19,7 +19,7 @@ $user 	=& JFactory::getUser();
 //Ordering allowed ?
 //$ordering = ($this->lists['order'] == 'obj.ordering');
 
-JHTML::_('behavior.tooltip');
+JHTML::_('behavior.mootools');
 ?>
 <style>
 .search-item {
@@ -46,45 +46,29 @@ JHTML::_('behavior.tooltip');
     clear:none;
 }
 </style>
-<script type="text/javascript" src="<?php echo $this->site_url;?>administrator/components/com_tracks/ext/adapter/ext/ext-base.js"></script>
-<script type="text/javascript" src="<?php echo $this->site_url;?>administrator/components/com_tracks/ext/ext-all.js"></script>
-<link rel="stylesheet" type="text/css" href="<?php echo $this->site_url;?>administrator/components/com_tracks/ext/resources/css/ext-all.css" />
+
 <script type="text/javascript">
-Ext.onReady(function() {
-	Ext.QuickTips.init();
-	var search = new Ext.form.ComboBox({
-		name: "quick_add",
-		allowBlank: true,
-		store: new Ext.data.Store({
-			proxy: new Ext.data.HttpProxy({
-				url: "<?php echo $this->site_url;?>administrator/index.php?option=com_tracks&controller=quickadd&task=search"
-			}),
-			reader: new Ext.data.JsonReader({
-				root: "rows",
-				totalProperty: "totalCount",
-				id: "id"
-			}, [
-				{name: "name", mapping: "name"},
-				{name: "id", mapping: "id"},
-				{name: "nickname", mapping: "nickname"}
-			])
-		}),
-		tpl: new Ext.XTemplate(
-			'<tpl for="."><div class="search-item">',
-			'<h3>{name}</h3>',
-			'Nickname: {nickname}',
-			'</div></tpl>'
-		),
-		itemSelector: "div.search-item",
-		valueField: "id",
-		displayField: "name",
-		hiddenName: "quick_add",
-		forceSelection: false,
-		typeAhead: false,
-		loadingText: "Searching...",
-		hideTrigger: true,
-		applyTo: "quickadd"
+window.addEvent('domready', function () {
+	var searchInput = $('quickadd2');
+
+	//A simple spinner div, display-toggled during request
+	var indicator = new Element('div', {
+	 'class': 'autocompleter-loading',
+	 'styles': {'display': 'none'}
+	}).injectAfter($('submit2')); // appended after the input
+	
+	var completer = new Autocompleter.Ajax.Jsonindividual(searchInput, 
+		'<?php echo $this->site_url;?>administrator/index.php?option=com_tracks&controller=quickadd&task=search', {
+	 'postVar': 'query',
+	 'minLength': 1,
+	 'onRequest': function(el) {
+	     indicator.setStyle('display', '');
+	 },
+	 'onComplete': function(el) {
+	     indicator.setStyle('display', 'none');
+	 }
 	});
+
 });
 </script>
 
@@ -102,13 +86,14 @@ function submitbutton(pressbutton)
 
 <div id="tracksmain">
 <form action="<?php echo $this->site_url; ?>administrator/index.php?option=com_tracks&controller=quickadd&task=add" method="post">
-<input type="hidden" name="srid" value="<?php echo $this->subround_id; ?>" />
+<input type="hidden" name="srid" id="srid" value="<?php echo $this->subround_id; ?>" />
 <table>
 	<tr>
-		<td>Quick Add:</td>
-		<td><input type="textbox" name="quickadd" id="quickadd" /></td>
-		<td><input type="submit" name="submit" value="Add" /></td>
+		<td>Quick Add 2:</td>
+		<td><input type="text" name="quickadd2" id="quickadd2" /></td>
+		<td><input type="hidden" id="individualid" name="individualid" value=""><input type="submit" name="submit2" id="submit2" value="Add2" /></td>
 	</tr>
+	
 </table>
 </form>
 <br />

@@ -50,15 +50,16 @@ class TracksControllerQuickAdd extends BaseController
 	{
 		global $mainframe, $option;
 		$db = &JFactory::getDBO();
-		$individual = JRequest::getVar("quick_add", "");
-		$srid = JRequest::getVar("srid", 0, "", "int");
+		$individualid = JRequest::getInt("individualid", 0);
+		$name = JRequest::getVar("quickadd2", '', 'request', 'string');
+		$srid = JRequest::getInt("srid", 0);
 		$projectid = $mainframe->getUserState($option."project");
 
 		// add the new individual as their name was sent through.
-		if (!is_numeric($individual)) {
+		if (!$individualid) {
 			require_once(JPATH_COMPONENT.DS.'models'.DS.'individual.php');
 			$model = new TracksModelIndividual();
-			$name = explode(" ", $individual);
+			$name = explode(" ", $name);
 			$firstname = ucfirst(array_shift($name));
 			$lastname = ucfirst(implode(" ", $name));
 			$data = array(
@@ -66,14 +67,29 @@ class TracksControllerQuickAdd extends BaseController
 				"last_name" => $lastname,
 			);
 			$model->store($data);
-			$individual = mysql_insert_id();
-			$db->setQuery("INSERT INTO #__tracks_projects_individuals (individual_id, project_id) VALUES (".$individual.", ".$projectid.")");
+			$individualid = mysql_insert_id();
+		}
+		
+		if (!$individualid) {
+			$msg = Jtext::_('Error adding individual');
+			$this->setRedirect("index.php?option=com_tracks&view=subroundresults&srid=".$srid, $msg, 'error');
+		}
+			
+		// check if indivual belongs to project
+		$query = ' SELECT individual_id FROM #__tracks_projects_individuals '
+		       . ' WHERE project_id = '. $db->Quote($projectid)
+		       . '   AND individual_id = '. $db->Quote($individualid);
+		$db->setQuery($query);
+		$res = $db->loadResult();
+		if (!$res)
+		{
+			$db->setQuery("INSERT INTO #__tracks_projects_individuals (individual_id, project_id) VALUES (".$individualid.", ".$projectid.")");
 			$db->query();
 		}
 
 		// assign the individual to the subround.
-		if (is_numeric($individual) && is_numeric($srid)) {
-			$db->setQuery("INSERT INTO #__tracks_rounds_results (individual_id, subround_id) VALUES (".$individual.", ".$srid.")");
+		if ($individualid && $srid) {
+			$db->setQuery("INSERT INTO #__tracks_rounds_results (individual_id, subround_id) VALUES (".$individualid.", ".$srid.")");
 			$db->query();
 		}
 

@@ -30,6 +30,11 @@ class TracksViewSubroundResults extends TracksView
 	function display($tpl = null)
 	{
 		global $mainframe, $option;
+    $document = &JFactory::getDocument();
+    
+    $document->addScript(JURI::base() . 'components/com_tracks/assets/js/Autocompleter.js');
+    $document->addScript(JURI::base() . 'components/com_tracks/assets/js/Observer.js');
+    $document->addStyleSheet(JURI::base() . 'components/com_tracks/assets/css/Autocompleter.css');
 
 		$subround =& $this->get('SubroundInfo');
 		
