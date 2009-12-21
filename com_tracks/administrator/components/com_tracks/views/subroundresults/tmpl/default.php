@@ -60,7 +60,7 @@ window.addEvent('domready', function () {
 	var completer = new Autocompleter.Ajax.Jsonindividual(searchInput, 
 		'<?php echo $this->site_url;?>administrator/index.php?option=com_tracks&controller=quickadd&task=search', {
 	 'postVar': 'query',
-	 'minLength': 1,
+	 'minLength': 3,
 	 'onRequest': function(el) {
 	     indicator.setStyle('display', '');
 	 },
