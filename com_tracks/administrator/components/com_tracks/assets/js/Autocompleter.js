@@ -178,7 +178,7 @@ Autocompleter.Base = new Class({
 	choiceSelect: function(el) {
 		this.observer.value = this.element.value = el.inputValue;
 		this.hideChoices();
-		console.log('selecting');
+//		console.log('selecting');
 		this.fireEvent('onSelect', [this.element], 20);
 	},
 
