@@ -13,9 +13,9 @@
 */
 // no direct access
 defined('_JEXEC') or die('Restricted access'); ?>
-<div class="mod_tracksranking<?php echo $params->get('moduleclass_sfx'); ?>">
+<div class="mod_tracksranking">
 
-<table class="raceResults" cellspacing="0" cellpadding="0" summary="">
+<table cellspacing="0" cellpadding="0" summary="">
   <tbody>
     <tr>
       <th><?php echo JText::_( 'Pos' ); ?></th>
