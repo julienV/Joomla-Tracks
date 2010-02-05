@@ -16,13 +16,15 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <div class="mod_tracksranking">
 
 <table cellspacing="0" cellpadding="0" summary="">
-  <tbody>
+	<thead>
     <tr>
       <th><?php echo JText::_( 'Pos' ); ?></th>
       <th><?php echo JText::_( 'Individual' ); ?></th>
       <?php if ($showteams) { ?><th><?php echo JText::_( 'Team' ); ?></th><?php } ?>
       <th><?php echo JText::_( 'Points' ); ?></th>
     </tr>
+	</thead>
+  <tbody>
     <?php
     $rank = 1;
     $count = 0;

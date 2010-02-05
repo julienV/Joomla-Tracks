@@ -21,16 +21,18 @@ $document->addStyleSheet( JURI::base() . '/modules/mod_tracks_results/mod_tracks
 $document->addScript( JURI::base() . '/modules/mod_tracks_results/mod_tracks_results.js' );
 ?>
 
-<div class="mod_tracksresults<?php echo $params->get('moduleclass_sfx'); ?>">
+<div class="mod_tracksresults">
 <div id="roundname"><?php echo $round->name . ' - ' . $list->typename; ?></div>
-<table class="raceResults" cellspacing="0" cellpadding="0" summary="">
-  <tbody>
+<table cellspacing="0" cellpadding="0" summary="">
+	<thead>
     <tr>
       <th><?php echo JText::_( 'Pos' ); ?></th>
       <th><?php echo JText::_( 'Individual' ); ?></th>
       <?php if ($showteams) { ?><th><?php echo JText::_( 'Team' ); ?></th><?php } ?>
       <?php if ($showpoints) { ?><th><?php echo JText::_( 'Points' ); ?></th><?php } ?>
     </tr>
+	</thead>
+  <tbody>
     <?php
     $rank = 1;
     $count = 0;
