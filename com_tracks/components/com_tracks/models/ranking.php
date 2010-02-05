@@ -43,6 +43,9 @@ class TracksFrontModelRanking extends baseModel
 		{
 			foreach ( $results as $r )
 			{
+				if (!isset($individuals[$r->id])) {
+					continue;
+				}
 				// always count the bonus points
 				$points = $r->bonus_points;
 				// points for the round only if countpoints is set to true
