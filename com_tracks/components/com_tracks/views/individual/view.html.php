@@ -54,7 +54,7 @@ class TracksFrontViewIndividual extends JView
 
 		$document->setTitle( $data->first_name . ' ' . $data->last_name );
 				
-		$data->description = $data->text;
+		$data->text = $data->description;
 		$results = $dispatcher->trigger('onPrepareContent', array (& $data, null, 0));
 		$data->description = $data->text;
 
