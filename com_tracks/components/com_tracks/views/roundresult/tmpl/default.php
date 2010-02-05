@@ -14,7 +14,6 @@
 defined('_JEXEC') or die('Restricted access'); 
 jimport( 'joomla.filter.output' );
 
-require_once(JPATH_COMPONENT.DS.'helpers'.DS.'countries.php');
 ?>
 <div id="tracks">
 
@@ -68,7 +67,7 @@ foreach ($this->results as $subround)
 	        <?php if ($this->projectparams->get('showflag')): ?>
 	        <td>
 	          <?php if ( $result->country_code ): ?>
-	          <?php echo Countries::getCountryFlag($result->country_code); ?>
+	          <?php echo TracksCountries::getCountryFlag($result->country_code); ?>
 	          <?php endif ?>
 	        </td>
 	        <?php endif; ?>

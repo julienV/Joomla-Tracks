@@ -14,7 +14,7 @@
 // no direct access
 defined('_JEXEC') or die('Restricted access');
 
-class Countries 
+class TracksCountries 
 {
 	function getCountries()
 	{
@@ -269,7 +269,7 @@ class Countries
 	
 	function getCountryOptions($value_tag = 'value', $text_tag = 'text')
 	{
-		$countries = Countries::getCountries();
+		$countries = self::getCountries();
 		$options = array();
 		foreach ($countries AS $k => $c)
 		{
@@ -792,7 +792,7 @@ class Countries
 	
 	function getIso3Flag($iso_code_3)
 	{
-		$iso2 = Countries::convertIso3to2($iso_code_3);
+		$iso2 = self::convertIso3to2($iso_code_3);
 		if ($iso2) {
 			$path = JURI::base().'media/com_tracks/images/flags/'.strtolower($iso2).'.png';
 			return $path;
@@ -802,17 +802,17 @@ class Countries
 		
 	function getCountryFlag($countrycode, $attributes = '')
 	{
-		$src = Countries::getIso3Flag($countrycode);
+		$src = self::getIso3Flag($countrycode);
 		if (!$src) {
 			return '';
 		}
-		$html = '<img src="'.$src.'" alt="'.Countries::getCountryName($countrycode).'" title="'.Countries::getCountryName($countrycode).'" '.$attributes.'/>';
+		$html = '<img src="'.$src.'" alt="'.self::getCountryName($countrycode).'" title="'.self::getCountryName($countrycode).'" '.$attributes.'/>';
 		return $html;
 	}
 	
 	function getCountryName($iso3)
 	{
-		$countries = Countries::getCountries();
+		$countries = self::getCountries();
 		return $countries[$iso3]['name'];
 	}
 }

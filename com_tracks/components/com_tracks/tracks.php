@@ -24,6 +24,7 @@ $acl->addACL( 'com_tracks', 'manage', 'users', 'administrator' );
 // Require the base controller
 require_once (JPATH_COMPONENT.DS.'controller.php');
 require_once (JPATH_COMPONENT.DS.'helpers'.DS.'trackshtml.php');
+require_once (JPATH_COMPONENT.DS.'helpers'.DS.'countries.php');
 
 // Require specific controller if requested
 if($controller = JRequest::getWord('controller')) {

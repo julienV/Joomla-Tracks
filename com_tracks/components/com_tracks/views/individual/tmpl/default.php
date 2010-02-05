@@ -14,7 +14,6 @@
 // no direct access
 defined('_JEXEC') or die('Restricted access'); ?>
 
-<?php require_once(JPATH_COMPONENT.DS.'helpers'.DS.'countries.php'); ?>
 <div id="tracks">
 <!-- Title -->
 <table class="contentpaneopen">
@@ -101,7 +100,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
         </label>
       </td>
       <td>
-        <?php echo Countries::getCountryFlag($this->data->country_code); ?>
+        <?php echo TracksCountries::getCountryFlag($this->data->country_code); ?>
       </td>
     </tr>
     <?php endif; ?>

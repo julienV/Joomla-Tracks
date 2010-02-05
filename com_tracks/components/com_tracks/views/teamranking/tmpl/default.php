@@ -12,7 +12,6 @@
 */ 
  // no direct access
 defined('_JEXEC') or die('Restricted access'); ?>
-<?php require_once(JPATH_COMPONENT.DS.'helpers'.DS.'countries.php'); ?>
 
 <div id="tracks">
 <h1><?php echo $this->project->name . ' ' . JText::_( 'Team Rankings' ); ?></h1>
@@ -40,7 +39,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
         <?php if ($this->projectparams->get('showflag')): ?>
         <td>
           <?php if ( $ranking->country_code ): ?>
-          <img src="<?php echo Countries::getIso3Flag($ranking->country_code); ?>"
+          <img src="<?php echo TracksCountries::getIso3Flag($ranking->country_code); ?>"
              title="<?php echo $ranking->country_code; ?>"
              alt="<?php echo $ranking->country_code; ?>"/>
           <?php endif ?>

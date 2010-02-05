@@ -15,7 +15,6 @@
 defined('_JEXEC') or die();
 
 jimport( 'joomla.application.component.view');
-require_once(JPATH_COMPONENT_SITE.DS.'helpers'.DS.'countries.php');
 
 /**
  * HTML View class for the Tracks component
@@ -124,7 +123,7 @@ class TracksFrontViewIndividual extends JView
     // countries
     $countries = array();
     $countries[] = JHTML::_('select.option', '', JTEXT::_('Select country'));
-    $countries = array_merge($countries, Countries::getCountryOptions());
+    $countries = array_merge($countries, TracksCountries::getCountryOptions());
     $lists['countries'] = JHTML::_('select.genericlist', $countries, 'country_code', '', 'value', 'text', $object->country_code);
     
     if ( $user->authorize('com_tracks', 'manage' ) 

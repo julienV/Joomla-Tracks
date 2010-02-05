@@ -12,8 +12,6 @@
 */
 defined('_JEXEC') or die('Restricted access'); ?>
 
-<?php require_once(JPATH_COMPONENT.DS.'helpers'.DS.'countries.php'); ?>
-
 <div id="tracks">
 
 <h1><?php echo $this->project->name . ' ' . JText::_( 'Rankings' ); ?></h1>
@@ -60,7 +58,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 	      <?php if ($this->params->get('showflag')): ?>
 	      <td>
 	        <?php if ( $ranking->country_code ): ?>
-            <?php echo Countries::getCountryFlag($ranking->country_code); ?>
+            <?php echo TracksCountries::getCountryFlag($ranking->country_code); ?>
           <?php endif; ?>
         </td>
 	      <?php endif; ?>
