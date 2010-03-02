@@ -44,7 +44,7 @@ class TracksFrontViewRound extends JView
         $document->setTitle( $round->name );
         
 				JPluginHelper::importPlugin('content');
-				$round->description = $round->text;
+				$round->text = $round->description;
 				$results = $dispatcher->trigger('onPrepareContent', array (& $round, null, 0));
 				$round->description = $round->text;
 				
