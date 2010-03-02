@@ -59,11 +59,12 @@ defined('_JEXEC') or die('Restricted access'); ?>
 			<th><?php echo JText::_( 'Team' ); ?></th>
 		</tr>
 		<?php 
+		$k = 0;
 		foreach( $this->results AS $result )
 		{			
       $link_round = JRoute::_( 'index.php?&view=roundresult&pr=' .$result->slug );			
       ?>
-			<tr>
+      <tr class="<?php echo ($k++ % 2 ? 'd1' : 'd0'); ?>">
         <td>
           <a href="<?php echo $link_round; ?>" title ="<?php echo JText::_( 'Display' ) ?>">
           <?php 

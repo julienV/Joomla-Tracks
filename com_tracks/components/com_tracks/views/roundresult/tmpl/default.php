@@ -44,14 +44,15 @@ foreach ($this->results as $subround)
 	      <?php endif; ?>
 	    </tr>
 	    <?php 
+	    $k = 0;
 	    foreach( $subround->results AS $result )
 	    {        
         $ind_slug = $result->individual_id . ':' . JFilterOutput::stringURLSafe( $result->first_name.' '.$result->last_name) ;
 	      $link_ind = JRoute::_( 'index.php?view=individual&i=' . $ind_slug ); 
 	      $team_slug = $result->team_id . ':' . JFilterOutput::stringURLSafe( $result->team_name ) ;
 	      $link_team = JRoute::_( 'index.php?view=team&t=' . $team_slug ); 
-	      ?>
-				<tr>
+	      ?>				
+      	<tr class="<?php echo ($k++ % 2 ? 'd1' : 'd0'); ?>">
 					<td>
 						<?php	if ($result->rank) {
 							echo $result->rank;

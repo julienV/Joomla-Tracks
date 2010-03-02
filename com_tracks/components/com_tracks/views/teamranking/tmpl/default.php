@@ -29,12 +29,13 @@ defined('_JEXEC') or die('Restricted access'); ?>
       <th><?php echo JText::_( 'Best rank' ); ?></th>
     </tr>
     <?php
-    $rank = 1; 
+    $rank = 1;
+    $k = 0; 
     foreach( $this->rankings AS $ranking )
     {     
       $link_team = JRoute::_( 'index.php?view=team&t=' . $ranking->team_id ); 
       ?>
-      <tr>
+      <tr class="<?php echo ($k++ % 2 ? 'd1' : 'd0'); ?>">
         <td><?php echo $rank++; ?></td>
         <?php if ($this->projectparams->get('showflag')): ?>
         <td>
