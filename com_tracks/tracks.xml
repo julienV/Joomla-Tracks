@@ -8,7 +8,7 @@
   	<creationDate>April 2008</creationDate>
   	<copyright>(C) 2008 Julien Vonthron. All rights reserved.</copyright>
   	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
-  	<version>0.4 rev xx</version>
+  	<version>0.4 rev g1.2</version>
   	<description>Racing and tracks competition management for Joomla 1.5</description>
 	
 	  <installfile>install.tracks.php</installfile>
