@@ -60,7 +60,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
       <?php if ($this->params->get('indview_results_showteam')): ?>
       <td><?php echo $result->teamname; ?></td>
       <?php endif; ?>    
-      <td><?php echo $result->roundname; ?></td>
+      <td><?php echo JHTML::link(JRoute::_(TracksHelperRoute::getRoundResultRoute($result->prslug)), $result->roundname); ?></td>
       <?php if ($this->params->get('indview_results_showrace')): ?>
       <td><?php echo $result->subroundname; ?></td>
       <?php endif; ?>     

@@ -98,13 +98,14 @@ class TracksFrontModelIndividual extends baseModel
 		if (!$ind->id) return null;
 		
 		$query = ' SELECT rr.rank, rr.performance, '
-           . '        r.name AS roundname, '
+           . '        r.name AS roundname, r.id as pr, '
 		       . '        srt.name AS subroundname, '
            . '        srt.points_attribution, '
            . '        p.name AS projectname, '
            . '        c.name AS competitionname, '
            . '        s.name AS seasonname, '
-           . '        t.name AS teamname '
+           . '        t.name AS teamname, '
+		       . ' CASE WHEN CHAR_LENGTH( r.alias ) THEN CONCAT_WS( \':\', r.id, r.alias ) ELSE r.id END AS prslug '
 		       . ' FROM #__tracks_rounds_results AS rr '
 		       . ' INNER JOIN #__tracks_projects_subrounds AS psr ON psr.id = rr.subround_id '
 		       . ' INNER JOIN #__tracks_subroundtypes AS srt ON srt.id = psr.type '
