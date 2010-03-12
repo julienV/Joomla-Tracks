@@ -47,7 +47,9 @@ class TracksFrontModelProject extends baseModel
 			. ' WHERE pr.published = 1 '
 			. '   AND rr.rank = 1 '
       . '   AND CHAR_LENGTH(srt.points_attribution) > 0 '
-			. '   AND pr.id IN (' . implode( ", ", $projectround_ids ) . ') ';
+			. '   AND pr.id IN (' . implode( ", ", $projectround_ids ) . ') '
+			. ' ORDER BY sr.ordering DESC'
+			;
 
 			$this->_db->setQuery( $query );
 
