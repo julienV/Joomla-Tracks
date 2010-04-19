@@ -49,7 +49,7 @@ JHTML::_('behavior.tooltip');
 			<th width="20" nowrap="nowrap">
 				<?php echo JText::_( 'Acronym' ); ?>
 			</th>      
-			<th class="title" nowrap="nowrap"><?php echo JText::_('ALIAS'); ?>
+			<th class="title" nowrap="nowrap"><?php echo JText::_('ALIAS'); ?></th>
 			<th width="1%" nowrap="nowrap">
 				<?php echo JHTML::_('grid.sort',  'ID', 'obj.id', $this->lists['order_Dir'], $this->lists['order'] ); ?>
 			</th>

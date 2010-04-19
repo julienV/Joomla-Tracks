@@ -48,7 +48,7 @@ JHTML::_('behavior.tooltip');
 				onclick="checkAll(<?php echo count( $this->items ); ?>);" /></th>
 			<th class="title" nowrap="nowrap"><?php echo JHTML::_('grid.sort',  'Name', 'p.name', $this->lists['order_Dir'], $this->lists['order'] ); ?>
 			</th>
-      <th class="title" nowrap="nowrap"><?php echo JText::_('ALIAS'); ?>
+      <th class="title" nowrap="nowrap"><?php echo JText::_('ALIAS'); ?></th>
 			<th class="title" nowrap="nowrap"><?php echo JHTML::_('grid.sort',  'Competition', 'l.name', $this->lists['order_Dir'], $this->lists['order'] ); ?>
 			</th>
 			<th class="title" nowrap="nowrap"><?php echo JHTML::_('grid.sort',  'Season', 's.name', $this->lists['order_Dir'], $this->lists['order'] ); ?>

@@ -60,7 +60,7 @@ JHTML::_('behavior.tooltip');
 			<th class="title">
 				<?php echo JHTML::_('grid.sort',  'First name', 'obj.first_name', $this->lists['order_Dir'], $this->lists['order'] ); ?>
 			</th>
-      <th class="title" nowrap="nowrap"><?php echo JText::_('ALIAS'); ?>
+      <th class="title" nowrap="nowrap"><?php echo JText::_('ALIAS'); ?></th>
 			<th width="1%" nowrap="nowrap">
 				<?php echo JHTML::_('grid.sort',  'ID', 'obj.id', $this->lists['order_Dir'], $this->lists['order'] ); ?>
 			</th>

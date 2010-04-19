@@ -16,10 +16,8 @@ defined('_JEXEC') or die('Restricted access');
 ?>
 		<div class="item">
 				<div align="center" class="imgBorder">
-					<a onclick="window.parent.selectImage('<?php echo $this->_tmp_img->name; ?>', '<?php echo $this->_tmp_img->name; ?>', '<?php echo $this->field; ?>');">
-						<div class="image">
+					<a onclick="window.parent.selectImage('<?php echo $this->_tmp_img->name; ?>', '<?php echo $this->_tmp_img->name; ?>', '<?php echo $this->field; ?>');" class="image">
 							<img src="<?php echo JURI::root(); ?>media/com_tracks/images/<?php echo $this->folder; ?>/<?php echo $this->_tmp_img->name; ?>"  width="<?php echo $this->_tmp_img->width_60; ?>" height="<?php echo $this->_tmp_img->height_60; ?>" alt="<?php echo $this->_tmp_img->name; ?> - <?php echo $this->_tmp_img->size; ?>" />
-						</div>
 					</a>
 				</div>
 			<div class="controls">
