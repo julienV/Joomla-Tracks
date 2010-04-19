@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <install type="module" version="1.5.0" method="upgrade">
 	<name>Tracks team ranking</name>
-	<author>Julien Vonthron</author>
-	<creationDate>May 2008</creationDate>
-	<copyright>Copyright (C) 2008 JLV Solutions. All rights reserved.</copyright>
-	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
-	<authorEmail>jlv@jlv-solutions.com</authorEmail>
-	<authorUrl>www.jlv-solutions.com</authorUrl>
-	<version>0.1</version>
+ 	<author>Julien Vonthron</author>
+ 	<authorEmail>julien.vonthron@gmail.com</authorEmail>
+  <authorUrl>http://www.jlv-solutions.com</authorUrl>	
+ 	<creationDate>VERSION_CREATION_DATE</creationDate>
+ 	<copyright>(C) 2008,2009,2010 Julien Vonthron. All rights reserved.</copyright>
+ 	<license>http://www.gnu.org/licenses/gpl.html</license>
+ 	<version>VERSION_NUMBER</version>
 	<description>Displays the current team rankings of selected project</description>
 	<files>
 		<filename module="mod_tracks_teamranking">mod_tracks_teamranking.php</filename>

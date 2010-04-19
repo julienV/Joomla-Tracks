@@ -3,13 +3,13 @@
   "-//Joomla! 1.5//DTD plugin 1.0//EN" "http://dev.joomla.org/xml/1.5/plugin-install.dtd">
 <install version="1.5" type="plugin" group="search" method="upgrade">
 	<name>Search - Tracks</name>
-	<creationDate>January 2009</creationDate>
-	<author>Julien Vonthron</author>
-  <authorEmail>jlv@jlv-solutions.com</authorEmail>
-  <authorUrl>http://www.jlv-solutions.com</authorUrl> 
-  <copyright>(C) 2008-2009 Julien Vonthron. All rights reserved.</copyright>
-  <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
-  <version>0.3</version>
+ 	<author>Julien Vonthron</author>
+ 	<authorEmail>julien.vonthron@gmail.com</authorEmail>
+	<authorUrl>http://www.jlv-solutions.com</authorUrl>	
+ 	<creationDate>VERSION_CREATION_DATE</creationDate>
+ 	<copyright>(C) 2008,2009,2010 Julien Vonthron. All rights reserved.</copyright>
+ 	<license>http://www.gnu.org/licenses/gpl.html</license>
+ 	<version>VERSION_NUMBER</version>
   <description>Search plugin for Tracks component</description>
 	
 	<files>

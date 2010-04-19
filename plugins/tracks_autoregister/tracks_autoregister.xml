@@ -3,13 +3,13 @@
   "-//Joomla! 1.5//DTD plugin 1.0//EN" "http://dev.joomla.org/xml/1.5/plugin-install.dtd">
 <install version="1.5" type="plugin" group="user" method="upgrade">
   <name>Tracks autoregister plugin</name>
-  <creationDate>April 2010</creationDate>
+  <creationDate>VERSION_CREATION_DATE</creationDate>
   <author>Julien Vonthron</author>
   <authorEmail>jlv@jlv-solutions.com</authorEmail>
   <authorUrl>http://www.jlv-solutions.com</authorUrl> 
   <copyright>(C) 2010 Julien Vonthron. All rights reserved.</copyright>
   <license>http://www.gnu.org/licenses/gpl-3.0.html GNU/GPL</license>
-  <version>1.0</version>
+  <version>VERSION_NUMBER</version>
   <description>PLUGIN DESC</description>
   
   <files>
