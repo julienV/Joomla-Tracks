@@ -75,7 +75,8 @@
       			<filename>index.html</filename>
             <filename>install.mysql.utf8.sql</filename>
             <filename>install.mysql.nonutf8.sql</filename>
-            <filename>LICENSE.txt</filename>
+            <filename>license.txt</filename>
+            <filename>copyright.txt</filename>
             <folder>abstract</folder>
             <folder>assets</folder>
       			<folder>controllers</folder>

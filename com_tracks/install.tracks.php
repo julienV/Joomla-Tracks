@@ -1,14 +1,9 @@
 <?php
 /**
-* @version    0.2 $Id$ 
+* @version    0.x
 * @package    JoomlaTracks
-* @copyright  Copyright (C) 2008 Julien Vonthron. All rights reserved.
-* @license    GNU/GPL, see LICENSE.php
-* Joomla Tracks is free software. This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-* See COPYRIGHT.php for copyright notices and details.
+* @copyright  Copyright (C) 2008,2009,2010 Julien Vonthron. See full notice in copyright.txt
+* @license    GNU/GPL, see license.txt
 */
 
 // no direct access
