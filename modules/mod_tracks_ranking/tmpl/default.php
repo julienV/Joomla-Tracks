@@ -62,7 +62,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <?php 
 $link = JRoute::_( 'index.php?option=com_tracks&view=ranking&p=' . $project->id );
 ?>
-<a id="fulltablelink" href="<?php echo $link; ?>"
+<a class="fulltablelink" href="<?php echo $link; ?>"
              title="<?php echo JText::_( 'View full table' ); ?>"> 
             <?php echo JText::_( 'View full table' ); ?>&nbsp;
 </a>
