@@ -43,16 +43,40 @@ class plgUserTracks_autoregister extends JPlugin {
 				
 		// Require tracks individual table
 		require_once (JPATH_ADMINISTRATOR.DS.'components'.DS.'com_tracks'.DS.'tables'.DS.'individual.php');
-		if ($isnew) {
+		if ($isnew) 
+		{
 			$table = &Jtable::getInstance('Individual', 'Table');
-			$split = strpos($user['name'], ' ');
-			if ($split) {
-				$table->first_name = substr($user['name'], 0, $split);
-				$table->last_name  = substr($user['name'], $split + 1);				
+			
+			if ($this->params->get('map_name', 0) == 0)
+			{
+				$split = strpos($user['name'], ' ');
+				if ($split && $this->params->get('split_name', 1)) 
+				{
+					$table->first_name = substr($user['name'], 0, $split);
+					$table->last_name  = substr($user['name'], $split + 1);				
+				}
+				else {
+					$table->last_name = $user['name'];
+				}
 			}
 			else {
-				$table->last_name = $user['name'];
+				$table->last_name = $user['username'];				
 			}
+			
+			switch ($this->params->get('map_nickname', 2))
+			{
+				case 0:
+					break;
+				
+				case 1:
+					$table->nickname = $user['name'];
+					break;
+					
+				case 2:
+					$table->nickname = $user['username'];
+					break;
+			}
+			
 			$table->user_id   = $user['id'];
 			if ($table->check() && $table->store()) {
 				
