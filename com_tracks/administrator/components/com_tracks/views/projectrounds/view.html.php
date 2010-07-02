@@ -39,6 +39,8 @@ class TracksViewProjectrounds extends TracksView
     
 		// Set toolbar items for the page
 		JToolBarHelper::title(   JText::_( 'Tracks Project Rounds' ), 'generic.png' );
+		JToolBarHelper::publish();
+		JToolBarHelper::unpublish();
 		JToolBarHelper::editListX();
 		JToolBarHelper::addNewX();
     JToolBarHelper::deleteList(JText::_('DELETEROUNDSCONFIRM'));
