@@ -46,8 +46,10 @@ class TracksFrontModelTeamRanking extends baseModel
                 . ' INNER JOIN #__tracks_subroundtypes AS srt ON srt.id = sr.type '
                 . ' INNER JOIN #__tracks_projects_rounds AS pr ON pr.id = sr.projectround_id '
                 . ' WHERE pr.project_id = ' . $project_id
-                . '   AND rr.team_id > 0';
-                
+                . '   AND rr.team_id > 0'
+                . '   AND pr.published = 1 '
+                . '   AND sr.published = 1 '
+                ;
         $this->_db->setQuery( $query );
         if ( $results = $this->_db->loadObjectList() )
         {
@@ -79,11 +81,8 @@ class TracksFrontModelTeamRanking extends baseModel
            	$teams[$r->team_id]->points += $points;
           }
           uasort( $teams, array( $this, "orderTeamRankings" ) );
-          return $teams;
         }
-        else {
-          return $results;        
-        }
+        return $teams;
     }
 
     /**
@@ -119,7 +118,8 @@ class TracksFrontModelTeamRanking extends baseModel
               . ' t.name AS team_name, t.short_name AS team_short_name, t.acronym AS team_acronym, t.country_code, t.picture_small AS team_logo'
               . ' FROM #__tracks_projects_individuals AS pi '
               . ' INNER JOIN #__tracks_teams AS t ON t.id = pi.team_id '
-              . ' WHERE pi.project_id = ' . $project_id;
+              . ' WHERE pi.project_id = ' . $project_id
+              . ' ORDER BY t.name ';
 
       $this->_db->setQuery( $query );
       if ($results = $this->_db->loadObjectList('team_id') )

@@ -83,7 +83,7 @@ class TracksFrontModelRanking extends baseModel
 	}
 
     /**
-     * Return the round result
+     * Return the round results
      *
      * @param int $project_id
      * @return array of objects
@@ -96,6 +96,8 @@ class TracksFrontModelRanking extends baseModel
                 . ' INNER JOIN #__tracks_subroundtypes AS srt ON srt.id = sr.type '
                 . ' INNER JOIN #__tracks_projects_rounds AS pr ON pr.id = sr.projectround_id '
                 . ' WHERE pr.project_id = ' . $project_id
+                . '   AND pr.published = 1 '
+                . '   AND sr.published = 1 '
                 ;
                 
         $this->_db->setQuery( $query );
@@ -139,7 +141,9 @@ class TracksFrontModelRanking extends baseModel
 				    	. ' FROM #__tracks_projects_individuals AS pi '
 				    	. ' INNER JOIN #__tracks_individuals AS i ON i.id = pi.individual_id '
 				    	. ' LEFT JOIN #__tracks_teams AS t ON t.id = pi.team_id '
-				    	. ' WHERE pi.project_id = ' . $project_id;
+				    	. ' WHERE pi.project_id = ' . $project_id
+				    	. ' ORDER BY pi.number ASC, i.last_name ASC, i.first_name ASC '
+				    	;
 
     	$this->_db->setQuery( $query );
     	if ($results = $this->_db->loadObjectList('id') )
