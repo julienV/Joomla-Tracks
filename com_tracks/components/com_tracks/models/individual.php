@@ -105,7 +105,7 @@ class TracksFrontModelIndividual extends baseModel
            . '        c.name AS competitionname, '
            . '        s.name AS seasonname, '
            . '        t.name AS teamname, '
-		       . ' CASE WHEN CHAR_LENGTH( r.alias ) THEN CONCAT_WS( \':\', r.id, r.alias ) ELSE r.id END AS prslug '
+		       . ' CASE WHEN CHAR_LENGTH( r.alias ) THEN CONCAT_WS( \':\', pr.id, r.alias ) ELSE pr.id END AS prslug '
 		       . ' FROM #__tracks_rounds_results AS rr '
 		       . ' INNER JOIN #__tracks_projects_subrounds AS psr ON psr.id = rr.subround_id '
 		       . ' INNER JOIN #__tracks_subroundtypes AS srt ON srt.id = psr.type '
