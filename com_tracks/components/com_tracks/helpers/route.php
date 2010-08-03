@@ -31,6 +31,22 @@ class TracksHelperRoute
 		return self::buildUrl( $parts );
 	}
 	
+	/**
+	 * return link to details view of specified event
+	 * @param int $id
+	 * @param int $xref
+	 * @return url
+	 */
+	function getRoundRoute($id = 0)
+	{
+		$parts = array( "option" => "com_tracks",
+		                "view"   => "round" );
+		if ($id) {
+			$parts['r'] = $id;
+		}
+		return self::buildUrl( $parts );
+	}
+	
 	
 	function buildUrl($parts)
 	{		

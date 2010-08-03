@@ -19,55 +19,59 @@
  */
 function TracksBuildRoute(&$query)
 {
-    $view = '';
-    $segments = array();
-    if(isset($query['view']))
-    {
-        $segments[] = $query['view'];
-        $view = $query['view'];
-        unset( $query['view'] );
-    }
-    switch ( $view )
-    {
-        case 'project':
-        case 'ranking':
-        case 'teamranking':
-            if(isset($query['p']))
-            {
-                $segments[] = $query['p'];
-                unset( $query['p'] );
-            }
-            break;
-        case 'roundresult':
-            if(isset($query['pr']))
-            {
-                $segments[] = $query['pr'];
-                unset( $query['pr'] );
-            }
-            break;
-        case 'individual':
-		    if(isset($query['i']))
-		    {
-		        $segments[] = $query['i'];
-		        unset( $query['i'] );
-		    }
-		    break;
+	$view = '';
+	$segments = array();
+	if (isset($query['view']))
+	{
+		$segments[] = $query['view'];
+		$view = $query['view'];
+		unset( $query['view'] );
+	}
+	switch ( $view )
+	{
+		case 'project':
+		case 'ranking':
+		case 'teamranking':
+			if (isset($query['p']))
+			{
+				$segments[] = $query['p'];
+				unset( $query['p'] );
+			}
+			break;
+			
+		case 'roundresult':
+			if (isset($query['pr']))
+			{
+				$segments[] = $query['pr'];
+				unset( $query['pr'] );
+			}
+			break;
+			
+		case 'individual':
+			if (isset($query['i']))
+			{
+				$segments[] = $query['i'];
+				unset( $query['i'] );
+			}
+			break;
+			
 		case 'team':
-            if(isset($query['t']))
-            {
-                $segments[] = $query['t'];
-                unset( $query['t'] );
-            }
-            break;
-        case 'round':
-            if(isset($query['r']))
-            {
-                $segments[] = $query['r'];
-                unset( $query['r'] );
-            }
-            break;
-    }
-    return $segments;
+			if (isset($query['t']))
+			{
+				$segments[] = $query['t'];
+				unset( $query['t'] );
+			}
+			break;
+			
+		case 'round':
+			if (isset($query['r']))
+			{
+				$segments[] = $query['r'];
+				unset( $query['r'] );
+			}
+			break;
+	}
+	return $segments;
 }
 
 /**
@@ -78,48 +82,55 @@ function TracksBuildRoute(&$query)
  */
 function TracksParseRoute($segments)
 {
-    $vars = array();
-    switch($segments[0])
-    {
-        case 'project':
-            $vars['view'] = 'project';
-            $id = explode( ':', $segments[1] );
-            $vars['p'] = (int) $id[0];
-            break;
-        case 'ranking':
-            $vars['view'] = 'ranking';
-            $id = explode( ':', $segments[1] );
-            $vars['p'] = (int) $id[0];
-            break;
-        case 'teamranking':
-            $vars['view'] = 'teamranking';
-            $id = explode( ':', $segments[1] );
-            $vars['p'] = (int) $id[0];
-            break;
-        case 'roundresult':
-            $vars['view'] = 'roundresult';
-            $id = explode( ':', $segments[1] );
-            $vars['pr'] = (int) $id[0];
-            break;
-        case 'individual':
-            $vars['view'] = 'individual';
-            $id = explode( ':', $segments[1] );
-            $vars['i'] = (int) $id[0];
-            break;
-        case 'team':
-            $vars['view'] = 'team';
-            $id = explode( ':', $segments[1] );
-            $vars['t'] = (int) $id[0];
-            break;
-        case 'round':
-            $vars['view'] = 'round';
-            $id = explode( ':', $segments[1] );
-            $vars['r'] = (int) $id[0];
-            break;
-        default:
-            $vars['view'] = $segments[0];
-    }
-    return $vars;
+	$vars = array();
+	switch($segments[0])
+	{
+		case 'project':
+			$vars['view'] = 'project';
+			$id = explode( ':', $segments[1] );
+			$vars['p'] = (int) $id[0];
+			break;
+			
+		case 'ranking':
+			$vars['view'] = 'ranking';
+			$id = explode( ':', $segments[1] );
+			$vars['p'] = (int) $id[0];
+			break;
+			
+		case 'teamranking':
+			$vars['view'] = 'teamranking';
+			$id = explode( ':', $segments[1] );
+			$vars['p'] = (int) $id[0];
+			break;
+			
+		case 'roundresult':
+			$vars['view'] = 'roundresult';
+			$id = explode( ':', $segments[1] );
+			$vars['pr'] = (int) $id[0];
+			break;
+			
+		case 'individual':
+			$vars['view'] = 'individual';
+			$id = explode( ':', $segments[1] );
+			$vars['i'] = (int) $id[0];
+			break;
+			
+		case 'team':
+			$vars['view'] = 'team';
+			$id = explode( ':', $segments[1] );
+			$vars['t'] = (int) $id[0];
+			break;
+			
+		case 'round':
+			$vars['view'] = 'round';
+			$id = explode( ':', $segments[1] );
+			$vars['r'] = (int) $id[0];
+			break;
+			
+		default:
+			$vars['view'] = $segments[0];
+	}
+	return $vars;
 }
 
 ?>
