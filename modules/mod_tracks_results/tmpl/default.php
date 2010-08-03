@@ -17,8 +17,8 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <?php
 JHTML::_('behavior.tooltip');
 $document = &JFactory::getDocument(); 
-$document->addStyleSheet( JURI::base() . '/modules/mod_tracks_results/mod_tracks_results.css' );
-$document->addScript( JURI::base() . '/modules/mod_tracks_results/mod_tracks_results.js' );
+$document->addStyleSheet( JURI::base() . 'modules/mod_tracks_results/mod_tracks_results.css' );
+$document->addScript( JURI::base() . 'modules/mod_tracks_results/mod_tracks_results.js' );
 ?>
 
 <div class="mod_tracksresults">
