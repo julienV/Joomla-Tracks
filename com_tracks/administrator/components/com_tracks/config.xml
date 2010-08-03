@@ -44,5 +44,10 @@
 	      <option value="0">No</option>
 	      <option value="1">Yes</option>
 	    </param>
+	    <param type="list" name="indview_results_showrank" default="1" label="COM_TRACKS_INDIVIDUAL_RESULTS_ORDERING" description="COM_TRACKS_INDIVIDUAL_RESULTS_ORDERING_DESC">
+	      <option value="0">COM_TRACKS_INDIVIDUAL_RESULTS_ORDERING_ASC</option>
+	      <option value="1">COM_TRACKS_INDIVIDUAL_RESULTS_ORDERING_DES</option>
+	    </param>
+	    
   </params>
 </root>

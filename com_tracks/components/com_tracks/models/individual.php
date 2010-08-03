@@ -123,8 +123,13 @@ class TracksFrontModelIndividual extends baseModel
     	$query .= ' AND CHAR_LENGTH(srt.points_attribution) > 0 ';
     }
     
-    $query .= ' ORDER BY s.ordering DESC, c.ordering DESC, p.ordering DESC, pr.ordering ASC, psr.ordering ASC'
-		       ;
+    if ($params->get('indview_results_ordering', 1) == 0) {
+    	$query .= ' ORDER BY s.ordering DESC, c.ordering DESC, p.ordering DESC, pr.ordering ASC, psr.ordering ASC';
+    }
+    else {
+    	$query .= ' ORDER BY s.ordering ASC, c.ordering ASC, p.ordering ASC, pr.ordering ASC, psr.ordering ASC';
+    }
+    
 		if (!$result = $this->_getList($query)) {
 			//echo $this->_db->getQuery();
 		}
