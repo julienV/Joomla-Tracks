@@ -104,7 +104,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
       </td>
     </tr>
     <?php endif; ?>
-    <?php if ($this->data->dob != '0000-00-00'): ?>
+    <?php if (strtotime($this->data->dob)): ?>
     <tr>
       <td width="100" align="right" class="key">
         <label for="dob">
