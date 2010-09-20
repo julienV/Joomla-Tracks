@@ -45,7 +45,7 @@ foreach ($this->rows as $r)
       <?php 
       foreach ($c as $r) 
       {
-        $link_round = JRoute::_( 'index.php?view=team&t=' .$r->slug );
+        $link_round = JRoute::_( TracksHelperRoute::getTeamRoute($r->slug) );
         if ($letter != strtoupper(substr($r->name, 0, 1)))
         {
           $letter = strtoupper(substr($r->name, 0, 1)); ?>

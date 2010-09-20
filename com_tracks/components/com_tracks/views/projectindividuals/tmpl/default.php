@@ -20,8 +20,8 @@ defined('_JEXEC') or die('Restricted access'); ?>
     <?php
     foreach( $this->individuals AS $obj )
     {
-      $link_ind = JRoute::_( 'index.php?option=com_tracks&view=individual&i=' . $obj->slug ); 
-      $link_team = JRoute::_( 'index.php?option=com_tracks&view=team&t=' . $obj->teamslug );      
+      $link_ind = JRoute::_( TracksHelperRoute::getIndividualRoute($obj->slug) ); 
+      $link_team = JRoute::_( TracksHelperRoute::getTeamRoute($obj->teamslug) );      
       ?>
       <li>
         <div>

@@ -29,9 +29,9 @@ defined('_JEXEC') or die('Restricted access'); ?>
   {
     foreach ( $this->projects as $project )
     {
-      $link_project = JRoute::_( 'index.php?view=project&p=' . $project->slug );
-      $link_ranking = JRoute::_( 'index.php?view=ranking&p=' . $project->slug );	
-      $link_teams_ranking = JRoute::_( 'index.php?view=teamranking&p=' . $project->slug );			     
+      $link_project = JRoute::_( TracksHelperRoute::getProjectRoute($project->slug) );
+      $link_ranking = JRoute::_( TracksHelperRoute::getRankingRoute($project->slug) );	
+      $link_teams_ranking = JRoute::_( TracksHelperRoute::getTeamRankingRoute($project->slug) );			     
      ?>
       <tr>
         <td>

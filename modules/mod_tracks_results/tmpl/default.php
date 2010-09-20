@@ -15,7 +15,7 @@
 defined('_JEXEC') or die('Restricted access'); ?>
 
 <?php
-JHTML::_('behavior.tooltip');
+JHTML::_('behavior.tooltip', '.mod-result-tip', array('className' => 'tip-mod-result'));
 $document = &JFactory::getDocument(); 
 $document->addStyleSheet( JURI::base() . 'modules/mod_tracks_results/mod_tracks_results.css' );
 $document->addScript( JURI::base() . 'modules/mod_tracks_results/mod_tracks_results.js' );
@@ -38,8 +38,8 @@ $document->addScript( JURI::base() . 'modules/mod_tracks_results/mod_tracks_resu
     $count = 0;
     foreach( $list->results AS $rows )
     {
-      $link_ind = JRoute::_( 'index.php?option=com_tracks&view=individual&i=' . $rows->individual_id ); 
-      $link_team = JRoute::_( 'index.php?option=com_tracks&view=team&t=' . $rows->team_id ); 
+      $link_ind = JRoute::_( TracksHelperRoute::getIndividualRoute($rows->individual_id) ); 
+      $link_team = JRoute::_( TracksHelperRoute::getTeamRoute($rows->team_id) );
       ?>
       <tr>
         <td><?php echo $rows->rank; ?></td>
@@ -47,15 +47,7 @@ $document->addScript( JURI::base() . 'modules/mod_tracks_results/mod_tracks_resu
           <a href="<?php echo $link_ind; ?>"
              title="<?php
               echo trim($rows->first_name . ' ' . $rows->last_name).'::'
-                  . $rows->performance; ?>" class="resultTip">
-              <?php 
-              echo $rows->last_name;
-              /*
-              if ( $ranking->country_code ) {
-                  echo ' (' . $ranking->country_code .')'; 
-              } 
-              */
-              ?>
+                  . $rows->performance; ?>" class="mod-result-tip"><?php echo $rows->last_name; ?>
           </a>
         </td> 
         <?php if ($showteams) { ?>
@@ -79,7 +71,7 @@ $document->addScript( JURI::base() . 'modules/mod_tracks_results/mod_tracks_resu
   </tbody>
 </table>
 <?php 
-$link = JRoute::_( 'index.php?option=com_tracks&view=roundresult&pr=' . $round->projectround_id );
+$link = JRoute::_( TracksHelperRoute::getRoundResultRoute($round->projectround_id) );
 ?>
 <a class="fulltablelink" href="<?php echo $link; ?>"
              title="<?php echo JText::_( 'View full table' ); ?>"> 

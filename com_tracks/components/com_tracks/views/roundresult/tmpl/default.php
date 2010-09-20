@@ -72,9 +72,9 @@ foreach ($this->results as $subround)
 	    foreach( $subround->results AS $result )
 	    {        
         $ind_slug = $result->individual_id . ':' . JFilterOutput::stringURLSafe( $result->first_name.' '.$result->last_name) ;
-	      $link_ind = JRoute::_( 'index.php?view=individual&i=' . $ind_slug ); 
+	      $link_ind = JRoute::_( TracksHelperRoute::getIndividualRoute($ind_slug) ); 
 	      $team_slug = $result->team_id . ':' . JFilterOutput::stringURLSafe( $result->team_name ) ;
-	      $link_team = JRoute::_( 'index.php?view=team&t=' . $team_slug ); 
+	      $link_team = JRoute::_( TracksHelperRoute::getTeamRoute($team_slug) ); 
 	      ?>				
       	<tr class="<?php echo ($k++ % 2 ? 'd1' : 'd0'); ?>">
 					<td>

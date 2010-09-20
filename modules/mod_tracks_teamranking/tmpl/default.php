@@ -27,7 +27,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     $count = 0;
     foreach( $list AS $ranking )
     {
-      $link_team = JRoute::_( 'index.php?option=com_tracks&view=team&t=' . $ranking->team_id ); 
+      $link_team = JRoute::_( TracksHelperRoute::getTeamRoute($ranking->team_id) ); 
       ?>
       <tr>
         <td><?php echo $rank++; ?></td>
@@ -48,7 +48,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
   </tbody>
 </table>
 <?php 
-$link = JRoute::_( 'index.php?option=com_tracks&view=teamranking&p=' . $project->id );
+$link = JRoute::_( TracksHelperRoute::getTeamRankingRoute($project->id) );
 ?>
 <a class="fulltablelink" href="<?php echo $link; ?>"
              title="<?php echo JText::_( 'View full table' ); ?>"> 

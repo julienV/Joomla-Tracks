@@ -47,7 +47,7 @@ foreach ($this->rows as $r)
       <?php 
       foreach ($c as $r) 
       {
-        $link_round = JRoute::_( 'index.php?view=individual&i=' .$r->slug );
+        $link_round = JRoute::_( TracksHelperRoute::getIndividualRoute($r->slug) );
 	      if ($letter != strtoupper(substr($r->last_name, 0, 1)))
 	      {
 		      $letter = strtoupper(substr($r->last_name, 0, 1)); ?>

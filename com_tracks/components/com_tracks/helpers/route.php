@@ -47,6 +47,55 @@ class TracksHelperRoute
 		return self::buildUrl( $parts );
 	}
 	
+	function getIndividualRoute($id = 0)
+	{
+		$parts = array( "option" => "com_tracks",
+		                "view"   => "individual" );		
+		if ($id) {
+			$parts['i'] = $id;
+		}
+		return self::buildUrl( $parts );
+	}
+	
+	function getProjectRoute($id = 0)
+	{
+		$parts = array( "option" => "com_tracks",
+		                "view"   => "project" );		
+		if ($id) {
+			$parts['p'] = $id;
+		}
+		return self::buildUrl( $parts );
+	}
+	
+	function getTeamRoute($id = 0)
+	{
+		$parts = array( "option" => "com_tracks",
+		                "view"   => "team" );		
+		if ($id) {
+			$parts['t'] = $id;
+		}
+		return self::buildUrl( $parts );
+	}
+	
+	function getRankingRoute($id = 0)
+	{
+		$parts = array( "option" => "com_tracks",
+		                "view"   => "ranking" );		
+		if ($id) {
+			$parts['p'] = $id;
+		}
+		return self::buildUrl( $parts );
+	}
+	
+	function getTeamRankingRoute($id = 0)
+	{
+		$parts = array( "option" => "com_tracks",
+		                "view"   => "teamranking" );		
+		if ($id) {
+			$parts['p'] = $id;
+		}
+		return self::buildUrl( $parts );
+	}
 	
 	function buildUrl($parts)
 	{		
@@ -84,11 +133,36 @@ class TracksHelperRoute
 				{					
 					switch ($query['view'])
 					{
+						case 'individual':
+							if ((int) @$item->query['i'] == (int) @$query['i']) {
+								return $item;
+							}					
+							break;
+							
+						case 'ranking':
+							if ((int) @$item->query['p'] == (int) @$query['p']) {
+								return $item;
+							}					
+							break;
+							
+						case 'round':
+							if ((int) @$item->query['r'] == (int) @$query['r']) {
+								return $item;
+							}						
+						  break;
+							
 						case 'roundresult':
 							if ((int) @$item->query['pr'] == (int) @$query['pr']) {
 								return $item;
 							}						
 						  break;
+						  
+						case 'team':
+							if ((int) @$item->query['t'] == (int) @$query['t']) {
+								return $item;
+							}					
+							break;
+							
 						default:
 							if (!isset($query['id']) || (int) @$item->query['id'] == (int) @$query['id']) {
 								return $item;

@@ -25,7 +25,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 </table>
 
 <?php if ($this->show_edit_link): ?>
-<div id="editprofile"><a href="<?php echo JRoute::_( 'index.php?controller=individual&task=edit&i='.$this->data->id ); ?>" 
+<div id="editprofile"><a href="<?php echo JRoute::_( TracksHelperRoute::getIndividualRoute($this->data->id).'&task=edit' ); ?>" 
        title ="<?php echo JText::_( 'Edit profile' ) ?>">
           <?php echo JText::_( 'Edit profile' ); ?>
           </a></div>
