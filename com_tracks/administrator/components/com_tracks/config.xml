@@ -49,5 +49,17 @@
 	      <option value="1">COM_TRACKS_INDIVIDUAL_RESULTS_ORDERING_DES</option>
 	    </param>
 	    
+	    
+    <param type="spacer" default="COM_TRACKS_RESULTS_VIEW_SETTINGS" />
+	    <param type="radio" name="resultview_results_showrounddesc" default="1" label="COM_TRACKS_RESULTS_VIEW_SHOW_ROUND_DESC" description="COM_TRACKS_RESULTS_VIEW_SHOW_ROUND_DESC_DESC">
+	      <option value="0">No</option>
+	      <option value="1">Yes</option>
+	    </param>
+	    <param type="radio" name="resultview_results_showsubrounddesc" default="1" label="COM_TRACKS_RESULTS_VIEW_SHOW_SUBROUND_DESC" description="COM_TRACKS_RESULTS_VIEW_SHOW_SUBROUND_DESC_DESC">
+	      <option value="0">No</option>
+	      <option value="1">Yes</option>
+	    </param>
+    	
+	    
   </params>
 </root>

@@ -27,8 +27,8 @@ class TracksFrontViewRoundResult extends JView
 {
     function display($tpl = null)
     {
-    	global $mainframe;
-    	$params = &JComponentHelper::getParams( 'com_tracks' );
+    	$mainframe = &Jfactory::getApplication();
+    	$params = $mainframe->getParams();
     	$ordering = $params->def('subround_order', 0);
     	$ordering = ($ordering) ? 'DESC':'ASC';
     	$projectround_id = JRequest::getVar( 'pr', 0, '', 'int' );
@@ -50,6 +50,7 @@ class TracksFrontViewRoundResult extends JView
     	$this->assignRef( 'results',    $subroundresults );
     	$this->assignRef( 'round',    $round );
       $this->assignRef( 'projectparams',    $projectparams );
+      $this->assignRef( 'params',    $params );
       
     	parent::display($tpl);
     }

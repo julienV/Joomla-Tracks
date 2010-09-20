@@ -14,16 +14,40 @@
 defined('_JEXEC') or die('Restricted access'); 
 jimport( 'joomla.filter.output' );
 
+$dispatcher = & JDispatcher::getInstance();
+JPluginHelper::importPlugin('content');
+
 ?>
 <div id="tracks">
 
 <h1><?php echo $this->round->name . ' - ' . $this->round->project_name; ?></h1>
+
+<?php if ($this->params->get('resultview_results_showrounddesc', 1)): ?>
+<div class="tracks-round-description">
+<?php 
+$this->round->text = $this->round->description;
+$results = $dispatcher->trigger('onPrepareContent', array (& $this->round, null, 0));
+echo $this->round->text;
+?>
+</div>
+<?php endif; ?>
 
 <?php
 foreach ($this->results as $subround)
 {
 	?>
 	<h2><?php echo $subround->typename; ?></h2>
+	
+	<?php if ($this->params->get('resultview_results_showsubrounddesc', 1)): ?>
+	<div class="tracks-round-description">
+	<?php 
+	$subround->text = $subround->description;
+	$results = $dispatcher->trigger('onPrepareContent', array (& $subround, null, 0));
+	echo $subround->description;
+	?>
+	</div>
+	<?php endif; ?>
+	
 	<table class="raceResults" cellspacing="0" cellpadding="0" summary="">
 	  <tbody>
 	    <tr>
