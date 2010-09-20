@@ -9,7 +9,7 @@
         <name>Standard team display layout</name>
         <description>Select a team</description>
         <url addpath="/administrator/components/com_tracks/elements">
-            <param name="t" type="tsql" default="" label="Select a round" description="" query="SELECT id AS t, name AS text FROM #__tracks_teams ORDER BY name ASC" />
+            <param name="t" type="tsql" default="" label="Select a team" description="" query="SELECT id AS t, name AS text FROM #__tracks_teams ORDER BY name ASC" />
         </url>
         <params>
         </params>
