@@ -12,7 +12,10 @@
 * See COPYRIGHT.php for copyright notices and details.
 */
 // no direct access
-defined('_JEXEC') or die('Restricted access'); ?>
+defined('_JEXEC') or die('Restricted access'); 
+
+JHTML::_('behavior.tooltip', '.mod-ranking-tip', array('className' => 'tip-mod-ranking'));
+?>
 <div class="mod_tracksranking">
 
 <table cellspacing="0" cellpadding="0" summary="">
@@ -37,7 +40,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
         <td><?php echo $rank++; ?></td>
         <td>
           <a href="<?php echo $link_ind; ?>"
-             title="<?php echo JText::_( 'Details' ); ?>">
+             title="<?php echo $ranking->last_name.($ranking->first_name ? ', '.$ranking->first_name : ''); ?>::" class="mod-ranking-tip">
           <?php echo $ranking->last_name; ?>
           </a>
         </td>
