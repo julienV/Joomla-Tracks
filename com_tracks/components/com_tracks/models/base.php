@@ -31,6 +31,12 @@ class baseModel extends JModel
 
     var $_project_id = null;
     
+		/**
+		 * reference to ranking class
+		 * @var unknown_type
+		 */
+		var $_rankingtool = null;
+    
     /**
      * returns project object
      * 
@@ -87,4 +93,15 @@ class baseModel extends JModel
       print_r ($params->getGroups());exit;*/
       return $params;
     }
+	
+	function _getRankingTool()
+	{
+		if (empty($this->_rankingtool)) 
+		{
+			// sport specific, for later ?
+			require_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'sports'.DS.'default'.DS.'rankingtool.php');
+			$this->_rankingtool = new TracksRankingTool($this->_project_id);
+		}
+		return $this->_rankingtool;
+	}
 }

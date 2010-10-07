@@ -26,25 +26,26 @@ class modTracksTeamRanking
 	 */
   var $_model = null;
   
-  function _getModel()
+  function _getModel($params)
   {       
     if ( $this->_model == null )
     {
       require_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'models'.DS.'teamranking.php');
       $this->_model = new TracksFrontModelTeamRanking();
+      $this->_model->setProjectId($params->get('project_id'));
     }
     return $this->_model;      
   }
   
   function getList(&$params)
 	{ 
-    $model = $this->_getModel();
-		return $model->getTeamRankings( $params->get('project_id') );
+    $model = $this->_getModel($params);
+		return $model->getTeamRankings();
 	}
 	
 	function getProject(&$params)
 	{
-	  $model = $this->_getModel();    
-    return $model->getProject( $params->get('project_id') );
+	  $model = $this->_getModel($params);    
+    return $model->getProject();
 	}
 }

@@ -24,44 +24,60 @@ require_once( 'base.php' );
  * @since 0.1
  */
 class TracksFrontModelProject extends baseModel
-{
+{	
+	var $_rounds = null;
+	
+	function __construct($projectid = null)
+	{
+		parent::__construct();
+		
+		$projectid = $projectid ? $projectid : JRequest::getInt('p');
+		
+		if ($projectid) {
+			$this->setProjectId($projectid);
+		}
+	}
+
+	function setProjectId($projectid)
+	{
+		if ($this->_project_id == $projectid) {
+			return true;
+		}
+		$this->_project_id = intval($projectid);
+		$this->_rankingtool = null;
+		return true;
+	}
+	
 	/**
 	 * Gets winner of each round, indexed by projectround_id
 	 *
 	 * @param array ids of projectrounds
 	 * @return the results to be displayed to the user
 	 */
-	function getWinners( $projectround_ids )
+	function getWinners( $project_id )
 	{
+		$rounds = $this->getRounds();
+		$projectround_ids = array();	
+		foreach ($rounds as $r) {
+			$projectround_ids[] = $r->projectround_id;
+		}
+		$winners = array();
 		if ( count( $projectround_ids ) )
 		{
-			$query = 	' SELECT rr.*, sr.projectround_id,'
-			. ' i.first_name, i.last_name, '
-			. ' t.name AS team_name '
-			. ' FROM #__tracks_rounds_results AS rr '
-      . ' INNER JOIN #__tracks_projects_subrounds AS sr ON rr.subround_id = sr.id '
-      . ' INNER JOIN #__tracks_subroundtypes AS srt ON srt.id = sr.type '
-			. ' INNER JOIN #__tracks_projects_rounds AS pr ON pr.id = sr.projectround_id '
-			. ' INNER JOIN #__tracks_individuals AS i ON i.id = rr.individual_id '
-			. ' LEFT JOIN #__tracks_teams AS t ON t.id = rr.team_id '
-			. ' WHERE pr.published = 1 '
-			. '   AND rr.rank = 1 '
-      . '   AND CHAR_LENGTH(srt.points_attribution) > 0 '
-			. '   AND pr.id IN (' . implode( ", ", $projectround_ids ) . ') '
-			. ' ORDER BY sr.ordering DESC'
-			;
-
-			$this->_db->setQuery( $query );
-
-			$result = $this->_db->loadObjectList( 'projectround_id' );
-			return $result;
+			$rankingtool = $this->_getRankingTool();
+			foreach ($projectround_ids as $pr)
+			{
+				$ranking = $rankingtool->getIndividualsRankings($pr);
+				$winners[$pr] = reset($ranking);
+			}
+			return $winners;
 		}
 		else return null;
 	}
 
-	function getRounds( $project_id = 0 )
+	function getRounds()
 	{
-		if ( $project_id )
+		if (empty($this->_rounds))
 		{
 			$query =  ' SELECT pr.id AS projectround_id, '
 			. ' pr.start_date, pr.end_date, '
@@ -70,14 +86,14 @@ class TracksFrontModelProject extends baseModel
 			. ' FROM #__tracks_projects_rounds AS pr '
 			. ' INNER JOIN #__tracks_rounds AS r ON r.id = pr.round_id '
 			. ' WHERE pr.published = 1 '
-			. '   AND pr.project_id = ' . $project_id
+			. '   AND pr.project_id = ' . $this->_project_id
 			. ' ORDER BY pr.ordering ';
 
 			$this->_db->setQuery( $query );
 
-			return $this->_db->loadObjectList();
+			$this->_rounds = $this->_db->loadObjectList();
 		}
-		else return null;
+		return $this->_rounds;
 	}
 
 	function getResults( $project_id = 0 )
