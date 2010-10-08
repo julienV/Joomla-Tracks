@@ -22,6 +22,7 @@
 	
 	  <files folder="components/com_tracks">
 			  <filename>tracks.php</filename>
+			  <filename>tracks.core.php</filename>
 			  <filename>controller.php</filename>
         <filename>router.php</filename>
 			  <filename>index.html</filename>
@@ -30,6 +31,7 @@
         <folder>css</folder>
         <folder>helpers</folder>
 			  <folder>models</folder>
+			  <folder>sports</folder>
 			  <folder>views</folder>
     </files>
     

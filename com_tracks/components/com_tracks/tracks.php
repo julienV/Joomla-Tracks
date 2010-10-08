@@ -14,18 +14,11 @@
 // no direct access
 defined('_JEXEC') or die('Restricted access');
 
-// ACL rules
+// require core
+require_once (JPATH_COMPONENT.DS.'tracks.core.php');
 
-$acl =& JFactory::getACL();
-$acl->addACL( 'com_tracks', 'manage', 'users', 'super administrator' );
-/* Additional access groups */
-$acl->addACL( 'com_tracks', 'manage', 'users', 'administrator' );
-    
 // Require the base controller
 require_once (JPATH_COMPONENT.DS.'controller.php');
-require_once (JPATH_COMPONENT.DS.'helpers'.DS.'trackshtml.php');
-require_once (JPATH_COMPONENT.DS.'helpers'.DS.'countries.php');
-require_once (JPATH_COMPONENT.DS.'helpers'.DS.'route.php');
 
 // Require specific controller if requested
 if($controller = JRequest::getWord('controller')) {

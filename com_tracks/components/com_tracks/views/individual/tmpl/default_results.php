@@ -21,13 +21,13 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <?php foreach ($this->results as $k => $project): ?>
 <h3>
 <?php echo $k; ?>
-<?php if ($this->params->get('indview_results_showcompetition') || $this->params->get('indview_results_showseason')) {
+<?php if ($this->params->get('indview_results_showcompetition', 1) || $this->params->get('indview_results_showseason', 1)) {
   $html = ' (';
   $elements = array();  
-  if ($this->params->get('indview_results_showcompetition')) {
+  if ($this->params->get('indview_results_showcompetition', 1)) {
     $elements[] = $project[0]->competitionname;
   }
-  if ($this->params->get('indview_results_showseason')) {
+  if ($this->params->get('indview_results_showseason', 1)) {
     $elements[] = $project[0]->seasonname;
   }
   $html .= implode(' / ', $elements);
@@ -39,37 +39,43 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <table class="raceResults">
   <thead>
     <tr>    
-      <?php if ($this->params->get('indview_results_showteam')): ?>
+      <?php if ($this->params->get('indview_results_showteam', 1)): ?>
       <th><?php echo JText::_('TEAM'); ?></th>
       <?php endif; ?>     
       <th><?php echo JText::_('ROUND'); ?></th>
-      <?php if ($this->params->get('indview_results_showrace')): ?>
+      <?php if ($this->params->get('indview_results_showrace', 1)): ?>
 	    <th><?php echo JText::_('RACE'); ?></th>
       <?php endif; ?>     
-      <?php if ($this->params->get('indview_results_showperformance')): ?>
+      <?php if ($this->params->get('indview_results_showperformance', 1)): ?>
       <th><?php echo JText::_('PERFORMANCE'); ?></th>
       <?php endif; ?>    
-      <?php if ($this->params->get('indview_results_showrank')): ?>
+      <?php if ($this->params->get('indview_results_showrank', 1)): ?>
 	    <th><?php echo JText::_('RANK'); ?></th>
+      <?php endif; ?>     
+      <?php if ($this->params->get('indview_results_points', 1)): ?>
+	    <th><?php echo JText::_('POINTS'); ?></th>
       <?php endif; ?>     
     </tr>
   </thead>
   <tbody>
     <?php foreach ($project as $result): ?>
     <tr>    
-      <?php if ($this->params->get('indview_results_showteam')): ?>
+      <?php if ($this->params->get('indview_results_showteam', 1)): ?>
       <td><?php echo $result->teamname; ?></td>
-      <?php endif; ?>    
+      <?php endif; ?>
       <td><?php echo JHTML::link(JRoute::_(TracksHelperRoute::getRoundResultRoute($result->prslug)), $result->roundname); ?></td>
-      <?php if ($this->params->get('indview_results_showrace')): ?>
+      <?php if ($this->params->get('indview_results_showrace', 1)): ?>
       <td><?php echo $result->subroundname; ?></td>
-      <?php endif; ?>     
-      <?php if ($this->params->get('indview_results_showperformance')): ?>
+      <?php endif; ?> 
+      <?php if ($this->params->get('indview_results_showperformance', 1)): ?>
       <td><?php echo $result->performance; ?></td>
-      <?php endif; ?>     
-      <?php if ($this->params->get('indview_results_showrank')): ?>
+      <?php endif; ?>
+      <?php if ($this->params->get('indview_results_showrank', 1)): ?>
       <td><?php echo $result->rank; ?></td>
-      <?php endif; ?>     
+      <?php endif; ?>
+      <?php if ($this->params->get('indview_results_points', 1)): ?>
+      <td><?php echo TracksHelperTools::getSubroundPoints($result); ?></td>
+      <?php endif; ?>
     </tr>
     <?php endforeach; ?>
   </tbody>

@@ -97,7 +97,7 @@ class TracksFrontModelIndividual extends baseModel
 		$ind = $this->getData();
 		if (!$ind->id) return null;
 		
-		$query = ' SELECT rr.rank, rr.performance, '
+		$query = ' SELECT rr.rank, rr.performance, rr.bonus_points, '
            . '        r.name AS roundname, r.id as pr, '
 		       . '        srt.name AS subroundname, '
            . '        srt.points_attribution, '
