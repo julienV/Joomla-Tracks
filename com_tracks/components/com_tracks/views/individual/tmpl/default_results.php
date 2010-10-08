@@ -59,7 +59,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
   </thead>
   <tbody>
     <?php foreach ($project as $result): ?>
-    <tr>    
+    <tr<?php echo ($result->rank == 1 ? 'class="winner"' : ''); ?>>    
       <?php if ($this->params->get('indview_results_showteam', 1)): ?>
       <td><?php echo $result->teamname; ?></td>
       <?php endif; ?>
