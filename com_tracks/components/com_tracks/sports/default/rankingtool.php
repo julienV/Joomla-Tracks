@@ -132,6 +132,9 @@ class TracksRankingTool extends JObject {
 		{
 			foreach ( $results as $r )
 			{
+				if (!$r->team_id) {
+					continue;
+				}
 				// points for the round
 				$points = $r->bonus_points;
 				if (!empty($r->points_attribution))
