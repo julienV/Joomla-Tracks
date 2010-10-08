@@ -187,7 +187,7 @@ function update03to04()
 	if ( !array_key_exists('number', $tablefields[ '#__tracks_rounds_results' ]) )
 	{
 		$database->setQuery( 'ALTER TABLE `#__tracks_rounds_results` '
-		. ' ADD `number` varchar(8) NOT NULL AFTER `team_id`;');
+		. ' ADD `number` varchar(8) NULL AFTER `team_id`;');
 		$database->query();
 		if ( !$database->getErrorNum() ) {
 			echo JTEXT::_('Added field number to individual results<br />');

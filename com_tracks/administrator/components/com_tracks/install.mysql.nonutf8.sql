@@ -177,7 +177,7 @@ CREATE TABLE IF NOT EXISTS `#__tracks_rounds_results` (
   `id` int(11) NOT NULL auto_increment,
   `individual_id` int(11) NOT NULL,
   `team_id` int(11) NOT NULL,
-  `number` VARCHAR(8) NOT NULL,
+  `number` VARCHAR(8) NULL,
   `subround_id` int(11) NOT NULL,
   `rank` int(11) NOT NULL,
   `performance` VARCHAR(30) NOT NULL DEFAULT '',
