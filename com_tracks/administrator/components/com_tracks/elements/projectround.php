@@ -43,8 +43,7 @@ class JElementProjectround extends JElement
       JTable::addIncludePath(JPATH_ADMINISTRATOR.DS.'components'.DS.'com_tracks'.DS.'tables');
     
 	    $projectround =& JTable::getInstance('Projectround','Table');
-	    if ($value) {
-	      $projectround->load($value);
+	    if ($value && $projectround->load($value)) {	      
 	      $roundname = $projectround->getName();
 	    } else {
 	      $roundname = JText::_('Select a project round');
