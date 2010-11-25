@@ -72,6 +72,9 @@ class TracksControllerSubround extends BaseController
 		$cid	= JRequest::getVar( 'cid', array(0), 'post', 'array' );
 		$post['id'] = (int) $cid[0];
 
+    $post['description'] = JRequest::getVar('description', '', 'post', 'string', JREQUEST_ALLOWRAW);
+    $post['comment'] = JRequest::getVar('comment', '', 'post', 'string', JREQUEST_ALLOWRAW);
+    
 		$model = $this->getModel('subround');
 
 		if ($returnid = $model->store($post)) {
