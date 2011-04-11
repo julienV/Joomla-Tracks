@@ -20,6 +20,7 @@ $user 	=& JFactory::getUser();
 //$ordering = ($this->lists['order'] == 'obj.ordering');
 
 JHTML::_('behavior.mootools');
+JHTML::_('behavior.tooltip');
 ?>
 <style>
 .search-item {
@@ -49,7 +50,7 @@ JHTML::_('behavior.mootools');
 
 <script type="text/javascript">
 window.addEvent('domready', function () {
-	var searchInput = $('quickadd2');
+	var searchInput = $('quickadd');
 
 	//A simple spinner div, display-toggled during request
 	var indicator = new Element('div', {
@@ -89,9 +90,9 @@ function submitbutton(pressbutton)
 <input type="hidden" name="srid" id="srid" value="<?php echo $this->subround_id; ?>" />
 <table>
 	<tr>
-		<td>Quick Add 2:</td>
-		<td><input type="text" name="quickadd2" id="quickadd2" /></td>
-		<td><input type="hidden" id="individualid" name="individualid" value=""><input type="submit" name="submit2" id="submit2" value="Add2" /></td>
+		<td class="hasTip" title="<?php echo JText::_('COM_TRACKS_QUICK_ADD').'::'.JText::_('COM_TRACKS_QUICK_ADD_TIP'); ?>"><?php echo JText::_('COM_TRACKS_QUICK_ADD'); ?>:</td>
+		<td><input type="text" name="quickadd" id="quickadd" /></td>
+		<td><input type="hidden" id="individualid" name="individualid" value=""><input type="submit" name="submit2" id="submit2" value="<?php echo JText::_('COM_TRACKS_ADD_PARTICIPANT'); ?>" /></td>
 	</tr>
 	
 </table>
