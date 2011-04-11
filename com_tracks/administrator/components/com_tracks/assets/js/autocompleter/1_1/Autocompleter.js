@@ -178,7 +178,6 @@ Autocompleter.Base = new Class({
 	choiceSelect: function(el) {
 		this.observer.value = this.element.value = el.inputValue;
 		this.hideChoices();
-//		console.log('selecting');
 		this.fireEvent('onSelect', [this.element], 20);
 	},
 
@@ -329,7 +328,6 @@ Autocompleter.Ajax.Jsonindividual = Autocompleter.Ajax.Base.extend({
 	},
 	
 	setIndividual: function(id) {
-//		console.log('setting val: '+id);
 		$('individualid').value = id;
 	},
 });

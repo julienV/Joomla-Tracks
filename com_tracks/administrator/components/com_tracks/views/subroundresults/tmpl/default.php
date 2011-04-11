@@ -48,31 +48,6 @@ JHTML::_('behavior.tooltip');
 }
 </style>
 
-<script type="text/javascript">
-window.addEvent('domready', function () {
-	var searchInput = $('quickadd');
-
-	//A simple spinner div, display-toggled during request
-	var indicator = new Element('div', {
-	 'class': 'autocompleter-loading',
-	 'styles': {'display': 'none'}
-	}).injectAfter($('submit2')); // appended after the input
-	
-	var completer = new Autocompleter.Ajax.Jsonindividual(searchInput, 
-		'<?php echo $this->site_url;?>administrator/index.php?option=com_tracks&controller=quickadd&task=search', {
-	 'postVar': 'query',
-	 'minLength': 3,
-	 'onRequest': function(el) {
-	     indicator.setStyle('display', '');
-	 },
-	 'onComplete': function(el) {
-	     indicator.setStyle('display', 'none');
-	 }
-	});
-
-});
-</script>
-
 <script language="javascript" type="text/javascript">
 function submitbutton(pressbutton)
 {
@@ -134,7 +109,7 @@ function submitbutton(pressbutton)
 	</thead>
 	<tfoot>
 		<tr>
-			<td colspan="8">
+			<td colspan="9">
 				<?php echo $this->pagination->getListFooter(); ?>
 			</td>
 		</tr>

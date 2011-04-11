@@ -134,5 +134,21 @@ class TracksHelper
 
     return $users;
   }
+  
+  /**
+   * return true if mootools upgrade is enabled
+   * 
+   * @return boolean
+   */
+  function isMootools12()
+  {
+  	$version = new JVersion();
+		if ($version->RELEASE == '1.5' && $version->DEV_LEVEL >= 19 && JPluginHelper::isEnabled( 'system', 'mtupgrade' ) ) {
+			return true;
+		}
+		else {
+			return false;
+		}
+  }
 }
 ?>
