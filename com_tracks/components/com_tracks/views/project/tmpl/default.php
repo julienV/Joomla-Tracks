@@ -73,8 +73,8 @@ defined('_JEXEC') or die('Restricted access'); ?>
           </a>
         </td>
         <td><?php echo formatRoundStartEnd( $result ); ?></td>
-        <td><?php echo $result->winner->first_name . ' ' . $result->winner->last_name; ?></td>
-        <td><?php echo $result->winner->team_name; ?></td>
+        <td><?php echo $result->winner ? $result->winner->first_name . ' ' . $result->winner->last_name : ''; ?></td>
+        <td><?php echo $result->winner ? $result->winner->team_name : ''; ?></td>
       </tr>
       <?php			
 		}

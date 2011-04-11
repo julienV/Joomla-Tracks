@@ -61,7 +61,8 @@ class TracksFrontViewProject extends JView
 			  }
 			  $description = array();
 			  $description[] = $result->round_name;
-			  if ($result->winner->last_name) {
+			  if ($result->winner && $result->winner->last_name) 
+			  {
 			  	$winner = JText::_('Winner: ').$result->winner->first_name.' '.$result->winner->last_name;
 			  	if ($result->winner->team_name) {
 			  		$winner .= ' ('.$result->winner->team_name.')';

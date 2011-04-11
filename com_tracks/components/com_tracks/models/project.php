@@ -68,7 +68,13 @@ class TracksFrontModelProject extends baseModel
 			foreach ($projectround_ids as $pr)
 			{
 				$ranking = $rankingtool->getIndividualsRankings($pr);
-				$winners[$pr] = reset($ranking);
+				$first = reset($ranking);
+				if ($first->best_rank) { // was actually ranked (for rounds not finished, all rank can be 0)
+					$winners[$pr] = $first;
+				}
+				else {
+					$winners[$pr] = false;
+				}
 			}
 			return $winners;
 		}
