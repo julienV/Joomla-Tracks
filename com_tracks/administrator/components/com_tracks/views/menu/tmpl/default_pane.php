@@ -113,7 +113,7 @@ echo $this->pane->startPanel( JTEXT::_('General'), 'generalpanel' );
     </tr>
     <tr>
       <td>
-      <a href="http://launchpad.net/joomla-tracks" target="_blank"
+      <a href="https://github.com/julienV/Joomla-Tracks" target="_blank"
         title="<?php echo JText::_('Code and bug reports'); ?>"><?php echo JText::_('Code and bug reports'); ?></a>
       </td>
     </tr>
