@@ -53,7 +53,7 @@ $document->addScript( JURI::base() . 'modules/mod_tracks_results/mod_tracks_resu
         <?php if ($showteams) { ?>
         <td>
           <a href="<?php echo $link_team; ?>"
-             title="<?php echo $rows->team_name . '::' . JText::_( 'Click for details' ); ?>" class="resultTip">
+             title="<?php echo $rows->team_name . '::' . JText::_( 'Click for details' ); ?>" class="mod-result-tip">
             <?php echo $rows->team_acronym; ?>&nbsp;
           </a>
         </td>
