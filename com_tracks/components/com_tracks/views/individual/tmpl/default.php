@@ -16,13 +16,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 <div id="tracks">
 <!-- Title -->
-<table class="contentpaneopen">
-<tbody>
-<tr>
-<td class="contentheading" width="100%"><?php echo $this->data->first_name . ' ' . $this->data->last_name; ?></td>
-</tr>
-</tbody>
-</table>
+<h1><?php echo $this->data->first_name . ' ' . $this->data->last_name; ?></h1>
 
 <?php if ($this->show_edit_link): ?>
 <div id="editprofile"><a href="<?php echo JRoute::_( TracksHelperRoute::getEditIndividualRoute($this->data->id).'&task=edit' ); ?>" 
@@ -56,6 +50,26 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <?php endif; ?>
 <div id="individualdetails">
 <table cellpadding="5" cellspacing="0" border="0" width="90%">
+    <?php if (isset($this->data->projectdata->number) && !empty($this->data->projectdata->number)): ?>
+    <tr>
+      <td width="100" align="right" class="key">
+				<?php echo JText::_( 'COM_TRACKS_INDIVIDUAL_NUMBER' ); ?>:
+      </td>
+      <td>
+        <?php echo $this->data->projectdata->number; ?>
+      </td>
+    </tr>
+    <?php endif; ?>
+    <?php if (isset($this->data->projectdata->team_name) && !empty($this->data->projectdata->team_name)): ?>
+    <tr>
+      <td width="100" align="right" class="key">
+				<?php echo JText::_( 'COM_TRACKS_INDIVIDUAL_TEAM' ); ?>:
+      </td>
+      <td>
+        <?php echo JHTML::link(TracksHelperRoute::getTeamRoute($this->data->projectdata->teamslug, $this->data->projectdata->projectslug), $this->data->projectdata->team_name); ?>
+      </td>
+    </tr>
+    <?php endif; ?>
     <?php if ($this->data->nickname): ?>
     <tr>
       <td width="100" align="right" class="key">

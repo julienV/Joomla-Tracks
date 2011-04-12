@@ -65,7 +65,8 @@ class TracksFrontModelIndividual extends baseModel
 
 			$this->_db->setQuery( $query );
 
-			if ( $result = $this->_db->loadObjectList() ) {
+			if ( $result = $this->_db->loadObjectList() ) 
+			{
 				$this->_data = $result[0];				
         $attribs['class']="pic";
 			
@@ -81,12 +82,41 @@ class TracksFrontModelIndividual extends baseModel
           $this->_data->picture_small = JHTML::image(JURI::base().'media/com_tracks/images/misc/tnnophoto.jpg', $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
         }
         
+        $this->_loadProjectDetails();                
 			}
 			else {
 				$this->_initData();
 			}
 		}
 		
+		return $this->_data;
+	}
+	
+	/**
+	 * add info relevant to the individual in the current project, if a project is set
+	 *  
+	 */
+	function _loadProjectDetails()
+	{
+		if ($this->_project_id && $this->_data)
+		{
+			$query = ' SELECT t.name as team_name, pi.number, ' 
+			       . ' CASE WHEN CHAR_LENGTH( t.alias ) THEN CONCAT_WS( \':\', t.id, t.alias ) ELSE t.id END AS teamslug, '
+			       . ' CASE WHEN CHAR_LENGTH( p.alias ) THEN CONCAT_WS( \':\', p.id, p.alias ) ELSE t.id END AS projectslug '
+			       . ' FROM #__tracks_projects_individuals AS pi ' 
+			       . ' LEFT JOIN #__tracks_teams AS t ON t.id = pi.team_id ' 
+			       . ' LEFT JOIN #__tracks_projects AS p ON p.id = pi.project_id ' 
+			       . ' WHERE pi.project_id = ' . $this->_db->Quote($this->_project_id)
+			       . '   AND pi.individual_id = '. $this->_id;
+			       ;
+			$this->_db->setQuery($query);
+			$res = $this->_db->loadObject();
+			$this->_data->projectdata = $res;
+		}
+		else {
+			$this->_data->projectdata = null;
+		}
+			
 		return $this->_data;
 	}
 	
