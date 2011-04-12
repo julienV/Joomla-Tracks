@@ -236,7 +236,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 <input type="hidden" name="option" value="com_tracks" />
 <input type="hidden" name="controller" value="individual" />
-<input type="hidden" name="id" value="<?php echo $this->object->id; ?>" />    
+<input type="hidden" name="i" value="<?php echo $this->object->id; ?>" />    
 <input type="hidden" name="task" value="save" />
 <?php if (!$this->user->authorize('com_tracks', 'manage' )): ?>
 <input type="hidden" name="user_id" value="<?php echo $this->user->id; ?>" />  

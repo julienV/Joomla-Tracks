@@ -126,8 +126,10 @@ function TracksParseRoute($segments)
 			
 		case 'individual':
 			$vars['view'] = 'individual';
-			$id = explode( ':', $segments[1] );
-			$vars['i'] = (int) $id[0];
+			if (count($segments) > 1) {
+				$id = explode( ':', $segments[1] );
+				$vars['i'] = (int) $id[0];
+			}
 			if (count($segments) > 2) {
 				$vars['p'] = (int) $segments[2];
 			}

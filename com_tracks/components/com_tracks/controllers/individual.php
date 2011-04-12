@@ -54,7 +54,7 @@ class TracksFrontControllerIndividual extends JController
     JRequest::checkToken() or jexit( 'Invalid Token' );
 
     $user  =& JFactory::getUser();
-    $id = JRequest::getVar( 'id', 0, 'post', 'int' );
+    $id = JRequest::getVar( 'i', 0, 'post', 'int' );
 
     // perform security checks
     if ( !$user->get('id') ) {
@@ -73,6 +73,7 @@ class TracksFrontControllerIndividual extends JController
     //clean request
     // first, save description...
     $post = JRequest::get( 'post' );
+    $post['id'] = $id;
     $post['user_id'] = $user_id;
     $post['full_name'] = JRequest::getVar('full_name', '', 'post', 'string');
     $post['last_name'] = JRequest::getVar('last_name', '', 'post', 'string');

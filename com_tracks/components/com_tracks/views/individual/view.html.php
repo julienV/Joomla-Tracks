@@ -29,7 +29,7 @@ class TracksFrontViewIndividual extends JView
 	{
 		global $mainframe;
 
-		if($this->getLayout() == 'form') {
+		if ($this->getLayout() == 'form') {
 			$this->_displayForm($tpl);
 			return;
 		}
@@ -46,7 +46,7 @@ class TracksFrontViewIndividual extends JView
 		$data = & $this->get('Data');
 		$raceResults = $this->sortResultsByProject($this->get('RaceResults'));
 
-		$show_edit_link = ( $user->id && $user->id == $data->user_id );
+		$show_edit_link = ( $user->id && $user->id == $data->user_id ) || $user->authorize('com_tracks', 'manage', 'users');
 
 		$breadcrumbs =& $mainframe->getPathWay();
 		$breadcrumbs->addItem( $data->first_name . ' ' . $data->last_name,

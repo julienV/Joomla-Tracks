@@ -183,6 +183,15 @@ class TracksFrontModelIndividual extends baseModel
     
   	$user   = JFactory::getUser();
     $username = $user->get('username');
+    
+    if ($data['id']) 
+    {
+    	$table->load($data['id']);
+    	
+    	if ($table->user_id != $user->get('id') && !$user->authorize('com_tracks', 'manage')) {
+    		JError::raiseError(403, JText::_('ACCESS_NOT_ALLOWED'));
+    	}
+    }
 
     // Bind the form fields to the user table
     if (!$table->bind($data)) {

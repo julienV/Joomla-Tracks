@@ -24,7 +24,10 @@ require_once( 'base.php' );
  * @since 0.1
  */
 class TracksFrontModelProfile extends baseModel
-{   
+{ 
+	/** individual id **/  
+	var $_id = 0;
+	
 	var $_userid;
 	
   var $_data = null;
@@ -33,42 +36,49 @@ class TracksFrontModelProfile extends baseModel
 	{
 		parent::__construct();
 		
-	  $user   =& JFactory::getUser();
-	  if (!$user) return false;
-	  $this->_userid = $user->get('id');
+	  $this->_id = JRequest::getInt('i');
 	}
 	
 	function getData()
 	{
-		if ( $this->_userid )
+		$user = &Jfactory::getUser();
+		if ( $this->_id )
 		{
 			$query =  ' SELECT i.* '
 			. ' FROM #__tracks_individuals as i '
-			. ' WHERE i.user_id = ' . $this->_userid;
+			. ' WHERE i.id = ' . $this->_id;
+		}
+		else if ($user->get('id'))
+		{
+			$query =  ' SELECT i.* '
+			. ' FROM #__tracks_individuals as i '
+			. ' WHERE i.user_id = ' . $user->get('id');
+		}
+		else {
+			JError::raiseError(403, JText::_('COM_TRACKS_ERROR_MUST_BE_LOGGED'));
+			return false;
+		}
 
-			$this->_db->setQuery( $query );
+		$this->_db->setQuery( $query );
 
-			if ( $result = $this->_db->loadObjectList() ) {
-        $this->_data = $result[0];        
-        $attribs['class']="pic";
-      
-        if ($this->_data->picture != '') {
-          $this->_data->picture = JHTML::image(JURI::root().'media/com_tracks/images/individuals/'.$this->_data->picture, $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
-        } else {
-          $this->_data->picture = JHTML::image(JURI::base().'media/com_tracks/images/misc/tnnophoto.jpg', $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
-        }
-			        
-        if ($this->_data->picture_small != '') {
-          $this->_data->picture_small = JHTML::image(JURI::root().'media/com_tracks/images/individuals/small/'.$this->_data->picture_small, $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
-        } else {
-          $this->_data->picture_small = JHTML::image(JURI::base().'media/com_tracks/images/misc/tnnophoto.jpg', $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
-        }
-        
-      }
-      else {
-        $this->_initData();
-      }
-    }
+		if ( $result = $this->_db->loadObject() )
+		{
+			$this->_data = $result;
+			$attribs['class']="pic";
+
+			if ($this->_data->picture != '') {
+				$this->_data->picture = JHTML::image(JURI::root().'media/com_tracks/images/individuals/'.$this->_data->picture, $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
+			} else {
+				$this->_data->picture = JHTML::image(JURI::base().'media/com_tracks/images/misc/tnnophoto.jpg', $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
+			}
+			 
+			if ($this->_data->picture_small != '') {
+				$this->_data->picture_small = JHTML::image(JURI::root().'media/com_tracks/images/individuals/small/'.$this->_data->picture_small, $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
+			} else {
+				$this->_data->picture_small = JHTML::image(JURI::base().'media/com_tracks/images/misc/tnnophoto.jpg', $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
+			}
+
+		}
     
     return $this->_data;
 	}
