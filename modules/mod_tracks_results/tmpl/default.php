@@ -39,7 +39,7 @@ $document->addScript( JURI::base() . 'modules/mod_tracks_results/mod_tracks_resu
     foreach( $list->results AS $rows )
     {
       $link_ind = JRoute::_( TracksHelperRoute::getIndividualRoute($rows->individual_id) ); 
-      $link_team = JRoute::_( TracksHelperRoute::getTeamRoute($rows->team_id) );
+      $link_team = JRoute::_( TracksHelperRoute::getTeamRoute($rows->team_id, $project->slug) );
       ?>
       <tr>
         <td><?php echo $rows->rank; ?></td>

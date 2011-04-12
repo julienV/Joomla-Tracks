@@ -47,7 +47,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     foreach( $this->rankings AS $ranking )
     {
       $link_ind = JRoute::_( TracksHelperRoute::getIndividualRoute($ranking->slug) ); 
-      $link_team = JRoute::_( TracksHelperRoute::getTeamRoute($ranking->teamslug) ); 
+      $link_team = JRoute::_( TracksHelperRoute::getTeamRoute($ranking->teamslug, $this->project->slug) ); 
       ?>
       <tr class="<?php echo ($i ? 'd1' : 'd0'); ?>">
         <td><?php echo $rank++; ?></td>

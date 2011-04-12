@@ -78,12 +78,15 @@ class TracksHelperRoute
 		return self::buildUrl( $parts );
 	}
 	
-	function getTeamRoute($id = 0)
+	function getTeamRoute($id = 0, $project = 0)
 	{
 		$parts = array( "option" => "com_tracks",
 		                "view"   => "team" );		
 		if ($id) {
 			$parts['t'] = $id;
+		}
+		if ($project) {
+			$parts['p'] = $project;
 		}
 		return self::buildUrl( $parts );
 	}

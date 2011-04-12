@@ -53,6 +53,11 @@ function TracksBuildRoute(&$query)
 				$segments[] = $query['i'];
 				unset( $query['i'] );
 			}
+			if (isset($query['p']))
+			{
+				$segments[] = $query['p'];
+				unset( $query['p'] );
+			}
 			break;
 			
 		case 'team':
@@ -61,6 +66,11 @@ function TracksBuildRoute(&$query)
 				$segments[] = $query['t'];
 				unset( $query['t'] );
 			}
+			if (isset($query['p']))
+			{
+				$segments[] = $query['p'];
+				unset( $query['p'] );
+			}
 			break;
 			
 		case 'round':
@@ -68,6 +78,11 @@ function TracksBuildRoute(&$query)
 			{
 				$segments[] = $query['r'];
 				unset( $query['r'] );
+			}
+			if (isset($query['p']))
+			{
+				$segments[] = $query['p'];
+				unset( $query['p'] );
 			}
 			break;
 	}
@@ -113,18 +128,27 @@ function TracksParseRoute($segments)
 			$vars['view'] = 'individual';
 			$id = explode( ':', $segments[1] );
 			$vars['i'] = (int) $id[0];
+			if (count($segments) > 1) {
+				$vars['p'] = (int) $segments[2];
+			}
 			break;
 			
 		case 'team':
 			$vars['view'] = 'team';
 			$id = explode( ':', $segments[1] );
 			$vars['t'] = (int) $id[0];
+			if (count($segments) > 1) {
+				$vars['p'] = (int) $segments[2];
+			}
 			break;
 			
 		case 'round':
 			$vars['view'] = 'round';
 			$id = explode( ':', $segments[1] );
 			$vars['r'] = (int) $id[0];
+			if (count($segments) > 1) {
+				$vars['p'] = (int) $segments[2];
+			}
 			break;
 			
 		default:

@@ -44,7 +44,7 @@ class baseModel extends JModel
 		 */
 		var $_data = null;
 
-		function __construct($config = null)
+		function __construct($config = array())
 		{
 			parent::__construct($config);
 			
@@ -94,7 +94,8 @@ class baseModel extends JModel
       	$this->setProjectId($project_id);
       }
       
-      $query =   ' SELECT * '
+      $query =   ' SELECT p.*, '
+               . ' CASE WHEN CHAR_LENGTH( p.alias ) THEN CONCAT_WS( \':\', p.id, p.alias ) ELSE p.id END AS slug '
                . ' FROM #__tracks_projects AS p '
                . ' WHERE p.id = ' . $this->_project_id;
                 

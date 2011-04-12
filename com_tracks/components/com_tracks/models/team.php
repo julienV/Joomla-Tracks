@@ -27,7 +27,7 @@ class TracksFrontModelTeam extends baseModel
 {   		
 	var $_individuals = null;
 	
-	function __construct($config = null)
+	function __construct($config = array())
 	{
 		parent::__construct($config);
 		

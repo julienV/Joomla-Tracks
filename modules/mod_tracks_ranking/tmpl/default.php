@@ -34,7 +34,7 @@ JHTML::_('behavior.tooltip', '.mod-ranking-tip', array('className' => 'tip-mod-r
     foreach( $list AS $ranking )
     {
       $link_ind = JRoute::_( TracksHelperRoute::getIndividualRoute($ranking->id) ); 
-      $link_team = JRoute::_( TracksHelperRoute::getTeamRoute($ranking->team_id) ); 
+      $link_team = JRoute::_( TracksHelperRoute::getTeamRoute($ranking->team_id, $project->slug) ); 
       ?>
       <tr>
         <td><?php echo $rank++; ?></td>

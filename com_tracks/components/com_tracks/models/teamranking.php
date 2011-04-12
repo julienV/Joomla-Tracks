@@ -74,23 +74,6 @@ class TracksFrontModelTeamRanking extends baseModel
 		return $this->_getRankingTool()->getTeamsRankings();
 	}
 
-	/**
-	 * returns project object
-	 *
-	 * @param int project_id
-	 * @return object project
-	 */
-	function getProject()
-	{
-		$query =   ' SELECT * '
-		. ' FROM #__tracks_projects AS p '
-		. ' WHERE p.id = ' . $this->_project_id;
-
-		$this->_db->setQuery( $query, 0, 1 );
-
-		return $this->_db->loadObject();
-	}
-
 	function getTeamRanking($teamid)
 	{
 		return $this->_getRankingTool()->getTeamRanking($teamid);
