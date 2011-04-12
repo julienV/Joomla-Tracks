@@ -15,13 +15,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 <div id="tracks">
 <!-- Title -->
-<table class="contentpaneopen">
-<tbody>
-<tr>
-<td class="contentheading" width="100%"><?php echo $this->data->name; ?></td>
-</tr>
-</tbody>
-</table>
+<h1><?php echo $this->data->name; ?></h1>
 
 <!-- Content -->
 <?php if ($this->data->picture): ?>
@@ -31,14 +25,20 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <?php endif; ?>
 
 <div id="teamdetails">
-	<table class="contentpaneopen">
-	<tbody>
-	<tr>
-	    <td><?php echo $this->data->description; ?></td>
-	</tr>
-	</tbody>
-	</table>
+	<?php echo $this->data->description; ?>
 </div>
+
+<?php if (count($this->individuals)): ?>
+	<h2 class="team-inds"><?php echo JTExt::_('COM_TRACKS_VIEW_TEAM_INDIVIDUALS'); ?></h2>
+	<?php foreach ($this->individuals as $proj): ?>
+	<div class="project-inds"><span class="project-title"><?php echo current($proj)->project_name; ?></span>
+	<?php foreach ($proj as $i): ?>
+	<?php $text = ($i->number ? $i->number.' ' : '').$i->first_name.' '.$i->last_name; ?>
+	<div class="team-ind"><?php echo JHTML::link(TracksHelperRoute::getIndividualRoute($i->id), $text); ?></div>
+	<?php endforeach; ?>
+	</div>
+	<?php endforeach; ?>
+<?php endif; ?>
 <div class="clear"></div>
 <p class="copyright">
   <?php echo HTMLtracks::footer( ); ?>

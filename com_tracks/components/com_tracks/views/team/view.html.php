@@ -34,6 +34,8 @@ class TracksFrontViewTeam extends JView
                 
         $model =& $this->getModel();
         $data = $model->getData( $id );
+        
+        $individuals = $this->get('Individuals');
                 				
 				//Execute content Plugins
 				$data->text	= $data->description;
@@ -49,7 +51,8 @@ class TracksFrontViewTeam extends JView
         $document =& JFactory::getDocument();
         $document->setTitle( $data->name );
         
-        $this->assignRef( 'data',    $data );
+        $this->assignRef( 'data',           $data );
+        $this->assignRef( 'individuals',    $individuals );
 
         parent::display($tpl);
     }

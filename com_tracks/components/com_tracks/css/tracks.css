@@ -104,3 +104,17 @@ div#individualpic img, div#teampic img{
 #tracks .icalbutton {
   text-align:center;
 }
+
+/* team view */
+div.project-inds {
+	padding-left: 5px;
+}
+
+div.project-inds span {
+	font-weight: bold;
+	font-size:1.2em;
+}
+
+div.project-inds div {
+	padding-left: 4px;
+}

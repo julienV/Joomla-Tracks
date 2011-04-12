@@ -36,7 +36,49 @@ class baseModel extends JModel
 		 * @var unknown_type
 		 */
 		var $_rankingtool = null;
+		
+		var $_id = 0;
+		
+		/** 
+		 * caching for data
+		 */
+		var $_data = null;
+
+		function __construct($config = null)
+		{
+			parent::__construct($config);
+			
+			$project = JRequest::getInt('p');
+			
+			$this->setProjectId($project);
+		}
+	
+		/**
+		 * set id of object to display
+		 * 
+		 * depends on view context...
+		 * 
+		 * @param int $id
+		 */
+		function setId($id)
+		{
+			$this->_id = (int) $id;
+			$this->_data = null;
+		}
     
+		/**
+		 * set id of project to display
+		 * 
+		 * @param int $id
+		 */
+		function setProjectId($id)
+		{
+			$this->_project_id = (int) $id;
+			$this->project = null;
+		}
+		
+		
+		
     /**
      * returns project object
      * 
@@ -48,10 +90,13 @@ class baseModel extends JModel
     	if ( $this->project && ( $project_id == 0 || $project_id == $this->project->id ) ) {
         return $this->project;
       }
+      if ($project_id && $project_id != $this->_project_id) {
+      	$this->setProjectId($project_id);
+      }
       
       $query =   ' SELECT * '
                . ' FROM #__tracks_projects AS p '
-               . ' WHERE p.id = ' . $project_id;
+               . ' WHERE p.id = ' . $this->_project_id;
                 
       $this->_db->setQuery( $query );
         
@@ -76,7 +121,7 @@ class baseModel extends JModel
     	{
 		    $query = ' SELECT settings '
 		           . ' FROM #__tracks_project_settings '
-		           . ' WHERE project_id = ' . $this->_db->Quote($project_id)
+		           . ' WHERE project_id = ' . $this->_db->Quote($this->_project_id)
                . '   AND xml = ' . $this->_db->Quote($xml)
                ;
 	      $this->_db->setQuery($query);
@@ -94,6 +139,13 @@ class baseModel extends JModel
       return $params;
     }
 	
+	function _reset()
+	{
+		$this->_project_id = 0;
+		$this->_id         = 0;
+		$this->project     = null;
+	}
+    
 	function _getRankingTool()
 	{
 		if (empty($this->_rankingtool)) 
