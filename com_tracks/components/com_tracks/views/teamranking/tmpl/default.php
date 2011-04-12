@@ -40,7 +40,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
         <?php if ($this->projectparams->get('showflag')): ?>
         <td>
           <?php if ( $ranking->country_code ): ?>
-          <img src="<?php echo TracksCountries::getIso3Flag($ranking->country_code); ?>"
+          <img src="<?php echo TracksCountries::getIsoFlag($ranking->country_code); ?>"
              title="<?php echo $ranking->country_code; ?>"
              alt="<?php echo $ranking->country_code; ?>"/>
           <?php endif ?>
@@ -49,13 +49,13 @@ defined('_JEXEC') or die('Restricted access'); ?>
         <td>
             <a href="<?php echo $link_team; ?>"
                title="<?php echo JText::_( 'Details' ); ?>"> 
-            <?php echo $ranking->team_name; ?>&nbsp;
+            <?php echo $ranking->team_name; ?>
             <?php //echo JHTML::image('media/com_tracks/images/teams/'.$ranking->team_logo, $ranking->team_name, array('title' => $ranking->team_name, 'class' => 'ranking-logo')); ?>
             </a>
         </td>
-        <td><?php echo $ranking->points; ?>&nbsp;</td>
-        <td><?php echo $ranking->wins; ?>&nbsp;</td>
-        <td><?php echo $ranking->best_rank; ?>&nbsp;</td>
+        <td><?php echo $ranking->points; ?></td>
+        <td><?php echo $ranking->wins; ?></td>
+        <td><?php echo $ranking->best_rank; ?></td>
       </tr>
       <?php
     }

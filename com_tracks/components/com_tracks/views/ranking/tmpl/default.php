@@ -72,15 +72,16 @@ defined('_JEXEC') or die('Restricted access'); ?>
         </td>
         <?php  if ($this->params->get('showteams')): ?>
         <td>
+        	<?php if ($ranking->team_id): ?>
           <a href="<?php echo $link_team; ?>"
              title="<?php echo JText::_( 'Details' ); ?>"> 
-            <?php echo $ranking->team_name; ?>&nbsp;
-          </a>
+            <?php echo $ranking->team_name; ?></a>
+          <?php endif; ?>
         </td>
         <?php endif; ?>
-        <td><?php echo $ranking->points; ?>&nbsp;</td>
-        <td><?php echo $ranking->wins; ?>&nbsp;</td>
-        <td><?php echo $ranking->best_rank; ?>&nbsp;</td>
+        <td><?php echo $ranking->points; ?></td>
+        <td><?php echo $ranking->wins; ?></td>
+        <td><?php echo $ranking->best_rank; ?></td>
       </tr>
       <?php    
       $i = 1 - $i; 

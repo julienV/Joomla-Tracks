@@ -34,10 +34,10 @@ defined('_JEXEC') or die('Restricted access'); ?>
         <td>
           <a href="<?php echo $link_team; ?>"
              title="<?php echo JText::_( 'Details' ); ?>"> 
-            <?php echo $ranking->team_name; ?>&nbsp;
+            <?php echo $ranking->team_name; ?>
           </a>
         </td>
-        <td><?php echo $ranking->points; ?>&nbsp;</td>
+        <td><?php echo $ranking->points; ?></td>
       </tr>
       <?php
       if ( ++$count >= $limit ) {
@@ -52,6 +52,6 @@ $link = JRoute::_( TracksHelperRoute::getTeamRankingRoute($project->slug) );
 ?>
 <a class="fulltablelink" href="<?php echo $link; ?>"
              title="<?php echo JText::_( 'View full table' ); ?>"> 
-            <?php echo JText::_( 'View full table' ); ?>&nbsp;
+            <?php echo JText::_( 'View full table' ); ?>
 </a>
 </div>

@@ -75,6 +75,7 @@ class TracksFrontModelRoundResult extends baseModel
                 
         $this->_db->setQuery( $query );
         
+        $ranked = false;
         if ( $result = $this->_db->loadObjectList() )
         {
           // reorder by rank, with rank 0 in the end.
@@ -84,6 +85,9 @@ class TracksFrontModelRoundResult extends baseModel
           {
             foreach ( $result as $k => $r )
             {
+            	if ($r->rank > 0) {
+            		$ranked = true;
+            	}
               $points_attrib = explode(',',  $r->points_attribution );
               if ( isset( $points_attrib[$r->rank - 1] ) ) {
                 $result[$k]->points = $points_attrib[$r->rank - 1];
@@ -94,7 +98,12 @@ class TracksFrontModelRoundResult extends baseModel
             }
           }
         }
-        return $result;
+        if ($ranked) {
+	        return $result;      	
+        }
+        else { // no results yet !
+					return false;
+				}
     }
     
     function getRound( $projectround_id )

@@ -81,5 +81,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
   </tbody>
 </table>
 <?php endforeach; ?>
+<?php else: ?>
+<span id="no-results"><?php echo JText::_('COM_TRACKS_VIEW_INDIVIDUAL_NO_RESULTS'); ?></span>
 <?php endif; ?>
 </div>

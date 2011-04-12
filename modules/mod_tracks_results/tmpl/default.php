@@ -54,12 +54,12 @@ $document->addScript( JURI::base() . 'modules/mod_tracks_results/mod_tracks_resu
         <td>
           <a href="<?php echo $link_team; ?>"
              title="<?php echo $rows->team_name . '::' . JText::_( 'Click for details' ); ?>" class="mod-result-tip">
-            <?php echo $rows->team_acronym; ?>&nbsp;
+            <?php echo $rows->team_acronym; ?>
           </a>
         </td>
         <?php } ?>
         <?php if ($showpoints) { ?>
-        <td><?php echo $rows->points + $rows->bonus_points; ?>&nbsp;</td>
+        <td><?php echo $rows->points + $rows->bonus_points; ?></td>
         <?php } ?>
       </tr>
       <?php
@@ -75,6 +75,6 @@ $link = JRoute::_( TracksHelperRoute::getRoundResultRoute($round->projectround_i
 ?>
 <a class="fulltablelink" href="<?php echo $link; ?>"
              title="<?php echo JText::_( 'View full table' ); ?>"> 
-            <?php echo JText::_( 'View full table' ); ?>&nbsp;
+            <?php echo JText::_( 'View full table' ); ?>
 </a>
 </div>

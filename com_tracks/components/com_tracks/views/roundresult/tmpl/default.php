@@ -48,6 +48,7 @@ foreach ($this->results as $subround)
 	</div>
 	<?php endif; ?>
 	
+	<?php if ($subround->results): ?>
 	<table class="raceResults" cellspacing="0" cellpadding="0" summary="">
 	  <tbody>
 	    <tr>
@@ -105,14 +106,15 @@ foreach ($this->results as $subround)
 					</td>
 					<?php if ($this->projectparams->get('showteams')): ?>
 					<td>
-					 <a href="<?php echo $link_team; ?>"
-						title="<?php echo JText::_( 'Details' ); ?>"> <?php echo $result->team_name; ?>&nbsp;
-					 </a>
+						<?php if ($result->team_id): ?>
+					 	<a href="<?php echo $link_team; ?>"
+						   title="<?php echo JText::_( 'Details' ); ?>"> <?php echo $result->team_name; ?></a>
+						<?php endif; ?>
 					</td>
 					<?php endif; ?>
-					<td><?php echo $result->performance; ?>&nbsp;</td>
+					<td><?php echo $result->performance; ?></td>
 					<?php if (!empty($subround->points_attribution)): ?>
-					<td><?php echo $result->points + $result->bonus_points; ?>&nbsp;</td>
+					<td><?php echo $result->points + $result->bonus_points; ?></td>
 					<?php endif; ?>
 				</tr>
 				<?php
@@ -120,6 +122,9 @@ foreach ($this->results as $subround)
 	    ?>
 	  </tbody>
 	</table>
+	<?php else: ?>
+	<span id="no-results"><?php echo JText::_('COM_TRACKS_VIEW_ROUNDRESULT_NO_RESULTS_YET'); ?></span>
+	<?php endif;?>
 	<?php
 }
 ?>

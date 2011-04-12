@@ -48,11 +48,11 @@ JHTML::_('behavior.tooltip', '.mod-ranking-tip', array('className' => 'tip-mod-r
         <td>
           <a href="<?php echo $link_team; ?>"
              title="<?php echo JText::_( 'Details' ); ?>"> 
-            <?php echo $ranking->team_acronym; ?>&nbsp;
+            <?php echo $ranking->team_acronym; ?>
           </a>
         </td>
         <?php } ?>
-        <td><?php echo $ranking->points; ?>&nbsp;</td>
+        <td><?php echo $ranking->points; ?></td>
       </tr>
       <?php
       if ( ++$count >= $limit ) {
@@ -67,6 +67,6 @@ $link = JRoute::_( TracksHelperRoute::getRankingRoute($project->slug) );
 ?>
 <a class="fulltablelink" href="<?php echo $link; ?>"
              title="<?php echo JText::_( 'View full table' ); ?>"> 
-            <?php echo JText::_( 'View full table' ); ?>&nbsp;
+            <?php echo JText::_( 'View full table' ); ?>
 </a>
 </div>
