@@ -47,12 +47,15 @@ class TracksHelperRoute
 		return self::buildUrl( $parts );
 	}
 	
-	function getIndividualRoute($id = 0)
+	function getIndividualRoute($id = 0, $project = 0)
 	{
 		$parts = array( "option" => "com_tracks",
 		                "view"   => "individual" );		
 		if ($id) {
 			$parts['i'] = $id;
+		}
+		if ($project) {
+			$parts['p'] = $project;
 		}
 		return self::buildUrl( $parts );
 	}

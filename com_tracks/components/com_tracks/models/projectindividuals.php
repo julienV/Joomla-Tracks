@@ -28,34 +28,7 @@ class TracksFrontModelProjectindividuals extends baseModel
 	 * associated project
 	 */
 	var $project = null;
-    
-	/**
-	 * returns project object
-	 *
-	 * @param int project_id
-	 * @return object project
-	 */
-	function getProject( $project_id = 0 )
-	{
-		if ( $this->project && ( $project_id == 0 || $project_id == $this->project->id ) ) {
-			return $this->project;
-		}
-
-		$query =   ' SELECT * '
-		. ' FROM #__tracks_projects AS p '
-		. ' WHERE p.id = ' . $project_id;
-
-		$this->_db->setQuery( $query );
-
-		if ( $result = $this->_db->loadObjectList() ) {
-			$this->project = $result[0];
-			return $this->project;
-		}
-		else {
-			return $result;
-		}
-	}
-	
+    	
 	function getIndividuals($project_id = 0) 
 	{
 		if (!$project_id) {

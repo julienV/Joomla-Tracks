@@ -128,7 +128,7 @@ function TracksParseRoute($segments)
 			$vars['view'] = 'individual';
 			$id = explode( ':', $segments[1] );
 			$vars['i'] = (int) $id[0];
-			if (count($segments) > 1) {
+			if (count($segments) > 2) {
 				$vars['p'] = (int) $segments[2];
 			}
 			break;
@@ -137,7 +137,7 @@ function TracksParseRoute($segments)
 			$vars['view'] = 'team';
 			$id = explode( ':', $segments[1] );
 			$vars['t'] = (int) $id[0];
-			if (count($segments) > 1) {
+			if (count($segments) > 2) {
 				$vars['p'] = (int) $segments[2];
 			}
 			break;
@@ -146,7 +146,7 @@ function TracksParseRoute($segments)
 			$vars['view'] = 'round';
 			$id = explode( ':', $segments[1] );
 			$vars['r'] = (int) $id[0];
-			if (count($segments) > 1) {
+			if (count($segments) > 2) {
 				$vars['p'] = (int) $segments[2];
 			}
 			break;

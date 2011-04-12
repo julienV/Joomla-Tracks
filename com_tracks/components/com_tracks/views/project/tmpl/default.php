@@ -82,7 +82,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 	</tbody>
 </table>
 <div class="icalbutton">
-  <a href="<?php echo JRoute::_(TracksHelperRoute::getProjectRoute($this->project->id).'&format=ical') ?>" title="<?php echo JText::_('ICAL EXPORT'); ?>">
+  <a href="<?php echo JRoute::_(TracksHelperRoute::getProjectRoute($this->project->slug).'&format=ical') ?>" title="<?php echo JText::_('ICAL EXPORT'); ?>">
     <img src="<?php echo JURI::base().'/components/com_tracks/assets/images/ical.gif'; ?>"  alt="<?php echo JText::_('ICAL EXPORT'); ?>"/>
   </a>
 </div>

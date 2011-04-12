@@ -26,7 +26,7 @@ class TracksFrontModelRoundResult extends baseModel
 {
 	 
 	var $subrounds;
-	
+		
     /**
      * call back function to place the individual with 
      * position 0 in the end
@@ -61,7 +61,9 @@ class TracksFrontModelRoundResult extends baseModel
     {
         $query = 	' SELECT rr.*, pr.project_id AS project_id, srt.points_attribution, '
                 . ' i.first_name, i.last_name, i.country_code, i.country_code, pi.number, '
-                . ' t.name AS team_name, t.short_name AS team_short_name, t.acronym AS team_acronym, t.picture_small AS team_logo '
+                . ' t.name AS team_name, t.short_name AS team_short_name, t.acronym AS team_acronym, t.picture_small AS team_logo, '
+                . ' CASE WHEN CHAR_LENGTH( i.alias ) THEN CONCAT_WS( \':\', i.id, i.alias ) ELSE i.id END AS slug, '
+                . ' CASE WHEN CHAR_LENGTH( t.alias ) THEN CONCAT_WS( \':\', t.id, t.alias ) ELSE t.id END AS teamslug '
                 . ' FROM #__tracks_rounds_results AS rr '
                 . ' INNER JOIN #__tracks_projects_subrounds AS sr ON sr.id = rr.subround_id '
                 . ' INNER JOIN #__tracks_subroundtypes AS srt ON srt.id = sr.type '
@@ -156,19 +158,22 @@ class TracksFrontModelRoundResult extends baseModel
      */
     function getRoundProject($projectround_id)
     {
-    	if (!$this->project)
+    	if (empty($this->project))
     	{
-	    	$query = ' SELECT p.* '
-	    	       . ' FROM #__tracks_projects_rounds AS pr '
-	    	       . ' INNER JOIN #__tracks_projects AS p ON p.id = pr.project_id '
-	    	       . ' WHERE pr.id = ' . (int)$projectround_id
-	    	       ;
-	    	$this->_db->setQuery($query);
-	    	$result = $this->_db->loadAssoc();
-	    	
-	    	$project = & JTable::getInstance('Project','Table');
-	    	$project->bind($result);	    	
-	    	$this->project = $project;
+	    	if ( $projectround_id )
+	    	{
+					$query = ' SELECT pr.project_id '
+	               . ' FROM #__tracks_projects_rounds AS pr '
+					       . ' WHERE pr.id = ' . $projectround_id;
+	
+					$this->_db->setQuery( $query );
+					if ( $result = $this->_db->loadresult() ) {
+						$this->setProjectId($result);
+						return $this->getProject();
+					}
+					else return false;
+	    	}
+	    	else return null;
     	}
     	return $this->project;
     }

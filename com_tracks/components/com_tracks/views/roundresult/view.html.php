@@ -43,14 +43,15 @@ class TracksFrontViewRoundResult extends JView
     	$breadcrumbs->addItem( $round->name,  'index.php?option=com_tracks&view=roundresult&pr=' . $projectround_id );
 
     	$document =& JFactory::getDocument();
-    	$document->setTitle( $round->name . ' - ' . $round->project_name );
+    	$document->setTitle( $round->name . ' - ' . $project->name );
 
     	//print_r($subroundresults);exit;
-    	$this->assignRef( 'points_attrib',   $points_attrib);
-    	$this->assignRef( 'results',    $subroundresults );
-    	$this->assignRef( 'round',    $round );
-      $this->assignRef( 'projectparams',    $projectparams );
-      $this->assignRef( 'params',    $params );
+    	$this->assignRef( 'points_attrib',  $points_attrib);
+    	$this->assignRef( 'results',        $subroundresults );
+    	$this->assignRef( 'round',          $round );
+    	$this->assignRef( 'project',        $project );
+      $this->assignRef( 'projectparams',  $projectparams );
+      $this->assignRef( 'params',         $params );
       
     	parent::display($tpl);
     }

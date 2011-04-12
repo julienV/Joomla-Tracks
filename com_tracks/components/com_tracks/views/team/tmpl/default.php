@@ -34,7 +34,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 	<div class="project-inds"><span class="project-title"><?php echo current($proj)->project_name; ?></span>
 	<?php foreach ($proj as $i): ?>
 	<?php $text = ($i->number ? $i->number.' ' : '').$i->first_name.' '.$i->last_name; ?>
-	<div class="team-ind"><?php echo JHTML::link(TracksHelperRoute::getIndividualRoute($i->id), $text); ?></div>
+	<div class="team-ind"><?php echo JHTML::link(TracksHelperRoute::getIndividualRoute($i->slug, $i->projectslug), $text); ?></div>
 	<?php endforeach; ?>
 	</div>
 	<?php endforeach; ?>

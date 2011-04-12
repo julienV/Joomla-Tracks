@@ -20,7 +20,7 @@ JPluginHelper::importPlugin('content');
 ?>
 <div id="tracks">
 
-<h1><?php echo $this->round->name . ' - ' . $this->round->project_name; ?></h1>
+<h1><?php echo $this->round->name . ' - ' . $this->project->name; ?></h1>
 
 <?php if ($this->params->get('resultview_results_showrounddesc', 1)): ?>
 <div class="tracks-round-description">
@@ -72,7 +72,7 @@ foreach ($this->results as $subround)
 	    foreach( $subround->results AS $result )
 	    {        
         $ind_slug = $result->individual_id . ':' . JFilterOutput::stringURLSafe( $result->first_name.' '.$result->last_name) ;
-	      $link_ind = JRoute::_( TracksHelperRoute::getIndividualRoute($ind_slug) ); 
+	      $link_ind = JRoute::_( TracksHelperRoute::getIndividualRoute($ind_slug, $this->project->slug) ); 
 	      $team_slug = $result->team_id . ':' . JFilterOutput::stringURLSafe( $result->team_name ) ;
 	      $link_team = JRoute::_( TracksHelperRoute::getTeamRoute($team_slug) ); 
 	      ?>				

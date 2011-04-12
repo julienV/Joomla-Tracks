@@ -33,8 +33,8 @@ JHTML::_('behavior.tooltip', '.mod-ranking-tip', array('className' => 'tip-mod-r
     $count = 0;
     foreach( $list AS $ranking )
     {
-      $link_ind = JRoute::_( TracksHelperRoute::getIndividualRoute($ranking->id) ); 
-      $link_team = JRoute::_( TracksHelperRoute::getTeamRoute($ranking->team_id, $project->slug) ); 
+      $link_ind = JRoute::_( TracksHelperRoute::getIndividualRoute($ranking->slug) ); 
+      $link_team = JRoute::_( TracksHelperRoute::getTeamRoute($ranking->teamslug, $project->slug) ); 
       ?>
       <tr>
         <td><?php echo $rank++; ?></td>
@@ -63,7 +63,7 @@ JHTML::_('behavior.tooltip', '.mod-ranking-tip', array('className' => 'tip-mod-r
   </tbody>
 </table>
 <?php 
-$link = JRoute::_( TracksHelperRoute::getRankingRoute($project->id) );
+$link = JRoute::_( TracksHelperRoute::getRankingRoute($project->slug) );
 ?>
 <a class="fulltablelink" href="<?php echo $link; ?>"
              title="<?php echo JText::_( 'View full table' ); ?>"> 

@@ -65,7 +65,8 @@ class modTracksResults
     $db = &JFactory::getDBO();
     
     $sql = ' SELECT pr.id AS projectround_id, pr.start_date, pr.end_date, pr.round_id, '
-         . ' r.name '
+         . ' r.name, '
+         . ' CASE WHEN CHAR_LENGTH( r.alias ) THEN CONCAT_WS( \':\', r.id, r.alias ) ELSE r.id END AS slug '
          . ' FROM #__tracks_projects_rounds AS pr '
          . ' INNER JOIN #__tracks_rounds AS r ON r.id = pr.round_id '
          . ' WHERE project_id = ' . $params->get('project_id')

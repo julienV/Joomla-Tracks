@@ -256,7 +256,8 @@ class TracksRankingTool extends JObject {
 		if (empty($this->_teams))
 		{
 			$query =  ' SELECT DISTINCT pi.team_id, '
-			. ' t.name AS team_name, t.short_name AS team_short_name, t.acronym AS team_acronym, t.country_code, t.picture_small AS team_logo'
+			. ' t.name AS team_name, t.short_name AS team_short_name, t.acronym AS team_acronym, t.country_code, t.picture_small AS team_logo, '
+			. ' CASE WHEN CHAR_LENGTH( t.alias ) THEN CONCAT_WS( \':\', t.id, t.alias ) ELSE t.id END AS slug '
 			. ' FROM #__tracks_projects_individuals AS pi '
 			. ' INNER JOIN #__tracks_teams AS t ON t.id = pi.team_id '
 			. ' WHERE pi.project_id = ' . $this->_project_id
