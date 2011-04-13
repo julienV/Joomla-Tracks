@@ -99,7 +99,7 @@ class TracksFrontControllerIndividual extends JController
       $msg  = $model->getError();
     }
 
-    $this->setRedirect( 'index.php?option=com_tracks&view=individual&i='.$model->getId() , $msg );
+    $this->setRedirect( JRoute::_(TracksHelperRoute::getIndividualRoute($model->getId())) , $msg );
   }
 }
 ?>
