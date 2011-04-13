@@ -1,18 +1,18 @@
 @CHARSET "UTF-8";
 
-#tracksnav {
-	width: 130px;
-	float: left;
-	padding-right: 10px;
-	margin-right: 10px;
-	border-right: 1px solid grey;
-	min-height: 300px;
+table.tracks-main {
+	width: 95%;
 }
 
-#tracksmain {
-	margin-left: 150px;
+table.tracks-main td.main-row {
+	vertical-align: top;
+	padding: 5px;
 }
 
+table.tracks-main td.tracks-main-menu {
+	width: 100px;
+}
+	
 /* submenu styling */
 #settings-submenu {
 	list-style: none;

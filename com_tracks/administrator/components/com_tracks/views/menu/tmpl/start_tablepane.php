@@ -13,6 +13,8 @@
 
 defined('_JEXEC') or die('Restricted access'); ?>
 
+<table class="tracks-main">
+<td class="main-row tracks-main-menu">
 <?php
 echo $this->pane->startPane( 'tracksnav' );
 if ( $this->project->id )
@@ -130,5 +132,6 @@ echo $this->pane->startPanel( JTEXT::_('General'), 'generalpanel' );
   </table>
   <?php
   echo $this->pane->endPanel(); 
-  echo $this->pane->endPane();
-  
+  echo $this->pane->endPane(); ?>
+  </td>
+  <td class="main-row">

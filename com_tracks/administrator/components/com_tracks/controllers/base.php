@@ -32,6 +32,7 @@ class BaseController extends JController
     }
     $viewName = JRequest::getCmd( 'view' );
     
+    $showmenu = true;
     switch (strtolower($viewName))
     {
       case 'about':
@@ -49,17 +50,22 @@ class BaseController extends JController
       case 'team':
       case 'competition':
       case 'imagehandler':
-      	break;
-      	
-      default:
-      	$this->ShowMenu('start');
-      	break;
-      	
+      	$showmenu = false;
+      	break;      	
     }
-		parent::display();
+    
+    if ($showmenu) 
+    {
+	    $this->ShowMenuStart();
+			parent::display();
+	    $this->ShowMenuEnd();    	
+    }
+    else {
+			parent::display();
+    }
 	}
 
-	function ShowMenu()
+	function ShowMenuStart()
 	{
 		global $mainframe, $option;
 
@@ -74,6 +80,26 @@ class BaseController extends JController
 			$model->setId( $mainframe->getUserState($option.'project', 0) );
 			$view->setModel($model, true);
 		}
+		$view->setLayout('start');
+		$view->display();
+	}
+
+	function ShowMenuEnd()
+	{
+		global $mainframe, $option;
+
+		$document =& JFactory::getDocument();
+
+		$viewType	= $document->getType();
+		$view = & $this->getView( 'Menu', $viewType );
+
+		if ($model = & $this->getModel('project')) 
+		{
+			// Push the model into the view (as default)
+			$model->setId( $mainframe->getUserState($option.'project', 0) );
+			$view->setModel($model, true);
+		}
+		$view->setLayout('end');
 		$view->display();
 	}
 }

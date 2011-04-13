@@ -30,6 +30,10 @@ class TracksViewMenu extends JView
 	{
 		global $mainframe, $option;
 		
+		if ($this->getLayout() == 'end') {
+			return $this->_displayEnd();
+		}
+		
 		$project	= & $this->get( 'Data' );
     $pane     = & JPane::getInstance('sliders');
     $view     = JRequest::getCmd( 'view' );
@@ -47,8 +51,12 @@ class TracksViewMenu extends JView
 		$this->assignRef('project',		$project);
     $this->assignRef('pane',   $pane);
 		
-		parent::display('pane');
-//		parent::display('blank');
+		parent::display('tablepane');
+	}
+	
+	function _displayEnd($tpl = null)
+	{
+		parent::display('tablepane');
 	}
 }
 ?>
