@@ -522,7 +522,7 @@ class TracksCountries
 		foreach ($countries AS $k => $c)
 		{
 			$name = explode(',', $c['name']);
-			$options[] = JHTML::_('select.option', $c['iso2'], JText::_($name[0]), $value_tag, $text_tag);
+			$options[] = JHTML::_('select.option', $k, JText::_($name[0]), $value_tag, $text_tag);
 		}
 		return $options;
 	}
