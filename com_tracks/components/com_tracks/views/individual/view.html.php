@@ -87,11 +87,11 @@ class TracksFrontViewIndividual extends JView
     $db   =& JFactory::getDBO();
     $uri  =& JFactory::getURI();
     $user   =& JFactory::getUser();
-  
-    if (!$user->get('id')) {
-      $mainframe->redirect(JRoute::_($_SERVER["HTTP_REFERER"]), JText::_('Please login to be able to edit your tracks profile'), 'error' );
-    }
     
+    if (!$user->get('id')) {
+      $mainframe->redirect(JURI::base(), JText::_('Please login to be able to edit your tracks profile'), 'error' );
+    }
+      
     $profile = &JModel::getInstance('profile', 'TracksFrontModel');
     $this->setModel($profile, true);
                 

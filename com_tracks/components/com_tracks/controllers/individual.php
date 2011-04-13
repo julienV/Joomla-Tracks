@@ -40,10 +40,16 @@ class TracksFrontControllerIndividual extends JController
 	 */
 	function edit()
 	{
+    $user   =& JFactory::getUser();
+    if (!$user->get('id')) {
+      $this->setRedirect(JURI::base(), JText::_('Please login to be able to edit your tracks profile'), 'error' );
+      $this->redirect();
+    }
+    
 		JRequest::setVar( 'view', 'individual' );
 		JRequest::setVar( 'layout', 'form'  );
 		JRequest::setVar( 'hidemainmenu', 1);
-
+		
 		parent::display();
 	}
 	
