@@ -23,6 +23,7 @@ $document->addScript( JURI::base() . 'modules/mod_tracks_results/mod_tracks_resu
 
 <div class="mod_tracksresults">
 <div id="roundname"><?php echo $round->name . ' - ' . $list->typename; ?></div>
+<?php if ($list->results): ?>
 <table cellspacing="0" cellpadding="0" summary="">
 	<thead>
     <tr>
@@ -70,6 +71,9 @@ $document->addScript( JURI::base() . 'modules/mod_tracks_results/mod_tracks_resu
     ?>
   </tbody>
 </table>
+<?php else: ?>
+<span class="no_res"><?php echo JText::_('MOD_TRACKS_RESULTS_NO_RESULTS'); ?></span>
+<?php endif;?>
 <?php 
 $link = JRoute::_( TracksHelperRoute::getRoundResultRoute($round->projectround_id) );
 ?>
