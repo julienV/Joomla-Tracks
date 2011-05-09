@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS `#__tracks_projects` (
   `checked_out_time` datetime NOT NULL,
   `published` tinyint(1) NOT NULL,
   PRIMARY KEY  (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `#__tracks_competitions` (
   `id` int(11) NOT NULL auto_increment,
@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `#__tracks_competitions` (
   `checked_out_time` datetime NOT NULL,
   `published` tinyint(1) NOT NULL,
   PRIMARY KEY  (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `#__tracks_seasons` (
   `id` int(11) NOT NULL auto_increment,
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `#__tracks_seasons` (
   `checked_out_time` datetime NOT NULL,
   `published` tinyint(1) NOT NULL,
   PRIMARY KEY  (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `#__tracks_teams` (
   `id` int(11) NOT NULL auto_increment,
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `#__tracks_teams` (
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL,
   PRIMARY KEY  (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `#__tracks_clubs` (
   `id` int(11) NOT NULL auto_increment,
@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `#__tracks_clubs` (
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL,
   PRIMARY KEY  (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `#__tracks_individuals` (
   `id` int(11) NOT NULL auto_increment,
@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `#__tracks_individuals` (
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL,
   PRIMARY KEY  (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `#__tracks_rounds` (
   `id` int(11) NOT NULL auto_increment,
@@ -106,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `#__tracks_rounds` (
   `checked_out_time` datetime NOT NULL,
   `published` tinyint(1) NOT NULL,
   PRIMARY KEY  (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `#__tracks_subroundtypes` (
   `id` int(11) NOT NULL auto_increment,
@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `#__tracks_subroundtypes` (
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL,
   PRIMARY KEY  (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `#__tracks_projects_rounds` (
   `id` int(11) NOT NULL auto_increment,
@@ -133,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `#__tracks_projects_rounds` (
   `checked_out_time` datetime NOT NULL,
   `published` tinyint(1) NOT NULL,
   PRIMARY KEY  (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `#__tracks_projects_subrounds` (
   `id` int(11) NOT NULL auto_increment,
@@ -148,7 +148,7 @@ CREATE TABLE IF NOT EXISTS `#__tracks_projects_subrounds` (
   `checked_out_time` datetime NOT NULL,
   `published` tinyint(1) NOT NULL,
   PRIMARY KEY  (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `#__tracks_projects_individuals` (
   `id` int(11) NOT NULL auto_increment,
@@ -160,7 +160,7 @@ CREATE TABLE IF NOT EXISTS `#__tracks_projects_individuals` (
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL,
   PRIMARY KEY  (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `#__tracks_projects_teams` (
   `id` int(11) NOT NULL auto_increment,
@@ -171,7 +171,7 @@ CREATE TABLE IF NOT EXISTS `#__tracks_projects_teams` (
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL,
   PRIMARY KEY  (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `#__tracks_rounds_results` (
   `id` int(11) NOT NULL auto_increment,
@@ -187,7 +187,7 @@ CREATE TABLE IF NOT EXISTS `#__tracks_rounds_results` (
   `checked_out_time` datetime NOT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `pr_ind` (`individual_id`,`subround_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `#__tracks_project_settings` (
   `id` int(11) NOT NULL auto_increment,
@@ -197,4 +197,4 @@ CREATE TABLE IF NOT EXISTS `#__tracks_project_settings` (
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL,
   PRIMARY KEY  (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM AUTO_INCREMENT=1 ;
