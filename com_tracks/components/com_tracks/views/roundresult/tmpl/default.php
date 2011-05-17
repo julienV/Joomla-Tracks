@@ -25,9 +25,8 @@ JPluginHelper::importPlugin('content');
 <?php if ($this->params->get('resultview_results_showrounddesc', 1)): ?>
 <div class="tracks-round-description">
 <?php 
-$this->round->text = $this->round->description;
-$results = $dispatcher->trigger('onPrepareContent', array (& $this->round, null, 0));
-echo $this->round->text;
+	// parse description with content plugins
+	echo JHTML::_('content.prepare', $this->round->description);
 ?>
 </div>
 <?php endif; ?>
@@ -41,9 +40,8 @@ foreach ($this->results as $subround)
 	<?php if ($this->params->get('resultview_results_showsubrounddesc', 1)): ?>
 	<div class="tracks-round-description">
 	<?php 
-	$subround->text = $subround->description;
-	$results = $dispatcher->trigger('onPrepareContent', array (& $subround, null, 0));
-	echo $subround->description;
+        // parse description with content plugins
+				echo JHTML::_('content.prepare', $subround->description);
 	?>
 	</div>
 	<?php endif; ?>

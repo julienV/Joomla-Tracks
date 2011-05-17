@@ -36,13 +36,9 @@ class TracksFrontViewTeam extends JView
         $data = $model->getData( $id );
         
         $individuals = $this->get('Individuals');
-                				
-				//Execute content Plugins
-				$data->text	= $data->description;
-	
-				JPluginHelper::importPlugin('content');
-				$results = $dispatcher->trigger('onPrepareContent', array (& $data, null, 0));
-				$data->description = $data->text;
+                					
+				// parse description with content plugins
+				$data->description = JHTML::_('content.prepare', $data->description);
 
         $breadcrumbs =& $mainframe->getPathWay();
         $breadcrumbs->addItem( $data->name, 
