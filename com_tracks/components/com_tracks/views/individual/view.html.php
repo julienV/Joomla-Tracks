@@ -89,7 +89,7 @@ class TracksFrontViewIndividual extends JView
     $user   =& JFactory::getUser();
     
     if (!$user->get('id')) {
-      $mainframe->redirect(JURI::base(), JText::_('Please login to be able to edit your tracks profile'), 'error' );
+      $mainframe->redirect(JURI::base(), JText::_('COM_TRACKS_VIEW_INDIVIDUAL_PLEASE_LOGIN_TO_EDIT_PROFILE'), 'error' );
     }
       
     $profile = &JModel::getInstance('profile', 'TracksFrontModel');
@@ -106,10 +106,10 @@ class TracksFrontViewIndividual extends JView
     if (is_object( $menu )) {
       $menu_params = new JParameter( $menu->params );     
       if (!$menu_params->get( 'page_title')) {
-        $params->set('page_title',  JText::_( 'Individual Details' ));
+        $params->set('page_title',  JText::_( 'COM_TRACKS_VIEW_INDIVIDUAL_TITLE' ));
       }
     } else {
-      $params->set('page_title',  JText::_( 'Individual Details' ));
+      $params->set('page_title',  JText::_( 'COM_TRACKS_VIEW_INDIVIDUAL_TITLE' ));
     }
     $document = &JFactory::getDocument();
     $document->setTitle( $params->get( 'page_title' ) );
@@ -122,7 +122,7 @@ class TracksFrontViewIndividual extends JView
 
     // countries
     $countries = array();
-    $countries[] = JHTML::_('select.option', '', JTEXT::_('Select country'));
+    $countries[] = JHTML::_('select.option', '', JTEXT::_('COM_TRACKS_SELECT_COUNTRY'));
     $countries = array_merge($countries, TracksCountries::getCountryOptions());
     $lists['countries'] = JHTML::_('select.genericlist', $countries, 'country_code', '', 'value', 'text', $object->country_code);
     
@@ -137,7 +137,7 @@ class TracksFrontViewIndividual extends JView
     }
     
     if (!$can_edit) {
-      JError::raiseError( 403, JText::_( 'Access Forbidden' ));
+      JError::raiseError( 403, JText::_( 'COM_TRACKS_ACCESS_FORBIDDEN' ));
       return;  
     }
     

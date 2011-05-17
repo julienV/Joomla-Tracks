@@ -25,7 +25,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 		// do field validation
 		if (form.last_name.value == ""){
-			alert( "<?php echo JText::_( 'Individual must have a last name', true ); ?>" );
+			alert( "<?php echo JText::_( 'COM_TRACKS_VIEW_INDIVIDUAL_MUST_HAVE_A_LASTNAME', true ); ?>" );
 		} else {
 			submitform( pressbutton );
 		}
@@ -45,10 +45,10 @@ defined('_JEXEC') or die('Restricted access'); ?>
     <?php echo $this->escape($this->params->get('page_title')); ?>
     <?php 
     if (!$this->object->id) { 
-      echo " - " . JText::_( 'Create profile' );
+      echo " - " . JText::_( 'COM_TRACKS_VIEW_INDIVIDUAL_CREATE_PROFILE' );
     }
     else {
-      echo " - " . JText::_( 'Edit profile' );    	
+      echo " - " . JText::_( 'COM_TRACKS_VIEW_INDIVIDUAL_EDIT_PROFILE' );    	
     }
     ?>    
   </div>
@@ -57,7 +57,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 		<tr>
       <td width="100" align="right" class="key">
         <label for="full_name">
-          <?php echo JText::_( 'First name' ); ?>:
+          <?php echo JText::_( 'COM_TRACKS_VIEW_INDIVIDUAL_First_name' ); ?>:
         </label>
       </td>
       <td>
@@ -67,7 +67,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     <tr>
       <td width="100" align="right" class="key">
         <label for="last_name">
-          <?php echo JText::_( 'Last name' ); ?>:
+          <?php echo JText::_( 'COM_TRACKS_VIEW_INDIVIDUAL_Last_name' ); ?>:
         </label>
       </td>
       <td>
@@ -77,7 +77,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     <tr>
       <td width="100" align="right" class="key">
         <label for="nickname">
-          <?php echo JText::_( 'Nickname' ); ?>:
+          <?php echo JText::_( 'COM_TRACKS_VIEW_INDIVIDUAL_Nickname' ); ?>:
         </label>
       </td>
       <td>
@@ -88,7 +88,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     <tr>
       <td width="100" align="right" class="key">
         <label for="user_id">
-          <?php echo JText::_( 'User' ); ?>:
+          <?php echo JText::_( 'COM_TRACKS_VIEW_INDIVIDUAL_User' ); ?>:
         </label>
       </td>
       <td>
@@ -99,7 +99,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     <tr>
       <td width="100" align="right" class="key">
         <label for="picture">
-          <?php echo JText::_( 'Picture' ); ?>:
+          <?php echo JText::_( 'COM_TRACKS_VIEW_INDIVIDUAL_Picture' ); ?>:
         </label>
       </td>
       <td>
@@ -110,7 +110,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     <tr>
       <td width="100" align="right" class="key">
         <label for="picture_small">
-          <?php echo JText::_( 'Small picture' ); ?>:
+          <?php echo JText::_( 'COM_TRACKS_VIEW_INDIVIDUAL_Small_picture' ); ?>:
         </label>
       </td>
       <td>
@@ -121,7 +121,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     <tr>
       <td width="100" align="right" class="key">
         <label for="height">
-          <?php echo JText::_( 'Height' ); ?>:
+          <?php echo JText::_( 'COM_TRACKS_VIEW_INDIVIDUAL_Height' ); ?>:
         </label>
       </td>
       <td>
@@ -131,7 +131,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     <tr>
       <td width="100" align="right" class="key">
         <label for="weight">
-          <?php echo JText::_( 'Weight' ); ?>:
+          <?php echo JText::_( 'COM_TRACKS_VIEW_INDIVIDUAL_Weight' ); ?>:
         </label>
       </td>
       <td>
@@ -140,8 +140,8 @@ defined('_JEXEC') or die('Restricted access'); ?>
     </tr>
     <tr>
       <td width="100" align="right" class="key">
-        <label for="last_name">
-          <?php echo JText::_( 'COUNTRY' ); ?>:
+        <label for="country_code">
+          <?php echo JText::_( 'COM_TRACKS_VIEW_INDIVIDUAL_COUNTRY' ); ?>:
         </label>
       </td>
       <td>
@@ -150,8 +150,8 @@ defined('_JEXEC') or die('Restricted access'); ?>
     </tr>
     <tr>
       <td width="100" align="right" class="key">
-        <label for="last_name">
-          <?php echo JText::_( 'Date of birth YYYY-MM-DD' ); ?>:
+        <label for="dob">
+          <?php echo JText::_( 'COM_TRACKS_VIEW_INDIVIDUAL_DOB' ); ?>:
         </label>
       </td>
       <td>
@@ -163,7 +163,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     <tr>
       <td width="100" align="right" class="key">
         <label for="hometown">
-          <?php echo JText::_( 'Hometown' ); ?>:
+          <?php echo JText::_( 'COM_TRACKS_VIEW_INDIVIDUAL_Hometown' ); ?>:
         </label>
       </td>
       <td>
@@ -173,7 +173,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     <tr>
       <td width="100" align="right" class="key">
         <label for="last_name">
-          <?php echo JText::_( 'Address' ); ?>:
+          <?php echo JText::_( 'COM_TRACKS_VIEW_INDIVIDUAL_Address' ); ?>:
         </label>
       </td>
       <td>
@@ -183,7 +183,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     <tr>
       <td width="100" align="right" class="key">
         <label for="last_name">
-          <?php echo JText::_( 'Postcode' ); ?>:
+          <?php echo JText::_( 'COM_TRACKS_VIEW_INDIVIDUAL_Postcode' ); ?>:
         </label>
       </td>
       <td>
@@ -193,7 +193,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     <tr>
       <td width="100" align="right" class="key">
         <label for="last_name">
-          <?php echo JText::_( 'City' ); ?>:
+          <?php echo JText::_( 'COM_TRACKS_VIEW_INDIVIDUAL_City' ); ?>:
         </label>
       </td>
       <td>
@@ -203,7 +203,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     <tr>
       <td width="100" align="right" class="key">
         <label for="last_name">
-          <?php echo JText::_( 'State' ); ?>:
+          <?php echo JText::_( 'COM_TRACKS_VIEW_INDIVIDUAL_State' ); ?>:
         </label>
       </td>
       <td>
@@ -213,7 +213,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     <tr>
       <td width="100" align="right" class="key">
         <label for="last_name">
-          <?php echo JText::_( 'Country' ); ?>:
+          <?php echo JText::_( 'COM_TRACKS_VIEW_INDIVIDUAL_Country' ); ?>:
         </label>
       </td>
       <td>
@@ -223,7 +223,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     <tr>
       <td width="100" align="right" class="key">
         <label for="name">
-          <?php echo JText::_( 'Description' ); ?>:
+          <?php echo JText::_( 'COM_TRACKS_VIEW_INDIVIDUAL_Description' ); ?>:
         </label>
       </td>
       <td>
@@ -232,7 +232,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     </tr>
 </table>
 
-<button class="button" type="submit" onclick="submitbutton( this.form );return false;"><?php echo JText::_('Save'); ?></button>
+<button class="button" type="submit" onclick="submitbutton( this.form );return false;"><?php echo JText::_('COM_TRACKS_VIEW_INDIVIDUAL_Save'); ?></button>
 
 <input type="hidden" name="option" value="com_tracks" />
 <input type="hidden" name="controller" value="individual" />
