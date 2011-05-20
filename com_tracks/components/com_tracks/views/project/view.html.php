@@ -27,22 +27,25 @@ class TracksFrontViewProject extends JView
 {
     function display($tpl = null)
     {
-    	global $mainframe;
+    	$mainframe = &JFactory::getApplication();
+    	
     	          
     	$model =& $this->getModel();
-        $results = $model->getResults( JRequest::getVar( 'p', 0, '', 'int' ) );
-        $project = $model->getProject( JRequest::getVar( 'p', 0, '', 'int' ) );
-        
-        $document =& JFactory::getDocument();
-        $document->setTitle( $project->name );
-        
-        $breadcrumbs =& $mainframe->getPathWay();
-        $breadcrumbs->addItem( $project->name, 'index.php?option=com_tracks&view=project&p=' . $project->id );
-        
-        $this->assignRef( 'results',    $results );
-        $this->assignRef( 'project',    $project );
-        
-        parent::display($tpl);
+    	$results = $model->getResults( JRequest::getVar( 'p', 0, '', 'int' ) );
+    	$project = $model->getProject( JRequest::getVar( 'p', 0, '', 'int' ) );
+    	$params =& $model->getParams();
+
+    	$document =& JFactory::getDocument();
+    	$document->setTitle( $project->name );
+
+    	$breadcrumbs =& $mainframe->getPathWay();
+    	$breadcrumbs->addItem( $project->name, 'index.php?option=com_tracks&view=project&p=' . $project->id );
+
+    	$this->assignRef( 'results',    $results );
+    	$this->assignRef( 'project',    $project );
+    	$this->assignRef( 'params',    $params );
+
+    	parent::display($tpl);
     }
 }
 ?>

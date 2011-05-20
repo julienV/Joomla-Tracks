@@ -109,9 +109,17 @@ class TracksRankingTool extends JObject {
 			}
 			uasort( $individuals, array( $this, "orderRankings" ) );
 			$rank = 1;
+			$previous = null;
 			foreach ( $individuals as $k => $value )
 			{
-				$individuals[$k]->rank = $rank++;
+				if ($previous && self::orderRankingsNoAlpha($previous, $value) == 0) {
+					$individuals[$k]->rank = $previous->rank;
+				}
+				else {
+					$individuals[$k]->rank = $rank;
+				}
+				$previous = $individuals[$k];
+				$rank++;
 			}			
 			return $individuals;
 		}
@@ -287,6 +295,21 @@ class TracksRankingTool extends JObject {
 	 */
 	function orderRankings( $a, $b )
 	{
+		$res = self::orderRankingsNoAlpha($a, $b);
+		if ( $res != 0 ) {
+			return $res;
+		}
+		else {
+			return strcasecmp($a->last_name, $b->last_name);
+		}
+	}
+
+	/**
+	 * order rankings by points, wins, best_rank
+	 *
+	 */
+	function orderRankingsNoAlpha( $a, $b )
+	{
 		if ( $a->points != $b->points ) {
 			return (-( $a->points - $b->points ) > 0) ? 1 : -1;
 		}
@@ -296,9 +319,7 @@ class TracksRankingTool extends JObject {
 		else if ( $a->best_rank != $b->best_rank ) {
 			return ( $a->best_rank - $b->best_rank );
 		}
-		else {
-			return strcasecmp($a->last_name, $b->last_name);
-		}
+		return 0;
 	}
           
 	/**

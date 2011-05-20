@@ -56,7 +56,6 @@ defined('_JEXEC') or die('Restricted access'); ?>
 			<th><?php echo JText::_( 'Round' ); ?></th>
 			<th><?php echo JText::_( 'Date' ); ?></th>
 			<th><?php echo JText::_( 'Winner' ); ?></th>
-			<th><?php echo JText::_( 'Team' ); ?></th>
 		</tr>
 		<?php 
 		$k = 0;
@@ -73,8 +72,12 @@ defined('_JEXEC') or die('Restricted access'); ?>
           </a>
         </td>
         <td><?php echo formatRoundStartEnd( $result ); ?></td>
-        <td><?php echo $result->winner ? $result->winner->first_name . ' ' . $result->winner->last_name : ''; ?></td>
-        <td><?php echo $result->winner ? $result->winner->team_name : ''; ?></td>
+        <td>
+        	<?php foreach ((array)$result->winner as $winner): ?>
+        	<div class="winner"><?php echo $winner->first_name . ' ' . $winner->last_name 
+					            . ($this->params->get('showteams', 1) && $winner->team_name ? ' ('.$winner->team_name.')' : ''); ?></div>
+        	<?php endforeach; ?>
+        </td>
       </tr>
       <?php			
 		}
