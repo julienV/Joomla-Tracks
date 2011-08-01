@@ -19,8 +19,24 @@
  */
 function TracksBuildRoute(&$query)
 {
+	$segments	= array();
+
+	// get a menu item based on Itemid or currently active
+	$app		= JFactory::getApplication();
+	$menu		= $app->getMenu();
+	$params		= JComponentHelper::getParams('com_tracks');
+
+	// we need a menu item.  Either the one specified in the query, or the current active one if none specified
+	if (empty($query['Itemid'])) {
+		$menuItem = $menu->getActive();
+		$menuItemGiven = false;
+	}
+	else {
+		$menuItem = $menu->getItem($query['Itemid']);
+		$menuItemGiven = true;
+	}
+        
 	$view = '';
-	$segments = array();
 	if (isset($query['view']))
 	{
 		$segments[] = $query['view'];

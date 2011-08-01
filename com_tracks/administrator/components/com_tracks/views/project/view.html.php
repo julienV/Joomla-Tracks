@@ -15,6 +15,7 @@
 defined('_JEXEC') or die();
 
 jimport( 'joomla.application.component.view');
+jimport('joomla.form.form');
 
 require_once (JPATH_COMPONENT.DS.'abstract'.DS.'tracksview.php');
 
@@ -109,7 +110,10 @@ class TracksViewProject extends TracksView
 		$lists['published'] 		= JHTML::_('select.booleanlist',  'published', 'class="inputbox"', $project->published );
 		
 		$file 	= JPATH_COMPONENT.DS.'models'.DS.'project.xml';
-		$params = new JParameter( $project->params, $file );
+		$params = JForm::getInstance('project', $file );
+		$params->bind($project);
+//		echo '<pre>';print_r($params); echo '</pre>';exit;
+//			dump($params);
 
 		$this->assignRef('lists',		$lists);
 		$this->assignRef('project',		$project);

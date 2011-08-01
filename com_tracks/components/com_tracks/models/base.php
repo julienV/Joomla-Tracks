@@ -115,8 +115,11 @@ class baseModel extends JModel
       $project = $this->getProject( $project_id );
     	if ($xml == '') 
     	{
-        $file   = JPATH_COMPONENT_ADMINISTRATOR.DS.'models'.DS.'project.xml';
-        $params = new JParameter( $project->params, $file );
+				$params = new JRegistry;
+				$params->loadString($project->params);
+				
+//        $file   = JPATH_COMPONENT_ADMINISTRATOR.DS.'models'.DS.'project.xml';
+//        $params = new JParameter( $project->params, $file );
     	}
     	else 
     	{
@@ -128,15 +131,13 @@ class baseModel extends JModel
 	      $this->_db->setQuery($query);
 	      if ($settings = $this->_db->loadObject())
 	      {
-	        $xmlfolder = JPATH_COMPONENT.DS.'projectparameters'.DS.'default';
-	        $params = new JParameter( $settings, $xmlfolder.DS.$xml ); 	      	
+					$params = new JRegistry;
+					$params->loadString($settings);	      	
 	      }
 	      else {
 	      	$params = false;
 	      }
     	}
-      /*print_r ($params->getParams('params','ranking view'));
-      print_r ($params->getGroups());exit;*/
       return $params;
     }
 	

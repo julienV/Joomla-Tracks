@@ -26,18 +26,18 @@ defined('_JEXEC') or die('Restricted access'); ?>
       if ( $round->end_date && $round->end_date != '0000-00-00 00:00:00' )
       {
         // both dates are defined.
-        $format_end = '%d %b %Y';
-        if ( JHTML::date( $round->start_date, '%Y%m' ) == JHTML::date( $round->end_date, '%Y%m' ) ) {
+        $format_end = 'd F Y';
+        if ( JHTML::date( $round->start_date, 'Ym' ) == JHTML::date( $round->end_date, 'Ym' ) ) {
           // no need to display twice the month and year here
-          $format_start = '%d';  
+          $format_start = 'd';  
         }
         else {
-          $format_start = '%d %b %Y';        
+          $format_start = 'd F Y';        
         }
         return JHTML::date( $round->start_date, $format_start ). ' - ' . JHTML::date( $round->end_date, $format_end );
       }
       else {
-        return JHTML::date( $round->start_date, '%d %b %Y' );
+        return JHTML::date( $round->start_date, 'd F Y' );
       }
     }
     else {

@@ -16,13 +16,15 @@ defined('_JEXEC') or die('Restricted access');
 
 // ACL rules
 
-$acl =& JFactory::getACL();
-$acl->addACL( 'com_tracks', 'manage', 'users', 'super administrator' );
-/* Additional access groups */
-$acl->addACL( 'com_tracks', 'manage', 'users', 'administrator' );
+if (version_compare(JVERSION, '1.6.0', '<'))
+{
+	$acl =& JFactory::getACL();
+	$acl->addACL( 'com_tracks', 'manage', 'users', 'super administrator' );
+	/* Additional access groups */
+	$acl->addACL( 'com_tracks', 'manage', 'users', 'administrator' );
+}
 
 require_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'helpers'.DS.'trackshtml.php');
 require_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'helpers'.DS.'countries.php');
 require_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'helpers'.DS.'route.php');
 require_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'helpers'.DS.'tools.php');
-

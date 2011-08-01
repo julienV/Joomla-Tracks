@@ -27,6 +27,18 @@ require_once (JPATH_COMPONENT.DS.'models'.DS.'item.php');
  */
 class TracksModelProject extends TracksModelItem
 {
+	
+	function &getData()
+	{
+		parent::getData();
+		
+		// Convert the params field to an array.
+		$registry = new JRegistry;
+		$registry->loadString($this->_data->params);
+		$this->_data->params = $registry->toArray();
+		return $this->_data;
+	}
+	
 	/**
 	 * Method to remove a project
 	 *

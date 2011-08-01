@@ -135,30 +135,38 @@ defined('_JEXEC') or die('Restricted access'); ?>
 		<table class="admintable">
 		<tr>
 			<td colspan="2">
-				<?php 
-				foreach ($this->params->getGroups() AS $_group => $value) {
-					?>
-					<fieldset class="adminform">
-				    <legend><?php 
-				      if ($_group == '_default') {
-				      	echo JText::_('COM_TRACKS_General');
-				      }
-				      else {
-				      	echo $_group;
-				      } ?>				    	
-				    </legend>
-				
-				    <table class="admintable">
-				    <tr>
-				      <td colspan="2">
-							<?php echo $this->params->render('params', $_group); ?>
-						  </td>
-						</tr>
-					  </table>
-				  </fieldset>
-				  <?php
-				}
-				?>
+			<?php
+	    // Iterate through the normal form fieldsets and display each one.
+	    foreach ($this->params->getFieldsets() as $fieldsets => $fieldset):
+	    ?>
+	    <fieldset class="adminform">
+	        <legend>
+	            <?php echo JText::_($fieldset->name.'_jform_fieldset_label'); ?>
+	        </legend>
+	        <dl>
+			<?php
+			// Iterate through the fields and display them.
+			foreach($this->params->getFieldset($fieldset->name) as $field):
+			    // If the field is hidden, only use the input.
+			    if ($field->hidden):
+			        echo $field->input;
+			    else:
+			    ?>
+			    <dt>
+			        <?php echo $field->label; ?>
+			    </dt>
+			    <dd<?php echo ($field->type == 'Editor' || $field->type == 'Textarea') ? ' style="clear: both; margin: 0;"' : ''?>>
+			        <?php echo $field->input ?>
+			    </dd>
+			    <?php
+			    endif;
+			endforeach;
+			?>
+			</dl>
+	    </fieldset>
+	    <?php
+	    endforeach;
+	    ?>
 			</td>
 		</tr>
 		</table>

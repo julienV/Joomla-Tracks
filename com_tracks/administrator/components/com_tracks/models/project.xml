@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<model>
-  <params>
-    <param name="auto_time" type="text" default="1440" label="COM_TRACKS_Change_current_round_after" description=""/>
-    <param name="project_type" type="list" default="0" label="COM_TRACKS_Project_type" description="">
-      <option value="0">COM_TRACKS_Default</option>
-    </param>
-  </params>
-	<params group="Display">   
-	  <param name="shownumber" type="radio" default="1" label="COM_TRACKS_Display_individual_number" description="" >
-	    <option value="0">COM_TRACKS_No</option>
-	    <option value="1">COM_TRACKS_Yes</option>
-	  </param>
-	  <param name="showflag" type="radio" default="1" label="COM_TRACKS_Display_country_flag" description="" >
-	    <option value="0">COM_TRACKS_No</option>
-	    <option value="1">COM_TRACKS_Yes</option>
-	  </param>
-	  <param name="showteams" type="radio" default="1" label="COM_TRACKS_Display_teams_in_rankings" description="" >
-	    <option value="0">COM_TRACKS_No</option>
-	    <option value="1">COM_TRACKS_Yes</option>
-	  </param>
-	</params>
-</model>
+<form>
+	<fields name="params">
+		<fieldset	name="basic">
+	    <field name="auto_time" type="text" default="1440" label="COM_TRACKS_Change_current_round_after" description=""/>
+	    <field name="project_type" type="list" default="0" label="COM_TRACKS_Project_type" description="">
+	      <option value="0">COM_TRACKS_Default</option>
+	    </field>
+	  </fieldset>
+		<fieldset name="Display">   
+		  <field name="shownumber" type="radio" default="1" label="COM_TRACKS_Display_individual_number" description="" >
+		    <option value="0">COM_TRACKS_No</option>
+		    <option value="1">COM_TRACKS_Yes</option>
+		  </field>
+		  <field name="showflag" type="radio" default="1" label="COM_TRACKS_Display_country_flag" description="" >
+		    <option value="0">COM_TRACKS_No</option>
+		    <option value="1">COM_TRACKS_Yes</option>
+		  </field>
+		  <field name="showteams" type="radio" default="1" label="COM_TRACKS_Display_teams_in_rankings" description="" >
+		    <option value="0">COM_TRACKS_No</option>
+		    <option value="1">COM_TRACKS_Yes</option>
+		  </field>
+		</fieldset>
+	</fields>
+</form>

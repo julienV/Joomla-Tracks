@@ -29,6 +29,7 @@ class TracksFrontViewProjects extends JView
     {
         $model =& $this->getModel();
         $projects = $model->getProjects();
+        
         $this->assignRef( 'projects',	$projects );
 
         parent::display($tpl);

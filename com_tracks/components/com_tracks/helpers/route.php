@@ -138,15 +138,14 @@ class TracksHelperRoute
 	{
 		$component =& JComponentHelper::getComponent('com_tracks');
 		$menus	= & JSite::getMenu();
-		$items	= $menus->getItems('componentid', $component->id);
+		$items	= $menus->getItems('component_id', $component->id);
 		$user 	= & JFactory::getUser();
-		$access = (int)$user->get('aid');
-		
+				
 		if ($items) 
 		{
 			foreach($items as $item)
 			{	
-				if ((@$item->query['view'] == $query['view']) && ($item->published == 1) && ($item->access <= $access)) 
+				if ((@$item->query['view'] == $query['view']) && ($item->published == 1)) 
 				{					
 					switch ($query['view'])
 					{

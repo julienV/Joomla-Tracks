@@ -67,13 +67,12 @@ class TracksControllerQuickAdd extends BaseController
 				"first_name" => $firstname,
 				"last_name" => $lastname,
 			);
-			$model->store($data);
-			$individualid = mysql_insert_id();
-		}
-		
-		if (!$individualid) {
-			$msg = JText::_('COM_TRACKS_Error_adding_individual');
-			$this->setRedirect("index.php?option=com_tracks&view=subroundresults&srid=".$srid, $msg, 'error');
+			$individualid = $model->store($data);
+			
+			if (!$individualid) {
+				$msg = Jtext::_('COM_TRACKS_Error_adding_individual').': '.$model->getError();
+				$this->setRedirect("index.php?option=com_tracks&view=subroundresults&srid=".$srid, $msg, 'error');
+			}
 		}
 			
 		// check if indivual belongs to project

@@ -33,22 +33,12 @@ class TracksViewSubroundResults extends TracksView
 		$option = JRequest::getCmd('option');
     $document = &JFactory::getDocument();
     
-    if (TracksHelper::isMootools12())
-    {
-    	$document->addScript(JURI::base() . 'components/com_tracks/assets/js/autocompleter/1_2/Autocompleter.js');
-    	$document->addScript(JURI::base() . 'components/com_tracks/assets/js/autocompleter/1_2/Autocompleter.Local.js');
-    	$document->addScript(JURI::base() . 'components/com_tracks/assets/js/autocompleter/1_2/Autocompleter.Request.js');
-    	$document->addScript(JURI::base() . 'components/com_tracks/assets/js/autocompleter/1_2/Observer.js'); 	    	
-    	$document->addScript(JURI::base() . 'components/com_tracks/assets/js/quickadd1_2.js');
-    	$document->addStyleSheet(JURI::base() . 'components/com_tracks/assets/css/Autocompleter1_2.css');
-    }
-    else 
-    {
-    	$document->addScript(JURI::base() . 'components/com_tracks/assets/js/autocompleter/1_1/Autocompleter.js');
-    	$document->addScript(JURI::base() . 'components/com_tracks/assets/js/autocompleter/1_1/Observer.js'); 	    	
-    	$document->addScript(JURI::base() . 'components/com_tracks/assets/js/quickadd1_1.js');
-    	$document->addStyleSheet(JURI::base() . 'components/com_tracks/assets/css/Autocompleter1_1.css');
-    }
+    $document->addScript(JURI::base() . 'components/com_tracks/assets/js/autocompleter/1_2/Autocompleter.js');
+    $document->addScript(JURI::base() . 'components/com_tracks/assets/js/autocompleter/1_2/Autocompleter.Local.js');
+    $document->addScript(JURI::base() . 'components/com_tracks/assets/js/autocompleter/1_2/Autocompleter.Request.js');
+    $document->addScript(JURI::base() . 'components/com_tracks/assets/js/autocompleter/1_2/Observer.js');
+    $document->addScript(JURI::base() . 'components/com_tracks/assets/js/quickadd1_2.js');
+    $document->addStyleSheet(JURI::base() . 'components/com_tracks/assets/css/Autocompleter1_2.css');
     
 
 		$subround =& $this->get('SubroundInfo');
