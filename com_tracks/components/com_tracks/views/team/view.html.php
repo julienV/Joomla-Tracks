@@ -27,7 +27,8 @@ class TracksFrontViewTeam extends JView
 {
     function display($tpl = null)
     {
-        global $mainframe;
+        $mainframe = &JFactory::getApplication();
+$option = JRequest::getCmd('option');
 				$dispatcher = & JDispatcher::getInstance();
         
         $id = JRequest::getVar( 't', 0, '', 'int' );

@@ -27,7 +27,8 @@ class TracksViewProjectround extends TracksView
 {
 	function display($tpl = null)
 	{
-		global $mainframe;
+		$mainframe = &JFactory::getApplication();
+		$option = JRequest::getCmd('option');
 
 		if($this->getLayout() == 'form') {
 			$this->_displayForm($tpl);
@@ -42,7 +43,8 @@ class TracksViewProjectround extends TracksView
 
 	function _displayForm($tpl)
 	{
-		global $mainframe, $option;
+		$mainframe = &JFactory::getApplication();
+		$option = JRequest::getCmd('option');
 
 		$db		=& JFactory::getDBO();
 		$uri 	=& JFactory::getURI();

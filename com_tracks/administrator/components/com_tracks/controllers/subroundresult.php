@@ -161,7 +161,8 @@ class TracksControllerSubroundresult extends BaseController
 	
 	function saveranks()
 	{
-		global $mainframe, $option;
+		$mainframe = &JFactory::getApplication();
+		$option = JRequest::getCmd('option');
 
 		$cid 	= JRequest::getVar( 'cid', array(), 'post', 'array' );
 		$rank = JRequest::getVar( 'rank', array(), 'post', 'array' );

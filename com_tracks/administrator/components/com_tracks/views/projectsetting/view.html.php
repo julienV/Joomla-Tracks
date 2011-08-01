@@ -44,7 +44,8 @@ class TracksViewProjectsetting extends TracksView
 
 	function _displayForm($tpl)
 	{
-		global $mainframe, $option;
+		$mainframe = &JFactory::getApplication();
+		$option = JRequest::getCmd('option');
 
 		$db		=& JFactory::getDBO();
 		$uri 	=& JFactory::getURI();

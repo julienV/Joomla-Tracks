@@ -29,7 +29,8 @@ class TracksViewProjectindividual extends JView
 {
 	function display($tpl = null)
 	{
-		global $mainframe;
+		$mainframe = &JFactory::getApplication();
+		$option = JRequest::getCmd('option');
 
 		if($this->getLayout() == 'form') {
 			$this->_displayForm($tpl);
@@ -44,7 +45,8 @@ class TracksViewProjectindividual extends JView
 
 	function _displayForm($tpl)
 	{
-		global $mainframe, $option;
+		$mainframe = &JFactory::getApplication();
+		$option = JRequest::getCmd('option');
 
 		$db		=& JFactory::getDBO();
 		$uri 	=& JFactory::getURI();

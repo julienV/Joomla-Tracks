@@ -48,7 +48,8 @@ class TracksControllerQuickAdd extends BaseController
 
 	function add()
 	{
-		global $mainframe, $option;
+		$mainframe = &JFactory::getApplication();
+		$option = JRequest::getCmd('option');
 		$db = &JFactory::getDBO();
 		$individualid = JRequest::getInt("individualid", 0);
 		$name = JRequest::getVar("quickadd", '', 'request', 'string');

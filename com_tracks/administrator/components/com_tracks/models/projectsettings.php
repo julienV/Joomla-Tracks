@@ -53,7 +53,8 @@ class TracksModelProjectsettings extends TracksModelList
 	
 	function __construct()
 	{
-    global $mainframe, $option;
+    $mainframe = &JFactory::getApplication();
+$option = JRequest::getCmd('option');
     
     parent::__construct();
     
@@ -140,7 +141,8 @@ class TracksModelProjectsettings extends TracksModelList
 
 	function _buildContentOrderBy()
 	{
-		global $mainframe, $option;
+		$mainframe = &JFactory::getApplication();
+		$option = JRequest::getCmd('option');
 
 		$filter_order		= $mainframe->getUserStateFromRequest( $option.'.viewcompetitions.filter_order',		'filter_order',		'obj.ordering',	'cmd' );
 		$filter_order_Dir	= $mainframe->getUserStateFromRequest( $option.'.viewcompetitions.filter_order_Dir',	'filter_order_Dir',	'',				'word' );
@@ -156,7 +158,8 @@ class TracksModelProjectsettings extends TracksModelList
 
 	function _buildContentWhere()
 	{
-		global $mainframe, $option;
+		$mainframe = &JFactory::getApplication();
+		$option = JRequest::getCmd('option');
 
 		$filter_state		= $mainframe->getUserStateFromRequest( $option.'.viewcompetitions.filter_state',		'filter_state',		'',				'word' );
 		$search				= $mainframe->getUserStateFromRequest( $option.'.viewcompetitions.search',			'search',			'',				'string' );

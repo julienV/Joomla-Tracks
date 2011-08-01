@@ -33,7 +33,8 @@ class TracksViewImagehandler extends JView  {
 	 */
 	function display($tpl = null)
 	{
-		global $mainframe;
+		$mainframe = &JFactory::getApplication();
+		$option = JRequest::getCmd('option');
 		
 		$document =& JFactory::getDocument();
 		

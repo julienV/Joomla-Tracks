@@ -29,7 +29,8 @@ class TracksViewRounds extends TracksView
 {
 	function display($tpl = null)
 	{
-		global $mainframe, $option;
+		$mainframe = &JFactory::getApplication();
+		$option = JRequest::getCmd('option');
 
 		// Set toolbar items for the page
 		JToolBarHelper::title(   JText::_( 'Tracks Rounds' ), 'generic.png' );

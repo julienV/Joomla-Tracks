@@ -44,7 +44,8 @@ class TracksModelIndividuals extends TracksModelList
 
 	function _buildContentOrderBy()
 	{
-		global $mainframe, $option;
+		$mainframe = &JFactory::getApplication();
+		$option = JRequest::getCmd('option');
 
 		$filter_order		= $mainframe->getUserStateFromRequest( $option.'.viewindividuals.filter_order',		'filter_order',		'obj.last_name',	'cmd' );
 		$filter_order_Dir	= $mainframe->getUserStateFromRequest( $option.'.viewindividuals.filter_order_Dir',	'filter_order_Dir',	'ASC',				'word' );
@@ -60,7 +61,8 @@ class TracksModelIndividuals extends TracksModelList
 
 	function _buildContentWhere()
 	{
-		global $mainframe, $option;
+		$mainframe = &JFactory::getApplication();
+		$option = JRequest::getCmd('option');
 
 		$search				= $mainframe->getUserStateFromRequest( $option.'.viewindividuals.search',			'search',			'',				'string' );
 		$search				= JString::strtolower( $search );

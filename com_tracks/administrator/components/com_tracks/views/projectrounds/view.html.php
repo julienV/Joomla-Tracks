@@ -29,7 +29,8 @@ class TracksViewProjectrounds extends TracksView
 {
 	function display($tpl = null)
 	{
-		global $mainframe, $option;
+		$mainframe = &JFactory::getApplication();
+		$option = JRequest::getCmd('option');
 
 	  if($this->getLayout() == 'copy_form') 
     {
@@ -88,7 +89,8 @@ class TracksViewProjectrounds extends TracksView
 
   function _displayCopy($tpl = null)
   {
-    global $mainframe, $option;
+    $mainframe = &JFactory::getApplication();
+$option = JRequest::getCmd('option');
     
     // Set toolbar items for the page
     JToolBarHelper::title(   JText::_( 'COPYROUNDS' ), 'generic.png' );

@@ -29,7 +29,8 @@ class TracksViewSubroundResults extends TracksView
 {
 	function display($tpl = null)
 	{
-		global $mainframe, $option;
+		$mainframe = &JFactory::getApplication();
+		$option = JRequest::getCmd('option');
     $document = &JFactory::getDocument();
     
     if (TracksHelper::isMootools12())

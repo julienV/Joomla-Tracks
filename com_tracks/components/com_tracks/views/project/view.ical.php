@@ -28,7 +28,8 @@ class TracksFrontViewProject extends JView
 {
     function display($tpl = null)
     {
-    	global $mainframe;
+    	$mainframe = &JFactory::getApplication();
+	$option = JRequest::getCmd('option');
     	  	          
     	$model =& $this->getModel();
       $results = $model->getResults( JRequest::getVar( 'p', 0, '', 'int' ) );

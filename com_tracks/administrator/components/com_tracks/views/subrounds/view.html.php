@@ -29,7 +29,8 @@ class TracksViewSubrounds extends TracksView
 {
 	function display($tpl = null)
 	{
-		global $mainframe, $option;
+		$mainframe = &JFactory::getApplication();
+		$option = JRequest::getCmd('option');
 
 		$round =& $this->get('Round');
 		

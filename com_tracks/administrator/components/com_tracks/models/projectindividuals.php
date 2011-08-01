@@ -44,7 +44,8 @@ class TracksModelProjectindividuals extends TracksModelList
 
 	function _buildContentOrderBy()
 	{
-		global $mainframe, $option;
+		$mainframe = &JFactory::getApplication();
+		$option = JRequest::getCmd('option');
 
 		$filter_order		= $mainframe->getUserStateFromRequest( $option.'.viewprojectindividuals.filter_order',		'filter_order',		't.name',	'cmd' );
 		$filter_order_Dir	= $mainframe->getUserStateFromRequest( $option.'.viewprojectindividuals.filter_order_Dir',	'filter_order_Dir',	'',				'word' );
@@ -60,7 +61,8 @@ class TracksModelProjectindividuals extends TracksModelList
 
 	function _buildContentWhere()
 	{
-		global $mainframe, $option;
+		$mainframe = &JFactory::getApplication();
+		$option = JRequest::getCmd('option');
     $project_id = $mainframe->getUserState( $option.'project' );
     
 		//$filter_state		= $mainframe->getUserStateFromRequest( $option.'.viewprojectindividuals.filter_state',		'filter_state',		'',				'word' );

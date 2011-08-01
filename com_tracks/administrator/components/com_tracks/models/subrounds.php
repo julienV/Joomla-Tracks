@@ -60,7 +60,8 @@ class TracksModelSubrounds extends TracksModelList
 
 	function _buildContentOrderBy()
 	{
-		global $mainframe, $option;
+		$mainframe = &JFactory::getApplication();
+		$option = JRequest::getCmd('option');
 
 		$filter_order		= $mainframe->getUserStateFromRequest( $option.'.viewsubrounds.filter_order',		'filter_order',		'obj.ordering',	'cmd' );
 		$filter_order_Dir	= $mainframe->getUserStateFromRequest( $option.'.viewsubrounds.filter_order_Dir',	'filter_order_Dir',	'',				'word' );
@@ -76,7 +77,8 @@ class TracksModelSubrounds extends TracksModelList
 
 	function _buildContentWhere()
 	{
-		global $mainframe, $option;
+		$mainframe = &JFactory::getApplication();
+		$option = JRequest::getCmd('option');
     $prid = JRequest::getVar('prid',0);
     
 		$filter_state		= $mainframe->getUserStateFromRequest( $option.'.viewsubrounds.filter_state',		'filter_state',		'',				'word' );

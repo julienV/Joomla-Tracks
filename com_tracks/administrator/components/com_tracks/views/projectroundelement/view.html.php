@@ -27,7 +27,8 @@ class TracksViewProjectroundElement extends JView
 {
   function display()
   {
-    global $mainframe;
+    $mainframe = &JFactory::getApplication();
+$option = JRequest::getCmd('option');
     
     // Initialize variables
     $db     = &JFactory::getDBO();
@@ -140,7 +141,8 @@ class TracksViewProjectroundElement extends JView
 
   function _getLists()
   {
-    global $mainframe;
+    $mainframe = &JFactory::getApplication();
+$option = JRequest::getCmd('option');
 
     // Initialize variables
     $db   = &JFactory::getDBO();

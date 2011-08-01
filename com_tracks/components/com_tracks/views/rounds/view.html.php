@@ -27,7 +27,8 @@ class TracksFrontViewRounds extends JView
 {
     function display($tpl = null)
     {
-    	global $mainframe;
+    	$mainframe = &JFactory::getApplication();
+	$option = JRequest::getCmd('option');
     	          
         $model =& $this->getModel();
         $rows = $model->getRounds();

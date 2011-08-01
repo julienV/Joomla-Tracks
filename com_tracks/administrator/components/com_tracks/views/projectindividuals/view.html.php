@@ -29,7 +29,8 @@ class TracksViewProjectindividuals extends TracksView
 {
 	function display($tpl = null)
 	{
-		global $mainframe, $option;
+		$mainframe = &JFactory::getApplication();
+		$option = JRequest::getCmd('option');
 
     if($this->getLayout() == 'assign') 
     {
@@ -85,7 +86,8 @@ class TracksViewProjectindividuals extends TracksView
 	
 	function _displayAssign($tpl = null)
 	{
-    global $mainframe, $option;
+    $mainframe = &JFactory::getApplication();
+$option = JRequest::getCmd('option');
 		
 		// Set toolbar items for the page
 		JToolBarHelper::title(   JText::_( 'Assign Participants' ), 'generic.png' );

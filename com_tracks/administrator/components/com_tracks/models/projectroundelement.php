@@ -42,7 +42,8 @@ class TracksModelProjectroundElement extends JModel
    */
   function getList()
   {
-    global $mainframe;
+    $mainframe = &JFactory::getApplication();
+$option = JRequest::getCmd('option');
 
     if (!empty($this->_list)) {
       return $this->_list;

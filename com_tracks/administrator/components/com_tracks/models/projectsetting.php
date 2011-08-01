@@ -48,7 +48,8 @@ class TracksModelProjectsetting extends TracksModelItem
 	
 	function __construct()
 	{
-		global $mainframe, $option;
+		$mainframe = &JFactory::getApplication();
+		$option = JRequest::getCmd('option');
 		
 		parent::__construct();
 		

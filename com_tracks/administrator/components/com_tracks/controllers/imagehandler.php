@@ -48,7 +48,8 @@ class TracksControllerImagehandler extends JController
 	 */
 	function upload()
 	{
-		global $mainframe;
+		$mainframe = &JFactory::getApplication();
+		$option = JRequest::getCmd('option');
 		
 		// Check for request forgeries
 		JRequest::checkToken() or die( 'Invalid Token' );
@@ -104,7 +105,8 @@ class TracksControllerImagehandler extends JController
 	 */
 	function delete()
 	{
-		global $mainframe;
+		$mainframe = &JFactory::getApplication();
+		$option = JRequest::getCmd('option');
 
 		// Set FTP credentials, if given
 		jimport('joomla.client.helper');

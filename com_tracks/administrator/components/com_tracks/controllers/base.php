@@ -67,7 +67,8 @@ class BaseController extends JController
 
 	function ShowMenuStart()
 	{
-		global $mainframe, $option;
+		$mainframe = &JFactory::getApplication();
+		$option = JRequest::getCmd('option');
 
 		$document =& JFactory::getDocument();
 
@@ -86,7 +87,8 @@ class BaseController extends JController
 
 	function ShowMenuEnd()
 	{
-		global $mainframe, $option;
+		$mainframe = &JFactory::getApplication();
+		$option = JRequest::getCmd('option');
 
 		$document =& JFactory::getDocument();
 

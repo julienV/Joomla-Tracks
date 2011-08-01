@@ -27,7 +27,8 @@ class TracksFrontViewProjectindividuals extends JView
 {
   function display($tpl = null)
   {
-    global $mainframe;
+    $mainframe = &JFactory::getApplication();
+$option = JRequest::getCmd('option');
 
     $project_id = JRequest::getVar( 'p', 0, '', 'int' );
     $params = &JComponentHelper::getParams( 'com_tracks' );

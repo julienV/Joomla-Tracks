@@ -77,7 +77,8 @@ class TracksControllerProject extends BaseController
 	 */
 	function select()
 	{
-		global $mainframe, $option;
+		$mainframe = &JFactory::getApplication();
+		$option = JRequest::getCmd('option');
 		// get cid array from address
 		$cid	= JRequest::getVar('cid', array(0), '', 'array');
 
