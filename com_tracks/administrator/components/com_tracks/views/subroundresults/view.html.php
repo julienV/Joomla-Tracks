@@ -86,14 +86,14 @@ class TracksViewSubroundResults extends TracksView
 		// table ordering
 		$lists['order_Dir'] = $filter_order_Dir;
 		$lists['order'] = $filter_order;
-				
+
 		$this->assignRef('user',		JFactory::getUser());
 		$this->assignRef('lists',		$lists);
 		$this->assignRef('items',		$items);
 		$this->assignRef('subround_id',	JRequest::getVar('srid',0));
 		$this->assignRef('pagination',	$pagination);
 		$this->assignRef('request_url',	$uri->toString());
-		$this->assignRef('site_url',	$mainframe->getSiteURL());
+		$this->assignRef('site_url',	JURI::root());
 
 		parent::display($tpl);
 	}
