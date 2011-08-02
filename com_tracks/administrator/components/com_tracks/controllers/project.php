@@ -103,7 +103,7 @@ class TracksControllerProject extends BaseController
 			$msg = JText::_('COM_TRACKS_Project_Saved' );
 			$msgtype = 'message';
 		} else {
-			$msg = JText::_('COM_TRACKS_Error_Saving_Project:' ).$model->getError();
+			$msg = JText::_('COM_TRACKS_Error_Saving_Project' ).$model->getError();
 			$msgtype = 'error';
 		}
 

@@ -142,8 +142,8 @@ JHTML::_('behavior.tooltip');
 					echo JText::_('COM_TRACKS_edit_locked' );
 				} else {
 				?>
-					<a href="<?php echo $link_results; ?>" title="<?php echo JText::_('COM_TRACKS_Edit_sub-rounds_/_results' ); ?>">
-						<?php echo JText::_('COM_TRACKS_Edit_sub-rounds' ); ?></a>
+					<a href="<?php echo $link_results; ?>" title="<?php echo JText::_('COM_TRACKS_EDIT_SUBROUNDS_RESULTS' ); ?>">
+						<?php echo JText::_('COM_TRACKS_Edit_subrounds' ); ?></a>
 				<?php
 				}
 				?>
