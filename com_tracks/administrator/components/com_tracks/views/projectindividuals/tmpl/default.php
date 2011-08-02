@@ -26,10 +26,10 @@ JHTML::_('behavior.tooltip');
 <table>
 <tr>
 	<td align="left" width="100%">
-		<?php echo JText::_( 'Filter' ); ?>:
+		<?php echo JText::_('COM_TRACKS_Filter' ); ?>:
 		<input type="text" name="search" id="search" value="<?php echo $this->lists['search'];?>" class="text_area" onchange="document.adminForm.submit();" />
-		<button onclick="this.form.submit();"><?php echo JText::_( 'Go' ); ?></button>
-		<button onclick="document.getElementById('search').value='';this.form.submit();"><?php echo JText::_( 'Reset' ); ?></button>
+		<button onclick="this.form.submit();"><?php echo JText::_('COM_TRACKS_Go' ); ?></button>
+		<button onclick="document.getElementById('search').value='';this.form.submit();"><?php echo JText::_('COM_TRACKS_Reset' ); ?></button>
 	</td>
 </tr>
 </table>
@@ -38,7 +38,7 @@ JHTML::_('behavior.tooltip');
 	<thead>
 		<tr>
 			<th width="5">
-				<?php echo JText::_( 'NUM' ); ?>
+				<?php echo JText::_('COM_TRACKS_NUM' ); ?>
 			</th>
 			<th width="20">
 				<input type="checkbox" name="toggle" value="" onclick="checkAll(<?php echo count( $this->items ); ?>);" />
@@ -92,7 +92,7 @@ JHTML::_('behavior.tooltip');
 					echo $row->last_name.', '.$row->first_name;
 				} else {
 				?>
-					<a href="<?php echo $link; ?>" title="<?php echo JText::_( 'Edit Project Participant' ); ?>">
+					<a href="<?php echo $link; ?>" title="<?php echo JText::_('COM_TRACKS_Edit_Project_Participant' ); ?>">
 						<?php echo $row->last_name. ', ' . $row->first_name; ?></a>
 				<?php
 				}

@@ -33,7 +33,7 @@ class TracksViewTeams extends TracksView
 		$option = JRequest::getCmd('option');
 
 		// Set toolbar items for the page
-		JToolBarHelper::title(   JText::_( 'Tracks Teams' ), 'generic.png' );
+		JToolBarHelper::title(   JText::_('COM_TRACKS_Teams' ), 'generic.png' );
 		JToolBarHelper::deleteList();
 		JToolBarHelper::editListX();
 		JToolBarHelper::addNewX();

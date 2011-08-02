@@ -82,7 +82,7 @@ class plgUserTracks_autoregister extends JPlugin {
 				
 			}
 			else {
-				Jerror::raiseWarning(0, JText::_('Error while creating tracks individual'));
+				Jerror::raiseWarning(0, JText::_('Error_while_creating_tracks_individual'));
 			}
 		}
 	}

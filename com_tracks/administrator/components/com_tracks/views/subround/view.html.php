@@ -59,7 +59,7 @@ class TracksViewSubround extends JView
 		// fail if checked out not by 'me'
 		if ($model->isCheckedOut( $user->get('id') )) 
     {
-			$msg = JText::sprintf( 'DESCBEINGEDITTED', JText::_( 'The projectround' ), $object->name );
+			$msg = JText::sprintf( 'DESCBEINGEDITTED', JText::_('COM_TRACKS_The_projectround' ), $object->name );
 			$mainframe->redirect( 'index.php?option='. $option, $msg );
 		}
 
@@ -76,7 +76,7 @@ class TracksViewSubround extends JView
 		}
 		
 		//build the html select list for sub-round types
-	  $types[] = JHTML::_('select.option',  '0', '- '. JText::_( 'Select a sub-round type' ) .' -','id', 'name' );
+	  $types[] = JHTML::_('select.option',  '0', '- '. JText::_('COM_TRACKS_Select_a_subround_type' ) .' -','id', 'name' );
 	  if ( $res = & $this->get('SubroundTypes') ) {
 	    $types = array_merge( $types, $res );
 	  }

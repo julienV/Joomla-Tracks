@@ -18,8 +18,8 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <?php
 	// Set toolbar items for the page
 	$edit		= JRequest::getVar('edit',true);
-	$text = !$edit ? JText::_( 'New' ) : JText::_( 'Edit' );
-	JToolBarHelper::title(   JText::_( 'Project' ).': <small><small>[ ' . $text.' ]</small></small>' );
+	$text = !$edit ? JText::_('COM_TRACKS_New' ) : JText::_('COM_TRACKS_Edit' );
+	JToolBarHelper::title(   JText::_('COM_TRACKS_Project' ).': <small><small>[ ' . $text.' ]</small></small>' );
 	JToolBarHelper::save();
 	JToolBarHelper::apply();
 	if (!$edit)  {
@@ -41,7 +41,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 		// do field validation
 		if (form.subround_id.value == ""){
-			alert( "<?php echo JText::_( 'Result item must have subround id', true ); ?>" );
+			alert( "<?php echo JText::_('COM_TRACKS_Result_item_must_have_subround_id', true ); ?>" );
 		} else {
 			submitform( pressbutton );
 		}
@@ -63,13 +63,13 @@ defined('_JEXEC') or die('Restricted access'); ?>
 		  <?php 
 		  echo $this->result->round_name . ' - ' 
 		     . $this->result->typename . ' - '
-		     . JText::_( 'Result' ); ?></legend>
+		     . JText::_('COM_TRACKS_Result' ); ?></legend>
 
 		<table class="admintable">
 		<tr>
 			<td valign="top" align="right" class="key">
 				<label for="individual">
-					<?php echo JText::_( 'Individual' ); ?>:
+					<?php echo JText::_('COM_TRACKS_Individual' ); ?>:
 				</label>
 			</td>
 			<td>
@@ -83,7 +83,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     <tr>
       <td width="100" align="right" class="key">
         <label for="rank">
-          <?php echo JText::_( 'Rank' ); ?>:
+          <?php echo JText::_('COM_TRACKS_Rank' ); ?>:
         </label>
       </td>
       <td>
@@ -93,7 +93,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     <tr>
       <td width="100" align="right" class="key">
         <label for="bonus_points">
-          <?php echo JText::_( 'Bonus points' ); ?>:
+          <?php echo JText::_('COM_TRACKS_Bonus_points' ); ?>:
         </label>
       </td>
       <td>
@@ -103,7 +103,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     <tr>
       <td width="100" align="right" class="key">
         <label for="performance">
-          <?php echo JText::_( 'Performance' ); ?>:
+          <?php echo JText::_('COM_TRACKS_Performance' ); ?>:
         </label>
       </td>
       <td>
@@ -113,7 +113,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     <tr>
       <td width="100" align="right" class="key">
         <label for="name">
-          <?php echo JText::_( 'Comment' ); ?>:
+          <?php echo JText::_('COM_TRACKS_Comment' ); ?>:
         </label>
       </td>
       <td>

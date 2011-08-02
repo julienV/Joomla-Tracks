@@ -85,12 +85,12 @@ class TableSubround extends JTable
 	{
 		if ( !$this->projectround_id ) 
 		{			
-			$this->setError( JTEXT::_('Error, projectround_id must be set') );
+			$this->setError( JTEXT::_('COM_TRACKS_Error_check_missing_projectround_id') );
 			return false;
 		}
     if ( !$this->type ) 
     {     
-      $this->setError( JTEXT::_('Error, subround type must be set') );
+      $this->setError( JTEXT::_('COM_TRACKS_Error_check_missing_subround_type') );
       return false;
     }
 		return true;

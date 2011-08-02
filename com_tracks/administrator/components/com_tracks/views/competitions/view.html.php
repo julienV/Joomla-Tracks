@@ -33,7 +33,7 @@ class TracksViewCompetitions extends TracksView
 		$option = JRequest::getCmd('option');
 
 		// Set toolbar items for the page
-		JToolBarHelper::title(   JText::_( 'Tracks Competitions' ), 'generic.png' );
+		JToolBarHelper::title(   JText::_('COM_TRACKS_Competitions' ), 'generic.png' );
 		JToolBarHelper::deleteList();
 		JToolBarHelper::editListX();
 		JToolBarHelper::addNewX();

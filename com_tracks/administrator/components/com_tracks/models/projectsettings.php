@@ -87,7 +87,7 @@ $option = JRequest::getCmd('option');
     	}
     }
     else {
-      JError::raiseError(500, JText::_( 'FOLDERNOTFOUND' ).': '.$this->_xmlfolder );    	
+      JError::raiseError(500, JText::_('COM_TRACKS_FOLDERNOTFOUND' ).': '.$this->_xmlfolder );    	
     }
     $this->_files = $files;
     

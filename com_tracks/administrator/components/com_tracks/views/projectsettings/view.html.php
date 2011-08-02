@@ -33,9 +33,9 @@ class TracksViewProjectsettings extends TracksView
 		$option = JRequest::getCmd('option');
     
 		// Set toolbar items for the page
-		JToolBarHelper::title(   JText::_( 'PROJECTSETTINGS' ), 'generic.png' );
+		JToolBarHelper::title(   JText::_('COM_TRACKS_PROJECTSETTINGS' ), 'generic.png' );
 		JToolBarHelper::editListX();
-    JToolBarHelper::deleteList(JText::_('DELETESETTINGSCONFIRM'));
+    JToolBarHelper::deleteList(JText::_('COM_TRACKS_DELETESETTINGSCONFIRM'));
     JToolBarHelper::help( 'screen.tracks.projectsettings', true );
         
 		$db		=& JFactory::getDBO();

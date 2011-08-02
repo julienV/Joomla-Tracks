@@ -19,8 +19,8 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <?php
 	// Set toolbar items for the page
 	$edit		= JRequest::getVar('edit',true);
-	$text = !$edit ? JText::_( 'New' ) : JText::_( 'Edit' );
-	JToolBarHelper::title(   JText::_( 'Round' ).': <small><small>[ ' . $text.' ]</small></small>' );
+	$text = !$edit ? JText::_('COM_TRACKS_New' ) : JText::_('COM_TRACKS_Edit' );
+	JToolBarHelper::title(   JText::_('COM_TRACKS_Round' ).': <small><small>[ ' . $text.' ]</small></small>' );
 	JToolBarHelper::save();
 	JToolBarHelper::apply();
 	if (!$edit)  {
@@ -43,7 +43,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     // do field validation
     var validator = document.formvalidator;
     if ( validator.validate(form.name) === false ){
-      alert( "<?php echo JText::_( 'ROUND NAME IS REQUIRED', true ); ?>" );
+      alert( "<?php echo JText::_('COM_TRACKS_ROUND_NAME_IS_REQUIRED', true ); ?>" );
     } else {
       submitform( pressbutton );
     }
@@ -53,12 +53,12 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <div id="tracksmain">
 <form action="index.php" method="post" name="adminForm" id="adminForm">
 <div class="col50">
-<fieldset class="adminform"><legend><?php echo JText::_( 'Round' ); ?></legend>
+<fieldset class="adminform"><legend><?php echo JText::_('COM_TRACKS_Round' ); ?></legend>
 
 <table class="admintable">
 	<tr>
 		<td width="100" align="right" class="key">
-			<label for="name"> <?php echo JText::_( 'Name' ); ?>:
+			<label for="name"> <?php echo JText::_('COM_TRACKS_Name' ); ?>:
 			</label>
 		</td>
 		<td><input class="text_area required" type="text" name="name" id="name"
@@ -66,20 +66,20 @@ defined('_JEXEC') or die('Restricted access'); ?>
 		</td>
 	</tr>
   <tr>
-    <td width="100" align="right" class="key"><label for="alias"> <?php echo JText::_( 'Alias' ); ?>:
+    <td width="100" align="right" class="key"><label for="alias"> <?php echo JText::_('COM_TRACKS_Alias' ); ?>:
     </label></td>
     <td><input class="text_area" type="text" name="alias" id="alias"
       size="32" maxlength="250" value="<?php echo $this->object->alias?>" />
     </td>
   </tr>
     <tr>
-        <td valign="top" align="right" class="key"><?php echo JText::_( 'Published' ); ?>:
+        <td valign="top" align="right" class="key"><?php echo JText::_('COM_TRACKS_Published' ); ?>:
         </td>
         <td><?php echo $this->lists['published']; ?></td>
     </tr>
 	<tr>
 		<td width="100" align="right" class="key">
-			<label for="description"> <?php echo JText::_( 'Description' ); ?>:
+			<label for="description"> <?php echo JText::_('COM_TRACKS_Description' ); ?>:
 			</label>
 		</td>
 		<td><?php echo $this->editor->display('description', $this->object->description, '600', '400', '70', '15'); ?>
@@ -88,7 +88,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 	<tr>
 		<td valign="top" align="right" class="key">
 			<label for="ordering">
-			  <?php echo JText::_( 'Ordering' ); ?>:
+			  <?php echo JText::_('COM_TRACKS_Ordering' ); ?>:
 			</label>
 		</td>
 		<td><?php echo $this->lists['ordering']; ?></td>

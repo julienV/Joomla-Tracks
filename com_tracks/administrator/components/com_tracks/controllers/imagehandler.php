@@ -69,7 +69,7 @@ class TracksControllerImagehandler extends JController
 
 		//do we have an upload?
 		if (empty($file['name'])) {
-			echo "<script> alert('".JText::_( 'IMAGE EMPTY' )."'); window.history.go(-1); </script>\n";
+			echo "<script> alert('".JText::_('COM_TRACKS_IMAGE_EMPTY' )."'); window.history.go(-1); </script>\n";
 			$mainframe->close();
 		}
 
@@ -86,11 +86,11 @@ class TracksControllerImagehandler extends JController
 
 		//upload the image		
 		if (!JFile::upload($file['tmp_name'], $filepath)) {
-			echo "<script> alert('".JText::_( 'UPLOAD FAILED' )."'); window.history.go(-1); </script>\n";
+			echo "<script> alert('".JText::_('COM_TRACKS_UPLOAD_FAILED' )."'); window.history.go(-1); </script>\n";
 			$mainframe->close();
 
 		} else {
-			echo "<script> alert('".JText::_( 'UPLOAD COMPLETE' )."'); window.history.go(-1); window.parent.elSelectImage('$filename', '$filename'); </script>\n";
+			echo "<script> alert('".JText::_('COM_TRACKS_UPLOAD_COMPLETE' )."'); window.history.go(-1); window.parent.elSelectImage('$filename', '$filename'); </script>\n";
 			$mainframe->close();
 		}
 
@@ -121,7 +121,7 @@ class TracksControllerImagehandler extends JController
 			foreach ($images as $image)
 			{
 				if ($image !== JFilterInput::clean($image, 'path')) {
-					JError::raiseWarning(100, JText::_('UNABLE TO DELETE').' '.htmlspecialchars($image, ENT_COMPAT, 'UTF-8'));
+					JError::raiseWarning(100, JText::_('COM_TRACKS_UNABLE_TO_DELETE').' '.htmlspecialchars($image, ENT_COMPAT, 'UTF-8'));
 					continue;
 				}
 

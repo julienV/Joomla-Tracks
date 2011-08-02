@@ -75,9 +75,9 @@ class TracksControllerProjectsetting extends BaseController
 		$model = $this->getModel('projectsetting');
 
 		if ($returnid = $model->store($post)) {
-			$msg = JText::_( 'Settings Saved' );
+			$msg = JText::_('COM_TRACKS_Settings_Saved' );
 		} else {
-			$msg = JText::_( 'Error Saving Settings' ).$model->getError();
+			$msg = JText::_('COM_TRACKS_Error_Saving_Settings' ).$model->getError();
 		}
 
 		// Check the table in so it can be edited.... we are done with it anyway
@@ -98,7 +98,7 @@ class TracksControllerProjectsetting extends BaseController
 		JArrayHelper::toInteger($cid);
 
 		if (count( $cid ) < 1) {
-			JError::raiseError(500, JText::_( 'Select an item to delete' ) );
+			JError::raiseError(500, JText::_('COM_TRACKS_Select_an_item_to_delete' ) );
 		}
 
 		$model = $this->getModel('projectsetting');

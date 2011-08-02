@@ -18,9 +18,9 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <table class="raceResults" cellspacing="0" cellpadding="0" summary="">
   <tbody>
     <tr>
-      <th><?php echo JText::_( 'Pos' ); ?></th>
-      <th><?php echo JText::_( 'Team' ); ?></th>
-      <th><?php echo JText::_( 'Points' ); ?></th>
+      <th><?php echo JText::_( 'MOD_TRACKS_TEAM_RANKING_Pos' ); ?></th>
+      <th><?php echo JText::_( 'MOD_TRACKS_TEAM_RANKING_Team' ); ?></th>
+      <th><?php echo JText::_( 'MOD_TRACKS_TEAM_RANKING_Points' ); ?></th>
     </tr>
     <?php
     $rank = 1;
@@ -33,7 +33,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
         <td><?php echo $rank++; ?></td>
         <td>
           <a href="<?php echo $link_team; ?>"
-             title="<?php echo JText::_( 'Details' ); ?>"> 
+             title="<?php echo JText::_( 'MOD_TRACKS_TEAM_RANKING_Details' ); ?>"> 
             <?php echo $ranking->team_name; ?>
           </a>
         </td>
@@ -51,7 +51,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 $link = JRoute::_( TracksHelperRoute::getTeamRankingRoute($project->slug) );
 ?>
 <a class="fulltablelink" href="<?php echo $link; ?>"
-             title="<?php echo JText::_( 'View full table' ); ?>"> 
-            <?php echo JText::_( 'View full table' ); ?>
+             title="<?php echo JText::_('MOD_TRACKS_TEAM_RANKING_View_full_table' ); ?>"> 
+            <?php echo JText::_('MOD_TRACKS_TEAM_RANKING_View_full_table' ); ?>
 </a>
 </div>

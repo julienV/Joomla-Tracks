@@ -33,10 +33,10 @@ class TracksViewProjects extends TracksView
 		$option = JRequest::getCmd('option');
 
 		// Set toolbar items for the page
-		JToolBarHelper::title(   JText::_( 'Tracks' ), 'generic.png' );
+		JToolBarHelper::title(   JText::_('COM_TRACKS' ), 'generic.png' );
 		JToolBarHelper::publishList();
 		JToolBarHelper::unpublishList();
-    JToolBarHelper::deleteList(JText::_('DELETEPROJECTSCONFIRM'));
+    JToolBarHelper::deleteList(JText::_('COM_TRACKS_DELETEPROJECTSCONFIRM'));
 		JToolBarHelper::editListX();
 		JToolBarHelper::addNewX();
 		JToolBarHelper::preferences('com_tracks', '600', '500');

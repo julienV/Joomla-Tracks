@@ -41,7 +41,7 @@ function submitbutton(pressbutton)
 	<thead>
 		<tr>
 			<th width="5">
-				<?php echo JText::_( 'NUM' ); ?>
+				<?php echo JText::_('COM_TRACKS_NUM' ); ?>
 			</th>
 			<th width="20">
 				<input type="checkbox" name="toggle" value="" onclick="checkAll(<?php echo count( $this->items ); ?>);" />
@@ -50,7 +50,7 @@ function submitbutton(pressbutton)
 				<?php echo JHTML::_('grid.sort',  'Type', 'sr.name', $this->lists['order_Dir'], $this->lists['order'] ); ?>
 			</th>    
       <th class="title">
-        <?php echo JText::_( 'Results' ); ?>
+        <?php echo JText::_('COM_TRACKS_Results' ); ?>
       </th>
       <th width="5%" nowrap="nowrap">
         <?php echo JHTML::_('grid.sort',  'Published', 'obj.published', $this->lists['order_Dir'], $this->lists['order'] ); ?>
@@ -98,7 +98,7 @@ function submitbutton(pressbutton)
 					echo $row->srtype;
 				} else {
 				  ?>
-					<a href="<?php echo $link; ?>" title="<?php echo JText::_( 'Edit Sub-round' ); ?>">
+					<a href="<?php echo $link; ?>" title="<?php echo JText::_('COM_TRACKS_Edit_Subround' ); ?>">
 						<?php echo $row->srtype; ?>
 					</a>
 				  <?php
@@ -108,11 +108,11 @@ function submitbutton(pressbutton)
       <td>
         <?php
         if (  JTable::isCheckedOut($this->user->get ('id'), $row->checked_out ) ) {
-          echo JText::_( 'edit locked' );
+          echo JText::_('COM_TRACKS_edit_locked' );
         } else {
         ?>
-          <a href="<?php echo $link_results; ?>" title="<?php echo JText::_( 'Edit results' ); ?>">
-            <?php echo JText::_( 'Edit results' ); ?></a>
+          <a href="<?php echo $link_results; ?>" title="<?php echo JText::_('COM_TRACKS_Edit_results' ); ?>">
+            <?php echo JText::_('COM_TRACKS_Edit_results' ); ?></a>
         <?php
         }
         ?>

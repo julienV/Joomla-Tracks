@@ -34,10 +34,10 @@ class TracksFrontViewIndividuals extends JView
         $rows = $model->getData();
         
         $document =& JFactory::getDocument();
-        $document->setTitle( JText::_( 'All Individuals' ) );
+        $document->setTitle( JText::_('COM_TRACKS_All_Individuals' ) );
         
         $breadcrumbs =& $mainframe->getPathWay();
-        $breadcrumbs->addItem( JText::_( 'All Individuals' ), 
+        $breadcrumbs->addItem( JText::_('COM_TRACKS_All_Individuals' ), 
             'index.php?option=com_tracks&view=individuals' );
         
         $this->assignRef( 'rows',    $rows );

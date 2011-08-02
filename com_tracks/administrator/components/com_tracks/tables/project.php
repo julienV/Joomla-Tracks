@@ -93,7 +93,7 @@ class TableProject extends JTable
 		$result = true;
 		if ( $this->name == '' )
 		{
-			$this->setError( JText::_( ' Name is mandatory ' ) );
+			$this->setError( JText::_('COM_TRACKS__Name_is_mandatory ' ) );
 			return false;
 		}
 		
@@ -105,12 +105,12 @@ class TableProject extends JTable
     
 		if ( !$this->season_id )
 		{
-			$this->setError( JText::_( ' Season is mandatory ' ) );
+			$this->setError( JText::_('COM_TRACKS__Season_is_mandatory ' ) );
 			return false;
 		}
 		if ( !$this->competition_id )
 		{
-			$this->setError( JText::_( ' Competition is mandatory ' ) );
+			$this->setError( JText::_('COM_TRACKS__Competition_is_mandatory ' ) );
 			return false;
 		}
 		return true;

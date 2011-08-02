@@ -33,7 +33,7 @@ class TracksViewCpanel extends TracksView
 		$option = JRequest::getCmd('option');
 
 		// Set toolbar items for the page
-		JToolBarHelper::title(   JText::_( 'Tracks' ), 'generic.png' );
+		JToolBarHelper::title(   JText::_('COM_TRACKS' ), 'generic.png' );
 		JToolBarHelper::publishList();
 		JToolBarHelper::unpublishList();
 		JToolBarHelper::deleteList();

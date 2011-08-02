@@ -34,10 +34,10 @@ class TracksFrontViewRounds extends JView
         $rows = $model->getRounds();
         
         $document =& JFactory::getDocument();
-        $document->setTitle( JText::_( 'All rounds' ) );
+        $document->setTitle( JText::_('COM_TRACKS_All_rounds' ) );
         
         $breadcrumbs =& $mainframe->getPathWay();
-        $breadcrumbs->addItem( JText::_( 'All rounds' ), 
+        $breadcrumbs->addItem( JText::_('COM_TRACKS_All_rounds' ), 
             'index.php?option=com_tracks&view=rounds' );
         
         $this->assignRef( 'rows',    $rows );

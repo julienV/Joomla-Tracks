@@ -35,12 +35,12 @@ class TracksViewSubrounds extends TracksView
 		$round =& $this->get('Round');
 		
 		// Set toolbar items for the page
-		JToolBarHelper::title(   JText::_( 'Sub-rounds for ').$round->roundname , 'generic.png' );
-    JToolBarHelper::custom('back', 'back.png', 'back.png', JTEXT::_('back'), false); 
+		JToolBarHelper::title(   JText::_('COM_TRACKS_Subrounds_for ').$round->roundname , 'generic.png' );
+    JToolBarHelper::custom('back', 'back.png', 'back.png', JText::_('COM_TRACKS_back'), false); 
 		JToolBarHelper::save( 'saveranks', 'Save' );
 		JToolBarHelper::editListX();
 		JToolBarHelper::addNewX();
-    JToolBarHelper::DeleteList(JText::_('DELETESUBROUNDSCONFIRM'));
+    JToolBarHelper::DeleteList(JText::_('COM_TRACKS_DELETESUBROUNDSCONFIRM'));
     JToolBarHelper::publish();
     JToolBarHelper::unpublish();
 		JToolBarHelper::help( 'screen.tracks', true );

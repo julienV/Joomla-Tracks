@@ -38,7 +38,7 @@ class getTracksTab extends cbTabHandler {
 		$items = $_CB_database->loadObjectList();
 		if(!count($items)>0) {
 			$return .= "<br /><br /><div class=\"sectiontableheader\" style=\"text-align:left;width:95%;\">";
-			$return .= JText::_('No associated individual');
+			$return .= JText::_('No_associated_individual');
 			$return .= "</div>";
 			return $return;
 		}
@@ -96,7 +96,7 @@ class getTracksTab extends cbTabHandler {
 	        $return .= "<th>".JText::_('Wins')."</th>";
         }
         if ($params->get('show_bestrank')) {
-	        $return .= "<th>".JText::_('Best rank')."</th>";
+	        $return .= "<th>".JText::_('Best_rank')."</th>";
         }
 	      $return .= "</tr>";
 	      $i=0;

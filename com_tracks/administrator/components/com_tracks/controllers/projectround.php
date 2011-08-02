@@ -76,9 +76,9 @@ class TracksControllerProjectround extends BaseController
 
 		$type = 'message';
 		if ($returnid = $model->store($post)) {
-			$msg = JText::_( 'Project Round Saved' );
+			$msg = JText::_('COM_TRACKS_Project_Round_Saved' );
 		} else {
-			$msg = JText::_( 'Error Saving Project Round' ).': '.$model->getError();
+			$msg = JText::_('COM_TRACKS_Error_Saving_Project_Round' ).': '.$model->getError();
       $type = 'error';
 		}
 
@@ -104,7 +104,7 @@ class TracksControllerProjectround extends BaseController
     JArrayHelper::toInteger($team_id);
 
     if (count( $cid ) < 1) {
-      JError::raiseError(500, JText::_( 'Select an round to copy' ) );
+      JError::raiseError(500, JText::_('COM_TRACKS_Select_an_round_to_copy' ) );
     }
     
     $model = $this->getModel('projectround');
@@ -121,7 +121,7 @@ class TracksControllerProjectround extends BaseController
 		JArrayHelper::toInteger($cid);
 
 		if (count( $cid ) < 1) {
-			JError::raiseError(500, JText::_( 'Select an item to delete' ) );
+			JError::raiseError(500, JText::_('COM_TRACKS_Select_an_item_to_delete' ) );
 		}
 
 		$model = $this->getModel('projectround');
@@ -140,7 +140,7 @@ class TracksControllerProjectround extends BaseController
 		JArrayHelper::toInteger($cid);
 
 		if (count( $cid ) < 1) {
-			JError::raiseError(500, JText::_( 'Select an item to publish' ) );
+			JError::raiseError(500, JText::_('COM_TRACKS_Select_an_item_to_publish' ) );
 		}
 
 		$model = $this->getModel('projectround');
@@ -158,7 +158,7 @@ class TracksControllerProjectround extends BaseController
 		JArrayHelper::toInteger($cid);
 
 		if (count( $cid ) < 1) {
-			JError::raiseError(500, JText::_( 'Select an item to unpublish' ) );
+			JError::raiseError(500, JText::_('COM_TRACKS_Select_an_item_to_unpublish' ) );
 		}
 
 		$model = $this->getModel('projectround');

@@ -146,7 +146,7 @@ class TracksModelIndividual extends TracksModelItem
       	$this->_db->setQuery($query);
       	if ($this->_db->loadResult())
       	{
-      		$this->setError( JText::_('INDIVIDUALPROJECTINUSE') );
+      		$this->setError( JText::_('COM_TRACKS_INDIVIDUALPROJECTINUSE') );
           return false;
       	}
       	

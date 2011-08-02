@@ -39,10 +39,10 @@ $option = JRequest::getCmd('option');
     $projectparams = & $model->getParams($project_id);
 
     $breadcrumbs =& $mainframe->getPathWay();
-    $breadcrumbs->addItem( $project->name. ' ' . JText::_( 'Participants' ), 'index.php?option=com_tracks&view=projectindividuals&p=' . $project_id );
+    $breadcrumbs->addItem( $project->name. ' ' . JText::_('COM_TRACKS_Participants' ), 'index.php?option=com_tracks&view=projectindividuals&p=' . $project_id );
 
     $document =& JFactory::getDocument();
-    $document->setTitle( $project->name. ' ' . JText::_( 'Participants' ) );
+    $document->setTitle( $project->name. ' ' . JText::_('COM_TRACKS_Participants' ) );
 
     $this->assignRef( 'params',    $params );
     $this->assignRef( 'project',    $project );

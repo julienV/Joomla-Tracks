@@ -33,7 +33,7 @@ $option = JRequest::getCmd('option');
         $user   =& JFactory::getUser();
         
         if (!$user->id) {
-          print JTEXT::_('You must register to access this page.');
+          print JText::_('COM_TRACKS_You_must_register_to_access_this_page');
           return;
         }
                 
@@ -50,7 +50,7 @@ $option = JRequest::getCmd('option');
           }
           else 
           {
-          	$msg = JText::_('No tracks individual associated to your account');
+          	$msg = JText::_('COM_TRACKS_No_tracks_individual_associated_to_your_account');
           	$mainframe->redirect( 'index.php?option=com_tracks', $msg );
           }
         }

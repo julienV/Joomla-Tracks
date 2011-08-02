@@ -23,7 +23,7 @@ defined('_JEXEC') or die('Restricted access');
 			<div class="controls">
 				<?php echo $this->_tmp_img->size; ?> -
 				<a class="delete-item" href="index.php?option=com_tracks&amp;task=delete&amp;controller=imagehandler&amp;tmpl=component&amp;type=<?php echo $this->type; ?>&amp;rm[]=<?php echo $this->_tmp_img->name; ?>">
-					<img src="images/publish_x.png" width="16" height="16" border="0" alt="<?php echo JText::_( 'DELETE IMAGE' ); ?>" />
+					<img src="images/publish_x.png" width="16" height="16" border="0" alt="<?php echo JText::_('COM_TRACKS_DELETE_IMAGE' ); ?>" />
 				</a>
 			</div>
 			<div class="imageinfo">

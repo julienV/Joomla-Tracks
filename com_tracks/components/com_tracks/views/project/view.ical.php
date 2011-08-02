@@ -28,8 +28,8 @@ class TracksFrontViewProject extends JView
 {
     function display($tpl = null)
     {
-    	$mainframe = &JFactory::getApplication();
-	$option = JRequest::getCmd('option');
+			$mainframe = &JFactory::getApplication();
+			$option = JRequest::getCmd('option');
     	  	          
     	$model =& $this->getModel();
       $results = $model->getResults( JRequest::getVar( 'p', 0, '', 'int' ) );
@@ -43,7 +43,7 @@ class TracksFrontViewProject extends JView
 			$v->setProperty( 'X-WR-CALNAME'
 			               , $project->name );          // set some X-properties, name, content.. .
 			$v->setProperty( 'X-WR-CALDESC'
-			               , JText::_('Project calendar') );
+			               , JText::_('COM_TRACKS_Project_calendar') );
 			$v->setConfig( "filename", 'project_'.$project->id.'.ics' ); 
 
 			foreach ((array) $results AS $result)
@@ -64,7 +64,7 @@ class TracksFrontViewProject extends JView
 			  $description[] = $result->round_name;
 			  if ($result->winner && $result->winner->last_name) 
 			  {
-			  	$winner = JText::_('Winner: ').$result->winner->first_name.' '.$result->winner->last_name;
+			  	$winner = JText::_('COM_TRACKS_Winner').$result->winner->first_name.' '.$result->winner->last_name;
 			  	if ($result->winner->team_name) {
 			  		$winner .= ' ('.$result->winner->team_name.')';
 			  	}

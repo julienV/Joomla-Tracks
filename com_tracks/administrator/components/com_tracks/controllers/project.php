@@ -84,10 +84,10 @@ class TracksControllerProject extends BaseController
 
 		// update session value for project
 		if ( $mainframe->setUserState( $option.'project', (int) $cid[0] ) ) {
-			$this->setRedirect('index.php?option=com_tracks', JText::_( 'Project selected' ));
+			$this->setRedirect('index.php?option=com_tracks', JText::_('COM_TRACKS_Project_selected' ));
 		}
 		else {
-			$this->setRedirect('index.php?option=com_tracks', JText::_( 'Error while selecting project' ), 'error');
+			$this->setRedirect('index.php?option=com_tracks', JText::_('COM_TRACKS_Error_while_selecting_project' ), 'error');
 		}
 	}
 
@@ -100,10 +100,10 @@ class TracksControllerProject extends BaseController
 		$model = $this->getModel('project');
 
 		if ($returnid = $model->store($post)) {
-			$msg = JText::_( 'Project Saved' );
+			$msg = JText::_('COM_TRACKS_Project_Saved' );
 			$msgtype = 'message';
 		} else {
-			$msg = JText::_( 'Error Saving Project:' ).$model->getError();
+			$msg = JText::_('COM_TRACKS_Error_Saving_Project:' ).$model->getError();
 			$msgtype = 'error';
 		}
 
@@ -126,7 +126,7 @@ class TracksControllerProject extends BaseController
 		JArrayHelper::toInteger($cid);
 
 		if (count( $cid ) < 1) {
-			JError::raiseError(500, JText::_( 'Select an item to delete' ) );
+			JError::raiseError(500, JText::_('COM_TRACKS_Select_an_item_to_delete' ) );
 		}
 
 		$model = $this->getModel('project');
@@ -145,7 +145,7 @@ class TracksControllerProject extends BaseController
 		JArrayHelper::toInteger($cid);
 
 		if (count( $cid ) < 1) {
-			JError::raiseError(500, JText::_( 'Select an item to publish' ) );
+			JError::raiseError(500, JText::_('COM_TRACKS_Select_an_item_to_publish' ) );
 		}
 
 		$model = $this->getModel('project');
@@ -163,7 +163,7 @@ class TracksControllerProject extends BaseController
 		JArrayHelper::toInteger($cid);
 
 		if (count( $cid ) < 1) {
-			JError::raiseError(500, JText::_( 'Select an item to unpublish' ) );
+			JError::raiseError(500, JText::_('COM_TRACKS_Select_an_item_to_unpublish' ) );
 		}
 
 		$model = $this->getModel('project');

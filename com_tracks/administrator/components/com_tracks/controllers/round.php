@@ -57,9 +57,9 @@ class TracksControllerRound extends BaseController
 		$model = $this->getModel('round');
 
 		if ($returnid = $model->store($post)) {
-			$msg = JText::_( 'Round Saved' );
+			$msg = JText::_('COM_TRACKS_Round_Saved' );
 		} else {
-			$msg = JText::_( 'Error Saving Round' ).$model->getError();
+			$msg = JText::_('COM_TRACKS_Error_Saving_Round' ).$model->getError();
 		}
 
 		// Check the table in so it can be edited.... we are done with it anyway
@@ -83,9 +83,9 @@ class TracksControllerRound extends BaseController
 	{
 		$model = $this->getModel('round');
 		if(!$model->delete()) {
-			$msg = JText::_( 'Error: One or More Rounds Could not be Deleted' );
+			$msg = JText::_('COM_TRACKS_Error_One_or_More_Rounds_Could_not_be_Deleted' );
 		} else {
-			$msg = JText::_( 'Round(s) Deleted' );
+			$msg = JText::_('COM_TRACKS_Rounds_Deleted' );
 		}
 
 		$this->setRedirect( 'index.php?option=com_tracks&view=rounds', $msg );
@@ -101,7 +101,7 @@ class TracksControllerRound extends BaseController
     $model = $this->getModel('round');
     $model->checkin();
     
-		$msg = JText::_( 'Operation Cancelled' );
+		$msg = JText::_('COM_TRACKS_Operation_Cancelled' );
 		$this->setRedirect( 'index.php?option=com_tracks&view=rounds', $msg );
 	}
 	
@@ -112,7 +112,7 @@ class TracksControllerRound extends BaseController
 		JArrayHelper::toInteger($cid);
 
 		if (count( $cid ) < 1) {
-			JError::raiseError(500, JText::_( 'Select an item to publish' ) );
+			JError::raiseError(500, JText::_('COM_TRACKS_Select_an_item_to_publish' ) );
 		}
 
 		$model = $this->getModel('round');
@@ -130,7 +130,7 @@ class TracksControllerRound extends BaseController
 		JArrayHelper::toInteger($cid);
 
 		if (count( $cid ) < 1) {
-			JError::raiseError(500, JText::_( 'Select an item to unpublish' ) );
+			JError::raiseError(500, JText::_('COM_TRACKS_Select_an_item_to_unpublish' ) );
 		}
 
 		$model = $this->getModel('round');

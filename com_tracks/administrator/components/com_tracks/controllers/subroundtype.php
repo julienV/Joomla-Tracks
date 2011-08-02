@@ -57,9 +57,9 @@ class TracksControllerSubroundtype extends BaseController
 		$model = $this->getModel('subroundtype');
 
 		if ($returnid = $model->store($post)) {
-			$msg = JText::_( 'Sub-round type Saved' );
+			$msg = JText::_('COM_TRACKS_Subround_type_Saved' );
 		} else {
-			$msg = JText::_( 'Error Saving Sub-round type' ).$model->getError();
+			$msg = JText::_('COM_TRACKS_Error_Saving_Subround_type' ).$model->getError();
 		}
 
 		// Check the table in so it can be edited.... we are done with it anyway
@@ -83,9 +83,9 @@ class TracksControllerSubroundtype extends BaseController
 	{
 		$model = $this->getModel('subroundtype');
 		if(!$model->delete()) {
-			$msg = JText::_( 'Error: One or More Sub-round types could not be Deleted' );
+			$msg = JText::_('COM_TRACKS_Error_One_or_More_Subround_types_could_not_be_Deleted' );
 		} else {
-			$msg = JText::_( 'Sub-round type(s) Deleted' );
+			$msg = JText::_('COM_TRACKS_Subround_types_Deleted' );
 		}
 
     $this->setRedirect( 'index.php?option=com_tracks&view=subroundtypes', $msg );
@@ -97,7 +97,7 @@ class TracksControllerSubroundtype extends BaseController
 	 */
 	function cancel()
 	{
-		$msg = JText::_( 'Operation Cancelled' );
+		$msg = JText::_('COM_TRACKS_Operation_Cancelled' );
 		$this->setRedirect( 'index.php?option=com_tracks&view=subroundtypes', $msg );
 	}
 	

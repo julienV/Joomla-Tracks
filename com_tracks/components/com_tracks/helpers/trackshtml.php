@@ -42,7 +42,7 @@ class HTMLTracks
     ;
     $db->setQuery( $query );
     if ( $nouser ) {
-      $users[] = JHTML::_('select.option',  '0', '- '. JText::_( 'No User' ) .' -' );
+      $users[] = JHTML::_('select.option',  '0', '- '. JText::_('COM_TRACKS_No_User' ) .' -' );
       $users = array_merge( $users, $db->loadObjectList() );
     } else {
       $users = $db->loadObjectList();

@@ -40,10 +40,10 @@ $option = JRequest::getCmd('option');
     $params->merge( JComponentHelper::getParams( 'com_tracks' ) );
 
     $breadcrumbs =& $mainframe->getPathWay();
-    $breadcrumbs->addItem( $project->name. ' ' . JText::_( 'Rankings' ), 'index.php?option=com_tracks&view=ranking&p=' . $project_id );
+    $breadcrumbs->addItem( $project->name. ' ' . JText::_('COM_TRACKS_Rankings' ), 'index.php?option=com_tracks&view=ranking&p=' . $project_id );
 
     $document =& JFactory::getDocument();
-    $document->setTitle( $project->name. ' ' . JText::_( 'Rankings' ) );
+    $document->setTitle( $project->name. ' ' . JText::_('COM_TRACKS_Rankings' ) );
 
     $this->assignRef( 'params',    $params );
     $this->assignRef( 'project',    $project );

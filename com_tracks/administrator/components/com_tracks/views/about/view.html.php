@@ -33,7 +33,7 @@ class TracksViewAbout extends TracksView
 		$option = JRequest::getCmd('option');
 
         // Set toolbar items for the page
-        JToolBarHelper::title(   JText::_( 'About Tracks' ), 'help_header' );
+        JToolBarHelper::title(   JText::_('COM_TRACKS_About_Tracks' ), 'help_header' );
         JToolBarHelper::back();
         
         $db     =& JFactory::getDBO();

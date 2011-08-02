@@ -14,13 +14,13 @@
 defined('_JEXEC') or die('Restricted access'); ?>
 
 <div id="tracks">
-<h1><?php echo JText::_( 'Tracks project list' ) ?></h1>
+<h1><?php echo JText::_('COM_TRACKS_project_list' ) ?></h1>
 
 <table>
   <tr>
-    <th><?php echo JText::_( 'Name' ) ?></th>
-    <th><?php echo JText::_( 'Competition' ) ?></th>
-    <th><?php echo JText::_( 'Season' ) ?></th>
+    <th><?php echo JText::_('COM_TRACKS_Name' ) ?></th>
+    <th><?php echo JText::_('COM_TRACKS_Competition' ) ?></th>
+    <th><?php echo JText::_('COM_TRACKS_Season' ) ?></th>
     <th><?php echo JText::_( '' ) ?></th>
     <th><?php echo JText::_( '' ) ?></th>
   </tr>
@@ -35,20 +35,20 @@ defined('_JEXEC') or die('Restricted access'); ?>
      ?>
       <tr>
         <td>
-        	<a href="<?php echo $link_project; ?>" title ="<?php echo JText::_( 'Display' ); ?>">
+        	<a href="<?php echo $link_project; ?>" title ="<?php echo JText::_('COM_TRACKS_Display' ); ?>">
         	  <?php echo $project->name; ?>
         	</a>
        	</td>
         <td><?php echo $project->competition_name; ?></td>
         <td><?php echo $project->season_name; ?></td>
         <td>
-        	<a href="<?php echo $link_ranking; ?>" title ="<?php echo JText::_( 'Rankings' ); ?>">
-        	  <?php echo JText::_( 'Rankings' ); ?>
+        	<a href="<?php echo $link_ranking; ?>" title ="<?php echo JText::_('COM_TRACKS_Rankings' ); ?>">
+        	  <?php echo JText::_('COM_TRACKS_Rankings' ); ?>
         	</a>
        	</td>
         <td>
-        	<a href="<?php echo $link_teams_ranking; ?>" title ="<?php echo JText::_( 'Team Rankings' ); ?>">
-        	  <?php echo JText::_( 'Team Rankings' ); ?>
+        	<a href="<?php echo $link_teams_ranking; ?>" title ="<?php echo JText::_('COM_TRACKS_Team_Rankings' ); ?>">
+        	  <?php echo JText::_('COM_TRACKS_Team_Rankings' ); ?>
         	</a>
        	</td>
       </tr>

@@ -54,10 +54,10 @@ $option = JRequest::getCmd('option');
       <table>
         <tr>
           <td width="100%">
-            <?php echo JText::_( 'Filter' ); ?>:
+            <?php echo JText::_('COM_TRACKS_Filter' ); ?>:
             <input type="text" name="search" id="search" value="<?php echo $lists['search'];?>" class="text_area" onchange="document.adminForm.submit();" />
-            <button onclick="this.form.submit();"><?php echo JText::_( 'Go' ); ?></button>
-            <button onclick="getElementById('search').value='';this.form.submit();"><?php echo JText::_( 'Reset' ); ?></button>
+            <button onclick="this.form.submit();"><?php echo JText::_('COM_TRACKS_Go' ); ?></button>
+            <button onclick="getElementById('search').value='';this.form.submit();"><?php echo JText::_('COM_TRACKS_Reset' ); ?></button>
           </td>
         </tr>
         <tr>
@@ -75,7 +75,7 @@ $option = JRequest::getCmd('option');
       <thead>
         <tr>
           <th width="5">
-            <?php echo JText::_( 'Num' ); ?>
+            <?php echo JText::_('COM_TRACKS_Num' ); ?>
           </th>
           <th class="title">
             <?php echo JHTML::_('grid.sort',   'Name', 'pr.name', @$lists['order_Dir'], @$lists['order'] ); ?>

@@ -51,7 +51,7 @@ class plgTracksJomsocial extends JPlugin {
         break;
     	case 1:
     	default:
-    		$text = JText::_('VIEW USER PROFILE');
+    		$text = JText::_('PLG_TRACKS_JOMSOCIAL_VIEW_USER_PROFILE');
     		break;
     }    
     

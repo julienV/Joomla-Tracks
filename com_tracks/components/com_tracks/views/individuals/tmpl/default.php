@@ -19,7 +19,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <table class="contentpaneopen">
 <tbody>
 <tr>
-<td class="contentheading" width="100%"><?php echo JText::_( 'All Individuals' ); ?></td>
+<td class="contentheading" width="100%"><?php echo JText::_('COM_TRACKS_All_Individuals' ); ?></td>
 </tr>
 </tbody>
 </table>
@@ -55,7 +55,7 @@ foreach ($this->rows as $r)
 	        <?php 
 	      } 
 	      ?>
-        <a href="<?php echo $link_round; ?>" title ="<?php echo JText::_( 'Display details' ) ?>">
+        <a href="<?php echo $link_round; ?>" title ="<?php echo JText::_('COM_TRACKS_Display_details' ) ?>">
           <?php echo $r->last_name . ', ' . $r->first_name; ?>
           </a>
           <br />

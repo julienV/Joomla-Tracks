@@ -78,9 +78,9 @@ class TracksControllerSubround extends BaseController
 		$model = $this->getModel('subround');
 
 		if ($returnid = $model->store($post)) {
-			$msg = JText::_( 'Sub-round Saved' );
+			$msg = JText::_('COM_TRACKS_Subround_Saved' );
 		} else {
-			$msg = JText::_( 'Error Saving Project sub-round' ).$model->getError();
+			$msg = JText::_('COM_TRACKS_Error_Saving_Project_sub-round' ).$model->getError();
 		}
 
 		// Check the table in so it can be edited.... we are done with it anyway
@@ -102,7 +102,7 @@ class TracksControllerSubround extends BaseController
 		JArrayHelper::toInteger($cid);
 
 		if (count( $cid ) < 1) {
-			JError::raiseError(500, JText::_( 'Select an item to delete' ) );
+			JError::raiseError(500, JText::_('COM_TRACKS_Select_an_item_to_delete' ) );
 		}
 
 		$model = $this->getModel('subround');
@@ -122,7 +122,7 @@ class TracksControllerSubround extends BaseController
 		JArrayHelper::toInteger($cid);
 
 		if (count( $cid ) < 1) {
-			JError::raiseError(500, JText::_( 'Select an item to publish' ) );
+			JError::raiseError(500, JText::_('COM_TRACKS_Select_an_item_to_publish' ) );
 		}
 
 		$model = $this->getModel('subround');
@@ -140,7 +140,7 @@ class TracksControllerSubround extends BaseController
 		JArrayHelper::toInteger($cid);
 
 		if (count( $cid ) < 1) {
-			JError::raiseError(500, JText::_( 'Select an item to unpublish' ) );
+			JError::raiseError(500, JText::_('COM_TRACKS_Select_an_item_to_unpublish' ) );
 		}
 
 		$model = $this->getModel('subround');

@@ -14,7 +14,7 @@
 // no direct access
 defined('_JEXEC') or die('Restricted access'); ?>
 
-<h2><?php echo JText::_('Results'); ?></h2>
+<h2><?php echo JText::_('COM_TRACKS_Results'); ?></h2>
 
 <div id="individualresults">
 <?php if (count($this->results)): ?>
@@ -40,20 +40,20 @@ defined('_JEXEC') or die('Restricted access'); ?>
   <thead>
     <tr>    
       <?php if ($this->params->get('indview_results_showteam', 1)): ?>
-      <th><?php echo JText::_('TEAM'); ?></th>
+      <th><?php echo JText::_('COM_TRACKS_TEAM'); ?></th>
       <?php endif; ?>     
-      <th><?php echo JText::_('ROUND'); ?></th>
+      <th><?php echo JText::_('COM_TRACKS_ROUND'); ?></th>
       <?php if ($this->params->get('indview_results_showrace', 1)): ?>
-	    <th><?php echo JText::_('RACE'); ?></th>
+	    <th><?php echo JText::_('COM_TRACKS_RACE'); ?></th>
       <?php endif; ?>     
       <?php if ($this->params->get('indview_results_showperformance', 1)): ?>
-      <th><?php echo JText::_('PERFORMANCE'); ?></th>
+      <th><?php echo JText::_('COM_TRACKS_PERFORMANCE'); ?></th>
       <?php endif; ?>    
       <?php if ($this->params->get('indview_results_showrank', 1)): ?>
-	    <th><?php echo JText::_('RANK'); ?></th>
+	    <th><?php echo JText::_('COM_TRACKS_RANK'); ?></th>
       <?php endif; ?>     
       <?php if ($this->params->get('indview_results_points', 1)): ?>
-	    <th><?php echo JText::_('POINTS'); ?></th>
+	    <th><?php echo JText::_('COM_TRACKS_POINTS'); ?></th>
       <?php endif; ?>     
     </tr>
   </thead>

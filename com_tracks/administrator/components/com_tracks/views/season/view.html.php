@@ -61,7 +61,7 @@ class TracksViewSeason extends JView
 
 		// fail if checked out not by 'me'
 		if ($model->isCheckedOut( $user->get('id') )) {
-			$msg = JText::sprintf( 'DESCBEINGEDITTED', JText::_( 'The season' ), $season->name );
+			$msg = JText::sprintf( 'DESCBEINGEDITTED', JText::_('COM_TRACKS_The_season' ), $season->name );
 			$mainframe->redirect( 'index.php?option='. $option, $msg );
 		}
 

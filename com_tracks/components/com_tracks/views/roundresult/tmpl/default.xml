@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-  <layout title="Standard project round result layout">
+  <layout title="COM_TRACKS_Standard_project_round_result_layout">
     <message>
-      <![CDATA[Displays a round result]]>
+      <![CDATA[COM_TRACKS_Displays_a_round_result]]>
     </message>
   </layout>
   <state>
-    <name>Standard project round result layout</name>
-    <description>Select a project round</description>
+    <name>COM_TRACKS_Standard_project_round_result_layout</name>
+    <description>COM_TRACKS_Select_a_project_round</description>
     <url addpath="/administrator/components/com_tracks/elements">
         <!-- work in progress -->
         <param name="pr" type="projectround" default=""
-          label="Select a project round" description="Select a project round" />
+          label="COM_TRACKS_Select_a_project_round" description="COM_TRACKS_Select_a_project_round" />
         <!-- 
-      <param type="text" name="pr" default="" label="Project round id" description="Please provide the project round id" />
+      <param type="text" name="pr" default="" label="COM_TRACKS_Project_round_id" description="COM_TRACKS_Please_provide_the_project_round_id" />
        --> 
     </url>
     <params>
-      <param name="showteams" type="radio" default="1" label="Display teams in rankings" description="" >
-        <option value="0">No</option>
-        <option value="1">Yes</option>
+      <param name="showteams" type="radio" default="1" label="COM_TRACKS_Display_teams_in_rankings" description="" >
+        <option value="0">COM_TRACKS_No</option>
+        <option value="1">COM_TRACKS_Yes</option>
       </param>
-      <param name="subround_order" type="radio" default="0" label="Ordering for sub rounds" description="" >
-        <option value="0">Ascending</option>
-        <option value="1">Descending</option>
+      <param name="subround_order" type="radio" default="0" label="COM_TRACKS_Ordering_for_sub_rounds" description="" >
+        <option value="0">COM_TRACKS_Ascending</option>
+        <option value="1">COM_TRACKS_Descending</option>
       </param>
     </params>
   </state>

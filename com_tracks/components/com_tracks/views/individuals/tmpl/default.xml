@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-    <layout title="DEFAULT INDIVIDUALS LAYOUT">
+    <layout title="COM_TRACKS_DEFAULT_INDIVIDUALS_LAYOUT">
         <message>
-        <![CDATA[DEFAULT INDIVIDUALS LAYOUT TIP]]>
+        <![CDATA[COM_TRACKS_DEFAULT_INDIVIDUALS_LAYOUT_TIP]]>
         </message>
     </layout>
     <state>
-        <name>DEFAULT INDIVIDUALS LAYOUT</name>
-        <description>DEFAULT INDIVIDUALS LAYOUT TIP</description>
+        <name>COM_TRACKS_DEFAULT_INDIVIDUALS_LAYOUT</name>
+        <description>COM_TRACKS_DEFAULT_INDIVIDUALS_LAYOUT_TIP</description>
     </state>
 </metadata>

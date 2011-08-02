@@ -17,7 +17,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 <?php
 	// Set toolbar items for the page
-	JToolBarHelper::title( JText::_( 'PROJECT SETTINGS' ) );
+	JToolBarHelper::title( JText::_('COM_TRACKS_PROJECT_SETTINGS' ) );
 	JToolBarHelper::save();
 	JToolBarHelper::apply();
 	// for existing items the button is renamed `close`
@@ -49,7 +49,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 <form action="index.php" method="post" name="adminForm" id="adminForm">
 	 <?php foreach ($this->projectparams->getGroups() as $key => $groups): ?>
-     <?php $gname = (strtolower($key) == '_default') ? JText::_('General') : $key;  ?>
+     <?php $gname = (strtolower($key) == '_default') ? JText::_('COM_TRACKS_General') : $key;  ?>
         <fieldset class="adminform">
         <legend><?php echo $gname; ?></legend>
         <?php echo $this->projectparams->render('settings', $key); ?>

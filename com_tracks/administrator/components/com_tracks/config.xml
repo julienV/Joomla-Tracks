@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <params>
-    <param type="radio" name="user_registration" default="0" label="Allow users registration:" description="Allow user to create a tracks profile ?">
-      <option value="0">No</option>
-      <option value="1">Yes</option>
+    <param type="radio" name="user_registration" default="0" label="COM_TRACKS_Allow_users_registration" description="COM_TRACKS_Allow_user_to_create_a_tracks_profile">
+      <option value="0">COM_TRACKS_No</option>
+      <option value="1">COM_TRACKS_Yes</option>
     </param>        
-    <param type="text" name="image_max_size" default="120" label="MAXIMAGESIZE" description="MAXIMAGESIZEDESC" />
+    <param type="text" name="image_max_size" default="120" label="COM_TRACKS_MAXIMAGESIZE" description="COM_TRACKS_MAXIMAGESIZEDESC" />
     
     <param type="spacer" default="INDIVIDUAL VIEW SETTINGS" />
-      <param type="radio" name="indview_showresults" default="1" label="SHOW INDIVIDUAL RESULTS" description="SHOW INDIVIDUAL RESULTS DESC">
-	      <option value="0">No</option>
-	      <option value="1">Yes</option>
+      <param type="radio" name="indview_showresults" default="1" label="COM_TRACKS_SHOW_INDIVIDUAL_RESULTS" description="COM_TRACKS_SHOW_INDIVIDUAL_RESULTS_DESC">
+	      <option value="0">COM_TRACKS_No</option>
+	      <option value="1">COM_TRACKS_Yes</option>
 	    </param>
-      <param type="radio" name="indview_results_showteam" default="1" label="INDIVIDUAL RESULTS SHOW TEAM" description="INDIVIDUAL RESULTS SHOW TEAM DESC">
-        <option value="0">No</option>
-        <option value="1">Yes</option>
+      <param type="radio" name="indview_results_showteam" default="1" label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_TEAM" description="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_TEAM_DESC">
+        <option value="0">COM_TRACKS_No</option>
+        <option value="1">COM_TRACKS_Yes</option>
       </param>
-	    <param type="radio" name="indview_results_showproject" default="1" label="INDIVIDUAL RESULTS SHOW PROJECT" description="INDIVIDUAL RESULTS SHOW PROJECT DESC">
-	      <option value="0">No</option>
-	      <option value="1">Yes</option>
+	    <param type="radio" name="indview_results_showproject" default="1" label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_PROJECT" description="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_PROJECT_DESC">
+	      <option value="0">COM_TRACKS_No</option>
+	      <option value="1">COM_TRACKS_Yes</option>
 	    </param>
-	    <param type="radio" name="indview_results_showcompetition" default="0" label="INDIVIDUAL RESULTS SHOW COMPETITION" description="INDIVIDUAL RESULTS SHOW COMPETITION DESC">
-	      <option value="0">No</option>
-	      <option value="1">Yes</option>
+	    <param type="radio" name="indview_results_showcompetition" default="0" label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_COMPETITION" description="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_COMPETITION_DESC">
+	      <option value="0">COM_TRACKS_No</option>
+	      <option value="1">COM_TRACKS_Yes</option>
 	    </param>
-	    <param type="radio" name="indview_results_showseason" default="0" label="INDIVIDUAL RESULTS SHOW SEASON" description="INDIVIDUAL RESULTS SHOW SEASON DESC">
-	      <option value="0">No</option>
-	      <option value="1">Yes</option>
+	    <param type="radio" name="indview_results_showseason" default="0" label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_SEASON" description="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_SEASON_DESC">
+	      <option value="0">COM_TRACKS_No</option>
+	      <option value="1">COM_TRACKS_Yes</option>
 	    </param>
-	    <param type="radio" name="indview_results_showrace" default="1" label="INDIVIDUAL RESULTS SHOW RACE" description="INDIVIDUAL RESULTS SHOW RACE DESC">
-	      <option value="0">No</option>
-	      <option value="1">Yes</option>
+	    <param type="radio" name="indview_results_showrace" default="1" label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_RACE" description="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_RACE_DESC">
+	      <option value="0">COM_TRACKS_No</option>
+	      <option value="1">COM_TRACKS_Yes</option>
 	    </param>
-      <param type="radio" name="indview_results_onlypointssubrounds" default="1" label="INDIVIDUAL RESULTS SHOW ONLY POINTS SUBROUND" description="INDIVIDUAL RESULTS SHOW ONLY POINTS SUBROUND">
-        <option value="0">No</option>
-        <option value="1">Yes</option>
+      <param type="radio" name="indview_results_onlypointssubrounds" default="1" label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_ONLY_POINTS_SUBROUND" description="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_ONLY_POINTS_SUBROUND">
+        <option value="0">COM_TRACKS_No</option>
+        <option value="1">COM_TRACKS_Yes</option>
       </param>
-	    <param type="radio" name="indview_results_showperformance" default="1" label="INDIVIDUAL RESULTS SHOW PERFORMANCE" description="INDIVIDUAL RESULTS SHOW PERFORMANCE DESC">
-	      <option value="0">No</option>
-	      <option value="1">Yes</option>
+	    <param type="radio" name="indview_results_showperformance" default="1" label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_PERFORMANCE" description="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_PERFORMANCE_DESC">
+	      <option value="0">COM_TRACKS_No</option>
+	      <option value="1">COM_TRACKS_Yes</option>
 	    </param>
-	    <param type="radio" name="indview_results_showrank" default="1" label="INDIVIDUAL RESULTS SHOW RANK" description="INDIVIDUAL RESULTS SHOW RANK DESC">
-	      <option value="0">No</option>
-	      <option value="1">Yes</option>
+	    <param type="radio" name="indview_results_showrank" default="1" label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_RANK" description="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_RANK_DESC">
+	      <option value="0">COM_TRACKS_No</option>
+	      <option value="1">COM_TRACKS_Yes</option>
 	    </param>
-	    <param type="radio" name="indview_results_points" default="1" label="INDIVIDUAL RESULTS SHOW POINTS" description="INDIVIDUAL RESULTS SHOW POINTS DESC">
-	      <option value="0">No</option>
-	      <option value="1">Yes</option>
+	    <param type="radio" name="indview_results_points" default="1" label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_POINTS" description="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_POINTS_DESC">
+	      <option value="0">COM_TRACKS_No</option>
+	      <option value="1">COM_TRACKS_Yes</option>
 	    </param>
 	    <param type="list" name="indview_results_showrank" default="1" label="COM_TRACKS_INDIVIDUAL_RESULTS_ORDERING" description="COM_TRACKS_INDIVIDUAL_RESULTS_ORDERING_DESC">
 	      <option value="0">COM_TRACKS_INDIVIDUAL_RESULTS_ORDERING_ASC</option>
@@ -56,12 +56,12 @@
 	    
     <param type="spacer" default="COM_TRACKS_RESULTS_VIEW_SETTINGS" />
 	    <param type="radio" name="resultview_results_showrounddesc" default="1" label="COM_TRACKS_RESULTS_VIEW_SHOW_ROUND_DESC" description="COM_TRACKS_RESULTS_VIEW_SHOW_ROUND_DESC_DESC">
-	      <option value="0">No</option>
-	      <option value="1">Yes</option>
+	      <option value="0">COM_TRACKS_No</option>
+	      <option value="1">COM_TRACKS_Yes</option>
 	    </param>
 	    <param type="radio" name="resultview_results_showsubrounddesc" default="1" label="COM_TRACKS_RESULTS_VIEW_SHOW_SUBROUND_DESC" description="COM_TRACKS_RESULTS_VIEW_SHOW_SUBROUND_DESC_DESC">
-	      <option value="0">No</option>
-	      <option value="1">Yes</option>
+	      <option value="0">COM_TRACKS_No</option>
+	      <option value="1">COM_TRACKS_Yes</option>
 	    </param>
     	
 	    

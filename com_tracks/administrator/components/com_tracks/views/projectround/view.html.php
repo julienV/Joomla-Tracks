@@ -62,7 +62,7 @@ class TracksViewProjectround extends TracksView
 		// fail if checked out not by 'me'
 		if ($model->isCheckedOut( $user->get('id') )) 
         {
-			$msg = JText::sprintf( 'DESCBEINGEDITTED', JText::_( 'The projectround' ), $projectround->name );
+			$msg = JText::sprintf( 'DESCBEINGEDITTED', JText::_('COM_TRACKS_The_projectround' ), $projectround->name );
 			$mainframe->redirect( 'index.php?option='. $option, $msg );
 		}
 
@@ -79,7 +79,7 @@ class TracksViewProjectround extends TracksView
 		}
 		
 		//build the html select list for rounds
-	    $rounds[] = JHTML::_('select.option',  '', '- '. JText::_( 'Select a round' ) .' -','id', 'name' );
+	    $rounds[] = JHTML::_('select.option',  '', '- '. JText::_('COM_TRACKS_Select_a_round' ) .' -','id', 'name' );
 	    if ( $res = & $this->get('Rounds') ) {
 	      $rounds = array_merge( $rounds, $res );
 	    }

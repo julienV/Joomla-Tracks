@@ -34,10 +34,10 @@ class TracksFrontViewTeams extends JView
         $rows = $model->getData();
         
         $document =& JFactory::getDocument();
-        $document->setTitle( JText::_( 'All Teams' ) );
+        $document->setTitle( JText::_('COM_TRACKS_All_Teams' ) );
         
         $breadcrumbs =& $mainframe->getPathWay();
-        $breadcrumbs->addItem( JText::_( 'All Teams' ), 
+        $breadcrumbs->addItem( JText::_('COM_TRACKS_All_Teams' ), 
             'index.php?option=com_tracks&view=teams' );
         
         $this->assignRef( 'rows',    $rows );

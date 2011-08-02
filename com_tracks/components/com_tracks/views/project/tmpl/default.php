@@ -48,14 +48,14 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 <div id="tracks">
 
-<h1><?php echo $this->project->name . ' ' . JText::_( 'Season Summary' ); ?></h1>
+<h1><?php echo $this->project->name . ' ' . JText::_('COM_TRACKS_Season_Summary' ); ?></h1>
 
 <table class="raceResults" cellspacing="0" cellpadding="0" summary="">
 	<tbody>
 		<tr>
-			<th><?php echo JText::_( 'Round' ); ?></th>
-			<th><?php echo JText::_( 'Date' ); ?></th>
-			<th><?php echo JText::_( 'Winner' ); ?></th>
+			<th><?php echo JText::_('COM_TRACKS_Round' ); ?></th>
+			<th><?php echo JText::_('COM_TRACKS_Date' ); ?></th>
+			<th><?php echo JText::_('COM_TRACKS_Winner' ); ?></th>
 		</tr>
 		<?php 
 		$k = 0;
@@ -65,7 +65,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
       ?>
       <tr class="<?php echo ($k++ % 2 ? 'd1' : 'd0'); ?>">
         <td>
-          <a href="<?php echo $link_round; ?>" title ="<?php echo JText::_( 'Display' ) ?>">
+          <a href="<?php echo $link_round; ?>" title ="<?php echo JText::_('COM_TRACKS_Display' ) ?>">
           <?php 
           echo $result->round_name; 
           ?>
@@ -85,8 +85,8 @@ defined('_JEXEC') or die('Restricted access'); ?>
 	</tbody>
 </table>
 <div class="icalbutton">
-  <a href="<?php echo JRoute::_(TracksHelperRoute::getProjectRoute($this->project->slug).'&format=ical') ?>" title="<?php echo JText::_('ICAL EXPORT'); ?>">
-    <img src="<?php echo JURI::base().'/components/com_tracks/assets/images/ical.gif'; ?>"  alt="<?php echo JText::_('ICAL EXPORT'); ?>"/>
+  <a href="<?php echo JRoute::_(TracksHelperRoute::getProjectRoute($this->project->slug).'&format=ical') ?>" title="<?php echo JText::_('COM_TRACKS_ICAL_EXPORT'); ?>">
+    <img src="<?php echo JURI::base().'/components/com_tracks/assets/images/ical.gif'; ?>"  alt="<?php echo JText::_('COM_TRACKS_ICAL_EXPORT'); ?>"/>
   </a>
 </div>
 

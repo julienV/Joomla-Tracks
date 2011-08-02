@@ -10,14 +10,14 @@
  	<copyright>(C) 2008,2009,2010 Julien Vonthron. All rights reserved.</copyright>
  	<license>http://www.gnu.org/licenses/gpl.html</license>
  	<version>VERSION_NUMBER</version>
-  <description>Search plugin for Tracks component</description>
+  <description>PLG_TRACKS_SEARCH_DESC</description>
 	
 	<files>
     <filename plugin="trackssearch">trackssearch.php</filename>
   </files>
 	
   <params>
-    <param name="search_limit" type="text" size="5" default="50" label="Search Limit" description="Number of Search items to return"/>
+    <param name="search_limit" type="text" size="5" default="50" label="PLG_TRACKS_SEARCH_Search_Limit" description="PLG_TRACKS_SEARCH_Number_of_Search_items_to_return"/>
   </params>
   
 	<languages>

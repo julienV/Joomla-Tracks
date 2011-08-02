@@ -46,7 +46,7 @@ class JElementProjectround extends JElement
 	    if ($value && $projectround->load($value)) {	      
 	      $roundname = $projectround->getName();
 	    } else {
-	      $roundname = JText::_('Select a project round');
+	      $roundname = JText::_('COM_TRACKS_Select_a_project_round');
 	    }
 	
 	    $js = "
@@ -58,7 +58,7 @@ class JElementProjectround extends JElement
 	    
 	    function jRoundReset() {
 	      document.getElementById('".$name."' + '_id').value = 0;
-        document.getElementById('".$name."' + '_name').value = '".JText::_('Select a project round')."';
+        document.getElementById('".$name."' + '_name').value = '".JText::_('COM_TRACKS_Select_a_project_round')."';
       }
 	    ";
 	    $doc->addScriptDeclaration($js);
@@ -67,8 +67,8 @@ class JElementProjectround extends JElement
 	
 	    JHTML::_('behavior.modal', 'a.modal');   	    
       $html = "\n".'<div style="float: left;"><input style="background: #ffffff;" type="text" id="'.$name.'_name" value="'.$roundname.'" disabled="disabled" /></div>';
-      $html .= "<div class=\"button2-left\"><div class=\"blank\"><a class=\"modal\" title=\"".JText::_('Select')."\"  href=\"$link\" rel=\"{handler: 'iframe', size: {x: 650, y: 375}}\">".JText::_('Select')."</a></div></div>\n";
-      $html .= "<div class=\"button2-left\"><div class=\"blank\"><a title=\"".JText::_('Reset')."\" onClick=\"jRoundReset();return false;\" >".JText::_('Reset')."</a></div></div>\n";
+      $html .= "<div class=\"button2-left\"><div class=\"blank\"><a class=\"modal\" title=\"".JText::_('COM_TRACKS_Select')."\"  href=\"$link\" rel=\"{handler: 'iframe', size: {x: 650, y: 375}}\">".JText::_('COM_TRACKS_Select')."</a></div></div>\n";
+      $html .= "<div class=\"button2-left\"><div class=\"blank\"><a title=\"".JText::_('COM_TRACKS_Reset')."\" onClick=\"jRoundReset();return false;\" >".JText::_('COM_TRACKS_Reset')."</a></div></div>\n";
       $html .= "\n".'<input type="hidden" id="'.$name.'_id" name="'.$fieldName.'" value="'.(int)$value.'" />';
 	
 	    return $html;

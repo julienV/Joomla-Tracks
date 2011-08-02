@@ -33,7 +33,7 @@ class TracksViewRounds extends TracksView
 		$option = JRequest::getCmd('option');
 
 		// Set toolbar items for the page
-		JToolBarHelper::title(   JText::_( 'Tracks Rounds' ), 'generic.png' );
+		JToolBarHelper::title(   JText::_('COM_TRACKS_Rounds' ), 'generic.png' );
 		JToolBarHelper::deleteList();
 		JToolBarHelper::editListX();
 		JToolBarHelper::addNewX();

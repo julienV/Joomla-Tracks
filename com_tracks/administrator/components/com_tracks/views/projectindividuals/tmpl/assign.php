@@ -26,7 +26,7 @@ JHTML::_('behavior.tooltip');
     
     // do field validation
     if (pressbutton == "saveassign" && document.adminForm.project_id.value == "0"){
-      alert( "<?php echo JText::_( 'You must select a project !', true ); ?>" );
+      alert( "<?php echo JText::_('COM_TRACKS_You_must_select_a_project', true ); ?>" );
     } else {    
 	    if (typeof document.adminForm.onsubmit == "function") {
 	      document.adminForm.onsubmit();
@@ -38,23 +38,23 @@ JHTML::_('behavior.tooltip');
 <div id="tracksmain">
 <form action="<?php echo $this->request_url; ?>" method="post" name="adminForm">
 <div id="projectsel">
-<?php echo JText::_( 'Assign to ' ) . $this->lists['projects']; ?>
+<?php echo JText::_('COM_TRACKS_Assign_to ' ) . $this->lists['projects']; ?>
 </div>
 <div id="editcell">
 	<table class="adminlist">
 	<thead>
 		<tr>
 			<th width="5">
-				<?php echo JText::_( 'Id' ); ?>
+				<?php echo JText::_('COM_TRACKS_Id' ); ?>
 			</th>
 			<th class="title">
-        <?php echo JText::_( 'Individual' ); ?>
+        <?php echo JText::_('COM_TRACKS_Individual' ); ?>
 			</th>
 			<th class="title">
-        <?php echo JText::_( 'Team' ); ?>
+        <?php echo JText::_('COM_TRACKS_Team' ); ?>
 			</th>
       <th width="10">
-        <?php echo JText::_( 'Number' ); ?>
+        <?php echo JText::_('COM_TRACKS_Number' ); ?>
       </th>
 		</tr>
 	</thead>

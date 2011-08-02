@@ -30,13 +30,13 @@ JHTML::_('behavior.tooltip');
 	<thead>
 		<tr>
 			<th width="5">
-				<?php echo JText::_( 'NUM' ); ?>
+				<?php echo JText::_('COM_TRACKS_NUM' ); ?>
 			</th>
 			<th width="20">
 				<input type="checkbox" name="toggle" value="" onclick="checkAll(<?php echo count( $this->items ); ?>);" />
 			</th>
 			<th class="title">
-				<?php echo JText::_( 'PARAMETERS GROUP' ); ?>
+				<?php echo JText::_('COM_TRACKS_PARAMETERS_GROUP' ); ?>
 			</th>
 			<th width="1%" nowrap="nowrap">
 				<?php echo JHTML::_('grid.sort',  'ID', 'obj.id', $this->lists['order_Dir'], $this->lists['order'] ); ?>
@@ -75,7 +75,7 @@ JHTML::_('behavior.tooltip');
 					echo $row->xml;
 				} else {
 				?>
-					<a href="<?php echo $link; ?>" title="<?php echo JText::_( 'Edit settings' ); ?>">
+					<a href="<?php echo $link; ?>" title="<?php echo JText::_('COM_TRACKS_Edit_settings' ); ?>">
 						<?php echo $row->xml; ?></a>
 				<?php
 				}

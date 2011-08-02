@@ -63,7 +63,7 @@ class TracksViewRound extends TracksView
 
 		// fail if checked out not by 'me'
 		if ($model->isCheckedOut( $user->get('id') )) {
-			$msg = JText::sprintf( 'DESCBEINGEDITTED', JText::_( 'The Round' ), $object->name );
+			$msg = JText::sprintf( 'DESCBEINGEDITTED', JText::_('COM_TRACKS_The_Round' ), $object->name );
 			$mainframe->redirect( 'index.php?option='. $option, $msg );
 		}
 

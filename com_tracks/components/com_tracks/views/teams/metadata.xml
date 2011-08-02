@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-	<view title="TEAMS VIEW">
+	<view title="COM_TRACKS_TEAMS_VIEW">
 		<message>
-			<![CDATA[TEAMS VIEW TIP]]>
+			<![CDATA[COM_TRACKS_TEAMS_VIEW_TIP]]>
 		</message>
 	</view>
 </metadata>

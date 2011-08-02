@@ -74,10 +74,10 @@ class TracksControllerSubroundresult extends BaseController
 		$model = $this->getModel('subroundResult');
 
 		if ($model->store($post)) {
-			$msg = JText::_( 'Sub-round result saved' );
+			$msg = JText::_('COM_TRACKS_Subround_result_saved' );
 			$msgtype = 'message';
 		} else {
-			$msg = JText::_( 'Error Saving sub-round result' ).$model->getError();     
+			$msg = JText::_('COM_TRACKS_Error_Saving_subround_result' ).$model->getError();     
 			$msgtype = 'error';
 		}
 
@@ -97,11 +97,11 @@ class TracksControllerSubroundresult extends BaseController
 		$model = $this->getModel('subroundResult');
 		
 		if ($model->addAll()) {
-			$msg = JText::_( 'Imported participants' );
+			$msg = JText::_('COM_TRACKS_Imported_participants' );
       $msgtype = 'message';
 		}
 		else {			
-      $msg = JText::_( 'Error importing participants' ).$model->getError();     
+      $msg = JText::_('COM_TRACKS_Error_importing_participants' ).$model->getError();     
       $msgtype = 'error';
       $this->setError($msg);
 		}		
@@ -115,7 +115,7 @@ class TracksControllerSubroundresult extends BaseController
 		JArrayHelper::toInteger($cid);
 
 		if (count( $cid ) < 1) {
-			JError::raiseError(500, JText::_( 'Select an item to delete' ) );
+			JError::raiseError(500, JText::_('COM_TRACKS_Select_an_item_to_delete' ) );
 		}
 
 		$model = $this->getModel('subroundresult');
@@ -123,7 +123,7 @@ class TracksControllerSubroundresult extends BaseController
 		$msg = '';
 		
 		if(!$model->delete($cid)) {
-			$msg = JText::_('Error while removing participants');
+			$msg = JText::_('COM_TRACKS_Error_while_removing_participants');
 		}
 
 		$this->setRedirect( 'index.php?option=com_tracks&view=subroundresults&srid='.$srid, $msg, 'error');

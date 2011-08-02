@@ -14,19 +14,19 @@
 defined('_JEXEC') or die('Restricted access'); ?>
 
 <div id="tracks">
-<h1><?php echo $this->project->name . ' ' . JText::_( 'Team Rankings' ); ?></h1>
+<h1><?php echo $this->project->name . ' ' . JText::_('COM_TRACKS_Team_Rankings' ); ?></h1>
 
 <table class="raceResults" cellspacing="0" cellpadding="0" summary="">
   <tbody>
     <tr>
-      <th><?php echo JText::_( 'POSITION SHORT' ); ?></th>
+      <th><?php echo JText::_('COM_TRACKS_POSITION_SHORT' ); ?></th>
       <?php if ($this->projectparams->get('showflag')): ?>
-      <th><?php echo JText::_( 'COUNTRY SHORT' ); ?></th>
+      <th><?php echo JText::_('COM_TRACKS_COUNTRY_SHORT' ); ?></th>
       <?php endif; ?>
-      <th><?php echo JText::_( 'Team' ); ?></th>
-      <th><?php echo JText::_( 'Points' ); ?></th>
-      <th><?php echo JText::_( 'Wins' ); ?></th>
-      <th><?php echo JText::_( 'Best rank' ); ?></th>
+      <th><?php echo JText::_('COM_TRACKS_Team' ); ?></th>
+      <th><?php echo JText::_('COM_TRACKS_Points' ); ?></th>
+      <th><?php echo JText::_('COM_TRACKS_Wins' ); ?></th>
+      <th><?php echo JText::_('COM_TRACKS_Best_rank' ); ?></th>
     </tr>
     <?php
     $rank = 1;
@@ -48,7 +48,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
         <?php endif; ?>
         <td>
             <a href="<?php echo $link_team; ?>"
-               title="<?php echo JText::_( 'Details' ); ?>"> 
+               title="<?php echo JText::_('COM_TRACKS_Details' ); ?>"> 
             <?php echo $ranking->team_name; ?>
             <?php //echo JHTML::image('media/com_tracks/images/teams/'.$ranking->team_logo, $ranking->team_name, array('title' => $ranking->team_name, 'class' => 'ranking-logo')); ?>
             </a>

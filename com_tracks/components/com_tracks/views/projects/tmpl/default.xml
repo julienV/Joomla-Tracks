@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-    <layout title="DEFAULT PROJECTS LAYOUT">
+    <layout title="COM_TRACKS_DEFAULT_PROJECTS_LAYOUT">
         <message>
-        <![CDATA[DEFAULT PROJECTS LAYOUT TIP]]>
+        <![CDATA[COM_TRACKS_DEFAULT_PROJECTS_LAYOUT_TIP]]>
         </message>
     </layout>
     <state>
-        <name>DEFAULT PROJECTS LAYOUT</name>
-        <description>DEFAULT PROJECTS LAYOUT TIP</description>
+        <name>COM_TRACKS_DEFAULT_PROJECTS_LAYOUT</name>
+        <description>COM_TRACKS_DEFAULT_PROJECTS_LAYOUT_TIP</description>
 	    <params>
-	      <param name="order" type="list" default="0" label="Criteria for ordering" description="Chose how to order projects" >
-	        <option value="0">By season, competition, project</option>
-	        <option value="1">By competition, season, project</option>
-	        <option value="2">By project</option>
+	      <param name="order" type="list" default="0" label="COM_TRACKS_Criteria_for_ordering" description="COM_TRACKS_Chose_how_to_order_projects" >
+	        <option value="0">COM_TRACKS_By_season_competition_project</option>
+	        <option value="1">COM_TRACKS_By_competition_season_project</option>
+	        <option value="2">COM_TRACKS_By_project</option>
 	      </param>
-	      <param name="order_dir" type="list" default="0" label="Direction" description="Direction for ordering" >
-	        <option value="ASC">Asc</option>
-	        <option value="DESC">Desc</option>
+	      <param name="order_dir" type="list" default="0" label="COM_TRACKS_Direction" description="COM_TRACKS_Direction_for_ordering" >
+	        <option value="ASC">COM_TRACKS_Asc</option>
+	        <option value="DESC">COM_TRACKS_Desc</option>
 	      </param>
 	    </params>
     </state>

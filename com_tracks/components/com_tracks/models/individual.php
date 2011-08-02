@@ -189,7 +189,7 @@ class TracksFrontModelIndividual extends baseModel
     	$table->load($data['id']);
     	
     	if ($table->user_id != $user->get('id') && !$user->authorize('com_tracks', 'manage')) {
-    		JError::raiseError(403, JText::_('ACCESS_NOT_ALLOWED'));
+    		JError::raiseError(403, JText::_('COM_TRACKS_ACCESS_NOT_ALLOWED'));
     	}
     }
 
@@ -219,7 +219,7 @@ class TracksFrontModelIndividual extends baseModel
       //dump($filepath);
 
       if (!JFile::upload( $picture['tmp_name'], $filepath )) {
-        $this->setError( JText::_( 'UPLOAD FAILED' ) );
+        $this->setError( JText::_('COM_TRACKS_UPLOAD_FAILED' ) );
         return false;
       } else {
         $table->picture = $filename;
@@ -248,7 +248,7 @@ class TracksFrontModelIndividual extends baseModel
       $filepath = $base_Dir . $filename;
 
       if (!JFile::upload( $picture_small['tmp_name'], $filepath )) {
-        $this->setError( JText::_( 'UPLOAD FAILED' ) );
+        $this->setError( JText::_('COM_TRACKS_UPLOAD_FAILED' ) );
         return false;
       } else {
         $table->picture_small = $filename;

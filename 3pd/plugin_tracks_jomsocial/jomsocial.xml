@@ -10,7 +10,7 @@
  	<copyright>(C) 2008,2009,2010 Julien Vonthron. All rights reserved.</copyright>
  	<license>http://www.gnu.org/licenses/gpl.html</license>
  	<version>VERSION_NUMBER</version>
-  <description>PLUGIN DESC</description>
+  <description>PLG_TRACKS_JOMSOCIAL_PLUGIN_DESC</description>
   
   <files>
     <filename plugin="jomsocial">jomsocial.php</filename>
@@ -21,10 +21,10 @@
   </languages>
 
   <params>
-    <param type="list" name="view_individual_link" default="1" label="Link on individual page" description="type of link on individual page">
-      <option value="0">No link</option>
-      <option value="1">text</option>
-      <option value="2">avatar</option>
+    <param type="list" name="view_individual_link" default="1" label="PLG_TRACKS_JOMSOCIAL_Link_on_individual_page" description="PLG_TRACKS_JOMSOCIAL_type_of_link_on_individual_page">
+      <option value="0">PLG_TRACKS_JOMSOCIAL_No_link</option>
+      <option value="1">PLG_TRACKS_JOMSOCIAL_text</option>
+      <option value="2">PLG_TRACKS_JOMSOCIAL_avatar</option>
     </param>
   </params>
 </install>

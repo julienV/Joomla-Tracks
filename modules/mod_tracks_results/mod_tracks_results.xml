@@ -8,7 +8,7 @@
  	<copyright>(C) 2008,2009,2010 Julien Vonthron. All rights reserved.</copyright>
  	<license>http://www.gnu.org/licenses/gpl.html</license>
  	<version>VERSION_NUMBER</version>
-	<description>Displays the latest round results of selected project</description>
+	<description>MOD_TRACKS_RESULTS_DESC</description>
 	<files>
 		<filename module="mod_tracks_results">mod_tracks_results.php</filename>
     <filename>mod_tracks_results.css</filename>
@@ -24,27 +24,27 @@
   </languages>
         
 	<params addpath="/administrator/components/com_tracks/elements">
-    <param name="moduleclass_sfx" type="text" default="" label="Module Class Suffix" description="PARAMMODULECLASSSUFFIX" />
+    <param name="moduleclass_sfx" type="text" default="" label="Module_Class_Suffix" description="PARAMMODULECLASSSUFFIX" />
     <param name="@spacer" type="spacer" default="" label="" description="" />
-		<param name="count" type="text" default="5" label="Count" description="The number of rows to display (default 5)" />
-		<param name="project_id" type="tsql" default="0" label="Select a project" description="Select a project" query="SELECT id AS project_id, name AS text FROM #__tracks_projects ORDER BY name ASC" />
-    <param name="subroundtype_id" type="tsql" default="0" label="Select a sub-round type" description="Select a sub-round type" query="SELECT id AS subroundtype_id, name AS text FROM #__tracks_subroundtypes ORDER BY name ASC" />
-    <param name="showteams" type="radio" default="1" label="Show teams ?" description="">
+		<param name="count" type="text" default="5" label="MOD_TRACKS_RESULTS_Count" description="MOD_TRACKS_RESULTS_The_number_of_rows_to_display" />
+		<param name="project_id" type="tsql" default="0" label="MOD_TRACKS_RESULTS_Select_a_project" description="MOD_TRACKS_RESULTS_Select_a_project" query="SELECT id AS project_id, name AS text FROM #__tracks_projects ORDER BY name ASC" />
+    <param name="subroundtype_id" type="tsql" default="0" label="MOD_TRACKS_RESULTS_Select_a_subround_type" description="MOD_TRACKS_RESULTS_Select_a_subround_type" query="SELECT id AS subroundtype_id, name AS text FROM #__tracks_subroundtypes ORDER BY name ASC" />
+    <param name="showteams" type="radio" default="1" label="MOD_TRACKS_RESULTS_Show_teams" description="">
       <option value="0">No</option>
       <option value="1">Yes</option>
     </param>
-    <param name="showpoints" type="radio" default="1" label="Show points ?" description="">
+    <param name="showpoints" type="radio" default="1" label="MOD_TRACKS_RESULTS_Show_points" description="">
       <option value="0">No</option>
       <option value="1">Yes</option>
     </param>
   </params>
   
   <params group="advanced">
-		<param name="cache" type="list" default="1" label="Caching" description="Select whether to cache the content of this module">
+		<param name="cache" type="list" default="1" label="Caching" description="Select_whether_to_cache_the_content_of_this_module">
 			<option value="1">Use global</option>
 			<option value="0">No caching</option>
 		</param>
-		<param name="cache_time" type="text" default="900" label="Cache Time" description="The time before the module is recached" />
+		<param name="cache_time" type="text" default="900" label="Cache_Time" description="The_time_before_the_module_is_recached" />
 	</params>
 	
 </install>

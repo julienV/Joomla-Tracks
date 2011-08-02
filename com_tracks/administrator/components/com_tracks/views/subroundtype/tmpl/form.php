@@ -19,8 +19,8 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <?php
 	// Set toolbar items for the page
 	$edit		= JRequest::getVar('edit',true);
-	$text = !$edit ? JText::_( 'New' ) : JText::_( 'Edit' );
-	JToolBarHelper::title(   JText::_( 'Sub-round type' ).': <small><small>[ ' . $text.' ]</small></small>' );
+	$text = !$edit ? JText::_('COM_TRACKS_New' ) : JText::_('COM_TRACKS_Edit' );
+	JToolBarHelper::title(   JText::_('COM_TRACKS_Subround_type' ).': <small><small>[ ' . $text.' ]</small></small>' );
 	JToolBarHelper::save();
 	JToolBarHelper::apply();
 	if (!$edit)  {
@@ -43,7 +43,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     // do field validation
     var validator = document.formvalidator;
     if ( validator.validate(form.name) === false ){
-      alert( "<?php echo JText::_( 'SUB ROUND TYPE NAME IS REQUIRED', true ); ?>" );
+      alert( "<?php echo JText::_('COM_TRACKS_SUBROUND_TYPE_NAME_IS_REQUIRED', true ); ?>" );
     } else {
       submitform( pressbutton );
     }
@@ -53,12 +53,12 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <div id="tracksmain">
 <form action="index.php" method="post" name="adminForm" id="adminForm">
 <div class="col50">
-<fieldset class="adminform"><legend><?php echo JText::_( 'Sub-round type' ); ?></legend>
+<fieldset class="adminform"><legend><?php echo JText::_('COM_TRACKS_Subround_type' ); ?></legend>
 
 <table class="admintable">
 	<tr>
 		<td width="100" align="right" class="key">
-			<label for="name"> <?php echo JText::_( 'Name' ); ?>:
+			<label for="name"> <?php echo JText::_('COM_TRACKS_Name' ); ?>:
 			</label>
 		</td>
 		<td><input class="text_area required" type="text" name="name" id="name"
@@ -66,7 +66,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 		</td>
 	</tr>
 	<tr>
-		<td width="100" align="right" class="key"><label for="alias"> <?php echo JText::_( 'Alias' ); ?>:
+		<td width="100" align="right" class="key"><label for="alias"> <?php echo JText::_('COM_TRACKS_Alias' ); ?>:
 		</label></td>
 		<td><input class="text_area" type="text" name="alias" id="alias"
 			size="32" maxlength="250" value="<?php echo $this->object->alias?>" />
@@ -74,7 +74,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 	</tr>
 	<tr>
 		<td width="100" align="right" class="key hasTip"
-			title="<?php echo JText::_('NOTE TIP'); ?>"><label for="alias"> <?php echo JText::_( 'Note' ); ?>:
+			title="<?php echo JText::_('COM_TRACKS_NOTE_TIP'); ?>"><label for="alias"> <?php echo JText::_('COM_TRACKS_Note' ); ?>:
 		</label></td>
 		<td><input class="text_area" type="text" name="note" id="note"
 			size="32" maxlength="100" value="<?php echo $this->object->note?>" />
@@ -82,7 +82,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 	</tr>
 	<tr>
 		<td valign="top" align="right" class="key hasTip"
-			title="<?php echo JText::_('POINTS TIP'); ?>"><label for="points_attribution"> <?php echo JText::_( 'Points' ); ?>:
+			title="<?php echo JText::_('COM_TRACKS_POINTS_TIP'); ?>"><label for="points_attribution"> <?php echo JText::_('COM_TRACKS_Points' ); ?>:
 		</label></td>
 		<td><input class="text_area" type="text" name="points_attribution" id="points_attribution"
 			size="50" maxlength="255" value="<?php echo $this->object->points_attribution?>" />
@@ -90,7 +90,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 	</tr>
 	<tr>
 		<td width="100" align="right" class="key">
-			<label for="description"> <?php echo JText::_( 'Description' ); ?>:
+			<label for="description"> <?php echo JText::_('COM_TRACKS_Description' ); ?>:
 			</label>
 		</td>
 		<td><?php echo $this->editor->display('description', $this->object->description, '600', '400', '70', '15'); ?>

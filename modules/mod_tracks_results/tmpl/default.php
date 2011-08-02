@@ -27,10 +27,10 @@ $document->addScript( JURI::base() . 'modules/mod_tracks_results/mod_tracks_resu
 <table cellspacing="0" cellpadding="0" summary="">
 	<thead>
     <tr>
-      <th><?php echo JText::_( 'Pos' ); ?></th>
-      <th><?php echo JText::_( 'Individual' ); ?></th>
-      <?php if ($showteams) { ?><th><?php echo JText::_( 'Team' ); ?></th><?php } ?>
-      <?php if ($showpoints) { ?><th><?php echo JText::_( 'Points' ); ?></th><?php } ?>
+      <th><?php echo JText::_( 'MOD_TRACKS_RESULTS_Pos' ); ?></th>
+      <th><?php echo JText::_( 'MOD_TRACKS_RESULTS_Individual' ); ?></th>
+      <?php if ($showteams) { ?><th><?php echo JText::_( 'MOD_TRACKS_RESULTS_Team' ); ?></th><?php } ?>
+      <?php if ($showpoints) { ?><th><?php echo JText::_( 'MOD_TRACKS_RESULTS_Points' ); ?></th><?php } ?>
     </tr>
 	</thead>
   <tbody>
@@ -54,7 +54,7 @@ $document->addScript( JURI::base() . 'modules/mod_tracks_results/mod_tracks_resu
         <?php if ($showteams) { ?>
         <td>
           <a href="<?php echo $link_team; ?>"
-             title="<?php echo $rows->team_name . '::' . JText::_( 'Click for details' ); ?>" class="mod-result-tip">
+             title="<?php echo $rows->team_name . '::' . JText::_('MOD_TRACKS_RESULTS_Click_for_details' ); ?>" class="mod-result-tip">
             <?php echo $rows->team_acronym; ?>
           </a>
         </td>
@@ -78,7 +78,7 @@ $document->addScript( JURI::base() . 'modules/mod_tracks_results/mod_tracks_resu
 $link = JRoute::_( TracksHelperRoute::getRoundResultRoute($round->projectround_id) );
 ?>
 <a class="fulltablelink" href="<?php echo $link; ?>"
-             title="<?php echo JText::_( 'View full table' ); ?>"> 
-            <?php echo JText::_( 'View full table' ); ?>
+             title="<?php echo JText::_('MOD_TRACKS_RESULTS_View_full_table' ); ?>"> 
+            <?php echo JText::_('MOD_TRACKS_RESULTS_View_full_table' ); ?>
 </a>
 </div>

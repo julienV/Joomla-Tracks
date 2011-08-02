@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-    <layout title="Default Project Layout">
+    <layout title="COM_TRACKS_Default_Project_Layout">
         <message>
-        <![CDATA[Displays a project summary]]>
+        <![CDATA[COM_TRACKS_Displays_a_project_summary]]>
         </message>
     </layout>
     <state>
-        <name>Default Project Layout</name>
-        <description>Select a project</description>
+        <name>COM_TRACKS_Default_Project_Layout</name>
+        <description>COM_TRACKS_Select_a_project</description>
         <url addpath="/administrator/components/com_tracks/elements">
-            <param name="p" type="tsql" default="" label="Select a project" description="Select a project" query="SELECT id AS p, name AS text FROM #__tracks_projects ORDER BY name ASC" />
+            <param name="p" type="tsql" default="" label="COM_TRACKS_Select_a_project" description="COM_TRACKS_Select_a_project" query="SELECT id AS p, name AS text FROM #__tracks_projects ORDER BY name ASC" />
         </url>
         <params>
         </params>

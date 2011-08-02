@@ -18,36 +18,36 @@
     <tabs>
     	<tab name="_UE_TRACKSTAB" description="" class="getTracksTab" cbfields="0">
 			<params>
-	      <param type="radio" name="show_history" default="1" label="Show history" description="">
+	      <param type="radio" name="show_history" default="1" label="Show_history" description="">
 	        <option value="0">No</option>
 	        <option value="1">Yes</option>
 	      </param>
-        <param name="@spacer" type="spacer" default="" label="History settings" description="" />
-        <param type="radio" name="show_number" default="1" label="Show individual number" description="">
+        <param name="@spacer" type="spacer" default="" label="History_settings" description="" />
+        <param type="radio" name="show_number" default="1" label="Show_individual_number" description="">
           <option value="0">No</option>
           <option value="1">Yes</option>
         </param>
-        <param type="radio" name="show_team" default="1" label="Show team" description="">
+        <param type="radio" name="show_team" default="1" label="Show_team" description="">
           <option value="0">No</option>
           <option value="1">Yes</option>
         </param>
-        <param type="radio" name="show_season" default="1" label="Show season" description="">
+        <param type="radio" name="show_season" default="1" label="Show_season" description="">
           <option value="0">No</option>
           <option value="1">Yes</option>
         </param>
-        <param type="radio" name="show_rank" default="1" label="Show rank" description="">
+        <param type="radio" name="show_rank" default="1" label="Show_rank" description="">
           <option value="0">No</option>
           <option value="1">Yes</option>
         </param>
-        <param type="radio" name="show_points" default="1" label="Show points" description="">
+        <param type="radio" name="show_points" default="1" label="Show_points" description="">
           <option value="0">No</option>
           <option value="1">Yes</option>
         </param>
-        <param type="radio" name="show_wins" default="1" label="Show wins" description="">
+        <param type="radio" name="show_wins" default="1" label="Show_wins" description="">
           <option value="0">No</option>
           <option value="1">Yes</option>
         </param>
-        <param type="radio" name="show_bestrank" default="1" label="Show best rank" description="">
+        <param type="radio" name="show_bestrank" default="1" label="Show_best_rank" description="">
           <option value="0">No</option>
           <option value="1">Yes</option>
         </param>

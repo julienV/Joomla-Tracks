@@ -38,7 +38,7 @@ class TracksHelper
     // Initialize variables
     $db = & JFactory::getDBO();
 
-    $projects[] = JHTML::_('select.option', '0', '- '.JText::_('Select Project').' -');
+    $projects[] = JHTML::_('select.option', '0', '- '.JText::_('COM_TRACKS_Select_Project').' -');
     $db->setQuery($query);
     $projects = array_merge($projects, $db->loadObjectList());
 
@@ -60,7 +60,7 @@ class TracksHelper
     // Initialize variables
     $db = & JFactory::getDBO();
 
-    $objects[] = JHTML::_('select.option', '0', '- '.JText::_('Select Competition').' -');
+    $objects[] = JHTML::_('select.option', '0', '- '.JText::_('COM_TRACKS_Select_Competition').' -');
     if ($query == '')
     {
       $query = 'SELECT id AS value, name AS text' .
@@ -88,7 +88,7 @@ class TracksHelper
     // Initialize variables
     $db = & JFactory::getDBO();
 
-    $objects[] = JHTML::_('select.option', '0', '- '.JText::_('Select Season').' -');
+    $objects[] = JHTML::_('select.option', '0', '- '.JText::_('COM_TRACKS_Select_Season').' -');
     if ($query == '')
     {
       $query = 'SELECT id AS value, name AS text' .
@@ -124,7 +124,7 @@ class TracksHelper
     ;
     $db->setQuery( $query );
     if ( $nouser ) {
-      $users[] = JHTML::_('select.option',  '0', '- '. JText::_( 'No User' ) .' -' );
+      $users[] = JHTML::_('select.option',  '0', '- '. JText::_('COM_TRACKS_No_User' ) .' -' );
       $users = array_merge( $users, $db->loadObjectList() );
     } else {
       $users = $db->loadObjectList();

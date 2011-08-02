@@ -60,9 +60,9 @@ class ImageSelect
     JHTML::_('behavior.modal', 'a.modal');
 
     $imageselect = "\n<input style=\"background: #ffffff;\" type=\"text\" id=\"a_".$fieldname."_name\" value=\"$value\" disabled=\"disabled\" />";
-    $imageselect .= "<div class=\"button2-left\"><div class=\"blank\"><a class=\"modal\" title=\"".JText::_('Upload')."\" href=\"$link\" rel=\"{handler: 'iframe', size: {x: 650, y: 375}}\">".JText::_('Upload')."</a></div></div>\n";
-    $imageselect .= "<div class=\"button2-left\"><div class=\"blank\"><a class=\"modal\" title=\"".JText::_('SELECTIMAGE')."\" href=\"$link2\" rel=\"{handler: 'iframe', size: {x: 650, y: 375}}\">".JText::_('SELECTIMAGE')."</a></div></div>\n";
-    $imageselect .= "<div class=\"button2-left\"><div class=\"blank\"><a title=\"".JText::_('SELECTIMAGE')."\" href=\"#\" onclick=\"selectImage('', '".JText::_('SELECTIMAGE')."', '".$fieldname."' );\">".JText::_('RESET')."</a></div></div>\n";
+    $imageselect .= "<div class=\"button2-left\"><div class=\"blank\"><a class=\"modal\" title=\"".JText::_('COM_TRACKS_Upload')."\" href=\"$link\" rel=\"{handler: 'iframe', size: {x: 650, y: 375}}\">".JText::_('COM_TRACKS_Upload')."</a></div></div>\n";
+    $imageselect .= "<div class=\"button2-left\"><div class=\"blank\"><a class=\"modal\" title=\"".JText::_('COM_TRACKS_SELECTIMAGE')."\" href=\"$link2\" rel=\"{handler: 'iframe', size: {x: 650, y: 375}}\">".JText::_('COM_TRACKS_SELECTIMAGE')."</a></div></div>\n";
+    $imageselect .= "<div class=\"button2-left\"><div class=\"blank\"><a title=\"".JText::_('COM_TRACKS_SELECTIMAGE')."\" href=\"#\" onclick=\"selectImage('', '".JText::_('COM_TRACKS_SELECTIMAGE')."', '".$fieldname."' );\">".JText::_('COM_TRACKS_RESET')."</a></div></div>\n";
     $imageselect .= "\n<input type=\"hidden\" id=\"a_".$fieldname."\" name=\"".$fieldname."\" value=\"$value\" />";
 		
     return $imageselect;
@@ -80,7 +80,7 @@ class ImageSelect
 
     //check if the upload is an image...getimagesize will return false if not
     if (!getimagesize($file['tmp_name'])) {
-      JError::raiseWarning(100, JText::_('UPLOAD FAILED NOT AN IMAGE').': '.htmlspecialchars($file['name'], ENT_COMPAT, 'UTF-8'));
+      JError::raiseWarning(100, JText::_('COM_TRACKS_UPLOAD_FAILED_NOT_AN_IMAGE').': '.htmlspecialchars($file['name'], ENT_COMPAT, 'UTF-8'));
       return false;
     }
 
@@ -89,13 +89,13 @@ class ImageSelect
 
     $allowable  = array ('gif', 'jpg', 'png');
     if (!in_array($fileext, $allowable)) {
-      JError::raiseWarning(100, JText::_('WRONG IMAGE FILE TYPE').': '.htmlspecialchars($file['name'], ENT_COMPAT, 'UTF-8'));
+      JError::raiseWarning(100, JText::_('COM_TRACKS_WRONG_IMAGE_FILE_TYPE').': '.htmlspecialchars($file['name'], ENT_COMPAT, 'UTF-8'));
       return false;
     }
 
     //Check filesize
     if ($imagesize > $sizelimit) {
-      JError::raiseWarning(100, JText::_('IMAGE FILE SIZE').': '.htmlspecialchars($file['name'], ENT_COMPAT, 'UTF-8'));
+      JError::raiseWarning(100, JText::_('COM_TRACKS_IMAGE_FILE_SIZE').': '.htmlspecialchars($file['name'], ENT_COMPAT, 'UTF-8'));
       return false;
     }
 
@@ -105,7 +105,7 @@ class ImageSelect
     foreach($html_tags as $tag) {
       // A tag is '<tagname ', so we need to add < and a space or '<tagname>'
       if(stristr($xss_check, '<'.$tag.' ') || stristr($xss_check, '<'.$tag.'>')) {
-        JError::raiseWarning(100, JText::_('WARN IE XSS'));
+        JError::raiseWarning(100, JText::_('COM_TRACKS_WARN_IE_XSS'));
         return false;
       }
     }

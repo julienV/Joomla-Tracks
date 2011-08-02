@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-    <layout title="DEFAULT ROUNDS LAYOUT">
+    <layout title="COM_TRACKS_DEFAULT_ROUNDS_LAYOUT">
         <message>
-        <![CDATA[DEFAULT ROUNDS LAYOUT TIP]]>
+        <![CDATA[COM_TRACKS_DEFAULT_ROUNDS_LAYOUT_TIP]]>
         </message>
     </layout>
     <state>
-        <name>DEFAULT ROUNDS LAYOUT</name>
-        <description>DEFAULT ROUNDS LAYOUT TIP</description>
+        <name>COM_TRACKS_DEFAULT_ROUNDS_LAYOUT</name>
+        <description>COM_TRACKS_DEFAULT_ROUNDS_LAYOUT_TIP</description>
     </state>
 </metadata>

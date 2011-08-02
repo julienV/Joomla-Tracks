@@ -23,7 +23,7 @@ $limit = intval( $params->get('count', 5) );
 $showteams = intval( $params->get('showteams', 1) );
 
 
-if (!$params->get('project_id')) return JText::_('No project specified');
+if (!$params->get('project_id')) return JText::_('No_project_specified');
 
 $helper = new modTracksRanking();
 

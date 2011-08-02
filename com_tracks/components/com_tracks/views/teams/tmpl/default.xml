@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-    <layout title="DEFAULT TEAMS LAYOUT">
+    <layout title="COM_TRACKS_DEFAULT_TEAMS_LAYOUT">
         <message>
-        <![CDATA[DEFAULT TEAMS LAYOUT TIP]]>
+        <![CDATA[COM_TRACKS_DEFAULT_TEAMS_LAYOUT_TIP]]>
         </message>
     </layout>
     <state>
-        <name>DEFAULT TEAMS LAYOUT</name>
-        <description>DEFAULT TEAMS LAYOUT TIP</description>
+        <name>COM_TRACKS_DEFAULT_TEAMS_LAYOUT</name>
+        <description>COM_TRACKS_DEFAULT_TEAMS_LAYOUT_TIP</description>
     </state>
 </metadata>
 

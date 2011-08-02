@@ -64,11 +64,11 @@ class TableProjectround extends JTable
 	function check()
 	{
 		if (! $this->project_id) {
-			$this->setError(JText::_('Error check: missing projectg id'));
+			$this->setError(JText::_('COM_TRACKS_Error_check_missing_project_id'));
 			return false;
 		}
     if (! $this->round_id) {
-      $this->setError(JText::_('Error check: round id not specified'));
+      $this->setError(JText::_('COM_TRACKS_Error_check_missing_round_id'));
       return false;
     }
 		return true;

@@ -20,8 +20,8 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 <?php if ($this->show_edit_link): ?>
 <div id="editprofile"><a href="<?php echo JRoute::_( TracksHelperRoute::getEditIndividualRoute($this->data->id).'&task=edit' ); ?>" 
-       title ="<?php echo JText::_( 'Edit profile' ) ?>">
-          <?php echo JText::_( 'Edit profile' ); ?>
+       title ="<?php echo JText::_('COM_TRACKS_Edit_profile' ) ?>">
+          <?php echo JText::_('COM_TRACKS_Edit_profile' ); ?>
           </a></div>
 <?php endif; ?>
 
@@ -41,7 +41,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 </tbody>
 </table>
 
-<h2><?php echo JText::_('Details'); ?></h2>
+<h2><?php echo JText::_('COM_TRACKS_Details'); ?></h2>
 
 <?php if ($this->data->picture): ?>
 <div id="individualpic">
@@ -74,7 +74,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     <tr>
       <td width="100" align="right" class="key">
         <label for="nickname">
-          <?php echo JText::_( 'Nickname' ); ?>:
+          <?php echo JText::_('COM_TRACKS_Nickname' ); ?>:
         </label>
       </td>
       <td>
@@ -86,7 +86,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     <tr>
       <td width="100" align="right" class="key">
         <label for="height">
-          <?php echo JText::_( 'Height' ); ?>:
+          <?php echo JText::_('COM_TRACKS_Height' ); ?>:
         </label>
       </td>
       <td>
@@ -98,7 +98,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     <tr>
       <td width="100" align="right" class="key">
         <label for="weight">
-          <?php echo JText::_( 'Weight' ); ?>:
+          <?php echo JText::_('COM_TRACKS_Weight' ); ?>:
         </label>
       </td>
       <td>
@@ -110,7 +110,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     <tr>
       <td width="100" align="right" class="key">
         <label for="country_code">
-          <?php echo JText::_( 'Country' ); ?>:
+          <?php echo JText::_('COM_TRACKS_Country' ); ?>:
         </label>
       </td>
       <td>
@@ -122,7 +122,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     <tr>
       <td width="100" align="right" class="key">
         <label for="dob">
-          <?php echo JText::_( 'Date of birth' ); ?>:
+          <?php echo JText::_('COM_TRACKS_Date_of_birth' ); ?>:
         </label>
       </td>
       <td>
@@ -134,7 +134,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     <tr>
       <td width="100" align="right" class="key">
         <label for="hometown">
-          <?php echo JText::_( 'Hometown' ); ?>:
+          <?php echo JText::_('COM_TRACKS_Hometown' ); ?>:
         </label>
       </td>
       <td>
@@ -146,7 +146,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     <tr>
       <td width="100" align="right" class="key">
         <label for="address">
-          <?php echo JText::_( 'Address' ); ?>:
+          <?php echo JText::_('COM_TRACKS_Address' ); ?>:
         </label>
       </td>
       <td>
@@ -158,7 +158,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     <tr>
       <td width="100" align="right" class="key">
         <label for="postcode">
-          <?php echo JText::_( 'Postcode' ); ?>:
+          <?php echo JText::_('COM_TRACKS_Postcode' ); ?>:
         </label>
       </td>
       <td>
@@ -170,7 +170,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     <tr>
       <td width="100" align="right" class="key">
         <label for="city">
-          <?php echo JText::_( 'City' ); ?>:
+          <?php echo JText::_('COM_TRACKS_City' ); ?>:
         </label>
       </td>
       <td>
@@ -182,7 +182,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     <tr>
       <td width="100" align="right" class="key">
         <label for="state">
-          <?php echo JText::_( 'State' ); ?>:
+          <?php echo JText::_('COM_TRACKS_State' ); ?>:
         </label>
       </td>
       <td>
@@ -194,7 +194,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     <tr>
       <td width="100" align="right" class="key">
         <label for="last_name">
-          <?php echo JText::_( 'Country' ); ?>:
+          <?php echo JText::_('COM_TRACKS_Country' ); ?>:
         </label>
       </td>
       <td>

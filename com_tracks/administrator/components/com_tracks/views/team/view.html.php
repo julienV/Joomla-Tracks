@@ -61,7 +61,7 @@ class TracksViewTeam extends JView
 
 		// fail if checked out not by 'me'
 		if ($model->isCheckedOut( $user->get('id') )) {
-			$msg = JText::sprintf( 'DESCBEINGEDITTED', JText::_( 'The Team' ), $object->name );
+			$msg = JText::sprintf( 'DESCBEINGEDITTED', JText::_('COM_TRACKS_The_Team' ), $object->name );
 			$mainframe->redirect( 'index.php?option='. $option, $msg );
 		}
 
@@ -78,7 +78,7 @@ class TracksViewTeam extends JView
 		
     // countries
     $countries = array();
-    $countries[] = JHTML::_('select.option', '', JTEXT::_('Select country'));
+    $countries[] = JHTML::_('select.option', '', JText::_('COM_TRACKS_Select_country'));
     $countries = array_merge($countries, TracksCountries::getCountryOptions());
     $lists['countries'] = JHTML::_('select.genericlist', $countries, 'country_code', '', 'value', 'text', $object->country_code);
 		

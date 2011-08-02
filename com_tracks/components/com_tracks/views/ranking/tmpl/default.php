@@ -14,30 +14,30 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 <div id="tracks">
 
-<h1><?php echo $this->project->name . ' ' . JText::_( 'Rankings' ); ?></h1>
+<h1><?php echo $this->project->name . ' ' . JText::_('COM_TRACKS_Rankings' ); ?></h1>
 
 <table class="raceResults" cellspacing="0" cellpadding="0" summary="">
   <thead>
     <tr>
-      <th><?php echo JText::_( 'POSITION SHORT' ); ?></th>
+      <th><?php echo JText::_('COM_TRACKS_POSITION_SHORT' ); ?></th>
       
       <?php if ($this->params->get('shownumber')): ?>
-      <th><?php echo JText::_( 'NUMBER SHORT' ); ?></th>
+      <th><?php echo JText::_('COM_TRACKS_NUMBER_SHORT' ); ?></th>
       <?php endif; ?>
       
       <?php if ($this->params->get('showflag')): ?>
-      <th><?php echo JText::_( 'COUNTRY SHORT' ); ?></th>
+      <th><?php echo JText::_('COM_TRACKS_COUNTRY_SHORT' ); ?></th>
       <?php endif; ?>
       
-      <th><?php echo JText::_( 'Individual' ); ?></th>
+      <th><?php echo JText::_('COM_TRACKS_Individual' ); ?></th>
       
       <?php if ($this->params->get('showteams')): ?>
-      <th><?php echo JText::_( 'Team' ); ?></th>
+      <th><?php echo JText::_('COM_TRACKS_Team' ); ?></th>
       <?php endif; ?>
       
-      <th><?php echo JText::_( 'Points' ); ?></th>
-      <th><?php echo JText::_( 'Wins' ); ?></th>
-      <th><?php echo JText::_( 'Best rank' ); ?></th>
+      <th><?php echo JText::_('COM_TRACKS_Points' ); ?></th>
+      <th><?php echo JText::_('COM_TRACKS_Wins' ); ?></th>
+      <th><?php echo JText::_('COM_TRACKS_Best_rank' ); ?></th>
     </tr>
   </thead>
   <tbody>
@@ -66,7 +66,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 	      
         <td>
           <a href="<?php echo $link_ind; ?>"
-  				   title="<?php echo JText::_( 'Details' ); ?>">
+  				   title="<?php echo JText::_('COM_TRACKS_Details' ); ?>">
           <?php echo $ranking->first_name . ' ' . $ranking->last_name; ?>
           </a>
         </td>
@@ -74,7 +74,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
         <td>
         	<?php if ($ranking->team_id): ?>
           <a href="<?php echo $link_team; ?>"
-             title="<?php echo JText::_( 'Details' ); ?>"> 
+             title="<?php echo JText::_('COM_TRACKS_Details' ); ?>"> 
             <?php echo $ranking->team_name; ?></a>
           <?php endif; ?>
         </td>

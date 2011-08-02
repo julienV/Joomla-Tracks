@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-    <layout title="INDIVIDUAL FORM LAYOUT">
+    <layout title="COM_TRACKS_INDIVIDUAL_FORM_LAYOUT">
         <message>
-        <![CDATA[INDIVIDUAL FORM LAYOUT TIP]]>
+        <![CDATA[COM_TRACKS_INDIVIDUAL_FORM_LAYOUT_TIP]]>
         </message>
     </layout>
     <state>
-        <name>INDIVIDUAL FORM LAYOUT</name>
-        <description>INDIVIDUAL FORM LAYOUT TIP</description>
+        <name>COM_TRACKS_INDIVIDUAL_FORM_LAYOUT</name>
+        <description>COM_TRACKS_INDIVIDUAL_FORM_LAYOUT_TIP</description>
     </state>
 </metadata>

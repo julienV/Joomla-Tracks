@@ -61,7 +61,7 @@ $option = JRequest::getCmd('option');
     // fail if checked out not by 'me'
     if ($model->isCheckedOut( $user->get('id') )) 
     {
-      $msg = JText::sprintf( 'DESCBEINGEDITTED', JText::_( 'The result' ), $result->id );
+      $msg = JText::sprintf( 'DESCBEINGEDITTED', JText::_('COM_TRACKS_The_result' ), $result->id );
       $mainframe->redirect( 'index.php?option='. $option, $msg );
     }
 
@@ -73,7 +73,7 @@ $option = JRequest::getCmd('option');
     {
       // initialise new record
       $participants = array();
-      $participants[] = JHTML::_('select.option', 0, JText::_('SELECT PARTICIPANT'));
+      $participants[] = JHTML::_('select.option', 0, JText::_('COM_TRACKS_SELECT_PARTICIPANT'));
       $participants = array_merge($participants, $this->get('ParticipantsOptions'));
       $lists['participants'] = JHTML::_('select.genericlist', $participants, 'individual_id', 'class="inputbox required"');
     }

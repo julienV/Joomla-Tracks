@@ -39,13 +39,13 @@ class TracksViewProjectrounds extends TracksView
     }
     
 		// Set toolbar items for the page
-		JToolBarHelper::title(   JText::_( 'Tracks Project Rounds' ), 'generic.png' );
+		JToolBarHelper::title(   JText::_('COM_TRACKS_Project_Rounds' ), 'generic.png' );
 		JToolBarHelper::publish();
 		JToolBarHelper::unpublish();
 		JToolBarHelper::editListX();
 		JToolBarHelper::addNewX();
-    JToolBarHelper::deleteList(JText::_('DELETEROUNDSCONFIRM'));
-    JToolBarHelper::customX( 'copy', 'copy.png', 'copy_f2.png', JTEXT::_('COPY'), true );
+    JToolBarHelper::deleteList(JText::_('COM_TRACKS_DELETEROUNDSCONFIRM'));
+    JToolBarHelper::customX( 'copy', 'copy.png', 'copy_f2.png', JText::_('COM_TRACKS_COPY'), true );
     JToolBarHelper::help( 'screen.tracks', true );
         
 		$db		=& JFactory::getDBO();
@@ -93,7 +93,7 @@ class TracksViewProjectrounds extends TracksView
 $option = JRequest::getCmd('option');
     
     // Set toolbar items for the page
-    JToolBarHelper::title(   JText::_( 'COPYROUNDS' ), 'generic.png' );
+    JToolBarHelper::title(   JText::_('COM_TRACKS_COPYROUNDS' ), 'generic.png' );
     JToolBarHelper::back();
     JToolBarHelper::save('savecopy', 'Copy');
     JToolBarHelper::cancel('cancelcopy');
@@ -107,7 +107,7 @@ $option = JRequest::getCmd('option');
     // print_r($model);
     
     //build the html select list for projects
-    $projects[] = JHTML::_('select.option',  '0', '- '. JText::_( 'Select a project' ) .' -','value', 'text' );
+    $projects[] = JHTML::_('select.option',  '0', '- '. JText::_('COM_TRACKS_Select_a_project' ) .' -','value', 'text' );
     if ( $res = & $this->get('projectsListOptions') ) {
       $projects = array_merge( $projects, $res );
     }

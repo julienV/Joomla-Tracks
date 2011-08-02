@@ -25,13 +25,13 @@ JHTML::_('behavior.tooltip');
 	name="adminForm">
 <table>
 	<tr>
-		<td align="right" width="100%"><?php echo JText::_( 'Filter' ); ?>: <input
+		<td align="right" width="100%"><?php echo JText::_('COM_TRACKS_Filter' ); ?>: <input
 			type="text" name="search" id="search"
 			value="<?php echo $this->lists['search'];?>" class="text_area"
 			onchange="document.adminForm.submit();" />
-		<button onclick="this.form.submit();"><?php echo JText::_( 'Go' ); ?></button>
+		<button onclick="this.form.submit();"><?php echo JText::_('COM_TRACKS_Go' ); ?></button>
 		<button
-			onclick="document.getElementById('search').value='';this.form.submit();"><?php echo JText::_( 'Reset' ); ?></button>
+			onclick="document.getElementById('search').value='';this.form.submit();"><?php echo JText::_('COM_TRACKS_Reset' ); ?></button>
 		</td>
 		<td nowrap="nowrap"><?php
 		echo $this->lists['state'];
@@ -42,7 +42,7 @@ JHTML::_('behavior.tooltip');
 <table class="adminlist">
 	<thead>
 		<tr>
-			<th width="5"><?php echo JText::_( 'NUM' ); ?></th>
+			<th width="5"><?php echo JText::_('COM_TRACKS_NUM' ); ?></th>
 			<th width="20"><input type="checkbox" name="toggle" value=""
 				onclick="checkAll(<?php echo count( $this->items ); ?>);" /></th>
 			<th class="title" nowrap="nowrap"><?php echo JHTML::_('grid.sort',  'Name', 'p.name', $this->lists['order_Dir'], $this->lists['order'] ); ?>
@@ -87,9 +87,9 @@ JHTML::_('behavior.tooltip');
 			} else 
       {
 				?> <a href="<?php echo $link; ?>"
-				title="<?php echo JText::_( 'Edit Project' ); ?>"> <?php echo $row->name; ?></a> | 
+				title="<?php echo JText::_('COM_TRACKS_Edit_Project' ); ?>"> <?php echo $row->name; ?></a> | 
 				<a href="<?php echo $link_select; ?>"
-				title="<?php echo JText::_( 'Select project' ); ?>"> <?php echo JText::_( 'select' ); ?></a>
+				title="<?php echo JText::_('COM_TRACKS_Select_project' ); ?>"> <?php echo JText::_('COM_TRACKS_select' ); ?></a>
 				<?php
       }
 ?></td>

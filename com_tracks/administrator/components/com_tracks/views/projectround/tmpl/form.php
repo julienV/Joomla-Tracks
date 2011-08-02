@@ -19,8 +19,8 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <?php
 	// Set toolbar items for the page
 	$edit		= JRequest::getVar('edit',true);
-	$text = !$edit ? JText::_( 'New' ) : JText::_( 'Edit' );
-	JToolBarHelper::title(   JText::_( 'Project' ).': <small><small>[ ' . $text.' ]</small></small>' );
+	$text = !$edit ? JText::_('COM_TRACKS_New' ) : JText::_('COM_TRACKS_Edit' );
+	JToolBarHelper::title(   JText::_('COM_TRACKS_Project' ).': <small><small>[ ' . $text.' ]</small></small>' );
 	JToolBarHelper::save();
 	JToolBarHelper::apply();
 	if (!$edit)  {
@@ -43,7 +43,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     // do field validation
     var validator = document.formvalidator;
     if ( validator.validate(form.round_id) === false ){
-      alert( "<?php echo JText::_( 'ROUND ID IS REQUIRED', true ); ?>" );
+      alert( "<?php echo JText::_('COM_TRACKS_ROUND_ID_IS_REQUIRED', true ); ?>" );
     } else {
       submitform( pressbutton );
     }
@@ -54,13 +54,13 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <form action="index.php" method="post" name="adminForm" id="adminForm">
 <div class="col50">
 	<fieldset class="adminform">
-		<legend><?php echo JText::_( 'Projectround' ); ?></legend>
+		<legend><?php echo JText::_('COM_TRACKS_Projectround' ); ?></legend>
 
 		<table class="admintable">
 		<tr>
 			<td valign="top" align="right" class="key">
 				<label for="round_id">
-					<?php echo JText::_( 'ROUND' ); ?>:
+					<?php echo JText::_('COM_TRACKS_ROUND' ); ?>:
 				</label>
 			</td>
 			<td>
@@ -68,14 +68,14 @@ defined('_JEXEC') or die('Restricted access'); ?>
 			</td>
 		</tr>
         <tr>
-            <td valign="top" align="right" class="key"><?php echo JText::_( 'Published' ); ?>:
+            <td valign="top" align="right" class="key"><?php echo JText::_('COM_TRACKS_Published' ); ?>:
             </td>
             <td><?php echo $this->lists['published']; ?></td>
         </tr>
 		<tr>
 			<td width="100" align="right" class="key">
 				<label for="last_name">
-					<?php echo JText::_( 'Round start' ); ?>:
+					<?php echo JText::_('COM_TRACKS_Round_start' ); ?>:
 				</label>
 			</td>
 			<td>
@@ -87,7 +87,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 		<tr>
 			<td width="100" align="right" class="key">
 				<label for="last_name">
-					<?php echo JText::_( 'Round end' ); ?>:
+					<?php echo JText::_('COM_TRACKS_Round_end' ); ?>:
 				</label>
 			</td>
 			<td>
@@ -99,7 +99,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 		<tr>
 	        <td valign="top" align="right" class="key">
 	        <label for="ordering">
-	          <?php echo JText::_( 'Ordering' ); ?>:
+	          <?php echo JText::_('COM_TRACKS_Ordering' ); ?>:
 	        </label>
 	        </td>
 	        <td>

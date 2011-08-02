@@ -61,7 +61,7 @@ class TracksViewProjectindividual extends JView
 		// fail if checked out not by 'me'
 		if ($model->isCheckedOut( $user->get('id') )) 
     {
-			$msg = JText::sprintf( 'DESCBEINGEDITTED', JText::_( 'The project participant' ), 
+			$msg = JText::sprintf( 'DESCBEINGEDITTED', JText::_('COM_TRACKS_The_project_participant' ), 
                               $projectindividual->first_name. ' ' . $projectindividual->last_name );
 			$mainframe->redirect( 'index.php?option='. $option, $msg );
 		}
@@ -79,7 +79,7 @@ class TracksViewProjectindividual extends JView
 		}
 		
 		//build the html select list for individuals
-    $individuals[] = JHTML::_('select.option',  '0', '- '. JText::_( 'Select a person' ) .' -','id', 'name' );
+    $individuals[] = JHTML::_('select.option',  '0', '- '. JText::_('COM_TRACKS_Select_a_person' ) .' -','id', 'name' );
     if ( $res = & $this->get('Individuals') ) {
       $individuals = array_merge( $individuals, $res );
     }
@@ -87,7 +87,7 @@ class TracksViewProjectindividual extends JView
     unset($individuals);
     
     //build the html select list for teams
-    $teams[] = JHTML::_('select.option',  '0', '- '. JText::_( 'Select a team' ) .' -','id', 'name' );
+    $teams[] = JHTML::_('select.option',  '0', '- '. JText::_('COM_TRACKS_Select_a_team' ) .' -','id', 'name' );
     if ( $res = & $this->get('Teams') ) {
       $teams = array_merge( $teams, $res );
     }

@@ -33,7 +33,7 @@ class plgTracksCb extends JPlugin {
 		}
 		
     $link = JRoute::_( 'index.php?option=com_comprofiler&&task=userProfile&user='. $user_id );
-		$object->text = JHTML::link($link, JText::_( 'VIEW USER PROFILE' ), $attribs);
+		$object->text = JHTML::link($link, JText::_('VIEW_USER_PROFILE' ), $attribs);
 		return true;
 	}
 }

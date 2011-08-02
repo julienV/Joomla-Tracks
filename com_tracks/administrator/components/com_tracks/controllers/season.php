@@ -75,9 +75,9 @@ class TracksControllerSeason extends BaseController
 		$model = $this->getModel('season');
 
 		if ($returnid = $model->store($post)) {
-			$msg = JText::_( 'Season Saved' );
+			$msg = JText::_('COM_TRACKS_Season_Saved' );
 		} else {
-			$msg = JText::_( 'Error Saving Season' ).$model->getError();
+			$msg = JText::_('COM_TRACKS_Error_Saving_Season' ).$model->getError();
 		}
 
 		// Check the table in so it can be edited.... we are done with it anyway
@@ -99,7 +99,7 @@ class TracksControllerSeason extends BaseController
 		JArrayHelper::toInteger($cid);
 
 		if (count( $cid ) < 1) {
-			JError::raiseError(500, JText::_( 'Select an item to delete' ) );
+			JError::raiseError(500, JText::_('COM_TRACKS_Select_an_item_to_delete' ) );
 		}
 
 		$model = $this->getModel('season');
@@ -118,7 +118,7 @@ class TracksControllerSeason extends BaseController
 		JArrayHelper::toInteger($cid);
 
 		if (count( $cid ) < 1) {
-			JError::raiseError(500, JText::_( 'Select an item to publish' ) );
+			JError::raiseError(500, JText::_('COM_TRACKS_Select_an_item_to_publish' ) );
 		}
 
 		$model = $this->getModel('season');
@@ -136,7 +136,7 @@ class TracksControllerSeason extends BaseController
 		JArrayHelper::toInteger($cid);
 
 		if (count( $cid ) < 1) {
-			JError::raiseError(500, JText::_( 'Select an item to unpublish' ) );
+			JError::raiseError(500, JText::_('COM_TRACKS_Select_an_item_to_unpublish' ) );
 		}
 
 		$model = $this->getModel('season');

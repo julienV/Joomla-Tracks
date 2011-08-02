@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-    <layout title="Standard team display layout">
+    <layout title="COM_TRACKS_Standard_team_display_layout">
         <message>
-        <![CDATA[Displays a team details]]>
+        <![CDATA[COM_TRACKS_Displays_a_team_details]]>
         </message>
     </layout>
     <state>
-        <name>Standard team display layout</name>
-        <description>Select a team</description>
+        <name>COM_TRACKS_Standard_team_display_layout</name>
+        <description>COM_TRACKS_Select_a_team</description>
         <url addpath="/administrator/components/com_tracks/elements">
-            <param name="t" type="tsql" default="" label="Select a team" description="" query="SELECT id AS t, name AS text FROM #__tracks_teams ORDER BY name ASC" />
+            <param name="t" type="tsql" default="" label="COM_TRACKS_Select_a_team" description="" query="SELECT id AS t, name AS text FROM #__tracks_teams ORDER BY name ASC" />
         </url>
         <params>
         </params>

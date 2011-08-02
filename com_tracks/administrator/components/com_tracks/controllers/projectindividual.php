@@ -62,9 +62,9 @@ class TracksControllerProjectindividual extends BaseController
 		$model = $this->getModel('projectindividual');
 
 		if ($returnid = $model->store($post)) {
-			$msg = JText::_( 'Participant Saved' );
+			$msg = JText::_('COM_TRACKS_Participant_Saved' );
 		} else {
-			$msg = JText::_( 'Error Saving Project Round' ).$model->getError();
+			$msg = JText::_('COM_TRACKS_Error_Saving_Project_Round' ).$model->getError();
 		}
 
 		// Check the table in so it can be edited.... we are done with it anyway
@@ -90,7 +90,7 @@ class TracksControllerProjectindividual extends BaseController
     JArrayHelper::toInteger($team_id);
     
     if (count( $cid ) < 1) {
-      JError::raiseError(500, JText::_( 'Select an individual to assign' ) );
+      JError::raiseError(500, JText::_('COM_TRACKS_Select_an_individual_to_assign' ) );
     }
     
     $rows = array();
@@ -118,7 +118,7 @@ class TracksControllerProjectindividual extends BaseController
 		JArrayHelper::toInteger($cid);
 
 		if (count( $cid ) < 1) {
-			JError::raiseError(500, JText::_( 'Select an item to delete' ) );
+			JError::raiseError(500, JText::_('COM_TRACKS_Select_an_item_to_delete' ) );
 		}
 
 		$model = $this->getModel('projectindividual');
@@ -126,7 +126,7 @@ class TracksControllerProjectindividual extends BaseController
 		if(!$count = $model->delete($cid)) {
 			echo "<script> alert('".$model->getError(true)."'); window.history.go(-1); </script>\n";
 		}
-		$msg = $count . ' ' . JText::_('indiviual(s) removed from project');
+		$msg = $count . ' ' . JText::_('COM_TRACKS_individuals_removed_from_project');
 
 		$this->setRedirect( 'index.php?option=com_tracks&view=projectindividuals', $msg);
 	}
@@ -138,7 +138,7 @@ class TracksControllerProjectindividual extends BaseController
 		JArrayHelper::toInteger($cid);
 
 		if (count( $cid ) < 1) {
-			JError::raiseError(500, JText::_( 'Select an item to publish' ) );
+			JError::raiseError(500, JText::_('COM_TRACKS_Select_an_item_to_publish' ) );
 		}
 
 		$model = $this->getModel('projectindividual');
@@ -156,7 +156,7 @@ class TracksControllerProjectindividual extends BaseController
 		JArrayHelper::toInteger($cid);
 
 		if (count( $cid ) < 1) {
-			JError::raiseError(500, JText::_( 'Select an item to unpublish' ) );
+			JError::raiseError(500, JText::_('COM_TRACKS_Select_an_item_to_unpublish' ) );
 		}
 
 		$model = $this->getModel('projectindividual');

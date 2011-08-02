@@ -42,7 +42,7 @@ class TracksFrontControllerIndividual extends JController
 	{
     $user   =& JFactory::getUser();
     if (!$user->get('id')) {
-      $this->setRedirect(JURI::base(), JText::_('Please login to be able to edit your tracks profile'), 'error' );
+      $this->setRedirect(JURI::base(), JText::_('COM_TRACKS_Please_login_to_be_able_to_edit_your_tracks_profile'), 'error' );
       $this->redirect();
     }
     
@@ -64,7 +64,7 @@ class TracksFrontControllerIndividual extends JController
 
     // perform security checks
     if ( !$user->get('id') ) {
-      JError::raiseError( 403, JText::_('Access Forbidden') );
+      JError::raiseError( 403, JText::_('COM_TRACKS_Access_Forbidden') );
       return;
     }
     
@@ -99,9 +99,9 @@ class TracksFrontControllerIndividual extends JController
     $model = $this->getModel('individual');
 
     if ($model->store($post, $picture, $picture_small)) {
-      $msg  = JText::_( 'Profile has been saved.' );
+      $msg  = JText::_('COM_TRACKS_Profile_has_been_saved.' );
     } else {
-      //$msg  = JText::_( 'Error saving your settings.' );
+      //$msg  = JText::_('COM_TRACKS_Error_saving_your_settings.' );
       $msg  = $model->getError();
     }
 

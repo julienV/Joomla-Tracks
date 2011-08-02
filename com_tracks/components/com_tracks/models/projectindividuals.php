@@ -32,7 +32,7 @@ class TracksFrontModelProjectindividuals extends baseModel
 	function getIndividuals($project_id = 0) 
 	{
 		if (!$project_id) {
-			$this->setError(JText::_('No project specified'));
+			$this->setError(JText::_('COM_TRACKS_No_project_specified'));
 			return null;
 		}
 		

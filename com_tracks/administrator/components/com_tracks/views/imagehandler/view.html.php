@@ -73,7 +73,7 @@ class TracksViewImagehandler extends JView  {
 			parent::display($tpl);
 		} else {
 			//no images in the folder, redirect to uploadscreen and raise notice
-			JError::raiseNotice('SOME_ERROR_CODE', JText::_('NO IMAGES AVAILABLE'));
+			JError::raiseNotice('SOME_ERROR_CODE', JText::_('COM_TRACKS_NO_IMAGES_AVAILABLE'));
 			$this->setLayout('upload');
 			$this->_displayupload($tpl);
 			return;

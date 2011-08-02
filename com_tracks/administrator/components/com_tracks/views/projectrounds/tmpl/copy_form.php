@@ -29,7 +29,7 @@ JHTML::_('behavior.tooltip');
     
     // do field validation
     if (pressbutton == "savecopy" && document.adminForm.project_id.value == "0"){
-      alert( "<?php echo JText::_( 'You must select a project !', true ); ?>" );
+      alert( "<?php echo JText::_('COM_TRACKS_You_must_select_a_project', true ); ?>" );
     } else {    
 	    if (typeof document.adminForm.onsubmit == "function") {
 	      document.adminForm.onsubmit();
@@ -41,17 +41,17 @@ JHTML::_('behavior.tooltip');
 <div id="tracksmain">
 <form action="<?php echo $this->request_url; ?>" method="post" name="adminForm">
 <div id="projectsel">
-<?php echo JText::_( 'Copy to ' ) . $this->lists['projects']; ?>
+<?php echo JText::_('COM_TRACKS_Copy_to ' ) . $this->lists['projects']; ?>
 </div>
 <div id="editcell">
 	<table class="adminlist">
 	<thead>
 		<tr>
 			<th width="5">
-				<?php echo JText::_( 'Id' ); ?>
+				<?php echo JText::_('COM_TRACKS_Id' ); ?>
 			</th>
 			<th class="title">
-        <?php echo JText::_( 'Name' ); ?>
+        <?php echo JText::_('COM_TRACKS_Name' ); ?>
 			</th>
 		</tr>
 	</thead>

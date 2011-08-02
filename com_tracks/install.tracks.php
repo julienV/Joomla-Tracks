@@ -37,20 +37,20 @@ function update01to02()
                        . ' ADD `hometown` varchar(50) NULL AFTER `dob` ;');
     $database->query();
     if ( !$database->getErrorNum() ) {
-      echo JTEXT::_('table #__tracks_individuals succesfully updated<br />');
+      echo JText::_('COM_TRACKS_table_#__tracks_individuals_succesfully_updated').'<br/>';
     }
     else {
-      echo JTEXT::_('Error while updating table #__tracks_individuals<br />') . $database->getErrorMsg();
+      echo JText::_('COM_TRACKS_Error_while_updating_table_#__tracks_individuals') . $database->getErrorMsg().'<br/>';
     }
     
     $database->setQuery( 'ALTER TABLE `#__tracks_projects_individuals` '
                        . ' ADD `number` int(11) NOT NULL AFTER `team_id` ;');
     $database->query(); 
     if ( !$database->getErrorNum() ) {
-      echo JTEXT::_('table #__tracks_projects_individuals succesfully updated<br />');
+      echo JText::_('COM_TRACKS_table_#__tracks_projects_individuals_succesfully_updated');
     }
     else {
-      echo JTEXT::_('Error while updating table #__tracks_projects_individuals<br />') . $database->getErrorMsg();
+      echo JText::_('COM_TRACKS_Error_while_updating_table_#__tracks_projects_individuals') . $database->getErrorMsg().'<br/>';
     }   
   }
   
@@ -65,10 +65,10 @@ function update01to02()
                        . ' CHANGE `projectround_id` `subround_id` int(11) NOT NULL;');
     $database->query();
     if ( !$database->getErrorNum() ) {
-      echo JTEXT::_('table #__tracks_rounds_results succesfully updated<br />');
+      echo JText::_('COM_TRACKS_table_#__tracks_rounds_results_succesfully_updated').'<br/>';
     }
     else {
-      echo JTEXT::_('Error while updating table #__tracks_rounds_results<br />') . $database->getErrorMsg();
+      echo JText::_('COM_TRACKS_Error_while_updating_table_#__tracks_rounds_results') . $database->getErrorMsg().'<br/>';
     }   
     
     /* change field name in table rounds_results */
@@ -78,10 +78,10 @@ function update01to02()
     $database->query();
     /* create a default subround type */
     if ( !$database->getErrorNum() ) {
-      echo JTEXT::_('a default subround type was added to  #__tracks_subroundtypes<br />');
+      echo JText::_('COM_TRACKS_a_default_subround_type_was_added_to_#__tracks_subroundtypes').'<br/>';
     }
     else {
-      echo JTEXT::_('Error while adding default subround type to table #__tracks_subroundtypes<br />') .   $database->getErrorMsg();
+      echo JText::_('COM_TRACKS_Error_while_adding_default_subround_type_to_table_#__tracks_subroundtypes') .   $database->getErrorMsg().'<br/>';
     }
     
     /* create corresponding subrounds */
@@ -92,10 +92,10 @@ function update01to02()
           FROM `#__tracks_projects_rounds`;' );
     $database->query();
     if ( !$database->getErrorNum() ) {
-      echo JTEXT::_('table #__tracks_projects_subrounds succesfully updated<br />');
+      echo JText::_('COM_TRACKS_table_#__tracks_projects_subrounds_succesfully_updated').'<br/>';
     }
     else {
-      echo JTEXT::_('Error while updating table #__tracks_projects_subrounds<br />') . $database->getErrorMsg();
+      echo JText::_('COM_TRACKS_Error_while_updating_table_#__tracks_projects_subrounds') . $database->getErrorMsg().'<br/>';
     }
   }
 }
@@ -123,10 +123,10 @@ function update02to03()
 	                       . ' ADD `alias` varchar(100) NOT NULL AFTER `id`;');
 	    $database->query();
 	    if ( !$database->getErrorNum() ) {
-	      echo JTEXT::_('table '.$t.' succesfully updated<br />');
+	      echo JText::_('COM_TRACKS_table '.$t.' succesfully updated').'<br/>';
 	    }
 	    else {
-	      echo JTEXT::_('Error while updating table '.$t.'<br />') . $database->getErrorMsg();
+	      echo JText::_('COM_TRACKS_Error_while_updating_table '.$t) . $database->getErrorMsg().'<br/>';
 	    }   
     } 
     
@@ -135,10 +135,10 @@ function update02to03()
                        . ' ADD `picture_small` varchar(100) NULL AFTER `picture`;');
     $database->query(); 
     if ( !$database->getErrorNum() ) {
-      echo JTEXT::_('table #__tracks_teams succesfully updated<br />');
+      echo JText::_('COM_TRACKS_table_#__tracks_teams_succesfully_updated').'<br/>';
     }
     else {
-      echo JTEXT::_('Error while updating table #__tracks_teams<br />') . $database->getErrorMsg();
+      echo JText::_('COM_TRACKS_Error_while_updating_table_#__tracks_teams') . $database->getErrorMsg().'<br/>';
     }   
       
   }
@@ -151,10 +151,10 @@ function update02to03()
   	. ' CHANGE `bonus_points` `bonus_points` float NOT NULL;');
   	$database->query();
   	if ( !$database->getErrorNum() ) {
-  		echo JTEXT::_('bonus points changed to type float<br />');
+  		echo JText::_('COM_TRACKS_bonus_points_changed_to_type_float').'<br/>';
   	}
   	else {
-  		echo JTEXT::_('Error while trying to convert bonus_points to float<br />') . $database->getErrorMsg();
+  		echo JText::_('COM_TRACKS_Error_while_trying_to_convert_bonus_points_to_float') . $database->getErrorMsg().'<br/>';
   	}
   }
 }
@@ -176,10 +176,10 @@ function update03to04()
 		. ' CHANGE `number` `number` VARCHAR(8) NULL;');
 		$database->query();
 		if ( !$database->getErrorNum() ) {
-			echo JTEXT::_('converted individual number to type varchar<br />');
+			echo JText::_('COM_TRACKS_converted_individual_number_to_type_varchar');
 		}
 		else {
-			echo JTEXT::_('Error while trying to convert number to varchar<br />') . $database->getErrorMsg();
+			echo JText::_('COM_TRACKS_Error_while_trying_to_convert_number_to_varchar') . $database->getErrorMsg().'<br/>';
 		}
 	}
 	 
@@ -190,10 +190,10 @@ function update03to04()
 		. ' ADD `number` varchar(8) NULL AFTER `team_id`;');
 		$database->query();
 		if ( !$database->getErrorNum() ) {
-			echo JTEXT::_('Added field number to individual results<br />');
+			echo JText::_('COM_TRACKS_Added_field_number_to_individual_results').'<br/>';
 		}
 		else {
-			echo JTEXT::_('Error while adding field number to individual results<br />') . $database->getErrorMsg();
+			echo JText::_('COM_TRACKS_Error_while_adding_field_number_to_individual_results') . $database->getErrorMsg().'<br/>';
 		}
 	}
 	 
@@ -206,19 +206,19 @@ function update03to04()
 		. ' ADD `points_attribution` varchar(250) NOT NULL AFTER `note`;');
 		$database->query();
 		if ( !$database->getErrorNum() ) {
-			echo JTEXT::_('Added fields note and points_attribution to subround types<br />');
+			echo JText::_('COM_TRACKS_Added_fields_note_and_points_attribution_to_subround_types').'<br/>';
 		}
 		else {
-			echo JTEXT::_('Error while adding fields note and points_attribution to subround types<br />') . $database->getErrorMsg();
+			echo JText::_('COM_TRACKS_Error_while_adding_fields_note_and_points_attribution_to_subround_types') . $database->getErrorMsg().'<br/>';
 		}
 		
 		$database->setQuery( 'ALTER TABLE `#__tracks_subroundtypes` DROP `countpoints`;');
     $database->query();
     if ( !$database->getErrorNum() ) {
-      echo JTEXT::_('Removed field countpoints for subround types<br />');
+      echo JText::_('COM_TRACKS_Removed_field_countpoints_for_subround_types').'<br/>';
     }
     else {
-      echo JTEXT::_('Error while removing field countpoints for subround types<br />') . $database->getErrorMsg();
+      echo JText::_('COM_TRACKS_Error_while_removing_field_countpoints_for_subround_types') . $database->getErrorMsg().'<br/>';
     }
 	}
 }

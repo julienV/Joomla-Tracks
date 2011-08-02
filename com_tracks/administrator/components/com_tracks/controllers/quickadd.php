@@ -72,7 +72,7 @@ class TracksControllerQuickAdd extends BaseController
 		}
 		
 		if (!$individualid) {
-			$msg = Jtext::_('Error adding individual');
+			$msg = JText::_('COM_TRACKS_Error_adding_individual');
 			$this->setRedirect("index.php?option=com_tracks&view=subroundresults&srid=".$srid, $msg, 'error');
 		}
 			

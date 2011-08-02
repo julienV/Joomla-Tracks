@@ -38,10 +38,10 @@ $option = JRequest::getCmd('option');
         $projectparams = & $model->getParams($project->id);
                 
         $breadcrumbs =& $mainframe->getPathWay();
-        $breadcrumbs->addItem( $project->name. ' ' . JText::_( 'Team Rankings' ), 'index.php?option=com_tracks&view=teamranking&p=' . $project_id );
+        $breadcrumbs->addItem( $project->name. ' ' . JText::_('COM_TRACKS_Team_Rankings' ), 'index.php?option=com_tracks&view=teamranking&p=' . $project_id );
         
         $document =& JFactory::getDocument();
-        $document->setTitle( $project->name. ' ' . JText::_( 'Team Rankings' ) );
+        $document->setTitle( $project->name. ' ' . JText::_('COM_TRACKS_Team_Rankings' ) );
         
         $this->assignRef( 'project',    $project );                
         $this->assignRef( 'rankings',	$rankings );

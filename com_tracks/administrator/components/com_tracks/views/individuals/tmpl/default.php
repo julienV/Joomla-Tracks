@@ -37,10 +37,10 @@ JHTML::_('behavior.tooltip');
 <table>
 <tr>
 	<td align="left" width="100%">
-		<?php echo JText::_( 'Filter' ); ?>:
+		<?php echo JText::_('COM_TRACKS_Filter' ); ?>:
 		<input type="text" name="search" id="search" value="<?php echo $this->lists['search'];?>" class="text_area" onchange="document.adminForm.submit();" />
-		<button onclick="this.form.submit();"><?php echo JText::_( 'Go' ); ?></button>
-		<button onclick="document.getElementById('search').value='';this.form.submit();"><?php echo JText::_( 'Reset' ); ?></button>
+		<button onclick="this.form.submit();"><?php echo JText::_('COM_TRACKS_Go' ); ?></button>
+		<button onclick="document.getElementById('search').value='';this.form.submit();"><?php echo JText::_('COM_TRACKS_Reset' ); ?></button>
 	</td>
 </tr>
 </table>
@@ -49,7 +49,7 @@ JHTML::_('behavior.tooltip');
 	<thead>
 		<tr>
 			<th width="5">
-				<?php echo JText::_( 'NUM' ); ?>
+				<?php echo JText::_('COM_TRACKS_NUM' ); ?>
 			</th>
 			<th width="20">
 				<input type="checkbox" name="toggle" value="" onclick="checkAll(<?php echo count( $this->items ); ?>);" />
@@ -60,7 +60,7 @@ JHTML::_('behavior.tooltip');
 			<th class="title">
 				<?php echo JHTML::_('grid.sort',  'First name', 'obj.first_name', $this->lists['order_Dir'], $this->lists['order'] ); ?>
 			</th>
-      <th class="title" nowrap="nowrap"><?php echo JText::_('ALIAS'); ?></th>
+      <th class="title" nowrap="nowrap"><?php echo JText::_('COM_TRACKS_ALIAS'); ?></th>
 			<th width="1%" nowrap="nowrap">
 				<?php echo JHTML::_('grid.sort',  'ID', 'obj.id', $this->lists['order_Dir'], $this->lists['order'] ); ?>
 			</th>
@@ -99,7 +99,7 @@ JHTML::_('behavior.tooltip');
 					echo $row->last_name;
 				} else {
 				?>
-					<a href="<?php echo $link; ?>" title="<?php echo JText::_( 'Edit Individual' ); ?>">
+					<a href="<?php echo $link; ?>" title="<?php echo JText::_('COM_TRACKS_Edit_Individual' ); ?>">
 						<?php echo $row->last_name; ?></a>
 				<?php
 				}

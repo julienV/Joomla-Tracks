@@ -21,9 +21,8 @@ defined('_JEXEC') or die('Restricted access'); ?>
 		  <img src="<?php echo JURI::base() ?>components/com_tracks/assets/images/tracks_logo_250.png"/>
 		</td>
 		<td>
-      <h2><?php echo JText::_('About Tracks'); ?></h2>
-		  <p><?php echo JText::_('Tracks is free software, under GPL version 2 license.<br/>
-			The full license can be found in the component folder.'); ?></p>
+      <h2><?php echo JText::_('COM_TRACKS_About_Tracks'); ?></h2>
+		  <p><?php echo JText::_('COM_TRACKS_LICENSE'); ?></p>
 			<p>
 			Please visit our <a href="http://tracks.jlv-solutions.com/forum" target="_blank">forum for support</a>.
 			</p>
@@ -31,9 +30,9 @@ defined('_JEXEC') or die('Restricted access'); ?>
       Tracks logo by <a href="mailto:info@notethis.nl">Sebastiaan Rozendaal</a>, www.notethis.nl.
       </p>
 			<p>
-			<?php echo JText::_('Thanks for using (beta testing) Tracks !'); ?>
+			<?php echo JText::_('COM_TRACKS_THANKS'); ?>
 			</p>
-			<h2><?php echo JText::_('Helping'); ?></h2>
+			<h2><?php echo JText::_('COM_TRACKS_Helping'); ?></h2>
 			<p>You can help by <a href="http://extensions.joomla.org/index.php?option=com_mtree&task=viewlink&link_id=4738&Itemid=2">voting and reviewing the component on Joomla extension directory</a>, by making donations, or by contributing with code, graphic, translations, etc...</p>
 			<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 			<input type="hidden" name="cmd" value="_s-xclick">

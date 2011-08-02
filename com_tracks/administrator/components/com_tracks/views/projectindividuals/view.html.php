@@ -39,9 +39,9 @@ class TracksViewProjectindividuals extends TracksView
 		}
 		
 		// Set toolbar items for the page
-		JToolBarHelper::title(   JText::_( 'Tracks Project Participants' ), 'generic.png' );
+		JToolBarHelper::title(   JText::_('COM_TRACKS_Project_Participants' ), 'generic.png' );
 		JToolBarHelper::back();
-		JToolBarHelper::deleteList(JText::_('DELETEPROJECTINDIVIDUALCONFIRM'));
+		JToolBarHelper::deleteList(JText::_('COM_TRACKS_DELETEPROJECTINDIVIDUALCONFIRM'));
 		JToolBarHelper::editListX();
 		JToolBarHelper::addNewX();
     JToolBarHelper::help( 'screen.tracks', true );
@@ -90,7 +90,7 @@ class TracksViewProjectindividuals extends TracksView
 $option = JRequest::getCmd('option');
 		
 		// Set toolbar items for the page
-		JToolBarHelper::title(   JText::_( 'Assign Participants' ), 'generic.png' );
+		JToolBarHelper::title(   JText::_('COM_TRACKS_Assign_Participants' ), 'generic.png' );
 		JToolBarHelper::back();
 		JToolBarHelper::save('saveassign', 'Save');
 		JToolBarHelper::cancel('cancelassign');
@@ -104,13 +104,13 @@ $option = JRequest::getCmd('option');
     // print_r($model);
     
 		//build the html select list for teams
-    $teamoptions[] = JHTML::_('select.option',  '0', '- '. JText::_( 'Select a team' ) .' -','id', 'name' );
+    $teamoptions[] = JHTML::_('select.option',  '0', '- '. JText::_('COM_TRACKS_Select_a_team' ) .' -','id', 'name' );
     if ( $res = & $this->get('Teams') ) {
       $teamoptions = array_merge( $teamoptions, $res );
     }
     
     //build the html select list for projects
-    $projects[] = JHTML::_('select.option',  '0', '- '. JText::_( 'Select a project' ) .' -','value', 'text' );
+    $projects[] = JHTML::_('select.option',  '0', '- '. JText::_('COM_TRACKS_Select_a_project' ) .' -','value', 'text' );
     if ( $res = & $this->get('projectsListOptions') ) {
       $projects = array_merge( $projects, $res );
     }

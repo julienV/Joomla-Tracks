@@ -18,8 +18,8 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <?php
 	// Set toolbar items for the page
 	$edit		= JRequest::getVar('edit',true);
-	$text = !$edit ? JText::_( 'New' ) : JText::_( 'Edit' );
-	JToolBarHelper::title(   JText::_( 'Project' ).': <small><small>[ ' . $text.' ]</small></small>' );
+	$text = !$edit ? JText::_('COM_TRACKS_New' ) : JText::_('COM_TRACKS_Edit' );
+	JToolBarHelper::title(   JText::_('COM_TRACKS_Project' ).': <small><small>[ ' . $text.' ]</small></small>' );
 	JToolBarHelper::save();
 	JToolBarHelper::apply();
 	if (!$edit)  {
@@ -41,7 +41,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 		// do field validation
 		if (form.individual_id.value == "0"){
-			alert( "<?php echo JText::_( 'You must chose a person !', true ); ?>" );
+			alert( "<?php echo JText::_('COM_TRACKS_You_must_chose_a_person', true ); ?>" );
 		} else {
 			submitform( pressbutton );
 		}
@@ -59,13 +59,13 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <form action="index.php" method="post" name="adminForm" id="adminForm">
 <div class="col50">
 	<fieldset class="adminform">
-		<legend><?php echo JText::_( 'Project Participant' ); ?></legend>
+		<legend><?php echo JText::_('COM_TRACKS_Project_Participant' ); ?></legend>
 
 		<table class="admintable">
 		<tr>
 			<td valign="top" align="right" class="key">
 				<label for="competition">
-					<?php echo JText::_( 'Person' ); ?>:
+					<?php echo JText::_('COM_TRACKS_Person' ); ?>:
 				</label>
 			</td>
 			<td>
@@ -75,7 +75,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     <tr>
       <td valign="top" align="right" class="key">
         <label for="number">
-          <?php echo JText::_( 'Number' ); ?>:
+          <?php echo JText::_('COM_TRACKS_Number' ); ?>:
         </label>
       </td>
       <td>
@@ -85,7 +85,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 		<tr>
 			<td valign="top" align="right" class="key">
 				<label for="competition">
-					<?php echo JText::_( 'Team' ); ?>:
+					<?php echo JText::_('COM_TRACKS_Team' ); ?>:
 				</label>
 			</td>
 			<td>

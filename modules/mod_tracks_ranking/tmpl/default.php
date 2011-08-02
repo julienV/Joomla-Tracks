@@ -21,10 +21,10 @@ JHTML::_('behavior.tooltip', '.mod-ranking-tip', array('className' => 'tip-mod-r
 <table cellspacing="0" cellpadding="0" summary="">
 	<thead>
     <tr>
-      <th><?php echo JText::_( 'Pos' ); ?></th>
-      <th><?php echo JText::_( 'Individual' ); ?></th>
-      <?php if ($showteams) { ?><th><?php echo JText::_( 'Team' ); ?></th><?php } ?>
-      <th><?php echo JText::_( 'Points' ); ?></th>
+      <th><?php echo JText::_( 'MOD_TRACKS_RANKING_Pos' ); ?></th>
+      <th><?php echo JText::_( 'MOD_TRACKS_RANKING_Individual' ); ?></th>
+      <?php if ($showteams) { ?><th><?php echo JText::_( 'MOD_TRACKS_RANKING_Team' ); ?></th><?php } ?>
+      <th><?php echo JText::_( 'MOD_TRACKS_RANKING_Points' ); ?></th>
     </tr>
 	</thead>
   <tbody>
@@ -47,7 +47,7 @@ JHTML::_('behavior.tooltip', '.mod-ranking-tip', array('className' => 'tip-mod-r
         <?php if ($showteams) { ?>
         <td>
           <a href="<?php echo $link_team; ?>"
-             title="<?php echo JText::_( 'Details' ); ?>"> 
+             title="<?php echo JText::_( 'MOD_TRACKS_RANKING_Details' ); ?>"> 
             <?php echo $ranking->team_acronym; ?>
           </a>
         </td>
@@ -66,7 +66,7 @@ JHTML::_('behavior.tooltip', '.mod-ranking-tip', array('className' => 'tip-mod-r
 $link = JRoute::_( TracksHelperRoute::getRankingRoute($project->slug) );
 ?>
 <a class="fulltablelink" href="<?php echo $link; ?>"
-             title="<?php echo JText::_( 'View full table' ); ?>"> 
-            <?php echo JText::_( 'View full table' ); ?>
+             title="<?php echo JText::_('MOD_TRACKS_RANKING_View_full_table' ); ?>"> 
+            <?php echo JText::_('MOD_TRACKS_RANKING_View_full_table' ); ?>
 </a>
 </div>

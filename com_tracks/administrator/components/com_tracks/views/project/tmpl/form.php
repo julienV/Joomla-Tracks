@@ -19,8 +19,8 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <?php
 	// Set toolbar items for the page
 	$edit		= JRequest::getVar('edit',true);
-	$text = !$edit ? JText::_( 'New' ) : JText::_( 'Edit' );
-	JToolBarHelper::title(   JText::_( 'Project' ).': <small><small>[ ' . $text.' ]</small></small>' );
+	$text = !$edit ? JText::_('COM_TRACKS_New' ) : JText::_('COM_TRACKS_Edit' );
+	JToolBarHelper::title(   JText::_('COM_TRACKS_Project' ).': <small><small>[ ' . $text.' ]</small></small>' );
 	JToolBarHelper::save();
 	JToolBarHelper::apply();
 	if (!$edit)  {
@@ -43,11 +43,11 @@ defined('_JEXEC') or die('Restricted access'); ?>
 		// do field validation
 		var validator = document.formvalidator;
 		if ( validator.validate(form.name) === false ){
-			alert( "<?php echo JText::_( 'PROJECT NAME IS REQUIRED', true ); ?>" );
+			alert( "<?php echo JText::_('COM_TRACKS_PROJECT_NAME_IS_REQUIRED', true ); ?>" );
     } else if ( validator.validate(form.competition_id) === false ){
-      alert( "<?php echo JText::_( 'COMPETITION IS REQUIRED', true ); ?>" );
+      alert( "<?php echo JText::_('COM_TRACKS_COMPETITION_IS_REQUIRED', true ); ?>" );
 		} else if ( validator.validate(form.season_id) === false ){
-      alert( "<?php echo JText::_( 'SEASON IS REQUIRED', true ); ?>" );
+      alert( "<?php echo JText::_('COM_TRACKS_SEASON_IS_REQUIRED', true ); ?>" );
     } else {
 			submitform( pressbutton );
 		}
@@ -58,13 +58,13 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <form action="index.php" method="post" name="adminForm" id="adminForm">
 <div class="col50">
 	<fieldset class="adminform">
-		<legend><?php echo JText::_( 'General' ); ?></legend>
+		<legend><?php echo JText::_('COM_TRACKS_General' ); ?></legend>
 
 		<table class="admintable">
 		<tr>
 			<td width="100" align="right" class="key">
 				<label for="name">
-					<?php echo JText::_( 'Name' ); ?>:
+					<?php echo JText::_('COM_TRACKS_Name' ); ?>:
 				</label>
 			</td>
 			<td>
@@ -72,7 +72,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 			</td>
 		</tr>
 	  <tr>
-	    <td width="100" align="right" class="key"><label for="alias"> <?php echo JText::_( 'Alias' ); ?>:
+	    <td width="100" align="right" class="key"><label for="alias"> <?php echo JText::_('COM_TRACKS_Alias' ); ?>:
 	    </label></td>
 	    <td><input class="text_area" type="text" name="alias" id="alias"
 	      size="32" maxlength="250" value="<?php echo $this->project->alias?>" />
@@ -80,7 +80,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 	  </tr>
 		<tr>
 			<td valign="top" align="right" class="key">
-				<?php echo JText::_( 'Published' ); ?>:
+				<?php echo JText::_('COM_TRACKS_Published' ); ?>:
 			</td>
 			<td>
 				<?php echo $this->lists['published']; ?>
@@ -89,7 +89,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 		<tr>
 			<td valign="top" align="right" class="key">
 				<label for="competition_id">
-					<?php echo JText::_( 'Competition' ); ?>:
+					<?php echo JText::_('COM_TRACKS_Competition' ); ?>:
 				</label>
 			</td>
 			<td>
@@ -99,7 +99,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 		<tr>
 			<td valign="top" align="right" class="key">
 				<label for="season_id">
-					<?php echo JText::_( 'Season' ); ?>:
+					<?php echo JText::_('COM_TRACKS_Season' ); ?>:
 				</label>
 			</td>
 			<td>
@@ -109,7 +109,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 		<tr>
 			<td valign="top" align="right" class="key">
 				<label for="admin_id">
-					<?php echo JText::_( 'Administrator' ); ?>:
+					<?php echo JText::_('COM_TRACKS_Administrator' ); ?>:
 				</label>
 			</td>
 			<td>
@@ -119,7 +119,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 		<tr>
       <td valign="top" align="right" class="key">
         <label for="ordering">
-          <?php echo JText::_( 'Ordering' ); ?>:
+          <?php echo JText::_('COM_TRACKS_Ordering' ); ?>:
         </label>
       </td>
       <td>
@@ -130,7 +130,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 	</fieldset>
 	
 	<fieldset class="adminform">
-		<legend><?php echo JText::_( 'Parameters' ); ?></legend>
+		<legend><?php echo JText::_('COM_TRACKS_Parameters' ); ?></legend>
 
 		<table class="admintable">
 		<tr>
@@ -141,7 +141,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 					<fieldset class="adminform">
 				    <legend><?php 
 				      if ($_group == '_default') {
-				      	echo JText::_('General');
+				      	echo JText::_('COM_TRACKS_General');
 				      }
 				      else {
 				      	echo $_group;

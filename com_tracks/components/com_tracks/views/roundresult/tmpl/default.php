@@ -50,20 +50,20 @@ foreach ($this->results as $subround)
 	<table class="raceResults" cellspacing="0" cellpadding="0" summary="">
 	  <tbody>
 	    <tr>
-	      <th><?php echo JText::_( 'POSITION SHORT' ); ?></th>
+	      <th><?php echo JText::_('COM_TRACKS_POSITION_SHORT' ); ?></th>
 	      <?php if ($this->projectparams->get('shownumber')): ?>
-	      <th><?php echo JText::_( 'NUMBER SHORT' ); ?></th>
+	      <th><?php echo JText::_('COM_TRACKS_NUMBER_SHORT' ); ?></th>
 	      <?php endif; ?>
 	      <?php if ($this->projectparams->get('showflag')): ?>
-	      <th><?php echo JText::_( 'COUNTRY SHORT' ); ?></th>
+	      <th><?php echo JText::_('COM_TRACKS_COUNTRY_SHORT' ); ?></th>
 	      <?php endif; ?>
-	      <th><?php echo JText::_( 'Individual' ); ?></th>
+	      <th><?php echo JText::_('COM_TRACKS_Individual' ); ?></th>
 	      <?php if ($this->projectparams->get('showteams')): ?>
-	      <th><?php echo JText::_( 'Team' ); ?></th>
+	      <th><?php echo JText::_('COM_TRACKS_Team' ); ?></th>
 	      <?php endif; ?>
-	      <th><?php echo JText::_( 'Performance' ); ?></th>
+	      <th><?php echo JText::_('COM_TRACKS_Performance' ); ?></th>
 	      <?php if (!empty($subround->points_attribution)): ?>
-	      <th><?php echo JText::_( 'Points' ); ?></th>
+	      <th><?php echo JText::_('COM_TRACKS_Points' ); ?></th>
 	      <?php endif; ?>
 	    </tr>
 	    <?php 
@@ -98,7 +98,7 @@ foreach ($this->results as $subround)
         
 					<td>
 					 <a href="<?php echo $link_ind; ?>"
-						  title="<?php echo JText::_( 'Details' ); ?>">
+						  title="<?php echo JText::_('COM_TRACKS_Details' ); ?>">
 					 <?php	echo $result->first_name . ' ' . $result->last_name; ?>
 					 </a>
 					</td>
@@ -106,7 +106,7 @@ foreach ($this->results as $subround)
 					<td>
 						<?php if ($result->team_id): ?>
 					 	<a href="<?php echo $link_team; ?>"
-						   title="<?php echo JText::_( 'Details' ); ?>"> <?php echo $result->team_name; ?></a>
+						   title="<?php echo JText::_('COM_TRACKS_Details' ); ?>"> <?php echo $result->team_name; ?></a>
 						<?php endif; ?>
 					</td>
 					<?php endif; ?>

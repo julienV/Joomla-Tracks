@@ -79,7 +79,7 @@ function submitbutton(pressbutton)
 	<thead>
 		<tr>
 			<th width="5">
-				<?php echo JText::_( 'NUM' ); ?>
+				<?php echo JText::_('COM_TRACKS_NUM' ); ?>
 			</th>
 			<th width="20">
 				<input type="checkbox" name="toggle" value="" onclick="checkAll(<?php echo count( $this->items ); ?>);" />
@@ -140,7 +140,7 @@ function submitbutton(pressbutton)
 					echo $row->last_name.', '.$row->first_name;
 				} else {
 				  ?>
-					<a href="<?php echo $link; ?>" title="<?php echo JText::_( 'Edit Project Participant' ); ?>">
+					<a href="<?php echo $link; ?>" title="<?php echo JText::_('COM_TRACKS_Edit_Project_Participant' ); ?>">
 						<?php echo $row->last_name. ', ' . $row->first_name; ?>
 					</a>
 				  <?php

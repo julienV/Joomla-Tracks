@@ -40,14 +40,14 @@ class TracksViewMenu extends JView
     $view     = JRequest::getCmd( 'view' );
 
 	  //Create Submenu
-    JSubMenuHelper::addEntry( JText::_( 'PROJECTS' ), 'index.php?option=com_tracks&view=projects', $view == 'projects');
-    JSubMenuHelper::addEntry( JText::_( 'COMPETITIONS' ), 'index.php?option=com_tracks&view=competitions', $view == 'competitions');
-    JSubMenuHelper::addEntry( JText::_( 'SEASONS' ), 'index.php?option=com_tracks&view=seasons', $view == 'seasons');
-    JSubMenuHelper::addEntry( JText::_( 'TEAMS' ), 'index.php?option=com_tracks&view=teams', $view == 'teams');
-    JSubMenuHelper::addEntry( JText::_( 'INDIVIDUALS' ), 'index.php?option=com_tracks&view=individuals', $view == 'individuals');
-    JSubMenuHelper::addEntry( JText::_( 'ROUNDS' ), 'index.php?option=com_tracks&view=rounds', $view == 'rounds');
-    JSubMenuHelper::addEntry( JText::_( 'SUBROUNDTYPES' ), 'index.php?option=com_tracks&view=subroundtypes', $view == 'subroundtypes');
-    JSubMenuHelper::addEntry( JText::_( 'ABOUT' ), 'index.php?option=com_tracks&view=about', $view == 'about');
+    JSubMenuHelper::addEntry( JText::_('COM_TRACKS_PROJECTS' ), 'index.php?option=com_tracks&view=projects', $view == 'projects');
+    JSubMenuHelper::addEntry( JText::_('COM_TRACKS_COMPETITIONS' ), 'index.php?option=com_tracks&view=competitions', $view == 'competitions');
+    JSubMenuHelper::addEntry( JText::_('COM_TRACKS_SEASONS' ), 'index.php?option=com_tracks&view=seasons', $view == 'seasons');
+    JSubMenuHelper::addEntry( JText::_('COM_TRACKS_TEAMS' ), 'index.php?option=com_tracks&view=teams', $view == 'teams');
+    JSubMenuHelper::addEntry( JText::_('COM_TRACKS_INDIVIDUALS' ), 'index.php?option=com_tracks&view=individuals', $view == 'individuals');
+    JSubMenuHelper::addEntry( JText::_('COM_TRACKS_ROUNDS' ), 'index.php?option=com_tracks&view=rounds', $view == 'rounds');
+    JSubMenuHelper::addEntry( JText::_('COM_TRACKS_SUBROUNDTYPES' ), 'index.php?option=com_tracks&view=subroundtypes', $view == 'subroundtypes');
+    JSubMenuHelper::addEntry( JText::_('COM_TRACKS_ABOUT' ), 'index.php?option=com_tracks&view=about', $view == 'about');
 
 		$this->assignRef('project',		$project);
     $this->assignRef('pane',   $pane);

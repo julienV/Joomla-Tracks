@@ -54,10 +54,10 @@ JHTML::_('behavior.tooltip');
 <table>
 <tr>
 	<td align="left" width="100%">
-		<?php echo JText::_( 'Filter' ); ?>:
+		<?php echo JText::_('COM_TRACKS_Filter' ); ?>:
 		<input type="text" name="search" id="search" value="<?php echo $this->lists['search'];?>" class="text_area" onchange="document.adminForm.submit();" />
-		<button onclick="this.form.submit();"><?php echo JText::_( 'Go' ); ?></button>
-		<button onclick="document.getElementById('search').value='';this.form.submit();"><?php echo JText::_( 'Reset' ); ?></button>
+		<button onclick="this.form.submit();"><?php echo JText::_('COM_TRACKS_Go' ); ?></button>
+		<button onclick="document.getElementById('search').value='';this.form.submit();"><?php echo JText::_('COM_TRACKS_Reset' ); ?></button>
 	</td>
 	<td nowrap="nowrap">
 		<?php
@@ -71,7 +71,7 @@ JHTML::_('behavior.tooltip');
 	<thead>
 		<tr>
 			<th width="5">
-				<?php echo JText::_( 'NUM' ); ?>
+				<?php echo JText::_('COM_TRACKS_NUM' ); ?>
 			</th>
 			<th width="20">
 				<input type="checkbox" name="toggle" value="" onclick="checkAll(<?php echo count( $this->items ); ?>);" />
@@ -80,10 +80,10 @@ JHTML::_('behavior.tooltip');
 				<?php echo JHTML::_('grid.sort',  'Name', 'r.name', $this->lists['order_Dir'], $this->lists['order'] ); ?>
 			</th>
 			<th class="title">
-				<?php echo JText::_( 'Sub rounds' ); ?>
+				<?php echo JText::_('COM_TRACKS_Sub_rounds' ); ?>
 			</th>
 			<th class="title">
-				<?php echo JText::_( 'Dates' ); ?>
+				<?php echo JText::_('COM_TRACKS_Dates' ); ?>
 			</th>
 			<th width="5%" nowrap="nowrap"><?php echo JHTML::_('grid.sort',  'Published', 'obj.published', $this->lists['order_Dir'], $this->lists['order'] ); ?>
 			</th>
@@ -130,7 +130,7 @@ JHTML::_('behavior.tooltip');
 					echo $row->name;
 				} else {
 				?>
-					<a href="<?php echo $link; ?>" title="<?php echo JText::_( 'Edit Projectround' ); ?>">
+					<a href="<?php echo $link; ?>" title="<?php echo JText::_('COM_TRACKS_Edit_Projectround' ); ?>">
 						<?php echo $row->name; ?></a>
 				<?php
 				}
@@ -139,11 +139,11 @@ JHTML::_('behavior.tooltip');
       <td>
 				<?php
 				if (  JTable::isCheckedOut($this->user->get ('id'), $row->checked_out ) ) {
-					echo JText::_( 'edit locked' );
+					echo JText::_('COM_TRACKS_edit_locked' );
 				} else {
 				?>
-					<a href="<?php echo $link_results; ?>" title="<?php echo JText::_( 'Edit sub-rounds / results' ); ?>">
-						<?php echo JText::_( 'Edit sub-rounds' ); ?></a>
+					<a href="<?php echo $link_results; ?>" title="<?php echo JText::_('COM_TRACKS_Edit_sub-rounds_/_results' ); ?>">
+						<?php echo JText::_('COM_TRACKS_Edit_sub-rounds' ); ?></a>
 				<?php
 				}
 				?>

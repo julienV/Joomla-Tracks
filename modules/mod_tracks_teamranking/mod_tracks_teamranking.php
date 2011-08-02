@@ -21,7 +21,7 @@ include_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'helpers'.DS.'route.
 
 $limit = intval( $params->get('count', 5) );
 
-if (!$params->get('project_id')) return JText::_('No project specified');
+if (!$params->get('project_id')) return JText::_('MOD_TRACKS_TEAM_RANKING_No_project_specified');
 
 $helper = new modTracksTeamRanking();
 

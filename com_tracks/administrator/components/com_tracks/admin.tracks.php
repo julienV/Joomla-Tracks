@@ -20,7 +20,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
  /*
 $user = & JFactory::getUser();
 if (!$user->authorize( 'com_tracks', 'manage' )) {
-	$mainframe->redirect( 'index.php', JText::_('ALERTNOTAUTH') );
+	$mainframe->redirect( 'index.php', JText::_('COM_TRACKS_ALERTNOTAUTH') );
 }*/
 
 // Require the base controller

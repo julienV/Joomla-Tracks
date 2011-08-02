@@ -63,7 +63,7 @@ class TracksViewProject extends TracksView
 
 		// fail if checked out not by 'me'
 		if ($model->isCheckedOut( $user->get('id') )) {
-			$msg = JText::sprintf( 'DESCBEINGEDITTED', JText::_( 'The project' ), $project->name );
+			$msg = JText::sprintf( 'DESCBEINGEDITTED', JText::_('COM_TRACKS_The_project' ), $project->name );
 			$mainframe->redirect( 'index.php?option='. $option, $msg );
 		}
 
@@ -80,7 +80,7 @@ class TracksViewProject extends TracksView
 		}
 		
 		//build the html select list for competition
-	    $competitions[] = JHTML::_('select.option',  '', '- '. JText::_( 'Select a Competition' ) .' -','id', 'name' );
+	    $competitions[] = JHTML::_('select.option',  '', '- '. JText::_('COM_TRACKS_Select_a_Competition' ) .' -','id', 'name' );
 	    if ( $res = & $this->get('Competitions') ) {
 	      $competitions = array_merge( $competitions, $res );
 	    }
@@ -88,7 +88,7 @@ class TracksViewProject extends TracksView
 	    unset($competitions);
 	    
 	    //build the html select list for season
-	    $seasons[] = JHTML::_('select.option',  '', '- '. JText::_( 'Select a Season' ) .' -','id', 'name' );
+	    $seasons[] = JHTML::_('select.option',  '', '- '. JText::_('COM_TRACKS_Select_a_Season' ) .' -','id', 'name' );
 	    if ( $res = & $this->get('Seasons') ) {
 	      $seasons = array_merge( $seasons, $res );
 	    }

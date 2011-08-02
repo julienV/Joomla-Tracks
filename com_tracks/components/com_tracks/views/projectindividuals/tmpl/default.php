@@ -14,7 +14,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 <div id="tracks">
 
-<h1><?php echo $this->project->name . ' ' . JText::_( 'Participants' ); ?></h1>
+<h1><?php echo $this->project->name . ' ' . JText::_('COM_TRACKS_Participants' ); ?></h1>
 
 <ul class="individualsGallery">
     <?php
@@ -48,7 +48,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 	        <?php if ( $obj->team_name && $this->projectparams->get('showteams') ) : ?>
 	        <div>
 						<a href="<?php echo $link_team; ?>"
-						   title="<?php echo JText::_( 'Details' ); ?>"> <?php echo $obj->team_name; ?>
+						   title="<?php echo JText::_('COM_TRACKS_Details' ); ?>"> <?php echo $obj->team_name; ?>
 						</a>
 					</div> 
 					<?php endif; ?>

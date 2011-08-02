@@ -33,7 +33,7 @@ class TracksViewSubroundtypes extends TracksView
 $option = JRequest::getCmd('option');
 
     // Set toolbar items for the page
-    JToolBarHelper::title(   JText::_( 'Sub-round types' ), 'generic.png' );
+    JToolBarHelper::title(   JText::_('COM_TRACKS_Subround_types' ), 'generic.png' );
     JToolBarHelper::deleteList();
     JToolBarHelper::editListX();
     JToolBarHelper::addNewX();

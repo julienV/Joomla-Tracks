@@ -58,9 +58,9 @@ class TracksControllerTeam extends BaseController
 		$model = $this->getModel('team');
 
 		if ($returnid = $model->store($post)) {
-			$msg = JText::_( 'Team Saved' );
+			$msg = JText::_('COM_TRACKS_Team_Saved' );
 		} else {
-			$msg = JText::_( 'Error Saving Team' ).$model->getError();
+			$msg = JText::_('COM_TRACKS_Error_Saving_Team' ).$model->getError();
 		}
 
 		// Check the table in so it can be edited.... we are done with it anyway
@@ -84,9 +84,9 @@ class TracksControllerTeam extends BaseController
 	{
 		$model = $this->getModel('team');
 		if(!$model->delete()) {
-			$msg = JText::_( 'Error: One or More Teams Could not be Deleted' );
+			$msg = JText::_('COM_TRACKS_Error_One_or_More_Teams_Could_not_be_Deleted' );
 		} else {
-			$msg = JText::_( 'Team(s) Deleted' );
+			$msg = JText::_('COM_TRACKS_Teams_Deleted' );
 		}
 
 		$this->setRedirect( 'index.php?option=com_tracks&view=teams', $msg );
@@ -98,7 +98,7 @@ class TracksControllerTeam extends BaseController
 	 */
 	function cancel()
 	{
-		$msg = JText::_( 'Operation Cancelled' );
+		$msg = JText::_('COM_TRACKS_Operation_Cancelled' );
 		$this->setRedirect( 'index.php?option=com_tracks&view=teams', $msg );
 	}
 }

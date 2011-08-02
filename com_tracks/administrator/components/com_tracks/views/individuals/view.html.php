@@ -33,7 +33,7 @@ class TracksViewIndividuals extends TracksView
 		$option = JRequest::getCmd('option');
     
 		// Set toolbar items for the page
-		JToolBarHelper::title(   JText::_( 'Tracks Individuals' ), 'generic.png' );
+		JToolBarHelper::title(   JText::_('COM_TRACKS_Individuals' ), 'generic.png' );
 		JToolBarHelper::deleteList();
 		JToolBarHelper::editListX();
 		JToolBarHelper::addNewX();

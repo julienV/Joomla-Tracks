@@ -36,7 +36,7 @@ class JElementUserList extends JElement
     function fetchElement($name, $value, &$node, $control_name)
     {
         $db = & JFactory::getDBO();
-        $list = JHTML::_( 'select.option', '0', JTEXT::_('Select user') );
+        $list = JHTML::_( 'select.option', '0', JText::_('COM_TRACKS_Select_user') );
         /* Better not use super admin accounts for users list */
         $query = ' SELECT id AS value, name AS text FROM #__users WHERE gid < 2 ORDER BY name ASC ';
         $db->setQuery($query);
