@@ -84,7 +84,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
         <input class="text_area" type="text" name="nickname" id="nickname" size="32" maxlength="40" value="<?php echo $this->object->nickname; ?>" />
       </td>
     </tr>
-    <?php if ($this->user->authorize('com_tracks', 'manage' )): ?>
+    <?php if ($this->user->authorise('core.manage', 'com_tracks')): ?>
     <tr>
       <td width="100" align="right" class="key">
         <label for="user_id">
@@ -238,7 +238,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <input type="hidden" name="controller" value="individual" />
 <input type="hidden" name="i" value="<?php echo $this->object->id; ?>" />    
 <input type="hidden" name="task" value="save" />
-<?php if (!$this->user->authorize('com_tracks', 'manage' )): ?>
+<?php if (!$this->user->authorise('core.manage', 'com_tracks')): ?>
 <input type="hidden" name="user_id" value="<?php echo $this->user->id; ?>" />  
 <?php endif; ?>
 

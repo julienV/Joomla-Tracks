@@ -69,7 +69,7 @@ class TracksFrontControllerIndividual extends JController
     }
     
     // only autorize users can specify the user_id.
-    if (!$user->authorize('com_tracks', 'manage' )) {
+    if (!$user->authorise('core.manage', 'com_tracks')) {
     	$user_id = $user->get('id');
     }
     else {

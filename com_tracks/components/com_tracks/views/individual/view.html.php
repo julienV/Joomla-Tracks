@@ -47,7 +47,7 @@ class TracksFrontViewIndividual extends JView
 		$data = & $this->get('Data');
 		$raceResults = $this->sortResultsByProject($this->get('RaceResults'));
 
-		$show_edit_link = ( $user->id && $user->id == $data->user_id ) || $user->authorize('com_tracks', 'manage', 'users');
+		$show_edit_link = ( $user->id && $user->id == $data->user_id ) || $user->authorise('core.manage', 'com_tracks');
 
 		$breadcrumbs =& $mainframe->getPathWay();
 		$breadcrumbs->addItem( $data->first_name . ' ' . $data->last_name,
@@ -127,7 +127,7 @@ $option = JRequest::getCmd('option');
     $countries = array_merge($countries, TracksCountries::getCountryOptions());
     $lists['countries'] = JHTML::_('select.genericlist', $countries, 'country_code', '', 'value', 'text', $object->country_code);
     
-    if ( $user->authorize('com_tracks', 'manage' ) 
+    if ( $user->authorise('core.manage', 'com_tracks') 
       || ( $object->user_id && ($user->id == $object->user_id) )
       || ( $isNew && $user->id )
        ) {

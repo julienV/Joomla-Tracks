@@ -188,7 +188,7 @@ class TracksFrontModelIndividual extends baseModel
     {
     	$table->load($data['id']);
     	
-    	if ($table->user_id != $user->get('id') && !$user->authorize('com_tracks', 'manage')) {
+    	if ($table->user_id != $user->get('id') && !$user->authorise('core.manage', 'com_tracks')) {
     		JError::raiseError(403, JText::_('COM_TRACKS_ACCESS_NOT_ALLOWED'));
     	}
     }
