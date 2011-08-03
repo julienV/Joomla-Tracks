@@ -7,24 +7,29 @@
   	<creationDate>VERSION_CREATION_DATE</creationDate>
   	<copyright>(C) 2008,2009,2010 Julien Vonthron. All rights reserved.</copyright>
   	<license>http://www.gnu.org/licenses/gpl.html</license>
-  	<version>VERSION_NUMBER</version>
-  	<description>Racing and tracks competition management for Joomla 1.5</description>
+  	<version>1.0.0</version>
+  	<description>Racing and tracks competition management for Joomla 1.7</description>
 	
-	  <installfile>install.tracks.php</installfile>
+	
+		<!-- Runs on install/uninstall/update -->
+		<scriptfile>installscript.php</scriptfile>
 	  <!-- Install Database Section -->
   	<install>
   		  <sql>
-            <file driver="mysql" charset="utf8">install.mysql.utf8.sql</file>
-            <file driver="mysql">install.mysql.nonutf8.sql</file>
+            <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
   		  </sql>
   	</install>
 	  <!-- Uninstall Database Section -->
   	<uninstall>
  		  <sql>
-            <file driver="mysql" charset="utf8">uninstall.mysql.utf8.sql</file>
-            <file driver="mysql">uninstall.mysql.nonutf8.sql</file>
+            <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
  		  </sql>
-  	</uninstall>
+  	</uninstall>	
+		<update> <!-- Runs on update; New in 1.6 -->
+			<schemas>
+				<schemapath type="mysql">sql/updates/mysql</schemapath>
+			</schemas>
+		</update>
 	
 	  <files folder="components/com_tracks">
 			  <filename>tracks.php</filename>
@@ -79,10 +84,6 @@
       			<filename>controller.php</filename>
             <filename>helper.php</filename>
       			<filename>index.html</filename>
-            <filename>install.mysql.utf8.sql</filename>
-            <filename>install.mysql.nonutf8.sql</filename>
-            <filename>uninstall.mysql.utf8.sql</filename>
-            <filename>uninstall.mysql.nonutf8.sql</filename>
             <filename>license.txt</filename>
             <filename>copyright.txt</filename>
             <folder>abstract</folder>
@@ -93,6 +94,7 @@
             <folder>helpers</folder>
       			<folder>models</folder>
       			<folder>projectparameters</folder>
+						<folder>sql</folder>
       			<folder>tables</folder>
       			<folder>views</folder>
     		</files>
@@ -104,5 +106,12 @@
             <language tag="es-ES">administrator/components/com_tracks/language/es-ES.com_tracks.ini</language>
         </languages>
 
-	  </administration>
+	  </administration>	  
+	  
+		<!-- UPDATESERVER DEFINITION -->
+		<updateservers>
+			<!-- Note: No spaces or linebreaks allowed between the server tags -->
+			<server type="extension" priority="1" name="Tracks Update Site">http://www.jlv-solutions.com/updates/tracks-update.xml</server>
+		</updateservers>
+		
 </extension>
