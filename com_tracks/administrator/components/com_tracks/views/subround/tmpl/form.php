@@ -59,7 +59,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <form action="index.php" method="post" name="adminForm" id="adminForm">
 <div class="col50">
 	<fieldset class="adminform">
-		<legend><?php echo JText::_('COM_TRACKS_Sub-round' ); ?></legend>
+		<legend><?php echo JText::_('COM_TRACKS_Subround' ); ?></legend>
 
 		<table class="admintable">
 		<tr>

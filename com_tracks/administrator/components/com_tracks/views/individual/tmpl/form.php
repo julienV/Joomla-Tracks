@@ -187,7 +187,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 		<tr>
 			<td width="100" align="right" class="key">
 				<label for="last_name">
-					<?php echo JText::_('COM_TRACKS_Date_of_birth_YYYY-MM-DD' ); ?>:
+					<?php echo JText::_('COM_TRACKS_Date_of_birth_YYYY_MM_DD' ); ?>:
 				</label>
 			</td>
 			<td>

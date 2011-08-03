@@ -99,9 +99,8 @@ class TracksFrontControllerIndividual extends JController
     $model = $this->getModel('individual');
 
     if ($model->store($post, $picture, $picture_small)) {
-      $msg  = JText::_('COM_TRACKS_Profile_has_been_saved.' );
+      $msg  = JText::_('COM_TRACKS_Profile_has_been_saved' );
     } else {
-      //$msg  = JText::_('COM_TRACKS_Error_saving_your_settings.' );
       $msg  = $model->getError();
     }
 

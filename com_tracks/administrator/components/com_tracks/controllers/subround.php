@@ -80,7 +80,7 @@ class TracksControllerSubround extends BaseController
 		if ($returnid = $model->store($post)) {
 			$msg = JText::_('COM_TRACKS_Subround_Saved' );
 		} else {
-			$msg = JText::_('COM_TRACKS_Error_Saving_Project_sub-round' ).$model->getError();
+			$msg = JText::_('COM_TRACKS_Error_Saving_Project_subround' ).$model->getError();
 		}
 
 		// Check the table in so it can be edited.... we are done with it anyway
