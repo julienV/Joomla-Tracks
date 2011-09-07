@@ -1,6 +1,5 @@
 <?php
 /**
-* @version    0.2 $Id$ 
 * @package    JoomlaTracks
 * @copyright  Copyright (C) 2008-2009 Julien Vonthron. All rights reserved.
 * @license    GNU/GPL, see LICENSE.php
@@ -15,25 +14,33 @@
 defined( '_JEXEC' ) or die( 'Restricted access' );
  
 // Import library dependencies
-jimport('joomla.event.plugin');
-
-JPlugin::loadLanguage( 'plg_tracks_cb', JPATH_ADMINISTRATOR );
+jimport('joomla.plugin.plugin');
 
 class plgTracksCb extends JPlugin {
- 
-	public function plgTracksCb(&$subject, $config = array()) 
+	
+	/**
+	* Constructor
+	*
+	* @access      protected
+	* @param       object  $subject The object to observe
+	* @param       array   $config  An array that holds the plugin configuration
+	* @since       1.5
+	*/
+	public function __construct(& $subject, $config)
 	{
 		parent::__construct($subject, $config);
+		$this->loadLanguage();
 	}
 
 	public function getProfileLink($user_id, &$object, &$attribs = '')
 	{
-		if (!JFactory::getUser($user_id)) {
+		$user = JFactory::getUser($user_id);
+		if (!$user->get('id')) {
 			return true;
 		}
 		
     $link = JRoute::_( 'index.php?option=com_comprofiler&&task=userProfile&user='. $user_id );
-		$object->text = JHTML::link($link, JText::_('VIEW_USER_PROFILE' ), $attribs);
+		$object->text = JHTML::link($link, JText::_('PLG_TRACKS_CB_VIEW_USER_PROFILE' ), $attribs);
 		return true;
 	}
 }
