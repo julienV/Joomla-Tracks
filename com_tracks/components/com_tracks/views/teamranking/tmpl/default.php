@@ -29,14 +29,13 @@ defined('_JEXEC') or die('Restricted access'); ?>
       <th><?php echo JText::_('COM_TRACKS_Best_rank' ); ?></th>
     </tr>
     <?php
-    $rank = 1;
     $k = 0; 
     foreach( $this->rankings AS $ranking )
     {     
       $link_team = JRoute::_( TracksHelperRoute::getTeamRoute($ranking->slug, $this->project->slug) ); 
       ?>
       <tr class="<?php echo ($k++ % 2 ? 'd1' : 'd0'); ?>">
-        <td><?php echo $rank++; ?></td>
+        <td><?php echo $ranking->rank; ?></td>
         <?php if ($this->projectparams->get('showflag')): ?>
         <td>
           <?php if ( $ranking->country_code ): ?>
