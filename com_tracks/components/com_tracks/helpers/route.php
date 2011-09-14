@@ -145,7 +145,7 @@ class TracksHelperRoute
 		{
 			foreach($items as $item)
 			{	
-				if ((@$item->query['view'] == $query['view']) && ($item->published == 1)) 
+				if ((@$item->query['view'] == $query['view']))
 				{					
 					switch ($query['view'])
 					{
