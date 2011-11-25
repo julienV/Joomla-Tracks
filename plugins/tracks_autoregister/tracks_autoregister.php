@@ -16,16 +16,15 @@
 defined( '_JEXEC' ) or die( 'Restricted access' );
  
 // Import library dependencies
-jimport('joomla.event.plugin');
-
-// load language file for frontend
-JPlugin::loadLanguage( 'plg_user_autoregister', JPATH_ADMINISTRATOR );
+jimport('joomla.plugin.plugin');
 
 class plgUserTracks_autoregister extends JPlugin {
  
 	function plgUserTracks_autoregister(&$subject, $config = array()) 
 	{
 		parent::__construct($subject, $config);
+		// load language file for frontend
+		$this->loadLanguage();
 	}
 	
 	/**
@@ -37,10 +36,10 @@ class plgUserTracks_autoregister extends JPlugin {
 	 * @param	boolean		true if user was succesfully stored in the database
 	 * @param	string		message
 	 */
-	function onAfterStoreUser($user, $isnew, $success, $msg)
+	function onUserAfterSave($user, $isnew, $success, $msg)
 	{
 		$app = &JFactory::getApplication();
-				
+		
 		// Require tracks individual table
 		require_once (JPATH_ADMINISTRATOR.DS.'components'.DS.'com_tracks'.DS.'tables'.DS.'individual.php');
 		if ($isnew) 
