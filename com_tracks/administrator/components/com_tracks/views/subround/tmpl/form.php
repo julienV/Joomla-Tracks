@@ -32,10 +32,10 @@ defined('_JEXEC') or die('Restricted access'); ?>
 ?>
 
 <script language="javascript" type="text/javascript">
-	function submitbutton(pressbutton) {
+	Joomla.submitbutton = function (pressbutton) {
 		var form = document.adminForm;
 		if (pressbutton == 'cancel') {
-			submitform( pressbutton );
+			Joomla.submitform( pressbutton );
 			return;
 		}
 
@@ -43,7 +43,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 		if (form.type.value == ""){
 			alert( "<?php echo JText::_('COM_TRACKS_You_must_chose_a_type', true ); ?>" );
 		} else {
-			submitform( pressbutton );
+			Joomla.submitform( pressbutton );
 		}
 	}
 </script>

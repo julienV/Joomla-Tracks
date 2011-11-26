@@ -16,10 +16,10 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <?php JHTML::_('behavior.tooltip'); ?>
 
 <script language="javascript" type="text/javascript">
-	function submitbutton(pressbutton) {
+	Joomla.submitbutton = function (pressbutton) {
 		var form = document.individualform;
 		if (pressbutton == 'cancel') {
-			submitform( pressbutton );
+			Joomla.submitform( pressbutton );
 			return;
 		}
 
@@ -27,7 +27,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 		if (form.last_name.value == ""){
 			alert( "<?php echo JText::_( 'COM_TRACKS_VIEW_INDIVIDUAL_MUST_HAVE_A_LASTNAME', true ); ?>" );
 		} else {
-			submitform( pressbutton );
+			Joomla.submitform( pressbutton );
 		}
 	}
 </script>
@@ -232,7 +232,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     </tr>
 </table>
 
-<button class="button" type="submit" onclick="submitbutton( this.form );return false;"><?php echo JText::_('COM_TRACKS_VIEW_INDIVIDUAL_Save'); ?></button>
+<button class="button" type="submit" onclick="Joomla.submitbutton( this.form );return false;"><?php echo JText::_('COM_TRACKS_VIEW_INDIVIDUAL_Save'); ?></button>
 
 <input type="hidden" name="option" value="com_tracks" />
 <input type="hidden" name="controller" value="individual" />

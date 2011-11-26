@@ -32,10 +32,10 @@ defined('_JEXEC') or die('Restricted access'); ?>
 ?>
 
 <script language="javascript" type="text/javascript">
-	function submitbutton(pressbutton) {
+	Joomla.submitbutton = function (pressbutton) {
 		var form = document.adminForm;
 		if (pressbutton == 'cancel') {
-			submitform( pressbutton );
+			Joomla.submitform( pressbutton );
 			return;
 		}
 
@@ -43,7 +43,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 		if (form.last_name.value == ""){
 			alert( "<?php echo JText::_('COM_TRACKS_Individual_must_have_a_last_name', true ); ?>" );
 		} else {
-			submitform( pressbutton );
+			Joomla.submitform( pressbutton );
 		}
 	}
 </script>

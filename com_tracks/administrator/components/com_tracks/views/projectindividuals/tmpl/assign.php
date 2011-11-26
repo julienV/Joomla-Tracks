@@ -19,7 +19,7 @@ $user 	=& JFactory::getUser();
 JHTML::_('behavior.tooltip');
 ?>
 <script language="javascript" type="text/javascript">
-  function submitbutton(pressbutton) {
+  Joomla.submitbutton = function (pressbutton) {
     if (pressbutton) {
       document.adminForm.task.value=pressbutton;
     }

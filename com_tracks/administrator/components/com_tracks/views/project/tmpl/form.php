@@ -33,10 +33,10 @@ defined('_JEXEC') or die('Restricted access'); ?>
 ?>
 
 <script language="javascript" type="text/javascript">
-	function submitbutton(pressbutton) {
+	Joomla.submitbutton = function (pressbutton) {
 		var form = document.adminForm;
 		if (pressbutton == 'cancel') {
-			submitform( pressbutton );
+			Joomla.submitform( pressbutton );
 			return;
 		}
 
@@ -49,7 +49,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 		} else if ( validator.validate(form.season_id) === false ){
       alert( "<?php echo JText::_('COM_TRACKS_SEASON_IS_REQUIRED', true ); ?>" );
     } else {
-			submitform( pressbutton );
+			Joomla.submitform( pressbutton );
 		}
 	}
 </script>

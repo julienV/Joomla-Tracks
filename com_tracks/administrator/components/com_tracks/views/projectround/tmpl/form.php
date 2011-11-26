@@ -33,10 +33,10 @@ defined('_JEXEC') or die('Restricted access'); ?>
 ?>
 
 <script language="javascript" type="text/javascript">
-	function submitbutton(pressbutton) {
+	Joomla.submitbutton = function (pressbutton) {
 		var form = document.adminForm;
 		if (pressbutton == 'cancel') {
-			submitform( pressbutton );
+			Joomla.submitform( pressbutton );
 			return;
 		}
 
@@ -45,7 +45,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     if ( validator.validate(form.round_id) === false ){
       alert( "<?php echo JText::_('COM_TRACKS_ROUND_ID_IS_REQUIRED', true ); ?>" );
     } else {
-      submitform( pressbutton );
+      Joomla.submitform( pressbutton );
     }
 	}
 </script>

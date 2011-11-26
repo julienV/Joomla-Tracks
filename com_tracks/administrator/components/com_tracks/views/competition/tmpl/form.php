@@ -33,10 +33,10 @@ JToolBarHelper::help( 'screen.tracks.edit' );
 ?>
 
 <script language="javascript" type="text/javascript">
-	function submitbutton(pressbutton) {
+	Joomla.submitbutton = function (pressbutton) {
 		var form = document.adminForm;
 		if (pressbutton == 'cancel') {
-			submitform( pressbutton );
+			Joomla.submitform( pressbutton );
 			return;
 		}
 
@@ -45,7 +45,7 @@ JToolBarHelper::help( 'screen.tracks.edit' );
     if ( validator.validate(form.name) === false ){
       alert( "<?php echo JText::_('COM_TRACKS_COMPETITION_NAME_IS_REQUIRED', true ); ?>" );
     } else {
-      submitform( pressbutton );
+    	Joomla.submitform( pressbutton );
     }
 	}
 </script>

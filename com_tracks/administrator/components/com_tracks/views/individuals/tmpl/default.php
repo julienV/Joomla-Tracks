@@ -24,11 +24,11 @@ JHTML::_('behavior.tooltip');
  /**
   * Overrides default function.
   */
-  function submitbutton(pressbutton) {
+  Joomla.submitbutton = function (pressbutton) {
     if (pressbutton == 'assign') {
       document.adminForm.controller.value='projectindividuals';
     }
-    submitform(pressbutton);
+    Joomla.submitform(pressbutton);
   }
 </script>
 

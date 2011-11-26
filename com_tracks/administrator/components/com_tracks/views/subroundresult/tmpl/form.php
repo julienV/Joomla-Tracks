@@ -32,10 +32,10 @@ defined('_JEXEC') or die('Restricted access'); ?>
 ?>
 
 <script language="javascript" type="text/javascript">
-	function submitbutton(pressbutton) {
+	Joomla.submitbutton = function (pressbutton) {
 		var form = document.adminForm;
 		if (pressbutton == 'cancel') {
-			submitform( pressbutton );
+			Joomla.submitform( pressbutton );
 			return;
 		}
 
@@ -43,7 +43,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 		if (form.subround_id.value == ""){
 			alert( "<?php echo JText::_('COM_TRACKS_Result_item_must_have_subround_id', true ); ?>" );
 		} else {
-			submitform( pressbutton );
+			Joomla.submitform( pressbutton );
 		}
 	}
 </script>

@@ -28,16 +28,16 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 <?php JHTMLBehavior::formvalidation(); ?>
 <script language="javascript" type="text/javascript">
-	function submitbutton(pressbutton) {
+	Joomla.submitbutton = function (pressbutton) {
 		var form = document.adminForm;
 		if (pressbutton == 'cancel') {
-			submitform( pressbutton );
+			Joomla.submitform( pressbutton );
 			return;
 		}
 
 		// do field validation
 		if (document.formvalidator.isValid(form)) {
-      submitform( pressbutton );
+      Joomla.submitform( pressbutton );
       return true; 
     }
     else {

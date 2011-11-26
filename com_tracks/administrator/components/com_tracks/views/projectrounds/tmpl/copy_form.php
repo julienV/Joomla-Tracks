@@ -22,7 +22,7 @@ $ordering = ($this->lists['order'] == 'obj.ordering');
 JHTML::_('behavior.tooltip');
 ?>
 <script language="javascript" type="text/javascript">
-  function submitbutton(pressbutton) {
+  Joomla.submitbutton = function (pressbutton) {
     if (pressbutton) {
       document.adminForm.task.value=pressbutton;
     }

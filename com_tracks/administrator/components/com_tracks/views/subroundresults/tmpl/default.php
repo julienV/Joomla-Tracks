@@ -48,14 +48,14 @@ JHTML::_('behavior.tooltip');
 }
 </style>
 
-<script language="javascript" type="text/javascript">
-function submitbutton(pressbutton)
+<script type="text/javascript">
+Joomla.submitform = function(pressbutton)
 {
   if (pressbutton == "saveranks"){
   	checkAll_button( <?php echo count($this->items)-1; ?>, pressbutton );
   }
   else {
-  	submitform(pressbutton);
+	  Joomla.submitform(pressbutton);
   }
 }
 </script>
