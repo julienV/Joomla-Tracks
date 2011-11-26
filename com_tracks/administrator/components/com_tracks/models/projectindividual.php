@@ -44,8 +44,11 @@ class TracksModelProjectindividual extends TracksModelItem
 			JArrayHelper::toInteger($cid);
 			$cids = implode( ',', $cid );
 			// delete results first
-			$query = 'DELETE rr FROM #__tracks_projects_individuals AS pi, #__tracks_rounds_results AS rr '
-				. ' WHERE pi.id IN ( '.$cids.' ) AND pi.individual_id = rr.individual_id ';
+			$query = ' DELETE rr FROM #__tracks_rounds_results AS rr '
+			  . ' INNER JOIN #__tracks_projects_subrounds AS psr ON psr.id = rr.subround_id '
+			  . ' INNER JOIN #__tracks_projects_rounds AS pr ON pr.id = psr.projectround_id '
+			  . ' INNER JOIN #__tracks_projects_individuals AS pi ON pi.individual_id = rr.individual_id AND pi.project_id = pr.project_id '
+				. ' WHERE pi.id IN ( '.$cids.' ) ';
 			
 			$this->_db->setQuery( $query );
 			if(!$this->_db->query()) 
