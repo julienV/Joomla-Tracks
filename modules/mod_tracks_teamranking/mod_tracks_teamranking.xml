@@ -19,7 +19,6 @@
 	    
   <languages>
     <language tag="en-GB">languages/en-GB.mod_tracks_teamranking.ini</language>
-    <language tag="sp-SP">languages/sp-SP.mod_tracks_teamranking.ini</language>
   </languages>
         
 	<params addpath="/administrator/components/com_tracks/elements">

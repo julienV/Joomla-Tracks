@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Id$ -->
+<install type="language" version="1.5.4" client="both" method="upgrade">
+	<name>redEVENT Danish</name>
+	<creationDate>19-04-2010</creationDate>
+	<author>Redweb.dk</author>
+	<authorEmail>email@redweb.dk</authorEmail>
+	<authorUrl>www.redweb.dk</authorUrl>
+	<copyright>(c) 2008 - 2009 Redweb.dk</copyright>
+	<license>GNU/GPL</license>
+	<version>2.0</version>
+	<description>Danish language pack for redEVENT</description>
+	
+	<tag>da-DK</tag>
+	<administration>
+		<files folder="admin">
+  			<filename>da-DK.com_redevent.ini</filename>
+  			<filename>da-DK.com_redevent.menu.ini</filename>
+		</files>
+	</administration>
+  
+	<site>
+		<files folder="site">
+  			<filename>da-DK.com_redevent.ini</filename>
+  		</files>
+	</site>
+</install>

@@ -51,7 +51,6 @@
     <!-- Site Main Language File Copy Section -->
     <languages>
         <language tag="en-GB">components/com_tracks/language/en-GB.com_tracks.ini</language>
-        <language tag="es-ES">components/com_tracks/language/es-ES.com_tracks.ini</language>
     </languages>
   
     <administration>
@@ -103,7 +102,6 @@
     		<!-- Admin Main Language File Copy Section -->
     	  <languages>
     	      <language tag="en-GB">administrator/components/com_tracks/language/en-GB.com_tracks.ini</language>
-            <language tag="es-ES">administrator/components/com_tracks/language/es-ES.com_tracks.ini</language>
         </languages>
 
 	  </administration>
