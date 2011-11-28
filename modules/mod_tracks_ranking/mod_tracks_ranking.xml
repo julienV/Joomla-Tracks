@@ -74,4 +74,10 @@
 			</fieldset>
 		</fields>
 	</config>
+	
+	<!-- UPDATESERVER DEFINITION -->
+	<updateservers>
+		<!-- Note: No spaces or linebreaks allowed between the server tags -->
+		<server type="extension" priority="1" name="Tracks Update Site">http://www.jlv-solutions.com/updates/tracks-update.xml</server>
+	</updateservers>
 </extension>
