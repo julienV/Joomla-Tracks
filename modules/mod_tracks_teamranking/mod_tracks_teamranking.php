@@ -26,6 +26,12 @@ if (!$params->get('project_id')) return JText::_('MOD_TRACKS_TEAM_RANKING_No_pro
 $helper = new modTracksTeamRanking();
 
 $project = $helper->getProject($params);
+
+if (!$project) {
+	echo JText::_('MOD_TRACKS_TEAMRANKING_PROJECT_NOT_FOUND');
+	return;
+}
+
 $list = $helper->getList($params);
 
 require(JModuleHelper::getLayoutPath('mod_tracks_teamranking'));

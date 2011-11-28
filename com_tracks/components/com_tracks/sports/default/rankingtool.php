@@ -140,7 +140,7 @@ class TracksRankingTool extends JObject {
 		{
 			foreach ( $results as $r )
 			{
-				if (!$r->team_id) {
+				if (!$r->team_id || !isset($teams[$r->team_id])) {
 					continue;
 				}
 				// points for the round
