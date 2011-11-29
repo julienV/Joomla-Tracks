@@ -9,7 +9,7 @@
  
       <infourl title="Tracks">http://tracks.jlv-solutions.com</infourl>
       <downloads>
-         <downloadurl type="full" format="tgz">http://www.jlv-solutions.com/rokdownloads/tracks/17/com_tracks_17_1.0.0.tar.gz</downloadurl>
+         <downloadurl type="full" format="tgz">http://www.jlv-solutions.com/rokdownloads/tracks/1.7/com_tracks_17_1.0.0.tar.gz</downloadurl>
       </downloads>
       <tags>
          <tag>tracks</tag>
@@ -29,7 +29,7 @@
  
       <infourl title="Tracks">http://tracks.jlv-solutions.com</infourl>
       <downloads>
-         <downloadurl type="full" format="tgz">http://www.jlv-solutions.com/rokdownloads/tracks/17/mod_tracks_ranking_17_1.0.0.tar.gz</downloadurl>
+         <downloadurl type="full" format="tgz">http://www.jlv-solutions.com/rokdownloads/tracks/1.7/mod_tracks_ranking_17_1.0.0.tar.gz</downloadurl>
       </downloads>
       <tags>
          <tag>tracks</tag>
@@ -49,7 +49,7 @@
  
       <infourl title="Tracks">http://tracks.jlv-solutions.com</infourl>
       <downloads>
-         <downloadurl type="full" format="tgz">http://www.jlv-solutions.com/rokdownloads/tracks/17/mod_tracks_teamranking_17_1.0.0.tar.gz</downloadurl>
+         <downloadurl type="full" format="tgz">http://www.jlv-solutions.com/rokdownloads/tracks/1.7/mod_tracks_teamranking_17_1.0.0.tar.gz</downloadurl>
       </downloads>
       <tags>
          <tag>tracks</tag>
@@ -69,7 +69,7 @@
  
       <infourl title="Tracks">http://tracks.jlv-solutions.com</infourl>
       <downloads>
-         <downloadurl type="full" format="tgz">http://www.jlv-solutions.com/rokdownloads/tracks/17/mod_tracks_results_17_1.0.0.tar.gz</downloadurl>
+         <downloadurl type="full" format="tgz">http://www.jlv-solutions.com/rokdownloads/tracks/1.7/mod_tracks_results_17_1.0.0.tar.gz</downloadurl>
       </downloads>
       <tags>
          <tag>tracks</tag>
@@ -90,7 +90,7 @@
  
       <infourl title="Tracks">http://tracks.jlv-solutions.com</infourl>
       <downloads>
-         <downloadurl type="full" format="tgz">http://www.jlv-solutions.com/rokdownloads/tracks/17/com_tracks_17_1.0.1.tar.gz</downloadurl>
+         <downloadurl type="full" format="tgz">http://www.jlv-solutions.com/rokdownloads/tracks/1.7/com_tracks_17_1.0.1.tar.gz</downloadurl>
       </downloads>
       <tags>
          <tag>tracks</tag>
@@ -110,7 +110,7 @@
  
       <infourl title="Tracks">http://tracks.jlv-solutions.com</infourl>
       <downloads>
-         <downloadurl type="full" format="tgz">http://www.jlv-solutions.com/rokdownloads/tracks/17/mod_tracks_ranking_17_1.0.1.tar.gz</downloadurl>
+         <downloadurl type="full" format="tgz">http://www.jlv-solutions.com/rokdownloads/tracks/1.7/mod_tracks_ranking_17_1.0.1.tar.gz</downloadurl>
       </downloads>
       <tags>
          <tag>tracks</tag>
@@ -130,7 +130,7 @@
  
       <infourl title="Tracks">http://tracks.jlv-solutions.com</infourl>
       <downloads>
-         <downloadurl type="full" format="tgz">http://www.jlv-solutions.com/rokdownloads/tracks/17/mod_tracks_teamranking_17_1.0.1.tar.gz</downloadurl>
+         <downloadurl type="full" format="tgz">http://www.jlv-solutions.com/rokdownloads/tracks/1.7/mod_tracks_teamranking_17_1.0.1.tar.gz</downloadurl>
       </downloads>
       <tags>
          <tag>tracks</tag>
@@ -150,7 +150,7 @@
  
       <infourl title="Tracks">http://tracks.jlv-solutions.com</infourl>
       <downloads>
-         <downloadurl type="full" format="tgz">http://www.jlv-solutions.com/rokdownloads/tracks/17/mod_tracks_results_17_1.0.1.tar.gz</downloadurl>
+         <downloadurl type="full" format="tgz">http://www.jlv-solutions.com/rokdownloads/tracks/1.7/mod_tracks_results_17_1.0.1.tar.gz</downloadurl>
       </downloads>
       <tags>
          <tag>tracks</tag>
@@ -161,5 +161,25 @@
       <section>tracks</section>
       <targetplatform name="joomla" version="1.7" />
    </update>
+    
+   <update>
+      <name>Tracks</name>
+      <description>Tracks Component</description>
+      <element>com_tracks</element>
+      <type>component</type>
+      <version>1.0.2</version>
  
+      <infourl title="Tracks">http://tracks.jlv-solutions.com</infourl>
+      <downloads>
+         <downloadurl type="full" format="tgz">http://www.jlv-solutions.com/rokdownloads/tracks/1.7/com_tracks_17_1.0.2.tar.gz</downloadurl>
+      </downloads>
+      <tags>
+         <tag>tracks</tag>
+      </tags>
+ 
+      <maintainer>JLV-Solutions</maintainer>
+      <maintainerurl>http://www.jlv-solutions.com</maintainerurl>
+      <section>tracks</section>
+      <targetplatform name="joomla" version="1.7" />
+   </update>
 </updates>
