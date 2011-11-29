@@ -37,7 +37,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 		if (pressbutton == 'cancel') {
 			Joomla.submitform( pressbutton );
 			return;
-		}
+	}
 
 		// do field validation
 		if (form.subround_id.value == ""){

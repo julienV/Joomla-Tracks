@@ -49,7 +49,7 @@ JHTML::_('behavior.tooltip');
 </style>
 
 <script type="text/javascript">
-Joomla.submitform = function(pressbutton)
+Joomla.submitbutton = function(pressbutton)
 {
   if (pressbutton == "saveranks"){
   	checkAll_button( <?php echo count($this->items)-1; ?>, pressbutton );
