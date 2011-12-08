@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <install type="language" version="1.5.4" client="both" method="upgrade">
-	<name>mod_tracks_ranking Italian</name>
+	<name>mod_tracks_results Italian</name>
 	
  	<author>Julien Vonthron</author>
  	<authorEmail>julien.vonthron@gmail.com</authorEmail>
@@ -9,14 +9,14 @@
  	<copyright>(C) 2008,2009,2010,2011 Julien Vonthron. All rights reserved.</copyright>
  	<license>http://www.gnu.org/licenses/gpl.html</license>
  	<version>VERSION_NUMBER</version>
-	<description>Italian language pack for mod_tracks_ranking</description>
+	<description>Italian language pack for mod_tracks_results</description>
 	
 	<tag>it-IT</tag>
 	<administration/>
   
 	<site>
 		<files>
-  			<filename>it-IT.mod_tracks_ranking.ini</filename>
+  			<filename>it-IT.mod_tracks_results.ini</filename>
   		</files>
 	</site>
 </install>

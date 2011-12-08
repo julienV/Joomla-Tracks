@@ -15,7 +15,7 @@
 	<administration/>
   
 	<site>
-		<files folder="site">
+		<files>
   			<filename>nl-NL.mod_tracks_teamranking.ini</filename>
   		</files>
 	</site>
