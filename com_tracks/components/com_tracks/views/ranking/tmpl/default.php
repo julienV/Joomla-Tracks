@@ -42,7 +42,6 @@ defined('_JEXEC') or die('Restricted access'); ?>
   </thead>
   <tbody>
     <?php
-    $rank = 1; 
     $i = 0;
     foreach( $this->rankings AS $ranking )
     {
@@ -50,7 +49,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
       $link_team = JRoute::_( TracksHelperRoute::getTeamRoute($ranking->teamslug, $this->project->slug) ); 
       ?>
       <tr class="<?php echo ($i ? 'd1' : 'd0'); ?>">
-        <td><?php echo $rank++; ?></td>
+        <td><?php echo $ranking->rank; ?></td>
         
         <?php if ($this->params->get('shownumber')): ?>
 	      <td><?php echo $ranking->number; ?></td>

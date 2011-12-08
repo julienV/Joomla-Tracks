@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="language" version="1.5.4" client="both" method="upgrade">
+	<name>mod_tracks_teamranking French</name>
+	
+ 	<author>Julien Vonthron</author>
+ 	<authorEmail>julien.vonthron@gmail.com</authorEmail>
+   <authorUrl>http://www.jlv-solutions.com</authorUrl>	
+ 	<creationDate>VERSION_CREATION_DATE</creationDate>
+ 	<copyright>(C) 2008,2009,2010,2011 Julien Vonthron. All rights reserved.</copyright>
+ 	<license>http://www.gnu.org/licenses/gpl.html</license>
+ 	<version>VERSION_NUMBER</version>
+	<description>French language pack for mod_tracks_teamranking</description>
+	
+	<tag>fr-FR</tag>
+	<administration/>
+  
+	<site>
+		<files>
+  			<filename>fr-FR.mod_tracks_teamranking.ini</filename>
+  			<filename>fr-FR.mod_tracks_teamranking.sys.ini</filename>
+  		</files>
+	</site>
+</install>

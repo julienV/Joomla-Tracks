@@ -169,6 +169,20 @@ class TracksRankingTool extends JObject {
 				$teams[$r->team_id]->points += $points;
 			}
 			uasort( $teams, array( $this, "orderTeamRankings" ) );
+			$rank = 1;
+			$previous = null;
+			foreach ( $teams as $k => $value )
+			{
+				if ($previous && self::orderTeamRankingsNoAlpha($previous, $value) == 0) {
+					$teams[$k]->rank = $previous->rank;
+				}
+				else {
+					$teams[$k]->rank = $rank;
+				}
+				$previous = $teams[$k];
+				$rank++;
+			}			
+			return $teams;
 		}
 		return $teams;
 	}
@@ -326,7 +340,7 @@ class TracksRankingTool extends JObject {
 	 * order rankings by points, wins, best_rank
 	 *
 	 */
-	function orderTeamRankings( $a, $b )
+	function orderTeamRankingsNoAlpha( $a, $b )
 	{
 		if ( $a->points != $b->points ) {
 			return (-( $a->points - $b->points ) > 0) ? 1 : -1;
@@ -337,8 +351,19 @@ class TracksRankingTool extends JObject {
 		else if ( $a->best_rank != $b->best_rank ) {
 			return ( $a->best_rank - $b->best_rank );
 		}
-		else {
-			return strcasecmp($a->team_name, $b->team_name);
+		return 0;
+	}
+          
+	/**
+	 * order rankings by points, wins, best_rank
+	 *
+	 */
+	function orderTeamRankings( $a, $b )
+	{
+		$res = self::orderTeamRankingsNoAlpha($a, $b);
+		if ( $res != 0 ) {
+			return $res;
 		}
+		return strcasecmp($a->team_name, $b->team_name);
 	}
 }
