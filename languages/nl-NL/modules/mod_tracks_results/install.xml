@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="language" version="1.5.4" client="both" method="upgrade">
+	<name>mod_tracks_results Dutch</name>
+	
+ 	<author>Julien Vonthron</author>
+ 	<authorEmail>julien.vonthron@gmail.com</authorEmail>
+   <authorUrl>http://www.jlv-solutions.com</authorUrl>	
+ 	<creationDate>VERSION_CREATION_DATE</creationDate>
+ 	<copyright>(C) 2008,2009,2010,2011 Julien Vonthron. All rights reserved.</copyright>
+ 	<license>http://www.gnu.org/licenses/gpl.html</license>
+ 	<version>VERSION_NUMBER</version>
+	<description>Dutch language pack for mod_tracks_results</description>
+	
+	<tag>nl-NL</tag>
+	<administration/>
+  
+	<site>
+		<files folder="site">
+  			<filename>nl-NL.mod_tracks_results.ini</filename>
+  		</files>
+	</site>
+</install>
