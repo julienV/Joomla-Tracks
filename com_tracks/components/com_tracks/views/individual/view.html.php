@@ -36,7 +36,7 @@ class TracksFrontViewIndividual extends JView
 		}
 
 		$user   =& JFactory::getUser();
-		$params = &JComponentHelper::getParams( 'com_tracks' );
+		$params = $mainframe->getParams( 'com_tracks' );
 		$document =& JFactory::getDocument();
 		
 		$dispatcher = & JDispatcher::getInstance();

@@ -122,7 +122,8 @@ class TracksFrontModelIndividual extends baseModel
 	
 	function getRaceResults()
 	{
-    $params = &JComponentHelper::getParams( 'com_tracks' );
+		$app = &JFactory::getApplication();
+		$params = $app->getParams( 'com_tracks' );
     
 		$ind = $this->getData();
 		if (!$ind->id) return null;

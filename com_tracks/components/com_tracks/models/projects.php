@@ -31,7 +31,9 @@ class TracksFrontModelProjects extends baseModel
     */
     function getProjects()
     {
-    	$params = &JComponentHelper::getParams( 'com_tracks' );
+    	$app = &JFactory::getApplication();
+    	$params = $app->getParams( 'com_tracks' );
+    	
     	$order = $params->get('order', 0);
       $order_dir = $params->get('order_dir', 'ASC');
       

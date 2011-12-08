@@ -28,7 +28,7 @@ class TracksFrontViewRanking extends JView
   function display($tpl = null)
   {
     $mainframe = &JFactory::getApplication();
-$option = JRequest::getCmd('option');
+    $option = JRequest::getCmd('option');
 
     $project_id = JRequest::getVar( 'p', 0, '', 'int' );
     
@@ -37,7 +37,10 @@ $option = JRequest::getCmd('option');
     $project  =& $model->getProject( $project_id );
         
     $params =& $model->getParams( $project_id );
-    $params->merge( JComponentHelper::getParams( 'com_tracks' ) );
+    
+    $viewparams = $mainframe->getParams( 'com_tracks' );
+    
+    $params->merge( $viewparams );
 
     $breadcrumbs =& $mainframe->getPathWay();
     $breadcrumbs->addItem( $project->name. ' ' . JText::_('COM_TRACKS_Rankings' ), 'index.php?option=com_tracks&view=ranking&p=' . $project_id );

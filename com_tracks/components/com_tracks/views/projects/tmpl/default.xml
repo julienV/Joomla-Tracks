@@ -5,6 +5,33 @@
         <![CDATA[COM_TRACKS_DEFAULT_PROJECTS_LAYOUT_TIP]]>
         </message>
     </layout>
+    
+		<!-- Add fields to the parameters object for the layout. -->
+		<fields name="params">
+			<fieldset name="basic" label="COM_TRACKS_FIELDSET_LAYOUT_OPTIONS">
+	
+				<field name="order" type="list"
+					default="0" 
+					label="COM_TRACKS_Criteria_for_ordering"
+					description="COM_TRACKS_Chose_how_to_order_projects"
+				>
+	        <option value="0">COM_TRACKS_By_season_competition_project</option>
+	        <option value="1">COM_TRACKS_By_competition_season_project</option>
+	        <option value="2">COM_TRACKS_By_project</option>
+				</field>
+				
+				<field name="order_dir" type="list"
+					default="0" 
+					label="COM_TRACKS_Direction"
+					description="COM_TRACKS_Direction_for_ordering"
+				>
+	        <option value="ASC">COM_TRACKS_Asc</option>
+	        <option value="DESC">COM_TRACKS_Desc</option>
+				</field>
+					
+			</fieldset>
+		</fields>
+	
     <state>
         <name>COM_TRACKS_DEFAULT_PROJECTS_LAYOUT</name>
         <description>COM_TRACKS_DEFAULT_PROJECTS_LAYOUT_TIP</description>

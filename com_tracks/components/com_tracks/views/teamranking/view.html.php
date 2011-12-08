@@ -28,7 +28,7 @@ class TracksFrontViewTeamRanking extends JView
     function display($tpl = null)
     {
         $mainframe = &JFactory::getApplication();
-$option = JRequest::getCmd('option');
+        $option = JRequest::getCmd('option');
         
         $project_id = JRequest::getVar( 'p', 0, '', 'int' );
         
@@ -36,6 +36,7 @@ $option = JRequest::getCmd('option');
         $rankings = $model->getTeamRankings( $project_id );
         $project  = $model->getProject( $project_id );
         $projectparams = & $model->getParams($project->id);
+        $params = $mainframe->getParams('com_tracks');
                 
         $breadcrumbs =& $mainframe->getPathWay();
         $breadcrumbs->addItem( $project->name. ' ' . JText::_('COM_TRACKS_Team_Rankings' ), 'index.php?option=com_tracks&view=teamranking&p=' . $project_id );
@@ -46,6 +47,7 @@ $option = JRequest::getCmd('option');
         $this->assignRef( 'project',    $project );                
         $this->assignRef( 'rankings',	$rankings );
         $this->assignRef( 'projectparams',    $projectparams );
+        $this->assignRef( 'params',    $params );
 
         parent::display($tpl);
     }

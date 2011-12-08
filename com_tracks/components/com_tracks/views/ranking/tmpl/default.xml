@@ -1,31 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-	<layout title="COM_TRACKS_Standard_project_individuals_ranking_layout">
+	<layout title="COM_TRACKS_Standard_project_ranking_layout">
 		<message>
-			<![CDATA[COM_TRACKS_Displays_project_individuals_ranking]]>
+			<![CDATA[COM_TRACKS_Standard_project_ranking_layout_tip]]>
 		</message>
-	</layout>
-	<state>
-		<name>COM_TRACKS_Standard_project_individuals_ranking_layout</name>
-		<description>COM_TRACKS_Select_a_project</description>
-		<url addpath="/administrator/components/com_tracks/elements">
-			<param name="p" type="tsql" default=""
-				label="COM_TRACKS_Select_a_project" description="COM_TRACKS_Select_a_project"
-				query="SELECT id AS p, name AS text FROM #__tracks_projects ORDER BY name ASC" />
-		</url>
-		<params>
-      <param name="shownumber" type="radio" default="1" label="COM_TRACKS_Display_individual_number" description="" >
+	</layout>	
+	
+	<!-- Add fields to the request variables for the layout. -->
+	<fields name="request">
+		<fieldset name="request">
+			
+			<field name="p" type="sql"
+				query="SELECT id AS value, name AS p FROM #__tracks_projects ORDER BY name ASC"
+				default=""
+				description="COM_TRACKS_Select_a_project"
+				extension="com_tracks"
+				label="COM_TRACKS_Select_a_project"
+				required="true"
+			/>
+			
+		</fieldset>
+	</fields>
+		
+		<!-- Add fields to the parameters object for the layout. -->
+	<fields name="params">
+		<fieldset name="basic" label="COM_TRACKS_FIELDSET_LAYOUT_OPTIONS">
+
+			<field name="shownumber" type="list"
+				label="COM_TRACKS_Display_individual_number"
+				description="COM_TRACKS_Display_individual_number"
+			>
         <option value="0">COM_TRACKS_No</option>
         <option value="1">COM_TRACKS_Yes</option>
-      </param>
-      <param name="showflag" type="radio" default="1" label="COM_TRACKS_Display_country_flag" description="" >
+			</field>
+
+			<field name="showflag" type="list"
+				label="COM_TRACKS_Display_country_flag"
+				description="COM_TRACKS_Display_country_flag"
+			>
         <option value="0">COM_TRACKS_No</option>
         <option value="1">COM_TRACKS_Yes</option>
-      </param>
-      <param name="showteams" type="radio" default="1" label="COM_TRACKS_Display_teams_in_rankings" description="" >
-			  <option value="0">COM_TRACKS_No</option>
-			  <option value="1">COM_TRACKS_Yes</option>
-			</param>
-    </params>
-	</state>
+			</field>
+
+			<field name="showteams" type="list"
+				label="COM_TRACKS_Display_teams_in_rankings"
+				description="COM_TRACKS_Display_teams_in_rankings"
+			>
+        <option value="0">COM_TRACKS_No</option>
+        <option value="1">COM_TRACKS_Yes</option>
+			</field>
+				
+		</fieldset>
+	</fields>
+	
 </metadata>

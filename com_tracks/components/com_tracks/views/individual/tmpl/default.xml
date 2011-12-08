@@ -5,13 +5,20 @@
         <![CDATA[COM_TRACKS_Display_an_individual]]>
         </message>
     </layout>
-    <state>
-        <name>COM_TRACKS_standard_individual_layout</name>
-        <description>COM_TRACKS_Select_an_individual</description>
-        <url addpath="/administrator/components/com_tracks/elements">
-            <param name="i" type="tsql" default="" label="COM_TRACKS_Select_an_individual" description="COM_TRACKS_Select_an_individual" query="SELECT id AS i, CONCAT(last_name, ', ', first_name) AS text FROM #__tracks_individuals ORDER BY last_name, first_name" />
-        </url>
-        <params>
-        </params>
-    </state>
+    
+		<!-- Add fields to the request variables for the layout. -->
+		<fields name="request">
+			<fieldset name="request">
+				
+				<field name="i" type="sql"
+					query="SELECT id AS value, CONCAT(last_name, ', ', first_name) AS i FROM #__tracks_individuals ORDER BY last_name, first_name"
+					default=""
+					description="COM_TRACKS_Select_an_individual"
+					extension="com_tracks"
+					label="COM_TRACKS_Select_an_individual"
+					required="true"
+				/>
+				
+			</fieldset>
+		</fields>
 </metadata>

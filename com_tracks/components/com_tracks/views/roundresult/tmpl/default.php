@@ -54,11 +54,11 @@ foreach ($this->results as $subround)
 	      <?php if ($this->projectparams->get('shownumber')): ?>
 	      <th><?php echo JText::_('COM_TRACKS_NUMBER_SHORT' ); ?></th>
 	      <?php endif; ?>
-	      <?php if ($this->projectparams->get('showflag')): ?>
+	      <?php if ($this->projectparams->get('showflag') && $this->params->get('showflag')): ?>
 	      <th><?php echo JText::_('COM_TRACKS_COUNTRY_SHORT' ); ?></th>
 	      <?php endif; ?>
 	      <th><?php echo JText::_('COM_TRACKS_Individual' ); ?></th>
-	      <?php if ($this->projectparams->get('showteams')): ?>
+	      <?php if ($this->projectparams->get('showteams') && $this->params->get('showteams')): ?>
 	      <th><?php echo JText::_('COM_TRACKS_Team' ); ?></th>
 	      <?php endif; ?>
 	      <th><?php echo JText::_('COM_TRACKS_Performance' ); ?></th>
@@ -88,7 +88,7 @@ foreach ($this->results as $subround)
           <td><?php echo $result->number; ?></td>
 	        <?php endif; ?>
 	        
-	        <?php if ($this->projectparams->get('showflag')): ?>
+	        <?php if ($this->projectparams->get('showflag') && $this->params->get('showflag')): ?>
 	        <td>
 	          <?php if ( $result->country_code ): ?>
 	          <?php echo TracksCountries::getCountryFlag($result->country_code); ?>
@@ -102,7 +102,7 @@ foreach ($this->results as $subround)
 					 <?php	echo $result->first_name . ' ' . $result->last_name; ?>
 					 </a>
 					</td>
-					<?php if ($this->projectparams->get('showteams')): ?>
+					<?php if ($this->projectparams->get('showteams') && $this->params->get('showteams')): ?>
 					<td>
 						<?php if ($result->team_id): ?>
 					 	<a href="<?php echo $link_team; ?>"

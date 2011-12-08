@@ -20,7 +20,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
   <tbody>
     <tr>
       <th><?php echo JText::_('COM_TRACKS_POSITION_SHORT' ); ?></th>
-      <?php if ($this->projectparams->get('showflag')): ?>
+      <?php if ($this->projectparams->get('showflag') && $this->params->get('showflag')): ?>
       <th><?php echo JText::_('COM_TRACKS_COUNTRY_SHORT' ); ?></th>
       <?php endif; ?>
       <th><?php echo JText::_('COM_TRACKS_Team' ); ?></th>
@@ -36,7 +36,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
       ?>
       <tr class="<?php echo ($k++ % 2 ? 'd1' : 'd0'); ?>">
         <td><?php echo $ranking->rank; ?></td>
-        <?php if ($this->projectparams->get('showflag')): ?>
+        <?php if ($this->projectparams->get('showflag') && $this->params->get('showflag')): ?>
         <td>
           <?php if ( $ranking->country_code ): ?>
           <img src="<?php echo TracksCountries::getIsoFlag($ranking->country_code); ?>"

@@ -28,7 +28,7 @@ class TracksFrontViewProfile extends JView
     function display($tpl = null)
     {
         $mainframe = &JFactory::getApplication();
-$option = JRequest::getCmd('option');
+        $option = JRequest::getCmd('option');
         
         $user   =& JFactory::getUser();
         
@@ -43,7 +43,7 @@ $option = JRequest::getCmd('option');
         if (!$data->id) 
         {
         	// no tracks individual associated to profile
-        	$params = &JComponentHelper::getParams( 'com_tracks' );        
+		    	$params = $mainframe->getParams( 'com_tracks' );     
           if ( $params->get( 'user_registration' ) )
           {
             $mainframe->redirect( 'index.php?option=com_tracks&controller=individual&task=add' );          	
