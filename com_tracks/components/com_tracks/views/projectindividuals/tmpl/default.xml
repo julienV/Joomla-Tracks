@@ -5,19 +5,35 @@
 			<![CDATA[COM_TRACKS_Displays_project_individuals]]>
 		</message>
 	</layout>
-	<state>
-		<name>COM_TRACKS_Standard_project_individuals_layout</name>
-		<description>COM_TRACKS_Select_a_project</description>
-		<url addpath="/administrator/components/com_tracks/elements">
-			<param name="p" type="tsql" default=""
-				label="COM_TRACKS_Select_a_project" description="COM_TRACKS_Select_a_project"
-				query="SELECT id AS p, name AS text FROM #__tracks_projects ORDER BY name ASC" />
-		</url>
-		<params>
-      <param name="showteams" type="radio" default="1" label="COM_TRACKS_Display_teams_in_rankings" description="" >
-			  <option value="0">COM_TRACKS_No</option>
-			  <option value="1">COM_TRACKS_Yes</option>
-			</param>
-    </params>
-	</state>
+	
+	<!-- Add fields to the request variables for the layout. -->
+	<fields name="request">
+		<fieldset name="request">
+			
+			<field name="p" type="sql"
+				query="SELECT id AS value, name AS p FROM #__tracks_projects ORDER BY name ASC"
+				default=""
+				description="COM_TRACKS_Select_a_project"
+				extension="com_tracks"
+				label="COM_TRACKS_Select_a_project"
+				required="true"
+			/>
+			
+		</fieldset>
+	</fields>
+		
+		<!-- Add fields to the parameters object for the layout. -->
+	<fields name="params">
+		<fieldset name="basic" label="COM_TRACKS_FIELDSET_LAYOUT_OPTIONS">
+
+			<field name="showteams" type="list"
+				label="COM_TRACKS_Display_teams_in_rankings"
+				description="COM_TRACKS_Display_teams_in_rankings_DESC"
+			>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+				
+		</fieldset>
+	</fields>
 </metadata>
