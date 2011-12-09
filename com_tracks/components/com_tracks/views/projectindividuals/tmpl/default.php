@@ -45,7 +45,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 	          <?php endif; ?>
           </p>
 	        
-	        <?php if ( $obj->team_name && $this->projectparams->get('showteams') && $this->params->get('showteams')) : ?>
+	        <?php if ( $obj->team_name && $this->projectparams->get('showteams') && $this->params->get('showteams', 1)) : ?>
 	        <div>
 						<a href="<?php echo $link_team; ?>"
 						   title="<?php echo JText::_('COM_TRACKS_Details' ); ?>"> <?php echo $obj->team_name; ?>

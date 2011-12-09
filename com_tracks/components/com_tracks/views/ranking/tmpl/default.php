@@ -21,17 +21,17 @@ defined('_JEXEC') or die('Restricted access'); ?>
     <tr>
       <th><?php echo JText::_('COM_TRACKS_POSITION_SHORT' ); ?></th>
       
-      <?php if ($this->params->get('shownumber')): ?>
+      <?php if ($this->params->get('shownumber',1)): ?>
       <th><?php echo JText::_('COM_TRACKS_NUMBER_SHORT' ); ?></th>
       <?php endif; ?>
       
-      <?php if ($this->params->get('showflag')): ?>
+      <?php if ($this->params->get('showflag',1)): ?>
       <th><?php echo JText::_('COM_TRACKS_COUNTRY_SHORT' ); ?></th>
       <?php endif; ?>
       
       <th><?php echo JText::_('COM_TRACKS_Individual' ); ?></th>
       
-      <?php if ($this->params->get('showteams')): ?>
+      <?php if ($this->params->get('showteams',1)): ?>
       <th><?php echo JText::_('COM_TRACKS_Team' ); ?></th>
       <?php endif; ?>
       
@@ -51,11 +51,11 @@ defined('_JEXEC') or die('Restricted access'); ?>
       <tr class="<?php echo ($i ? 'd1' : 'd0'); ?>">
         <td><?php echo $ranking->rank; ?></td>
         
-        <?php if ($this->params->get('shownumber')): ?>
+        <?php if ($this->params->get('shownumber',1)): ?>
 	      <td><?php echo $ranking->number; ?></td>
 	      <?php endif; ?>
 	      
-	      <?php if ($this->params->get('showflag')): ?>
+	      <?php if ($this->params->get('showflag',1)): ?>
 	      <td>
 	        <?php if ( $ranking->country_code ): ?>
             <?php echo TracksCountries::getCountryFlag($ranking->country_code); ?>
@@ -69,7 +69,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
           <?php echo $ranking->first_name . ' ' . $ranking->last_name; ?>
           </a>
         </td>
-        <?php  if ($this->params->get('showteams')): ?>
+        <?php  if ($this->params->get('showteams',1)): ?>
         <td>
         	<?php if ($ranking->team_id): ?>
           <a href="<?php echo $link_team; ?>"

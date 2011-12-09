@@ -29,6 +29,7 @@
 			<field name="showteams" type="list"
 				label="COM_TRACKS_Display_teams_in_rankings"
 				description="COM_TRACKS_Display_teams_in_rankings_DESC"
+				default="1"
 			>
 				<option value="0">JHIDE</option>
 				<option value="1">JSHOW</option>

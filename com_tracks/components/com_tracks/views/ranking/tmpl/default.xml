@@ -29,6 +29,7 @@
 			<field name="shownumber" type="list"
 				label="COM_TRACKS_Display_individual_number"
 				description="COM_TRACKS_Display_individual_number"
+				default="1"
 			>
         <option value="0">COM_TRACKS_No</option>
         <option value="1">COM_TRACKS_Yes</option>
@@ -37,6 +38,7 @@
 			<field name="showflag" type="list"
 				label="COM_TRACKS_Display_country_flag"
 				description="COM_TRACKS_Display_country_flag"
+				default="1"
 			>
         <option value="0">COM_TRACKS_No</option>
         <option value="1">COM_TRACKS_Yes</option>
@@ -45,6 +47,7 @@
 			<field name="showteams" type="list"
 				label="COM_TRACKS_Display_teams_in_rankings"
 				description="COM_TRACKS_Display_teams_in_rankings"
+				default="1"
 			>
         <option value="0">COM_TRACKS_No</option>
         <option value="1">COM_TRACKS_Yes</option>
