@@ -48,6 +48,8 @@ $option = JRequest::getCmd('option');
     $rows = &$this->get('List');
     $page = &$this->get('Pagination');
     JHTML::_('behavior.tooltip');
+    
+    $function = JRequest::getCmd('function', 'jSelectBook');
     ?>
     <form action="index.php?option=com_tracks&amp;controller=projectround&amp;task=element&amp;tmpl=component" method="post" name="adminForm">
 
@@ -112,8 +114,7 @@ $option = JRequest::getCmd('option');
             <?php echo $page->getRowOffset( $i ); ?>
           </td>
           <td>
-            <a style="cursor: pointer;" onclick="window.parent.jSelectProjectround('<?php echo $row->id; ?>', '<?php echo str_replace(array("'", "\""), array("\\'", ""),$row->name); ?>', '<?php echo JRequest::getVar('object'); ?>');">
-              <?php echo htmlspecialchars($row->name, ENT_QUOTES, 'UTF-8'); ?></a>
+            <a class="pointer" onclick="if (window.parent) window.parent.<?php echo $this->escape($function);?>('<?php echo $row->id; ?>', '<?php echo $this->escape(addslashes($row->name)); ?>');"><?php echo $this->escape($row->name); ?></a>
           </td>
           <td>
             <?php echo $row->project; ?>
@@ -135,6 +136,7 @@ $option = JRequest::getCmd('option');
     <input type="hidden" name="boxchecked" value="0" />
     <input type="hidden" name="filter_order" value="<?php echo $lists['order']; ?>" />
     <input type="hidden" name="filter_order_Dir" value="<?php echo $lists['order_Dir']; ?>" />
+    <input type="hidden" name="function" value="<?php echo $function; ?>" />
     </form>
     <?php
   }

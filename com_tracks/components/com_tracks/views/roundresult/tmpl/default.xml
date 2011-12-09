@@ -7,10 +7,15 @@
   </layout>
 	
 	<!-- Add fields to the request variables for the layout. -->
-	<fields name="request">
+	<fields name="request" addfieldpath="administrator/components/com_tracks/models/fields">
 		<fieldset name="request">
 			
-			<field type="text" name="pr" default="" label="COM_TRACKS_Project_round_id" description="COM_TRACKS_Please_provide_the_project_round_id"
+			<field 
+				name="pr"
+				type="projectround"
+				label="COM_TRACKS_SELECT_A_PROJECT_ROUND" 
+				description="COM_TRACKS_SELECT_A_PROJECT_ROUND"
+				required="true"
 			/>
 			
 		</fieldset>
