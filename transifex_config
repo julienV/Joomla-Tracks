@@ -40,6 +40,11 @@ file_filter = languages/<lang>/plugins/tracks_search/<lang>.plg_search_trackssea
 source_file = plugins/tracks_search/language/en-GB/en-GB.plg_search_trackssearch.ini
 source_lang = en-GB
 
+[tracks.17-plg_search_trackssearch-sys-ini]
+file_filter = languages/<lang>/plugins/tracks_search/<lang>.plg_search_trackssearch.sys.ini
+source_file = plugins/tracks_search/language/en-GB/en-GB.plg_search_trackssearch.sys.ini
+source_lang = en-GB
+
 [tracks.17-mod_tracks_teamranking-ini]
 file_filter = languages/<lang>/modules/mod_tracks_teamranking/<lang>.mod_tracks_teamranking.ini
 source_file = modules/mod_tracks_teamranking/languages/en-GB.mod_tracks_teamranking.ini

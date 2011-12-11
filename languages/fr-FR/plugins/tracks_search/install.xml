@@ -15,6 +15,7 @@
 	<administration>
 		<files>
   			<filename>fr-FR.plg_search_trackssearch.ini</filename>
+  			<filename>fr-FR.plg_search_trackssearch.sys.ini</filename>
 		</files>
 	</administration>
 	

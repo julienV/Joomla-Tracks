@@ -14,292 +14,392 @@
 
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
- 
-//define the registerEvent and the language file. 
-$mainframe->registerEvent( 'onSearch', 'plgSearchTracksSearch' );
-$mainframe->registerEvent( 'onSearchAreas', 'plgSearchTracksSearchAreas' );
- 
-JPlugin::loadLanguage( 'plg_search_trackssearch' );
- 
-//define a function to return an array of search areas.
-function &plgSearchTracksSearchAreas()
-{
-        static $areas = array(
-                'tracksindividuals' => 'TRACKS INDIVIDUALS',
-                'tracksteams' => 'TRACKS TEAMS',
-                'tracksprojects' => 'TRACKS PROJECTS',
-        );
-        return $areas;
-}
- 
-//Then the real function has to be created. The database connection should be made. 
-function plgSearchTracksSearch( $text, $phrase='', $ordering='', $areas=null )
-{
-	$db            =& JFactory::getDBO();
-	$user  =& JFactory::getUser();
+jimport('joomla.plugin.plugin');
 
-	//If the array is not correct, return it:
-	if (is_array( $areas )) {
-		if (!array_intersect( $areas, array_keys( plgSearchTracksSearchAreas() ) )) {
+require_once JPATH_SITE.'/components/com_weblinks/helpers/route.php';
+
+/**
+ * Weblinks Search plugin
+ *
+ * @package		Joomla.Plugin
+ * @subpackage	Search.Tracks
+ * @since		1.7
+ */
+class plgSearchTrackssearch extends JPlugin
+{
+	/**
+	 * Constructor
+	 *
+	 * @access      protected
+	 * @param       object  $subject The object to observe
+	 * @param       array   $config  An array that holds the plugin configuration
+	 * @since       1.5
+	 */
+	public function __construct(& $subject, $config)
+	{
+		parent::__construct($subject, $config);
+		$this->loadLanguage();
+	}
+
+	/**
+	 * @return array An array of search areas
+	 */
+	public function onContentSearchAreas() 
+	{
+		static $areas = array(
+			'tracksindividuals' => 'PLG_SEARCH_TRACKS_INDIVIDUALS',
+			'tracksteams' => 'PLG_SEARCH_TRACKS_TEAMS',
+			'tracksprojects' => 'PLG_SEARCH_TRACKS_PROJECTS',
+			'tracksrounds' => 'PLG_SEARCH_TRACKS_ROUNDS',
+		);
+		return $areas;
+	}
+
+	/**
+	 * Weblink Search method
+	 *
+	 * The sql must return the following fields that are used in a common display
+	 * routine: href, title, section, created, text, browsernav
+	 * @param string Target search string
+	 * @param string mathcing option, exact|any|all
+	 * @param string ordering option, newest|oldest|popular|alpha|category
+	 * @param mixed An array if the search it to be restricted to areas, null if search all
+	 */
+	public function onContentSearch($text, $phrase='', $ordering='', $areas=null)
+	{
+		$db		= JFactory::getDbo();
+		$app	= JFactory::getApplication();
+		$user	= JFactory::getUser();
+		$groups	= implode(',', $user->getAuthorisedViewLevels());
+
+		$searchText = $text;
+
+		if (is_array($areas)) {
+			if (!array_intersect($areas, array_keys($this->onContentSearchAreas()))) {
+				return array();
+			}
+		}
+
+		$limit			= $this->params->def('search_limit',		50);
+
+		$text = trim($text);
+		if ($text == '') {
 			return array();
 		}
-	}
+		$section	= JText::_('PLG_SEARCH_TRACKS_TRACKS');
 
-	//It is time to define the parameters! First get the right plugin; 'search' (the group), 'nameofplugin'.
-	$plugin =& JPluginHelper::getPlugin('search', 'trackssearch');
-
-	//Then load the parameters of the plugin..
-	$pluginParams = new JParameter( $plugin->params );
+		$rows = array();
+		if (!$areas || in_array('tracksindividuals', $areas))
+		{
+			$wheres = array();
+			switch ($phrase) {
 	
-  $limit = $pluginParams->def( 'search_limit', 50 );
-
-	//Use the function trim to delete spaces in front of or at the back of the searching terms
-	$text = trim( $text );
-
-	//Return Array when nothing was filled in
-	if ($text == '') {
-		return array();
-	}
-
-	$rows = array();
-	
-	$searchTracks = $db->Quote(JText::_( 'TRACKS' ));
-
-	if (!$areas || in_array('tracksindividuals', $areas))
-	{
-		$wheres = array();
-		switch ($phrase) {
-
-			//search exact
-			case 'exact':
-				$string        = $db->Quote( '%'.$db->getEscaped( $text, true ).'%', false );
-				$wheres2       = array();
-				$wheres2[]   = 'LOWER(i.first_name) LIKE '.$string;
-        $wheres2[]   = 'LOWER(i.last_name) LIKE '.$string;
-        $wheres2[]   = 'LOWER(i.nickname) LIKE '.$string;
-				$where                 = '(' . implode( ') OR (', $wheres2 ) . ')';
-				break;
-
-				//search all or any
-			case 'all':
-			case 'any':
-
-				//set default
-			default:
-				$words         = explode( ' ', $text );
-				$wheres = array();
-				foreach ($words as $word)
-				{
-					$word          = $db->Quote( '%'.$db->getEscaped( $word, true ).'%', false );
+				//search exact
+				case 'exact':
+					$string        = $db->Quote( '%'.$db->getEscaped( $text, true ).'%', false );
 					$wheres2       = array();
-	        $wheres2[]   = 'LOWER(i.first_name) LIKE '.$word;
-	        $wheres2[]   = 'LOWER(i.last_name) LIKE '.$word;
-	        $wheres2[]   = 'LOWER(i.nickname) LIKE '.$word;
-					$wheres[]    = implode( ' OR ', $wheres2 );
-				}
-				$where = '(' . implode( ($phrase == 'all' ? ') AND (' : ') OR ('), $wheres ) . ')';
-				break;
+					$wheres2[]   = 'LOWER(i.first_name) LIKE '.$string;
+	        $wheres2[]   = 'LOWER(i.last_name) LIKE '.$string;
+	        $wheres2[]   = 'LOWER(i.nickname) LIKE '.$string;
+					$where                 = '(' . implode( ') OR (', $wheres2 ) . ')';
+					break;
+	
+					//search all or any
+				case 'all':
+				case 'any':
+	
+					//set default
+				default:
+					$words         = explode( ' ', $text );
+					$wheres = array();
+					foreach ($words as $word)
+					{
+						$word          = $db->Quote( '%'.$db->getEscaped( $word, true ).'%', false );
+						$wheres2       = array();
+		        $wheres2[]   = 'LOWER(i.first_name) LIKE '.$word;
+		        $wheres2[]   = 'LOWER(i.last_name) LIKE '.$word;
+		        $wheres2[]   = 'LOWER(i.nickname) LIKE '.$word;
+						$wheres[]    = implode( ' OR ', $wheres2 );
+					}
+					$where = '(' . implode( ($phrase == 'all' ? ') AND (' : ') OR ('), $wheres ) . ')';
+					break;
+			}
+	
+			//ordering of the results
+			switch ( $ordering ) {
+	
+				//alphabetic, ascending
+				case 'alpha':
+					$order = 'i.last_name ASC, i.first_name ASC';
+					break;
+	
+					//oldest first
+				case 'oldest':
+	
+					//popular first
+				case 'popular':
+	
+					//newest first
+				case 'newest':
+	
+					//default setting: alphabetic, ascending
+				default:
+	        $order = 'i.last_name ASC, i.first_name ASC';
+			}
+	
+			//the database query; differs per situation! It will look something like this:
+			$query = 'SELECT CONCAT_WS(", ", i.last_name, i.first_name) AS title,'
+			. ' CONCAT_WS( " / ", '. $db->Quote($section) .', '.$db->Quote(JText::_( 'PLG_SEARCH_TRACKS_INDIVIDUALS' )).' ) AS section,'
+	    . ' CASE WHEN CHAR_LENGTH( i.alias ) THEN CONCAT_WS( \':\', i.id, i.alias ) ELSE i.id END AS slug, '
+	    . ' NULL AS created, '
+			. ' "2" AS browsernav'
+			. ' FROM #__tracks_individuals AS i'
+			. ' WHERE ( '. $where .' )'
+			. ' ORDER BY '. $order
+			;
+	
+			//Set query
+			$db->setQuery( $query, 0, $limit );
+// 			echo '<pre>';print_r($db->getQuery()); echo '</pre>';exit;
+			$results = $db->loadObjectList();
+	
+			//The 'output' of the displayed link
+			foreach($results as $key => $row) {
+				$results[$key]->href = 'index.php?option=com_tracks&view=individual&i='.$row->slug;
+			}
+			
+			$rows = array_merge($rows, $results);
 		}
-
-		//ordering of the results
-		switch ( $ordering ) {
-
-			//alphabetic, ascending
-			case 'alpha':
-				$order = 'i.last_name ASC, i.first_name ASC';
-				break;
-
-				//oldest first
-			case 'oldest':
-
-				//popular first
-			case 'popular':
-
-				//newest first
-			case 'newest':
-
-				//default setting: alphabetic, ascending
-			default:
-        $order = 'i.last_name ASC, i.first_name ASC';
-		}
-
-		//the database query; differs per situation! It will look something like this:
-		$query = 'SELECT CONCAT_WS(", ", i.last_name, i.first_name) AS title,'
-		. ' CONCAT_WS( " / ", '. $searchTracks .', '.$db->Quote(JText::_( 'INDIVIDUALS' )).' ) AS section,'
-    . ' CASE WHEN CHAR_LENGTH( i.alias ) THEN CONCAT_WS( \':\', i.id, i.alias ) ELSE i.id END AS slug, '
-    . ' NULL AS created, '
-		. ' "2" AS browsernav'
-		. ' FROM #__tracks_individuals AS i'
-		. ' WHERE ( '. $where .' )'
-		. ' ORDER BY '. $order
-		;
-
-		//Set query
-		$db->setQuery( $query, 0, $limit );
-		$results = $db->loadObjectList();
-
-		//The 'output' of the displayed link
-		foreach($results as $key => $row) {
-			$results[$key]->href = 'index.php?option=com_tracks&view=individual&i='.$row->slug;
-		}
+				
+		if (!$areas || in_array('tracksteams', $areas))
+		{
+	    $wheres = array();
+	    switch ($phrase) {
+	
+	      //search exact
+	      case 'exact':
+	        $string          = $db->Quote( '%'.$db->getEscaped( $text, true ).'%', false );
+	        $wheres2       = array();
+	        $wheres2[]   = 'LOWER(t.name) LIKE '.$string;
+	        $where                 = '(' . implode( ') OR (', $wheres2 ) . ')';
+	        break;
+	
+	        //search all or any
+	      case 'all':
+	      case 'any':
+	
+	        //set default
+	      default:
+	        $words         = explode( ' ', $text );
+	        $wheres = array();
+	        foreach ($words as $word)
+	        {
+	          $word          = $db->Quote( '%'.$db->getEscaped( $word, true ).'%', false );
+	          $wheres2       = array();
+	          $wheres2[]   = 'LOWER(t.name) LIKE '.$word;
+	          $wheres[]    = implode( ' OR ', $wheres2 );
+	        }
+	        $where = '(' . implode( ($phrase == 'all' ? ') AND (' : ') OR ('), $wheres ) . ')';
+	        break;
+	    }
+	
+	    //ordering of the results
+	    switch ( $ordering ) {
+	
+	      //alphabetic, ascending
+	      case 'alpha':
+	        $order = 't.name ASC';
+	        break;
+	
+	        //oldest first
+	      case 'oldest':
+	
+	        //popular first
+	      case 'popular':
+	
+	        //newest first
+	      case 'newest':
+	
+	        //default setting: alphabetic, ascending
+	      default:
+	        $order = 't.name ASC';
+	    }
+	
+	    //the database query; differs per situation! It will look something like this:
+	    $query = 'SELECT t.name AS title,'
+	    . ' CONCAT_WS( " / ", '. $db->Quote($section) .', '.$db->Quote(JText::_( 'PLG_SEARCH_TRACKS_TEAMS' )).' ) AS section,'
+	    . ' CASE WHEN CHAR_LENGTH( t.alias ) THEN CONCAT_WS( \':\', t.id, t.alias ) ELSE t.id END AS slug, '
+	    . ' NULL AS created, '
+	    . ' "2" AS browsernav'
+	    . ' FROM #__tracks_teams AS t'
+	    . ' WHERE ( '. $where .' )'
+	    . ' ORDER BY '. $order
+	    ;
+	
+	    //Set query
+	    $db->setQuery( $query, 0, $limit );
+	    $results = $db->loadObjectList();
+	
+	    //The 'output' of the displayed link
+	    foreach($results as $key => $row) {
+	      $results[$key]->href = 'index.php?option=com_tracks&view=team&t='.$row->slug;
+	    }
+	    $rows = array_merge($rows, $results);
+	  }
+	
+	  if (!$areas || in_array('tracksprojects', $areas))
+	  {
+	    $wheres = array();
+	    switch ($phrase) {
+	
+	      //search exact
+	      case 'exact':
+	        $string          = $db->Quote( '%'.$db->getEscaped( $text, true ).'%', false );
+	        $wheres2       = array();
+	        $wheres2[]   = 'LOWER(p.name) LIKE '.$string;
+	        $where                 = '(' . implode( ') OR (', $wheres2 ) . ')';
+	        break;
+	
+	        //search all or any
+	      case 'all':
+	      case 'any':
+	
+	        //set default
+	      default:
+	        $words         = explode( ' ', $text );
+	        $wheres = array();
+	        foreach ($words as $word)
+	        {
+	          $word          = $db->Quote( '%'.$db->getEscaped( $word, true ).'%', false );
+	          $wheres2       = array();
+	          $wheres2[]   = 'LOWER(p.name) LIKE '.$word;
+	          $wheres[]    = implode( ' OR ', $wheres2 );
+	        }
+	        $where = '(' . implode( ($phrase == 'all' ? ') AND (' : ') OR ('), $wheres ) . ')';
+	        break;
+	    }
+	
+	    //ordering of the results
+	    switch ( $ordering ) {
+	
+	      //alphabetic, ascending
+	      case 'alpha':
+	        $order = 'p.name ASC';
+	        break;
+	
+	        //oldest first
+	      case 'oldest':
+	
+	        //popular first
+	      case 'popular':
+	
+	        //newest first
+	      case 'newest':
+	
+	        //default setting: alphabetic, ascending
+	      default:
+	        $order = 'p.name ASC';
+	    }
+	
+	    //the database query; differs per situation! It will look something like this:
+	    $query = 'SELECT p.name AS title,'
+	    . ' CONCAT_WS( " / ", '. $db->Quote($section) .', '.$db->Quote(JText::_( 'PLG_SEARCH_TRACKS_PROJECTS' )).' ) AS section,'
+	    . ' CASE WHEN CHAR_LENGTH( p.alias ) THEN CONCAT_WS( \':\', p.id, p.alias ) ELSE p.id END AS slug, '
+	    . ' NULL AS created, '
+	    . ' "2" AS browsernav'
+	    . ' FROM #__tracks_projects AS p'
+	    . ' WHERE ( '. $where .' )'
+	    . ' ORDER BY '. $order
+	    ;
+	
+	    //Set query
+	    $db->setQuery( $query, 0, $limit );
+	    $results = $db->loadObjectList();
+	
+	    //The 'output' of the displayed link
+	    foreach($results as $key => $row) {
+	      $results[$key]->href = 'index.php?option=com_tracks&view=project&p='.$row->slug;
+	    }
+	    $rows = array_merge($rows, $results);
+	  }		
+	
+	  if (!$areas || in_array('tracksrounds', $areas))
+	  {
+	    $wheres = array();
+	    switch ($phrase) {
+	
+	      //search exact
+	      case 'exact':
+	        $string          = $db->Quote( '%'.$db->getEscaped( $text, true ).'%', false );
+	        $wheres2       = array();
+	        $wheres2[]   = 'LOWER(r.name) LIKE '.$string;
+	        $where                 = '(' . implode( ') OR (', $wheres2 ) . ')';
+	        break;
+	
+	        //search all or any
+	      case 'all':
+	      case 'any':
+	
+	        //set default
+	      default:
+	        $words         = explode( ' ', $text );
+	        $wheres = array();
+	        foreach ($words as $word)
+	        {
+	          $word          = $db->Quote( '%'.$db->getEscaped( $word, true ).'%', false );
+	          $wheres2       = array();
+	          $wheres2[]   = 'LOWER(r.name) LIKE '.$word;
+	          $wheres[]    = implode( ' OR ', $wheres2 );
+	        }
+	        $where = '(' . implode( ($phrase == 'all' ? ') AND (' : ') OR ('), $wheres ) . ')';
+	        break;
+	    }
+	
+	    //ordering of the results
+	    switch ( $ordering ) {
+	
+	      //alphabetic, ascending
+	      case 'alpha':
+	        $order = 'r.name ASC';
+	        break;
+	
+	        //oldest first
+	      case 'oldest':
+	
+	        //popular first
+	      case 'popular':
+	
+	        //newest first
+	      case 'newest':
+	
+	        //default setting: alphabetic, ascending
+	      default:
+	        $order = 'r.name ASC';
+	    }
+	
+	    //the database query; differs per situation! It will look something like this:
+	    $query = 'SELECT r.name AS title,'
+	    . ' CONCAT_WS( " / ", '. $db->Quote($section) .', '.$db->Quote(JText::_( 'PLG_SEARCH_TRACKS_ROUNDS' )).' ) AS section,'
+	    . ' CASE WHEN CHAR_LENGTH( r.alias ) THEN CONCAT_WS( \':\', r.id, r.alias ) ELSE r.id END AS slug, '
+	    . ' NULL AS created, '
+	    . ' "2" AS browsernav'
+	    . ' FROM #__tracks_rounds AS r'
+	    . ' WHERE ( '. $where .' )'
+	    . ' ORDER BY '. $order
+	    ;
+	
+	    //Set query
+	    $db->setQuery( $query, 0, $limit );
+	    $results = $db->loadObjectList();
+	
+	    //The 'output' of the displayed link
+	    foreach($results as $key => $row) {
+	      $results[$key]->href = 'index.php?option=com_tracks&view=round&r='.$row->slug;
+	    }
+	    $rows = array_merge($rows, $results);
+	  }		
 		
-		$rows = array_merge($rows, $results);
+		return $rows;
 	}
 	
- if (!$areas || in_array('tracksteams', $areas))
-  {
-    $wheres = array();
-    switch ($phrase) {
-
-      //search exact
-      case 'exact':
-        $string          = $db->Quote( '%'.$db->getEscaped( $text, true ).'%', false );
-        $wheres2       = array();
-        $wheres2[]   = 'LOWER(t.name) LIKE '.$string;
-        $where                 = '(' . implode( ') OR (', $wheres2 ) . ')';
-        break;
-
-        //search all or any
-      case 'all':
-      case 'any':
-
-        //set default
-      default:
-        $words         = explode( ' ', $text );
-        $wheres = array();
-        foreach ($words as $word)
-        {
-          $word          = $db->Quote( '%'.$db->getEscaped( $word, true ).'%', false );
-          $wheres2       = array();
-          $wheres2[]   = 'LOWER(t.name) LIKE '.$word;
-          $wheres[]    = implode( ' OR ', $wheres2 );
-        }
-        $where = '(' . implode( ($phrase == 'all' ? ') AND (' : ') OR ('), $wheres ) . ')';
-        break;
-    }
-
-    //ordering of the results
-    switch ( $ordering ) {
-
-      //alphabetic, ascending
-      case 'alpha':
-        $order = 't.name ASC';
-        break;
-
-        //oldest first
-      case 'oldest':
-
-        //popular first
-      case 'popular':
-
-        //newest first
-      case 'newest':
-
-        //default setting: alphabetic, ascending
-      default:
-        $order = 't.name ASC';
-    }
-
-    //the database query; differs per situation! It will look something like this:
-    $query = 'SELECT t.name AS title,'
-    . ' CONCAT_WS( " / ", '. $searchTracks .', '.$db->Quote(JText::_( 'TEAMS' )).' ) AS section,'
-    . ' CASE WHEN CHAR_LENGTH( t.alias ) THEN CONCAT_WS( \':\', t.id, t.alias ) ELSE t.id END AS slug, '
-    . ' NULL AS created, '
-    . ' "2" AS browsernav'
-    . ' FROM #__tracks_teams AS t'
-    . ' WHERE ( '. $where .' )'
-    . ' ORDER BY '. $order
-    ;
-
-    //Set query
-    $db->setQuery( $query, 0, $limit );
-    $results = $db->loadObjectList();
-
-    //The 'output' of the displayed link
-    foreach($results as $key => $row) {
-      $results[$key]->href = 'index.php?option=com_tracks&view=team&t='.$row->slug;
-    }
-    $rows = array_merge($rows, $results);
-  }
-
-  if (!$areas || in_array('tracksprojects', $areas))
-  {
-    $wheres = array();
-    switch ($phrase) {
-
-      //search exact
-      case 'exact':
-        $string          = $db->Quote( '%'.$db->getEscaped( $text, true ).'%', false );
-        $wheres2       = array();
-        $wheres2[]   = 'LOWER(p.name) LIKE '.$string;
-        $where                 = '(' . implode( ') OR (', $wheres2 ) . ')';
-        break;
-
-        //search all or any
-      case 'all':
-      case 'any':
-
-        //set default
-      default:
-        $words         = explode( ' ', $text );
-        $wheres = array();
-        foreach ($words as $word)
-        {
-          $word          = $db->Quote( '%'.$db->getEscaped( $word, true ).'%', false );
-          $wheres2       = array();
-          $wheres2[]   = 'LOWER(p.name) LIKE '.$word;
-          $wheres[]    = implode( ' OR ', $wheres2 );
-        }
-        $where = '(' . implode( ($phrase == 'all' ? ') AND (' : ') OR ('), $wheres ) . ')';
-        break;
-    }
-
-    //ordering of the results
-    switch ( $ordering ) {
-
-      //alphabetic, ascending
-      case 'alpha':
-        $order = 'p.name ASC';
-        break;
-
-        //oldest first
-      case 'oldest':
-
-        //popular first
-      case 'popular':
-
-        //newest first
-      case 'newest':
-
-        //default setting: alphabetic, ascending
-      default:
-        $order = 'p.name ASC';
-    }
-
-    //the database query; differs per situation! It will look something like this:
-    $query = 'SELECT p.name AS title,'
-    . ' CONCAT_WS( " / ", '. $searchTracks .', '.$db->Quote(JText::_( 'PROJECTS' )).' ) AS section,'
-    . ' CASE WHEN CHAR_LENGTH( p.alias ) THEN CONCAT_WS( \':\', p.id, p.alias ) ELSE p.id END AS slug, '
-    . ' NULL AS created, '
-    . ' "2" AS browsernav'
-    . ' FROM #__tracks_projects AS p'
-    . ' WHERE ( '. $where .' )'
-    . ' ORDER BY '. $order
-    ;
-
-    //Set query
-    $db->setQuery( $query, 0, $limit );
-    $results = $db->loadObjectList();
-
-    //The 'output' of the displayed link
-    foreach($results as $key => $row) {
-      $results[$key]->href = 'index.php?option=com_tracks&view=project&p='.$row->slug;
-    }
-    $rows = array_merge($rows, $results);
-  }
-  
-	//Return the search results in an array
-	return $rows;
 }
-
-?>
