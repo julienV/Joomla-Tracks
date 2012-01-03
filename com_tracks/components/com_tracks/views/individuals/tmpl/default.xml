@@ -9,4 +9,19 @@
         <name>COM_TRACKS_DEFAULT_INDIVIDUALS_LAYOUT</name>
         <description>COM_TRACKS_DEFAULT_INDIVIDUALS_LAYOUT_TIP</description>
     </state>
+    
+	<!-- Add fields to the parameters object for the layout. -->
+	<fields name="params">
+		<fieldset name="basic" label="COM_TRACKS_FIELDSET_LAYOUT_OPTIONS">
+
+			<field name="ordering" type="list"
+				label="COM_TRACKS_Display_individuals_ordering"
+				description="COM_TRACKS_Display_individuals_ordering_desc"
+				default="0"
+			>
+        <option value="0">COM_TRACKS_Display_individuals_ordering_LAST_FIRST</option>
+        <option value="1">COM_TRACKS_Display_individuals_ordering_FIRST_LAST</option>
+			</field>
+		</fieldset>
+	</fields>	
 </metadata>

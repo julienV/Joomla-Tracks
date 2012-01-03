@@ -34,11 +34,14 @@ foreach ($this->rows as $r)
 	$column[floor($i/$total*3)][] = $r;
 	$i++;
 }
+
+$first = $this->params->get('ordering') ? 'first_name' : 'last_name';
+
 ?>
     
 <table id="namelist">
   <tr>
-    <?php $letter = strtoupper(substr($column[0][0]->last_name, 0, 1)); ?>
+    <?php $letter = strtoupper(substr($column[0][0]->$first, 0, 1)); ?>
     <?php foreach ($column as $k => $c): ?>
     <td>
       <?php if ($k == 0): ?>
@@ -48,15 +51,19 @@ foreach ($this->rows as $r)
       foreach ($c as $r) 
       {
         $link_round = JRoute::_( TracksHelperRoute::getIndividualRoute($r->slug) );
-	      if ($letter != strtoupper(substr($r->last_name, 0, 1)))
+	      if ($letter != strtoupper(substr($r->$first, 0, 1)))
 	      {
-		      $letter = strtoupper(substr($r->last_name, 0, 1)); ?>
+		      $letter = strtoupper(substr($r->$first, 0, 1)); ?>
 		      <div class="letter"><?php echo $letter; ?></div>
 	        <?php 
 	      } 
 	      ?>
         <a href="<?php echo $link_round; ?>" title ="<?php echo JText::_('COM_TRACKS_Display_details' ) ?>">
+		<?php if ($this->params->get('ordering')): ?>
+          <?php echo $r->first_name . ', ' . $r->last_name; ?>
+		<?php else: ?>
           <?php echo $r->last_name . ', ' . $r->first_name; ?>
+		<?php endif; ?>
           </a>
           <br />
           <?php 

@@ -48,7 +48,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 <div id="tracks">
 
-<h1><?php echo $this->project->name . ' ' . JText::_('COM_TRACKS_Season_Summary' ); ?></h1>
+<h1><?php echo $this->project->season_name. ' ' .$this->project->name . ' ' . JText::_('COM_TRACKS_Season_Summary' ); ?></h1>
 
 <table class="raceResults" cellspacing="0" cellpadding="0" summary="">
 	<tbody>

@@ -94,9 +94,13 @@ class baseModel extends JModel
       	$this->setProjectId($project_id);
       }
       
-      $query =   ' SELECT p.*, '
-               . ' CASE WHEN CHAR_LENGTH( p.alias ) THEN CONCAT_WS( \':\', p.id, p.alias ) ELSE p.id END AS slug '
+      $query =   ' SELECT p.*, s.name as season_name, c.name as competition_name, '
+               . ' CASE WHEN CHAR_LENGTH( p.alias ) THEN CONCAT_WS( \':\', p.id, p.alias ) ELSE p.id END AS slug, '
+               . ' CASE WHEN CHAR_LENGTH( s.alias ) THEN CONCAT_WS( \':\', s.id, s.alias ) ELSE s.id END AS season_slug, '
+               . ' CASE WHEN CHAR_LENGTH( c.alias ) THEN CONCAT_WS( \':\', c.id, c.alias ) ELSE c.id END AS competition_slug '
                . ' FROM #__tracks_projects AS p '
+               . ' INNER JOIN #__tracks_season AS s ON s.id = p.season_id '
+               . ' INNER JOIN #__tracks_competition AS c ON c.id = p.competition_id '
                . ' WHERE p.id = ' . $this->_project_id;
                 
       $this->_db->setQuery( $query );

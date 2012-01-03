@@ -28,7 +28,8 @@ class TracksFrontViewIndividuals extends JView
     function display($tpl = null)
     {
     	$mainframe = &JFactory::getApplication();
-	$option = JRequest::getCmd('option');
+			$option = JRequest::getCmd('option');
+			$params = $mainframe->getParams('com_tracks');
     	          
         $model =& $this->getModel();
         $rows = $model->getData();
@@ -41,6 +42,7 @@ class TracksFrontViewIndividuals extends JView
             'index.php?option=com_tracks&view=individuals' );
         
         $this->assignRef( 'rows',    $rows );
+        $this->assignRef( 'params',  $params );
         
         parent::display($tpl);
     }
