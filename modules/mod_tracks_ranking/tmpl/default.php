@@ -15,6 +15,8 @@
 defined('_JEXEC') or die('Restricted access'); 
 
 JHTML::_('behavior.tooltip', '.mod-ranking-tip', array('className' => 'tip-mod-ranking'));
+
+$img_dir = JPATH_SITE.DS.'media'.DS.'com_tracks'.DS.'images'.DS.'individuals'.DS;
 ?>
 <div class="mod_tracksranking">
 
@@ -39,6 +41,9 @@ JHTML::_('behavior.tooltip', '.mod-ranking-tip', array('className' => 'tip-mod-r
       <tr>
         <td><?php echo $rank++; ?></td>
         <td>
+        	<?php if ($params->get('showpicture', 1) && $ranking->picture_small): ?>
+        	<?php echo JLVImageTool::modalimage($img_dir.$ranking->picture_small, $ranking->first_name, 20); ?>
+        	<?php endif; ?>
           <a href="<?php echo $link_ind; ?>"
              title="<?php echo $ranking->last_name.($ranking->first_name ? ', '.$ranking->first_name : ''); ?>::" class="mod-ranking-tip">
           <?php echo $ranking->last_name; ?>
