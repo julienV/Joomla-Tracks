@@ -17,6 +17,8 @@
 
 defined('_JEXEC') or die('Restricted access');
 
+jimport('joomla.filesystem.folder');
+
 class JLVImageTool {
 
 	/**
@@ -35,6 +37,10 @@ class JLVImageTool {
 	{
 		//GD-Lib > 2.0 only!
 		@unlink($save);
+		
+		if (!file_exists(dirname($save))) {
+			JFolder::create(dirname($save));
+		}
 
 		//get sizes else stop
 		if (!$infos = @getimagesize($file)) {
