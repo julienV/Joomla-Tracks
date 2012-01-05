@@ -153,6 +153,27 @@ defined('_JEXEC') or die('Restricted access'); ?>
       </td>
     </tr>
     <!-- end image import -->
+    <!-- start image import -->
+    <tr>
+      <td width="100" align="right" class="key">
+        <label for="miniimage">
+          <span class="hasTip" title='<?php echo JText::_('COM_TRACKS_INDIVIDUALBACKGROUNDPICTURE' ); ?>::<?php echo JText::_('COM_TRACKS_INDIVIDUALBACKGROUNDPICTURE_DESC' ); ?>'>
+            <?php echo JText::_('COM_TRACKS_INDIVIDUALBACKGROUNDPICTURE' ).':'; ?>
+          </span>
+        </label>
+      </td>
+      <td>
+        <table>
+          <tr>
+            <td><?php echo $this->backgroundimageselect; ?></td>
+            <td>
+              <img class="imagepreview" src="../images/M_images/blank.png" name="background_picture_preview" id="background_picture_preview" width="80" height="80" border="2" alt="Preview" />
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <!-- end image import -->
     
     <tr>
       <td width="100" align="right" class="key">

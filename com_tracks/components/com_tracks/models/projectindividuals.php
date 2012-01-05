@@ -36,7 +36,7 @@ class TracksFrontModelProjectindividuals extends baseModel
 			return null;
 		}
 		
-		$query =  ' SELECT i.id, i.first_name, i.last_name, i.country_code, i.picture, i.picture_small, '
+		$query =  ' SELECT i.id, i.first_name, i.last_name, i.country_code, i.picture, i.picture_small, i.picture_background, '
 		        . ' pi.number, pi.team_id, '
             . ' t.name as team_name, t.picture_small AS team_logo, '
             . ' CASE WHEN CHAR_LENGTH( i.alias ) THEN CONCAT_WS( \':\', i.id, i.alias ) ELSE i.id END AS slug, '

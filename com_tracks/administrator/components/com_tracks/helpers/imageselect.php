@@ -169,6 +169,9 @@ class ImageSelect
       case "individuals_small":
         return "individuals".DS."small";
         break;
+      case "individuals_background":
+        return "individuals".DS."background";
+        break;
       case "teams":
         return "teams";
         break;

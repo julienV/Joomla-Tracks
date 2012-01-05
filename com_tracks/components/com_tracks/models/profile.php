@@ -77,6 +77,12 @@ class TracksFrontModelProfile extends baseModel
 			} else {
 				$this->_data->picture_small = JHTML::image(JURI::base().'media/com_tracks/images/misc/tnnophoto.jpg', $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
 			}
+			 
+			if ($this->_data->picture_background != '') {
+				$this->_data->picture_background = JHTML::image(JURI::root().'media/com_tracks/images/individuals/background/'.$this->_data->picture_background, $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
+			} else {
+				$this->_data->picture_background = JHTML::image(JURI::base().'media/com_tracks/images/misc/tnnophoto.jpg', $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
+			}
 
 		}
     
@@ -99,6 +105,7 @@ class TracksFrontModelProfile extends baseModel
       $object->user_id          = 0;
       $object->picture          = null;
       $object->picture_small    = null;
+      $object->picture_background    = null;
       $object->address          = null;
       $object->postcode         = null;
       $object->city             = null;

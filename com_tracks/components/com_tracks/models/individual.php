@@ -82,6 +82,12 @@ class TracksFrontModelIndividual extends baseModel
           $this->_data->picture_small = JHTML::image(JURI::base().'media/com_tracks/images/misc/tnnophoto.jpg', $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
         }
         
+        if ($this->_data->picture_background != '') {
+          $this->_data->picture_background = JHTML::image(JURI::root().'media/com_tracks/images/individuals/background/'.$this->_data->picture_background, $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
+        } else {
+          $this->_data->picture_background = JHTML::image(JURI::base().'media/com_tracks/images/misc/tnnophoto.jpg', $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
+        }
+        
         $this->_loadProjectDetails();                
 			}
 			else {
@@ -175,7 +181,7 @@ class TracksFrontModelIndividual extends baseModel
    * @return  boolean True on success
    * @since 1.5
    */
-  function store($data, $picture, $picture_small)
+  function store($data, $picture, $picture_small, $picture_background)
   {
 		// Require the base controller
 		require_once (JPATH_COMPONENT_ADMINISTRATOR.DS.'tables'.DS.'individual.php');
@@ -259,6 +265,35 @@ class TracksFrontModelIndividual extends baseModel
       unset($table->picture_small);
     }//end image upload if
     
+    if ( !empty($picture_background['name']) )  {
+
+      jimport('joomla.filesystem.file');
+
+      $base_Dir   = JPATH_SITE.DS.'media'.DS.'com_tracks'.DS.'images'.DS.'individuals'.DS.'background'.DS;
+
+      //check the image
+      $check = ImageSelect::check($picture_background);
+
+      if ($check === false) {
+        $this->setError( 'IMAGE CHECK FAILED' );
+        return false;
+      }
+
+      //sanitize the image filename
+      $filename = ImageSelect::sanitize($base_Dir, $picture_background['name']);
+      $filepath = $base_Dir . $filename;
+
+      if (!JFile::upload( $picture_background['tmp_name'], $filepath )) {
+        $this->setError( JText::_('COM_TRACKS_UPLOAD_FAILED' ) );
+        return false;
+      } else {
+        $table->picture_background = $filename;
+      }
+    } else {
+      //keep image if edited and left blank
+      unset($table->picture_background);
+    }//end image upload if
+    
     // Store the individual to the database
     if (!$table->save($data)) {
       $this->setError( $user->getError() );
@@ -294,6 +329,7 @@ class TracksFrontModelIndividual extends baseModel
       $object->user_id          = 0;
       $object->picture          = null;
       $object->picture_small    = null;
+      $object->picture_background = null;
       $object->address          = null;
       $object->postcode         = null;
       $object->city             = null;

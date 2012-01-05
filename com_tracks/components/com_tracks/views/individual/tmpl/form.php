@@ -120,6 +120,17 @@ defined('_JEXEC') or die('Restricted access'); ?>
     </tr>
     <tr>
       <td width="100" align="right" class="key">
+        <label for="picture_background">
+          <?php echo JText::_( 'COM_TRACKS_VIEW_INDIVIDUAL_background_picture' ); ?>:
+        </label>
+      </td>
+      <td>
+        <input class="inputbox" name="picture_background" id="picture_background" type="file" />
+        <?php echo $this->object->picture_background; ?>
+      </td>
+    </tr>
+    <tr>
+      <td width="100" align="right" class="key">
         <label for="height">
           <?php echo JText::_( 'COM_TRACKS_VIEW_INDIVIDUAL_Height' ); ?>:
         </label>

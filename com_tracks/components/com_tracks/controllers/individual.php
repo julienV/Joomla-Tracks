@@ -94,11 +94,12 @@ class TracksFrontControllerIndividual extends JController
         
     $picture           = JRequest::getVar( 'picture', '', 'files', 'array' );
     $picture_small     = JRequest::getVar( 'picture_small', '', 'files', 'array' );
+    $picture_background     = JRequest::getVar( 'picture_background', '', 'files', 'array' );
     
     // store data
     $model = $this->getModel('individual');
 
-    if ($model->store($post, $picture, $picture_small)) {
+    if ($model->store($post, $picture, $picture_small, $picture_background)) {
       $msg  = JText::_('COM_TRACKS_Profile_has_been_saved' );
     } else {
       $msg  = $model->getError();

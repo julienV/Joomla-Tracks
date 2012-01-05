@@ -48,6 +48,7 @@ class TableIndividual extends JTable
   var $user_id;
   var $picture;
   var $picture_small;
+  var $picture_background;
   var $address;
   var $postcode;
   var $city;
