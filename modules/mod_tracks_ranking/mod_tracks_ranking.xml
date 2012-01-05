@@ -31,7 +31,11 @@
 		<fields name="params">
 			<fieldset name="basic">
 				<field name="count" type="text" default="5" label="MOD_TRACKS_RANKING_Count" description="MOD_TRACKS_RANKING_The_number_of_rows_to_display" />
-				<field name="project_id" type="sql" default="" label="MOD_TRACKS_RANKING_Select_a_project" description="MOD_TRACKS_RANKING_Select_a_project" query="SELECT name AS project_id, id AS value FROM #__tracks_projects ORDER BY name ASC" />
+		    <field name="usecurrent" type="radio" default="0" label="MOD_TRACKS_RANKING_use_current_label" description="MOD_TRACKS_RANKING_use_current_DESC">
+		      <option value="0">JNo</option>
+		      <option value="1">JYes</option>
+		    </field>
+				<field name="project_id" type="sql" default="" label="MOD_TRACKS_RANKING_Select_a_project" description="MOD_TRACKS_RANKING_SELECT_A_PROJECT_DESC" query="SELECT name AS project_id, id AS value FROM #__tracks_projects ORDER BY name ASC" />
 				<field name="showteams" type="radio" default="1" label="MOD_TRACKS_RANKING_Show_teams" description="">
 		      <option value="0">JNo</option>
 		      <option value="1">JYes</option>
