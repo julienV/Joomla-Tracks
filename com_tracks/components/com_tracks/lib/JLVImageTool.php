@@ -188,7 +188,6 @@ class JLVImageTool {
 		$base = $app->isAdmin() ? $app->getSiteURL() : JURI::base();
 		
 		if (empty($image_path) || !file_exists($image_path)) {
-			exit($image_path);
 			return false;
 		}
 		
