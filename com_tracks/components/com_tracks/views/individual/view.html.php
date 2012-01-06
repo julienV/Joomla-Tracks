@@ -46,6 +46,7 @@ class TracksFrontViewIndividual extends JView
 
 		$data = & $this->get('Data');
 		$raceResults = $this->sortResultsByProject($this->get('RaceResults'));
+		$rankings = $this->get('Rankings');
 
 		$show_edit_link = ( $user->id && $user->id == $data->user_id ) || $user->authorise('core.manage', 'com_tracks');
 
@@ -58,11 +59,12 @@ class TracksFrontViewIndividual extends JView
 		// allow content plugins
 		$data->description = JHTML::_('content.prepare', $data->description);
 
-		$this->assignRef( 'data',    $data );
-		$this->assignRef( 'show_edit_link',    $show_edit_link );
-		$this->assignRef( 'results', $raceResults );
-		$this->assignRef( 'params', $params );
-    $this->assignRef( 'dispatcher', $dispatcher );
+		$this->assignRef( 'data',           $data );
+		$this->assignRef( 'show_edit_link', $show_edit_link );
+		$this->assignRef( 'results',        $raceResults );
+		$this->assignRef( 'rankings',       $rankings );
+		$this->assignRef( 'params',         $params );
+    $this->assignRef( 'dispatcher',     $dispatcher );
 
 		parent::display($tpl);
 	}
@@ -78,6 +80,20 @@ class TracksFrontViewIndividual extends JView
 		}
 		return $projects;
 	}
+	
+	function addOrdinalNumberSuffix($num) 
+	{
+		if (!in_array(($num % 100),array(11,12,13))){
+			switch ($num % 10) {
+				// Handle 1st, 2nd, 3rd
+				case 1:  return $num.'st';
+				case 2:  return $num.'nd';
+				case 3:  return $num.'rd';
+			}
+		}
+		return $num.'th';
+	}
+	
     
 
   function _displayForm($tpl)

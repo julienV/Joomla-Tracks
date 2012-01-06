@@ -108,7 +108,7 @@ class TracksFrontModelIndividual extends baseModel
 		{
 			$query = ' SELECT t.name as team_name, pi.number, ' 
 			       . ' CASE WHEN CHAR_LENGTH( t.alias ) THEN CONCAT_WS( \':\', t.id, t.alias ) ELSE t.id END AS teamslug, '
-			       . ' CASE WHEN CHAR_LENGTH( p.alias ) THEN CONCAT_WS( \':\', p.id, p.alias ) ELSE t.id END AS projectslug '
+			       . ' CASE WHEN CHAR_LENGTH( p.alias ) THEN CONCAT_WS( \':\', p.id, p.alias ) ELSE p.id END AS projectslug '
 			       . ' FROM #__tracks_projects_individuals AS pi ' 
 			       . ' LEFT JOIN #__tracks_teams AS t ON t.id = pi.team_id ' 
 			       . ' LEFT JOIN #__tracks_projects AS p ON p.id = pi.project_id ' 
@@ -138,7 +138,7 @@ class TracksFrontModelIndividual extends baseModel
            . '        r.name AS roundname, r.id as pr, '
 		       . '        srt.name AS subroundname, '
            . '        srt.points_attribution, '
-           . '        p.name AS projectname, '
+           . '        p.name AS projectname, p.id as project_id, '
            . '        c.name AS competitionname, '
            . '        s.name AS seasonname, '
            . '        t.name AS teamname, '
@@ -172,8 +172,49 @@ class TracksFrontModelIndividual extends baseModel
 		}
 		return $result;
 	}
-    
-
+   	
+	/**
+	 * get rankings of individual in projects
+	 * 
+	 * @return array
+	 */
+	function getRankings()
+	{
+		require_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'sports'.DS.'default'.DS.'rankingtool.php');
+		
+		$app = &JFactory::getApplication();
+		$params = $app->getParams( 'com_tracks' );
+		
+		// all individual projects
+		$query = ' SELECT p.id, p.name, s.name as seasonname, c.name as competitionname, ' 
+		       . ' CASE WHEN CHAR_LENGTH( p.alias ) THEN CONCAT_WS( \':\', p.id, p.alias ) ELSE p.id END AS projectslug '
+		       . ' FROM #__tracks_projects_individuals AS pi '
+		       . ' INNER JOIN #__tracks_individuals AS i ON i.id = pi.individual_id ' 
+		       . ' INNER JOIN #__tracks_projects AS p ON pi.project_id = p.id ' 
+		       . ' INNER JOIN #__tracks_seasons AS s ON p.season_id = s.id ' 
+		       . ' INNER JOIN #__tracks_competitions AS c ON p.competition_id = c.id ' 
+		       . ' WHERE i.id = ' . $this->_db->Quote($this->_id)
+		       ;
+		
+		if ($params->get('indview_results_ordering', 1) == 0) {
+			$query .= ' ORDER BY s.ordering DESC, c.ordering DESC, p.ordering DESC';
+		}
+		else {
+			$query .= ' ORDER BY s.ordering ASC, c.ordering ASC, p.ordering ASC';
+		}
+		$this->_db->setQuery($query);
+		$projects = $this->_db->loadObjectList();
+		
+		$res = array();
+		foreach ((array) $projects as $project)
+		{
+			$rankingtool = new TracksRankingTool($project->id);
+			$project->ranking = $rankingtool->getIndividualRanking($this->_id);
+			$res[$project->id] = $project;
+		}
+		return $res;
+	}
+	
   /**
    * Method to store the individual data
    *
