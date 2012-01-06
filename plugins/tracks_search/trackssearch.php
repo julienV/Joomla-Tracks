@@ -50,7 +50,7 @@ class plgSearchTrackssearch extends JPlugin
 			'tracksindividuals' => 'PLG_SEARCH_TRACKS_INDIVIDUALS',
 			'tracksteams' => 'PLG_SEARCH_TRACKS_TEAMS',
 			'tracksprojects' => 'PLG_SEARCH_TRACKS_PROJECTS',
-			'tracksrounds' => 'PLG_SEARCH_TRACKS_ROUNDS',
+// 			'tracksrounds' => 'PLG_SEARCH_TRACKS_ROUNDS',
 		);
 		return $areas;
 	}
@@ -323,7 +323,8 @@ class plgSearchTrackssearch extends JPlugin
 	    $rows = array_merge($rows, $results);
 	  }		
 	
-	  if (!$areas || in_array('tracksrounds', $areas))
+// 	  if (!$areas || in_array('tracksrounds', $areas))
+		if (0)
 	  {
 	    $wheres = array();
 	    switch ($phrase) {
