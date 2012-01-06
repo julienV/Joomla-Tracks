@@ -59,13 +59,12 @@ class TracksControllerImagehandler extends JController
     $type     = JRequest::getVar( 'type' );
     $folder = ImageSelect::getfolder($type);
 		
-		// Set FTP credentials, if given
-		jimport('joomla.client.helper');
-		JClientHelper::setCredentialsFromRequest('ftp');
-		//$ftp = JClientHelper::getCredentials('ftp');
-
 		//set the target directory
 	  $base_Dir = JPATH_SITE.DS.'media'.DS.'com_tracks'.DS.'images'.DS.$folder.DS;
+		if (!file_exists($base_Dir)) {
+			JFolder::create($base_Dir);
+			JFile::copy(JPATH_SITE.DS.'components'.DS.'index.html', $base_Dir.DS.'index.html');
+		}
 
 		//do we have an upload?
 		if (empty($file['name'])) {
@@ -85,11 +84,12 @@ class TracksControllerImagehandler extends JController
 		$filepath = $base_Dir . $filename;
 
 		//upload the image		
-		if (!JFile::upload($file['tmp_name'], $filepath)) {
+		if (!JFile::move($file['tmp_name'], $filepath)) {
 			echo "<script> alert('".JText::_('COM_TRACKS_UPLOAD_FAILED' )."'); window.history.go(-1); </script>\n";
 			$mainframe->close();
 
 		} else {
+			chmod($filepath, '644');
 			echo "<script> alert('".JText::_('COM_TRACKS_UPLOAD_COMPLETE' )."'); window.history.go(-1); window.parent.elSelectImage('$filename', '$filename'); </script>\n";
 			$mainframe->close();
 		}
