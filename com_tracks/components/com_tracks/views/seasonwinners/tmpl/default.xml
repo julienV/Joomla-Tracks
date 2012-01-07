@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+    <layout title="COM_TRACKS_VIEW_SEASONWINNERS_DEFAULT_LAYOUT">
+        <message>
+        <![CDATA[COM_TRACKS_VIEW_SEASONWINNERS_DEFAULT_LAYOUT_MESSAGE]]>
+        </message>
+    </layout>
+    
+		<!-- Add fields to the request variables for the layout. -->
+		<fields name="request">
+			<fieldset name="request">
+	
+				<field name="s" type="sql"
+					query="SELECT id AS value, name AS s FROM #__tracks_seasons ORDER BY name ASC"
+					default=""
+					description="COM_TRACKS_Select_a_season"
+					extension="com_tracks"
+					label="COM_TRACKS_Select_a_season"
+					required="true"
+				/>
+			</fieldset>
+		</fields>
+    
+</metadata>
