@@ -11,7 +11,7 @@
 			<fieldset name="request">
 	
 				<field name="s" type="sql"
-					query="SELECT id AS value, name AS s FROM #__tracks_seasons ORDER BY name ASC"
+					query="SELECT CASE WHEN CHAR_LENGTH( alias ) THEN CONCAT_WS( ':', id, alias ) ELSE id END AS value, name AS s FROM #__tracks_seasons ORDER BY name ASC"
 					default=""
 					description="COM_TRACKS_Select_a_season"
 					extension="com_tracks"

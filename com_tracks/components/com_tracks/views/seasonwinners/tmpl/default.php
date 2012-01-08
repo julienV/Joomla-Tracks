@@ -21,8 +21,16 @@ defined('_JEXEC') or die('Restricted access');
 <table>
 <?php $i = 0; ?>
 <?php foreach ((array) $this->winners as $project): ?>
+<?php 
+if (isset($project->prid)) {
+	$tablelink = TracksHelperRoute::getRoundResultRoute($project->prid);
+}
+else {
+	$tablelink = TracksHelperRoute::getRankingRoute($project->slug);
+}
+?>
 <tr class="<?php echo ($i ? 'd1' : 'd0'); ?>">
-<td class="projectname"><?php echo JHTML::link(TracksHelperRoute::getRankingRoute($project->slug), $project->name); ?></td>
+<td class="projectname"><?php echo JHTML::link($tablelink, $project->name); ?></td>
 <td class="winner">
 <?php
 $winners = array();

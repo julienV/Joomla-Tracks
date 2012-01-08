@@ -69,11 +69,11 @@ class TracksFrontModelSeasonwinners extends baseModel
 		       . ' FROM #__tracks_projects AS p ' 
 		       . ' INNER JOIN #__tracks_competitions AS c ON c.id = p.competition_id ' 
 		       . ' WHERE p.season_id = ' . $this->_db->Quote($this->_season_id)
-		       . ' ORDER BY c.ordering ASC '
+		       . ' ORDER BY c.name ASC '
 		;
 		$this->_db->setQuery($query);
 		$projects = $this->_db->loadObjectList();
-		
+				
 		if (!count($projects)) {
 			return false;
 		}
@@ -87,7 +87,7 @@ class TracksFrontModelSeasonwinners extends baseModel
 			$winners = array();
 			foreach ($rankings as $r) 
 			{
-				if ($r->rank == 1) {
+				if ($r->best_rank && $r->rank == 1) {
 					$winners[] = $r;
 				}
 				else {
@@ -95,8 +95,46 @@ class TracksFrontModelSeasonwinners extends baseModel
 				}
 			}
 			$project->winners = $winners;
-			$res[$project->id] = $project;
+			if ($project->winners) {
+				$res[$project->id] = $project;
+			}
 		}
+		
+		// take into account event season
+		$season = $this->getSeason();
+		$query = ' SELECT p.name, p.id, p.competition_id, p.season_id, pr.id as prid '
+				       . '   , c.name as competition_name ' 
+				       . '   , CASE WHEN CHAR_LENGTH( p.alias ) THEN CONCAT_WS( \':\', p.id, p.alias ) ELSE p.id END AS slug '
+				       . ' FROM #__tracks_projects AS p ' 
+				       . ' INNER JOIN #__tracks_competitions AS c ON c.id = p.competition_id ' 
+				       . ' INNER JOIN #__tracks_projects_rounds AS pr ON pr.project_id = p.id '
+				       . ' INNER JOIN #__tracks_rounds AS r ON r.id = pr.round_id '
+				       . ' WHERE p.season_id = 23 '
+				       . '   AND r.name = '.$this->_db->Quote($season->name)
+		;
+		$this->_db->setQuery($query);
+		$eventrounds = $this->_db->loadObjectList();
+		foreach ((array) $eventrounds as $event)
+		{
+			$rankingtool = new TracksRankingTool($event->id);
+			$rankings = $rankingtool->getIndividualsRankings($event->prid);
+			// there can be tied winners
+			$winners = array();
+			foreach ($rankings as $r) 
+			{
+				if ($r->best_rank && $r->rank == 1) {
+					$winners[] = $r;
+				}
+				else {
+					break;
+				}
+			}
+			$event->winners = $winners;
+			if ($event->winners) {
+				$res[$event->id] = $event;
+			}
+		}
+		
 		return $res;
 	}
 }

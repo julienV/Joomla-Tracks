@@ -42,6 +42,8 @@ class TracksFrontViewSeasonWinners extends JView
     	$breadcrumbs =& $mainframe->getPathWay();
     	$title = JText::sprintf('COM_TRACKS_SEASON_WINNERS_S', $season->name);
     	$breadcrumbs->addItem( $season->name, 'index.php?option=com_tracks&view=seasonwinnners&s=' . $season->slug );
+    	
+    	uasort($winners, array('TracksFrontViewSeasonWinners', '_sortByRider'));
 
     	$this->assignRef( 'season',    $season );
     	$this->assignRef( 'winners',   $winners );
@@ -49,6 +51,17 @@ class TracksFrontViewSeasonWinners extends JView
     	$this->assignRef( 'title',     $title );
 
     	parent::display($tpl);
+    }
+    
+    function _sortByRider($a, $b)
+    {
+    	$res = strcasecmp(reset($a->winners)->first_name, reset($b->winners)->first_name);
+    	if (!$res == 0) {
+    		return $res;
+    	}
+    	else {
+    		return strcasecmp(reset($a->winners)->last_name, reset($b->winners)->last_name);
+    	}
     }
 }
 ?>
