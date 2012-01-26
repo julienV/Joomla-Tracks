@@ -78,6 +78,12 @@ class TracksViewIndividual extends TracksView
     $countries[] = JHTML::_('select.option', '', JText::_('COM_TRACKS_Select_country'));
     $countries = array_merge($countries, TracksCountries::getCountryOptions());
     $lists['countries'] = JHTML::_('select.genericlist', $countries, 'country_code', '', 'value', 'text', $object->country_code);
+    
+    // femal
+    $options = array(JHTML::_('select.option', 0, JText::_('COM_TRACKS_UNKOWN')),
+                     JHTML::_('select.option', 1, JText::_('COM_TRACKS_MALE')),
+                     JHTML::_('select.option', 2, JText::_('COM_TRACKS_FEMALE')), );
+    $lists['gender'] = JHTML::_('select.genericlist', $options, 'gender', '', 'value', 'text', $object->gender);
 		
 		//editor
 		$editor =& JFactory::getEditor();

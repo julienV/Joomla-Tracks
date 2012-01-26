@@ -100,6 +100,17 @@ defined('_JEXEC') or die('Restricted access'); ?>
       </td>
     </tr>
     
+    <tr>
+      <td width="100" align="right" class="key">
+        <label for="gender">
+          <?php echo JText::_('COM_TRACKS_GENDER' ); ?>:
+        </label>
+      </td>
+      <td>
+          <?php echo $this->lists['gender']; ?>
+      </td>
+    </tr>
+    
 		<tr>
 			<td width="100" align="right" class="key">
 				<label for="user_id">

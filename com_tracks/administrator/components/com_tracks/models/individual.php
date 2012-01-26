@@ -119,6 +119,7 @@ class TracksModelIndividual extends TracksModelItem
 			$object->description      = null;
 			$object->checked_out			= 0;
 			$object->checked_out_time	= 0;
+			$object->gender	          = 0;
 			$this->_data					= $object;
 			return (boolean) $this->_data;
 		}
