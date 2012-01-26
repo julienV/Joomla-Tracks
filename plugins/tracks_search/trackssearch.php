@@ -16,8 +16,6 @@
 defined( '_JEXEC' ) or die( 'Restricted access' );
 jimport('joomla.plugin.plugin');
 
-require_once JPATH_SITE.'/components/com_weblinks/helpers/route.php';
-
 /**
  * Weblinks Search plugin
  *
@@ -71,7 +69,9 @@ class plgSearchTrackssearch extends JPlugin
 		$app	= JFactory::getApplication();
 		$user	= JFactory::getUser();
 		$groups	= implode(',', $user->getAuthorisedViewLevels());
-
+		
+		require_once JPATH_SITE.'/components/com_tracks/helpers/route.php';
+		
 		$searchText = $text;
 
 		if (is_array($areas)) {
