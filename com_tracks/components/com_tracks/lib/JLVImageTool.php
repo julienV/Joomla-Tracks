@@ -225,6 +225,7 @@ class JLVImageTool {
 	 *
 	 * @param string type, must be one of 'events', 'venues', etc...
 	 * @param string image_path full image path, or relative to joomla root
+	 * @param int maxdim maximum dimension of image
 	 * @return url or false if it doesn't exists
 	 */
 	function getThumbUrl($image_path, $maxdim)
@@ -234,7 +235,7 @@ class JLVImageTool {
 		$base = $app->isAdmin() ? $app->getSiteURL() : JURI::base();
 
 		if (!JFile::exists($image_path)) {
-			throw new Exception('Image not found');
+			throw new Exception('Image not found'.': '.$image_path);
 			return false;
 		}
 		

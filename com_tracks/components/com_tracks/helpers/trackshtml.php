@@ -52,6 +52,20 @@ class HTMLTracks
 
     return $users;
   }
+  
+  function getIndividualThumb($individual, $size)
+  {
+  	$path = JPATH_SITE.DS.'media'.DS.'com_tracks'.DS.'images'.DS.'individuals'.DS.'small'.DS.$individual->picture_small;
+  	if ($individual->picture_small && file_exists($path)) {
+  		return JLVImageTool::getThumbUrl($path, $size);
+  	}
+  	else if ($individual->gender == 2) {
+  		return JLVImageTool::getThumbUrl(JPATH_SITE.DS.'media'.DS.'com_tracks'.DS.'images'.DS.'individuals'.DS.'tnnophoto2.jpg', $size);
+  	}
+  	else {
+  		return JLVImageTool::getThumbUrl(JPATH_SITE.DS.'media'.DS.'com_tracks'.DS.'images'.DS.'individuals'.DS.'tnnophoto.jpg', $size);  		
+  	}
+  }
 }
 
 ?>
