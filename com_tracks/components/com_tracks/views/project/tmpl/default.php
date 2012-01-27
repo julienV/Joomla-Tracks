@@ -74,7 +74,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
         <td><?php echo formatRoundStartEnd( $result ); ?></td>
         <td>
         	<?php foreach ((array)$result->winner as $winner): ?>
-        	<div class="winner"><?php echo $winner->first_name . ' ' . $winner->last_name 
+        	<div class="winner"><?php echo $winner->rank.'. '.$winner->first_name . ' ' . $winner->last_name 
 					            . ($this->params->get('showteams', 1) && $winner->team_name ? ' ('.$winner->team_name.')' : ''); ?></div>
         	<?php endforeach; ?>
         </td>
