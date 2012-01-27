@@ -75,8 +75,9 @@ defined('_JEXEC') or die('Restricted access'); ?>
         <td>
         	<?php foreach ((array)$result->winner as $winner): ?>
         	<?php $img = JHTML::image(HTMLTracks::getIndividualThumb($winner, 20), $winner->first_name . ' ' . $winner->last_name); ?>
+        	<?php $cimg = $winner->country_code ? TracksCountries::getCountryFlag($winner->country_code) : ''; ?>
         	<div class="winner">
-        	<?php echo $img; ?><?php echo $winner->rank.'. '.$winner->first_name . ' ' . $winner->last_name 
+        	<?php echo $cimg.' '.$img; ?><?php echo $winner->rank.'. '.$winner->first_name . ' ' . $winner->last_name 
 					            . ($this->params->get('showteams', 1) && $winner->team_name ? ' ('.$winner->team_name.')' : ''); ?></div>
         	<?php endforeach; ?>
         </td>
