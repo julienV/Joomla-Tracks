@@ -167,7 +167,7 @@ class TracksFrontModelIndividual extends baseModel
 //     	$query .= ' ORDER BY s.ordering ASC, c.ordering ASC, p.ordering ASC, pr.ordering ASC, psr.ordering ASC';
 //     }
     
-    $query .= ' ORDER BY c.name ASC, p.ordering ASC, pr.ordering ASC, psr.ordering ASC';
+    $query .= ' ORDER BY s.ordering ASC, p.name ASC, pr.ordering ASC, psr.ordering ASC';
     
 		if (!$result = $this->_getList($query)) {
 			//echo $this->_db->getQuery();
