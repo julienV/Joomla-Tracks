@@ -20,9 +20,12 @@ if (!JFactory::getUser()->authorise('core.manage', 'com_tracks'))
 	return JError::raiseWarning(404, JText::_('JERROR_ALERTNOAUTHOR'));
 }
 
+// import joomla controller library
+jimport('joomla.application.component.controller');
+
 // Require the base controller
 require_once (JPATH_COMPONENT.DS.'controllers'.DS.'base.php');
-require_once (JPATH_COMPONENT.DS.'controller.php');
+
 // the helpers
 require_once(JPATH_COMPONENT.DS.'helper.php');
 require_once(JPATH_COMPONENT.DS.'helpers'.DS.'imageselect.php');
@@ -39,14 +42,14 @@ if($controller = JRequest::getWord('controller')) {
 	} else {
 		$controller = '';
 	}
+	// Create the controller
+	$classname	= 'TracksController'.ucfirst($controller);
+	$controller	= new $classname( );
 }
-
-// Set the table directory
-JTable::addIncludePath( JPATH_COMPONENT.DS.'tables' );
-
-// Create the controller
-$classname	= 'TracksController'.ucfirst($controller);
-$controller	= new $classname( );
+else {
+	// Get an instance of the controller prefixed by HelloWorld
+	$controller = JController::getInstance('Tracks');
+}
 
 // Perform the Request task
 $controller->execute( JRequest::getCmd('task'));

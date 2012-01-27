@@ -50,6 +50,7 @@ class BaseController extends JController
       case 'team':
       case 'competition':
       case 'imagehandler':
+      case 'sponsor':
       	$showmenu = false;
       	break;      	
     }

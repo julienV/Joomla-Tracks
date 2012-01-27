@@ -27,6 +27,7 @@ class TracksController extends BaseController
   function display()
   {
 		parent::display();
+		return $this;
 	}
 }
 ?>

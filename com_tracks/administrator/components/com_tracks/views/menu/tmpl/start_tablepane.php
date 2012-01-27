@@ -91,6 +91,12 @@ echo $this->pane->startPanel( JText::_('COM_TRACKS_General'), 'generalpanel' );
     </tr>
     <tr>
       <td>
+      <a href="<?php echo JRoute::_( 'index.php?option=com_tracks&view=sponsors' ); ?>"
+        title="<?php echo JText::_('COM_TRACKS_sponsors' ); ?>"><?php echo JText::_('COM_TRACKS_sponsors' ); ?></a>
+      </td>
+    </tr>
+    <tr>
+      <td>
       <a href="<?php echo JRoute::_( 'index.php?option=com_tracks&view=about' ); ?>"
         title="<?php echo JText::_('COM_TRACKS_About_tracks' ); ?>"><?php echo JText::_('COM_TRACKS_About' ); ?></a>
       </td>

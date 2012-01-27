@@ -150,5 +150,35 @@ class TracksHelper
 			return false;
 		}
   }
+    
+  /**
+   * Gets a list of the actions that can be performed.
+   *
+   * @param	int		The category ID.
+   * @return	JObject
+   * @since	1.6
+   */
+  public static function getActions($asset = null, $id = 0)
+  {
+  	$user	= JFactory::getUser();
+  	$result	= new JObject;
+  
+  	if (empty($asset)) {
+  		$assetName = 'com_tracks';
+  	} else {
+  		$assetName = 'com_tracks.'.$asset;
+  		if ($id) $assetName .= '.'.(int) $id;
+  	}
+  
+  	$actions = array(
+  			'core.admin', 'core.manage', 'core.create', 'core.edit', 'core.edit.own', 'core.edit.state', 'core.delete'
+  	);
+  
+  	foreach ($actions as $action) {
+  		$result->set($action,	$user->authorise($action, $assetName));
+  	}
+  
+  	return $result;
+  }
 }
 ?>
