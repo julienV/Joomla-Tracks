@@ -24,7 +24,7 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 $canOrder	= $user->authorise('core.manage', 'com_tracks.sponsor');
 $saveOrder	= $listOrder == 'a.name';
 ?>
-
+<div id="tracksmain">
 <form action="<?php echo JRoute::_('index.php?option=com_tracks&view=sponsors'); ?>" method="post" name="adminForm" id="adminForm">
 	<fieldset id="filter-bar">
 		<div class="filter-search fltlft">
@@ -42,7 +42,7 @@ $saveOrder	= $listOrder == 'a.name';
 			
 		</div>
 	</fieldset>
-	<div class="clr"> </div>
+	<div class="clr"></div>
 
 	<table class="adminlist">
 		<thead>
@@ -112,3 +112,5 @@ $saveOrder	= $listOrder == 'a.name';
 		<?php echo JHtml::_('form.token'); ?>
 	</div>
 </form>
+
+</div>

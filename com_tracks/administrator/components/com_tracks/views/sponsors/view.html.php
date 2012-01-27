@@ -15,6 +15,8 @@ defined('JPATH_PLATFORM') or die;
 
 jimport('joomla.application.component.view');
 
+require_once (JPATH_COMPONENT.DS.'abstract'.DS.'tracksview.php');
+
 /**
  * View class for a list of sponsors.
  *
@@ -22,7 +24,7 @@ jimport('joomla.application.component.view');
  * @subpackage	com_tracks
  * @since		1.7
  */
-class TracksViewSponsors extends JView
+class TracksViewSponsors extends TracksView
 {
 	protected $items;
 	protected $pagination;
