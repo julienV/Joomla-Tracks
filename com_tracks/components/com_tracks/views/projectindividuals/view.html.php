@@ -43,13 +43,53 @@ class TracksFrontViewProjectindividuals extends JView
 
     $document =& JFactory::getDocument();
     $document->setTitle( $project->name. ' ' . JText::_('COM_TRACKS_Participants' ) );
-
+    
     $this->assignRef( 'params',    $params );
     $this->assignRef( 'project',    $project );
     $this->assignRef( 'projectparams',    $projectparams );
+    
+    $individuals = $this->orderRanking($individuals);
     $this->assignRef( 'individuals',	$individuals );
 
     parent::display($tpl);
+  }
+  
+  private function orderRanking($individuals)
+  {  	
+		require_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'sports'.DS.'default'.DS.'rankingtool.php');
+  	$rankingtool = new TracksRankingTool($this->project->id);
+  	$ranking = $rankingtool->getIndividualsRankings();
+  	
+  	$sorted = array();
+  	foreach ($individuals as $k => $i)
+  	{
+  		if (isset($ranking[$i->id])) {
+  			$individuals[$k]->rank = $ranking[$i->id]->rank;
+  		}
+  		else {
+  			$individuals[$k]->rank = 0;
+  		}
+  	}
+  	
+  	uasort($individuals, array('TracksFrontViewProjectindividuals', '_sortRanking'));
+  	
+  	return $individuals;
+  }
+  
+  private function _sortRanking($a, $b)
+  {
+  	if (!$a->rank && $b->rank) {
+  		return $b;
+  	}
+  	if ($a->rank && !$b->rank) {
+  		return $a;
+  	}
+  	if ($a->rank != $b->rank) {
+  		return $a->rank-$b->rank;
+  	}
+  	else {
+  		return strcasecmp($a->last_name.$a->first_name, $b->last_name.$b->first_name);
+  	}
   }
 }
 ?>
