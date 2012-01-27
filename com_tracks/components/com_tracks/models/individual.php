@@ -69,23 +69,24 @@ class TracksFrontModelIndividual extends baseModel
 			{
 				$this->_data = $result[0];				
         $attribs['class']="pic";
+        $nopic = $this->_data->gender == 2 ? 'tnnophoto2.jpg' : 'tnnophoto.jpg';
 			
         if ($this->_data->picture != '') {
           $this->_data->picture = JHTML::image(JURI::root().'media/com_tracks/images/individuals/'.$this->_data->picture, $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
         } else {
-          $this->_data->picture = JHTML::image(JURI::base().'media/com_tracks/images/misc/tnnophoto.jpg', $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
+          $this->_data->picture = JHTML::image(JURI::base().'media/com_tracks/images/misc/'.$nopic, $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
         }
         
         if ($this->_data->picture_small != '') {
           $this->_data->picture_small = JHTML::image(JURI::root().'media/com_tracks/images/individuals/small/'.$this->_data->picture_small, $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
         } else {
-          $this->_data->picture_small = JHTML::image(JURI::base().'media/com_tracks/images/misc/tnnophoto.jpg', $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
+          $this->_data->picture_small = JHTML::image(JURI::base().'media/com_tracks/images/misc/'.$nopic, $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
         }
         
         if ($this->_data->picture_background != '') {
           $this->_data->picture_background = JHTML::image(JURI::root().'media/com_tracks/images/individuals/background/'.$this->_data->picture_background, $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
         } else {
-          $this->_data->picture_background = JHTML::image(JURI::base().'media/com_tracks/images/misc/tnnophoto.jpg', $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
+          $this->_data->picture_background = JHTML::image(JURI::base().'media/com_tracks/images/misc/'.$nopic, $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
         }
         
         $this->_loadProjectDetails();                
