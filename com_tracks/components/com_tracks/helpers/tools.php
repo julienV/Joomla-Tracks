@@ -21,7 +21,7 @@ class TracksHelperTools
 	 * @param object result (requires bonus_points, points_attribution, rank)
 	 * @return float points
 	 */
-	function getSubroundPoints($result)
+	public static function getSubroundPoints($result)
 	{
 		$points = $result->bonus_points;
 		if (!empty($result->points_attribution) && $result->rank)
@@ -34,6 +34,120 @@ class TracksHelperTools
 		}
 		return $points;
 	}
+	
+	/**
+	 * get total starts for individual
+	 * 
+	 * @param int $individual_id
+	 * @return int
+	 */
+	public static function getStarts($individual_id)
+	{
+		$db = &JFactory::getDbo();
+		
+		$query = ' SELECT count(*) ' 
+		       . ' FROM #__tracks_rounds_results ' 
+		       . ' WHERE individual_id = ' . intval($individual_id);
+		$db->setQuery($query);
+		return $db->loadResult();
+	}
+	
+	/**
+	 * get total wins for individual
+	 * 
+	 * @param int $individual_id
+	 * @return int
+	 */
+	public static function getWins($individual_id)
+	{
+		$db = &JFactory::getDbo();
+		
+		$query = ' SELECT count(*) ' 
+		       . ' FROM #__tracks_rounds_results ' 
+		       . ' WHERE individual_id = ' . intval($individual_id)
+		       . '   AND rank = 1 ';
+		$db->setQuery($query);
+		return $db->loadResult();
+	}
+	
+	/**
+	 * get total podiums for individual
+	 * 
+	 * @param int $individual_id
+	 * @return int
+	 */
+	public static function getPodiums($individual_id)
+	{
+		$db = &JFactory::getDbo();
+		
+		$query = ' SELECT count(*) ' 
+		       . ' FROM #__tracks_rounds_results ' 
+		       . ' WHERE individual_id = ' . intval($individual_id)
+		       . '   AND rank IN (1,2,3) ';
+		$db->setQuery($query);
+		return $db->loadResult();
+	}
+	
+	/**
+	 * get total Top5 for individual
+	 * 
+	 * @param int $individual_id
+	 * @return int
+	 */
+	public static function getTop5($individual_id)
+	{
+		$db = &JFactory::getDbo();
+		
+		$query = ' SELECT count(*) ' 
+		       . ' FROM #__tracks_rounds_results ' 
+		       . ' WHERE individual_id = ' . intval($individual_id)
+		       . '   AND rank IN (1,2,3,4,5) ';
+		$db->setQuery($query);
+		return $db->loadResult();
+	}
+	
+	/**
+	 * get total Top10 for individual
+	 * 
+	 * @param int $individual_id
+	 * @return int
+	 */
+	public static function getTop10($individual_id)
+	{
+		$db = &JFactory::getDbo();
+		
+		$query = ' SELECT count(*) ' 
+		       . ' FROM #__tracks_rounds_results ' 
+		       . ' WHERE individual_id = ' . intval($individual_id)
+		       . '   AND rank IN (1,2,3,4,5,6,7,8,9,10) ';
+		$db->setQuery($query);
+		return $db->loadResult();
+	}
+	
+	/**
+	 * get average finish for individual
+	 * 
+	 * @param int $individual_id
+	 * @return int
+	 */
+	public static function getAverageFinish($individual_id)
+	{
+		$db = &JFactory::getDbo();
+		
+		$query = ' SELECT rank ' 
+		       . ' FROM #__tracks_rounds_results ' 
+		       . ' WHERE individual_id = ' . intval($individual_id)
+		       . '   AND rank > 0 ';
+		$db->setQuery($query);
+		$results = $db->loadResultArray();
+		if (count($results)) {
+			return array_sum($results)/count($results);
+		}
+		else {
+			return 0;
+		}
+	}
+	
 }
 
 ?>
