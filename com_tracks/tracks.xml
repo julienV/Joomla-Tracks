@@ -64,6 +64,7 @@
     	      <menu link="option=com_tracks&amp;view=individuals">COM_TRACKS_Individuals</menu>
     	      <menu link="option=com_tracks&amp;view=teams">COM_TRACKS_Teams</menu>
     	      <menu link="option=com_tracks&amp;view=rounds">COM_TRACKS_Rounds</menu>
+    	      <menu link="option=com_tracks&amp;view=sponsors">COM_TRACKS_sponsors</menu>
     	      <menu link="option=com_tracks&amp;view=about">COM_TRACKS_About_Tracks</menu>
         </submenu>
     		
