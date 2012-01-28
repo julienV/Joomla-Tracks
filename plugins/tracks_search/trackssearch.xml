@@ -13,6 +13,7 @@
 	<files>
     <filename plugin="trackssearch">trackssearch.php</filename>
 		<filename>index.html</filename>
+    <folder>language</folder>
   </files>
 	
 	<config>
@@ -27,10 +28,6 @@
 			</fieldset>
 		</fields>
 	</config>
-  
-	<languages>
-    <language tag="en-GB">language/en-GB/en-GB.plg_search_trackssearch.ini</language>
-  </languages>
 
 </extension>
 	

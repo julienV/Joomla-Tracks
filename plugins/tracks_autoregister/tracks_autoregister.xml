@@ -13,12 +13,8 @@
   <files>
     <filename plugin="tracks_autoregister">tracks_autoregister.php</filename>
 		<filename>index.html</filename>
+    <folder>language</folder>
   </files>
-    
-  <languages>
-    <language tag="en-GB">languages/en-GB.plg_user_tracks_autoregister.ini</language>
-    <language tag="en-GB">languages/en-GB.plg_user_tracks_autoregister.sys.ini</language>
-  </languages>
 
 	<config>
 		<fields name="params">
