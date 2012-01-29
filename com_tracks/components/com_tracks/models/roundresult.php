@@ -60,7 +60,7 @@ class TracksFrontModelRoundResult extends baseModel
     function _getSubroundResults( $subround_id = 0 )
     {
         $query = 	' SELECT rr.*, pr.project_id AS project_id, srt.points_attribution, '
-                . ' i.first_name, i.last_name, i.country_code, i.country_code, pi.number, '
+                . ' i.first_name, i.last_name, i.country_code, i.country_code, i.picture_small, i.gender, pi.number, '
                 . ' t.name AS team_name, t.short_name AS team_short_name, t.acronym AS team_acronym, t.picture_small AS team_logo, '
                 . ' CASE WHEN CHAR_LENGTH( i.alias ) THEN CONCAT_WS( \':\', i.id, i.alias ) ELSE i.id END AS slug, '
                 . ' CASE WHEN CHAR_LENGTH( t.alias ) THEN CONCAT_WS( \':\', t.id, t.alias ) ELSE t.id END AS teamslug '

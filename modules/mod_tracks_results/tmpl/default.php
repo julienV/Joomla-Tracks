@@ -12,7 +12,11 @@
 * See COPYRIGHT.php for copyright notices and details.
 */
 // no direct access
-defined('_JEXEC') or die('Restricted access'); ?>
+defined('_JEXEC') or die('Restricted access'); 
+
+include_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'helpers'.DS.'trackshtml.php');
+include_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'lib'.DS.'JLVImageTool.php');
+?>
 
 <?php
 JHTML::_('behavior.tooltip', '.mod-result-tip', array('className' => 'tip-mod-result'));
@@ -45,6 +49,7 @@ $document->addScript( JURI::base() . 'modules/mod_tracks_results/mod_tracks_resu
       <tr>
         <td><?php echo $rows->rank; ?></td>
         <td>
+        	<?php echo JHTML::image(HTMLTracks::getIndividualThumb($rows, 20), $rows->first_name . ' ' . $rows->last_name)?>
           <a href="<?php echo $link_ind; ?>"
              title="<?php
               echo trim($rows->first_name . ' ' . $rows->last_name).'::'
