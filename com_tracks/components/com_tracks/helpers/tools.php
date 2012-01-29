@@ -43,13 +43,7 @@ class TracksHelperTools
 	 */
 	public static function getStarts($individual_id)
 	{
-		$db = &JFactory::getDbo();
-		
-		$query = ' SELECT count(*) ' 
-		       . ' FROM #__tracks_rounds_results ' 
-		       . ' WHERE individual_id = ' . intval($individual_id);
-		$db->setQuery($query);
-		return $db->loadResult();
+		return count(self::getFilteredHeats($individual_id));
 	}
 	
 	/**
@@ -60,14 +54,14 @@ class TracksHelperTools
 	 */
 	public static function getWins($individual_id)
 	{
-		$db = &JFactory::getDbo();
-		
-		$query = ' SELECT count(*) ' 
-		       . ' FROM #__tracks_rounds_results ' 
-		       . ' WHERE individual_id = ' . intval($individual_id)
-		       . '   AND rank = 1 ';
-		$db->setQuery($query);
-		return $db->loadResult();
+		$results = self::getFilteredHeats($individual_id);
+		$res = 0;
+		foreach ($results as $r) {
+			if ($r->rank == 1) {
+				$res++;
+			}
+		}
+		return $res;
 	}
 	
 	/**
@@ -78,14 +72,15 @@ class TracksHelperTools
 	 */
 	public static function getPodiums($individual_id)
 	{
-		$db = &JFactory::getDbo();
+		$results = self::getFilteredHeats($individual_id);
 		
-		$query = ' SELECT count(*) ' 
-		       . ' FROM #__tracks_rounds_results ' 
-		       . ' WHERE individual_id = ' . intval($individual_id)
-		       . '   AND rank IN (1,2,3) ';
-		$db->setQuery($query);
-		return $db->loadResult();
+		$res = 0;
+		foreach ($results as $r) {
+			if ($r->rank > 0 && $r->rank <= 3) {
+				$res++;
+			}
+		}
+		return $res;
 	}
 	
 	/**
@@ -96,14 +91,15 @@ class TracksHelperTools
 	 */
 	public static function getTop5($individual_id)
 	{
-		$db = &JFactory::getDbo();
+		$results = self::getFilteredHeats($individual_id);
 		
-		$query = ' SELECT count(*) ' 
-		       . ' FROM #__tracks_rounds_results ' 
-		       . ' WHERE individual_id = ' . intval($individual_id)
-		       . '   AND rank IN (1,2,3,4,5) ';
-		$db->setQuery($query);
-		return $db->loadResult();
+		$res = 0;
+		foreach ($results as $r) {
+			if ($r->rank > 0 && $r->rank <= 5) {
+				$res++;
+			}
+		}
+		return $res;
 	}
 	
 	/**
@@ -114,14 +110,15 @@ class TracksHelperTools
 	 */
 	public static function getTop10($individual_id)
 	{
-		$db = &JFactory::getDbo();
+		$results = self::getFilteredHeats($individual_id);
 		
-		$query = ' SELECT count(*) ' 
-		       . ' FROM #__tracks_rounds_results ' 
-		       . ' WHERE individual_id = ' . intval($individual_id)
-		       . '   AND rank IN (1,2,3,4,5,6,7,8,9,10) ';
-		$db->setQuery($query);
-		return $db->loadResult();
+		$res = 0;
+		foreach ($results as $r) {
+			if ($r->rank > 0 && $r->rank <= 10) {
+				$res++;
+			}
+		}
+		return $res;
 	}
 	
 	/**
@@ -132,22 +129,89 @@ class TracksHelperTools
 	 */
 	public static function getAverageFinish($individual_id)
 	{
-		$db = &JFactory::getDbo();
+		$results = self::getFilteredHeats($individual_id);
 		
-		$query = ' SELECT rank ' 
-		       . ' FROM #__tracks_rounds_results ' 
-		       . ' WHERE individual_id = ' . intval($individual_id)
-		       . '   AND rank > 0 ';
-		$db->setQuery($query);
-		$results = $db->loadResultArray();
-		if (count($results)) {
-			return array_sum($results)/count($results);
+		$num = 0;
+		$starts = 0;
+		foreach ($results as $r) 
+		{
+			if ($r->rank > 0) {
+				$starts++;
+				$num += $r->rank;
+			}
 		}
-		else {
+		if (!$starts) {
 			return 0;
 		}
+		return $num/$starts;
+	}
+	
+	/**
+	 * return results for individual id, filtering final heats if other subrounds
+	 * 
+	 * @param unknown_type $individual_id
+	 * @return array
+	 */
+	private static function getFilteredHeats($individual_id)
+	{
+		static $indres;
+				
+		if ($indres && isset($indres[$individual_id])) {
+			return $indres[$individual_id];
+		}
+		
+		$db = &JFactory::getDbo();
+		
+		$query = ' SELECT rr.rank, srt.name, sr.projectround_id '
+				       . ' FROM #__tracks_rounds_results AS rr ' 
+				       . ' INNER JOIN #__tracks_projects_subrounds AS sr ON sr.id = rr.subround_id '
+				       . ' INNER JOIN #__tracks_subroundtypes AS srt ON srt.id = sr.type'
+				       . ' WHERE rr.individual_id = ' . intval($individual_id);
+		$db->setQuery($query);
+		$res = $db->loadObjectList();
+		
+		if (!count($res)) {
+			@$indres[$individual_id] = array();
+			return array();
+		}
+		
+		// we need to filter the 'finals' subround when there are other subrounds
+		$rounds = array();
+		foreach ($res as $r)
+		{
+			@$rounds[$r->projectround_id][] = $r;
+		}
+		$filtered = array();
+		foreach ($rounds as $round)
+		{
+			if (count($round) > 1)
+			{
+				foreach ($round as $sr)
+				{
+					if (strstr($sr->name, 'final') === false) {
+						$filtered[] = $sr;
+					}
+				}
+			}
+			else {
+				$filtered[] = $round[0];
+			}
+		}
+		@$indres[$individual_id] = $filtered;
+		return $filtered;
+	}
+	
+	public function testStats($individual_id) 
+	{
+		$res = array(
+		  self::getStarts($individual_id),
+		  self::getWins($individual_id),
+		  self::getPodiums($individual_id),
+		  self::getTop5($individual_id),
+		  self::getTop10($individual_id),
+		  self::getAverageFinish($individual_id),
+		);
+		return implode(" / ", $res);
 	}
 	
 }
-
-?>
