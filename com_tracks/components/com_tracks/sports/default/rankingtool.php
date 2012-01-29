@@ -325,12 +325,19 @@ class TracksRankingTool extends JObject {
 	function orderRankingsNoAlpha( $a, $b )
 	{
 		if ( $a->points != $b->points ) {
-			return (-( $a->points - $b->points ) > 0) ? 1 : -1;
+			return ( $a->points - $b->points > 0 ? -1 : 1 );
 		}
 		else if ( $a->wins != $b->wins ) {
 			return -( $a->wins - $b->wins );
 		}
-		else if ( $a->best_rank != $b->best_rank ) {
+		else if ( $a->best_rank != $b->best_rank )
+		{
+			if (!$a->best_rank) {
+				return 1;
+			}
+			if (!$b->best_rank) {
+				return -1;
+			}			
 			return ( $a->best_rank - $b->best_rank );
 		}
 		return 0;
@@ -343,12 +350,19 @@ class TracksRankingTool extends JObject {
 	function orderTeamRankingsNoAlpha( $a, $b )
 	{
 		if ( $a->points != $b->points ) {
-			return (-( $a->points - $b->points ) > 0) ? 1 : -1;
+			return ( $a->points - $b->points > 0 ? -1 : 1 );
 		}
 		else if ( $a->wins != $b->wins ) {
 			return -( $a->wins - $b->wins );
 		}
-		else if ( $a->best_rank != $b->best_rank ) {
+		else if ( $a->best_rank != $b->best_rank ) 
+		{
+			if (!$a->best_rank) {
+				return 1;
+			}
+			if (!$b->best_rank) {
+				return -1;
+			}			
 			return ( $a->best_rank - $b->best_rank );
 		}
 		return 0;
