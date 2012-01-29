@@ -53,7 +53,14 @@ class HTMLTracks
     return $users;
   }
   
-  function getIndividualThumb($individual, $size)
+  /**
+   * returns thumbnail url
+   * 
+   * @param object $individual
+   * @param int $size
+   * @return string url
+   */
+  public static function getIndividualThumb($individual, $size)
   {
   	$path = JPATH_SITE.DS.'media'.DS.'com_tracks'.DS.'images'.DS.'individuals'.DS.'small'.DS.$individual->picture_small;
   	if ($individual->picture_small && file_exists($path)) {

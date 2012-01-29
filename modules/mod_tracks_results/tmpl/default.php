@@ -15,6 +15,7 @@
 defined('_JEXEC') or die('Restricted access'); 
 
 include_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'helpers'.DS.'trackshtml.php');
+include_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'helpers'.DS.'countries.php');
 include_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'lib'.DS.'JLVImageTool.php');
 ?>
 
@@ -45,11 +46,13 @@ $document->addScript( JURI::base() . 'modules/mod_tracks_results/mod_tracks_resu
     {
       $link_ind = JRoute::_( TracksHelperRoute::getIndividualRoute($rows->slug, $project->slug) ); 
       $link_team = JRoute::_( TracksHelperRoute::getTeamRoute($rows->teamslug, $project->slug) );
+      $img = JHTML::image(HTMLTracks::getIndividualThumb($rows, 20), $rows->first_name . ' ' . $rows->last_name, array('class' => 'ind-thumb'));
+      $cimg = ( $rows->country_code ? TracksCountries::getCountryFlag($rows->country_code,  array('class' => 'ind-country')) : '');
       ?>
       <tr>
         <td><?php echo $rows->rank; ?></td>
         <td>
-        	<?php echo JHTML::image(HTMLTracks::getIndividualThumb($rows, 20), $rows->first_name . ' ' . $rows->last_name)?>
+        	<?php echo $cimg.$img; ?>
           <a href="<?php echo $link_ind; ?>"
              title="<?php
               echo trim($rows->first_name . ' ' . $rows->last_name).'::'
