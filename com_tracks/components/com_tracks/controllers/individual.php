@@ -112,5 +112,19 @@ class TracksFrontControllerIndividual extends JController
 
     $this->setRedirect( JRoute::_(TracksHelperRoute::getIndividualRoute($model->getId())) , $msg );
   }
+  
+  function savecountry()
+  {
+  	$id = JRequest::getVar('id', '', 'post', 'string');
+  	$country = JRequest::getVar('countryupdate', '', 'post', 'string');
+  	
+		// Require the base controller
+		require_once (JPATH_COMPONENT_ADMINISTRATOR.DS.'tables'.DS.'individual.php');
+  	$table = JTable::getInstance('individual', 'table');
+  	$table->load($id);
+  	$table->country_code = $country;
+  	$table->store();
+  	self::display();
+  }
 }
 ?>

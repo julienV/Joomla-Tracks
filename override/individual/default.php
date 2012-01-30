@@ -216,6 +216,22 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <?php echo $this->loadTemplate('results'); ?>
 <?php endif; ?>
 
+
+  <script>
+	window.addEvent('domready', function(){
+		document.id('countryupdate').addEvent('change', function(){
+			this.form.submit();
+		});
+	});
+	</script>
+		<form name="addcountry" method="post" action="<?php echo JFactory::getURI()->toString(); ?>">
+        <?php echo JHTML::_('select.genericlist', TracksCountries::getCountryOptions(), 'countryupdate', '', 'value', 'text', $this->data->country_code); ?>
+		<input type="hidden" name="controller" value="individual" />
+		<input type="hidden" name="option" value="com_tracks" />
+		<input type="hidden" name="task" value="savecountry" />
+		<input type="hidden" name="id" value="<?php echo $this->data->id; ?>" />
+		</form>
+		
 <p class="copyright">
   <?php echo HTMLtracks::footer( ); ?>
 </p>
