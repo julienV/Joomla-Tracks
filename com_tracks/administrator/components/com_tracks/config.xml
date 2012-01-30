@@ -6,6 +6,10 @@
       <option value="1">COM_TRACKS_Yes</option>
     </field>        
     <field type="text" name="image_max_size" default="120" label="COM_TRACKS_MAXIMAGESIZE" description="COM_TRACKS_MAXIMAGESIZEDESC" />
+    <field type="text" name="default_individual_images_folder"
+           label="COM_TRACKS_SETTINGS_DEFAULT_IMAGE_FOLDER_INDIVIDUALS_LABEL"
+           description="COM_TRACKS_SETTINGS_DEFAULT_IMAGE_FOLDER_INDIVIDUALS_DESC" 
+           default="tracks/individuals"/>
     
     <field type="spacer" default="INDIVIDUAL VIEW SETTINGS" />
       <field type="radio" name="indview_showresults" default="1" label="COM_TRACKS_SHOW_INDIVIDUAL_RESULTS" description="COM_TRACKS_SHOW_INDIVIDUAL_RESULTS_DESC">

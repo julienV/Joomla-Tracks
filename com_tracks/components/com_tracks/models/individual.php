@@ -71,13 +71,13 @@ class TracksFrontModelIndividual extends baseModel
         $attribs['class']="pic";
 			
         if ($this->_data->picture != '') {
-          $this->_data->picture = JHTML::image(JURI::root().'media/com_tracks/images/individuals/'.$this->_data->picture, $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
+          $this->_data->picture = JHTML::image(JURI::root().$this->_data->picture, $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
         } else {
           $this->_data->picture = JHTML::image(JURI::base().'media/com_tracks/images/misc/tnnophoto.jpg', $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
         }
         
         if ($this->_data->picture_small != '') {
-          $this->_data->picture_small = JHTML::image(JURI::root().'media/com_tracks/images/individuals/small/'.$this->_data->picture_small, $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
+          $this->_data->picture_small = JHTML::image(JURI::root().$this->_data->picture_small, $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
         } else {
           $this->_data->picture_small = JHTML::image(JURI::base().'media/com_tracks/images/misc/tnnophoto.jpg', $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
         }
@@ -181,6 +181,7 @@ class TracksFrontModelIndividual extends baseModel
 		require_once (JPATH_COMPONENT_ADMINISTRATOR.DS.'tables'.DS.'individual.php');
 		
     $table = $this->getTable('individual');
+    $params = &JComponentHelper::getParams('com_tracks');
     
   	$user   = JFactory::getUser();
     $username = $user->get('username');
@@ -200,11 +201,17 @@ class TracksFrontModelIndividual extends baseModel
       return false;
     }
     
+    $targetpath = 'images'.DS.$params->get('default_individual_images_folder', 'tracks/individuals');
+    
+    jimport('joomla.filesystem.file');
+    jimport('joomla.filesystem.folder');
+    
     if ( !empty($picture['name']) )  {
-
-      jimport('joomla.filesystem.file');
-
-      $base_Dir   = JPATH_SITE.DS.'media'.DS.'com_tracks'.DS.'images'.DS.'individuals'.DS;
+    	
+	    $base_Dir = JPATH_SITE.DS.$targetpath.DS;
+	    if (!JFolder::exists($base_Dir)) {
+	    	JFolder::create($base_Dir);
+	    }
 
       //check the image
       $check = ImageSelect::check($picture);
@@ -223,7 +230,7 @@ class TracksFrontModelIndividual extends baseModel
         $this->setError( JText::_('COM_TRACKS_UPLOAD_FAILED' ) );
         return false;
       } else {
-        $table->picture = $filename;
+        $table->picture = $targetpath.DS.$filename;
       }
     } else {
       //keep image if edited and left blank
@@ -233,8 +240,11 @@ class TracksFrontModelIndividual extends baseModel
     if ( !empty($picture_small['name']) )  {
 
       jimport('joomla.filesystem.file');
-
-      $base_Dir   = JPATH_SITE.DS.'media'.DS.'com_tracks'.DS.'images'.DS.'individuals'.DS.'small'.DS;
+      
+      $base_Dir = JPATH_SITE.DS.$targetpath.DS.'small'.DS;
+      if (!JFolder::exists($base_Dir)) {
+      	JFolder::create($base_Dir);
+      }
 
       //check the image
       $check = ImageSelect::check($picture_small);
@@ -252,7 +262,7 @@ class TracksFrontModelIndividual extends baseModel
         $this->setError( JText::_('COM_TRACKS_UPLOAD_FAILED' ) );
         return false;
       } else {
-        $table->picture_small = $filename;
+        $table->picture_small = $targetpath.DS.'small'.DS.$filename;
       }
     } else {
       //keep image if edited and left blank

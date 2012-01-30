@@ -99,8 +99,8 @@ class baseModel extends JModel
                . ' CASE WHEN CHAR_LENGTH( s.alias ) THEN CONCAT_WS( \':\', s.id, s.alias ) ELSE s.id END AS season_slug, '
                . ' CASE WHEN CHAR_LENGTH( c.alias ) THEN CONCAT_WS( \':\', c.id, c.alias ) ELSE c.id END AS competition_slug '
                . ' FROM #__tracks_projects AS p '
-               . ' INNER JOIN #__tracks_season AS s ON s.id = p.season_id '
-               . ' INNER JOIN #__tracks_competition AS c ON c.id = p.competition_id '
+               . ' INNER JOIN #__tracks_seasons AS s ON s.id = p.season_id '
+               . ' INNER JOIN #__tracks_competitions AS c ON c.id = p.competition_id '
                . ' WHERE p.id = ' . $this->_project_id;
                 
       $this->_db->setQuery( $query );

@@ -39,7 +39,7 @@ class TracksViewProjects extends TracksView
     JToolBarHelper::deleteList(JText::_('COM_TRACKS_DELETEPROJECTSCONFIRM'));
 		JToolBarHelper::editListX();
 		JToolBarHelper::addNewX();
-		JToolBarHelper::preferences('com_tracks', '600', '500');
+		JToolBarHelper::preferences('com_tracks', '600', '600');
     JToolBarHelper::help( 'screen.tracks', true );
         
 		$db		=& JFactory::getDBO();

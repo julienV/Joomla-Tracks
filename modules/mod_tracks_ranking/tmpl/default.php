@@ -16,7 +16,7 @@ defined('_JEXEC') or die('Restricted access');
 
 JHTML::_('behavior.tooltip', '.mod-ranking-tip', array('className' => 'tip-mod-ranking'));
 
-$img_dir = JPATH_SITE.DS.'media'.DS.'com_tracks'.DS.'images'.DS.'individuals'.DS.'small'.DS;
+$img_dir = JPATH_SITE.DS;
 ?>
 <div class="mod_tracksranking">
 

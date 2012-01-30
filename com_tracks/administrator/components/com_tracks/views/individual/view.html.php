@@ -82,14 +82,11 @@ class TracksViewIndividual extends TracksView
 		//editor
 		$editor =& JFactory::getEditor();
 		
-		$imageselect = ImageSelect::getSelector('picture', 'picture_preview', 'individuals', $object->picture);
-    $miniimageselect = ImageSelect::getSelector('picture_small', 'mini_picture_preview', 'individuals_small', $object->picture_small);
-		
     $this->assignRef( 'editor', $editor );   
 		$this->assignRef( 'lists', $lists);
 		$this->assignRef( 'object', $object);
-    $this->assignRef( 'imageselect', $imageselect);
     $this->assignRef( 'miniimageselect', $miniimageselect);
+		$this->assignRef('form'      	, $this->get('form'));
 
 		parent::display($tpl);
 	}
