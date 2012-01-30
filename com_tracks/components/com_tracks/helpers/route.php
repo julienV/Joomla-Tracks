@@ -114,6 +114,16 @@ class TracksHelperRoute
 		return self::buildUrl( $parts );
 	}
 	
+	function getIndividualsRoute($layout = null)
+	{
+		$parts = array( "option" => "com_tracks",
+		                "view"   => "individuals" );		
+		if ($layout) {
+			$parts['layout'] = $layout;
+		}
+		return self::buildUrl( $parts );
+	}
+	
 	function buildUrl($parts)
 	{		
 		if($item = self::_findItem($parts)) {

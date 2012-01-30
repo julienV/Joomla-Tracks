@@ -1063,7 +1063,7 @@ class TracksCountries
 	 * @param string: additional html attributes for the img tag
 	 * @return string: html code for the flag image
 	 */
-	function getCountryFlag($countrycode, $attributes = null)
+	function getCountryFlag($countrycode, $attributes = null, $link = true)
 	{
 		$src = self::getIsoFlag($countrycode);
 		if (!$src) {
@@ -1073,7 +1073,14 @@ class TracksCountries
 		if ($attributes) {
 			$attr = array_merge($attr, $attributes);
 		}
-		return JHTML::image($src, self::getCountryName($countrycode), $attr);
+		$img = JHTML::image($src, self::getCountryName($countrycode), $attr);
+		if (!$link) {
+			return $img;
+		}
+		else {
+			$link = TracksHelperRoute::getIndividualsRoute('search').'&country='.$countrycode;
+			return JHTML::link($link, $img);
+		}
 	}
 
   /**

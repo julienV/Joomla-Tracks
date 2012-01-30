@@ -33,33 +33,30 @@ class TracksFrontViewIndividuals extends JView
     	          
 			$model =& $this->getModel();
 			$rows = $model->getData();
-			
-			if (JRequest::getCmd('filtering')) 
-			{				
-				switch (JRequest::getCmd('filtering'))
-				{
-					case 'female':
-						$title = Jtext::_('COM_TRACKS_INDIVIDUAL_SEARCH_FEMALES_TITLE');
-						break;
-					case 'haspicture':
-						$title = Jtext::_('COM_TRACKS_INDIVIDUAL_SEARCH_PICTURES_TITLE');
-						break;
-					case 'standup':
-						$title = Jtext::_('COM_TRACKS_INDIVIDUAL_SEARCH_STANDUP_TITLE');
-						break;
-					case 'lastupdated':
-						$title = Jtext::_('COM_TRACKS_INDIVIDUAL_SEARCH_LAST_UPDATED_TITLE');
-						break;
-					case 'lastviewed':
-						$title = Jtext::_('COM_TRACKS_INDIVIDUAL_SEARCH_LAST_VIEWED_TITLE');
-						break;
-					default:
-						$title = Jtext::_('COM_TRACKS_All_Individuals');
+						
+			switch (JRequest::getCmd('filtering'))
+			{
+				case 'female':
+					$title = Jtext::_('COM_TRACKS_INDIVIDUAL_SEARCH_FEMALES_TITLE');
 					break;
-				}
-				if (JRequest::getCmd('country')) {
-					$title .= Jtext::sprintf('COM_TRACKS_INDIVIDUAL_SEARCH_COUNTRY_TITLE', TracksCountries::getCountryName(JRequest::getCmd('country')));
-				}
+				case 'haspicture':
+					$title = Jtext::_('COM_TRACKS_INDIVIDUAL_SEARCH_PICTURES_TITLE');
+					break;
+				case 'standup':
+					$title = Jtext::_('COM_TRACKS_INDIVIDUAL_SEARCH_STANDUP_TITLE');
+					break;
+				case 'lastupdated':
+					$title = Jtext::_('COM_TRACKS_INDIVIDUAL_SEARCH_LAST_UPDATED_TITLE');
+					break;
+				case 'lastviewed':
+					$title = Jtext::_('COM_TRACKS_INDIVIDUAL_SEARCH_LAST_VIEWED_TITLE');
+					break;
+				default:
+					$title = Jtext::_('COM_TRACKS_All_Individuals');
+				break;
+			}
+			if (JRequest::getCmd('country')) {
+				$title .= Jtext::sprintf('COM_TRACKS_INDIVIDUAL_SEARCH_COUNTRY_TITLE', TracksCountries::getCountryName(JRequest::getCmd('country')));
 			}
 			
 			$document =& JFactory::getDocument();
