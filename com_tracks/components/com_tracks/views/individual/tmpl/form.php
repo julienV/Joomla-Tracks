@@ -15,7 +15,18 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 <?php JHTML::_('behavior.tooltip'); ?>
 
-<script language="javascript" type="text/javascript">
+<script type="text/javascript">
+	window.addEvent('domready', function(){
+		document.id('has_other_sponsor').addEvent('click', function(){
+			if (this.getProperty('checked')) {
+				document.id('sponsor_other').removeProperty('disabled');
+			}
+			else {
+				document.id('sponsor_other').setProperty('disabled', 'disabled');
+			}				
+		});
+	});
+
 	Joomla.submitbutton = function (pressbutton) {
 		var form = document.individualform;
 		if (pressbutton == 'cancel') {
@@ -231,6 +242,28 @@ defined('_JEXEC') or die('Restricted access'); ?>
         <input class="text_area" type="text" name="country" id="country" size="30" maxlength="50" value="<?php echo $this->object->country; ?>" />
       </td>
     </tr>
+		<tr>
+			<td width="100" align="right" class="key">
+				<label for="sponsors">
+					<?php echo JText::_('COM_TRACKS_sponsors' ); ?>:
+				</label>
+			</td>
+			<td>
+				<div id="d-sponsors">
+				<?php foreach ((array) $this->lists['sponsor'] as $opt): ?>
+				<input class="inputbox checkbox" type="checkbox" name="sponsors[]" 
+				       value="<?php echo $opt->value; ?>" 
+				       <?php echo (in_array($opt->value, $this->sponsors) ? ' checked="checked"' : ''); ?>/> <label><?php echo $opt->text; ?></label>
+				<?php endforeach; ?>
+				<input class="inputbox checkbox" type="checkbox" name="has_other_sponsor" 
+				       value="-1" id="has_other_sponsor"
+				       <?php echo ($this->object->sponsor_other ? ' checked="checked"' : ''); ?>/> <label><?php echo JText::_('COM_TRACKS_SPONSOR_OTHER'); ?></label>
+				<input name="sponsor_other" id="sponsor_other" 
+				       value="<?php echo $this->object->sponsor_other; ?>" 
+				       <?php echo (empty($this->object->sponsor_other) ? ' disabled="disabled"' : ''); ?>/>
+       </div>
+			</td>
+		</tr>
     <tr>
       <td width="100" align="right" class="key">
         <label for="name">

@@ -79,6 +79,11 @@ class TracksFrontControllerIndividual extends JController
     //clean request
     // first, save description...
     $post = JRequest::get( 'post' );
+    
+    if (!isset($post['has_other_sponsor'])) {
+    	$post['sponsor_other'] = '';
+    }
+    
     $post['id'] = $id;
     $post['user_id'] = $user_id;
     $post['full_name'] = JRequest::getVar('full_name', '', 'post', 'string');

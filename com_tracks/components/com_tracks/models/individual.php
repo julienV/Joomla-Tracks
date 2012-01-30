@@ -343,7 +343,22 @@ class TracksFrontModelIndividual extends baseModel
       $this->setError( $user->getError() );
       return false;
     }
-    $this->_id = $table->id;
+		$this->_id = $table->id;
+
+		// clear sponsors
+		$query = ' DELETE FROM #__tracks_individuals_sponsors '
+		       . ' WHERE individual_id = ' . $this->_db->Quote($table->id);
+		$this->_db->setQuery($query);
+		$res = $this->_db->query();
+
+		// save sponsors
+		foreach ($data['sponsors'] as $sp)
+		{
+			$obj = JTable::getInstance('Individualsponsor', 'trackstable');
+			$obj->individual_id = $table->id;
+			$obj->sponsor_id = $sp;
+			$obj->store();
+		}
     
     return $this->_id;
   }

@@ -117,5 +117,28 @@ class TracksFrontModelProfile extends baseModel
       $this->_data          = $object;
       return (boolean) $this->_data;
   }
-    
+  
+	/**
+	* returns sponsors as options
+	* @return array
+	*/
+	public function getSponsorOptions()
+	{
+		$query = ' SELECT id AS value, name AS text '
+  	       . ' FROM #__tracks_sponsors '
+  	       . ' ORDER BY name ASC ';
+		$this->_db->setQuery($query);
+		$res = $this->_db->loadObjectList();
+		return $res;
+  }
+  
+  public function getSponsors()
+  {
+  	$query = ' SELECT sponsor_id '
+           . ' FROM #__tracks_individuals_sponsors '
+           . ' WHERE individual_id = ' . $this->_db->Quote($this->_id);
+		$this->_db->setQuery($query);
+		$res = $this->_db->loadResultArray();
+		return $res;
+  }
 }

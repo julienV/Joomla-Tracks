@@ -143,6 +143,9 @@ $option = JRequest::getCmd('option');
     $countries = array_merge($countries, TracksCountries::getCountryOptions());
     $lists['countries'] = JHTML::_('select.genericlist', $countries, 'country_code', '', 'value', 'text', $object->country_code);
     
+    $options = $this->get('SponsorOptions');
+    $lists['sponsor'] = $options;
+    
     if ( $user->authorise('core.manage', 'com_tracks') 
       || ( $object->user_id && ($user->id == $object->user_id) )
       || ( $isNew && $user->id )
@@ -169,6 +172,7 @@ $option = JRequest::getCmd('option');
     $this->assignRef( 'object', $object);
     $this->assignRef( 'params', $params);
     $this->assignRef( 'user', $user);
+    $this->assignref('sponsors', $this->get('sponsors'));
 
     parent::display($tpl);
   }
