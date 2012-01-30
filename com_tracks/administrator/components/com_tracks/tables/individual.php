@@ -26,41 +26,6 @@ jimport('joomla.filter.input');
 class TableIndividual extends JTable
 {
 	/**
-	 * Primary Key
-	 *
-	 * @var int
-	 */
-	var $id = null;
-	
-  var $last_name;
-  var $first_name;
-  /**
-   * alias for SEO
-   *
-   * @var string
-   */
-  var $alias;
-  var $nickname;
-  var $height;
-  var $weight;
-  var $hometown;
-  var $dob;
-  var $user_id;
-  var $picture;
-  var $picture_small;
-  var $picture_background;
-  var $address;
-  var $postcode;
-  var $city;
-  var $state;
-  var $country_code;
-  var $description;
-  var $checked_out;
-  var $checked_out_time;
-  
-  var $gender;
-
-	/**
 	 * Constructor
 	 *
 	 * @param object Database connector object

@@ -243,12 +243,19 @@ class TracksFrontModelIndividual extends baseModel
     		JError::raiseError(403, JText::_('COM_TRACKS_ACCESS_NOT_ALLOWED'));
     	}
     }
-
+    		
     // Bind the form fields to the user table
     if (!$table->bind($data)) {
       $this->setError($this->_db->getErrorMsg());
       return false;
     }
+    
+    if (!$table->id) {
+    	$table->created = gmdate('Y-m-d H:i:s');
+    	$table->created_by = JFactory::getUser()->get('id');
+    }
+    $table->modified = gmdate('Y-m-d H:i:s');
+    $table->modified_by = JFactory::getUser()->get('id');
     
     if ( !empty($picture['name']) )  {
 

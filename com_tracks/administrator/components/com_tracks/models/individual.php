@@ -67,6 +67,13 @@ class TracksModelIndividual extends TracksModelItem
 			return false;
 		}
 
+		if (!$row->id) {
+			$row->created = gmdate('Y-m-d H:i:s');
+			$row->created_by = JFactory::getUser()->get('id');
+		}
+		$row->modified = gmdate('Y-m-d H:i:s');
+		$row->modified_by = JFactory::getUser()->get('id');
+		
 		// Create the timestamp for the date
 		$row->checked_out_time = gmdate('Y-m-d H:i:s');
 		

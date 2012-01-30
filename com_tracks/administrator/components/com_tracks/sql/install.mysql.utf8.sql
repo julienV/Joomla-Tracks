@@ -92,7 +92,14 @@ CREATE TABLE IF NOT EXISTS `#__tracks_individuals` (
   `country` varchar(20) NULL,
   `description` text NULL,
   `checked_out` int(11) NOT NULL,
-  `checked_out_time` datetime NOT NULL,
+  `checked_out_time` datetime NOT NULL,  
+  `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `created_by` int(10) unsigned NOT NULL DEFAULT '0',
+  `created_by_alias` varchar(255) NOT NULL DEFAULT '',
+  `modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `modified_by` int(10) unsigned NOT NULL DEFAULT '0',
+  `hits` int(10) unsigned NOT NULL DEFAULT '0',
+  `last_hit` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
