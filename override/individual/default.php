@@ -225,7 +225,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 	});
 	</script>
 		<form name="addcountry" method="post" action="<?php echo JFactory::getURI()->toString(); ?>">
-        <?php echo JHTML::_('select.genericlist', TracksCountries::getCountryOptions(), 'countryupdate', '', 'value', 'text', $this->data->country_code); ?>
+        <?php echo JHTML::_('select.genericlist', TracksCountries::getCountryOptions(), 'countryupdate', '', 'value', 'text', $this->data->country_code ? $this->data->country_code : 0); ?>
 		<input type="hidden" name="controller" value="individual" />
 		<input type="hidden" name="option" value="com_tracks" />
 		<input type="hidden" name="task" value="savecountry" />

@@ -264,7 +264,6 @@ class TracksCountries
 		$country["YEM"]= Array( "iso2" => "YE", "name" => "Yemen");
 		$country["ZMB"]= Array( "iso2" => "ZM", "name" => "Zambia, Republic of");
 		$country["ZWE"]= Array( "iso2" => "ZW", "name" => "Zimbabwe, Republic of");
-		$country["0"]= Array( "iso2" => "0", "name" => "NO VALID COUNTRY");
     return $country;
 	}
 	
@@ -515,10 +514,10 @@ class TracksCountries
     return $countrycoord;
   }
 
-	function getCountryOptions($value_tag = 'value', $text_tag = 'text')
+	function getCountryOptions($include_select = true, $value_tag = 'value', $text_tag = 'text')
 	{
 		$countries = self::getCountries();
-		$options = array();
+		$options = array(JHTML::_('select.option', 0, '-'.JText::_('COM_TRACKS_SELECT_COUNTRY').'-', $value_tag, $text_tag));
 		foreach ($countries AS $k => $c)
 		{
 			$name = explode(',', $c['name']);

@@ -36,7 +36,8 @@ else {
 $winners = array();
 foreach ((array) $project->winners as $ind) {
 	$link_ind = JRoute::_( TracksHelperRoute::getIndividualRoute($ind->slug, $project->slug) );
-	$winners[] = JHTML::link($link_ind, $ind->first_name.' '.$ind->last_name);
+	$picture = JHTML::image(HTMLTracks::getIndividualThumb($ind, 100), $ind->first_name . ' ' . $ind->last_name);
+	$winners[] = $picture.JHTML::link($link_ind, $ind->first_name.' '.$ind->last_name);	
 }
 echo implode('<br/>', $winners);
 ?>
