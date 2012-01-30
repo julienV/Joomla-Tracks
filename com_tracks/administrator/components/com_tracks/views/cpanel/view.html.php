@@ -39,7 +39,7 @@ class TracksViewCpanel extends TracksView
 		JToolBarHelper::deleteList();
 		JToolBarHelper::editListX();
 		JToolBarHelper::addNewX();
-		JToolBarHelper::preferences('com_tracks', '360');
+		JToolBarHelper::preferences('com_tracks', '600', '600');
     JToolBarHelper::help( 'screen.tracks', true );
 
         

@@ -62,7 +62,7 @@ class HTMLTracks
    */
   public static function getIndividualThumb($individual, $size)
   {
-  	$path = JPATH_SITE.DS.'media'.DS.'com_tracks'.DS.'images'.DS.'individuals'.DS.'small'.DS.$individual->picture_small;
+  	$path = JPATH_SITE.DS.$individual->picture_small;
   	if ($individual->picture_small && file_exists($path)) {
   		return JLVImageTool::getThumbUrl($path, $size);
   	}

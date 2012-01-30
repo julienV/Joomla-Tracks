@@ -41,6 +41,49 @@ defined('_JEXEC') or die('Restricted access'); ?>
 				document.id('sponsor_other').setProperty('disabled', 'disabled');
 			}				
 		});
+	
+		$('picture').addEvent('change', function(){
+			if (this.get('value')) {
+				$('picture_preview').empty().adopt(
+						new Element('img', {
+							src: '../'+this.get('value'),
+							class: 're-image-preview',
+							alt: 'preview'
+						}));
+			}
+			else {
+				$('picture_preview').empty();
+			}
+		}).fireEvent('change');
+	
+		$('picture_small').addEvent('change', function(){
+			if (this.get('value')) {
+				$('picture_small_preview').empty().adopt(
+						new Element('img', {
+							src: '../'+this.get('value'),
+							class: 're-image-preview',
+							alt: 'preview'
+						}));
+			}
+			else {
+				$('picture_small_preview').empty();
+			}
+		}).fireEvent('change');
+	
+		$('picture_background').addEvent('change', function(){
+			if (this.get('value')) {
+				$('picture_background_preview').empty().adopt(
+						new Element('img', {
+							src: '../'+this.get('value'),
+							class: 're-image-preview',
+							alt: 'preview'
+						}));
+			}
+			else {
+				$('picture_background_preview').empty();
+			}
+		}).fireEvent('change');
+		
 	});
 
 	Joomla.submitbutton = function (pressbutton) {
@@ -136,18 +179,14 @@ defined('_JEXEC') or die('Restricted access'); ?>
 		<!-- start image import -->
     <tr>
       <td width="100" align="right" class="key">
-        <label for="image">
-          <span class="hasTip" title='<?php echo JText::_('COM_TRACKS_INDIVIDUALPICTURE' ); ?>::<?php echo JText::_('COM_TRACKS_INDIVIDUALPICTUREDESC' ); ?>'>
-            <?php echo JText::_('COM_TRACKS_INDIVIDUALPICTURE' ).':'; ?>
-          </span>
-        </label>
+				<?php echo $this->form->getLabel('picture'); ?>
       </td>
       <td>
         <table>
           <tr>
-            <td><?php echo $this->imageselect; ?></td>
+            <td><?php echo $this->form->getInput('picture'); ?></td>
             <td>
-              <img class="imagepreview" src="../images/M_images/blank.png" name="picture_preview" id="picture_preview" width="80" height="80" border="2" alt="Preview" />
+              <span id="picture_preview"></span>
             </td>
           </tr>
         </table>
@@ -157,18 +196,14 @@ defined('_JEXEC') or die('Restricted access'); ?>
     <!-- start image import -->
     <tr>
       <td width="100" align="right" class="key">
-        <label for="miniimage">
-          <span class="hasTip" title='<?php echo JText::_('COM_TRACKS_INDIVIDUALSMALLPICTURE' ); ?>::<?php echo JText::_('COM_TRACKS_INDIVIDUALSMALLPICTUREDESC' ); ?>'>
-            <?php echo JText::_('COM_TRACKS_INDIVIDUALSMALLPICTURE' ).':'; ?>
-          </span>
-        </label>
+				<?php echo $this->form->getLabel('picture_small'); ?>
       </td>
       <td>
         <table>
           <tr>
-            <td><?php echo $this->miniimageselect; ?></td>
+            <td><?php echo $this->form->getInput('picture_small'); ?></td>
             <td>
-              <img class="imagepreview" src="../images/M_images/blank.png" name="mini_picture_preview" id="mini_picture_preview" width="80" height="80" border="2" alt="Preview" />
+              <span id="picture_small_preview"></span>
             </td>
           </tr>
         </table>
@@ -178,18 +213,14 @@ defined('_JEXEC') or die('Restricted access'); ?>
     <!-- start image import -->
     <tr>
       <td width="100" align="right" class="key">
-        <label for="miniimage">
-          <span class="hasTip" title='<?php echo JText::_('COM_TRACKS_INDIVIDUALBACKGROUNDPICTURE' ); ?>::<?php echo JText::_('COM_TRACKS_INDIVIDUALBACKGROUNDPICTURE_DESC' ); ?>'>
-            <?php echo JText::_('COM_TRACKS_INDIVIDUALBACKGROUNDPICTURE' ).':'; ?>
-          </span>
-        </label>
+				<?php echo $this->form->getLabel('picture_background'); ?>
       </td>
       <td>
         <table>
           <tr>
-            <td><?php echo $this->backgroundimageselect; ?></td>
+            <td><?php echo $this->form->getInput('picture_background'); ?></td>
             <td>
-              <img class="imagepreview" src="../images/M_images/blank.png" name="background_picture_preview" id="background_picture_preview" width="80" height="80" border="2" alt="Preview" />
+              <span id="picture_background_preview"></span>
             </td>
           </tr>
         </table>

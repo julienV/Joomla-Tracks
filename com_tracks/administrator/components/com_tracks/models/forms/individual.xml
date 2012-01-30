@@ -1,1 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<form>
+		
+	<field
+		name="picture"
+		type="media"
+		label="COM_TRACKS_INDIVIDUALPICTURE"
+		description="COM_TRACKS_INDIVIDUALPICTUREDESC"
+		class="inputbox"
+		directory="com_tracks"/>
+		
+	<field
+		name="picture_small"
+		type="media"
+		label="COM_TRACKS_INDIVIDUALSMALLPICTURE"
+		description="COM_TRACKS_INDIVIDUALSMALLPICTUREDESC"
+		class="inputbox"
+		directory="com_tracks"/>
+		
+	<field
+		name="picture_background"
+		type="media"
+		label="COM_TRACKS_INDIVIDUALBACKGROUNDPICTURE"
+		description="COM_TRACKS_INDIVIDUALBACKGROUNDPICTURE_DESC"
+		class="inputbox"
+		directory="com_tracks"/>
+		
+</form>
