@@ -517,7 +517,7 @@ class TracksCountries
 	function getCountryOptions($include_select = true, $value_tag = 'value', $text_tag = 'text')
 	{
 		$countries = self::getCountries();
-		$options = array(JHTML::_('select.option', 0, '-'.JText::_('COM_TRACKS_SELECT_COUNTRY').'-', $value_tag, $text_tag));
+		$options = array(JHTML::_('select.option', 0, '- '.JText::_('COM_TRACKS_SELECT_COUNTRY').' -', $value_tag, $text_tag));
 		foreach ($countries AS $k => $c)
 		{
 			$name = explode(',', $c['name']);

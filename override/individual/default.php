@@ -230,6 +230,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 		<input type="hidden" name="option" value="com_tracks" />
 		<input type="hidden" name="task" value="savecountry" />
 		<input type="hidden" name="id" value="<?php echo $this->data->id; ?>" />
+		<button type="submit"><?php echo Jtext::_('COM_TRACKS_UPDATE'); ?></button>
 		</form>
 		
 <p class="copyright">
