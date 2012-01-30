@@ -7,7 +7,7 @@
     </layout>
     
 		<!-- Add fields to the request variables for the layout. -->
-		<fields name="request">
+		<fields name="request" addfieldpath="administrator/components/com_tracks/models/fields">
 			<fieldset name="request">
 				
 				<field name="i" type="sql"

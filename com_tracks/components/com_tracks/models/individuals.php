@@ -23,18 +23,65 @@ require_once( 'base.php' );
  * @since 0.1
  */
 class TracksFrontModelIndividuals extends baseModel
-{   
-    function getData()
-    {
-    	$ordering = JFactory::getApplication()->getParams('com_tracks')->get('ordering', 0);
-    	$order = $ordering ? ' ORDER BY i.first_name, i.last_name ASC ' : ' ORDER BY i.last_name ASC, i.first_name ASC ';
-        $query =  ' SELECT i.id, i.first_name, i.last_name, i.country_code, '
-        . ' CASE WHEN CHAR_LENGTH( i.alias ) THEN CONCAT_WS( \':\', i.id, i.alias ) ELSE i.id END AS slug '
-        . ' FROM #__tracks_individuals as i '
-        . $order;
+{
 
-        $this->_db->setQuery( $query );
-        
-        return $this->_db->loadObjectList();
-    }
+	function __construct($config = array())
+	{
+		parent::__construct($config = array());
+		$this->setState('filtering', JRequest::getCmd('filtering'));
+		$this->setState('country', JRequest::getCmd('country'));
+	}
+	  
+	function getData()
+	{
+		$db		= $this->getDbo();
+		$query	= $db->getQuery(true);
+			
+		$limit = 0;
+		$limitstart = 0;
+			
+		$query->select( 'i.id, i.first_name, i.last_name, i.country_code, '
+		              . ' CASE WHEN CHAR_LENGTH( i.alias ) THEN CONCAT_WS( \':\', i.id, i.alias ) ELSE i.id END AS slug ');
+		$query->from('#__tracks_individuals as i');
+		
+		$ordering = JFactory::getApplication()->getParams('com_tracks')->get('ordering', 0);
+		$query->order($ordering ? 'i.first_name, i.last_name ASC ' : 'i.last_name ASC, i.first_name ASC ');
+			
+		if ($this->getState('country')) {
+			$query->where('i.country_code = ' . $this->_db->Quote($this->getState('country')));
+		}
+			
+		switch ($this->getState('filtering'))
+		{
+			case 'female':
+				$query->where('i.gender = 2');
+				break;
+			case 'haspicture':
+				$query->where('CHAR_LENGTH(i.picture_small) > 0 ');
+				break;
+			case 'standup':
+				$query->innerJoin('#__tracks_rounds_results AS rr ON rr.individual_id = i.id');
+				$query->innerJoin('#__tracks_projects_subrounds AS sr ON sr.id = rr.subround_id ');
+				$query->innerJoin('#__tracks_projects_rounds AS pr ON pr.id = sr.projectround_id ');
+				$query->innerJoin('#__tracks_projects AS p ON p.id = pr.project_id ');
+				$query->where('p.competition_id = 1');
+				$query->where('p.name NOT LIKE ("%freestyle%")');
+				$query->group('i.id');
+				break;
+			case 'lastupdated':
+				$query->clear('order');
+				$query->order('i.modified DESC ');
+				$limit = 10;
+				break;
+			case 'lastviewed':
+				$query->clear('order');
+				$query->order('i.last_hit DESC ');
+				$limit = 10;
+				break;
+		}
+
+		$this->_db->setQuery( $query, $limitstart, $limit );					
+
+		return $this->_db->loadObjectList();
+	}
 }

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+    <layout title="COM_TRACKS_VIEW_INDIVIDUALS_LAYOUT_SEARCH">
+        <message>
+        <![CDATA[COM_TRACKS_VIEW_INDIVIDUALS_LAYOUT_SEARCH_TIP]]>
+        </message>
+    </layout>
+    <state>
+        <name>COM_TRACKS_VIEW_INDIVIDUALS_LAYOUT_SEARCH</name>
+        <description>COM_TRACKS_VIEW_INDIVIDUALS_LAYOUT_SEARCH_TIP</description>
+    </state>
+    
+	<!-- Add fields to the parameters object for the layout. -->
+	
+	<fields name="request" addfieldpath="administrator/components/com_tracks/models/fields">
+		<fieldset name="request">
+			<field name="filtering" type="list"
+				label="COM_TRACKS_Display_individuals_filtering"
+				description="COM_TRACKS_Display_individuals_filtering_desc"
+				default="0"
+			>
+        <option value="none">COM_TRACKS_Display_individuals_filtering_none</option>
+        <option value="female">COM_TRACKS_Display_individuals_filtering_female</option>
+        <option value="standup">COM_TRACKS_Display_individuals_filtering_standup</option>
+        <option value="lastviewed">COM_TRACKS_Display_individuals_filtering_lastviewed</option>
+        <option value="lastupdated">COM_TRACKS_Display_individuals_filtering_lastupdated</option>
+        <option value="haspicture">COM_TRACKS_Display_individuals_filtering_haspicture</option>
+			</field>
+			
+			<field name="country" type="tcountry"
+			       label="COM_TRACKS_Display_individuals_country_filtering"
+			       description="COM_TRACKS_Display_individuals_country_filtering_desc"
+			       default="0" />
+		</fieldset>
+	</fields>
+			
+	<fields name="params">
+		<fieldset name="basic" label="COM_TRACKS_FIELDSET_LAYOUT_OPTIONS">
+
+			<field name="ordering" type="list"
+				label="COM_TRACKS_Display_individuals_ordering"
+				description="COM_TRACKS_Display_individuals_ordering_desc"
+				default="0"
+			>
+        <option value="0">COM_TRACKS_Display_individuals_ordering_LAST_FIRST</option>
+        <option value="1">COM_TRACKS_Display_individuals_ordering_FIRST_LAST</option>
+			</field>
+		</fieldset>
+	</fields>	
+</metadata>
