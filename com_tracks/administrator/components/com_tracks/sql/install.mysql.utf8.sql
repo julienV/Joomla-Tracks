@@ -162,6 +162,15 @@ CREATE TABLE IF NOT EXISTS `#__tracks_projects_individuals` (
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+CREATE TABLE IF NOT EXISTS `#__tracks_individuals_sponsors` (
+  `id` int(11) NOT NULL auto_increment,
+  `individual_id` int(11) NOT NULL,
+  `sponsor_id` int(11) NOT NULL,
+  PRIMARY KEY  (`id`),  
+  KEY `individual_id` (`individual_id`),
+  KEY `sponsor_id` (`sponsor_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
 CREATE TABLE IF NOT EXISTS `#__tracks_projects_teams` (
   `id` int(11) NOT NULL auto_increment,
   `team_id` int(11) NOT NULL,

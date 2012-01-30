@@ -69,7 +69,7 @@ class TracksModelIndividual extends TracksModelItem
 
 		// Create the timestamp for the date
 		$row->checked_out_time = gmdate('Y-m-d H:i:s');
-
+		
 		// Make sure the item is valid
 		if (!$row->check()) {
 			$this->setError($this->_db->getErrorMsg());
@@ -80,6 +80,21 @@ class TracksModelIndividual extends TracksModelItem
 		if (!$row->store()) {
 			$this->setError($this->_db->getErrorMsg());
 			return false;
+		}
+		
+		// clear sponsors
+		$query = ' DELETE FROM #__tracks_individuals_sponsors ' 
+		       . ' WHERE individual_id = ' . $this->_db->Quote($row->id);
+		$this->_db->setQuery($query);
+		$res = $this->_db->query();
+		
+		// save sponsors
+		foreach ($data['sponsors'] as $sp)
+		{
+			$obj = JTable::getInstance('Individualsponsor', 'trackstable');
+			$obj->individual_id = $row->id;
+			$obj->sponsor_id = $sp;
+			$obj->store();
 		}
 
 		return $row->id;
@@ -158,6 +173,30 @@ class TracksModelIndividual extends TracksModelItem
       } 
     }
     return $rec;
+  }
+  
+  /**
+   * returns sponsors as options
+   * @return array
+   */
+  public function getSponsorOptions()
+  {
+  	$query = ' SELECT id AS value, name AS text ' 
+  	       . ' FROM #__tracks_sponsors ' 
+  	       . ' ORDER BY name ASC ';
+  	$this->_db->setQuery($query);
+  	$res = $this->_db->loadObjectList();
+  	return $res;
+  }
+  
+  public function getSponsors()
+  {
+  	$query = ' SELECT sponsor_id ' 
+  	       . ' FROM #__tracks_individuals_sponsors ' 
+  	       . ' WHERE individual_id = ' . $this->_db->Quote($this->_id);
+  	$this->_db->setQuery($query);
+  	$res = $this->_db->loadResultArray();
+  	return $res;
   }
 }
 ?>

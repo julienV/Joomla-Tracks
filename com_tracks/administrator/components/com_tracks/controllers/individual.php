@@ -55,6 +55,10 @@ class TracksControllerIndividual extends BaseController
 		// data from editor must be retrieved as raw
     $post['description'] = JRequest::getVar('description', '', 'post', 'string', JREQUEST_ALLOWRAW);
 
+    if (!isset($post['has_other_sponsor'])) {
+    	$post['sponsor_other'] = '';
+    }
+    
 		$model = $this->getModel('individual');
 
 		if ($returnid = $model->store($post)) {

@@ -139,3 +139,9 @@ table#abouttracks td {
 	vertical-align: top;
 	padding: 10px;
 }
+
+div#d-sponsors label, div#d-sponsors input {
+	float: none;
+	clear: none;
+	display: inline;
+}

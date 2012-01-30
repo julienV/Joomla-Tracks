@@ -1,0 +1,1 @@
+ALTER TABLE `#__tracks_individuals` ADD `sponsor_other` VARCHAR( 255 ) NULL DEFAULT NULL 
