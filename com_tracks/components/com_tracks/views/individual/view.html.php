@@ -34,6 +34,9 @@ class TracksFrontViewIndividual extends JView
 			$this->_displayForm($tpl);
 			return;
 		}
+		
+		$model = &$this->getModel();
+		$model->addHit();
 
 		$user   =& JFactory::getUser();
 		$params = $mainframe->getParams( 'com_tracks' );
