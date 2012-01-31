@@ -214,21 +214,6 @@ class TracksModelSubroundResult extends TracksModelItem
 		return true;
 	}
 
- /**
-   * Method to get a table object, load it if necessary.
-   *
-   * @access  public
-   * @param string The table name. Optional.
-   * @param string The class prefix. Optional.
-   * @param array Configuration array for model. Optional.
-   * @return  object  The table
-   * @since 1.5
-   */
-  function &getTable($name='', $prefix='Table', $options = array())
-  {
-    return parent::getTable('projectroundresult', $prefix, $options);
-  }
-
   /**
    * Method to store the item
    *
@@ -323,5 +308,19 @@ class TracksModelSubroundResult extends TracksModelItem
     $this->_db->setQuery($query);
     return $this->_db->loadObjectList();
   }
+	
+	/**
+	* Returns a Table object, always creating it
+	*
+	* @param	type	The table type to instantiate
+	* @param	string	A prefix for the table class name. Optional.
+	* @param	array	Configuration array for model. Optional.
+	* @return	JTable	A database object
+	* @since	1.6
+	*/
+	public function getTable($type = 'projectroundresult', $prefix = 'table', $config = array())
+	{
+		return JTable::getInstance($type, $prefix, $config);
+	}
 }
 ?>

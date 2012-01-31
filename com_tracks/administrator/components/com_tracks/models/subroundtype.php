@@ -110,5 +110,19 @@ class TracksModelSubroundType extends TracksModelItem
 		}
 		return true;
 	}
+	
+	/**
+	* Returns a Table object, always creating it
+	*
+	* @param	type	The table type to instantiate
+	* @param	string	A prefix for the table class name. Optional.
+	* @param	array	Configuration array for model. Optional.
+	* @return	JTable	A database object
+	* @since	1.6
+	*/
+	public function getTable($type = 'subroundtype', $prefix = 'table', $config = array())
+	{
+		return JTable::getInstance($type, $prefix, $config);
+	}
 }
 ?>
