@@ -23,7 +23,7 @@ defined('_JEXEC') or die('Restricted access');
 <ul>
 	<?php foreach ($this->rows as $r): ?>
 	<?php $link = JRoute::_( TracksHelperRoute::getIndividualRoute($r->slug) ); ?>
-	<li>
+	<li><?php echo JHTML::image(HTMLTracks::getIndividualThumb($r, 20), $r->first_name . ' ' . $r->last_name); ?>	
 	<?php if ($this->params->get('ordering')): ?>
 		<?php echo JHTML::link($link, $r->first_name . ', ' . $r->last_name); ?>
 	<?php else: ?>

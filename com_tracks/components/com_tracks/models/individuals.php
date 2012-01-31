@@ -40,7 +40,7 @@ class TracksFrontModelIndividuals extends baseModel
 		$limit = 0;
 		$limitstart = 0;
 			
-		$query->select( 'i.id, i.first_name, i.last_name, i.country_code, '
+		$query->select( 'i.id, i.first_name, i.last_name, i.country_code, i.picture_small, '
 		              . ' CASE WHEN CHAR_LENGTH( i.alias ) THEN CONCAT_WS( \':\', i.id, i.alias ) ELSE i.id END AS slug ');
 		$query->from('#__tracks_individuals as i');
 		
