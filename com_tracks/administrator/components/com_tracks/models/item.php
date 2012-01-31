@@ -24,7 +24,7 @@ jimport('joomla.application.component.modeladmin');
  * @package   Tracks
  * @since 0.1
  */
-class TracksModelItem extends JModelAdmin
+abstract class TracksModelItem extends JModelAdmin
 {
 	/**
 	 * item id
@@ -291,7 +291,7 @@ class TracksModelItem extends JModelAdmin
 	public function getForm($data = array(), $loadData = true)
 	{
 		// Get the form.
-		$form = $this->loadForm('com_tracks.xxxxx', 'xxxxx',
+		$form = $this->loadForm('com_tracks.'.$this->name, $this->name,
 		array('load_data' => $loadData) );
 		if (empty($form))
 		{
@@ -309,7 +309,7 @@ class TracksModelItem extends JModelAdmin
 	protected function loadFormData()
 	{
 		// Check the session for previously entered form data.
-		$data = JFactory::getApplication()->getUserState('com_tracks.edit.xxxxx.data', array());
+		$data = JFactory::getApplication()->getUserState('com_tracks.edit.'.$this->name.'.data', array());
 		if (empty($data))
 		{
 			$data = $this->getData();
