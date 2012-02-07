@@ -141,7 +141,9 @@ class TracksFrontModelRoundResult extends baseModel
         $query =  ' SELECT sr.*, srt.name AS typename, srt.points_attribution '
                 . ' FROM #__tracks_projects_subrounds AS sr '
                 . ' INNER JOIN #__tracks_subroundtypes AS srt ON srt.id = sr.type '
-                . ' WHERE sr.projectround_id = ' . $projectround_id;
+                . ' WHERE sr.projectround_id = ' . $projectround_id
+                . '   AND sr.published = 1 '
+                ;
         if ($subroundtype_id) $query .= ' AND srt.id = ' . $subroundtype_id;
         $query .= ' ORDER BY sr.ordering ' . $ordering;
                 
