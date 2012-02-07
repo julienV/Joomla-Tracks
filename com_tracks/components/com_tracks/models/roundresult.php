@@ -71,7 +71,8 @@ class TracksFrontModelRoundResult extends baseModel
                 . ' INNER JOIN #__tracks_individuals AS i ON i.id = rr.individual_id '
                 . ' INNER JOIN #__tracks_projects_individuals AS pi ON pi.individual_id = rr.individual_id AND pi.project_id = pr.project_id '
                 . ' LEFT JOIN #__tracks_teams AS t ON t.id = rr.team_id '
-                . ' WHERE rr.subround_id = ' . $subround_id;
+                . ' WHERE rr.subround_id = ' . $subround_id
+        ;
                 
         $this->_db->setQuery( $query );
         
@@ -141,7 +142,9 @@ class TracksFrontModelRoundResult extends baseModel
         $query =  ' SELECT sr.*, srt.name AS typename, srt.points_attribution '
                 . ' FROM #__tracks_projects_subrounds AS sr '
                 . ' INNER JOIN #__tracks_subroundtypes AS srt ON srt.id = sr.type '
-                . ' WHERE sr.projectround_id = ' . $projectround_id;
+                . ' WHERE sr.projectround_id = ' . $projectround_id
+                . '   AND sr.published = 1 '
+                ;
         if ($subroundtype_id) $query .= ' AND srt.id = ' . $subroundtype_id;
         $query .= ' ORDER BY sr.ordering ' . $ordering;
                 
