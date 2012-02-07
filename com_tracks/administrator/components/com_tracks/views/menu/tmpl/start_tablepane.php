@@ -22,12 +22,14 @@ if ( $this->project->id )
 	echo $this->pane->startPanel( $this->project->name, 'projectpanel' );
   ?>
 	<table class="adminlist">
+	<!-- 
     <tr>
       <td>
       <a href="<?php echo JRoute::_( 'index.php?option=com_tracks&view=projectsettings' ); ?>"
         title="<?php echo JText::_('COM_TRACKS_SETTINGS' ); ?>"> <?php echo JText::_('COM_TRACKS_SETTINGS' ); ?></a>
       </td>
     </tr>
+     -->
 		<tr>
 			<td>
       <a href="<?php echo JRoute::_( 'index.php?option=com_tracks&view=projectrounds' ); ?>"

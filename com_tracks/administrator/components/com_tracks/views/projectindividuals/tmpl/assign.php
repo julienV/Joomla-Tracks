@@ -36,7 +36,7 @@ JHTML::_('behavior.tooltip');
   }
 </script>
 <div id="tracksmain">
-<form action="<?php echo $this->request_url; ?>" method="post" name="adminForm">
+<form action="<?php echo $this->request_url; ?>" method="post" name="adminForm" id="adminForm">
 <div id="projectsel">
 <?php echo JText::_('COM_TRACKS_Assign_to ' ) . $this->lists['projects']; ?>
 </div>

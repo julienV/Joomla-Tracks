@@ -23,7 +23,7 @@ $ordering = ($this->lists['order'] == 'obj.ordering');
 JHTML::_('behavior.tooltip');
 ?>
 <div id="tracksmain">
-<form action="<?php echo $this->request_url; ?>" method="post" name="adminForm">
+<form action="<?php echo $this->request_url; ?>" method="post" name="adminForm" id="adminForm">
 
 <div id="editcell">
 	<table class="adminlist">

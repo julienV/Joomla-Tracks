@@ -55,9 +55,16 @@ class TracksViewProjectsetting extends TracksView
     JHTML::_('behavior.tooltip');
 				
 		$object =& $this->get('data');
-		$xmlfolder = JPATH_COMPONENT.DS.'projectparameters'.DS.'default';
-    $projectparams = new JParameter( $object->settings, $xmlfolder.DS.$object->xml ); 
-    //print_r($projectparams);
+    
+		JForm::addFormPath(JPATH_COMPONENT.DS.'projectparameters'.DS.'default');
+		if (strstr($object->xml, '.xml')) {
+			$xml = substr($object->xml, 0, -4);
+		}
+		else {
+			$xml = $object->xml;
+		}
+		$projectparams = JForm::getInstance('form', $xml);
+		$projectparams->bind(array('params' => $object->settings));
     
     $this->assignRef('object', $object);
     $this->assignRef('projectparams', $projectparams);

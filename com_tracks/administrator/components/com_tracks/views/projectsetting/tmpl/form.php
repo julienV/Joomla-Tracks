@@ -48,13 +48,39 @@ defined('_JEXEC') or die('Restricted access'); ?>
 </script>
 
 <form action="index.php" method="post" name="adminForm" id="adminForm">
-	 <?php foreach ($this->projectparams->getGroups() as $key => $groups): ?>
-     <?php $gname = (strtolower($key) == '_default') ? JText::_('COM_TRACKS_General') : $key;  ?>
-        <fieldset class="adminform">
-        <legend><?php echo $gname; ?></legend>
-        <?php echo $this->projectparams->render('settings', $key); ?>
-        </fieldset>
-    <?php endforeach; ?>
+
+			<?php
+	    // Iterate through the normal form fieldsets and display each one.
+	    foreach ($this->projectparams->getFieldsets() as $fieldsets => $fieldset):
+	    ?>
+	    <fieldset class="adminform">
+	        <legend>
+	            <?php echo JText::_($fieldset->name.'_jform_fieldset_label'); ?>
+	        </legend>
+	        <dl>
+			<?php
+			// Iterate through the fields and display them.
+			foreach($this->projectparams->getFieldset($fieldset->name) as $field):
+			    // If the field is hidden, only use the input.
+			    if ($field->hidden):
+			        echo $field->input;
+			    else:
+			    ?>
+			    <dt>
+			        <?php echo $field->label; ?>
+			    </dt>
+			    <dd<?php echo ($field->type == 'Editor' || $field->type == 'Textarea') ? ' style="clear: both; margin: 0;"' : ''?>>
+			        <?php echo $field->input ?>
+			    </dd>
+			    <?php
+			    endif;
+			endforeach;
+			?>
+			</dl>
+	    </fieldset>
+	    <?php
+	    endforeach;
+	    ?>
 	
 	<?php echo JHTML::_( 'form.token' ); ?>
 	<input type="hidden" name="option" value="com_tracks" />

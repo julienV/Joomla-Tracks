@@ -23,7 +23,7 @@ JHTML::_('behavior.tooltip');
 ?>
 <div id="tracksmain">
 <form action="<?php echo $this->request_url; ?>" method="post"
-	name="adminForm">
+	name="adminForm" id="adminForm">
 <table>
 	<tr>
 		<td align="right" width="100%"><?php echo JText::_('COM_TRACKS_Filter' ); ?>: <input

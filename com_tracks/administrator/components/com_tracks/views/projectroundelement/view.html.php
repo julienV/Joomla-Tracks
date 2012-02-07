@@ -51,7 +51,7 @@ $option = JRequest::getCmd('option');
     
     $function = JRequest::getCmd('function', 'jSelectBook');
     ?>
-    <form action="index.php?option=com_tracks&amp;controller=projectround&amp;task=element&amp;tmpl=component" method="post" name="adminForm">
+    <form action="index.php?option=com_tracks&amp;controller=projectround&amp;task=element&amp;tmpl=component" method="post" name="adminForm" id="adminForm">
 
       <table>
         <tr>

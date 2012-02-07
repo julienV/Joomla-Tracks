@@ -73,7 +73,7 @@ Joomla.submitbutton = function(pressbutton)
 </table>
 </form>
 <br />
-<form action="<?php echo $this->request_url; ?>" method="post" name="adminForm">
+<form action="<?php echo $this->request_url; ?>" method="post" name="adminForm" id="adminForm">
 <div id="editcell">
 	<table class="adminlist">
 	<thead>
@@ -103,7 +103,7 @@ Joomla.submitbutton = function(pressbutton)
 				<?php echo JHTML::_('grid.sort',  'Bonus pts', 'rr.bonus_points', $this->lists['order_Dir'], $this->lists['order'] ); ?>
       </th>
 			<th width="1%" nowrap="nowrap">
-				<?php echo JHTML::_('grid.sort',  'ID', 'obj.id', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+				<?php echo JHTML::_('grid.sort',  'ID', 'rr.id', $this->lists['order_Dir'], $this->lists['order'] ); ?>
 			</th>
 		</tr>
 	</thead>
