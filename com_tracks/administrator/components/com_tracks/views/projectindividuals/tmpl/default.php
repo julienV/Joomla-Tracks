@@ -44,13 +44,13 @@ JHTML::_('behavior.tooltip');
 				<input type="checkbox" name="toggle" value="" onclick="checkAll(<?php echo count( $this->items ); ?>);" />
 			</th>
       <th width="5">
-        <?php echo JHTML::_('grid.sort',  'Number', 'obj.number', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+        <?php echo JHTML::_('grid.sort',  'COM_TRACKS_Number', 'obj.number', $this->lists['order_Dir'], $this->lists['order'] ); ?>
       </th>
 			<th class="title">
-				<?php echo JHTML::_('grid.sort',  'Name', 'i.last_name', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+				<?php echo JHTML::_('grid.sort',  'COM_TRACKS_Name', 'i.last_name', $this->lists['order_Dir'], $this->lists['order'] ); ?>
 			</th>
 			<th class="title">
-				<?php echo JHTML::_('grid.sort',  'Team', 't.name', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+				<?php echo JHTML::_('grid.sort',  'COM_TRACKS_Team', 't.name', $this->lists['order_Dir'], $this->lists['order'] ); ?>
 			</th>
 			<th width="1%" nowrap="nowrap">
 				<?php echo JHTML::_('grid.sort',  'ID', 'obj.id', $this->lists['order_Dir'], $this->lists['order'] ); ?>

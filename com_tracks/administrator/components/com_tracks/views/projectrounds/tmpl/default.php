@@ -77,7 +77,7 @@ JHTML::_('behavior.tooltip');
 				<input type="checkbox" name="toggle" value="" onclick="checkAll(<?php echo count( $this->items ); ?>);" />
 			</th>
 			<th class="title">
-				<?php echo JHTML::_('grid.sort',  'Name', 'r.name', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+				<?php echo JHTML::_('grid.sort',  'COM_TRACKS_Name', 'r.name', $this->lists['order_Dir'], $this->lists['order'] ); ?>
 			</th>
 			<th class="title">
 				<?php echo JText::_('COM_TRACKS_Sub_rounds' ); ?>

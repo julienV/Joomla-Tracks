@@ -85,22 +85,22 @@ function submitbutton(pressbutton)
 				<input type="checkbox" name="toggle" value="" onclick="checkAll(<?php echo count( $this->items ); ?>);" />
 			</th>
       <th width="5%">
-        <?php echo JHTML::_('grid.sort',  'Num.', 'pi.number', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+        <?php echo JHTML::_('grid.sort',  'COM_TRACKS_Number', 'pi.number', $this->lists['order_Dir'], $this->lists['order'] ); ?>
       </th>
 			<th class="title">
-				<?php echo JHTML::_('grid.sort',  'Participant', 'i.last_name', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+				<?php echo JHTML::_('grid.sort',  'COM_TRACKS_Participant', 'i.last_name', $this->lists['order_Dir'], $this->lists['order'] ); ?>
 			</th>
 			<th class="title">
-				<?php echo JHTML::_('grid.sort',  'Team', 't.name', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+				<?php echo JHTML::_('grid.sort',  'COM_TRACKS_Team', 't.name', $this->lists['order_Dir'], $this->lists['order'] ); ?>
 			</th>            
       <th class="title">
-        <?php echo JHTML::_('grid.sort',  'Performance', 'rr.performance', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+        <?php echo JHTML::_('grid.sort',  'COM_TRACKS_Performance', 'rr.performance', $this->lists['order_Dir'], $this->lists['order'] ); ?>
       </th>			
 			<th width="5%">
-				<?php echo JHTML::_('grid.sort',  'Rank', 'rr.rank', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+				<?php echo JHTML::_('grid.sort',  'COM_TRACKS_Rank', 'rr.rank', $this->lists['order_Dir'], $this->lists['order'] ); ?>
 			</th>    
       <th width="5%">
-				<?php echo JHTML::_('grid.sort',  'Bonus pts', 'rr.bonus_points', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+				<?php echo JHTML::_('grid.sort',  'COM_TRACKS_Bonus_points', 'rr.bonus_points', $this->lists['order_Dir'], $this->lists['order'] ); ?>
       </th>
 			<th width="1%" nowrap="nowrap">
 				<?php echo JHTML::_('grid.sort',  'ID', 'obj.id', $this->lists['order_Dir'], $this->lists['order'] ); ?>

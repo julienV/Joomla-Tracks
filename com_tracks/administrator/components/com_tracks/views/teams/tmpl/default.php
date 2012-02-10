@@ -44,7 +44,7 @@ JHTML::_('behavior.tooltip');
 				<input type="checkbox" name="toggle" value="" onclick="checkAll(<?php echo count( $this->items ); ?>);" />
 			</th>
 			<th class="title">
-				<?php echo JHTML::_('grid.sort',  'Full Name', 'obj.full_name', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+				<?php echo JHTML::_('grid.sort',  'COM_TRACKS_name', 'obj.full_name', $this->lists['order_Dir'], $this->lists['order'] ); ?>
 			</th>
 			<th width="20" nowrap="nowrap">
 				<?php echo JText::_('COM_TRACKS_Acronym' ); ?>
