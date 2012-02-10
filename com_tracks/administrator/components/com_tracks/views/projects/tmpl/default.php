@@ -46,18 +46,18 @@ JHTML::_('behavior.tooltip');
 			<th width="5"><?php echo JText::_('COM_TRACKS_NUM' ); ?></th>
 			<th width="20"><input type="checkbox" name="toggle" value=""
 				onclick="checkAll(<?php echo count( $this->items ); ?>);" /></th>
-			<th class="title" nowrap="nowrap"><?php echo JHTML::_('grid.sort',  'Name', 'p.name', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+			<th class="title" nowrap="nowrap"><?php echo JHTML::_('grid.sort',  'COM_TRACKS_Name', 'p.name', $this->lists['order_Dir'], $this->lists['order'] ); ?>
 			</th>
       <th class="title" nowrap="nowrap"><?php echo JText::_('COM_TRACKS_ALIAS'); ?></th>
-			<th class="title" nowrap="nowrap"><?php echo JHTML::_('grid.sort',  'Competition', 'l.name', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+			<th class="title" nowrap="nowrap"><?php echo JHTML::_('grid.sort',  'COM_TRACKS_Competition', 'l.name', $this->lists['order_Dir'], $this->lists['order'] ); ?>
 			</th>
-			<th class="title" nowrap="nowrap"><?php echo JHTML::_('grid.sort',  'Season', 's.name', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+			<th class="title" nowrap="nowrap"><?php echo JHTML::_('grid.sort',  'COM_TRACKS_Season', 's.name', $this->lists['order_Dir'], $this->lists['order'] ); ?>
 			</th>
-			<th width="5%" nowrap="nowrap"><?php echo JHTML::_('grid.sort',  'Published', 'p.published', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+			<th width="5%" nowrap="nowrap"><?php echo JHTML::_('grid.sort',  'COM_TRACKS_Published', 'p.published', $this->lists['order_Dir'], $this->lists['order'] ); ?>
 			</th>
 			<th width="8%" nowrap="nowrap"><?php echo JHTML::_('grid.sort',  'Order', 'p.ordering', $this->lists['order_Dir'], $this->lists['order'] ); ?>
 			<?php echo JHTML::_('grid.order',  $this->items ); ?></th>
-			<th width="1%" nowrap="nowrap"><?php echo JHTML::_('grid.sort',  'ID', 'p.id', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+			<th width="1%" nowrap="nowrap"><?php echo JHTML::_('grid.sort',  'COM_TRACKS_ID', 'p.id', $this->lists['order_Dir'], $this->lists['order'] ); ?>
 			</th>
 		</tr>
 	</thead>
