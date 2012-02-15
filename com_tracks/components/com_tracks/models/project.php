@@ -71,21 +71,24 @@ class TracksFrontModelProject extends baseModel
 				$first = reset($ranking);
 				if ($first->best_rank) // was actually ranked (for rounds not finished, all rank can be 0)
 				{ 
-					$winners[$pr] = array_slice($ranking, 0, 3);
-// 					foreach ($ranking as $r)
-// 					{
-// 						if ($r->rank == $first->rank) {
-// 							$winners[$pr][] = $r;
-// 						}
-// 						else {
-// 							break;
-// 						}						
-// 					}
+					$pwins = array();
+					$mi = 0;
+					foreach ($ranking as $r)
+					{
+						if ($mi++ > 3) {
+							break;
+						}
+						if ($r->rank <= 3 && $r->best_rank <= 3 && $r->best_rank ) {
+							$pwins[] = $r;
+						}
+					}
+					$winners[$pr] = $pwins;
 				}
 				else {
 					$winners[$pr] = false;
 				}
 			}
+// 			echo '<pre>';print_r($winners); echo '</pre>';exit;
 			return $winners;
 		}
 		else return null;
