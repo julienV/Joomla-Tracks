@@ -61,6 +61,7 @@ class TracksFrontModelSeasonwinners extends baseModel
 	public function getWinners()
 	{
 		require_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'sports'.DS.'default'.DS.'rankingtool.php');
+		$res = array();
 		
 		// get projects
 		$query = ' SELECT p.name, p.id, p.competition_id, p.season_id '
@@ -73,13 +74,8 @@ class TracksFrontModelSeasonwinners extends baseModel
 		;
 		$this->_db->setQuery($query);
 		$projects = $this->_db->loadObjectList();
-				
-		if (!count($projects)) {
-			return false;
-		}
-		
-		$res = array();
-		foreach ($projects as $project)
+						
+		foreach ((array) $projects as $project)
 		{
 			$rankingtool = new TracksRankingTool($project->id);
 			$rankings = $rankingtool->getIndividualsRankings();
