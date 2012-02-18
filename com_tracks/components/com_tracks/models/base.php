@@ -162,4 +162,10 @@ class baseModel extends JModel
 		}
 		return $this->_rankingtool;
 	}
+    
+	function getRankingToolInstance()
+	{
+		require_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'sports'.DS.'default'.DS.'rankingtool.php');
+		return new TracksRankingTool($this->_project_id);
+	}
 }

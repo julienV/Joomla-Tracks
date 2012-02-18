@@ -64,7 +64,7 @@ class TracksFrontModelProject extends baseModel
 		$winners = array();
 		if ( count( $projectround_ids ) )
 		{
-			$rankingtool = $this->_getRankingTool();
+			$rankingtool = $this->getRankingToolInstance();
 			foreach ($projectround_ids as $pr)
 			{
 				$ranking = $rankingtool->getIndividualsRankings($pr);
