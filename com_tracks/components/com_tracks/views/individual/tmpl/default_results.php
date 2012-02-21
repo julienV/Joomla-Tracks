@@ -59,7 +59,10 @@ defined('_JEXEC') or die('Restricted access'); ?>
   </thead>
   <tbody>
     <?php foreach ($project as $result): ?>
-    <tr<?php echo ($result->rank == 1 ? 'class="winner"' : ''); ?>>    
+    <?php $class = array(); ?>
+    <?php if ($result->rank == 1) $class[] = "winner"; ?>
+    <?php if ($this->useragainst && in_array($result->subround_id, $this->useragainst)) $class[] = "common"; ?>
+    <tr class="<?php echo implode(" ", $class); ?>">    
       <?php if ($this->params->get('indview_results_showteam', 1)): ?>
       <td><?php echo $result->teamname; ?></td>
       <?php endif; ?>

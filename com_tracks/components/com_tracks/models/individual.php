@@ -135,7 +135,7 @@ class TracksFrontModelIndividual extends baseModel
 		$ind = $this->getData();
 		if (!$ind->id) return null;
 		
-		$query = ' SELECT rr.rank, rr.performance, rr.bonus_points, '
+		$query = ' SELECT rr.rank, rr.performance, rr.bonus_points, rr.subround_id, '
            . '        r.name AS roundname, r.id as pr, '
 		       . '        srt.name AS subroundname, '
            . '        srt.points_attribution, '
@@ -468,6 +468,42 @@ class TracksFrontModelIndividual extends baseModel
   	$query->group('i.id');
   	$this->_db->setQuery($query);
   	$res = $this->_db->loadObjectList();
+  	
+  	return $res;
+  }
+  
+  /**
+   * returns subround ids where current user participated too
+   * 
+   * @return array
+   */
+  public function getUserParticipatedAgainst()
+  {
+  	$user = &JFactory::getUser();
+  	$ind = $this->getData();
+  	if (!$user->get('id') || $user->get('id') == $ind->user_id) {
+  		return false;
+  	}
+  	
+  	// does the user have a corresponding ind
+  	$query = ' SELECT id ' 
+  	       . ' FROM #__tracks_individuals ' 
+  	       . ' WHERE user_id = ' . $user->get('id');
+  	$this->_db->setQuery($query);
+  	$uind = $this->_db->loadResult();
+  	
+  	if (!$uind) {
+  		return false;
+  	}
+  	
+  	$query = ' SELECT rr1.subround_id '
+		       . ' FROM #__tracks_rounds_results AS rr1 ' 
+		       . ' INNER JOIN #__tracks_rounds_results AS rr2 ON rr1.subround_id = rr2.subround_id'
+		       . ' WHERE rr1.individual_id = ' . $ind->id
+		       . '   AND rr2.individual_id = ' . $uind
+		;
+  	$this->_db->setQuery($query);
+  	$res = $this->_db->loadResultArray();
   	
   	return $res;
   }
