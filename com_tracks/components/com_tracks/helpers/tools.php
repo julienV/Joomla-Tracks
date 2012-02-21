@@ -201,17 +201,66 @@ class TracksHelperTools
 		return $filtered;
 	}
 	
-	public function testStats($individual_id) 
+	/**
+	 * returns compared stats for 2 individuals
+	 * 
+	 * @param int $id1
+	 * @param int $id2
+	 * @return array
+	 */
+	public static function racervs($id1, $id2)
 	{
-		$res = array(
-		  self::getStarts($individual_id),
-		  self::getWins($individual_id),
-		  self::getPodiums($individual_id),
-		  self::getTop5($individual_id),
-		  self::getTop10($individual_id),
-		  self::getAverageFinish($individual_id),
-		);
-		return implode(" / ", $res);
+		$stats = array();
+		$stats[$id1] = self::allStats($id1);
+		$stats[$id1]->beatsother = 0;
+		$stats[$id2] = self::allStats($id2);
+		$stats[$id2]->beatsother = 0;
+		
+		// get common competitions
+		
+		$db = &JFactory::getDbo();
+		$query = ' SELECT rr1.rank AS rank1, rr2.rank AS rank2 '
+		       . ' FROM #__tracks_rounds_results AS rr1 ' 
+		       . ' INNER JOIN #__tracks_rounds_results AS rr2 ON rr1.subround_id = rr2.subround_id'
+		       . ' WHERE rr1.individual_id = ' . intval($id1)
+		       . '   AND rr2.individual_id = ' . intval($id2)
+		;
+		$db->setQuery($query);
+		$res = $db->loadObjectList();
+		foreach ((array) $res as $result)
+		{
+			if (!$result->rank1 && !$result->rank2) {
+				continue;
+			}
+			else if ($result->rank1 == $result->rank2) {
+				continue;
+			}
+			else if (!$result->rank1) {
+				$stats[$id2]->beatsother++;
+			}
+			else if (!$result->rank2) {
+				$stats[$id1]->beatsother++;
+			}
+			else if ($result->rank1 < $result->rank2) {
+				$stats[$id1]->beatsother++;
+			}
+			else {
+				$stats[$id2]->beatsother++;
+			}
+		}
+		return $stats;
+	}
+	
+	public static function allStats($individual_id) 
+	{
+		$stats = new stdclass();
+		$stats->starts  = self::getStarts($individual_id);
+		$stats->wins    = self::getWins($individual_id);
+		$stats->podiums = self::getPodiums($individual_id);
+		$stats->top5    = self::getTop5($individual_id);
+		$stats->top10   = self::getTop10($individual_id);
+		$stats->average = self::getAverageFinish($individual_id);
+		return $stats;
 	}
 	
 }
