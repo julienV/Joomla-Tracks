@@ -68,6 +68,7 @@ class TracksFrontViewIndividual extends JView
 		$this->assignRef( 'rankings',       $rankings );
 		$this->assignRef( 'params',         $params );
     $this->assignRef( 'dispatcher',     $dispatcher );
+    $this->assignRef( 'competedagainst', $this->get('competedagainst') );
 
 		parent::display($tpl);
 	}

@@ -431,4 +431,44 @@ class TracksFrontModelIndividual extends baseModel
   	$this->_db->setQuery($query);
   	$res = $this->_db->query();
   }
+  
+  /**
+   * returns all individuals the user competed against
+   * 
+   * @return array
+   */
+  public function getCompetedAgainst()
+  {
+  	$user = &JFactory::getUser();
+  	$ind = $this->getData();
+  	if (!$user->get('id') || $user->get('id') != $ind->user_id) {
+  		//return false;
+  	}
+  	  	
+  	$query = $this->_db->getQuery(true);
+  	$query->select('sr.id');
+  	$query->from('#__tracks_rounds_results AS rr');
+  	$query->join('INNER', '#__tracks_projects_subrounds AS sr ON sr.id = rr.subround_id');
+  	$query->where('rr.individual_id = '.$this->_id);
+  	$this->_db->setQuery($query);
+  	$res = $this->_db->loadResultArray();
+  	if (!$res || !count($res)) {
+  		return false;
+  	}
+  	
+  	$query = $this->_db->getQuery(true);
+  	$query->select('COUNT(i.id) AS num, i.id, i.first_name, i.last_name, i.picture_small');
+  	$query->select('CASE WHEN CHAR_LENGTH( i.alias ) THEN CONCAT_WS( \':\', i.id, i.alias ) ELSE i.id END AS slug');
+  	$query->from('#__tracks_individuals AS i');
+  	$query->join('INNER', '#__tracks_rounds_results AS rr ON rr.individual_id = i.id');
+  	$query->join('INNER', '#__tracks_projects_subrounds AS sr ON sr.id = rr.subround_id');
+  	$query->where('sr.id IN ('.implode(",", $res).')');
+  	$query->where('i.id <> '.$this->_id);
+  	$query->order(array('num DESC', 'i.last_name', 'i.first_name'));
+  	$query->group('i.id');
+  	$this->_db->setQuery($query);
+  	$res = $this->_db->loadObjectList();
+  	
+  	return $res;
+  }
 }

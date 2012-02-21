@@ -216,6 +216,17 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <?php echo $this->loadTemplate('results'); ?>
 <?php endif; ?>
 
+<?php if ($this->competedagainst && count($this->competedagainst)): ?>
+<h2><?php echo JText::_('COM_TRACKS_COMPETED_AGAINST'); ?></h2>
+<ul id="competedagainst">
+	<?php foreach ($this->competedagainst as $ind): ?>
+	<?php $text = ($ind->first_name ? $ind->first_name.' '.$ind->last_name : $ind->last_name). ' ('.$ind->num.' times)';?>
+	<?php $link = TracksHelperRoute::getIndividualRoute($ind->slug); ?>
+	<li><?php echo JHTML::link($link, $text); ?></li>
+	<?php endforeach; ?>
+</ul>
+<?php endif; ?>
+
 <p class="copyright">
   <?php echo HTMLtracks::footer( ); ?>
 </p>
