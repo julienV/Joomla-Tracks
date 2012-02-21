@@ -76,13 +76,13 @@ class TracksFrontModelIndividual extends baseModel
         } else {
           $this->_data->picture = JHTML::image(JURI::base().'media/com_tracks/images/misc/'.$nopic, $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
         }
-        
+
         if ($this->_data->picture_small != '') {
-          $this->_data->picture_small = JHTML::image(JURI::root().$this->_data->picture_small, $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
+//          $this->_data->picture_small = JHTML::image(JURI::root().$this->_data->picture_small, $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
         } else {
           $this->_data->picture_small = JHTML::image(JURI::base().'media/com_tracks/images/misc/'.$nopic, $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
         }
-        
+
         if ($this->_data->picture_background != '') {
           $this->_data->picture_background = JHTML::image(JURI::root().$this->_data->picture_background, $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
         } else {
@@ -259,12 +259,12 @@ class TracksFrontModelIndividual extends baseModel
     $table->modified_by = JFactory::getUser()->get('id');
     
     $targetpath = 'images'.DS.$params->get('default_individual_images_folder', 'tracks/individuals');
-    
+
     jimport('joomla.filesystem.file');
     jimport('joomla.filesystem.folder');
-    
+
     if ( !empty($picture['name']) )  {
-    	
+
 	    $base_Dir = JPATH_SITE.DS.$targetpath.DS;
 	    if (!JFolder::exists($base_Dir)) {
 	    	JFolder::create($base_Dir);
@@ -293,11 +293,11 @@ class TracksFrontModelIndividual extends baseModel
       //keep image if edited and left blank
       unset($table->picture);
     }//end image upload if
-    
+
     if ( !empty($picture_small['name']) )  {
 
       jimport('joomla.filesystem.file');
-      
+
       $base_Dir = JPATH_SITE.DS.$targetpath.DS.'small'.DS;
       if (!JFolder::exists($base_Dir)) {
       	JFolder::create($base_Dir);
@@ -325,9 +325,9 @@ class TracksFrontModelIndividual extends baseModel
       //keep image if edited and left blank
       unset($table->picture_small);
     }//end image upload if
-    
+
     if ( !empty($picture_background['name']) )  {
-    	
+
 	    $base_Dir = JPATH_SITE.DS.$targetpath.DS.'background'.DS;
 	    if (!JFolder::exists($base_Dir)) {
 	    	JFolder::create($base_Dir);
@@ -356,7 +356,7 @@ class TracksFrontModelIndividual extends baseModel
       //keep image if edited and left blank
       unset($table->picture_background);
     }//end image upload if
-    
+
     // Store the individual to the database
     if (!$table->save($data)) {
       $this->setError( $user->getError() );
