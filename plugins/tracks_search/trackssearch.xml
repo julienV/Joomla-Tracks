@@ -24,6 +24,10 @@
     		       size="5" default="50" 
     		       label="PLG_TRACKS_SEARCH_Search_Limit" 
     		       description="PLG_TRACKS_SEARCH_Number_of_Search_items_to_return"/>
+    		<field name="image_size" type="text" 
+    		       size="5" default="40" 
+    		       label="PLG_TRACKS_SEARCH_IMAGE_SIZE_LABEL" 
+    		       description="PLG_TRACKS_SEARCH_IMAGE_SIZE_DESC"/>
 
 			</fieldset>
 		</fields>

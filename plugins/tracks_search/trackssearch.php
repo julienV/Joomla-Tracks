@@ -35,6 +35,7 @@ class plgSearchTrackssearch extends JPlugin
 	 */
 	public function __construct(& $subject, $config)
 	{
+		include_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'lib'.DS.'JLVImageTool.php');
 		parent::__construct($subject, $config);
 		$this->loadLanguage();
 	}
@@ -148,7 +149,7 @@ class plgSearchTrackssearch extends JPlugin
 			}
 	
 			//the database query; differs per situation! It will look something like this:
-			$query = 'SELECT CONCAT_WS(", ", i.last_name, i.first_name) AS title,'
+			$query = 'SELECT CONCAT_WS(", ", i.last_name, i.first_name) AS title, picture_small, '
 			. ' CONCAT_WS( " / ", '. $db->Quote($section) .', '.$db->Quote(JText::_( 'PLG_SEARCH_TRACKS_INDIVIDUALS' )).' ) AS section,'
 	    . ' CASE WHEN CHAR_LENGTH( i.alias ) THEN CONCAT_WS( \':\', i.id, i.alias ) ELSE i.id END AS slug, '
 	    . ' NULL AS created, '
@@ -165,9 +166,9 @@ class plgSearchTrackssearch extends JPlugin
 	
 			//The 'output' of the displayed link
 			foreach($results as $key => $row) {
-				$results[$key]->href = 'index.php?option=com_tracks&view=individual&i='.$row->slug;
+				$results[$key]->href  = TracksHelperRoute::getIndividualRoute($row->slug);
+				$results[$key]->image = JLVImageTool::getThumbUrl(JPATH_SITE.DS.$row->picture_small, $this->params->get('image_size', 40));
 			}
-			
 			$rows = array_merge($rows, $results);
 		}
 				
@@ -242,7 +243,7 @@ class plgSearchTrackssearch extends JPlugin
 	
 	    //The 'output' of the displayed link
 	    foreach($results as $key => $row) {
-	      $results[$key]->href = 'index.php?option=com_tracks&view=team&t='.$row->slug;
+				$results[$key]->href  = TracksHelperRoute::getTeamRoute($row->slug);
 	    }
 	    $rows = array_merge($rows, $results);
 	  }
@@ -318,7 +319,7 @@ class plgSearchTrackssearch extends JPlugin
 	
 	    //The 'output' of the displayed link
 	    foreach($results as $key => $row) {
-	      $results[$key]->href = 'index.php?option=com_tracks&view=project&p='.$row->slug;
+				$results[$key]->href  = TracksHelperRoute::getProjectRoute($row->slug);
 	    }
 	    $rows = array_merge($rows, $results);
 	  }		

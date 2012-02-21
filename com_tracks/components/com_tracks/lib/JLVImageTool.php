@@ -235,7 +235,7 @@ class JLVImageTool {
 		$base = $app->isAdmin() ? $app->getSiteURL() : JURI::base();
 
 		if (!JFile::exists($image_path)) {
-			JError::raiseWarning(0, 'Image not found'.': '.$image_path);
+			//JError::raiseWarning(0, 'Image not found'.': '.$image_path);
 			//throw new Exception('Image not found'.': '.$image_path);
 			return false;
 		}
