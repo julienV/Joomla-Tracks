@@ -219,15 +219,42 @@ class TracksHelperTools
 		// get common competitions
 		
 		$db = &JFactory::getDbo();
-		$query = ' SELECT rr1.rank AS rank1, rr2.rank AS rank2 '
+		$query = ' SELECT rr1.rank AS rank1, rr2.rank AS rank2, srt.name, sr.projectround_id '
 		       . ' FROM #__tracks_rounds_results AS rr1 ' 
 		       . ' INNER JOIN #__tracks_rounds_results AS rr2 ON rr1.subround_id = rr2.subround_id'
+		       . ' INNER JOIN #__tracks_projects_subrounds AS sr ON sr.id = rr1.subround_id '
+		       . ' INNER JOIN #__tracks_subroundtypes AS srt ON srt.id = sr.type'
 		       . ' WHERE rr1.individual_id = ' . intval($id1)
 		       . '   AND rr2.individual_id = ' . intval($id2)
 		;
 		$db->setQuery($query);
 		$res = $db->loadObjectList();
-		foreach ((array) $res as $result)
+		
+		
+		// we need to filter the 'finals' subround when there are other subrounds
+		$rounds = array();
+		foreach ($res as $r)
+		{
+			@$rounds[$r->projectround_id][] = $r;
+		}
+		$filtered = array();
+		foreach ((array) $rounds as $round)
+		{
+			if (count($round) > 1)
+			{
+				foreach ($round as $sr)
+				{
+					if (strstr($sr->name, 'final') === false) {
+						$filtered[] = $sr;
+					}
+				}
+			}
+			else {
+				$filtered[] = $round[0];
+			}
+		}			
+		
+		foreach ((array) $filtered as $result)
 		{
 			if (!$result->rank1 && !$result->rank2) {
 				continue;

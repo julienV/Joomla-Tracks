@@ -32,9 +32,11 @@ class TracksModelIndividuals extends TracksModelList
 		$orderby	= $this->_buildContentOrderBy();
 
 		$query = ' SELECT obj.id, obj.first_name, obj.last_name, obj.alias, obj.checked_out, obj.checked_out_time, '
-      . ' u.name AS editor '
+      . ' u.name AS editor, '
+      . ' ui.name AS individual_user '
 			. ' FROM #__tracks_individuals AS obj '
 			. ' LEFT JOIN #__users AS u ON u.id = obj.checked_out '
+			. ' LEFT JOIN #__users AS ui ON ui.id = obj.user_id '
 			. $where
 			. $orderby
 		;
