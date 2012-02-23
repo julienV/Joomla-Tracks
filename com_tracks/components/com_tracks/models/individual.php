@@ -264,6 +264,9 @@ class TracksFrontModelIndividual extends baseModel
     jimport('joomla.filesystem.folder');
 
     if ( !empty($picture['name']) )  {
+    	if ($table->id) {
+    		$this->delpic();
+    	}
 
 	    $base_Dir = JPATH_SITE.DS.$targetpath.DS;
 	    if (!JFolder::exists($base_Dir)) {
@@ -295,6 +298,9 @@ class TracksFrontModelIndividual extends baseModel
     }//end image upload if
 
     if ( !empty($picture_small['name']) )  {
+    	if ($table->id) {
+    		$this->delpic('small');
+    	}
 
       jimport('joomla.filesystem.file');
 
@@ -327,6 +333,9 @@ class TracksFrontModelIndividual extends baseModel
     }//end image upload if
 
     if ( !empty($picture_background['name']) )  {
+    	if ($table->id) {
+    		$this->delpic('back');
+    	}
 
 	    $base_Dir = JPATH_SITE.DS.$targetpath.DS.'background'.DS;
 	    if (!JFolder::exists($base_Dir)) {
@@ -523,6 +532,7 @@ class TracksFrontModelIndividual extends baseModel
   	switch($type)
   	{
   		case 'back':
+  		case 'background':
   			$file = $table->picture_background;
   			$table->picture_background = '';
   			break;
