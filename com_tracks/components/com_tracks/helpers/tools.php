@@ -278,6 +278,12 @@ class TracksHelperTools
 		return $stats;
 	}
 	
+	/**
+	 * returns an object with group of stats
+	 * 
+	 * @param int $individual_id
+	 * @return object
+	 */
 	public static function allStats($individual_id) 
 	{
 		$stats = new stdclass();
@@ -290,4 +296,33 @@ class TracksHelperTools
 		return $stats;
 	}
 	
+	/**
+	 * Returns true if user has an individual, and competed against specified individual
+	 * 
+	 * @param int $id individual id
+	 * @param object $user current user if null
+	 * @return boolean
+	 */
+	public static function competedAgainst($id, $user = null)
+	{		
+		if (!$user) {
+			$user = &Jfactory::getUser();
+		}
+		if (!$user->get('id')) {
+			return false;
+		}
+		$db = &JFactory::getDbo();
+		$query = ' SELECT rr1.id '
+				       . ' FROM #__tracks_rounds_results AS rr1 ' 
+				       . ' INNER JOIN #__tracks_rounds_results AS rr2 ON rr1.subround_id = rr2.subround_id'
+				       . ' INNER JOIN #__tracks_individuals AS i ON i.id = rr2.individual_id'
+				       . ' INNER JOIN #__tracks_projects_subrounds AS sr ON sr.id = rr1.subround_id '
+				       . ' INNER JOIN #__tracks_subroundtypes AS srt ON srt.id = sr.type'
+				       . ' WHERE rr1.individual_id = ' . intval($id)
+		           . '   AND i.user_id = ' . intval($user->get('id'))
+		;
+		$db->setQuery($query, 0, 1);
+		$res = $db->loadObject();
+		return $res ? true : false;
+	}
 }
