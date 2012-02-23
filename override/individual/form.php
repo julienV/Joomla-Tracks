@@ -98,6 +98,25 @@ window.onload = function(){initialize();};
 
 
 <script language="javascript" type="text/javascript">
+
+	window.addEvent('domready', function(){
+		document.id('reset-pic').addEvent('click', function(){
+			document.id('picture').value = '';
+			document.individualform.task.value = 'delpic';
+			document.individualform.submit();
+		});
+		document.id('reset-pic_s').addEvent('click', function(){
+			document.id('picture_small').value = '';
+			document.individualform.task.value = 'delpicsmall';
+			document.individualform.submit();
+		});
+		document.id('reset-pic_b').addEvent('click', function(){
+			document.id('picture_background').value = '';
+			document.individualform.task.value = 'delpicback';
+			document.individualform.submit();
+		});
+	});
+
 	Joomla.submitbutton = function (pressbutton) {
 
 		var form = document.individualform;
@@ -291,6 +310,7 @@ window.onload = function(){initialize();};
 //  document.write('<a target="_blank" class="uibutton" href="http://xjetski.com/plugins/system/phpimageeditor/index.php?isadmin=true&imagesrc=../../../' + picture_small + '&language=en-GB">Edit</a>');
   document.write('<a target="_blank" class="uibutton" href="http://xjetski.com/phpimageeditor/index.php?c=<?php echo substr($this->object->first_name,-2); ?>&imagesrc=../' + picture_small + '&s=1&u=<?php echo $this->object->first_name; ?>">Edit</a>');
 </script>
+<button class="uibutton" id="reset-pic_s" type="button">Delete</button>
 </h1>
 
 <IMG width=100 height=12 SRC="http://xjetski.com/templates/sainttropez-fjt/images/measure_100.png"><br>
@@ -305,6 +325,7 @@ window.onload = function(){initialize();};
 //  document.write('<a target="_blank" class="uibutton" href="http://xjetski.com/plugins/system/phpimageeditor/index.php?isadmin=true&imagesrc=../../../' + picture + '&language=en-GB">Edit</a>');
   document.write('<a target="_blank" class="uibutton" href="http://xjetski.com/phpimageeditor/index.php?c=<?php echo substr($this->object->first_name,-2); ?>&imagesrc=../' + picture + '&s=2&u=<?php echo $this->object->first_name; ?>">Edit</a>');
 </script>
+<button class="uibutton" id="reset-pic" type="button">Delete</button>
 </h1>
 
 <IMG width=250 height=12 SRC="http://xjetski.com/templates/sainttropez-fjt/images/measure_250.png"><br>
@@ -319,6 +340,7 @@ window.onload = function(){initialize();};
 //  document.write('<a target="_blank" class="uibutton" href="http://xjetski.com/plugins/system/phpimageeditor/index.php?isadmin=true&imagesrc=../../../' + personalbgd + '&language=en-GB">Edit</a>');
   document.write('<a target="_blank" class="uibutton" href="http://xjetski.com/phpimageeditor/index.php?c=<?php echo substr($this->object->first_name,-2); ?>&imagesrc=../' + personalbgd + '&s=3&u=<?php echo $this->object->first_name; ?>">Edit</a>');
 </script>
+<button class="uibutton" id="reset-pic_b" type="button">Delete</button>
 </h1>
 
 <IMG width=930 height=12 SRC="http://xjetski.com/templates/sainttropez-fjt/images/measure_960.png"><br>

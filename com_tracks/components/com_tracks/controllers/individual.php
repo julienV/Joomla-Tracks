@@ -126,5 +126,53 @@ class TracksFrontControllerIndividual extends JController
   	$table->store();
   	self::display();
   }
+  
+  public function delpic()
+  {
+  	$user = &JFactory::getUser();
+  	if (!$user->get('id')) {
+  		Jerror::raiseError(403, 'not allowed');
+  	}
+  	$id = JRequest::getInt('i');
+  	if (!$id) {
+  		JError::raiseError(0, 'id is 0');
+  		return false;
+  	}
+  	$model = $this->getModel('individual');
+  	$model->delpic();
+  	$this->setRedirect( JRoute::_(TracksHelperRoute::getEditIndividualRoute($id)) , $msg );
+  }
+  
+  public function delpicsmall()
+  {
+  	$user = &JFactory::getUser();
+  	if (!$user->get('id')) {
+  		Jerror::raiseError(403, 'not allowed');
+  	}
+  	$id = JRequest::getInt('i');
+  	if (!$id) {
+  		JError::raiseError(0, 'id is 0');
+  		return false;
+  	}
+  	$model = $this->getModel('individual');
+  	$model->delpic('small');
+  	$this->setRedirect( JRoute::_(TracksHelperRoute::getEditIndividualRoute($id)) , $msg );
+  }
+  
+  public function delpicback()
+  {
+  	$user = &JFactory::getUser();
+  	if (!$user->get('id')) {
+  		Jerror::raiseError(403, 'not allowed');
+  	}
+  	$id = JRequest::getInt('i');
+  	if (!$id) {
+  		JError::raiseError(0, 'id is 0');
+  		return false;
+  	}
+  	$model = $this->getModel('individual');
+  	$model->delpic('small');
+  	$this->setRedirect( JRoute::_(TracksHelperRoute::getEditIndividualRoute($id)) , $msg );
+  }
 }
 ?>

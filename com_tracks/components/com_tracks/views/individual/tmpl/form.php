@@ -26,6 +26,24 @@ defined('_JEXEC') or die('Restricted access'); ?>
 			}				
 		});
 	});
+	
+	window.addEvent('domready', function(){
+		document.id('reset-pic').addEvent('click', function(){
+			document.id('picture').value = '';
+			document.individualform.task.value = 'delpic';
+			document.individualform.submit();
+		});
+		document.id('reset-pic_s').addEvent('click', function(){
+			document.id('picture_small').value = '';
+			document.individualform.task.value = 'delpicsmall';
+			document.individualform.submit();
+		});
+		document.id('reset-pic_b').addEvent('click', function(){
+			document.id('picture_background').value = '';
+			document.individualform.task.value = 'delpicback';
+			document.individualform.submit();
+		});
+	});
 
 	Joomla.submitbutton = function (pressbutton) {
 		var form = document.individualform;
@@ -116,6 +134,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
       <td>
         <input class="inputbox" name="picture" id="picture" type="file" />
         <?php echo $this->object->picture; ?>
+				<button class="uibutton" id="reset-pic" type="button">Delete</button>
       </td>
     </tr>
     <tr>
@@ -127,6 +146,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
       <td>
         <input class="inputbox" name="picture_small" id="picture_small" type="file" />
         <?php echo $this->object->picture_small; ?>
+				<button class="uibutton" id="reset-pic_s" type="button">Delete</button>
       </td>
     </tr>
     <tr>
@@ -138,6 +158,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
       <td>
         <input class="inputbox" name="picture_background" id="picture_background" type="file" />
         <?php echo $this->object->picture_background; ?>
+				<button class="uibutton" id="reset-pic_b" type="button">Delete</button>
       </td>
     </tr>
     <tr>

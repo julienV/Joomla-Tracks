@@ -507,4 +507,55 @@ class TracksFrontModelIndividual extends baseModel
   	
   	return $res;
   }
+  
+  public function delpic($type = '')
+  {
+		require_once (JPATH_COMPONENT_ADMINISTRATOR.DS.'tables'.DS.'individual.php');
+  	$user = &JFactory::getUser();
+		
+    $table = $this->getTable('individual');
+  	$table->load($this->_id);
+  	
+  	if (!$user->get('id') || $user->get('id') != $table->user_id) {
+  		Jerror::raiseError(403, 'not allowed');  		
+  	}
+  	
+  	switch($type)
+  	{
+  		case 'back':
+  			$file = $table->picture_background;
+  			$table->picture_background = '';
+  			break;
+  		case 'small':
+  			$file = $table->picture_small;
+  			$table->picture_small = '';
+  			break;
+  		default:
+  			$file = $table->picture;
+  			$table->picture = '';
+  	}
+  	if (!$table->store()) {
+  		$this->setError($table->getError());
+  		return false;
+  	}
+  	
+  	// remove file and thumbnails from file system too
+  	if ($file && file_exists(JPATH_SITE.DS.$file)) 
+  	{
+  		unlink($file);
+  		$thumb_key = md5(basename($file));
+  		if (file_exists(dirname(JPATH_SITE.DS.$file).DS.'small')) 
+  		{
+  			$thumbs = JFolder::files(dirname(JPATH_SITE.DS.$file).DS.'small');
+  			foreach ($thumbs as $th)
+  			{
+  				if (strpos($th, $thumb_key) === 0) {
+  					unlink(dirname(JPATH_SITE.DS.$file).DS.'small'.DS.$th);
+  				}
+  			}
+  		}
+  	}
+  	
+  	return true;
+  }
 }

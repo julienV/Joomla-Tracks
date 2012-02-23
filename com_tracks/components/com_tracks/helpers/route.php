@@ -64,7 +64,8 @@ class TracksHelperRoute
 	{
 		$parts = array( "option" => "com_tracks",
 		                "view"   => "individual",
-		                "controller" => "individual" );		
+		                "controller" => "individual",
+		                "task" => "edit" );		
 		if ($id) {
 			$parts['i'] = $id;
 		}
