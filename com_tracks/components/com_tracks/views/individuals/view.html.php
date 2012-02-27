@@ -45,11 +45,41 @@ class TracksFrontViewIndividuals extends JView
 				case 'standup':
 					$title = Jtext::_('COM_TRACKS_INDIVIDUAL_SEARCH_STANDUP_TITLE');
 					break;
+				case 'sitdown':
+					$title = Jtext::_('COM_TRACKS_INDIVIDUAL_SEARCH_SITDOWN_TITLE');
+					break;
+				case 'sport':
+					$title = Jtext::_('COM_TRACKS_INDIVIDUAL_SEARCH_SPORT_TITLE');
+					break;
+				case 'freestyle':
+					$title = Jtext::_('COM_TRACKS_INDIVIDUAL_SEARCH_FREESTYLE_TITLE');
+					break;
+				case 'freeride':
+					$title = Jtext::_('COM_TRACKS_INDIVIDUAL_SEARCH_FREERIDE_TITLE');
+					break;
 				case 'lastupdated':
 					$title = Jtext::_('COM_TRACKS_INDIVIDUAL_SEARCH_LAST_UPDATED_TITLE');
 					break;
 				case 'lastviewed':
 					$title = Jtext::_('COM_TRACKS_INDIVIDUAL_SEARCH_LAST_VIEWED_TITLE');
+					break;
+				case 'mostpopular':
+					$title = Jtext::_('COM_TRACKS_INDIVIDUAL_SEARCH_MOSTPOPULAR_TITLE');
+					break;
+				case 'mostpopularstandup':
+					$title = Jtext::_('COM_TRACKS_INDIVIDUAL_SEARCH_MOSTPOPULAR_STANDUP_TITLE');
+					break;
+				case 'mostpopularsitdown':
+					$title = Jtext::_('COM_TRACKS_INDIVIDUAL_SEARCH_MOSTPOPULAR_SITDOWN_TITLE');
+					break;
+				case 'mostpopularsport':
+					$title = Jtext::_('COM_TRACKS_INDIVIDUAL_SEARCH_MOSTPOPULAR_SPORT_TITLE');
+					break;
+				case 'mostpopularfreestyle':
+					$title = Jtext::_('COM_TRACKS_INDIVIDUAL_SEARCH_MOSTPOPULAR_FREESTYLE_TITLE');
+					break;
+				case 'mostpopularfreeride':
+					$title = Jtext::_('COM_TRACKS_INDIVIDUAL_SEARCH_MOSTPOPULAR_FREERIDE_TITLE');
 					break;
 				default:
 					$title = Jtext::_('COM_TRACKS_All_Individuals');
