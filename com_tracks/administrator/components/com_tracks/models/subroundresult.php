@@ -132,7 +132,7 @@ class TracksModelSubroundResult extends TracksModelItem
 			else 
 			{
 				if ( $row->rank != $rank[$i] 
-				  || $row->bonus_points != $pbonus_points[$i] 
+				  || $row->bonus_points != $bonus_points[$i] 
 				  || $row->performance != $performance[$i] )
 				{
           $row->rank          = $rank[$i];

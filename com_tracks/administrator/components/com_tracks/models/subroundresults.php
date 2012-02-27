@@ -134,17 +134,110 @@ class TracksModelSubroundResults extends TracksModelList
 		        . ' r.name AS roundname, '
 		        . ' srt.name AS subroundname, sr.id AS subround_id, '
             . ' p.name AS projectname '
+            . ' ,s.name AS seasonname '
 		        . ' FROM #__tracks_projects_rounds AS pr '
 		        . ' INNER JOIN #__tracks_rounds AS r ON r.id = pr.round_id '
             . ' INNER JOIN #__tracks_projects_subrounds AS sr ON sr.projectround_id = pr.id '
             . ' INNER JOIN #__tracks_subroundtypes AS srt ON sr.type = srt.id '
             . ' INNER JOIN #__tracks_projects AS p ON p.id = pr.project_id '
+            . ' INNER JOIN #__tracks_seasons AS s ON s.id = p.season_id '
             . ' WHERE sr.id=' . $this->subround_id 
             ;
 		$this->_db->setQuery( $query );
 		$res = $this->_db->loadObject();
 		//echo "debug: ";	print_r($res);exit;
 		return $res;
+	}
+	
+	public function createnews($subround_id)
+	{
+		$article = JTable::getInstance('content');
+		$this->subround_id = $subround_id;
+		
+		$info = $this->getSubroundInfo();
+		$results = $this->getData();
+		
+		$title = ($info->seasonname =='event' ?  $info->projectname :  $info->projectname .' '. $info->subroundname . '(' . $info->roundname  . ')'  ) . " report";
+		
+		$article->title = $title;
+		
+		$content = '';
+		$podium = array();
+		// results should be sorted by rank...
+		foreach ($results as $r)
+		{
+			if ($r->rank && $r->rank < 4) {
+				$podium[$r->rank][] = $r;
+			}
+		}
+		$podiumres = array();
+		foreach ($podium as $rank => $individuals)
+		{
+			$ind = array();
+			foreach ($individuals as $i) {
+				$ind[] = $i->first_name.' '.$i->last_name;
+			}
+			switch ($rank)
+			{
+				case 1:
+					$podiumres[] = count($ind) > 1 
+					             ? JText::sprintf('COM_TRACKS_XJ_ARTICLE_COME_FIRST', implode(JText::_('COM_TRACKS_XJ_ARTICLE_TIED_INDIVIDUALS_SEPARATOR'), $ind))
+					             : JText::sprintf('COM_TRACKS_XJ_ARTICLE_COMES_FIRST', implode(JText::_('COM_TRACKS_XJ_ARTICLE_TIED_INDIVIDUALS_SEPARATOR'), $ind)) ;
+					break;
+				case 2:
+					$podiumres[] = count($ind) > 1 
+					             ? JText::sprintf('COM_TRACKS_XJ_ARTICLE_COME_SECOND', implode(JText::_('COM_TRACKS_XJ_ARTICLE_TIED_INDIVIDUALS_SEPARATOR'), $ind))
+					             : JText::sprintf('COM_TRACKS_XJ_ARTICLE_COMES_SECOND', implode(JText::_('COM_TRACKS_XJ_ARTICLE_TIED_INDIVIDUALS_SEPARATOR'), $ind)) ;
+					break;
+				case 3:
+					$podiumres[] = count($ind) > 1 
+					             ? JText::sprintf('COM_TRACKS_XJ_ARTICLE_COME_THIRD', implode(JText::_('COM_TRACKS_XJ_ARTICLE_TIED_INDIVIDUALS_SEPARATOR'), $ind))
+					             : JText::sprintf('COM_TRACKS_XJ_ARTICLE_COMES_THIRD', implode(JText::_('COM_TRACKS_XJ_ARTICLE_TIED_INDIVIDUALS_SEPARATOR'), $ind)) ;
+					break;
+			}
+		}
+		$content .= '<p>'.implode(", ", $podiumres).'</p>';
+		
+		foreach ($results as $r)
+		{
+			if (strcasecmp($r->performance, 'DQ') == 0) {
+				$content .= '<p>'.$i->first_name.' '.$i->last_name.' DQ-ed</p>';
+			}
+		}
+		
+// 		echo '<pre>';print_r($content); echo '</pre>';exit;
+
+		$article->introtext = $content;
+		$article->catid = 7;
+		$article->state = 1;
+		$article->featured = 1;
+		$article->language = "*";
+		if (!$article->check()) {
+			throw new Exception($article->getError());
+		}
+		
+		if (!$article->store()) {
+			throw new Exception($article->getError());
+		}
+		
+		// then the weblink
+		require_once (JPATH_ADMINISTRATOR.DS.'components'.DS.'com_weblinks'.DS.'tables'.DS.'weblink.php');
+		require_once (JPATH_SITE.DS.'components'.DS.'com_content'.DS.'helpers'.DS.'route.php');
+		$weblink = JTable::getInstance('Weblink', 'WeblinksTable');
+		
+		$weblink->title = $title;
+		$weblink->url = JRoute::_(JURI::root().ContentHelperRoute::getArticleRoute($article->id, $article->catid));
+		$weblink->state = 1;
+		
+		if (!$weblink->check()) {
+			throw new Exception($weblink->getError());
+		}
+		
+		if (!$weblink->store()) {
+			throw new Exception($weblink->getError());
+		}
+		
+		return true;
 	}
 }
 ?>

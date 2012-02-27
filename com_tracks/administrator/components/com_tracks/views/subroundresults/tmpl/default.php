@@ -51,7 +51,7 @@ JHTML::_('behavior.tooltip');
 <script type="text/javascript">
 Joomla.submitbutton = function(pressbutton)
 {
-  if (pressbutton == "saveranks"){
+  if (pressbutton == "saveranks" || pressbutton == "saveandnews"){
   	checkAll_button( <?php echo count($this->items)-1; ?>, pressbutton );
   }
   else {

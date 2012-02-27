@@ -33,6 +33,7 @@ class TracksControllerSubroundresult extends BaseController
 		$this->registerTask( 'add',  'display' );
 		$this->registerTask( 'edit', 'display' );
 		$this->registerTask( 'apply', 'save' );
+		$this->registerTask( 'saveandnews', 'saveranks' );
 	}
   
 	function display() {
@@ -184,6 +185,12 @@ class TracksControllerSubroundresult extends BaseController
 		  $msg = 'Results saved';
 		}
 		else $msg = 'Error saving results';
+		
+		if ($this->getTask() == 'saveandnews') {
+			$mod = $this->getModel('subroundresults');
+			$mod->createnews($subround_id);
+		}
+		
 		$this->setRedirect( 'index.php?option=com_tracks&view=subroundresults&srid='.$subround_id, $msg );
 	}
 }

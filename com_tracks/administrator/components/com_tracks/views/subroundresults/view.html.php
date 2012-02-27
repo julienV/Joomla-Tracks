@@ -48,6 +48,7 @@ class TracksViewSubroundResults extends TracksView
 		//JToolBarHelper::custom('massadd', 'default', 'default', JText::_('COM_TRACKS_Mass_Add'), false);
     JToolBarHelper::custom('back', 'back.png', 'back.png', JText::_('COM_TRACKS_back'), false); 
 		JToolBarHelper::save( 'saveranks', 'Save' );
+		JToolBarHelper::save( 'saveandnews', 'Save and create news' );
 		JToolBarHelper::editListX();
 		JToolBarHelper::addNewX();
     JToolBarHelper::custom('addall', 'default', 'default', JText::_('COM_TRACKS_Add_all'), false);
