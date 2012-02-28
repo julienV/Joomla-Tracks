@@ -65,12 +65,26 @@ class TracksRankingTool extends JObject {
 	/**
 	 * Gets the project individuals ranking of whole rounds or only specified one
 	 *
-	 * @param int project round
+	 * @param int project round get only rakning for specified round id if set
+	 * @param int $from start projectround id or null
+	 * @param int $to end projectround id or null
+	 * @param boolean $strict excludes from and to if true
 	 * @return array of objects
 	 */
-	function getIndividualsRankings($projectround_id = null)
+	function getIndividualsRankings($projectround_id = null, $from = null, $to = null, $strict = false)
 	{
 		$individuals = $this->_initIndividuals();
+		
+		$selectedrounds = array();
+		$allrounds = true;
+		if ($projectround_id) {
+			$selectedrounds[] = $projectround_id;
+			$allrounds = false;
+		}
+		else if ($from || $to) {
+			$selectedrounds = array_merge($selectedrounds, $this->_getRoundsInterval($from, $to, $strict));
+			$allrounds = false;
+		}
 		
 		if ( $results = $this->_getResults() )
 		{
@@ -79,7 +93,7 @@ class TracksRankingTool extends JObject {
 				if (!isset($individuals[$r->id])) {
 					continue;
 				}
-				if ($projectround_id && $projectround_id != $r->projectround_id) {
+				if (!$allrounds && !in_array($r->projectround_id, $selectedrounds)) {
 					continue;
 				}
 				// always count the bonus points
@@ -222,7 +236,7 @@ class TracksRankingTool extends JObject {
 		if (empty($this->_results))
 		{
 			$query =  ' SELECT rr.individual_id as id, rr.rank, rr.bonus_points, rr.team_id, '
-			       . '   sr.projectround_id, srt.points_attribution '
+			       . '   sr.projectround_id, srt.points_attribution, sr.projectround_id '
 			       . ' FROM #__tracks_rounds_results AS rr '
 			       . ' INNER JOIN #__tracks_projects_subrounds AS sr ON sr.id = rr.subround_id '
 			       . ' INNER JOIN #__tracks_subroundtypes AS srt ON srt.id = sr.type '
@@ -379,5 +393,57 @@ class TracksRankingTool extends JObject {
 			return $res;
 		}
 		return strcasecmp($a->team_name, $b->team_name);
+	}
+	
+	/**
+	 * return project rounds ids between from and to 
+	 *
+	 * @param int $from start projectround id or null
+	 * @param int $to end projectround id or null
+	 * @param boolean $strict excludes from and to if true
+	 * @return array of selected project round ids
+	 */
+	protected function _getRoundsInterval($from, $to, $strict = false)
+	{
+		$query = ' SELECT pr.id, pr.ordering ' 
+		       . ' FROM #__tracks_projects_rounds AS pr ' 
+		       . ' WHERE pr.project_id = ' . $this->_project_id
+		       . ' ORDER BY pr.ordering ASC '
+		;
+		$this->_db->setQuery($query);
+		$res = $this->_db->loadObjectList();
+		
+		// start and end
+		$start = null;
+		$end = null;
+		foreach ($res as $round)
+		{
+			if ($round->id == $from) {
+				$start = $round;
+			}
+			if ($round->id == $to) {
+				$end = $round;
+			}
+		}
+		
+		// select !
+		$allowed = array();
+		foreach ($res as $round)
+		{
+			if ($strict) 
+			{
+				if ( (!$start || $start->ordering < $round->ordering) && (!$end || $end->ordering > $round->ordering) ) {
+					$allowed[] = $round->id;
+				}
+			}
+			else
+			{
+				if ( (!$start || $start->ordering <= $round->ordering) && (!$end || $end->ordering >= $round->ordering) ) {
+					$allowed[] = $round->id;
+				}
+			}
+		}
+		
+		return $allowed;
 	}
 }

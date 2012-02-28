@@ -325,4 +325,28 @@ class TracksHelperTools
 		$res = $db->loadObject();
 		return $res ? true : false;
 	}
+	
+	public static function getProjectRoundsLeader($projectid)
+	{
+		$db = &JFactory::getDbo();
+		$query = $db->getQuery(true);
+		
+		$query->select('pr.id, r.name');
+		$query->from('#__tracks_projects_rounds AS pr');
+		$query->innerjoin('#__tracks_rounds AS r On r.id = pr.round_id');
+		$query->where('pr.project_id = '.$projectid);
+		$query->order('pr.ordering ASC');
+		$db->setQuery($query);
+		$res = $db->loadObjectList();
+		
+		require_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'sports'.DS.'default'.DS.'rankingtool.php');
+		$rankingtool =  new TracksRankingTool($projectid);
+		
+		foreach ($res as $k => $round) {
+			$ranking = $rankingtool->getIndividualsRankings(null, null, $round->id);
+			$res[$k]->leader = reset($ranking);
+			echo '<p>'.$round->name.': '.$res[$k]->leader->last_name.'<p>';
+		}
+		exit;
+	}
 }

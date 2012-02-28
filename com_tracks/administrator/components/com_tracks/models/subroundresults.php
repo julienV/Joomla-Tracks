@@ -130,9 +130,9 @@ class TracksModelSubroundResults extends TracksModelList
   
 	function getSubroundInfo()
 	{		
-		$query = ' SELECT sr.projectround_id, '
+		$query = ' SELECT sr.projectround_id, p.id AS project_id, '
 		        . ' r.name AS roundname, '
-		        . ' srt.name AS subroundname, sr.id AS subround_id, '
+		        . ' srt.name AS subroundname, sr.id AS subround_id, sr.projectround_id, '
             . ' p.name AS projectname '
             . ' ,s.name AS seasonname '
 		        . ' FROM #__tracks_projects_rounds AS pr '
@@ -157,7 +157,7 @@ class TracksModelSubroundResults extends TracksModelList
 		$info = $this->getSubroundInfo();
 		$results = $this->getData();
 		
-		$title = ($info->seasonname =='event' ?  $info->projectname :  $info->projectname .' '. $info->subroundname . '(' . $info->roundname  . ')'  ) . " report";
+		$title = ($info->seasonname =='event' ?  $info->projectname :  $info->projectname .' '. $info->subroundname . ' (' . $info->roundname  . ')'  ) . " report";
 		
 		$article->title = $title;
 		
@@ -198,6 +198,23 @@ class TracksModelSubroundResults extends TracksModelList
 		}
 		$content .= '<p>'.implode(", ", $podiumres).'</p>';
 		
+		// previous leader:		
+		require_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'sports'.DS.'default'.DS.'rankingtool.php');
+		$rankingtool =  new TracksRankingTool($info->project_id);
+		$previousranking = $rankingtool->getIndividualsRankings(null, null, $info->projectround_id, true);
+		$ind = reset($previousranking);
+		$previousleader = null;
+		
+		if ($ind && $ind->rank == 1) 
+		{
+			foreach ($results as $r)
+			{
+				if ($r->individual_id == $ind->id && $r->rank > 3) {
+					$content .= '<p>'.JText::sprintf('COM_TRACKS_XJ_ARTICLE_LEADER', $r->first_name.' '.$r->last_name, $r->rank).'</p>';
+				}
+			}
+		}
+		
 		foreach ($results as $r)
 		{
 			if (strcasecmp($r->performance, 'DQ') == 0) {
@@ -205,19 +222,19 @@ class TracksModelSubroundResults extends TracksModelList
 			}
 		}
 		
-// 		echo '<pre>';print_r($content); echo '</pre>';exit;
-
 		$article->introtext = $content;
-		$article->catid = 7;
+		$article->catid = 78;
 		$article->state = 1;
 		$article->featured = 1;
 		$article->language = "*";
 		if (!$article->check()) {
-			throw new Exception($article->getError());
+			$this->setError($article->getError());
+			return false;
 		}
 		
 		if (!$article->store()) {
-			throw new Exception($article->getError());
+			$this->setError($article->getError());
+			return false;
 		}
 		
 		// then the weblink
@@ -230,11 +247,13 @@ class TracksModelSubroundResults extends TracksModelList
 		$weblink->state = 1;
 		
 		if (!$weblink->check()) {
-			throw new Exception($weblink->getError());
+			$this->setError($weblink->getError());
+			return false;
 		}
 		
 		if (!$weblink->store()) {
-			throw new Exception($weblink->getError());
+			$this->setError($weblink->getError());
+			return false;
 		}
 		
 		return true;

@@ -172,6 +172,7 @@ class TracksControllerSubroundresult extends BaseController
 		$individual = JRequest::getVar( 'individual', array(), 'post', 'array' );
 		$team = JRequest::getVar( 'team', array(), 'post', 'array' );
 		$subround_id = JRequest::getVar( 'subround_id', 0, 'post', 'int' );
+		$msgtype = 'message';
 		
 		JArrayHelper::toInteger($cid);
 		JArrayHelper::toInteger($rank);
@@ -184,14 +185,23 @@ class TracksControllerSubroundresult extends BaseController
 		if ( $model->saveranks($cid, $rank, $bonus_points, $performance, $individual, $team, $subround_id) ) {
 		  $msg = 'Results saved';
 		}
-		else $msg = 'Error saving results';
+		else {
+			$msg = 'Error saving results';
+			$msgtype = 'error';
+		}
 		
 		if ($this->getTask() == 'saveandnews') {
 			$mod = $this->getModel('subroundresults');
-			$mod->createnews($subround_id);
+			if (!$mod->createnews($subround_id)) {
+				$msg .= '<br>'.$mod->getError();
+				$msgtype = 'error';
+			}
+			else {
+				$msg .= '<br> article created';
+			}
 		}
 		
-		$this->setRedirect( 'index.php?option=com_tracks&view=subroundresults&srid='.$subround_id, $msg );
+		$this->setRedirect( 'index.php?option=com_tracks&view=subroundresults&srid='.$subround_id, $msg, $msgtype );
 	}
 }
 ?>

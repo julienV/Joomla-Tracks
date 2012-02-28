@@ -36,5 +36,11 @@ class TracksFrontController extends JController
 
 		parent::display();
 	}
+	
+	public function leaders()
+	{
+		$p = Jrequest::getInt('p');
+		TracksHelperTools::getProjectRoundsLeader($p);
+	}
 }
 ?>
