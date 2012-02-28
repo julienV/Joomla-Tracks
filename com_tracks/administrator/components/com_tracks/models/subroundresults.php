@@ -218,14 +218,14 @@ class TracksModelSubroundResults extends TracksModelList
 		foreach ($results as $r)
 		{
 			if (strcasecmp($r->performance, 'DQ') == 0) {
-				$content .= '<p>'.$i->first_name.' '.$i->last_name.' DQ-ed</p>';
+				$content .= '<p>'.$r->first_name.' '.$r->last_name.' DQ-ed</p>';
 			}
 		}
 		
 		$article->introtext = $content;
 		$article->catid = 78;
 		$article->state = 1;
-		$article->featured = 1;
+		$article->featured = 0;
 		$article->language = "*";
 		if (!$article->check()) {
 			$this->setError($article->getError());
@@ -245,6 +245,8 @@ class TracksModelSubroundResults extends TracksModelList
 		$weblink->title = $title;
 		$weblink->url = JRoute::_(JURI::root().ContentHelperRoute::getArticleRoute($article->id, $article->catid));
 		$weblink->state = 1;
+		$weblink->catid = 13;
+		$weblink->language = "*";
 		
 		if (!$weblink->check()) {
 			$this->setError($weblink->getError());
