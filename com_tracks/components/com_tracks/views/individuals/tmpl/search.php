@@ -20,6 +20,21 @@ defined('_JEXEC') or die('Restricted access');
 <!-- Title -->
 <h1><?php echo $this->title; ?></h1>
 
+<?php if ($r = $this->userindividual): ?>
+	<div class="userindividual">
+	<?php $link = JRoute::_( TracksHelperRoute::getIndividualRoute($r->slug) ); ?>
+	<A HREF="<?php echo $link ?>">
+		<?php echo ( $r->picture_small ? '<IMG style="margin-bottom:1px;" SRC="' . HTMLTracks::getIndividualThumb($r, 100) .'"><br>' : '' ) ?>
+    </A>
+	<?php if ( $r->country_code ): ?>
+	          <?php echo TracksCountries::getCountryFlag($r->country_code); ?>
+    <?php endif ?>
+    <A HREF="<?php echo $link ?>">
+		<?php echo  $r->first_name . ' ' . $r->last_name ; ?>
+	</A>
+	</div>
+<?php endif; unset($r);unset($link); ?>
+
 <ul>
 	<?php foreach ($this->rows as $r): ?>
 	<?php $link = JRoute::_( TracksHelperRoute::getIndividualRoute($r->slug) ); ?>

@@ -98,6 +98,7 @@ class TracksFrontViewIndividuals extends JView
 			$this->assignRef( 'rows',    $rows );
 			$this->assignRef( 'params',  $params );
 			$this->assignRef( 'title',   $title );
+			$this->assignRef( 'userindividual',   $this->get('CurrentUserIndividual') );
 
 			parent::display($tpl);
     }
