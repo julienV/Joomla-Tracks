@@ -242,5 +242,110 @@ class TracksModelProject extends TracksModelItem
 	{
 		return JTable::getInstance($type, $prefix, $config);
 	}
+	
+	/**
+	 * copy sepcified projects
+	 *  
+	 * @param array $cid ids of project to copy
+	 */
+	public function copy($cid)
+	{
+		$count = 0;
+		foreach ($cid as $projectid)
+		{
+			$project = &$this->getTable();
+			if (!$project->load($projectid)) {
+				$this->setError(JText::_('COM_TRACKS_UNKOWN_PROJECT').': '.$projectid);
+				return false;
+			}
+			$project->id = null;
+			$project->name = 'Copy of'.$project->name;
+			$project->alias = null;
+			$project->published = 0;
+			$project->ordering = 0;
+			
+			if (!$project->check() || !$project->store()) {
+				$this->setError($project->getError());
+				return false;				
+			}
+			
+			// now copy rounds
+			$db = &JFactory::getDbo();
+			$query = $db->getQuery(true);
+			
+			$query->select('sr.id as subround_id, sr.projectround_id');
+			$query->from('#__tracks_projects_rounds AS pr');
+			$query->innerjoin('#__tracks_projects_subrounds AS sr ON sr.projectround_id = pr.id ');
+			$query->where('pr.project_id = '.$projectid);
+			$db->setQuery($query);
+			$subrounds = $db->loadObjectList();
+			
+			// sort by round
+			$rounds = array();
+			foreach ($subrounds as $sr)
+			{
+				$rounds[$sr->projectround_id][] = $sr;
+			}
+			
+			// now do the copy
+			foreach ($rounds as $rid => $sr)
+			{
+				$round = $this->getTable('projectround');
+				if (!$round->load($rid)) {
+					$this->setError(JText::_('COM_TRACKS_UNKOWN_PROJECTROUND').': '.$rid);
+					return false;
+				}
+				$round->id = null;
+				$round->project_id = $project->id;
+				if (!$round->check() || !$round->store()) {
+					$this->setError($round->getError());
+					return false;				
+				}
+
+				foreach ($sr as $sub)
+				{
+					$subround = $this->getTable('subround');
+					if (!$subround->load($sub->subround_id)) {
+						$this->setError(JText::_('COM_TRACKS_UNKOWN_SUBROUND').': '.$rid);
+						return false;
+					}
+					$subround->id = null;
+					$subround->projectround_id = $round->id;
+					if (!$subround->check() || !$subround->store()) {
+						$this->setError($subround->getError());
+						return false;				
+					}					
+				} 
+			}
+			
+			// and last the participant
+			$db = &JFactory::getDbo();
+			$query = $db->getQuery(true);
+			
+			$query->select('pi.id');
+			$query->from('#__tracks_projects_individuals AS pi');
+			$query->where('pi.project_id = '.$projectid);
+			$db->setQuery($query);
+			$res = $db->loadResultArray();
+			
+			foreach ($res as $pi_id)
+			{
+				$participant = $this->getTable('projectindividual');
+				if (!$participant->load($pi_id)) {
+					$this->setError(JText::_('COM_TRACKS_UNKOWN_PARTICIPANT').': '.$pi_id);
+					return false;
+				}
+				$participant->id = null;
+				$participant->project_id = $project->id;
+				if (!$participant->check() || !$participant->store()) {
+					$this->setError($participant->getError());
+					return false;				
+				}					
+			}
+			
+			$count++;
+		}
+		return $count;
+	}
 }
 ?>
