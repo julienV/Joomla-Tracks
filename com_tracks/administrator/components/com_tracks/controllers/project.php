@@ -213,5 +213,25 @@ class TracksControllerProject extends BaseController
 		$msg = 'New ordering saved';
 		$this->setRedirect( 'index.php?option=com_tracks', $msg );
 	}
+	
+	/**
+	 * copy one or several projects
+	 */
+	public function copy()
+	{
+		$cid 	= JRequest::getVar( 'cid', array(), 'post', 'array' );
+		JArrayHelper::toInteger($cid);
+		
+		$msgtype = '';
+		$model = $this->getModel('project');
+		if ($nb = $model->copy($cid)) {
+			$msg = JText::sprintf('COM_TRACKS_PROJECT_COPY_SUCCESSFULL', $nb);
+		}
+		else {
+			$msg = $model->getError();
+			$msgtype = 'error';
+		}
+		$this->setRedirect( 'index.php?option=com_tracks', $msg, $msgtype );		
+	}
 }
 ?>
