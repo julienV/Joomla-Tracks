@@ -51,8 +51,13 @@ JHTML::_('behavior.tooltip');
 <script type="text/javascript">
 Joomla.submitbutton = function(pressbutton)
 {
-  if (pressbutton == "saveranks" || pressbutton == "saveandnews"){
+  if (pressbutton == "saveranks"){
   	checkAll_button( <?php echo count($this->items)-1; ?>, pressbutton );
+  }
+  else if (pressbutton == "saveandnews") {
+	  if (confirm(Joomla.JText._('COM_TRACKS_CREATE_NEWS_CONFIRM'))) {
+	  	checkAll_button( <?php echo count($this->items)-1; ?>, pressbutton );
+	  }
   }
   else {
 	  Joomla.submitform(pressbutton);

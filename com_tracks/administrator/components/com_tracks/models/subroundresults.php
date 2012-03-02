@@ -205,7 +205,7 @@ class TracksModelSubroundResults extends TracksModelList
 		$ind = reset($previousranking);
 		$previousleader = null;
 		
-		if ($ind && $ind->rank == 1) 
+		if ($ind && $ind->rank == 1 && $ind->points) 
 		{
 			foreach ($results as $r)
 			{
@@ -221,6 +221,8 @@ class TracksModelSubroundResults extends TracksModelList
 				$content .= '<p>'.$r->first_name.' '.$r->last_name.' DQ-ed</p>';
 			}
 		}
+		$fullres = TracksHelperRoute::getRoundResultRoute($info->projectround_id);
+		$content .= '<p>'.JText::sprintf('COM_TRACKS_XJ_ARTICLE_COMPLETE_RESULTS_LINK', $fullres).'</p>';
 		
 		$article->introtext = $content;
 		$article->catid = 78;
@@ -240,6 +242,16 @@ class TracksModelSubroundResults extends TracksModelList
 		// then the weblink
 		require_once (JPATH_ADMINISTRATOR.DS.'components'.DS.'com_weblinks'.DS.'tables'.DS.'weblink.php');
 		require_once (JPATH_SITE.DS.'components'.DS.'com_content'.DS.'helpers'.DS.'route.php');
+		
+		$db = &JFactory::getDbo();
+		$query = $db->getQuery(true);
+		
+		$query->select('MAX(ordering)');
+		$query->from('#__weblinks');
+		$query->group('id');
+		$db->setQuery($query);
+		$max = $db->loadResult();
+		
 		$weblink = JTable::getInstance('Weblink', 'WeblinksTable');
 		
 		$weblink->title = $title;
@@ -247,6 +259,7 @@ class TracksModelSubroundResults extends TracksModelList
 		$weblink->state = 1;
 		$weblink->catid = 13;
 		$weblink->language = "*";
+		$weblink->ordering = $max+1;
 		
 		if (!$weblink->check()) {
 			$this->setError($weblink->getError());

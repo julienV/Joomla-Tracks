@@ -21,7 +21,7 @@ class TracksHelperRoute
 	 * @param int $xref
 	 * @return url
 	 */
-	function getRoundResultRoute($id = 0)
+	public static function getRoundResultRoute($id = 0)
 	{
 		$parts = array( "option" => "com_tracks",
 		                "view"   => "roundresult" );
@@ -37,7 +37,7 @@ class TracksHelperRoute
 	 * @param int $xref
 	 * @return url
 	 */
-	function getRoundRoute($id = 0)
+	public static function getRoundRoute($id = 0)
 	{
 		$parts = array( "option" => "com_tracks",
 		                "view"   => "round" );
@@ -47,7 +47,7 @@ class TracksHelperRoute
 		return self::buildUrl( $parts );
 	}
 	
-	function getIndividualRoute($id = 0, $project = 0)
+	public static function getIndividualRoute($id = 0, $project = 0)
 	{
 		$parts = array( "option" => "com_tracks",
 		                "view"   => "individual" );		
@@ -60,7 +60,7 @@ class TracksHelperRoute
 		return self::buildUrl( $parts );
 	}
 	
-	function getEditIndividualRoute($id = 0)
+	public static function getEditIndividualRoute($id = 0)
 	{
 		$parts = array( "option" => "com_tracks",
 		                "view"   => "individual",
@@ -72,7 +72,7 @@ class TracksHelperRoute
 		return self::buildUrl( $parts );
 	}
 	
-	function getProjectRoute($id = 0)
+	public static function getProjectRoute($id = 0)
 	{
 		$parts = array( "option" => "com_tracks",
 		                "view"   => "project" );		
@@ -82,7 +82,7 @@ class TracksHelperRoute
 		return self::buildUrl( $parts );
 	}
 	
-	function getTeamRoute($id = 0, $project = 0)
+	public static function getTeamRoute($id = 0, $project = 0)
 	{
 		$parts = array( "option" => "com_tracks",
 		                "view"   => "team" );		
@@ -95,7 +95,7 @@ class TracksHelperRoute
 		return self::buildUrl( $parts );
 	}
 	
-	function getRankingRoute($id = 0)
+	public static function getRankingRoute($id = 0)
 	{
 		$parts = array( "option" => "com_tracks",
 		                "view"   => "ranking" );		
@@ -105,7 +105,7 @@ class TracksHelperRoute
 		return self::buildUrl( $parts );
 	}
 	
-	function getTeamRankingRoute($id = 0)
+	public static function getTeamRankingRoute($id = 0)
 	{
 		$parts = array( "option" => "com_tracks",
 		                "view"   => "teamranking" );		
@@ -115,7 +115,7 @@ class TracksHelperRoute
 		return self::buildUrl( $parts );
 	}
 	
-	function getIndividualsRoute($layout = null)
+	public static function getIndividualsRoute($layout = null)
 	{
 		$parts = array( "option" => "com_tracks",
 		                "view"   => "individuals" );		
@@ -125,7 +125,7 @@ class TracksHelperRoute
 		return self::buildUrl( $parts );
 	}
 	
-	function buildUrl($parts)
+	protected static function buildUrl($parts)
 	{		
 		if($item = self::_findItem($parts)) {
 			$parts['Itemid'] = $item->id;
@@ -145,10 +145,10 @@ class TracksHelperRoute
 	 *
 	 * @return int Itemid
 	 */
-	function _findItem($query)
-	{
+	protected static function _findItem($query)
+	{		
 		$component =& JComponentHelper::getComponent('com_tracks');
-		$menus	= & JSite::getMenu();
+		$menus	= & JApplication::getMenu('site');
 		$items	= $menus->getItems('component_id', $component->id);
 		$user 	= & JFactory::getUser();
 				

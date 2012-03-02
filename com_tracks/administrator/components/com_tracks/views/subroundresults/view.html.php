@@ -40,6 +40,7 @@ class TracksViewSubroundResults extends TracksView
     $document->addScript(JURI::base() . 'components/com_tracks/assets/js/quickadd1_2.js');
     $document->addStyleSheet(JURI::base() . 'components/com_tracks/assets/css/Autocompleter1_2.css');
     
+    JText::script("COM_TRACKS_CREATE_NEWS_CONFIRM");
 
 		$subround =& $this->get('SubroundInfo');
 		

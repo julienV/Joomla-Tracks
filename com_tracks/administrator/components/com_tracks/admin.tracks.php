@@ -30,6 +30,7 @@ require_once (JPATH_COMPONENT.DS.'controllers'.DS.'base.php');
 require_once(JPATH_COMPONENT.DS.'helper.php');
 require_once(JPATH_COMPONENT.DS.'helpers'.DS.'imageselect.php');
 require_once(JPATH_COMPONENT_SITE.DS.'helpers'.DS.'countries.php');
+require_once(JPATH_COMPONENT_SITE.DS.'helpers'.DS.'route.php');
 
 // and the abstract view
 require_once (JPATH_COMPONENT.DS.'abstract'.DS.'tracksview.php');
