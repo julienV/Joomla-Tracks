@@ -131,7 +131,7 @@ class TracksModelSubroundResults extends TracksModelList
 	function getSubroundInfo()
 	{		
 		$query = ' SELECT sr.projectround_id, p.id AS project_id, '
-		        . ' r.name AS roundname, '
+		        . ' r.name AS roundname, pr.comment, '
 		        . ' srt.name AS subroundname, sr.id AS subround_id, sr.projectround_id, '
             . ' p.name AS projectname '
             . ' ,s.name AS seasonname '
@@ -149,6 +149,12 @@ class TracksModelSubroundResults extends TracksModelList
 		return $res;
 	}
 	
+	/**
+	 * creates article and weblink for the subround results
+	 * 
+	 * @param id $subround_id
+	 * @return boolean true on success
+	 */
 	public function createnews($subround_id)
 	{
 		$article = JTable::getInstance('content');
@@ -157,10 +163,10 @@ class TracksModelSubroundResults extends TracksModelList
 		$info = $this->getSubroundInfo();
 		$results = $this->getData();
 		
-		$title = ($info->seasonname =='event' ?  $info->projectname :  $info->projectname .' '. $info->subroundname . ' (' . $info->roundname  . ')'  ) . " report";
-		
-		$article->title = $title;
-		
+		$title = ( $info->seasonname =='event' 
+		         ? $info->projectname 
+		         : $info->projectname .' '. $info->subroundname . ' (' . $info->roundname .($info->comment ? ' '.$info->comment : '') .')'  ) . " report";
+				
 		$content = '';
 		$podium = array();
 		// results should be sorted by rank...
@@ -224,6 +230,8 @@ class TracksModelSubroundResults extends TracksModelList
 		$fullres = TracksHelperRoute::getRoundResultRoute($info->projectround_id);
 		$content .= '<p>'.JText::sprintf('COM_TRACKS_XJ_ARTICLE_COMPLETE_RESULTS_LINK', $fullres).'</p>';
 		
+		$article->title = $title;
+		$article->alias = JFilterOutput::stringURLSafe($title);
 		$article->introtext = $content;
 		$article->catid = 78;
 		$article->state = 1;
@@ -248,7 +256,6 @@ class TracksModelSubroundResults extends TracksModelList
 		
 		$query->select('MAX(ordering)');
 		$query->from('#__weblinks');
-		$query->group('id');
 		$db->setQuery($query);
 		$max = $db->loadResult();
 		
