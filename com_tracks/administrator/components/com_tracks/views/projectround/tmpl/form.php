@@ -67,6 +67,16 @@ defined('_JEXEC') or die('Restricted access'); ?>
 				<?php echo $this->lists['rounds']; ?>
 			</td>
 		</tr>
+		<tr>
+			<td valign="top" align="right" class="key">
+				<label for="comment">
+					<?php echo JText::_('COM_TRACKS_ROUND_COMMENT' ); ?>:
+				</label>
+			</td>
+			<td>
+				<input name="comment" type="text" value="<?php echo $this->projectround->comment; ?>"/>
+			</td>
+		</tr>
         <tr>
             <td valign="top" align="right" class="key"><?php echo JText::_('COM_TRACKS_Published' ); ?>:
             </td>
