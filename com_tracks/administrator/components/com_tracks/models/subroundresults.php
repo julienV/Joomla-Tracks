@@ -168,6 +168,15 @@ class TracksModelSubroundResults extends TracksModelList
 		         : $info->projectname .' '. $info->subroundname . ' (' . $info->roundname .($info->comment ? ' '.$info->comment : '') .')'  ) . " report";
 				
 		$content = '';
+				
+		// previous leader:
+		require_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'sports'.DS.'default'.DS.'rankingtool.php');
+		$rankingtool =  new TracksRankingTool($info->project_id);
+		$previousranking = $rankingtool->getIndividualsRankings(null, null, $info->projectround_id, true);
+		$previousleader = reset($previousranking);
+		// check validity
+		$previousleader = $previousleader->rank == 1 && $previousleader->points ? $previousleader : null;
+		
 		$podium = array();
 		// results should be sorted by rank...
 		foreach ($results as $r)
@@ -180,8 +189,13 @@ class TracksModelSubroundResults extends TracksModelList
 		foreach ($podium as $rank => $individuals)
 		{
 			$ind = array();
-			foreach ($individuals as $i) {
-				$ind[] = $i->first_name.' '.$i->last_name;
+			foreach ($individuals as $i) 
+			{
+				$name = $i->first_name.' '.$i->last_name;
+				if ($previousleader->id == $i->individual_id) {
+					$name .= ' ('.JText::_('COM_TRACKS_XJ_ARTICLE_PROJECT_LEADER').')';
+				}
+				$ind[] = $name;
 			}
 			switch ($rank)
 			{
@@ -203,19 +217,12 @@ class TracksModelSubroundResults extends TracksModelList
 			}
 		}
 		$content .= '<p>'.implode(", ", $podiumres).'</p>';
-		
-		// previous leader:		
-		require_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'sports'.DS.'default'.DS.'rankingtool.php');
-		$rankingtool =  new TracksRankingTool($info->project_id);
-		$previousranking = $rankingtool->getIndividualsRankings(null, null, $info->projectround_id, true);
-		$ind = reset($previousranking);
-		$previousleader = null;
-		
-		if ($ind && $ind->rank == 1 && $ind->points) 
+				
+		if ($previousleader) 
 		{
 			foreach ($results as $r)
 			{
-				if ($r->individual_id == $ind->id && $r->rank > 3) {
+				if ($r->individual_id == $previousleader->id && $r->rank > 3) {
 					$content .= '<p>'.JText::sprintf('COM_TRACKS_XJ_ARTICLE_LEADER', $r->first_name.' '.$r->last_name, $r->rank).'</p>';
 				}
 			}
@@ -223,8 +230,18 @@ class TracksModelSubroundResults extends TracksModelList
 		
 		foreach ($results as $r)
 		{
-			if (strcasecmp($r->performance, 'DQ') == 0) {
-				$content .= '<p>'.$r->first_name.' '.$r->last_name.' DQ-ed</p>';
+			if ($r->rank == 0)
+			{
+				$name = $r->first_name.' '.$r->last_name;
+				if ($previousleader->id == $r->individual_id) {
+					$name .= ' ('.JText::_('COM_TRACKS_XJ_ARTICLE_PROJECT_LEADER').')';
+				}
+				if (strcasecmp($r->performance, 'DQ') == 0) {
+					$content .= '<p>'.$name.' DQ-ed</p>';
+				}
+				else {
+					$content .= '<p>'.$name.'...'.$r->performance.'</p>';
+				}
 			}
 		}
 		$fullres = TracksHelperRoute::getRoundResultRoute($info->projectround_id);
