@@ -293,6 +293,17 @@ class TracksHelperTools
 		$stats->top5    = self::getTop5($individual_id);
 		$stats->top10   = self::getTop10($individual_id);
 		$stats->average = self::getAverageFinish($individual_id);
+		
+		$db = &JFactory::getDbo();
+			$query =  ' SELECT i.* '
+			. ' FROM #__tracks_individuals as i '
+			. ' WHERE i.id = ' . $individual_id;
+		$db->setQuery($query);
+		$res = $db->loadObjectList();
+
+    $stats->name=$res[0]->last_name;
+    $stats->picture=$res[0]->picture;
+    
 		return $stats;
 	}
 	
@@ -338,7 +349,7 @@ class TracksHelperTools
 		$query->order('pr.ordering ASC');
 		$db->setQuery($query);
 		$res = $db->loadObjectList();
-		
+
 		require_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'sports'.DS.'default'.DS.'rankingtool.php');
 		$rankingtool =  new TracksRankingTool($projectid);
 		
@@ -349,4 +360,39 @@ class TracksHelperTools
 		}
 		exit;
 	}
+	
+  // AP
+	public static function getRiderVsRider()
+	{
+
+	$today = getdate();
+
+  $currentweek = floor(($today['yday']-57)/7); //cos we started on Mar 1;
+  $currentday = $today['yday']-57; //cos we started on Mar 1;
+
+  $rider1=array(103,5318,16,111,175);
+  $rider2=array(
+         1,1,1,3320,2441,70,5318
+        ,157,4329,733,3182,2454,1141,338
+        ,556,289,1,4,5323,526,44
+        ,50,5537,5541,227,119,1141,128
+        );
+
+    $database = &JFactory::getDbo();
+  	$sql = "select id , last_name , picture_small from #__tracks_individuals WHERE id = '$rider1[$currentweek]' limit 1";
+   		$database->setQuery( $sql );
+  	$rider1 = $database->loadObjectList();
+
+    $database = &JFactory::getDbo();
+  	$sql = "select id , last_name , picture_small from #__tracks_individuals WHERE id = '$rider2[$currentday]' limit 1";
+   		$database->setQuery( $sql );
+  	$rider2 = $database->loadObjectList();
+
+		$result = array();
+		$result[1]=$rider1[0];
+		$result[2]=$rider2[0];
+		return $result;
+	}
+	
+	
 }
