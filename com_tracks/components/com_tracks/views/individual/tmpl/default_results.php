@@ -55,6 +55,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
       <?php if ($this->params->get('indview_results_points', 1)): ?>
 	    <th><?php echo JText::_('COM_TRACKS_POINTS'); ?></th>
       <?php endif; ?>     
+      <th>Ride</th>
     </tr>
   </thead>
   <tbody>
@@ -76,6 +77,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
       <?php if ($this->params->get('indview_results_points', 1)): ?>
       <td><?php echo TracksHelperTools::getSubroundPoints($result); ?></td>
       <?php endif; ?>
+      <td><?php echo $this->rideButton($result); ?></td>
     </tr>
     <?php endforeach; ?>
   </tbody>

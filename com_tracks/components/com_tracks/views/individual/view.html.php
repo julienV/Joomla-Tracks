@@ -211,5 +211,24 @@ $option = JRequest::getCmd('option');
 
     parent::display($tpl);
   }
+  
+  public function rideButton($result)
+  {
+  	$user = &JFactory::getUser();
+  	if ($result->ride) {
+  		return JLVImageTool::modalimage($result->ride, 'ride', 16, null, 'components/com_tracks/assets/images/viewride.png');
+  	}
+  	else if ($user->get('id') && ($user->authorise('core.manage', 'com_tracks') || $this->data->user_id == $user->get('id')))
+  	{
+  		$document = JFactory::getDocument();
+			$document->addScript('components/com_tracks/assets/js/ridemodal.js');
+  		JHTML::_('behavior.modal', 'a.ride');
+  		$img = JHTML::image('components/com_tracks/assets/images/addride.png', 'ride');
+  		$attribs = array('class' => 'ride',
+			                 'rel' => "{handler: 'iframe', size: {x: 650, y: 375}}");
+  		$link = JHTML::link('index.php?option=com_tracks&controller=addride&task=add&tmpl=component&r='.$result->id, $img, $attribs);
+  		return $link;
+  	}
+  }
 }
 ?>

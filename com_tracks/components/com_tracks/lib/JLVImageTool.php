@@ -94,7 +94,7 @@ class JLVImageTool {
 				imagefill($imgB, 0, 0, $whitecolorindex);
 			}
 			imagecopyresampled($imgB, $imgA, 0, 0, 0, 0, $iNewW, $iNewH, $infos[0], $infos[1]);
-			imagegif($imgB, $save);
+			imagepng($imgB, $save);
 
 		} elseif($infos[2] == 2) {
 			/*
@@ -103,7 +103,7 @@ class JLVImageTool {
 			$imgA = imagecreatefromjpeg($file);
 			$imgB = imagecreatetruecolor($iNewW,$iNewH);
 			imagecopyresampled($imgB, $imgA, 0, 0, 0, 0, $iNewW, $iNewH, $infos[0], $infos[1]);
-			imagejpeg($imgB, $save);
+			imagepng($imgB, $save);
 
 		} elseif($infos[2] == 3) {
 			/*
@@ -186,8 +186,9 @@ class JLVImageTool {
 	 * @param string alt attribute 
 	 * @param string int maximum dimension in pixels
 	 * @param array other attributes
+	 * @param string $thumb alternate thumbnail path
 	 */
-	function modalimage($image_path, $alt, $maxdim, $attribs = array())
+	public static function modalimage($image_path, $alt, $maxdim, $attribs = array(), $thumb_path = null)
 	{
 		jimport('joomla.filesystem.file');
 		$app = &JFactory::getApplication();
@@ -203,9 +204,7 @@ class JLVImageTool {
 			$image_dir_rel = substr($image_dir_rel, 1);
 		}
 		$image_dir_rel_path = $base.str_replace("\\", "/", $image_dir_rel);
-
-		$thumb_path = self::getThumbUrl($image_path, $maxdim);
-
+		
 		JHTML::_('behavior.modal', 'a.imodal');
 		if (isset($attribs['class'])) {
 			$attribs['class'] .= ' imodal';
@@ -214,9 +213,14 @@ class JLVImageTool {
 			$attribs['class'] = 'imodal';
 		}
 		
+		if (!$thumb_path)
+		{
+			$thumb_path = self::getThumbUrl($image_path, $maxdim);	
+		}
+		
 		$thumb = JHTML::image($thumb_path, $alt, $attribs);
 		$html = JHTML::link($image_dir_rel_path.'/'.basename($image_path), $thumb, $attribs);
-
+		
 		return $html;
 	}
 

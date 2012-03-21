@@ -43,4 +43,19 @@ class TracksController extends BaseController
 		$db->setQuery($query);
 		$res = $db->query();
 	}
+	
+	public function ctride()
+	{
+		$db = JFactory::getDbo();
+		$query = ' CREATE TABLE IF NOT EXISTS `#__tracks_result_ride` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `result_id` int(11) NOT NULL,
+  `file` varchar(255) NOT NULL,
+  `comment` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `result_id` (`result_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ; ';
+		$db->setQuery($query);
+		$res = $db->query();
+	}
 }

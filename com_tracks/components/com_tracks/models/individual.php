@@ -145,6 +145,7 @@ class TracksFrontModelIndividual extends baseModel
            . '        c.name AS competitionname, '
            . '        s.name AS seasonname, '
            . '        t.name AS teamname, '
+           . '        ride.file AS ride,'
 		       . ' CASE WHEN CHAR_LENGTH( r.alias ) THEN CONCAT_WS( \':\', pr.id, r.alias ) ELSE pr.id END AS prslug, '
 		       . ' CASE WHEN CHAR_LENGTH( r.alias ) THEN CONCAT_WS( \':\', r.id, r.alias ) ELSE r.id END AS rslug '
 		       . ' FROM #__tracks_rounds_results AS rr '
@@ -155,6 +156,7 @@ class TracksFrontModelIndividual extends baseModel
 		       . ' INNER JOIN #__tracks_projects AS p ON p.id = pr.project_id'
            . ' INNER JOIN #__tracks_seasons AS s ON s.id = p.season_id'  
            . ' INNER JOIN #__tracks_competitions AS c ON c.id = p.competition_id '
+           . ' LEFT JOIN #__tracks_result_ride AS ride ON ride.result_id = rr.id '
            . ' LEFT JOIN  #__tracks_teams AS t ON t.id = rr.team_id'
            . ' WHERE rr.individual_id = ' . $this->_db->Quote($this->_id)
            . '   AND p.published AND pr.published AND psr.published '

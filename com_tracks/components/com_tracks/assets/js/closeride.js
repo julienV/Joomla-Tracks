@@ -1,0 +1,2 @@
+
+window.parent.updateRide();
