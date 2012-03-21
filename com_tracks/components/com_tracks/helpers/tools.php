@@ -417,4 +417,27 @@ class TracksHelperTools
 		return true;	
 	}
 	
+	/**
+	 * returns true if the user is a rider
+	 * @param int $user_id
+	 * @return boolean
+	 */
+	public static function isRider($user_id = null)
+	{
+		$user = JFactory::getUser($user_id);
+		
+		if (!$user->get('id')) {
+			return false;
+		}
+		
+		$db = &JFactory::getDbo();
+		$query = $db->getQuery(true);
+		
+		$query->select('id');
+		$query->from('#__tracks_individuals');
+		$query->where('user_id = '.$user->get('id'));
+		$db->setQuery($query);
+		$res = $db->loadResult();
+		return $res ? true : false;
+	}
 }
