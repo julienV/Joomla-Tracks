@@ -71,7 +71,6 @@ class TracksFrontViewIndividual extends JView
     $this->assignRef( 'competedagainst', $this->get('competedagainst') );
     $this->assignRef( 'useragainst',     $this->get('userParticipatedAgainst') );
     
-    TracksHelperTools::addUpdate($data->id, 'page was visited');
 		parent::display($tpl);
 	}
 	
