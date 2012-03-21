@@ -29,5 +29,18 @@ class TracksController extends BaseController
 		parent::display();
 		return $this;
 	}
+	
+	public function ctlast()
+	{
+		$db = JFactory::getDbo();
+		$query = ' CREATE TABLE IF NOT EXISTS `#__tracks_latest_update` (
+		  `id` int(11) NOT NULL AUTO_INCREMENT,
+		  `individual_id` int(11) NOT NULL,
+		  `text` text NOT NULL,
+		  `time` datetime NOT NULL,
+		  PRIMARY KEY (`id`)
+		) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ; ';
+		$db->setQuery($query);
+		$res = $db->query();
+	}
 }
-?>

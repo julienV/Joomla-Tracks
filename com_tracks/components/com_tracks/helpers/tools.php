@@ -394,5 +394,27 @@ class TracksHelperTools
 		return $result;
 	}
 	
+	/**
+	 * Add a 'latest updates' item to the table
+	 * 
+	 * @param int $individual_id
+	 * @param string $text
+	 * @return boolean true on sucess
+	 */
+	public static function addUpdate($individual_id, $text)
+	{
+		$db = JFactory::getDbo();
+		
+		$query = sprintf('INSERT INTO #__tracks_latest_update '
+		               . '   SET individual_id = %d, text = %s, time = NOW() ', $individual_id, $db->quote($text));
+		
+		$db->setQuery($query);
+		if (!$res = $db->query())
+		{
+			throw new Exception($db->getErrorMsg());
+		}
+		
+		return true;	
+	}
 	
 }
