@@ -34,11 +34,9 @@ class TracksFrontViewIndividual extends JView
 			$this->_displayForm($tpl);
 			return;
 		}
-		
-		$model = &$this->getModel();
-		$model->addHit();
 
 		$user   =& JFactory::getUser();
+		
 		$params = $mainframe->getParams( 'com_tracks' );
 		$document =& JFactory::getDocument();
 		
@@ -48,10 +46,21 @@ class TracksFrontViewIndividual extends JView
     JPluginHelper::importPlugin('content');
 
 		$data = & $this->get('Data');
+
+//if ( $user->name=="John Corns" )
+ //  	$raceResults = $this->sortResultsByYear($this->get('RaceResults'));
+  // 	else
 		$raceResults = $this->sortResultsByProject($this->get('RaceResults'));
+
 		$rankings = $this->get('Rankings');
 
 		$show_edit_link = ( $user->id && $user->id == $data->user_id ) || $user->authorise('core.manage', 'com_tracks');
+
+	  if (! $show_edit_link && $user->name )
+    {
+		$model = &$this->getModel();
+		$model->addHit();
+		}
 
 		$breadcrumbs =& $mainframe->getPathWay();
 		$breadcrumbs->addItem( $data->first_name . ' ' . $data->last_name,
@@ -70,7 +79,7 @@ class TracksFrontViewIndividual extends JView
     $this->assignRef( 'dispatcher',     $dispatcher );
     $this->assignRef( 'competedagainst', $this->get('competedagainst') );
     $this->assignRef( 'useragainst',     $this->get('userParticipatedAgainst') );
-    
+
 		parent::display($tpl);
 	}
 	
@@ -85,7 +94,27 @@ class TracksFrontViewIndividual extends JView
 		}
 		return $projects;
 	}
-	
+
+	function sortResultsByYear($results)
+	{
+		$projects = array();
+		if (!count($results)) return $projects;
+
+		foreach ($results AS $r)
+		{
+		if ($r->seasonname != 'event')
+ 			@$projects[$r->s][] = $r;
+		}
+
+		foreach ($results AS $r)
+		{
+		if ($r->seasonname == 'event')
+ 			@$projects[$r->r][] = $r;
+		}
+
+		return $projects;
+	}
+
 	function addOrdinalNumberSuffix($num) 
 	{
 		if (!in_array(($num % 100),array(11,12,13))){
@@ -125,8 +154,15 @@ $option = JRequest::getCmd('option');
 
     // because the application sets a default page title, we need to get it
     // right from the menu item itself
-    $params->set('page_title',  JText::_( 'COM_TRACKS_VIEW_INDIVIDUAL_TITLE' ));
-    
+    //AP REMOVED BECAUSE OF THE ERRORS USERS WERE REPORTING
+//     if (is_object( $menu )) {
+//       $menu_params = new JParameter( $menu->params );
+//       if (!$menu_params->get( 'page_title')) {
+//         $params->set('page_title',  JText::_( 'COM_TRACKS_VIEW_INDIVIDUAL_TITLE' ));
+//       }
+//     } else {
+//       $params->set('page_title',  JText::_( 'COM_TRACKS_VIEW_INDIVIDUAL_TITLE' ));
+//    }
     $document = &JFactory::getDocument();
     $document->setTitle( $params->get( 'page_title' ) );
     
@@ -157,7 +193,7 @@ $option = JRequest::getCmd('option');
     
     if (!$can_edit) {
       JError::raiseError( 403, JText::_( 'COM_TRACKS_ACCESS_FORBIDDEN' ));
-      return;  
+      return;
     }
     
     // users list

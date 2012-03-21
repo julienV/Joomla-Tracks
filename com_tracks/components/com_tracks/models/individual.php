@@ -137,6 +137,8 @@ class TracksFrontModelIndividual extends baseModel
 		
 		$query = ' SELECT rr.rank, rr.performance, rr.bonus_points, rr.subround_id, '
            . '        r.name AS roundname, r.id as pr, '
+           . '        rr.failed AS failed, '
+           . '        rr.id AS id, '
 		       . '        srt.name AS subroundname, '
            . '        srt.points_attribution, '
            . '        p.name AS projectname, p.id as project_id, '
@@ -189,7 +191,7 @@ class TracksFrontModelIndividual extends baseModel
 		$params = $app->getParams( 'com_tracks' );
 		
 		// all individual projects
-		$query = ' SELECT p.id, p.name, s.name as seasonname, c.name as competitionname, ' 
+		$query = ' SELECT p.id, p.name, s.name as seasonname, c.name as competitionname, '
 		       . ' CASE WHEN CHAR_LENGTH( p.alias ) THEN CONCAT_WS( \':\', p.id, p.alias ) ELSE p.id END AS projectslug '
 		       . ' FROM #__tracks_projects_individuals AS pi '
 		       . ' INNER JOIN #__tracks_individuals AS i ON i.id = pi.individual_id ' 
@@ -240,9 +242,9 @@ class TracksFrontModelIndividual extends baseModel
     {
     	$table->load($data['id']);
     	
-    	if ($table->user_id != $user->get('id') && !$user->authorise('core.manage', 'com_tracks')) {
-    		JError::raiseError(403, JText::_('COM_TRACKS_ACCESS_NOT_ALLOWED'));
-    	}
+     	if ($table->user_id != $user->get('id') && !$user->authorise('core.manage', 'com_tracks')) {
+     		JError::raiseError(403, JText::_('COM_TRACKS_ACCESS_NOT_ALLOWED'));
+     	}
     }
     		
     // Bind the form fields to the user table
@@ -466,14 +468,14 @@ class TracksFrontModelIndividual extends baseModel
   	}
   	
   	$query = $this->_db->getQuery(true);
-  	$query->select('COUNT(i.id) AS num, i.id, i.first_name, i.last_name, i.picture_small');
+  	$query->select('COUNT(i.id) AS num, i.id, i.first_name, i.last_name, i.picture_small, i.country_code');
   	$query->select('CASE WHEN CHAR_LENGTH( i.alias ) THEN CONCAT_WS( \':\', i.id, i.alias ) ELSE i.id END AS slug');
   	$query->from('#__tracks_individuals AS i');
   	$query->join('INNER', '#__tracks_rounds_results AS rr ON rr.individual_id = i.id');
   	$query->join('INNER', '#__tracks_projects_subrounds AS sr ON sr.id = rr.subround_id');
   	$query->where('sr.id IN ('.implode(",", $res).')');
   	$query->where('i.id <> '.$this->_id);
-  	$query->order(array('num DESC', 'i.last_name', 'i.first_name'));
+  	$query->order(array('i.first_name ASC', 'i.last_name', 'i.first_name'));
   	$query->group('i.id');
   	$this->_db->setQuery($query);
   	$res = $this->_db->loadObjectList();
@@ -526,7 +528,7 @@ class TracksFrontModelIndividual extends baseModel
   	$table->load($this->_id);
   	
   	if (!$user->get('id') || $user->get('id') != $table->user_id) {
-  		Jerror::raiseError(403, 'not allowed');  		
+//  		Jerror::raiseError(403, 'not allowed');
   	}
   	
   	switch($type)
