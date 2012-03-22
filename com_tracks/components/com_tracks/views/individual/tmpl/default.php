@@ -227,6 +227,10 @@ defined('_JEXEC') or die('Restricted access'); ?>
 </ul>
 <?php endif; ?>
 
+<?php if ($this->user->get('id') && $this->user->get('id') == $this->data->user_id): ?>
+<?php echo $this->loadTemplate('tipsfrompro'); ?>
+<?php endif; ?>
+
 <p class="copyright">
   <?php echo HTMLtracks::footer( ); ?>
 </p>

@@ -58,4 +58,21 @@ class TracksController extends BaseController
 		$db->setQuery($query);
 		$res = $db->query();
 	}
+	
+	public function cttips()
+	{
+		$db = JFactory::getDbo();
+		$query = ' CREATE TABLE IF NOT EXISTS `#__tracks_tips` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `individual_id` int(11) NOT NULL,
+  `category` varchar(100) NOT NULL,
+  `tips` text NOT NULL,
+  `time` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `individual_id` (`individual_id`),
+  KEY `category` (`category`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ; ';
+		$db->setQuery($query);
+		$res = $db->query();
+	}
 }

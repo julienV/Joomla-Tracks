@@ -572,4 +572,28 @@ class TracksFrontModelIndividual extends baseModel
   	
   	return true;
   }
+  
+  /**
+   * stores a tip from pro
+   * @param int $individual_id
+   * @param string $category
+   * @param string $tip
+   * @return boolean true on success
+   */
+  public function storeTip($individual_id, $category, $tip)
+  {
+  	$query = ' INSERT INTO #__tracks_tips ' 
+  	       . ' SET individual_id = '.$individual_id
+  	       . '   , category = '.$this->_db->Quote($category)
+  	       . '   , tips = '.$this->_db->Quote($tip)
+  	       . '   , time = NOW() '
+  	       ;
+  	$this->_db->setQuery($query);
+  	$res = $this->_db->query();
+  	if (!$res) {
+  		$this->setError($this->_db->getErrorMsg());
+  		return false;
+  	}
+  	return true;
+  }
 }

@@ -174,5 +174,45 @@ class TracksFrontControllerIndividual extends JController
   	$model->delpic('small');
   	$this->setRedirect( JRoute::_(TracksHelperRoute::getEditIndividualRoute($id)) , $msg );
   }
+  
+  /**
+   * add a tip to tips table
+   */
+  public function newtip()
+  {
+  	$category      = JRequest::getVar('category', null, 'post', 'word');
+  	$tip           = JRequest::getVar('tip', null, 'post', 'string');
+  	$individual_id = Jrequest::getInt('id');
+
+  	$msg = '';
+  	$msgtype = 'message'; 
+  	if ($category && $tip && $individual_id) 
+  	{  	
+	  	$model = $this->getModel('individual');
+	  	if (!$model->storeTip($individual_id, $category, $tip)) {
+	  		$msg = $model->getError();
+	  		$msgtype = 'error';
+	  	}
+	  	else {
+	  		$msg = JText::_('COM_TRACKS_TIPS_TIP_SAVED');
+	  	}
+  	}
+ 		$this->setRedirect(JRoute::_(TracksHelperRoute::getIndividualRoute($individual_id)), $msg, $msgtype);
+  }
+  
+	public function deltip()
+	{
+		$model = $this->getModel('Tipsfrompro');
+		$tip = JREquest::getInt('id');
+		$msg = '';
+		$msgtype = 'message';
+		if ($model->removetip($tip)) {
+			$msg = JText::_('COM_TRACKS_TIPSFROMPRO_TIP_REMOVED');
+		}
+		else {
+			$msg = $model->getError();
+			$msgtype = 'error';
+		}
+		$this->setRedirect(JRoute::_(TracksHelperRoute::getTipsRoute()), $msg, $msgtype);
+	}  
 }
-?>

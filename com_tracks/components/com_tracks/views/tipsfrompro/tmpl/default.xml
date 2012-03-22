@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+    <layout title="COM_TRACKS_DEFAULT_TIPSFROMPRO_LAYOUT">
+        <message>
+        <![CDATA[COM_TRACKS_DEFAULT_TIPSFROMPRO_LAYOUT_TIP]]>
+        </message>
+    </layout>
+    <state>
+        <name>COM_TRACKS_DEFAULT_TIPSFROMPRO_LAYOUT</name>
+        <description>COM_TRACKS_DEFAULT_TIPSFROMPRO_LAYOUT_TIP</description>
+    </state>
+    
+	<!-- Add fields to the parameters object for the layout. -->
+	<fields name="params">
+		<fieldset name="basic" label="COM_TRACKS_FIELDSET_LAYOUT_OPTIONS">
+
+		</fieldset>
+	</fields>	
+</metadata>
+

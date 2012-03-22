@@ -125,6 +125,16 @@ class TracksHelperRoute
 		return self::buildUrl( $parts );
 	}
 	
+	public static function getTipsRoute($layout = null)
+	{
+		$parts = array( "option" => "com_tracks",
+		                "view"   => "tipsfrompro" );		
+		if ($layout) {
+			$parts['layout'] = $layout;
+		}
+		return self::buildUrl( $parts );
+	}
+	
 	protected static function buildUrl($parts)
 	{		
 		if($item = self::_findItem($parts)) {

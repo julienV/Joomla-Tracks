@@ -70,6 +70,15 @@ class TracksFrontViewIndividual extends JView
 				
 		// allow content plugins
 		$data->description = JHTML::_('content.prepare', $data->description);
+		
+		$options = array(JHTML::_('select.option', 'racing', JText::_('COM_TRACKS_TIPS_SELECT_category_RACING')));
+		if (TracksHelperTools::isFreerider($data->id)) {
+			$options[] = JHTML::_('select.option', 'freeride', JText::_('COM_TRACKS_TIPS_SELECT_category_FREERIDE'));			
+		}
+		if (TracksHelperTools::isFreestyler($data->id)) {
+			$options[] = JHTML::_('select.option', 'freestyle', JText::_('COM_TRACKS_TIPS_SELECT_category_FREESTYLE'));			
+		}
+		$tipscategory = JHTML::_('select.genericlist', $options, 'category');
 
 		$this->assignRef( 'data',           $data );
 		$this->assignRef( 'show_edit_link', $show_edit_link );
@@ -79,6 +88,8 @@ class TracksFrontViewIndividual extends JView
     $this->assignRef( 'dispatcher',     $dispatcher );
     $this->assignRef( 'competedagainst', $this->get('competedagainst') );
     $this->assignRef( 'useragainst',     $this->get('userParticipatedAgainst') );
+    $this->assignRef( 'user',     $user );
+    $this->assignRef( 'tipscategory',     $tipscategory );
 
 		parent::display($tpl);
 	}
