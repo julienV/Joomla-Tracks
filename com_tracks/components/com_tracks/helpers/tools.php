@@ -458,6 +458,7 @@ class TracksHelperTools
 		$query->join('INNER', '#__tracks_projects_rounds AS pr ON pr.id = sr.projectround_id ');
 		$query->join('INNER', '#__tracks_projects AS p ON p.id = pr.project_id ');
 		$query->where('LOWER(p.name) LIKE ("%freestyle%")');
+		$query->where('i.id = '.$individual_id);
 		$db->setQuery($query, 0, 1);
 		$res = $db->loadResult();
 		return $res ? true : false;
@@ -480,6 +481,30 @@ class TracksHelperTools
 		$query->join('INNER', '#__tracks_projects_rounds AS pr ON pr.id = sr.projectround_id ');
 		$query->join('INNER', '#__tracks_projects AS p ON p.id = pr.project_id ');
 		$query->where('LOWER(p.name) LIKE ("%freeride%")');
+		$query->where('i.id = '.$individual_id);
+		$db->setQuery($query, 0, 1);
+		$res = $db->loadResult();
+		return $res ? true : false;
+	}
+	
+	/**
+	 * checks if individual competed in any Freeride project
+	 * @param int $individual_id
+	 * @return boolean
+	 */
+	public static function isRacer($individual_id)
+	{
+		$db = &JFactory::getDbo();
+		$query = $db->getQuery(true);
+		
+		$query->select('i.id');
+		$query->from('#__tracks_individuals AS i');
+		$query->join('INNER', '#__tracks_rounds_results AS rr ON rr.individual_id = i.id ');
+		$query->join('INNER', '#__tracks_projects_subrounds AS sr ON sr.id = rr.subround_id ');
+		$query->join('INNER', '#__tracks_projects_rounds AS pr ON pr.id = sr.projectround_id ');
+		$query->join('INNER', '#__tracks_projects AS p ON p.id = pr.project_id ');
+		$query->where('LOWER(p.name) NOT LIKE ("%freeride%") AND LOWER(p.name) NOT LIKE ("%freestyle%")');
+		$query->where('i.id = '.$individual_id);
 		$db->setQuery($query, 0, 1);
 		$res = $db->loadResult();
 		return $res ? true : false;

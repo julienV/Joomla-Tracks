@@ -71,11 +71,17 @@ class TracksFrontViewIndividual extends JView
 		// allow content plugins
 		$data->description = JHTML::_('content.prepare', $data->description);
 		
-		$options = array(JHTML::_('select.option', 'racing', JText::_('COM_TRACKS_TIPS_SELECT_category_RACING')));
-		if (TracksHelperTools::isFreerider($data->id)) {
+		$options = array();
+		$isfreerider  = TracksHelperTools::isFreerider($data->id);
+		$isfreestyler = TracksHelperTools::isFreestyler($data->id);
+		$isracer = TracksHelperTools::isRacer($data->id);
+		if ($isracer) {
+			$options[] = JHTML::_('select.option', 'racing', JText::_('COM_TRACKS_TIPS_SELECT_category_RACING'));			
+		}
+		if ($isfreerider) {
 			$options[] = JHTML::_('select.option', 'freeride', JText::_('COM_TRACKS_TIPS_SELECT_category_FREERIDE'));			
 		}
-		if (TracksHelperTools::isFreestyler($data->id)) {
+		if ($isfreestyler) {
 			$options[] = JHTML::_('select.option', 'freestyle', JText::_('COM_TRACKS_TIPS_SELECT_category_FREESTYLE'));			
 		}
 		$tipscategory = JHTML::_('select.genericlist', $options, 'category');
@@ -225,14 +231,22 @@ $option = JRequest::getCmd('option');
   
   public function rideButton($result)
   {
+  	JHTML::_('behavior.framework');
   	$user = &JFactory::getUser();
+  	$document = JFactory::getDocument();
+  	$document->addScript('components/com_tracks/assets/js/ridemodal.js');
+  	
+  	JText::script('COM_TRACKS_RIDE_DELETE_CONFIRM');
+  	
   	if ($result->ride) {
-  		return JLVImageTool::modalimage($result->ride, 'ride', 16, null, 'components/com_tracks/assets/images/viewride.png');
+  		$txt = JLVImageTool::modalimage($result->ride, 'ride', 16, null, 'components/com_tracks/assets/images/viewride.png');
+  		$img = JHTML::image('components/com_tracks/assets/images/removeride.png', 'remove');
+  		$attribs = array('class' => 'removeride');
+  		$txt.= JHTML::link('index.php?option=com_tracks&controller=addride&task=remove&tmpl=component&ind='.$this->data->id.'&r='.$result->id, $img, $attribs);
+  		return $txt;
   	}
   	else if ($user->get('id') && ($user->authorise('core.manage', 'com_tracks') || $this->data->user_id == $user->get('id')))
   	{
-  		$document = JFactory::getDocument();
-			$document->addScript('components/com_tracks/assets/js/ridemodal.js');
   		JHTML::_('behavior.modal', 'a.ride');
   		$img = JHTML::image('components/com_tracks/assets/images/addride.png', 'ride');
   		$attribs = array('class' => 'ride',

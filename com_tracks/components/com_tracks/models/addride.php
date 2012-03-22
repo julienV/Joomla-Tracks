@@ -58,24 +58,7 @@ class TracksFrontModelAddride extends JModel
 		}
 		
 		// remove previous file and record
-		$db = &JFactory::getDbo();
-		$query = $db->getQuery(true);
-		
-		$query->select('*');
-		$query->from('#__tracks_result_ride ');
-		$query->where('result_id = ' . $result_id);
-		$db->setQuery($query);
-		$res = $db->loadObject();
-		
-		if ($res) {
-			unlink(JPATH_SITE.DS.$res->file);
-			$query = ' DELETE FROM #__tracks_result_ride WHERE result_id = ' . $this->_db->Quote($result_id);
-			$this->_db->setQuery($query);
-			if (!$res = $this->_db->query()) {
-				$this->setError($this->_db->getErrorMsg());
-				return false;
-			}
-		}		
+		$this->remove($result_id);
 		
 		$targetpath = 'images'.DS.$params->get('default_individual_images_folder', 'tracks/individuals').DS.'rides';
 		if (!file_exists($targetpath)) {
@@ -107,5 +90,45 @@ class TracksFrontModelAddride extends JModel
 		}
 		
 		return true;
+	}
+	
+	/**
+	 * removes a ride
+	 * @param unknown_type $result_id
+	 */
+	public function remove($result_id)
+	{
+		$user = JFactory::getUser();
+		
+		$db = &JFactory::getDbo();
+		$query = $db->getQuery(true);
+		
+		$query->select('r.*');
+		$query->select('i.user_id');
+		$query->from('#__tracks_result_ride AS r');
+		$query->innerjoin('#__tracks_rounds_results AS rr ON rr.id = r.result_id');
+		$query->innerjoin('#__tracks_individuals AS i ON rr.individual_id = i.id');
+		$query->where('r.result_id = ' . $result_id);
+		$db->setQuery($query);
+		$res = $db->loadObject();
+		
+		if (!$res) {
+			$this->setError(Jtext::_('COM_TRACKS_RIDE_NOT_FOUND'));
+			return false;
+		}
+		
+		if (!$user->authorise('core.manage', 'com_tracks') && !($user->get('id') == $res->user_id)) {
+			Jerror::raiseError(403, 'ACCESS NOT ALLOWED');
+		}
+			
+		unlink(JPATH_SITE.DS.$res->file);
+		$query = ' DELETE FROM #__tracks_result_ride WHERE result_id = ' . $this->_db->Quote($result_id);
+		$this->_db->setQuery($query);
+		if (!$res = $this->_db->query()) {
+			$this->setError($this->_db->getErrorMsg());
+			return false;
+		}
+		
+		return true;		
 	}
 }

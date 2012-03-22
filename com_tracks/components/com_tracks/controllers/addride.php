@@ -62,4 +62,21 @@ class TracksFrontControllerAddride extends JController
 		$document = JFactory::getDocument();
 		$document->addScript('components/com_tracks/assets/js/closeride.js');
 	}
+	
+	public function remove()
+	{
+		$result = JRequest::getInt('r');
+		$ind = JRequest::getInt('ind');
+		$msg = '';
+		$msgtype = '';
+		$model = $this->getModel('addride');
+		if (!$model->remove($result)) {
+			$msg = $model->getError();
+			$msgtype = 'error';
+		}
+		else {
+			$msg = JText::_('COM_TRACKS_RIDE_REMOVED');
+		}
+		$this->setRedirect(TracksHelperRoute::getIndividualRoute($ind), $msg, $msgtype);
+	}
 }
