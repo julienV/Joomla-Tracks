@@ -64,7 +64,8 @@ class TracksFrontModelAddride extends JModel
 		if (!file_exists($targetpath)) {
 			JFolder::create($targetpath);
 		}
-		$final_name = md5($file['tmp_name']).'.png';
+		$ext = pathinfo($file['name']);
+		$final_name = $ext['filename'].'_'.uniqid().'.'.$ext['extension'];
 		$final_path = $targetpath.DS.$final_name;
 		
 		$maxwidth = 960;
