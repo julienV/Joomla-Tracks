@@ -29,6 +29,7 @@ class TracksFrontModelTipsfrompro extends JModelList
 	{
 		$db		= $this->getDbo();
 		$query	= $db->getQuery(true);
+		$filter_cat = JFactory::getApplication()->getParams('com_tracks')->get('category', '');
 		
 		$query->select('t.*');
 		$query->select('i.last_name, i.first_name, i.picture, i.user_id');
@@ -36,6 +37,10 @@ class TracksFrontModelTipsfrompro extends JModelList
 		$query->from('#__tracks_tips AS t');
 		$query->innerjoin('#__tracks_individuals AS i on i.id = t.individual_id');
 		$query->order('t.time DESC');
+		
+		if ($filter_cat) {
+			$query->where('t.category = '.$db->Quote($filter_cat));
+		}
 	
 		return $query;
 	}

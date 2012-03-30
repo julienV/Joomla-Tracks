@@ -13,7 +13,14 @@
 	<!-- Add fields to the parameters object for the layout. -->
 	<fields name="params">
 		<fieldset name="basic" label="COM_TRACKS_FIELDSET_LAYOUT_OPTIONS">
-
+			<field name="category" type="list" default="" 
+			       label="COM_TRACKS_FIELDSET_TIPSFROMPRO_CATEGORY_LABEL" 
+			       description="COM_TRACKS_FIELDSET_TIPSFROMPRO_CATEGORY_DESC">
+				<option value="">COM_TRACKS_FIELDSET_TIPSFROMPRO_CATEGORY_ALL</option>
+				<option value="racing">COM_TRACKS_FIELDSET_TIPSFROMPRO_CATEGORY_RACING</option>
+				<option value="freeride">COM_TRACKS_FIELDSET_TIPSFROMPRO_CATEGORY_freeride</option>
+				<option value="freestyle">COM_TRACKS_FIELDSET_TIPSFROMPRO_CATEGORY_freestyle</option>
+			</field>
 		</fieldset>
 	</fields>	
 </metadata>
