@@ -21,12 +21,12 @@ defined('_JEXEC') or die('Restricted access');
 	
 	<ul>
 	<?php foreach ($this->data as $row): ?>
-	<li><?php echo $row->text.' ('.strftime('%m/%d/%Y %H:%M').')'; ?></li>
+	<li><?php echo $row->text.' ('.strftime('%m/%d/%Y %H:%M', strtotime($row->time)).')'; ?></li>
 	<?php endforeach; ?>
 	</ul>
 	<div class="pagination">
 		<p class="counter">
-				<?php echo $this->pagination->getPagesCounter(); ?>
+			<?php echo $this->pagination->getPagesCounter(); ?>
 		</p>
 		<?php echo $this->pagination->getPagesLinks(); ?>
 	</div>

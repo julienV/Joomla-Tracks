@@ -23,7 +23,7 @@ $delimage = JHTML::image('components/com_tracks/assets/images/delete.png', 'dele
 	<?php foreach ($this->data as $row): ?>
 	<?php $indlink = JHTML::link(TracksHelperRoute::getIndividualRoute($row->islug), $row->first_name.' '.$row->last_name); ?>
 	<li>
-		<div class="protips-title"><?php echo JText::sprintf('COM_TRACKS_TIPSFROMPRO_TIP_TITLE', $indlink, $row->category, strftime('%m/%d/%Y %H:%M')); ?>
+		<div class="protips-title"><?php echo JText::sprintf('COM_TRACKS_TIPSFROMPRO_TIP_TITLE', $indlink, $row->category, strftime('%m/%d/%Y %H:%M', strtotime($row->time))); ?>
 		</div>
 		<?php if ($this->user->get('id') == $row->user_id || $this->user->authorise('core.manage', 'com_tracks')): ?>
 		<div class="tips-delete" rel="<?php echo JRoute::_('index.php?option=com_tracks&controller=individual&task=deltip&id='.$row->id); ?>"><?php echo $delimage; ?></div>
