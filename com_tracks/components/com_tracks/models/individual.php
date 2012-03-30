@@ -391,7 +391,7 @@ class TracksFrontModelIndividual extends baseModel
 			$obj->sponsor_id = $sp;
 			$obj->store();
 		}
-    
+    		
     return $this->_id;
   }
   
@@ -438,7 +438,7 @@ class TracksFrontModelIndividual extends baseModel
    * 
    */
   public function addHit()
-  {
+  {  	
   	$query = ' UPDATE #__tracks_individuals SET hits = hits+1, last_hit = NOW()'
   	       . ' WHERE id = ' . $this->_db->Quote($this->_id);
   	$this->_db->setQuery($query);

@@ -405,6 +405,26 @@ class TracksHelperTools
 	{
 		$db = JFactory::getDbo();
 		
+		if (!trim($text)) {
+			$this->setError(JTExt::_('COM_TRACKS_UPDATE_ERROR_NO_TEXT'));
+			return false;
+		}
+		
+		// first make sure it's not identical to the previous one
+		$query	= $db->getQuery(true);
+		$query->select('text');
+		$query->from($db->nameQuote('#__tracks_latest_update'));
+		$query->where('individual_id = '.intval($individual_id));
+		$query->order('id DESC');
+		$db->setQuery($query, 0, 1);
+		if ($res = $db->loadResult()) 
+		{
+			if ($res == $text) {
+				return true;
+			}
+		}
+		
+		// not the same
 		$query = sprintf('INSERT INTO #__tracks_latest_update '
 		               . '   SET individual_id = %d, text = %s, time = NOW() ', $individual_id, $db->quote($text));
 		

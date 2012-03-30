@@ -96,7 +96,7 @@ class TracksFrontViewIndividual extends JView
     $this->assignRef( 'useragainst',     $this->get('userParticipatedAgainst') );
     $this->assignRef( 'user',     $user );
     $this->assignRef( 'tipscategory',     $tipscategory );
-
+    
 		parent::display($tpl);
 	}
 	
