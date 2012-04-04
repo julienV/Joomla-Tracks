@@ -31,9 +31,9 @@ class TracksFrontModelLatestUpdates extends JModelList
 		$query	= $db->getQuery(true);
 		
 		$query->select('lu.*');
-		$query->select('i.last_name, i.first_name, i.picture');
+		$query->select('i.last_name, i.first_name, i.picture, i.picture_small');
 		$query->from('#__tracks_latest_update AS lu');
-		$query->innerjoin('#__tracks_individuals AS i on i.id = lu.individual_id');
+		$query->join('LEFT' ,'#__tracks_individuals AS i on i.id = lu.individual_id');
 		$query->order('lu.time DESC');
 	
 		return $query;

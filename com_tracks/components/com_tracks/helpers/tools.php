@@ -397,11 +397,11 @@ class TracksHelperTools
 	/**
 	 * Add a 'latest updates' item to the table
 	 * 
-	 * @param int $individual_id
 	 * @param string $text
+	 * @param boolean $logindividual log individual id 
 	 * @return boolean true on sucess
 	 */
-	public static function addUpdate($individual_id, $text)
+	public static function addUpdate($text, $logindividual = 1)
 	{
 		$db = JFactory::getDbo();
 		
@@ -410,6 +410,8 @@ class TracksHelperTools
 			return false;
 		}
 		
+		$individual_id = $loguser ? self::getIndividualId() : 0;
+				
 		// first make sure it's not identical to the previous one
 		$query	= $db->getQuery(true);
 		$query->select('text');
@@ -438,9 +440,9 @@ class TracksHelperTools
 	}
 	
 	/**
-	 * returns true if the user is a rider
+	 * returns individual id if the user is a rider
 	 * @param int $user_id
-	 * @return boolean
+	 * @return int individual 
 	 */
 	public static function isRider($user_id = null)
 	{
@@ -458,7 +460,18 @@ class TracksHelperTools
 		$query->where('user_id = '.$user->get('id'));
 		$db->setQuery($query);
 		$res = $db->loadResult();
-		return $res ? true : false;
+		return $res ? $res : 0;
+	}
+	
+	/**
+	 * returns individual id if the user is a rider
+	 * @param int $user_id
+	 * @return int individual 
+	 */
+	public static function getIndividualId($user_id = null)
+	{
+		$res = self::isRider();
+		return $res ? $res : 0;
 	}
 	
 	/**
