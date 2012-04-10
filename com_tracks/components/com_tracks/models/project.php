@@ -83,7 +83,7 @@ class TracksFrontModelProject extends baseModel
 					}
 				}
 				else {
-					$winners[$pr] = false;
+					$winners[$pr] = array();
 				}
 			}
 			return $winners;
@@ -123,11 +123,14 @@ class TracksFrontModelProject extends baseModel
 				$projectround_ids[] = $r->projectround_id;
 			}
 			$winners = $this->getWinners( $projectround_ids );
-			 
+			
 			foreach ( $results as $k => $r )
 			{
 				if ( isset( $winners[$r->projectround_id] ) ) {
 					$results[$k]->winner = $winners[$r->projectround_id];
+				}
+				else {
+					$results[$k]->winner = array();
 				}
 			}
 			return $results;
