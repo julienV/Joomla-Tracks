@@ -370,12 +370,14 @@ class TracksHelperTools
   $currentweek = floor(($today['yday']-57)/7); //cos we started on Mar 1;
   $currentday = $today['yday']-57; //cos we started on Mar 1;
 
-  $rider1=array(103,5318,16,111,175);
+  $rider1=array(103,5318,16,111,175,4492);
   $rider2=array(
          1,1,1,3320,2441,70,5318
         ,157,4329,733,3182,2454,1141,338
         ,556,289,1,4,5323,526,44
-        ,50,5537,5541,227,119,1141,128
+        ,50,5537,5541,227,119,1141,128,
+        157,1125,5175,5568,4024,338,214,
+        1896,5350,4034,3410,5541,3182,2433
         );
 
     $database = &JFactory::getDbo();
@@ -393,7 +395,6 @@ class TracksHelperTools
 		$result[2]=$rider2[0];
 		return $result;
 	}
-	
 	/**
 	 * Add a 'latest updates' item to the table
 	 * 
@@ -410,7 +411,7 @@ class TracksHelperTools
 			return false;
 		}
 		
-		$individual_id = $loguser ? self::getIndividualId() : 0;
+		$individual_id = $logindividual ? self::getIndividualId() : 0;
 				
 		// first make sure it's not identical to the previous one
 		$query	= $db->getQuery(true);
@@ -436,13 +437,21 @@ class TracksHelperTools
 			throw new Exception($db->getErrorMsg());
 		}
 		
+		// house keeping
+		$query = 'DELETE FROM #__tracks_latest_update WHERE DATEDIFF(NOW(), time) > 3';
+		$db->setQuery($query);
+		if (!$res = $db->query())
+		{
+			throw new Exception($db->getErrorMsg());
+		}
+		
 		return true;	
 	}
 	
 	/**
-	 * returns individual id if the user is a rider
+	 * returns true if the user is a rider
 	 * @param int $user_id
-	 * @return int individual 
+	 * @return boolean
 	 */
 	public static function isRider($user_id = null)
 	{
@@ -519,7 +528,7 @@ class TracksHelperTools
 		$res = $db->loadResult();
 		return $res ? true : false;
 	}
-	
+
 	/**
 	 * checks if individual competed in any Freeride project
 	 * @param int $individual_id
@@ -542,4 +551,5 @@ class TracksHelperTools
 		$res = $db->loadResult();
 		return $res ? true : false;
 	}
+
 }
