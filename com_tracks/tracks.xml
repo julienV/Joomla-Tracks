@@ -42,6 +42,7 @@
         <folder>css</folder>
         <folder>helpers</folder>
         <folder>language</folder>
+        <folder>lib</folder>
 			  <folder>models</folder>
 			  <folder>sports</folder>
 			  <folder>views</folder>
