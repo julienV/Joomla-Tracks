@@ -52,39 +52,31 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 <div id="tracksmain">
 <form action="index.php" method="post" name="adminForm" id="adminForm">
-<div class="col50">
+<div class="width-50">
 	<fieldset class="adminform">
 		<legend><?php echo JText::_('COM_TRACKS_Season' ); ?></legend>
 
-		<table class="admintable">
-		<tr>
-			<td width="100" align="right" class="key">
+		<ul class="adminformlist">
+			<li>
 				<label for="name">
 					<?php echo JText::_('COM_TRACKS_Name' ); ?>:
 				</label>
-			</td>
-			<td>
 				<input class="text_area required" type="text" name="name" id="name" size="32" maxlength="250" value="<?php echo $this->season->name?>" />
-			</td>
-		</tr>
-	  <tr>
-	    <td width="100" align="right" class="key"><label for="alias"> <?php echo JText::_('COM_TRACKS_Alias' ); ?>:
-	    </label></td>
-	    <td><input class="text_area" type="text" name="alias" id="alias"
+			</li>
+			<li>		
+				<label for="alias"> <?php echo JText::_('COM_TRACKS_Alias' ); ?>:</label>
+				<input class="text_area" type="text" name="alias" id="alias"
 	      size="32" maxlength="250" value="<?php echo $this->season->alias?>" />
-	    </td>
-	  </tr>
-		<tr>
-			<td valign="top" align="right" class="key"><?php echo JText::_('COM_TRACKS_Published' ); ?>:
-			</td>
-			<td><?php echo $this->lists['published']; ?></td>
-		</tr>
-		<tr>
-			<td valign="top" align="right" class="key"><label for="ordering"> <?php echo JText::_('COM_TRACKS_Ordering' ); ?>:
-			</label></td>
-			<td><?php echo $this->lists['ordering']; ?></td>
-		</tr>
-  </table>
+			</li>
+			<li>
+				<label for="published"><?php echo JText::_('COM_TRACKS_Published' ); ?>:</label>
+			<?php echo $this->lists['published']; ?>
+			</li>
+			<li>		
+				<label for="ordering"> <?php echo JText::_('COM_TRACKS_Ordering' ); ?>:</label>
+				<?php echo $this->lists['ordering']; ?>
+			</li>
+		</ul>					
 	</fieldset>
 </div>
 

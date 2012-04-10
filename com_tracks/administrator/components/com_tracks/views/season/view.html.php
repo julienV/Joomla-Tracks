@@ -86,7 +86,11 @@ class TracksViewSeason extends JView
 		$lists['ordering'] 			= JHTML::_('list.specificordering',  $season, $season->id, $query, 1 );
 
 		// build the html select list
-		$lists['published'] 		= JHTML::_('select.booleanlist',  'published', 'class="inputbox"', $season->published );
+		$arr = array(
+			JHtml::_('select.option', '0', JText::_('JNO')),
+			JHtml::_('select.option', '1', JText::_('JYES'))
+		);
+		$lists['published'] 		= JHTML::_('select.genericlist',  $arr,'published', 'class="inputbox"', 'value', 'text', $season->published );
 
 		$this->assignRef('lists',		$lists);
 		$this->assignRef('season',		$season);

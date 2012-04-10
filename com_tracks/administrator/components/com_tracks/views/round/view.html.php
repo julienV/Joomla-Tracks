@@ -81,7 +81,12 @@ class TracksViewRound extends TracksView
         $lists['ordering']          = JHTML::_('list.specificordering',  $object, $object->id, $query, 1 );
 		
         // build the html radio for publish
-        $lists['published']         = JHTML::_('select.booleanlist',  'published', 'class="inputbox"', $object->published );
+		// build the html select list
+		$arr = array(
+			JHtml::_('select.option', '0', JText::_('JNO')),
+			JHtml::_('select.option', '1', JText::_('JYES'))
+		);
+		$lists['published'] 		= JHTML::_('select.genericlist',  $arr,'published', 'class="inputbox"', 'value', 'text', $object->published );
         
 		//editor
 		$editor =& JFactory::getEditor();

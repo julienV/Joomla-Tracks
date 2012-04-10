@@ -52,48 +52,37 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 <div id="tracksmain">
 <form action="index.php" method="post" name="adminForm" id="adminForm">
-<div class="col50">
+<div class="width-70">
 <fieldset class="adminform"><legend><?php echo JText::_('COM_TRACKS_Round' ); ?></legend>
 
-<table class="admintable">
-	<tr>
-		<td width="100" align="right" class="key">
-			<label for="name"> <?php echo JText::_('COM_TRACKS_Name' ); ?>:
-			</label>
-		</td>
-		<td><input class="text_area required" type="text" name="name" id="name"
+	<ul class="adminformlist">
+		<li>
+			<label for="name"> <?php echo JText::_('COM_TRACKS_Name' ); ?>:</label>
+			<input class="text_area required" type="text" name="name" id="name"
 			size="32" maxlength="40" value="<?php echo $this->object->name?>" />
-		</td>
-	</tr>
-  <tr>
-    <td width="100" align="right" class="key"><label for="alias"> <?php echo JText::_('COM_TRACKS_Alias' ); ?>:
-    </label></td>
-    <td><input class="text_area" type="text" name="alias" id="alias"
+		</li>
+		<li>
+			<label for="alias"> <?php echo JText::_('COM_TRACKS_Alias' ); ?>:
+    </label>
+    <input class="text_area" type="text" name="alias" id="alias"
       size="32" maxlength="250" value="<?php echo $this->object->alias?>" />
-    </td>
-  </tr>
-    <tr>
-        <td valign="top" align="right" class="key"><?php echo JText::_('COM_TRACKS_Published' ); ?>:
-        </td>
-        <td><?php echo $this->lists['published']; ?></td>
-    </tr>
-	<tr>
-		<td width="100" align="right" class="key">
-			<label for="description"> <?php echo JText::_('COM_TRACKS_Description' ); ?>:
-			</label>
-		</td>
-		<td><?php echo $this->editor->display('description', $this->object->description, '600', '400', '70', '15'); ?>
-		</td>
-	</tr>
-	<tr>
-		<td valign="top" align="right" class="key">
+		</li>
+		<li>
+			<label for="published"><?php echo JText::_('COM_TRACKS_Published' ); ?>:</label>
+      <?php echo $this->lists['published']; ?>
+		</li>
+		<li>
 			<label for="ordering">
 			  <?php echo JText::_('COM_TRACKS_Ordering' ); ?>:
 			</label>
-		</td>
-		<td><?php echo $this->lists['ordering']; ?></td>
-	</tr>
-</table>
+			<?php echo $this->lists['ordering']; ?>
+		</li>
+		<li>
+			<label for="description"> <?php echo JText::_('COM_TRACKS_Description' ); ?>:
+			</label>
+			<?php echo $this->editor->display('description', $this->object->description, '100%', '400', '70', '15'); ?>
+		</li>
+	</ul>
 </fieldset>
 </div>
 

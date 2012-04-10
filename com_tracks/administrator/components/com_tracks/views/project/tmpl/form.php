@@ -56,92 +56,62 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 <div id="tracksmain">
 <form action="index.php" method="post" name="adminForm" id="adminForm">
-<div class="col50">
+	<div class="width-60 fltlft">
 	<fieldset class="adminform">
 		<legend><?php echo JText::_('COM_TRACKS_General' ); ?></legend>
 
-		<table class="admintable">
-		<tr>
-			<td width="100" align="right" class="key">
+		<ul class="adminformlist">
+			<li>
 				<label for="name">
 					<?php echo JText::_('COM_TRACKS_Name' ); ?>:
 				</label>
-			</td>
-			<td>
 				<input class="text_area required" type="text" name="name" id="name" size="32" maxlength="250" value="<?php echo $this->project->name?>" />
-			</td>
-		</tr>
-	  <tr>
-	    <td width="100" align="right" class="key"><label for="alias"> <?php echo JText::_('COM_TRACKS_Alias' ); ?>:
-	    </label></td>
-	    <td><input class="text_area" type="text" name="alias" id="alias"
-	      size="32" maxlength="250" value="<?php echo $this->project->alias?>" />
-	    </td>
-	  </tr>
-		<tr>
-			<td valign="top" align="right" class="key">
-				<?php echo JText::_('COM_TRACKS_Published' ); ?>:
-			</td>
-			<td>
+			</li>
+			<li>				
+				<label for="alias"> <?php echo JText::_('COM_TRACKS_Alias' ); ?>:</label>
+				<input class="text_area" type="text" name="alias" id="alias"
+	             size="32" maxlength="250" value="<?php echo $this->project->alias?>" />
+			</li>
+			<li>				
+				<label for="published"><?php echo JText::_('COM_TRACKS_Published' ); ?>:</label>
 				<?php echo $this->lists['published']; ?>
-			</td>
-		</tr>
-		<tr>
-			<td valign="top" align="right" class="key">
+			</li>
+			<li>				
 				<label for="competition_id">
 					<?php echo JText::_('COM_TRACKS_Competition' ); ?>:
 				</label>
-			</td>
-			<td>
 				<?php echo $this->lists['competitions']; ?>
-			</td>
-		</tr>
-		<tr>
-			<td valign="top" align="right" class="key">
+			</li>
+			<li>				
 				<label for="season_id">
 					<?php echo JText::_('COM_TRACKS_Season' ); ?>:
 				</label>
-			</td>
-			<td>
 				<?php echo $this->lists['seasons']; ?>
-			</td>
-		</tr>
-		<tr>
-			<td valign="top" align="right" class="key">
+			</li>
+			<li>				
 				<label for="admin_id">
 					<?php echo JText::_('COM_TRACKS_Administrator' ); ?>:
 				</label>
-			</td>
-			<td>
 				<?php echo $this->lists['admin']; ?>
-			</td>
-		</tr>
-		<tr>
-      <td valign="top" align="right" class="key">
-        <label for="ordering">
+			</li>
+			<li>
+				<label for="ordering">
           <?php echo JText::_('COM_TRACKS_Ordering' ); ?>:
         </label>
-      </td>
-      <td>
         <?php echo $this->lists['ordering']; ?>
-      </td>
-    </tr>
-	</table>
+			</li>
+		</ul>
 	</fieldset>
-	
-	<fieldset class="adminform">
-		<legend><?php echo JText::_('COM_TRACKS_Parameters' ); ?></legend>
-
-		<table class="admintable">
-		<tr>
-			<td colspan="2">
+	</div>
+		
+	<div class="width-40 fltrt">	
 			<?php
 	    // Iterate through the normal form fieldsets and display each one.
 	    foreach ($this->params->getFieldsets() as $fieldsets => $fieldset):
 	    ?>
 	    <fieldset class="adminform">
 	        <legend>
-	            <?php echo JText::_($fieldset->name.'_jform_fieldset_label'); ?>
+	            <?php echo JText::_($fieldset->name); ?>
 	        </legend>
 	        <dl>
 			<?php
@@ -167,17 +137,13 @@ defined('_JEXEC') or die('Restricted access'); ?>
 	    <?php
 	    endforeach;
 	    ?>
-			</td>
-		</tr>
-		</table>
-	</fieldset>
-</div>
+	</div>
 
-<div class="clr"></div>
+	<div class="clr"></div>
 
-<input type="hidden" name="option" value="com_tracks" />
-<input type="hidden" name="controller" value="project" />
-<input type="hidden" name="cid[]" value="<?php echo $this->project->id; ?>" />
-<input type="hidden" name="task" value="" />
+	<input type="hidden" name="option" value="com_tracks" />
+	<input type="hidden" name="controller" value="project" />
+	<input type="hidden" name="cid[]" value="<?php echo $this->project->id; ?>" />
+	<input type="hidden" name="task" value="" />
 </form>
 </div>

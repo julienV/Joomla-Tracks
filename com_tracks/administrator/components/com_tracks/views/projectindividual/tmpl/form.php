@@ -31,7 +31,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     JToolBarHelper::help( 'screen.tracks.edit', true );
 ?>
 
-<script language="javascript" type="text/javascript">
+<script type="text/javascript">
 	Joomla.submitbutton = function (pressbutton) {
 		var form = document.adminForm;
 		if (pressbutton == 'cancel') {
@@ -61,38 +61,26 @@ defined('_JEXEC') or die('Restricted access'); ?>
 	<fieldset class="adminform">
 		<legend><?php echo JText::_('COM_TRACKS_Project_Participant' ); ?></legend>
 
-		<table class="admintable">
-		<tr>
-			<td valign="top" align="right" class="key">
-				<label for="competition">
+		<ul class="adminformlist">
+			<li>
+				<label for="individual_id">
 					<?php echo JText::_('COM_TRACKS_Person' ); ?>:
 				</label>
-			</td>
-			<td>
 				<?php echo $this->lists['individuals']; ?>
-			</td>
-		</tr>
-    <tr>
-      <td valign="top" align="right" class="key">
-        <label for="number">
+			</li>
+			<li>
+				<label for="number">
           <?php echo JText::_('COM_TRACKS_Number' ); ?>:
         </label>
-      </td>
-      <td>
         <input class="text_area" type="text" name="number" id="number" size="4" maxlength="4" value="<?php echo $this->projectindividual->number; ?>" />
-      </td>
-    </tr>
-		<tr>
-			<td valign="top" align="right" class="key">
+			</li>
+			<li>
 				<label for="competition">
 					<?php echo JText::_('COM_TRACKS_Team' ); ?>:
 				</label>
-			</td>
-			<td>
 				<?php echo $this->lists['teams']; ?>
-			</td>
-		</tr>
-	</table>
+			</li>
+		</ul>
 	</fieldset>
 </div>
 

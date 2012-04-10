@@ -31,7 +31,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
     JToolBarHelper::help( 'screen.tracks.edit', true );
 ?>
 
-<script language="javascript" type="text/javascript">
+<script type="text/javascript">
 	Joomla.submitbutton = function (pressbutton) {
 		var form = document.adminForm;
 		if (pressbutton == 'cancel') {
@@ -47,17 +47,10 @@ defined('_JEXEC') or die('Restricted access'); ?>
 		}
 	}
 </script>
-<style type="text/css">
-	table.paramlist td.paramlist_key {
-		width: 92px;
-		text-align: left;
-		height: 30px;
-	}
-</style>
 
 <div id="tracksmain">
 <form action="index.php" method="post" name="adminForm" id="adminForm">
-<div class="col50">
+<div class="width-50">
 	<fieldset class="adminform">
 		<legend>
 		  <?php 
@@ -65,62 +58,42 @@ defined('_JEXEC') or die('Restricted access'); ?>
 		     . $this->result->typename . ' - '
 		     . JText::_('COM_TRACKS_Result' ); ?></legend>
 
-		<table class="admintable">
-		<tr>
-			<td valign="top" align="right" class="key">
+		<ul class="adminformlist">
+			<li>
 				<label for="individual">
 					<?php echo JText::_('COM_TRACKS_Individual' ); ?>:
 				</label>
-			</td>
-			<td>
 			  <?php if (!$edit): ?>
         <?php echo $this->lists['participants'] ; ?>
 			  <?php else: ?>
 				<?php echo $this->result->first_name . ' ' . $this->result->last_name ; ?>
 				<?php endif; ?>
-			</td>
-    </tr>
-    <tr>
-      <td width="100" align="right" class="key">
-        <label for="rank">
+			</li>
+			<li>
+				<label for="rank">
           <?php echo JText::_('COM_TRACKS_Rank' ); ?>:
         </label>
-      </td>
-      <td>
         <input class="text_area" type="text" name="rank" id="rank" size="3" maxlength="3" value="<?php echo $this->result->rank; ?>" />
-      </td>
-		</tr>
-    <tr>
-      <td width="100" align="right" class="key">
-        <label for="bonus_points">
+			</li>
+			<li>
+				<label for="bonus_points">
           <?php echo JText::_('COM_TRACKS_Bonus_points' ); ?>:
         </label>
-      </td>
-      <td>
         <input class="text_area" type="text" name="bonus_points" id="bonus_points" size="3" maxlength="3" value="<?php echo $this->result->bonus_points; ?>" />
-      </td>
-    </tr>
-    <tr>
-      <td width="100" align="right" class="key">
-        <label for="performance">
+			</li>
+			<li>
+				<label for="performance">
           <?php echo JText::_('COM_TRACKS_Performance' ); ?>:
         </label>
-      </td>
-      <td>
         <input class="text_area" type="text" name="performance" id="performance" size="10" maxlength="20" value="<?php echo $this->result->performance; ?>" />
-      </td>
-    </tr>
-    <tr>
-      <td width="100" align="right" class="key">
-        <label for="name">
+			</li>
+			<li>
+				<label for="name">
           <?php echo JText::_('COM_TRACKS_Comment' ); ?>:
         </label>
-      </td>
-      <td>
         <?php echo $this->editor->display('comment', $this->result->comment, '100%', '200', '70', '10'); ?>
-      </td>
-    </tr>
-	</table>
+			</li>
+			</ul>				
 	</fieldset>
 </div>
 

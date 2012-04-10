@@ -90,208 +90,119 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 <div id="tracksmain">
 <form action="index.php" method="post" name="adminForm" id="adminForm">
-<div class="col50">
+<div class="width-70">
 	<fieldset class="adminform">
 		<legend><?php echo JText::_('COM_TRACKS_Individual' ); ?></legend>
 
-		<table class="admintable">
-		<tr>
-			<td width="100" align="right" class="key">
+		<ul class="adminformlist">
+			<li>
 				<label for="full_name">
 					<?php echo JText::_('COM_TRACKS_First_name' ); ?>:
 				</label>
-			</td>
-			<td>
 				<input class="text_area" type="text" name="first_name" id="first_name" size="32" maxlength="40" value="<?php echo $this->object->first_name; ?>" />
-			</td>
-		</tr>
-		<tr>
-			<td width="100" align="right" class="key">
+			</li>
+			<li>
 				<label for="last_name">
 					<?php echo JText::_('COM_TRACKS_Last_name' ); ?>:
 				</label>
-			</td>
-			<td>
 				<input class="text_area" type="text" name="last_name" id="last_name" size="32" maxlength="40" value="<?php echo $this->object->last_name; ?>" />
-			</td>
-		</tr>
-	  <tr>
-	    <td width="100" align="right" class="key"><label for="alias"> <?php echo JText::_('COM_TRACKS_Alias' ); ?>:
-	    </label></td>
-	    <td><input class="text_area" type="text" name="alias" id="alias"
+			</li>
+			<li>
+				<label for="alias"> <?php echo JText::_('COM_TRACKS_Alias' ); ?>:</label>
+				<input class="text_area" type="text" name="alias" id="alias"
 	      size="32" maxlength="250" value="<?php echo $this->object->alias?>" />
-	    </td>
-	  </tr>
-    <tr>
-      <td width="100" align="right" class="key">
-        <label for="nickname">
+			</li>
+			<li>
+				<label for="nickname">
           <?php echo JText::_('COM_TRACKS_Nickname' ); ?>:
         </label>
-      </td>
-      <td>
         <input class="text_area" type="text" name="nickname" id="nickname" size="32" maxlength="40" value="<?php echo $this->object->nickname; ?>" />
-      </td>
-    </tr>
-    
-		<tr>
-			<td width="100" align="right" class="key">
+			</li>
+			<li>
 				<label for="user_id">
 					<?php echo JText::_('COM_TRACKS_User' ); ?>:
 				</label>
-			</td>
-			<td>
 				<?php echo $this->lists['users']; ?>
-      </td>
-		</tr>
-		
-		<!-- start image import -->
-    <tr>
-      <td width="100" align="right" class="key">
+			</li>
+			<li>
 				<?php echo $this->form->getLabel('picture'); ?>
-      </td>
-      <td>
-        <table>
-          <tr>
-            <td><?php echo $this->form->getInput('picture'); ?></td>
-            <td>
-              <span id="picture_preview"></span>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-    <!-- end image import -->
-    <!-- start image import -->
-    <tr>
-      <td width="100" align="right" class="key">
+				<?php echo $this->form->getInput('picture'); ?> 
+				<span id="picture_preview"></span>
+			</li>
+			<li>				
 				<?php echo $this->form->getLabel('picture_small'); ?>
-      </td>
-      <td>
-        <table>
-          <tr>
-            <td><?php echo $this->form->getInput('picture_small'); ?></td>
-            <td>
-              <span id="picture_small_preview"></span>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-    <!-- end image import -->
-    
-    <tr>
-      <td width="100" align="right" class="key">
+				<?php echo $this->form->getInput('picture_small'); ?>
+				<span id="picture_small_preview"></span>
+			</li>
+			<li>				
         <label for="height">
           <?php echo JText::_('COM_TRACKS_Height' ); ?>:
         </label>
-      </td>
-      <td>
         <input class="text_area" type="text" name="height" id="height" size="10" maxlength="10" value="<?php echo $this->object->height; ?>" />
-      </td>
-    </tr>
-    <tr>
-      <td width="100" align="right" class="key">
-        <label for="weight">
+			</li>
+			<li>
+				<label for="weight">
           <?php echo JText::_('COM_TRACKS_Weight' ); ?>:
         </label>
-      </td>
-      <td>
         <input class="text_area" type="text" name="weight" id="weight" size="10" maxlength="10" value="<?php echo $this->object->weight; ?>" />
-      </td>
-    </tr>
-		<tr>
-			<td width="100" align="right" class="key">
-				<label for="last_name">
+			</li>
+			<li>
+				<label for="country_code">
 					<?php echo JText::_('COM_TRACKS_COUNTRY' ); ?>:
 				</label>
-			</td>
-			<td>
 				<?php echo $this->lists['countries']; ?>
-			</td>
-		</tr>
-		<tr>
-			<td width="100" align="right" class="key">
-				<label for="last_name">
+			</li>
+			<li>
+				<label for="dob">
 					<?php echo JText::_('COM_TRACKS_Date_of_birth_YYYY_MM_DD' ); ?>:
 				</label>
-			</td>
-			<td>
 			<?php 
       echo  JHTML::calendar( $this->object->dob, 'dob', 'dob' );
       ?>
-      </td>
-		</tr>
-    <tr>
-      <td width="100" align="right" class="key">
-        <label for="hometown">
+			</li>
+			<li>
+				<label for="hometown">
           <?php echo JText::_('COM_TRACKS_Hometown' ); ?>:
         </label>
-      </td>
-      <td>
         <input class="text_area" type="text" name="hometown" id="hometown" size="30" maxlength="50" value="<?php echo $this->object->hometown; ?>" />
-      </td>
-    </tr>
-		<tr>
-			<td width="100" align="right" class="key">
-				<label for="last_name">
+			</li>
+			<li>
+				<label for="address">
 					<?php echo JText::_('COM_TRACKS_Address' ); ?>:
 				</label>
-			</td>
-			<td>
-				<input class="text_area" type="text" name="address" id="address" size="100" maxlength="200" value="<?php echo $this->object->address; ?>" />
-			</td>
-		</tr>
-		<tr>
-			<td width="100" align="right" class="key">
-				<label for="last_name">
+				<input class="text_area" type="text" name="address" id="address" size="50" maxlength="200" value="<?php echo $this->object->address; ?>" />
+			</li>
+			<li>
+				<label for="postcode">
 					<?php echo JText::_('COM_TRACKS_Postcode' ); ?>:
 				</label>
-			</td>
-			<td>
 				<input class="text_area" type="text" name="postcode" id="postcode" size="10" maxlength="10" value="<?php echo $this->object->postcode; ?>" />
-			</td>
-		</tr>
-		<tr>
-			<td width="100" align="right" class="key">
-				<label for="last_name">
+			</li>
+			<li>
+				<label for="city">
 					<?php echo JText::_('COM_TRACKS_City' ); ?>:
 				</label>
-			</td>
-			<td>
 				<input class="text_area" type="text" name="city" id="city" size="30" maxlength="50" value="<?php echo $this->object->city; ?>" />
-			</td>
-		</tr>
-		<tr>
-			<td width="100" align="right" class="key">
-				<label for="last_name">
+			</li>
+			<li>
+				<label for="state">
 					<?php echo JText::_('COM_TRACKS_State' ); ?>:
 				</label>
-			</td>
-			<td>
 				<input class="text_area" type="text" name="state" id="state" size="30" maxlength="50" value="<?php echo $this->object->state; ?>" />
-			</td>
-		</tr>
-		<tr>
-			<td width="100" align="right" class="key">
-				<label for="last_name">
+			</li>
+			<li>
+				<label for="country">
 					<?php echo JText::_('COM_TRACKS_Country' ); ?>:
 				</label>
-			</td>
-			<td>
 				<input class="text_area" type="text" name="country" id="country" size="30" maxlength="50" value="<?php echo $this->object->country; ?>" />
-			</td>
-		</tr>
-		<tr>
-			<td width="100" align="right" class="key">
-				<label for="name">
+			</li>
+			<li>
+				<label for="description">
 					<?php echo JText::_('COM_TRACKS_Description' ); ?>:
 				</label>
-			</td>
-			<td>
 				<?php echo $this->editor->display('description', $this->object->description, '100%', '400', '70', '15'); ?>
-      </td>
-		</tr>
-	</table>
+			</li>
+		</ul>				
 	</fieldset>
 </div>
 

@@ -57,81 +57,56 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 <div id="tracksmain">
 <form action="index.php" method="post" name="adminForm" id="adminForm">
-<div class="col50">
+<div class="width-70">
 	<fieldset class="adminform">
 		<legend><?php echo JText::_('COM_TRACKS_Subround' ); ?></legend>
 
-		<table class="admintable">
-		<tr>
-			<td valign="top" align="right" class="key">
+		<ul class="adminformlist">
+			<li>
 				<label for="competition">
 					<?php echo JText::_('COM_TRACKS_Type' ); ?>:
 				</label>
-			</td>
-			<td>
 				<?php echo $this->lists['types']; ?>
-			</td>
-		</tr>
-		<tr>
-			<td valign="top" align="right" class="key"><?php echo JText::_('COM_TRACKS_Published' ); ?>:
-			</td>
-			<td><?php echo $this->lists['published']; ?></td>
-		</tr>
-		<tr>
-			<td width="100" align="right" class="key">
-				<label for="last_name">
+			</li>
+			<li>
+				<label for="published"><?php echo JText::_('COM_TRACKS_Published' ); ?>:</label>
+				<?php echo $this->lists['published']; ?>
+			</li>
+			<li>
+				<label for="start_date">
 					<?php echo JText::_('COM_TRACKS_Round_start' ); ?>:
 				</label>
-			</td>
-			<td>
       <?php 
 		    echo  JHTML::calendar( $this->object->start_date, 'start_date', 'start_date', '%Y-%m-%d %H:%M:%S' );
 		  ?>
-		  </td>
-		</tr>
-		<tr>
-			<td width="100" align="right" class="key">
-				<label for="last_name">
+			</li>
+			<li>
+				<label for="end_date">
 					<?php echo JText::_('COM_TRACKS_Round_end' ); ?>:
 				</label>
-			</td>
-			<td>
 			<?php 
 	        echo  JHTML::calendar( $this->object->end_date, 'end_date', 'end_date', '%Y-%m-%d %H:%M:%S' );
 	    ?>
-	    </td>
-		</tr>
-		<tr>
-	    <td valign="top" align="right" class="key">
-	     <label for="ordering">
+			</li>
+			<li>
+				<label for="ordering">
 	     <?php echo JText::_('COM_TRACKS_Ordering' ); ?>:
 	     </label>
-	    </td>
-	    <td>
 	    <?php echo $this->lists['ordering']; ?>
-	    </td>
-	  </tr>
-    <tr>
-      <td width="100" align="right" class="key">
-        <label for="description">
+			</li>
+			<li>
+				<label for="description">
           <?php echo JText::_('COM_TRACKS_Description' ); ?>:
         </label>
-      </td>
-      <td>
         <?php echo $this->editor->display('description', $this->object->description, '100%', '400', '70', '15'); ?>
-      </td>
-    </tr>
-    <tr>
-      <td width="100" align="right" class="key">
-        <label for="comment">
+			</li>
+			<li>
+				<label for="comment">
           <?php echo JText::_('COM_TRACKS_Comment' ); ?>:
         </label>
-      </td>
-      <td>
         <?php echo $this->editor->display('comment', $this->object->comment, '100%', '400', '70', '15'); ?>
-      </td>
-    </tr>
-	</table>
+			</li>
+		</ul>				
 	</fieldset>
 </div>
 

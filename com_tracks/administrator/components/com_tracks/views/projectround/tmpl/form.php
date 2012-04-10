@@ -52,61 +52,44 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 <div id="tracksmain">
 <form action="index.php" method="post" name="adminForm" id="adminForm">
-<div class="col50">
+<div class="width-70">
 	<fieldset class="adminform">
 		<legend><?php echo JText::_('COM_TRACKS_Projectround' ); ?></legend>
-
-		<table class="admintable">
-		<tr>
-			<td valign="top" align="right" class="key">
+		
+		<ul class="adminformlist">
+			<li>
 				<label for="round_id">
 					<?php echo JText::_('COM_TRACKS_ROUND' ); ?>:
 				</label>
-			</td>
-			<td>
 				<?php echo $this->lists['rounds']; ?>
-			</td>
-		</tr>
-        <tr>
-            <td valign="top" align="right" class="key"><?php echo JText::_('COM_TRACKS_Published' ); ?>:
-            </td>
-            <td><?php echo $this->lists['published']; ?></td>
-        </tr>
-		<tr>
-			<td width="100" align="right" class="key">
+			</li>
+			<li>
+				<label for="published"><?php echo JText::_('COM_TRACKS_Published' ); ?>:</label>
+        <?php echo $this->lists['published']; ?>
+			</li>
+			<li>
 				<label for="last_name">
 					<?php echo JText::_('COM_TRACKS_Round_start' ); ?>:
 				</label>
-			</td>
-			<td>
-            <?php 
+				<?php 
 		    echo  JHTML::calendar( $this->projectround->start_date, 'start_date', 'start_date', '%Y-%m-%d %H:%M:%S' );
 		    ?>
-		    </td>
-		</tr>
-		<tr>
-			<td width="100" align="right" class="key">
+			</li>
+			<li>
 				<label for="last_name">
 					<?php echo JText::_('COM_TRACKS_Round_end' ); ?>:
 				</label>
-			</td>
-			<td>
 			<?php 
 	        echo  JHTML::calendar( $this->projectround->end_date, 'end_date', 'end_date', '%Y-%m-%d %H:%M:%S' );
 	        ?>
-	        </td>
-		</tr>
-		<tr>
-	        <td valign="top" align="right" class="key">
-	        <label for="ordering">
+			</li>
+			<li>
+				<label for="ordering">
 	          <?php echo JText::_('COM_TRACKS_Ordering' ); ?>:
 	        </label>
-	        </td>
-	        <td>
 	        <?php echo $this->lists['ordering']; ?>
-	        </td>
-	    </tr>
-	</table>
+			</li>
+			</ul>
 	</fieldset>
 </div>
 

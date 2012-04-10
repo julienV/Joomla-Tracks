@@ -107,7 +107,11 @@ class TracksViewProject extends TracksView
 		$lists['ordering'] 			= JHTML::_('list.specificordering',  $project, $project->id, $query, 1 );
 
 		// build the html select list
-		$lists['published'] 		= JHTML::_('select.booleanlist',  'published', 'class="inputbox"', $project->published );
+		$arr = array(
+			JHtml::_('select.option', '0', JText::_('JNO')),
+			JHtml::_('select.option', '1', JText::_('JYES'))
+		);
+		$lists['published'] 		= JHTML::_('select.genericlist',  $arr,'published', 'class="inputbox"', 'value', 'text', $project->published );
 		
 		$file 	= JPATH_COMPONENT.DS.'models'.DS.'project.xml';
 		$params = JForm::getInstance('project', $file );

@@ -44,7 +44,7 @@ class TracksViewSubroundResults extends TracksView
 		$subround =& $this->get('SubroundInfo');
 		
 		// Set toolbar items for the page
-		JToolBarHelper::title(   JText::_('COM_TRACKS_Subround_results').$subround->roundname.' - '.$subround->subroundname , 'generic.png' );
+		JToolBarHelper::title(   JText::sprintf('COM_TRACKS_Subround_results_s_s', $subround->roundname, $subround->subroundname) , 'generic.png' );
 		//JToolBarHelper::custom('massadd', 'default', 'default', JText::_('COM_TRACKS_Mass_Add'), false);
     JToolBarHelper::custom('back', 'back.png', 'back.png', JText::_('COM_TRACKS_back'), false); 
 		JToolBarHelper::save( 'saveranks', 'Save' );

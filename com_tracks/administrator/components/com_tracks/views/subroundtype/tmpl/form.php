@@ -52,51 +52,38 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 <div id="tracksmain">
 <form action="index.php" method="post" name="adminForm" id="adminForm">
-<div class="col50">
+<div class="width-70">
 <fieldset class="adminform"><legend><?php echo JText::_('COM_TRACKS_Subround_type' ); ?></legend>
 
-<table class="admintable">
-	<tr>
-		<td width="100" align="right" class="key">
-			<label for="name"> <?php echo JText::_('COM_TRACKS_Name' ); ?>:
+	<ul class="adminformlist">
+		<li><label for="name"> <?php echo JText::_('COM_TRACKS_Name' ); ?>:
 			</label>
-		</td>
-		<td><input class="text_area required" type="text" name="name" id="name"
+			<input class="text_area required" type="text" name="name" id="name"
 			size="32" maxlength="40" value="<?php echo $this->object->name?>" />
-		</td>
-	</tr>
-	<tr>
-		<td width="100" align="right" class="key"><label for="alias"> <?php echo JText::_('COM_TRACKS_Alias' ); ?>:
-		</label></td>
-		<td><input class="text_area" type="text" name="alias" id="alias"
+		</li>
+		<li>
+		<label for="alias"> <?php echo JText::_('COM_TRACKS_Alias' ); ?>:
+		</label>
+		<input class="text_area" type="text" name="alias" id="alias"
 			size="32" maxlength="250" value="<?php echo $this->object->alias?>" />
-		</td>
-	</tr>
-	<tr>
-		<td width="100" align="right" class="key hasTip"
-			title="<?php echo JText::_('COM_TRACKS_NOTE_TIP'); ?>"><label for="alias"> <?php echo JText::_('COM_TRACKS_Note' ); ?>:
-		</label></td>
-		<td><input class="text_area" type="text" name="note" id="note"
+		</li>
+		<li><label for="alias"> <?php echo JText::_('COM_TRACKS_Note' ); ?>:
+		</label>
+		<input class="text_area" type="text" name="note" id="note"
 			size="32" maxlength="100" value="<?php echo $this->object->note?>" />
-		</td>
-	</tr>
-	<tr>
-		<td valign="top" align="right" class="key hasTip"
-			title="<?php echo JText::_('COM_TRACKS_POINTS_TIP'); ?>"><label for="points_attribution"> <?php echo JText::_('COM_TRACKS_Points' ); ?>:
-		</label></td>
-		<td><input class="text_area" type="text" name="points_attribution" id="points_attribution"
+		</li>
+		<li>
+		<label for="points_attribution"> <?php echo JText::_('COM_TRACKS_Points' ); ?>:
+		</label>
+		<input class="text_area" type="text" name="points_attribution" id="points_attribution"
 			size="50" maxlength="255" value="<?php echo $this->object->points_attribution?>" />
-		</td>
-	</tr>
-	<tr>
-		<td width="100" align="right" class="key">
-			<label for="description"> <?php echo JText::_('COM_TRACKS_Description' ); ?>:
+		</li>
+		<li>
+		<label for="description"> <?php echo JText::_('COM_TRACKS_Description' ); ?>:
 			</label>
-		</td>
-		<td><?php echo $this->editor->display('description', $this->object->description, '600', '400', '70', '15'); ?>
-		</td>
-	</tr>
-</table>
+			<?php echo $this->editor->display('description', $this->object->description, '100%', '400', '70', '15'); ?>
+		</li>
+	</ul>
 </fieldset>
 </div>
 
