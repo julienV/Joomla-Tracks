@@ -53,6 +53,8 @@ JHTML::_('behavior.tooltip');
 			</th>
 			<th class="title" nowrap="nowrap"><?php echo JHTML::_('grid.sort',  'Season', 's.name', $this->lists['order_Dir'], $this->lists['order'] ); ?>
 			</th>
+			<th width="5%" nowrap="nowrap"><?php echo JHTML::_('grid.sort',  'COM_TRACKS_Finished', 'p.finished', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+			</th>
 			<th width="5%" nowrap="nowrap"><?php echo JHTML::_('grid.sort',  'Published', 'p.published', $this->lists['order_Dir'], $this->lists['order'] ); ?>
 			</th>
 			<th width="8%" nowrap="nowrap"><?php echo JHTML::_('grid.sort',  'Order', 'p.ordering', $this->lists['order_Dir'], $this->lists['order'] ); ?>
@@ -63,7 +65,7 @@ JHTML::_('behavior.tooltip');
 	</thead>
 	<tfoot>
 		<tr>
-			<td colspan="9"><?php echo $this->pagination->getListFooter(); ?></td>
+			<td colspan="10"><?php echo $this->pagination->getListFooter(); ?></td>
 		</tr>
 	</tfoot>
 	<tbody>
@@ -78,7 +80,7 @@ JHTML::_('behavior.tooltip');
 
 		$checked 	= JHTML::_('grid.checkedout',   $row, $i );
 		$published 	= JHTML::_('grid.published', $row, $i );
-
+		$finished = $this->finished($row, $i);
 		?>
 		<tr class="<?php echo "row$k"; ?>">
 			<td><?php echo $this->pagination->getRowOffset( $i ); ?></td>
@@ -98,6 +100,7 @@ JHTML::_('behavior.tooltip');
       <td align="center"><?php echo $row->alias;?></td>
 			<td><?php echo $row->competition;?></td>
 			<td><?php echo $row->season;?></td>
+			<td align="center"><?php echo $finished;?></td>
 			<td align="center"><?php echo $published;?></td>
 			<td class="order"><span><?php echo $this->pagination->orderUpIcon( $i, $i > 0 , 'orderup', 'Move Up', true ); ?></span>
 			<span><?php echo $this->pagination->orderDownIcon( $i, $n, $i < $n, 'orderdown', 'Move Down', true ); ?></span>

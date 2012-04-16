@@ -36,6 +36,10 @@ class TracksViewProjects extends TracksView
 		JToolBarHelper::title(   JText::_('COM_TRACKS' ), 'generic.png' );
 		JToolBarHelper::publishList();
 		JToolBarHelper::unpublishList();
+		JToolBarHelper::divider();
+		JToolBarHelper::custom('finish', 'publish', 'publish', 'COM_TRACKS_FINISHED', true);
+		JToolBarHelper::custom('unfinish', 'unpublish', 'unpublish', 'COM_TRACKS_NOT_FINISHED', true);
+		JToolBarHelper::divider();
     JToolBarHelper::deleteList(JText::_('COM_TRACKS_DELETEPROJECTSCONFIRM'));
 		JToolBarHelper::editListX();
 		JToolBarHelper::addNewX();
@@ -80,6 +84,26 @@ class TracksViewProjects extends TracksView
 		$this->assignRef('request_url',	$uri->toString());
 		
 		parent::display($tpl);
+	}
+	
+	
+	public static function finished($value, $i, $img1 = 'tick.png', $img0 = 'publish_x.png', $prefix='')
+	{
+		if (is_object($value)) {
+			$value = $value->finished;
+		}
+	
+		$img	= $value ? $img1 : $img0;
+		$task	= $value ? 'unfinish' : 'finish';
+		$alt	= $value ? JText::_('COM_TRACKS_FINISHED') : JText::_('COM_TRACKS_NOT_FINISHED');
+		$action = $value ? JText::_('COM_TRACKS_SET_NOT_FINISHED') : JText::_('COM_TRACKS_SET_FINISHED');
+	
+		$href = '
+		<a href="#" onclick="return listItemTask(\'cb'. $i .'\',\''. $prefix.$task .'\')" title="'. $action .'">'.
+		JHtml::_('image', 'admin/'.$img, $alt, NULL, true).'</a>'
+		;
+	
+		return $href;
 	}
 }
 ?>

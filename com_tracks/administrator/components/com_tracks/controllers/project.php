@@ -173,7 +173,42 @@ class TracksControllerProject extends BaseController
 
 		$this->setRedirect( 'index.php?option=com_tracks' );
 	}
-
+	
+	function finish()
+	{
+		$cid = JRequest::getVar( 'cid', array(), 'post', 'array' );
+		JArrayHelper::toInteger($cid);
+	
+		if (count( $cid ) < 1) {
+			JError::raiseError(500, JText::_('COM_TRACKS_Select_a_project_to_set_as_finished' ) );
+		}
+	
+		$model = $this->getModel('project');
+		if(!$model->finish($cid, 1)) {
+			echo "<script> alert('".$model->getError(true)."'); window.history.go(-1); </script>\n";
+		}
+	
+		$this->setRedirect( 'index.php?option=com_tracks' );
+	}
+	
+	
+	function unfinish()
+	{
+		$cid = JRequest::getVar( 'cid', array(), 'post', 'array' );
+		JArrayHelper::toInteger($cid);
+	
+		if (count( $cid ) < 1) {
+			JError::raiseError(500, JText::_('COM_TRACKS_Select_a_project_to_set_as_not_finished' ) );
+		}
+	
+		$model = $this->getModel('project');
+		if(!$model->finish($cid, 0)) {
+			echo "<script> alert('".$model->getError(true)."'); window.history.go(-1); </script>\n";
+		}
+	
+		$this->setRedirect( 'index.php?option=com_tracks' );
+	}
+	
 	function cancel()
 	{
 		// Checkin the project

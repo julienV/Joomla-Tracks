@@ -80,6 +80,14 @@ defined('_JEXEC') or die('Restricted access'); ?>
 	  </tr>
 		<tr>
 			<td valign="top" align="right" class="key">
+				<?php echo JText::_('COM_TRACKS_finished' ); ?>:
+			</td>
+			<td>
+				<?php echo JHTML::_('select.booleanlist', 'finished', null, $this->project->finished); ?>
+			</td>
+		</tr>
+		<tr>
+			<td valign="top" align="right" class="key">
 				<?php echo JText::_('COM_TRACKS_Published' ); ?>:
 			</td>
 			<td>

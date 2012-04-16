@@ -75,4 +75,12 @@ class TracksController extends BaseController
 		$db->setQuery($query);
 		$res = $db->query();
 	}
+	
+	public function ctpf()
+	{
+		$db = JFactory::getDbo();
+		$query = ' ALTER TABLE `#__tracks_projects` ADD `finished` TINYINT( 1 ) NOT NULL DEFAULT 0 ';
+		$db->setQuery($query);
+		$res = $db->query();
+	}
 }

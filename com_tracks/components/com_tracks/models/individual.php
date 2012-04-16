@@ -193,7 +193,7 @@ class TracksFrontModelIndividual extends baseModel
 		$params = $app->getParams( 'com_tracks' );
 		
 		// all individual projects
-		$query = ' SELECT p.id, p.name, s.name as seasonname, c.name as competitionname, '
+		$query = ' SELECT p.id, p.name, s.name as seasonname, c.name as competitionname, p.finished, '
 		       . ' CASE WHEN CHAR_LENGTH( p.alias ) THEN CONCAT_WS( \':\', p.id, p.alias ) ELSE p.id END AS projectslug '
 		       . ' FROM #__tracks_projects_individuals AS pi '
 		       . ' INNER JOIN #__tracks_individuals AS i ON i.id = pi.individual_id ' 
