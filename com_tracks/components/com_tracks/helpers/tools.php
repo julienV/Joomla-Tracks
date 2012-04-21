@@ -34,6 +34,68 @@ class TracksHelperTools
 		}
 		return $points;
 	}
+	
+	/**
+	 * returns number of top 3 for ranking row object
+	 * @param object $rankingrow
+	 * @return int
+	 */
+	public static function getTop3($rankingrow)
+	{
+		$count = 0;
+		foreach ((array) $rankingrow->finishes as $pos)
+		{
+			if ($pos <= 3) {
+				$count++;
+			}
+		}
+		return $count;
+	}
+	
+	/**
+	 * returns number of top 5 for ranking row object
+	 * @param object $rankingrow
+	 * @return int
+	 */
+	public static function getTop5($rankingrow)
+	{
+		$count = 0;
+		foreach ((array) $rankingrow->finishes as $pos)
+		{
+			if ($pos <= 5) {
+				$count++;
+			}
+		}
+		return $count;
+	}
+	
+	/**
+	 * returns number of top 10 for ranking row object
+	 * @param object $rankingrow
+	 * @return int
+	 */
+	public static function getTop10($rankingrow)
+	{
+		$count = 0;
+		foreach ((array) $rankingrow->finishes as $pos)
+		{
+			if ($pos <= 10) {
+				$count++;
+			}
+		}
+		return $count;
+	}
+	
+	/**
+	 * returns average finish for ranking row object
+	 * @param object $rankingrow
+	 * @return int
+	 */
+	public static function getAverageFinish($rankingrow, $precision = 2)
+	{
+		if (!count($rankingrow->finishes)) {
+			return 0;
+		}
+		return round(array_sum($rankingrow->finishes) / count($rankingrow->finishes), 2);
+	}
 }
-
-?>
