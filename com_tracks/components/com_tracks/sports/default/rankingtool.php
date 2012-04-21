@@ -103,6 +103,8 @@ class TracksRankingTool extends JObject {
 						if ( $r->rank == 1 ) {
 							$individuals[$r->id]->wins++;
 						}
+						
+						$individuals[$r->id]->finishes[] = $r->rank;
 					}
 				}
 				$individuals[$r->id]->points += $points;
@@ -267,6 +269,7 @@ class TracksRankingTool extends JObject {
 				$result->best_rank = 0;
 				$result->wins = 0;
 				$result->rank = null;
+				$result->finishes = array();		
 				$results[$i] = $result;
 			}
 		}
