@@ -98,4 +98,14 @@ class TracksHelperTools
 		}
 		return round(array_sum($rankingrow->finishes) / count($rankingrow->finishes), 2);
 	}
+	
+	/**
+	 * returns total number of participation (rank > 0) in the project
+	 * @param object $rankingrow
+	 * @return int
+	 */
+	public static function getTotalParticipated($rankingrow)
+	{
+		return count($rankingrow->finishes);
+	}
 }

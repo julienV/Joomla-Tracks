@@ -44,6 +44,12 @@
 		    <option value="0">COM_TRACKS_No</option>
 		    <option value="1">COM_TRACKS_Yes</option>
 		  </param>
+	    <param name="rk_show_participated" type="radio" default="1" 
+	           label="COM_TRACKS_XML_PROJECT_PARAMS_RANKINGVIEW_SHOW_PARTICIPATED" 
+	           description="COM_TRACKS_XML_PROJECT_PARAMS_RANKINGVIEW_SHOW_PARTICIPATED_DESC">
+	      <option value="0">COM_TRACKS_No</option>
+	      <option value="1">COM_TRACKS_Yes</option>
+	    </param>
 	  
 	</params>
 </model>

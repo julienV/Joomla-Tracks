@@ -54,6 +54,10 @@ defined('_JEXEC') or die('Restricted access'); ?>
       <?php if ($this->params->get('rk_show_average')): ?>
       <th><?php echo JText::_('COM_TRACKS_TABLE_HEADER_AVERAGE' ); ?></th>
       <?php endif; ?>
+      
+      <?php if ($this->params->get('rk_show_participated')): ?>
+      <th><?php echo JText::_('COM_TRACKS_TABLE_HEADER_PARTICIPATED' ); ?></th>
+      <?php endif; ?>
     </tr>
   </thead>
   <tbody>
@@ -112,6 +116,10 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 	      <?php if ($this->params->get('rk_show_average')): ?>
 	      <td><?php echo TracksHelperTools::getAverageFinish($ranking); ?></td>
+	      <?php endif; ?>
+
+	      <?php if ($this->params->get('rk_show_participated')): ?>
+	      <td><?php echo TracksHelperTools::getTotalParticipated($ranking); ?></td>
 	      <?php endif; ?>
 	      
       </tr>
