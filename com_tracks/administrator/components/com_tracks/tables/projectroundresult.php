@@ -24,24 +24,7 @@ jimport('joomla.filter.input');
 * @since 0.1
 */
 class TableProjectroundResult extends JTable
-{
-	/**
-	 * Primary Key
-	 *
-	 * @var int
-	 */
-	var $id = null;
-
-	var $individual_id;
-	var $team_id;
-	var $subround_id;
-	var $rank;
-	var $performance;
-	var $bonus_points;
-	var $comment;
-	var $checked_out;
-	var $checked_out_time;
-  
+{  
 	/**
 	 * Constructor
 	 *

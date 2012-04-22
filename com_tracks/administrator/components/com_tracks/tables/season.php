@@ -26,27 +26,6 @@ jimport('joomla.filter.input');
 class TableSeason extends JTable
 {
 	/**
-	 * Primary Key
-	 *
-	 * @var int
-	 */
-	var $id = null;
-	
-  var $name;  
-  /**
-   * alias for SEO
-   *
-   * @var string
-   */
-  var $alias;
-     
-  var $ordering;
-  
-  var $checked_out;
-  var $checked_out_time;
-  var $published;
-
-	/**
 	 * Constructor
 	 *
 	 * @param object Database connector object

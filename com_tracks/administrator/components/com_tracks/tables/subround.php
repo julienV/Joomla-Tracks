@@ -26,45 +26,6 @@ jimport('joomla.filter.input');
 class TableSubround extends JTable
 {
 	/**
-	 * Primary Key
-	 *
-	 * @var int
-	 */
-	var $id = null;
-	
-	/**
-	 * the project round this subround belong to
-	 *
-	 * @var int
-	 */
-  var $projectround_id;
-  var $start_date;
-  var $end_date;
-  /**
-   * general description
-   *
-   * @var string
-   */
-  var $description;
-  /**
-   * comment about results.
-   *
-   * @var string
-   */
-  var $comment;
-  /**
-   * subround type
-   *
-   * @var int
-   */
-  var $type;
-  var $checked_out;
-  var $checked_out_time;
-  var $ordering;
-  var $published;
-
-
-	/**
 	 * Constructor
 	 *
 	 * @param object Database connector object

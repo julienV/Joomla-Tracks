@@ -29,46 +29,6 @@ jimport('joomla.filter.input');
 class TableSubroundType extends JTable
 {
 	/**
-	 * Primary Key
-	 *
-	 * @var int
-	 */
-	var $id = null;
-	/**
-	 * the name for the subround
-	 * e.g: race, practise,...
-	 *
-	 * @var string
-	 */
-  var $name;
-  /**
-   * alias for SEO
-   *
-   * @var string
-   */
-  var $alias;
-  /**
-   * note, to make a difference subround having same name
-   *
-   * @var string
-   */
-  var $note;
-  /**
-   * The point attribution for the subround
-   *
-   * @var string
-   */
-  var $points_attribution;
-  /**
-   * description of the subround
-   *
-   * @var unknown_type
-   */
-  var $description;
-  var $checked_out;
-  var $checked_out_time;
-
-	/**
 	 * Constructor
 	 *
 	 * @param object Database connector object

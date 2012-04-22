@@ -26,25 +26,6 @@ jimport('joomla.filter.input');
 class TableProjectround extends JTable
 {
 	/**
-	 * Primary Key
-	 *
-	 * @var int
-	 */
-	var $id = null;
-	
-  var $round_id;
-  var $project_id;
-  var $start_date;
-  var $end_date;
-  var $description;
-  var $comment;
-  var $checked_out;
-  var $checked_out_time;
-  var $ordering;
-  var $published;
-
-
-	/**
 	 * Constructor
 	 *
 	 * @param object Database connector object

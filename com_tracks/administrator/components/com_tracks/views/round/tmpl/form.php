@@ -68,6 +68,12 @@ defined('_JEXEC') or die('Restricted access'); ?>
       size="32" maxlength="250" value="<?php echo $this->object->alias?>" />
 		</li>
 		<li>
+			<label for="short_name"> <?php echo JText::_('COM_TRACKS_ROUND_SHORT_NAME' ); ?>:
+    </label>
+    <input class="text_area" type="text" name="short_name" id="short_name"
+      size="10" maxlength="10" value="<?php echo $this->object->short_name; ?>" />
+		</li>
+		<li>
 			<label for="published"><?php echo JText::_('COM_TRACKS_Published' ); ?>:</label>
       <?php echo $this->lists['published']; ?>
 		</li>

@@ -26,31 +26,6 @@ jimport('joomla.filter.input');
 class TableCompetition extends JTable
 {
 	/**
-	 * Primary Key
-	 *
-	 * @var int
-	 */
-	var $id = null;
-	/**
-	 * competition name
-	 *
-	 * @var string
-	 */
-  var $name;
-  /**
-   * alias for SEO
-   *
-   * @var string
-   */
-  var $alias;
-  
-  var $checked_out;
-  var $checked_out_time;    
-  var $ordering;
-  var $published;
-
-
-	/**
 	 * Constructor
 	 *
 	 * @param object Database connector object

@@ -1,0 +1,1 @@
+ALTER TABLE `#__tracks_rounds` ADD  `short_name` VARCHAR( 10 ) NOT NULL;

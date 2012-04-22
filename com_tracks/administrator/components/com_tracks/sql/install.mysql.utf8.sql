@@ -99,6 +99,7 @@ CREATE TABLE IF NOT EXISTS `#__tracks_individuals` (
 CREATE TABLE IF NOT EXISTS `#__tracks_rounds` (
   `id` int(11) NOT NULL auto_increment,
   `name` varchar(40) NOT NULL,
+  `short_name` varchar(10) NOT NULL,
   `alias` varchar(100) NOT NULL default '',
   `description` text NULL,
   `ordering` int(11) NOT NULL,

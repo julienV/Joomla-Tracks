@@ -26,34 +26,6 @@ jimport('joomla.filter.input');
 class TableTeam extends JTable
 {
 	/**
-	 * Primary Key
-	 *
-	 * @var int
-	 */
-	var $id = null;
-	
-	var $club_id;
-	
-  var $name;
-  /**
-   * alias for SEO
-   *
-   * @var string
-   */
-  var $alias;
-  var $short_name;
-  var $acronym;
-  var $picture;
-  var $picture_small;
-  var $country_code;
-  var $description;
-  var $admin_id;
-  
-  var $checked_out;
-  var $checked_out_time;  
-
-
-	/**
 	 * Constructor
 	 *
 	 * @param object Database connector object

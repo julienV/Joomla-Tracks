@@ -26,20 +26,6 @@ jimport('joomla.filter.input');
 class TableProjectindividual extends JTable
 {
 	/**
-	 * Primary Key
-	 *
-	 * @var int
-	 */
-	var $id = null;
-	
-  var $individual_id;
-  var $project_id;
-  var $team_id;
-  var $number;
-  var $checked_out;
-  var $checked_out_time;
-
-	/**
 	 * Constructor
 	 *
 	 * @param object Database connector object

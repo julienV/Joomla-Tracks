@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="COM_TRACKS_XML_PROJECTRESULTS_LAYOUT_DEFAULT">
+		<message>
+			<![CDATA[COM_TRACKS_XML_PROJECTRESULTS_LAYOUT_DEFAULT_DESC]]>
+		</message>
+	</layout>
+	
+	<!-- Add fields to the request variables for the layout. -->
+	<fields name="request">
+		<fieldset name="request">
+			
+			<field name="p" type="sql"
+				query="SELECT id AS value, name AS p FROM #__tracks_projects ORDER BY name ASC"
+				default=""
+				description="COM_TRACKS_Select_a_project"
+				extension="com_tracks"
+				label="COM_TRACKS_Select_a_project"
+				required="true"
+			/>
+			
+		</fieldset>
+	</fields>
+		
+	<!-- Add fields to the parameters object for the layout. -->
+	<fields name="params">
+		<fieldset name="basic" label="COM_TRACKS_FIELDSET_LAYOUT_OPTIONS">
+
+			<field name="shownumber" type="list"
+				label="COM_TRACKS_Display_individual_number"
+				description="COM_TRACKS_Display_individual_number"
+				default="1"
+			>
+        <option value="0">COM_TRACKS_No</option>
+        <option value="1">COM_TRACKS_Yes</option>
+			</field>
+
+			<field name="showflag" type="list"
+				label="COM_TRACKS_Display_country_flag"
+				description="COM_TRACKS_Display_country_flag"
+				default="1"
+			>
+        <option value="0">COM_TRACKS_No</option>
+        <option value="1">COM_TRACKS_Yes</option>
+			</field>
+
+			<field name="showteams" type="list"
+				label="COM_TRACKS_Display_teams_in_rankings"
+				description="COM_TRACKS_Display_teams_in_rankings"
+				default="1"
+			>
+        <option value="0">COM_TRACKS_No</option>
+        <option value="1">COM_TRACKS_Yes</option>
+			</field>
+				
+		</fieldset>
+	</fields>
+	
+</metadata>
