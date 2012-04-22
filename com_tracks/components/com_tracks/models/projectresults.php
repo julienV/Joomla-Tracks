@@ -85,7 +85,8 @@ class TracksFrontModelProjectresults extends baseModel
 		$query = $db->getQuery(true);
 		
 		$query->select('psr.id AS subround_id, srt.name AS subround_name');
-		$query->select('r.name AS round_name, r.id AS round_id');
+		$query->select('r.id AS round_id, r.name AS round_name');
+		$query->select('CASE WHEN CHAR_LENGTH(r.short_name) THEN r.short_name ELSE r.name END AS short_name');
 		$query->from('#__tracks_projects_subrounds AS psr');
 		$query->join('INNER', '#__tracks_subroundtypes AS srt ON srt.id = psr.type');
 		$query->join('INNER', '#__tracks_projects_rounds AS pr ON pr.id = psr.projectround_id');
@@ -112,6 +113,7 @@ class TracksFrontModelProjectresults extends baseModel
 				$obj = new stdClass();
 				$obj->round_id   = $r->round_id;
 				$obj->round_name = $r->round_name;
+				$obj->short_name = $r->short_name;
 				$obj->subrounds = array($r);
 				$rounds[$r->round_id]= $obj;
 			}

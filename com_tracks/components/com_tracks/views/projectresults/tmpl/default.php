@@ -36,7 +36,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
       <?php endif; ?>
       
       <?php foreach ($this->rounds as $r): ?>
-      <th colspan="<?php echo count($r->subrounds); ?>" class="hasTip" title="<?php echo $r->round_name; ?>"><?php echo substr($r->round_name, 0, 3); ?></th>
+      <th colspan="<?php echo count($r->subrounds); ?>" class="hasTip" title="<?php echo $r->round_name; ?>"><?php echo substr($r->short_name, 0, 6); ?></th>
       <?php endforeach; ?>
       
       <th><?php echo JText::_('COM_TRACKS_Points' ); ?></th>
