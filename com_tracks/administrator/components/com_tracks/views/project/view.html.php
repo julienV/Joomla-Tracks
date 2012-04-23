@@ -116,8 +116,6 @@ class TracksViewProject extends TracksView
 		$file 	= JPATH_COMPONENT.DS.'models'.DS.'project.xml';
 		$params = JForm::getInstance('project', $file );
 		$params->bind($project);
-//		echo '<pre>';print_r($params); echo '</pre>';exit;
-//			dump($params);
 
 		$this->assignRef('lists',		$lists);
 		$this->assignRef('project',		$project);

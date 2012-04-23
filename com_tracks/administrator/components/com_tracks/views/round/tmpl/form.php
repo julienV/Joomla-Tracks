@@ -44,7 +44,9 @@ defined('_JEXEC') or die('Restricted access'); ?>
     var validator = document.formvalidator;
     if ( validator.validate(form.name) === false ){
       alert( "<?php echo JText::_('COM_TRACKS_ROUND_NAME_IS_REQUIRED', true ); ?>" );
-    } else {
+    } else if ( validator.validate(form.short_name) === false ){
+			alert( "<?php echo JText::_('COM_TRACKS_ROUND_SHORT_NAME_IS_REQUIRED', true ); ?>" );
+		} else {
       Joomla.submitform( pressbutton );
     }
 	}
@@ -57,38 +59,26 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 	<ul class="adminformlist">
 		<li>
-			<label for="name"> <?php echo JText::_('COM_TRACKS_Name' ); ?>:</label>
-			<input class="text_area required" type="text" name="name" id="name"
-			size="32" maxlength="40" value="<?php echo $this->object->name?>" />
+			<?php echo $this->form->getLabel('name'); ?> 
+			<?php echo $this->form->getInput('name'); ?>
 		</li>
 		<li>
-			<label for="alias"> <?php echo JText::_('COM_TRACKS_Alias' ); ?>:
-    </label>
-    <input class="text_area" type="text" name="alias" id="alias"
-      size="32" maxlength="250" value="<?php echo $this->object->alias?>" />
+			<?php echo $this->form->getLabel('alias'); ?> 
+			<?php echo $this->form->getInput('alias'); ?>
 		</li>
 		<li>
-			<label for="short_name"> <?php echo JText::_('COM_TRACKS_ROUND_SHORT_NAME' ); ?>:
-    </label>
-    <input class="text_area" type="text" name="short_name" id="short_name"
-      size="10" maxlength="10" value="<?php echo $this->object->short_name; ?>" />
+			<?php echo $this->form->getLabel('short_name'); ?> 
+			<?php echo $this->form->getInput('short_name'); ?>
 		</li>
 		<li>
-			<label for="published"><?php echo JText::_('COM_TRACKS_Published' ); ?>:</label>
-      <?php echo $this->lists['published']; ?>
-		</li>
-		<li>
-			<label for="ordering">
-			  <?php echo JText::_('COM_TRACKS_Ordering' ); ?>:
-			</label>
-			<?php echo $this->lists['ordering']; ?>
-		</li>
-		<li>
-			<label for="description"> <?php echo JText::_('COM_TRACKS_Description' ); ?>:
-			</label>
-			<?php echo $this->editor->display('description', $this->object->description, '100%', '400', '70', '15'); ?>
+			<?php echo $this->form->getLabel('published'); ?> 
+			<?php echo $this->form->getInput('published'); ?>
 		</li>
 	</ul>
+	<div class="clr"></div>
+	<?php echo $this->form->getLabel('description'); ?>
+	<div class="clr"></div>
+	<?php echo $this->form->getInput('description'); ?>
 </fieldset>
 </div>
 

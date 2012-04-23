@@ -94,6 +94,7 @@ class TracksViewRound extends TracksView
     $this->assignRef( 'editor', $editor );  
 		$this->assignRef( 'lists', $lists );
 		$this->assignRef( 'object', $object );
+		$this->assignRef( 'form',  $this->get('form') );
 
 		parent::display($tpl);
 	}
