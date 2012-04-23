@@ -155,5 +155,20 @@ class TracksControllerRound extends BaseController
 		$this->setRedirect( 'index.php?option=com_tracks&view=rounds', $msg );
 	}
 	
+	function orderup()
+	{
+		$model = $this->getModel('round');
+		$model->move(-1);
+	
+		$this->setRedirect( 'index.php?option=com_tracks&view=rounds');
+	}
+	
+	function orderdown()
+	{
+		$model = $this->getModel('round');
+		$model->move(1);
+	
+		$this->setRedirect( 'index.php?option=com_tracks&view=rounds');
+	}
 }
 ?>
