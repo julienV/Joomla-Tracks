@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE install PUBLIC 
-  "-//Joomla! 1.5//DTD plugin 1.0//EN" "http://dev.joomla.org/xml/1.5/plugin-install.dtd">
-<install version="1.5" type="plugin" group="tracks" method="upgrade">
+<extension version="1.7" type="plugin" group="tracks" method="upgrade">
   <name>Jomsocial integration for tracks plugin</name>
  	<author>Julien Vonthron</author>
  	<authorEmail>julien.vonthron@gmail.com</authorEmail>
@@ -14,17 +12,19 @@
   
   <files>
     <filename plugin="jomsocial">jomsocial.php</filename>
+    <folder>language</folder>
   </files>
-    
-  <languages>
-    <language tag="en-GB">languages/en-GB.plg_tracks_jomsocial.ini</language>
-  </languages>
-
-  <params>
-    <param type="list" name="view_individual_link" default="1" label="PLG_TRACKS_JOMSOCIAL_Link_on_individual_page" description="PLG_TRACKS_JOMSOCIAL_type_of_link_on_individual_page">
-      <option value="0">PLG_TRACKS_JOMSOCIAL_No_link</option>
-      <option value="1">PLG_TRACKS_JOMSOCIAL_text</option>
-      <option value="2">PLG_TRACKS_JOMSOCIAL_avatar</option>
-    </param>
-  </params>
-</install>
+  
+	<config>  
+		<fields name="params">
+		
+			<fieldset name="basic">
+		    <field type="list" name="view_individual_link" default="1" label="PLG_TRACKS_JOMSOCIAL_Link_on_individual_page" description="PLG_TRACKS_JOMSOCIAL_type_of_link_on_individual_page">
+		      <option value="0">PLG_TRACKS_JOMSOCIAL_No_link</option>
+		      <option value="1">PLG_TRACKS_JOMSOCIAL_text</option>
+		      <option value="2">PLG_TRACKS_JOMSOCIAL_avatar</option>
+		    </field>
+	  	</fieldset>
+	  </fields>
+	</config>
+</extension>

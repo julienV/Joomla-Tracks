@@ -13,11 +13,7 @@
   <files>
     <filename plugin="cb">cb.php</filename>
     <filename>index.html</filename>
+    <folder>language</folder>
   </files>
-    
-  <languages>
-    <language tag="en-GB">languages/en-GB.plg_tracks_cb.ini</language>
-    <language tag="en-GB">languages/en-GB.plg_tracks_cb.sys.ini</language>
-  </languages>
 
 </extension>
