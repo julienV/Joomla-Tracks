@@ -76,10 +76,9 @@ class BaseController extends JController
 		$viewType	= $document->getType();
 		$view = & $this->getView( 'Menu', $viewType );
 
-		if ($model = & $this->getModel('project')) 
+		if ($model = & $this->getModel('Menu', 'TracksModel')) 
 		{
 			// Push the model into the view (as default)
-			$model->setId( $mainframe->getUserState($option.'project', 0) );
 			$view->setModel($model, true);
 		}
 		$view->setLayout('start');
@@ -96,10 +95,9 @@ class BaseController extends JController
 		$viewType	= $document->getType();
 		$view = & $this->getView( 'Menu', $viewType );
 
-		if ($model = & $this->getModel('project')) 
+		if ($model = & $this->getModel('Menu', 'TracksModel')) 
 		{
 			// Push the model into the view (as default)
-			$model->setId( $mainframe->getUserState($option.'project', 0) );
 			$view->setModel($model, true);
 		}
 		$view->setLayout('end');
