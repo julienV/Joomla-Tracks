@@ -210,7 +210,6 @@ class TracksModelProjectround extends TracksModelItem
           $subround->projectround_id = $row->id;
           $subround->checked_out = 0;
           $subround->checked_out_time = null;
-      		dump($subround);
           
 		      if (!$subround->store()) {
 		        $this->setError($this->_db->getErrorMsg());

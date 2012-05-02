@@ -30,6 +30,8 @@ class TracksViewMenu extends JView
 	{
 		$mainframe = &JFactory::getApplication();
 		$option = JRequest::getCmd('option');
+		$document = JFactory::getDocument();
+		$uri = JURI::getInstance();
 		
 		if ($this->getLayout() == 'end') {
 			return $this->_displayEnd();
@@ -38,6 +40,8 @@ class TracksViewMenu extends JView
 		$project	= & $this->get( 'Data' );
     $pane     = & JPane::getInstance('sliders');
     $view     = JRequest::getCmd( 'view' );
+    $state    = $this->get('state');
+    $document->addScript('components/com_tracks/assets/js/menu.js');
 
 	  //Create Submenu
     JSubMenuHelper::addEntry( JText::_('COM_TRACKS_PROJECTS' ), 'index.php?option=com_tracks&view=projects', $view == 'projects');
@@ -49,8 +53,18 @@ class TracksViewMenu extends JView
     JSubMenuHelper::addEntry( JText::_('COM_TRACKS_SUBROUNDTYPES' ), 'index.php?option=com_tracks&view=subroundtypes', $view == 'subroundtypes');
     JSubMenuHelper::addEntry( JText::_('COM_TRACKS_ABOUT' ), 'index.php?option=com_tracks&view=about', $view == 'about');
 
-		$this->assignRef('project',		$project);
-    $this->assignRef('pane',   $pane);
+    $lists = array();
+    $options = array(JHTML::_('select.option', 0, JText::_('COM_TRACKS_SELECT_A_PROJECT')));
+    $moreopts = $this->get('ProjectsOptions');
+    if ($moreopts) {
+    	$options = array_merge($options, $moreopts);
+    }
+    $lists['project'] = JHTML::_('select.genericlist', $options, 'glproject', 'class="inputbox"', 'value', 'text', $state->get('project'));
+    
+		$this->assignRef('project',  $project);
+    $this->assignRef('pane',     $pane);
+    $this->assignRef('lists',    $lists);    
+    $this->assignRef('referer',  $uri->toString());     
 		
 		parent::display('tablepane');
 	}

@@ -33,7 +33,7 @@ class TracksHelper
 	 * @param boolean $active
 	 * @return html select
 	 */
-  function filterProject($query, $active = NULL)
+  public static function filterProject($query, $active = NULL)
   {
     // Initialize variables
     $db = & JFactory::getDBO();
@@ -55,7 +55,7 @@ class TracksHelper
    * @param boolean $active
    * @return html select
    */
-  function filterCompetition($query, $active = NULL)
+  public static function filterCompetition($query, $active = NULL)
   {
     // Initialize variables
     $db = & JFactory::getDBO();
@@ -83,7 +83,7 @@ class TracksHelper
    * @param boolean $active
    * @return html select
    */
-  function filterSeason($query, $active = NULL)
+  public static function filterSeason($query, $active = NULL)
   {
     // Initialize variables
     $db = & JFactory::getDBO();
@@ -106,7 +106,7 @@ class TracksHelper
  /**
   * Select list of active users
   */
-  function usersSelect( $name, $active, $nouser = 0, $javascript = NULL, $order = 'name', $reg = 1 )
+  public static function usersSelect( $name, $active, $nouser = 0, $javascript = NULL, $order = 'name', $reg = 1 )
   {
     $db =& JFactory::getDBO();
 
@@ -133,22 +133,6 @@ class TracksHelper
     $users = JHTML::_('select.genericlist',   $users, $name, 'class="inputbox" size="1" '. $javascript, 'value', 'text', $active );
 
     return $users;
-  }
-  
-  /**
-   * return true if mootools upgrade is enabled
-   * 
-   * @return boolean
-   */
-  function isMootools12()
-  {
-  	$version = new JVersion();
-		if ($version->RELEASE == '1.5' && $version->DEV_LEVEL >= 19 && JPluginHelper::isEnabled( 'system', 'mtupgrade' ) ) {
-			return true;
-		}
-		else {
-			return false;
-		}
   }
 }
 ?>

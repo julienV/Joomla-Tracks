@@ -13,7 +13,16 @@
 
 defined('_JEXEC') or die('Restricted access'); ?>
 
+<form name="tracksnav" id="tracksnav" action="index.php" method="post">
+	<?php echo $this->lists['project']; ?>
+	<input name="option" type="hidden" value="com_tracks"> 
+	<input name="controller" type="hidden" value="menu"> 
+	<input name="task" type="hidden" value=""> 
+	<input name="referer" type="hidden" value="<?php echo $this->referer; ?>"> 
+</form>
+
 <table class="tracks-main">
+
 <td class="main-row tracks-main-menu">
 <?php
 echo $this->pane->startPane( 'tracksnav' );
