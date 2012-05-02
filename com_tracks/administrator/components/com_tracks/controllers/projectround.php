@@ -98,6 +98,9 @@ class TracksControllerProjectround extends BaseController
 
   function savecopy()
   {   
+		$app    = JFactory::getApplication();
+		$option = JRequest::getCmd('option');
+		
     $cid = JRequest::getVar( 'cid', array(), 'post', 'array' );
     $project_id = JRequest::getVar( 'project_id', 0, 'post', 'int' );
     JArrayHelper::toInteger($cid);
@@ -111,6 +114,7 @@ class TracksControllerProjectround extends BaseController
     if(!$model->assign($cid, $project_id)) {
       echo "<script> alert('".$model->getError(true)."');</script>\n";
     }
+    $app->setUserState( $option.'project', $project_id );
     $link = 'index.php?option=com_tracks&view=projectrounds';
     $this->setRedirect($link);
   }

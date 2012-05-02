@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+					
+	<field
+		name="start_date"
+		type="calendar"
+		label="COM_TRACKS_Round_start"
+		description="COM_TRACKS_Round_start"
+		format="%Y-%m-%d %H:%M:%S"
+		/>
+					
+	<field
+		name="end_date"
+		type="calendar"
+		label="COM_TRACKS_Round_end"
+		description="COM_TRACKS_Round_end"
+		format="%Y-%m-%d %H:%M:%S"
+		/>
+	
+	<field
+		name="type"
+		type="sql"
+		label="COM_TRACKS_Type"
+		description="COM_TRACKS_Type"
+		query="SELECT id AS value, CONCAT(name, ' (', note, ')') as type FROM #__tracks_subroundtypes ORDER BY name ASC"
+		required="true"
+		class="validate-notzero"
+		>
+		<option value="0">COM_TRACKS_Select_a_subround_type</option>
+	</field>
+		
+					
+		<field
+			name="published"
+			type="list"
+			class="inputbox"
+			default="1"
+			size="1"
+			label="JSTATUS"
+			description="JFIELD_PUBLISHED_DESC">
+			<option
+				value="1">
+				JPUBLISHED</option>
+			<option
+				value="0">
+				JUNPUBLISHED</option>
+		</field>
+	
+		<field
+			name="description"
+			type="editor"
+			label="COM_TRACKS_Description"
+			description="COM_TRACKS_Description" 
+			filter="JComponentHelper::filterText" buttons="true"
+			/>
+	
+		<field
+			name="comment"
+			type="editor"
+			label="COM_TRACKS_comment"
+			description="COM_TRACKS_comment" 
+			filter="JComponentHelper::filterText" buttons="true"
+			/>
+		
+</form>

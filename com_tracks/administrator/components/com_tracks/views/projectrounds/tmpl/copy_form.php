@@ -16,12 +16,9 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <?php
 $user 	=& JFactory::getUser();
 
-//Ordering allowed ?
-$ordering = ($this->lists['order'] == 'obj.ordering');
-
 JHTML::_('behavior.tooltip');
 ?>
-<script language="javascript" type="text/javascript">
+<script type="text/javascript">
   Joomla.submitbutton = function (pressbutton) {
     if (pressbutton) {
       document.adminForm.task.value=pressbutton;
@@ -41,7 +38,7 @@ JHTML::_('behavior.tooltip');
 <div id="tracksmain">
 <form action="<?php echo $this->request_url; ?>" method="post" name="adminForm">
 <div id="projectsel">
-<?php echo JText::_('COM_TRACKS_Copy_to ' ) . $this->lists['projects']; ?>
+<?php echo JText::_('COM_TRACKS_Copy_to' ) . $this->lists['projects']; ?>
 </div>
 <div id="editcell">
 	<table class="adminlist">
