@@ -165,7 +165,7 @@ class TracksModelProjectround extends TracksModelItem
     {
       $cid =& $cids[$i];
       
-      $query = 'SELECT round_id, description'
+      $query = 'SELECT *'
           . ' FROM #__tracks_projects_rounds '
           . ' WHERE id = ' . intval($cid);
       $this->_db->setQuery( $query );
@@ -179,9 +179,12 @@ class TracksModelProjectround extends TracksModelItem
       }
       
       $row->reset();
+      $row->bind($round);
       $row->id = null;
-      $row->round_id = $round->round_id;
       $row->project_id = $project_id;
+      $row->checked_out = 0;
+      $row->checked_out_time = null;      
+      
       // Store the item to the database
       if (!$row->store()) {
         $this->setError($this->_db->getErrorMsg());
@@ -189,7 +192,7 @@ class TracksModelProjectround extends TracksModelItem
       }
       
       // now copy subrounds
-      $query = ' SELECT description, type, ordering '
+      $query = ' SELECT * '
              . ' FROM #__tracks_projects_subrounds'
              . ' WHERE projectround_id = ' . $cid;
       $this->_db->setQuery( $query );
@@ -202,9 +205,12 @@ class TracksModelProjectround extends TracksModelItem
       	foreach ($subrounds AS $s)
       	{
       		$subround->reset();
+      		$subround->bind($s);
           $subround->id = null;
-          $subround->bind($s);
           $subround->projectround_id = $row->id;
+          $subround->checked_out = 0;
+          $subround->checked_out_time = null;
+      		dump($subround);
           
 		      if (!$subround->store()) {
 		        $this->setError($this->_db->getErrorMsg());

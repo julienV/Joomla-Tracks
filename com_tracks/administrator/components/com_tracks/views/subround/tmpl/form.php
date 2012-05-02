@@ -32,6 +32,19 @@ defined('_JEXEC') or die('Restricted access'); ?>
 ?>
 
 <script language="javascript" type="text/javascript">
+
+	window.addEvent('domready', function(){
+      document.formvalidator.setHandler('notzero',
+        function (value) {
+          if(value=="0") {
+            return false;
+          } else {
+            return true;
+          }
+        }
+      );
+	});
+
 	Joomla.submitbutton = function (pressbutton) {
 		var form = document.adminForm;
 		if (pressbutton == 'cancel') {
@@ -39,8 +52,9 @@ defined('_JEXEC') or die('Restricted access'); ?>
 			return;
 		}
 
+		var validator = document.formvalidator;
 		// do field validation
-		if (form.type.value == ""){
+		if (!validator.validate(form.type)){
 			alert( "<?php echo JText::_('COM_TRACKS_You_must_chose_a_type', true ); ?>" );
 		} else {
 			Joomla.submitform( pressbutton );
@@ -63,50 +77,32 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 		<ul class="adminformlist">
 			<li>
-				<label for="competition">
-					<?php echo JText::_('COM_TRACKS_Type' ); ?>:
-				</label>
-				<?php echo $this->lists['types']; ?>
+				<?php echo $this->form->getLabel('type'); ?>
+				<?php echo $this->form->getInput('type'); ?>
 			</li>
 			<li>
-				<label for="published"><?php echo JText::_('COM_TRACKS_Published' ); ?>:</label>
-				<?php echo $this->lists['published']; ?>
+				<?php echo $this->form->getLabel('published'); ?>
+				<?php echo $this->form->getInput('published'); ?>
 			</li>
 			<li>
-				<label for="start_date">
-					<?php echo JText::_('COM_TRACKS_Round_start' ); ?>:
-				</label>
-      <?php 
-		    echo  JHTML::calendar( $this->object->start_date, 'start_date', 'start_date', '%Y-%m-%d %H:%M:%S' );
-		  ?>
+				<?php echo $this->form->getLabel('start_date'); ?>
+				<?php echo $this->form->getInput('start_date'); ?>
 			</li>
 			<li>
-				<label for="end_date">
-					<?php echo JText::_('COM_TRACKS_Round_end' ); ?>:
-				</label>
-			<?php 
-	        echo  JHTML::calendar( $this->object->end_date, 'end_date', 'end_date', '%Y-%m-%d %H:%M:%S' );
-	    ?>
+				<?php echo $this->form->getLabel('end_date'); ?>
+				<?php echo $this->form->getInput('end_date'); ?>
 			</li>
-			<li>
-				<label for="ordering">
-	     <?php echo JText::_('COM_TRACKS_Ordering' ); ?>:
-	     </label>
-	    <?php echo $this->lists['ordering']; ?>
-			</li>
-			<li>
-				<label for="description">
-          <?php echo JText::_('COM_TRACKS_Description' ); ?>:
-        </label>
-        <?php echo $this->editor->display('description', $this->object->description, '100%', '400', '70', '15'); ?>
-			</li>
-			<li>
-				<label for="comment">
-          <?php echo JText::_('COM_TRACKS_Comment' ); ?>:
-        </label>
-        <?php echo $this->editor->display('comment', $this->object->comment, '100%', '400', '70', '15'); ?>
-			</li>
-		</ul>				
+		</ul>
+		
+		<div class="clr"></div>
+		<?php echo $this->form->getLabel('description'); ?>
+		<div class="clr"></div>
+		<?php echo $this->form->getInput('description'); ?>
+		<div class="clr"></div>
+		<?php echo $this->form->getLabel('comment'); ?>
+		<div class="clr"></div>
+		<?php echo $this->form->getInput('comment'); ?>
+	
 	</fieldset>
 </div>
 

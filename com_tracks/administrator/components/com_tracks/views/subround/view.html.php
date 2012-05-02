@@ -51,7 +51,8 @@ class TracksViewSubround extends JView
 		$user 	=& JFactory::getUser();
 		$model	=& $this->getModel();
 
-		$lists = array();
+		JHTML::_('behavior.formvalidation');
+		
 		//get the project
 		$object	=& $this->get('data');
 		$isNew		= ($object->id < 1);
@@ -74,36 +75,13 @@ class TracksViewSubround extends JView
 			$object->order 	= 0;
 			$object->projectround_id 	= JRequest::getVar('prid',0);
 		}
-		
-		//build the html select list for sub-round types
-	  $types[] = JHTML::_('select.option',  '0', '- '. JText::_('COM_TRACKS_Select_a_subround_type' ) .' -','id', 'name' );
-	  if ( $res = & $this->get('SubroundTypes') ) {
-	    $types = array_merge( $types, $res );
-	  }
-	  $lists['types'] = JHTML::_('select.genericlist',  $types, 'type', 'class="inputbox" size="1"', 'id', 'name', $object->type);
-	  unset($types);
-    
-		// build the html select list for ordering
-		$query = 'SELECT sr.ordering AS value, CONCAT(srt.name, "(", srt.note, ")") AS text'
-			. ' FROM #__tracks_projects_subrounds AS sr '
-			. ' INNER JOIN #__tracks_subroundtypes AS srt ON sr.type = srt.id'
-      . ' WHERE projectround_id = ' . JRequest::getVar('prid',0)
-			. ' ORDER BY sr.ordering';
-		$lists['ordering'] 			= JHTML::_('list.specificordering',  $object, $object->id, $query, 1 );
-
-		// build the html select list
-		$arr = array(
-			JHtml::_('select.option', '0', JText::_('JNO')),
-			JHtml::_('select.option', '1', JText::_('JYES'))
-		);
-		$lists['published'] 		= JHTML::_('select.genericlist',  $arr,'published', 'class="inputbox"', 'value', 'text', $object->published );
-    
+		    
 		//editor
     $editor =& JFactory::getEditor();
 		
     $this->assignRef('editor', $editor);  
-    $this->assignRef('lists',		$lists);
 		$this->assignRef('object',		$object);
+		$this->assignRef('form',		$this->get('form'));
 
 		parent::display($tpl);
 	}
