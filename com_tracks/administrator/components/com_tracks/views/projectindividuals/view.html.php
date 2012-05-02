@@ -30,13 +30,22 @@ class TracksViewProjectindividuals extends TracksView
 	function display($tpl = null)
 	{
 		$mainframe = &JFactory::getApplication();
-		$option = JRequest::getCmd('option');
-
+		$option = JRequest::getCmd('option');		
+		
     if($this->getLayout() == 'assign') 
     {
 			$this->_displayAssign($tpl);
 			return;
 		}
+    $project_id = $mainframe->getUserState( $option.'project' );
+		
+		$document = &JFactory::getDocument();
+		$document->addScript(JURI::base() . 'components/com_tracks/assets/js/autocompleter/1_2/Autocompleter.js');
+		$document->addScript(JURI::base() . 'components/com_tracks/assets/js/autocompleter/1_2/Autocompleter.Local.js');
+		$document->addScript(JURI::base() . 'components/com_tracks/assets/js/autocompleter/1_2/Autocompleter.Request.js');
+		$document->addScript(JURI::base() . 'components/com_tracks/assets/js/autocompleter/1_2/Observer.js');
+		$document->addScript(JURI::base() . 'components/com_tracks/assets/js/quickadd1_2.js');
+		$document->addStyleSheet(JURI::base() . 'components/com_tracks/assets/css/Autocompleter1_2.css');
 		
 		// Set toolbar items for the page
 		JToolBarHelper::title(   JText::_('COM_TRACKS_Project_Participants' ), 'generic.png' );
@@ -80,6 +89,7 @@ class TracksViewProjectindividuals extends TracksView
 		$this->assignRef('items',		$items);
 		$this->assignRef('pagination',	$pagination);
 		$this->assignRef('request_url',	$uri->toString());
+		$this->assignRef('project_id',  $project_id);
 		
 		parent::display($tpl);
 	}

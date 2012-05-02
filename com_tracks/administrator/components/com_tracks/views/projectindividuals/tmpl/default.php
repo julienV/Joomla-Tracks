@@ -22,6 +22,21 @@ $ordering = ($this->lists['order'] == 'obj.ordering');
 JHTML::_('behavior.tooltip');
 ?>
 <div id="tracksmain">
+
+<form action="index.php" method="post">
+	<input type="hidden" name="p" value="<?php echo $this->project_id; ?>" />
+	<table>
+		<tr>
+			<td class="hasTip" title="<?php echo JText::_('COM_TRACKS_QUICK_ADD').'::'.JText::_('COM_TRACKS_QUICK_ADD_TIP'); ?>"><?php echo JText::_('COM_TRACKS_QUICK_ADD'); ?>:</td>
+			<td><input type="text" name="quickadd" id="quickadd" /></td>
+			<td><input type="hidden" id="individualid" name="individualid" value=""><input type="submit" name="submit2" id="submit2" value="<?php echo JText::_('COM_TRACKS_ADD_PARTICIPANT'); ?>" /></td>
+		</tr>	
+	</table>
+	<input name="option" type="hidden" value="com_tracks"/>
+	<input name="controller" type="hidden" value="quickadd"/>
+	<input name="task" type="hidden" value="addpi"/>
+</form>
+
 <form action="<?php echo $this->request_url; ?>" method="post" name="adminForm" id="adminForm">
 <table>
 <tr>
