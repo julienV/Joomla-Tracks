@@ -64,7 +64,7 @@ class TracksControllerProjectindividual extends BaseController
 		if ($returnid = $model->store($post)) {
 			$msg = JText::_('COM_TRACKS_Participant_Saved' );
 		} else {
-			$msg = JText::_('COM_TRACKS_Error_Saving_Project_Round' ).$model->getError();
+			$msg = JText::_('COM_TRACKS_Error_Saving_Participant' ).': '.$model->getError();
 		}
 
 		// Check the table in so it can be edited.... we are done with it anyway

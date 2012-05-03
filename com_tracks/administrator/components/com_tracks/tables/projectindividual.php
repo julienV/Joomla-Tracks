@@ -65,7 +65,7 @@ class TableProjectindividual extends JTable
 		$query->select('id');
 		$query->from('#__tracks_projects_individuals');
 		$query->where('project_id = '.$this->project_id);
-		$query->where('team_id = '.$this->team_id);
+		$query->where('individual_id = '.$this->individual_id);
 		$db->setQuery($query);
 		$res = $db->loadResult();
 		if ($res) {

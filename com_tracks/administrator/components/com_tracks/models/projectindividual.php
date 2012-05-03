@@ -193,7 +193,7 @@ class TracksModelProjectindividual extends TracksModelItem
 
 		// Make sure the item is valid
 		if (!$row->check()) {
-			$this->setError($this->_db->getErrorMsg());
+			$this->setError($row->getError());
 			return false;
 		}
 
