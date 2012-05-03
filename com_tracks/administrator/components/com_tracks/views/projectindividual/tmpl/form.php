@@ -40,7 +40,8 @@ defined('_JEXEC') or die('Restricted access'); ?>
 		}
 
 		// do field validation
-		if (form.individual_id.value == "0"){
+    var validator = document.formvalidator;
+		if (validator.validate(form.individual_id) === false) {
 			alert( "<?php echo JText::_('COM_TRACKS_You_must_chose_a_person', true ); ?>" );
 		} else {
 			Joomla.submitform( pressbutton );
@@ -60,39 +61,20 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <div class="col50">
 	<fieldset class="adminform">
 		<legend><?php echo JText::_('COM_TRACKS_Project_Participant' ); ?></legend>
-
-		<table class="admintable">
-		<tr>
-			<td valign="top" align="right" class="key">
-				<label for="competition">
-					<?php echo JText::_('COM_TRACKS_Person' ); ?>:
-				</label>
-			</td>
-			<td>
-				<?php echo $this->lists['individuals']; ?>
-			</td>
-		</tr>
-    <tr>
-      <td valign="top" align="right" class="key">
-        <label for="number">
-          <?php echo JText::_('COM_TRACKS_Number' ); ?>:
-        </label>
-      </td>
-      <td>
-        <input class="text_area" type="text" name="number" id="number" size="4" maxlength="4" value="<?php echo $this->projectindividual->number; ?>" />
-      </td>
-    </tr>
-		<tr>
-			<td valign="top" align="right" class="key">
-				<label for="competition">
-					<?php echo JText::_('COM_TRACKS_Team' ); ?>:
-				</label>
-			</td>
-			<td>
-				<?php echo $this->lists['teams']; ?>
-			</td>
-		</tr>
-	</table>
+		<ul class="adminformlist">
+			<li>
+				<?php echo $this->form->getLabel('individual_id'); ?>
+				<?php echo $this->form->getInput('individual_id'); ?>
+			</li>
+			<li>
+				<?php echo $this->form->getLabel('number'); ?>
+				<?php echo $this->form->getInput('number'); ?>
+			</li>
+			<li>
+				<?php echo $this->form->getLabel('team_id'); ?>
+				<?php echo $this->form->getInput('team_id'); ?>
+			</li>
+		</ul>
 	</fieldset>
 </div>
 
