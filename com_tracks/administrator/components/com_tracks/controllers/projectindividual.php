@@ -207,4 +207,3 @@ class TracksControllerProjectindividual extends BaseController
 		$this->setRedirect( 'index.php?option=com_tracks&view=projectindividuals', $msg );
 	}
 }
-?>

@@ -105,5 +105,17 @@ class TracksControllerIndividual extends BaseController
 		$msg = JText::_('COM_TRACKS_Operation_Cancelled' );
 		$this->setRedirect( 'index.php?option=com_tracks&view=individuals', $msg );
 	}
+	
+	
+	/**
+	 * individual element
+	 */
+	function element()
+	{
+		$model  = &$this->getModel( 'individuals' );
+		$view = &$this->getView( 'individuals', 'html' );
+		$view->setLayout( 'element' );
+		$view->setModel( $model, true );
+		$view->display();
+	}
 }
-?>
