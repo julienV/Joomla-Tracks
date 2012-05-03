@@ -43,7 +43,7 @@ if($controller = JRequest::getWord('controller')) {
 	} else {
 		$controller = '';
 	}
-<<<<<<< HEAD
+	
 	// Create the controller
 	$classname	= 'TracksController'.ucfirst($controller);
 	$controller	= new $classname( );
@@ -52,12 +52,7 @@ else {
 	// Get an instance of the controller prefixed by HelloWorld
 	$controller = JController::getInstance('Tracks');
 }
-=======
-}
->>>>>>> 1cb76cb... / added individual element
 
 // Perform the Request task
 $controller->execute( JRequest::getCmd('task'));
 $controller->redirect();
-
-?>

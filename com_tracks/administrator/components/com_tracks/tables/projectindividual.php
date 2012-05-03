@@ -58,6 +58,21 @@ class TableProjectindividual extends JTable
 	 */
 	function check()
 	{
+		// check unicity per project
+		$db = &JFactory::getDbo();
+		$query = $db->getQuery(true);
+		
+		$query->select('id');
+		$query->from('#__tracks_projects_individuals');
+		$query->where('project_id = '.$this->project_id);
+		$query->where('team_id = '.$this->team_id);
+		$db->setQuery($query);
+		$res = $db->loadResult();
+		if ($res) {
+			$this->setError(Jtext::_('COM_TRACKS_INDIVIDUAL_IS_ALREADY_PARTICIPATING_TO_PROJECT'));
+			return false;
+		}
+		
 		return true;
 	}
 }
