@@ -23,7 +23,7 @@ require_once( 'base.php' );
  * @package     Tracks
  * @since 0.1
  */
-class TracksFrontModelProfile extends baseModel
+class TracksModelProfile extends baseModel
 { 
 	/** individual id **/  
 	var $_id = 0;

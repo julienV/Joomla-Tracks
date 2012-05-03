@@ -22,7 +22,7 @@ require_once( 'base.php' );
  * @package		Tracks
  * @since 0.1
  */
-class TracksFrontModelProjectresults extends baseModel
+class TracksModelProjectresults extends baseModel
 {
 	/**
 	 * associated project

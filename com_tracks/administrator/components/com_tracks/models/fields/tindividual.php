@@ -22,10 +22,11 @@ class JFormFieldTIndividual extends JFormField
 	{
 		// Load modal behavior
 		JHtml::_('behavior.modal', 'a.modal');
-	
+		
 		// Build the script
 		$script = array();
-		$script[] = '    function jSelectIndividual_'.$this->id.'(id, title, object) {';
+		$script[] = '    function jSelectIndividual_'.$this->id.'(id, lastname, firstname) {';
+		$script[] = '        var title = firstname ? firstname+" "+lastname : lastname;';
 		$script[] = '        document.id("'.$this->id.'_id").value = id;';
 		$script[] = '        document.id("'.$this->id.'_name").value = title;';
 		$script[] = '        SqueezeBox.close();';
@@ -36,8 +37,7 @@ class JFormFieldTIndividual extends JFormField
 	
 		// Setup variables for display
 		$html = array();
-		$link = 'index.php?option=com_tracks&amp;controller=individual&amp;task=element'.
-	                  '&amp;tmpl=component&amp;function=jSelectIndividual_'.$this->id;
+		$link = 'index.php?option=com_tracks&amp;view=individuals&amp;layout=modal&amp;tmpl=component&amp;function=jSelectIndividual_'.$this->id;
 		$title = null;
 		if ($this->value)
 		{

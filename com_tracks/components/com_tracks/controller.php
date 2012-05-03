@@ -25,8 +25,19 @@ $document->addStyleSheet( JURI::base() . 'components/com_tracks/css/tracks.css',
  * @package		Tracks
  * @since 0.1
  */
-class TracksFrontController extends JController
-{
+class TracksController extends JController
+{	
+	function __construct($config = array())
+	{
+		// frontpage Editor pagebreak proxying:
+		if(JRequest::getCmd('view') === 'individuals' && JRequest::getCmd('layout') === 'modal') {
+			JHtml::_('stylesheet','system/adminlist.css', array(), true);
+			$config['base_path'] = JPATH_COMPONENT_ADMINISTRATOR;
+		}
+	
+		parent::__construct($config);
+	}
+	
 	function display()
 	{
 		// Set a default view if none exists

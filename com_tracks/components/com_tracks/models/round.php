@@ -23,7 +23,7 @@ require_once( 'base.php' );
  * @package     Tracks
  * @since 0.1
  */
-class TracksFrontModelRound extends baseModel
+class TracksModelRound extends baseModel
 {   
     function getRound( $round_id )
     {
