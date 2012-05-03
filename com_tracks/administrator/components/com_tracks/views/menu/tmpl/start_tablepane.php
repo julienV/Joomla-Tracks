@@ -26,7 +26,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <td class="main-row tracks-main-menu">
 <?php
 echo $this->pane->startPane( 'tracksnav' );
-if ( $this->project->id )
+if ( $this->project )
 {
 	echo $this->pane->startPanel( $this->project->name, 'projectpanel' );
   ?>
