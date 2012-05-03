@@ -145,3 +145,8 @@ div#d-sponsors label, div#d-sponsors input {
 	clear: none;
 	display: inline;
 }
+
+span.quickrank {
+	cursor: pointer;
+}
+}

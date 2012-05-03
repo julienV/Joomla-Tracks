@@ -49,6 +49,13 @@ JHTML::_('behavior.tooltip');
 </style>
 
 <script type="text/javascript">
+
+window.addEvent('domready', function(){
+	$$("span.quickrank").addEvent('click', function(){
+		this.getParent().getElement('input').value = this.get('text');
+	});
+});
+
 Joomla.submitbutton = function(pressbutton)
 {
   if (pressbutton == "saveranks"){
@@ -101,7 +108,7 @@ Joomla.submitbutton = function(pressbutton)
       <th class="title">
         <?php echo JHTML::_('grid.sort',  'Performance', 'rr.performance', $this->lists['order_Dir'], $this->lists['order'] ); ?>
       </th>			
-			<th width="5%">
+			<th width="80">
 				<?php echo JHTML::_('grid.sort',  'Rank', 'rr.rank', $this->lists['order_Dir'], $this->lists['order'] ); ?>
 			</th>    
       <th width="5%">
@@ -159,6 +166,9 @@ Joomla.submitbutton = function(pressbutton)
 				       style="text-align: center" />
 			</td>
       <td>
+      	<?php for ($j = 1; $j < 11; $j++): ?>
+      		<span class="quickrank"><?php echo $j; ?></span>
+      	<?php endfor; ?>      	
         <input type="text" name="rank[]" size="3"
 				       value="<?php echo $row->rank;?>" class="text_area"
 				       style="text-align: center" />
