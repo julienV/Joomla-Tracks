@@ -23,7 +23,7 @@ jimport( 'joomla.application.component.view');
  * @package		Tracks
  * @since 0.1
  */
-class TracksFrontViewRacerVSRacer extends JView
+class TracksViewRacerVSRacer extends JView
 {
 	function display($tpl = null)
 	{
@@ -114,7 +114,7 @@ $option = JRequest::getCmd('option');
       $mainframe->redirect(JURI::base(), JText::_('COM_TRACKS_VIEW_INDIVIDUAL_PLEASE_LOGIN_TO_EDIT_PROFILE'), 'error' );
     }
       
-    $profile = &JModel::getInstance('profile', 'TracksFrontModel');
+    $profile = &JModel::getInstance('profile', 'TracksModel');
     $this->setModel($profile, true);
                 
     // Get the page/component configuration

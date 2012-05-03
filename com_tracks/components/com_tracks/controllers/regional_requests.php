@@ -22,7 +22,7 @@ jimport('joomla.application.component.controller');
  * @package		Tracks
  * @since 0.1
  */
-class TracksFrontControllerregional_requests extends JController
+class TracksControllerregional_requests extends JController
 {
   
   function __construct()

@@ -23,7 +23,7 @@ require_once( 'base.php' );
  * @package		Tracks
  * @since 0.1
  */
-class TracksFrontModelLatest_Projects extends baseModel
+class TracksModelLatest_Projects extends baseModel
 {
     /**
     * Gets the published projects (season and competition have to be published too)

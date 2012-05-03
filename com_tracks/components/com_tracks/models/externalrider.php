@@ -24,7 +24,7 @@ require_once (JPATH_COMPONENT_ADMINISTRATOR.DS.'helpers'.DS.'imageselect.php');
  * @package     Tracks
  * @since 0.1
  */
-class TracksFrontModelexternalrider extends baseModel
+class TracksModelexternalrider extends baseModel
 { 
 	/**
 	 * individual id
