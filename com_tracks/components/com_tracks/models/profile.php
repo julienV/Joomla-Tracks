@@ -55,7 +55,7 @@ class TracksFrontModelProfile extends baseModel
 			. ' WHERE i.user_id = ' . $user->get('id');
 		}
 		else {
-			JError::raiseError(403, JText::_('COM_TRACKS_ERROR_MUST_BE_LOGGED'));
+			JError::raiseError(404, JText::_('COM_TRACKS_ERROR_MUST_BE_LOGGED'));
 			return false;
 		}
 

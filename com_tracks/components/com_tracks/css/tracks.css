@@ -7,19 +7,19 @@ text-align:left;
 }
 
 table.raceResults th, table.raceResults td {
-background-color:#FFFFFF;
 border-collapse:collapse;
-font-size:1.2em;
+font-size:12px;
 line-height:1.2em;
 margin:0pt 0pt 1px;
 padding:2px 10px;
 }
 
+table.raceResults th {font-size:10px;font-weight:bold;}
+
 table#tracksprofile th {
 	text-align: right;
 	width: 140px;
 	font-weight: bold;
-	background-color: #F6F6F6;
 } 
 
 #tracks ul.individualsGallery {
@@ -29,14 +29,11 @@ table#tracksprofile th {
 }
 
 #tracks ul.individualsGallery li {
-  background:#ECECEC none repeat scroll 0% 0%;
-	color:#FFFFFF;
 	float:left;
 	margin:0pt 5px 5px 0pt;
 }
 
 #tracks ul.individualsGallery li div {
-	background:#FFFFFF none repeat scroll 0% 0%;
   text-align:center;
 	margin:5px;
 }
@@ -74,7 +71,40 @@ table#tracksprofile th {
 
 #individualdetails {
   /*clear:both;*/
+  width:250px;
+  overflow:hidden;
+  float:left;
+  padding:10px;
+  /* margin-top:10px;
+  background:#f5f5ff; */
 }
+
+
+#individualdetails ul { margin-left: 0; }
+
+#individualdetails li {
+  list-style:none;
+  float:left;
+  padding:3px;
+  margin:1px 3px 0px 0px;
+}
+
+#individualdetails li:first-child {
+  width:70px;
+  text-align:right;
+  font-weight:bold;
+}
+
+
+#individualresults {
+  /*clear:both;*/
+  overflow:hidden;
+  float:left;
+  margin: 0px 0px 20px 10px;
+  background:#f5f5ff;
+}
+
+
 
 div#tracks .copyright {
 font-size: 0.9em; text-align: center;
@@ -87,9 +117,15 @@ div#tracks table#namelist td {
 }
 
 div#tracks table#namelist .letter {
-  font-size: 1.5em;
   font-weight: bold;
-  padding:5px;
+  margin-left:20px;
+  color:#1AA8FB;
+}
+
+
+div#tracks table#namelist .featuredrider a{
+  font-weight: bold;
+  color:red;
 }
 
 div#individualpic img, div#teampic img{
@@ -117,19 +153,4 @@ div.project-inds span {
 
 div.project-inds div {
 	padding-left: 4px;
-}
-
-div.seasonwinners table th {
-	border-bottom:1px solid #ECECEC;
-	padding-bottom:4px;
-	text-align:left;
-}
-
-div.seasonwinners table td {
-	background-color:#FFFFFF;
-	border-collapse:collapse;
-	font-size:1.2em;
-	line-height:1.2em;
-	margin:0pt 0pt 1px;
-	padding:2px 10px;
 }

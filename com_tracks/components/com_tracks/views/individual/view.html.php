@@ -96,7 +96,7 @@ class TracksFrontViewIndividual extends JView
     $this->assignRef( 'useragainst',     $this->get('userParticipatedAgainst') );
     $this->assignRef( 'user',     $user );
     $this->assignRef( 'tipscategory',     $tipscategory );
-    
+
 		parent::display($tpl);
 	}
 	
@@ -228,7 +228,7 @@ $option = JRequest::getCmd('option');
 
     parent::display($tpl);
   }
-  
+
   public function rideButton($result)
   {
   	JHTML::_('behavior.framework');
@@ -237,21 +237,24 @@ $option = JRequest::getCmd('option');
   	$document->addScript('components/com_tracks/assets/js/ridemodal.js');
   	
   	JText::script('COM_TRACKS_RIDE_DELETE_CONFIRM');
-  	
+
   	if ($result->ride) {
-  		$txt = JLVImageTool::modalimage($result->ride, 'ride', 16, null, 'components/com_tracks/assets/images/viewride.png');
-  		$img = JHTML::image('components/com_tracks/assets/images/removeride.png', 'remove');
-  		$attribs = array('class' => 'removeride');
-  		$txt.= JHTML::link('index.php?option=com_tracks&controller=addride&task=remove&tmpl=component&ind='.$this->data->id.'&r='.$result->id, $img, $attribs);
+  		$txt = JLVImageTool::modalimage($result->ride, 'ride', 16, null, 'images/icons/viewride.png');
+      if ( $this->show_edit_link )
+          {
+      		$img = JHTML::image('images/icons/removeride.png', 'remove');
+      		$attribs = array('class' => 'removeride');
+      		$txt.= JHTML::link('index.php?option=com_tracks&controller=addride&task=remove&tmpl=component&ind='.$this->data->id.'&r='.$result->id, $img, $attribs);
+      		}
   		return $txt;
   	}
   	else if ($user->get('id') && ($user->authorise('core.manage', 'com_tracks') || $this->data->user_id == $user->get('id')))
   	{
   		JHTML::_('behavior.modal', 'a.ride');
-  		$img = JHTML::image('components/com_tracks/assets/images/addride.png', 'ride');
+  		$img = JHTML::image('images/icons/addride.png', 'ride');
   		$attribs = array('class' => 'ride',
-			                 'rel' => "{handler: 'iframe', size: {x: 650, y: 375}}");
-  		$link = JHTML::link('index.php?option=com_tracks&controller=addride&task=add&tmpl=component&r='.$result->id, $img, $attribs);
+			                 'rel' => "{handler: 'iframe', size: {x: 650, y: 200}}");
+  		$link = JHTML::link('index.php?option=com_tracks&controller=addride&task=add&tmpl=component&r='.$result->id.'&ind='.$this->data->id, $img, $attribs);
   		return $link;
   	}
   }

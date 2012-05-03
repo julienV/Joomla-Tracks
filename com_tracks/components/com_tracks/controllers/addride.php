@@ -36,7 +36,10 @@ class TracksFrontControllerAddride extends JController
 		$params = JComponentHelper::getParams('com_tracks');
 		$result_id = JRequest::getInt('rid');
 		$id = JRequest::getInt('id');
-		
+		$ind = JRequest::getInt('ind');
+
+
+  	
 		$maxwidth = 960;
 		
 		$file	= JRequest::getVar( 'file', '', 'files', 'array' );
@@ -52,13 +55,14 @@ class TracksFrontControllerAddride extends JController
 		}
 		
 		$model = $this->getModel('addride');
-		if (!$model->store($file, $result_id)) {
+		if (!$model->store($file, $result_id,$ind)) {
 			echo $model->getError();
 			return false;
 		}
 		
 		// saved ok, load the js to close the window
 		echo JText::_('COM_TRACKS_RIDE_SAVED');
+		
 		$document = JFactory::getDocument();
 		$document->addScript('components/com_tracks/assets/js/closeride.js');
 	}

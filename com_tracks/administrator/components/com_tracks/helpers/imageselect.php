@@ -87,7 +87,7 @@ class ImageSelect
     //check if the imagefiletype is valid
     $fileext  = JFile::getExt($file['name']);
 
-    $allowable  = array ('gif', 'jpg', 'png');
+    $allowable  = array ('gif', 'jpg', 'png','GIF', 'JPG', 'PNG', 'jpeg', 'JPEG');
     if (!in_array($fileext, $allowable)) {
       JError::raiseWarning(100, JText::_('COM_TRACKS_WRONG_IMAGE_FILE_TYPE').': '.htmlspecialchars($file['name'], ENT_COMPAT, 'UTF-8'));
       return false;

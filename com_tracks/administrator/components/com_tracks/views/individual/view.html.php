@@ -71,7 +71,7 @@ class TracksViewIndividual extends TracksView
 		}
 		
 		// users list
-    $lists['users'] = TracksHelper::usersSelect('user_id', $object->user_id, 1, NULL, 'name', 0);
+    $lists['users'] = TracksHelper::usersSelect('user_id', $object->user_id, 1, 'onChange=emailuser();', 'name', 0);
     
     // countries
     $countries = array();

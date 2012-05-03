@@ -44,6 +44,17 @@ class TracksController extends BaseController
 		$res = $db->query();
 	}
 	
+	public function testlast()
+	{
+		$db = &JFactory::getDbo();
+		$query = $db->getQuery(true);
+		
+		$query->select('lu.*');
+		$query->from('#__tracks_latest_update AS lu');
+		$db->setQuery($query, 0, 10);
+		$res = $db->loadObjectList();
+	}
+
 	public function ctride()
 	{
 		$db = JFactory::getDbo();
@@ -58,7 +69,7 @@ class TracksController extends BaseController
 		$db->setQuery($query);
 		$res = $db->query();
 	}
-	
+
 	public function cttips()
 	{
 		$db = JFactory::getDbo();
@@ -83,4 +94,5 @@ class TracksController extends BaseController
 		$db->setQuery($query);
 		$res = $db->query();
 	}
+
 }

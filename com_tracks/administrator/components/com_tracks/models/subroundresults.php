@@ -131,7 +131,7 @@ class TracksModelSubroundResults extends TracksModelList
 	function getSubroundInfo()
 	{		
 		$query = ' SELECT sr.projectround_id, p.id AS project_id, '
-		        . ' r.name AS roundname, pr.comment, '
+		        . ' r.name AS roundname, '
 		        . ' srt.name AS subroundname, sr.id AS subround_id, sr.projectround_id, '
             . ' p.name AS projectname '
             . ' ,s.name AS seasonname '

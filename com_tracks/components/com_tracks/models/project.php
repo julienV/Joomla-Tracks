@@ -83,12 +83,12 @@ class TracksFrontModelProject extends baseModel
 						}
 					}
 					$winners[$pr] = $pwins;
+					//$winners[$pr] = array_slice($ranking, 0, 3);
 				}
 				else {
 					$winners[$pr] = false;
 				}
 			}
-// 			echo '<pre>';print_r($winners); echo '</pre>';exit;
 			return $winners;
 		}
 		else return null;

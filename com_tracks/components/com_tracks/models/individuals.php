@@ -121,6 +121,7 @@ class TracksFrontModelIndividuals extends baseModel
 					break;
 				case 'mostpopular':
 					$query->clear('order');
+					$query->where('CHAR_LENGTH(i.picture_small) > 0 ');
 					$query->order('i.hits DESC ');
 					$limit = 15;
 					break;
@@ -132,6 +133,7 @@ class TracksFrontModelIndividuals extends baseModel
 					$query->where('p.competition_id = 1');
 					$query->where('p.name NOT LIKE ("%freestyle%")');
 					$query->where('p.name NOT LIKE ("%freeride%")');
+					$query->where('CHAR_LENGTH(i.picture_small) > 0 ');
 					$query->group('i.id');
 					$query->clear('order');
 					$query->order('i.hits DESC ');
@@ -145,6 +147,7 @@ class TracksFrontModelIndividuals extends baseModel
 					$query->where('p.competition_id = 2');
 					$query->where('p.name NOT LIKE ("%freestyle%")');
 					$query->where('p.name NOT LIKE ("%freeride%")');
+					$query->where('CHAR_LENGTH(i.picture_small) > 0 ');
 					$query->group('i.id');
 					$query->clear('order');
 					$query->order('i.hits DESC ');
@@ -158,6 +161,7 @@ class TracksFrontModelIndividuals extends baseModel
 					$query->where('p.competition_id = 3');
 					$query->where('p.name NOT LIKE ("%freestyle%")');
 					$query->where('p.name NOT LIKE ("%freeride%")');
+					$query->where('CHAR_LENGTH(i.picture_small) > 0 ');
 					$query->group('i.id');
 					$query->clear('order');
 					$query->order('i.hits DESC ');
@@ -170,6 +174,7 @@ class TracksFrontModelIndividuals extends baseModel
 					$query->innerJoin('#__tracks_projects AS p ON p.id = pr.project_id ');
 					$query->where('p.competition_id = 1');
 					$query->where('p.name LIKE ("%freestyle%")');
+					$query->where('CHAR_LENGTH(i.picture_small) > 0 ');
 					$query->group('i.id');
 					$query->clear('order');
 					$query->order('i.hits DESC ');
@@ -182,6 +187,7 @@ class TracksFrontModelIndividuals extends baseModel
 					$query->innerJoin('#__tracks_projects AS p ON p.id = pr.project_id ');
 					$query->where('p.competition_id = 1');
 					$query->where('p.name LIKE ("%freeride%")');
+					$query->where('CHAR_LENGTH(i.picture_small) > 0 ');
 					$query->group('i.id');
 					$query->clear('order');
 					$query->order('i.hits DESC ');

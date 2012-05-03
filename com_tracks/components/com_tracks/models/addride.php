@@ -48,10 +48,12 @@ class TracksFrontModelAddride extends JModel
 		return $res;
 	}
 	
-	public function store($file, $result_id)
+	public function store($file, $result_id,$ind)
 	{
 		$params = JComponentHelper::getParams('com_tracks');
-		
+
+  	$facebook = JRequest::getVar('facebook', '', 'post', 'string');
+  	
 		$size = getimagesize($file['tmp_name']);
 		if (!$size) {
 			echo Jtext::_('COM_TRACKS_RIDE_NOT_AN_IMAGE');
@@ -89,6 +91,31 @@ class TracksFrontModelAddride extends JModel
 			$this->setError($this->_db->getErrorMsg());
 			return false;
 		}
+
+
+		/* POST ON FACEBOOK WALL and send me email*/
+		mail('notifications@xjetski.com',  'Ride added ' . JRequest::getVar('description', '', 'post', 'string')  , 'user=' . JFactory::getUser()->name );
+
+  if ($facebook)
+    {
+    require_once JPATH_ROOT.DS.'components'.DS.'com_jfbconnect'.DS.'libraries'.DS.'facebook.php';
+    $jfbcLibrary = JFBConnectFacebookLibrary::getInstance();
+    $post['message'] = 'Added photo of my ski';
+    $post['link'] = 'http://xjetski.com/' . TracksHelperRoute::getIndividualRoute($ind) ;
+    $post['name'] = "my ski on XJETSKI.com";
+    $post['description'] = "showcasing world's best jetski competitors (racing,freestyle,freeride) and all competition results worldwide";
+    $post['picture'] = 'http://xjetski.com/' . $final_path ;
+
+    if ($jfbcLibrary->getUserId()) // Check if there is a Facebook user logged in
+       $jfbcLibrary->setFacebookMessage($post);
+    }
+    /* END POST ON FACEBOOK WALL */
+
+    // Add to the pit wall
+    require_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'helpers'.DS.'tools.php');
+    TracksHelperTools::addUpdate( "Added ride photo"  , 1 , '' , 15 );
+
+
 		
 		return true;
 	}

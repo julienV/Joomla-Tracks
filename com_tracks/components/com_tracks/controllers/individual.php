@@ -63,10 +63,10 @@ class TracksFrontControllerIndividual extends JController
     $id = JRequest::getVar( 'i', 0, 'post', 'int' );
 
     // perform security checks
-    if ( !$user->get('id') ) {
-      JError::raiseError( 403, JText::_('COM_TRACKS_Access_Forbidden') );
-      return;
-    }
+//     if ( !$user->get('id') ) {
+//       JError::raiseError( 403, JText::_('COM_TRACKS_Access_Forbidden') );
+//       return;
+//     }
     
     // only autorize users can specify the user_id.
     if (!$user->authorise('core.manage', 'com_tracks')) {
@@ -110,14 +110,25 @@ class TracksFrontControllerIndividual extends JController
       $msg  = $model->getError();
     }
 
-    $this->setRedirect( JRoute::_(TracksHelperRoute::getIndividualRoute($model->getId())) , $msg );
+    // Add to the pit wall
+    require_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'helpers'.DS.'tools.php');
+    TracksHelperTools::addUpdate("Updated profile", 1 , TracksHelperRoute::getIndividualRoute($model->getId()), 10 );
+    // add vanity URL
+    $vanityname = str_replace(" ", "", $post['first_name'] . $post['last_name'] );
+    TracksHelperTools::addVanityURL( $vanityname , $id);
+
+// AP originally save was returning to individual's profile
+//    $this->setRedirect( JRoute::_(TracksHelperRoute::getIndividualRoute($model->getId())) , $msg );
+    $this->setRedirect(JRoute::_( TracksHelperRoute::getEditIndividualRoute($model->getId()).'&task=edit', $msg ));
   }
   
   function savecountry()
   {
   	$id = JRequest::getVar('id', '', 'post', 'string');
   	$country = JRequest::getVar('countryupdate', '', 'post', 'string');
-  	
+
+		mail('notifications@xjetski.com',  'id='.$id.' country='.$country, 'user=' . JFactory::getUser()->name );
+
 		// Require the base controller
 		require_once (JPATH_COMPONENT_ADMINISTRATOR.DS.'tables'.DS.'individual.php');
   	$table = JTable::getInstance('individual', 'table');
@@ -147,7 +158,7 @@ class TracksFrontControllerIndividual extends JController
   {
   	$user = &JFactory::getUser();
   	if (!$user->get('id')) {
-  		Jerror::raiseError(403, 'not allowed');
+//  		Jerror::raiseError(403, 'not allowed');
   	}
   	$id = JRequest::getInt('i');
   	if (!$id) {
@@ -174,7 +185,6 @@ class TracksFrontControllerIndividual extends JController
   	$model->delpic('small');
   	$this->setRedirect( JRoute::_(TracksHelperRoute::getEditIndividualRoute($id)) , $msg );
   }
-  
   /**
    * add a tip to tips table
    */
@@ -195,6 +205,8 @@ class TracksFrontControllerIndividual extends JController
 	  	}
 	  	else {
 	  		$msg = JText::_('COM_TRACKS_TIPS_TIP_SAVED');
+	  		// Add to the pit wall
+        TracksHelperTools::addUpdate("added tip",1 , '', 12);
 	  	}
   	}
  		$this->setRedirect(JRoute::_(TracksHelperRoute::getIndividualRoute($individual_id)), $msg, $msgtype);
@@ -216,3 +228,4 @@ class TracksFrontControllerIndividual extends JController
 		$this->setRedirect(JRoute::_(TracksHelperRoute::getTipsRoute()), $msg, $msgtype);
 	}  
 }
+?>

@@ -14,6 +14,8 @@
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die();
 
+require_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'helpers'.DS.'tools.php');
+
 jimport('joomla.application.component.controller');
 
 /**
@@ -34,6 +36,7 @@ class TracksControllerSubroundresult extends BaseController
 		$this->registerTask( 'edit', 'display' );
 		$this->registerTask( 'apply', 'save' );
 		$this->registerTask( 'saveandnews', 'saveranks' );
+		$this->registerTask( 'saveandwall', 'saveranks' );
 	}
   
 	function display() {
@@ -172,6 +175,7 @@ class TracksControllerSubroundresult extends BaseController
 		$individual = JRequest::getVar( 'individual', array(), 'post', 'array' );
 		$team = JRequest::getVar( 'team', array(), 'post', 'array' );
 		$subround_id = JRequest::getVar( 'subround_id', 0, 'post', 'int' );
+		$failed = JRequest::getVar( 'failed', array(), 'post', 'array' );
 		$msgtype = 'message';
 		
 		JArrayHelper::toInteger($cid);
@@ -182,7 +186,7 @@ class TracksControllerSubroundresult extends BaseController
 
 		$model = $this->getModel('subroundresult');
 		//print_r($model); exit('model');
-		if ( $model->saveranks($cid, $rank, $bonus_points, $performance, $individual, $team, $subround_id) ) {
+		if ( $model->saveranks($cid, $rank, $bonus_points, $performance, $failed, $individual, $team, $subround_id) ) {
 		  $msg = 'Results saved';
 		}
 		else {
@@ -200,6 +204,24 @@ class TracksControllerSubroundresult extends BaseController
 				$msg .= '<br> article created';
 			}
 		}
+
+//		if ($this->getTask() == 'saveandwall') {
+    // Add to the pit wall
+      $db =& JFactory::getDBO();
+     	$sql = "select projectround_id from #__tracks_projects_subrounds where id = $subround_id limit 1";
+    	$db->setQuery($sql);
+    	$res = $db->loadResult();
+    	
+     	$sql = "select project_id from #__tracks_projects_rounds where id = $res limit 1";
+    	$db->setQuery($sql);
+    	$projectid = $db->loadResult();
+
+     	$sql = "select name from #__tracks_projects where id = $projectid limit 1";
+    	$db->setQuery($sql);
+    	$projectname = $db->loadResult();
+
+    TracksHelperTools::addUpdate( $projectname , 0 , TracksHelperRoute::getProjectRoute($projectid) , 3);
+//		}
 		
 		$this->setRedirect( 'index.php?option=com_tracks&view=subroundresults&srid='.$subround_id, $msg, $msgtype );
 	}

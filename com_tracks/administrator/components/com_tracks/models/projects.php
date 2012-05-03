@@ -54,7 +54,7 @@ class TracksModelProjects extends TracksModelList
 		if ($filter_order == 'p.ordering'){
 			$orderby 	= ' ORDER BY p.ordering '.$filter_order_Dir;
 		} else {
-			//$orderby 	= ' ORDER BY '.$filter_order.' '.$filter_order_Dir.' , p.ordering ';
+			$orderby 	= ' ORDER BY '.$filter_order.' '.$filter_order_Dir.' , p.ordering ';
 		}
 
 		return $orderby;

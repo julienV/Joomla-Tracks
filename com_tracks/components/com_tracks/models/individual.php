@@ -141,7 +141,7 @@ class TracksFrontModelIndividual extends baseModel
            . '        rr.id AS id, '
 		       . '        srt.name AS subroundname, '
            . '        srt.points_attribution, '
-           . '        p.name AS projectname, p.id as project_id, '
+           . '        p.name AS projectname, p.id as project_id, p.finished, '
            . '        c.name AS competitionname, '
            . '        s.name AS seasonname, '
            . '        t.name AS teamname, '
@@ -156,8 +156,8 @@ class TracksFrontModelIndividual extends baseModel
 		       . ' INNER JOIN #__tracks_projects AS p ON p.id = pr.project_id'
            . ' INNER JOIN #__tracks_seasons AS s ON s.id = p.season_id'  
            . ' INNER JOIN #__tracks_competitions AS c ON c.id = p.competition_id '
-           . ' LEFT JOIN #__tracks_result_ride AS ride ON ride.result_id = rr.id '
            . ' LEFT JOIN  #__tracks_teams AS t ON t.id = rr.team_id'
+           . ' LEFT JOIN #__tracks_result_ride AS ride ON ride.result_id = rr.id '
            . ' WHERE rr.individual_id = ' . $this->_db->Quote($this->_id)
            . '   AND p.published AND pr.published AND psr.published '
            ;
@@ -391,7 +391,7 @@ class TracksFrontModelIndividual extends baseModel
 			$obj->sponsor_id = $sp;
 			$obj->store();
 		}
-    		
+    
     return $this->_id;
   }
   
@@ -438,7 +438,7 @@ class TracksFrontModelIndividual extends baseModel
    * 
    */
   public function addHit()
-  {  	
+  {
   	$query = ' UPDATE #__tracks_individuals SET hits = hits+1, last_hit = NOW()'
   	       . ' WHERE id = ' . $this->_db->Quote($this->_id);
   	$this->_db->setQuery($query);
@@ -571,8 +571,8 @@ class TracksFrontModelIndividual extends baseModel
   	}
   	
   	return true;
-  }
-  
+  }  
+
   /**
    * stores a tip from pro
    * @param int $individual_id
@@ -596,4 +596,5 @@ class TracksFrontModelIndividual extends baseModel
   	}
   	return true;
   }
+
 }

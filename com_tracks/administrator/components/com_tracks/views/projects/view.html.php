@@ -85,9 +85,8 @@ class TracksViewProjects extends TracksView
 		
 		parent::display($tpl);
 	}
-	
-	
-	public static function finished($value, $i, $img1 = 'tick.png', $img0 = 'publish_x.png', $prefix='')
+
+	public static function finished($value, $i, $img1 = 'finished.png', $img0 = 'unfinished.png', $prefix='')
 	{
 		if (is_object($value)) {
 			$value = $value->finished;

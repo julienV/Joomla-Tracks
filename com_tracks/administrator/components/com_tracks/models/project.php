@@ -175,36 +175,6 @@ class TracksModelProject extends TracksModelItem
 
 		return true;
 	}
-	
-	/**
-	 * Method to (un)finish a project
-	 *
-	 * @access	public
-	 * @return	boolean	True on success
-	 * @since	1.5
-	 */
-	function finish($cid = array(), $publish = 1)
-	{
-		$user 	=& JFactory::getUser();
-		if (count( $cid ))
-		{
-			JArrayHelper::toInteger($cid);
-			$cids = implode( ',', $cid );
-
-			$query = 'UPDATE #__tracks_projects'
-				. ' SET finished = '.(int) $publish
-				. ' WHERE id IN ( '.$cids.' )'
-				. ' AND ( checked_out = 0 OR ( checked_out = '.(int) $user->get('id').' ) )'
-			;
-			$this->_db->setQuery( $query );
-			if (!$this->_db->query()) {
-				$this->setError($this->_db->getErrorMsg());
-				return false;
-			}
-		}
-
-		return true;
-	}
 
 	/**
 	 * Method to load content project data
@@ -377,5 +347,35 @@ class TracksModelProject extends TracksModelItem
 		}
 		return $count;
 	}
+	
+	/**
+	 * Method to (un)finish a project
+	 *
+	 * @access	public
+	 * @return	boolean	True on success
+	 * @since	1.5
+	 */
+	function finish($cid = array(), $publish = 1)
+	{
+		$user 	=& JFactory::getUser();
+		if (count( $cid ))
+		{
+			JArrayHelper::toInteger($cid);
+			$cids = implode( ',', $cid );
+
+			$query = 'UPDATE #__tracks_projects'
+				. ' SET finished = '.(int) $publish
+				. ' WHERE id IN ( '.$cids.' )'
+				. ' AND ( checked_out = 0 OR ( checked_out = '.(int) $user->get('id').' ) )'
+			;
+			$this->_db->setQuery( $query );
+			if (!$this->_db->query()) {
+				$this->setError($this->_db->getErrorMsg());
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 }
-?>

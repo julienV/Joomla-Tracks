@@ -14,6 +14,8 @@
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die();
 
+require_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'helpers'.DS.'tools.php');
+
 jimport('joomla.application.component.controller');
 
 /**
@@ -77,6 +79,14 @@ class TracksControllerIndividual extends BaseController
     else {
       $link = 'index.php?option=com_tracks&controller=individual&task=edit&cid[]='.$returnid;
     }
+    
+    // Add to the pit wall
+    TracksHelperTools::addUpdate("New rider added" , 0 , '' , 1);
+    // add fancy domain name
+//    TracksHelperTools::addVanityURL( $post['first_name'] . $post['last_name'] , $returnid);
+
+
+
 		$this->setRedirect($link, $msg);
 	}
 

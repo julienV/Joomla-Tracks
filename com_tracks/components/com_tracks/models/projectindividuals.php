@@ -36,7 +36,7 @@ class TracksFrontModelProjectindividuals extends baseModel
 			return null;
 		}
 		
-		$query =  ' SELECT i.id, i.first_name, i.last_name, i.country_code, i.picture, i.picture_small, i.picture_background, '
+		$query =  ' SELECT i.id, i.first_name, i.last_name, i.country_code, i.picture, i.picture_small, i.picture_background,i.gender,  '
 		        . ' pi.number, pi.team_id, '
             . ' t.name as team_name, t.picture_small AS team_logo, '
             . ' CASE WHEN CHAR_LENGTH( i.alias ) THEN CONCAT_WS( \':\', i.id, i.alias ) ELSE i.id END AS slug, '
@@ -57,13 +57,29 @@ class TracksFrontModelProjectindividuals extends baseModel
         $obj =& $result[$i];
         $attribs['class']="pic";
         
-        if ($obj->picture != '') {
-          $obj->picture = JHTML::image(JURI::root().'media/com_tracks/images/individuals/'.$obj->picture, $obj->first_name. ' ' . $obj->last_name, $attribs);
-        } else {
-          $obj->picture = JHTML::image(JURI::base().'media/com_tracks/images/misc/tnnophoto.jpg', $obj->first_name. ' ' . $obj->last_name, $attribs);
-        }
+        if ($obj->picture != '')
+          {
+          $obj->picture = JHTML::image(JURI::root().$obj->picture, $obj->first_name. ' ' . $obj->last_name, $attribs);
+          }
+          else if ($obj->picture_small != '')
+              {
+              $obj->picture = JHTML::image(JURI::root().$obj->picture_small, $obj->first_name. ' ' . $obj->last_name, $attribs);
+              }
+            	 else if ($obj->gender == 2)
+                    {
+                    $obj->picture = JHTML::image(JURI::base().'media/com_tracks/images/misc/tnnophoto2.jpg', $obj->first_name. ' ' . $obj->last_name, $attribs);
+                   	}
+           	        else
+                     {
+                    $obj->picture = JHTML::image(JURI::base().'media/com_tracks/images/misc/tnnophoto.jpg', $obj->first_name. ' ' . $obj->last_name, $attribs);
+                  	}
+
+
+
+
+
     }
     return $result;
 	}
-    
+
 }

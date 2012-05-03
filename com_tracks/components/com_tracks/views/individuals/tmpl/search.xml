@@ -22,9 +22,19 @@
         <option value="none">COM_TRACKS_Display_individuals_filtering_none</option>
         <option value="female">COM_TRACKS_Display_individuals_filtering_female</option>
         <option value="standup">COM_TRACKS_Display_individuals_filtering_standup</option>
+        <option value="sitdown">COM_TRACKS_Display_individuals_filtering_sitdown</option>
+        <option value="sport">COM_TRACKS_Display_individuals_filtering_sport</option>
+        <option value="freestyle">COM_TRACKS_Display_individuals_filtering_freestyle</option>
+        <option value="freeride">COM_TRACKS_Display_individuals_filtering_freeride</option>
         <option value="lastviewed">COM_TRACKS_Display_individuals_filtering_lastviewed</option>
         <option value="lastupdated">COM_TRACKS_Display_individuals_filtering_lastupdated</option>
         <option value="haspicture">COM_TRACKS_Display_individuals_filtering_haspicture</option>
+        <option value="mostpopular">COM_TRACKS_Display_individuals_filtering_mostpopular</option>
+        <option value="mostpopularstandup">COM_TRACKS_Display_individuals_filtering_mostpopular_standup</option>
+        <option value="mostpopularsitdown">COM_TRACKS_Display_individuals_filtering_mostpopular_sitdown</option>
+        <option value="mostpopularsport">COM_TRACKS_Display_individuals_filtering_mostpopular_sport</option>
+        <option value="mostpopularfreestyle">COM_TRACKS_Display_individuals_filtering_mostpopular_freestyle</option>
+        <option value="mostpopularfreeride">COM_TRACKS_Display_individuals_filtering_mostpopular_freeride</option>
 			</field>
 			
 			<field name="country" type="tcountry"

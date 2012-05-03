@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="COM_TRACKS_Standard_project_individuals_ranking_layout">
+		<message>
+			<![CDATA[COM_TRACKS_Displays_project_individuals_ranking]]>
+		</message>
+	</layout>
+	<state>
+		<name>COM_TRACKS_Standard_project_individuals_ranking_layout</name>
+		<description>COM_TRACKS_Select_a_project</description>
+		<url addpath="/administrator/components/com_tracks/elements">
+			<param name="p" type="tsql" default=""
+				label="COM_TRACKS_Select_a_project" description="COM_TRACKS_Select_a_project"
+				query="SELECT id AS p, name AS text FROM #__tracks_projects ORDER BY name ASC" />
+		</url>
+		<params>
+      <param name="shownumber" type="radio" default="1" label="COM_TRACKS_Display_individual_number" description="" >
+        <option value="0">COM_TRACKS_No</option>
+        <option value="1">COM_TRACKS_Yes</option>
+      </param>
+      <param name="showflag" type="radio" default="1" label="COM_TRACKS_Display_country_flag" description="" >
+        <option value="0">COM_TRACKS_No</option>
+        <option value="1">COM_TRACKS_Yes</option>
+      </param>
+      <param name="showteams" type="radio" default="1" label="COM_TRACKS_Display_teams_in_rankings" description="" >
+			  <option value="0">COM_TRACKS_No</option>
+			  <option value="1">COM_TRACKS_Yes</option>
+			</param>
+    </params>
+	</state>
+</metadata>

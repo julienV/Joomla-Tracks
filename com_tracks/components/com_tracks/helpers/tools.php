@@ -370,14 +370,18 @@ class TracksHelperTools
   $currentweek = floor(($today['yday']-57)/7); //cos we started on Mar 1;
   $currentday = $today['yday']-57; //cos we started on Mar 1;
 
-  $rider1=array(103,5318,16,111,175,4492);
+  $rider1=array(103,5318,16,111,175,4492,1835,535,4190,3320);
   $rider2=array(
          1,1,1,3320,2441,70,5318
         ,157,4329,733,3182,2454,1141,338
         ,556,289,1,4,5323,526,44
         ,50,5537,5541,227,119,1141,128,
         157,1125,5175,5568,4024,338,214,
-        1896,5350,4034,3410,5541,3182,2433
+        1896,5350,4034,3410,5541,3182,2433,
+        50,3387,119,5396,2859,54,4938,
+        520,16,338,567,570,289,1,
+        50,227,5396,1835,46,3410,128,
+        157,1125,5175,5568,4024,4024,5515
         );
 
     $database = &JFactory::getDbo();
@@ -402,7 +406,7 @@ class TracksHelperTools
 	 * @param boolean $logindividual log individual id 
 	 * @return boolean true on sucess
 	 */
-	public static function addUpdate($text, $logindividual = 1)
+	public static function addUpdate($text, $logindividual = 1 , $urltogo = '' , $icon = '' )
 	{
 		$db = JFactory::getDbo();
 		
@@ -415,29 +419,29 @@ class TracksHelperTools
 				
 		// first make sure it's not identical to the previous one
 		$query	= $db->getQuery(true);
-		$query->select('text');
+		$query->select('text , individual_id');
 		$query->from($db->nameQuote('#__tracks_latest_update'));
-		$query->where('individual_id = '.intval($individual_id));
+//		$query->where('individual_id = '.intval($individual_id));
 		$query->order('id DESC');
 		$db->setQuery($query, 0, 1);
-		if ($res = $db->loadResult()) 
+		if ($res = $db->loadObjectList())
 		{
-			if ($res == $text) {
+			if ($res[0]->text == $text && $res[0]->individual_id == $individual_id) {
 				return true;
 			}
 		}
 		
 		// not the same
 		$query = sprintf('INSERT INTO #__tracks_latest_update '
-		               . '   SET individual_id = %d, text = %s, time = NOW() ', $individual_id, $db->quote($text));
+		               . '   SET individual_id = %d, text = %s, time = NOW() , icon = "' . $icon . '" ,  url = "' . $urltogo . '"' , $individual_id, $db->quote($text));
 		
 		$db->setQuery($query);
 		if (!$res = $db->query())
 		{
 			throw new Exception($db->getErrorMsg());
 		}
-		
-		// house keeping
+
+	// house keeping
 		$query = 'DELETE FROM #__tracks_latest_update WHERE DATEDIFF(NOW(), time) > 3';
 		$db->setQuery($query);
 		if (!$res = $db->query())
@@ -551,5 +555,17 @@ class TracksHelperTools
 		$res = $db->loadResult();
 		return $res ? true : false;
 	}
+
+  public static function addVanityURL ($name,$id)
+  {
+        $today =  date("Y-m-d");
+        $database = &JFactory::getDbo();
+				$sql = "INSERT INTO #__redirect_links (old_url, new_url , published , created_date) VALUES('http://xjetski.com/$name', 'http://xjetski.com/index.php?option=com_tracks&view=individual&i=$id' , '1' , '$today' )" ;
+				$database->setQuery($sql);
+				$database->query();
+				$sql = "INSERT INTO #__redirect_links (old_url, new_url , published , created_date) VALUES('http://xjetski.com/en/$name', 'http://xjetski.com/index.php?option=com_tracks&view=individual&i=$id' , '1' , '$today')" ;
+				$database->setQuery($sql);
+				$database->query();
+  }
 
 }

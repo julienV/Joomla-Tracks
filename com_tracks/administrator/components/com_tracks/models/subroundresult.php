@@ -105,7 +105,7 @@ class TracksModelSubroundResult extends TracksModelItem
 	 * @return	boolean	True on success
 	 * @since	1.5
 	 */
-	function saveranks($cid = array(), $rank, $bonus_points, $performance, $individual, $team, $subround_id)
+	function saveranks($cid = array(), $rank, $bonus_points, $performance, $failed, $individual, $team, $subround_id)
 	{
 		$row =& $this->getTable('projectroundresult');
 		
@@ -122,7 +122,8 @@ class TracksModelSubroundResult extends TracksModelItem
 			  $row->rank          = $rank[$i];
         $row->bonus_points  = $bonus_points[$i];
 			  $row->performance   = $performance[$i];
-			  
+			  $row->failed   = $failed[$i];
+
 			  if (!$row->store())
 			  {
 			    $this->setError($this->_db->getErrorMsg());
@@ -133,11 +134,13 @@ class TracksModelSubroundResult extends TracksModelItem
 			{
 				if ( $row->rank != $rank[$i] 
 				  || $row->bonus_points != $bonus_points[$i] 
-				  || $row->performance != $performance[$i] )
+				  || $row->performance != $performance[$i]
+				  || $row->failed != $failed[$i] )
 				{
           $row->rank          = $rank[$i];
           $row->bonus_points  = $bonus_points[$i];
           $row->performance   = $performance[$i];
+          $row->failed   = $failed[$i];
           $row->team_id       = $team[$i];
 					
 					if (!$row->store()) 

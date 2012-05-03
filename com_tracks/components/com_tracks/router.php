@@ -150,6 +150,12 @@ function TracksParseRoute($segments)
 				$vars['p'] = (int) $segments[2];
 			}
 			break;
+
+		case 'externalrider':
+			$vars['view'] = 'externalrider';
+			$id = explode( ':', $segments[1] );
+			$vars['i'] = (int) $id[0];
+			break;
 			
 		case 'team':
 			$vars['view'] = 'team';

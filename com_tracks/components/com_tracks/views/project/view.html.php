@@ -36,7 +36,7 @@ class TracksFrontViewProject extends JView
     	$params =& $model->getParams();
 
     	$document =& JFactory::getDocument();
-    	$document->setTitle( $project->name );
+    	$document->setTitle(  ( $project->season_name =="event" ? "" : $project->season_name . ' ' ) . $project->name . ' ' . JText::_('COM_TRACKS_Results' ) );
 
     	$breadcrumbs =& $mainframe->getPathWay();
     	$breadcrumbs->addItem( $project->name, 'index.php?option=com_tracks&view=project&p=' . $project->id );

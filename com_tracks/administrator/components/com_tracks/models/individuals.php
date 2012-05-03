@@ -30,8 +30,8 @@ class TracksModelIndividuals extends TracksModelList
 		// Get the WHERE and ORDER BY clauses for the query
 		$where		= $this->_buildContentWhere();
 		$orderby	= $this->_buildContentOrderBy();
-
-		$query = ' SELECT obj.id, obj.first_name, obj.last_name, obj.alias, obj.checked_out, obj.checked_out_time, '
+		
+		$query = ' SELECT obj.id, obj.first_name, obj.last_name, obj.country_code , obj.gender , obj.alias, obj.checked_out, obj.checked_out_time, '
       . ' u.name AS editor, '
       . ' ui.name AS individual_user '
 			. ' FROM #__tracks_individuals AS obj '
