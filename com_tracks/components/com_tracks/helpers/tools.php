@@ -84,6 +84,27 @@ class TracksHelperTools
 	}
 	
 	/**
+	 * get best finish for individual
+	 * 
+	 * @param int $individual_id
+	 * @return int
+	 */
+	public static function getBestFinish($individual_id)
+	{
+		$results = self::getFilteredHeats($individual_id);
+		if (!count($results)) {
+			return 0;
+		}
+		$res = array();
+		foreach ($results as $r) {
+			if ($r->rank > 0) {
+				$res[] = $r->rank;
+			}
+		}
+		return count($res) ? min($res) : 0;
+	}
+	
+	/**
 	 * get total Top5 for individual
 	 * 
 	 * @param int $individual_id
