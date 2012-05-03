@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 /**
 * @version    $Id: individuals.php 15 2008-02-06 00:37:43Z julienv $ 
@@ -33,6 +32,7 @@ class TracksModelIndividuals extends TracksModelList
 		$orderby	= $this->_buildContentOrderBy();
 		
 		$query = ' SELECT obj.id, obj.first_name, obj.last_name, obj.country_code , obj.gender , obj.alias, obj.checked_out, obj.checked_out_time, '
+		  . ' obj.picture_small, '
       . ' u.name AS editor, '
       . ' ui.name AS individual_user '
 			. ' FROM #__tracks_individuals AS obj '
@@ -83,4 +83,3 @@ class TracksModelIndividuals extends TracksModelList
 	}
 
 }
-?>

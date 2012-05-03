@@ -43,36 +43,6 @@ class plgButtonTracks_individual extends JPlugin
 	 *
 	 * @return object button
 	 */
-	function onDisplayyyyy($name)
-	{
-		$mainframe = &JFactory::getApplication();
-
-		$doc = & JFactory::getDocument();
-		$template = $mainframe->getTemplate();
-		
-		$declaration	="
-		.button2-left .tracks_individual 	{ background: url(components/com_tracks/assets/images/indiv_editor_button.png) 100% 0 no-repeat; } ";
-		
-		$doc->addStyleDeclaration($declaration);
-
-		$link = 'index.php?option=com_tracks&amp;controller=individuals&amp;view=individuals&amp;layout=modal&amp;tmpl=component&amp;e_name='.$name;
-
-		JHTML::_('behavior.modal');
-
-		$button = new JObject();
-		$button->set('modal', true);
-		$button->set('link', $link);
-		$button->set('text', JText::_('PLG_TRACKS_INDIVIDUAL_EDITORXTD_BUTTON_LABEL'));
-		$button->set('name', 'tracks_individual');
-		$button->set('options', "{handler: 'iframe', size: {x: 600, y: 500}}");
-
-		return $button;
-	}
-	/**
-	 * Display the button
-	 *
-	 * @return object button
-	 */
 	function onDisplay($name)
 	{
 		/*
@@ -82,8 +52,11 @@ class plgButtonTracks_individual extends JPlugin
 		 * and closes the select frame.
 		 */
 		$js = "
-		function jSelectIndividual(id, lastname, firstname) {
+		function jSelectIndividual(id, lastname, firstname, object) {
 		  var title = firstname ? firstname+' '+lastname : lastname;
+		  if (object.picture_small) {
+		  	title = title + ' <img src=\"'+object.picture_small+'\" alt=\"'+title+'\"/>'
+			}
 			var tag = '<a href='+'\"index.php?option=com_tracks&amp;view=individual&amp;i='+id+'\">'+title+'</a>';
 			jInsertEditorText(tag, '".$name."');
 			SqueezeBox.close();

@@ -64,6 +64,9 @@ $function	= JRequest::getCmd('function', 'jSelectIndividual');
 		for ($i=0, $n=count( $this->items ); $i < $n; $i++)
 		{
 			$row = &$this->items[$i];
+			$json = new stdClass();
+			$json->picture_small = $row->picture_small;
+			JFactory::getDocument()->addScriptDeclaration('var tracksind'.$i.' = '.json_encode($json).";\n");
 			?>
 			<tr class="<?php echo "row$k"; ?>">
 				<td>
@@ -71,7 +74,7 @@ $function	= JRequest::getCmd('function', 'jSelectIndividual');
 					   onclick="if (window.parent) window.parent.<?php echo $this->escape($function);?>('<?php 
 					                    echo $row->id; ?>', '<?php 
 					                    echo $this->escape(addslashes($row->last_name)); ?>', '<?php 
-					                    echo $this->escape(addslashes($row->first_name)); ?>');"><?php echo $this->escape($row->last_name); ?></a>
+					                    echo $this->escape(addslashes($row->first_name)); ?>', tracksind<?php echo $i; ?>);"><?php echo $this->escape($row->last_name); ?></a>
 				</td>
 				<td>
 					<?php
