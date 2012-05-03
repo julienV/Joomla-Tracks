@@ -35,6 +35,7 @@ class plgSearchTrackssearch extends JPlugin
 	 */
 	public function __construct(& $subject, $config)
 	{
+		include_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'helpers'.DS.'countries.php');
 		include_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'lib'.DS.'JLVImageTool.php');
 		parent::__construct($subject, $config);
 		$this->loadLanguage();
@@ -149,7 +150,7 @@ class plgSearchTrackssearch extends JPlugin
 			}
 	
 			//the database query; differs per situation! It will look something like this:
-			$query = 'SELECT CONCAT_WS(", ", i.last_name, i.first_name) AS title, picture_small, '
+			$query = 'SELECT CONCAT_WS(", ", i.last_name, i.first_name) AS title, picture_small, i.country_code, '
 			. ' CONCAT_WS( " / ", '. $db->Quote($section) .', '.$db->Quote(JText::_( 'PLG_SEARCH_TRACKS_INDIVIDUALS' )).' ) AS section,'
 	    . ' CASE WHEN CHAR_LENGTH( i.alias ) THEN CONCAT_WS( \':\', i.id, i.alias ) ELSE i.id END AS slug, '
 	    . ' NULL AS created, '
@@ -168,6 +169,7 @@ class plgSearchTrackssearch extends JPlugin
 			foreach($results as $key => $row) {
 				$results[$key]->href  = TracksHelperRoute::getIndividualRoute($row->slug);
 				$results[$key]->image = JLVImageTool::getThumbUrl(JPATH_SITE.DS.$row->picture_small, $this->params->get('image_size', 40));
+				$results[$key]->flag  = $row->country_code ? TracksCountries::getCountryFlag($row->country_code, null, true) : false;
 			}
 			$rows = array_merge($rows, $results);
 		}
