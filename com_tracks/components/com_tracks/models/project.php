@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 /**
 * @version    $Id: roundresult.php 43 2008-02-24 23:47:38Z julienv $ 
@@ -23,7 +24,7 @@ require_once( 'base.php' );
  * @package		Tracks
  * @since 0.1
  */
-class TracksFrontModelProject extends baseModel
+class TracksModelProject extends baseModel
 {	
 	var $_rounds = null;
 	

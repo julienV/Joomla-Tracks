@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 /**
 * @version    $Id: view.html.php 77 2008-04-30 03:32:25Z julienv $ 
@@ -23,7 +24,7 @@ jimport( 'joomla.application.component.view');
  * @package		Tracks
  * @since 0.1
  */
-class TracksFrontViewRoundResult extends JView
+class TracksViewRoundResult extends JView
 {
     function display($tpl = null)
     {
@@ -56,4 +57,3 @@ class TracksFrontViewRoundResult extends JView
     	parent::display($tpl);
     }
 }
-?>

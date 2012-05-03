@@ -23,7 +23,7 @@ require_once( 'base.php' );
  * @package     Tracks
  * @since 0.1
  */
-class TracksFrontModelTeam extends baseModel
+class TracksModelTeam extends baseModel
 {   		
 	var $_individuals = null;
 	

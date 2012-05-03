@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 /**
 * @version    $Id: individual.php 140 2008-06-10 16:47:22Z julienv $ 
@@ -22,7 +23,7 @@ jimport('joomla.application.component.controller');
  * @package		Tracks
  * @since 0.1
  */
-class TracksFrontControllerIndividual extends JController
+class TracksControllerIndividual extends JController
 {
   
   function __construct()

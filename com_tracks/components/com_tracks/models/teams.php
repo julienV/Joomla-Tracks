@@ -22,7 +22,7 @@ require_once( 'base.php' );
  * @package     Tracks
  * @since 0.1
  */
-class TracksFrontModelTeams extends baseModel
+class TracksModelTeams extends baseModel
 {   
     function getData()
     {

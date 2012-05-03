@@ -102,7 +102,7 @@ class getTracksTab extends cbTabHandler {
 	      $i=0;
 	    	foreach ($items as $project)
 	    	{
-	    		$ranking = new TracksFrontModelRanking();
+	    		$ranking = new TracksModelRanking();
 	    		$rank = $ranking->getIndividualRanking($project->project_id, $individual->id);
 	    		$link = JRoute::_('index.php?option=com_tracks&view=project&p=' . $project->project_id);
 	        $return .= '<tr class="sectiontableentry'.(1+$i).'">';

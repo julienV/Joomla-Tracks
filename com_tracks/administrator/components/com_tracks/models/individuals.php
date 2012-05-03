@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 /**
 * @version    $Id: individuals.php 15 2008-02-06 00:37:43Z julienv $ 
@@ -15,7 +16,7 @@
 defined('_JEXEC') or die();
 
 jimport('joomla.application.component.model');
-require_once (JPATH_COMPONENT.DS.'models'.DS.'list.php');
+require_once (JPATH_SITE.'/administrator/components/com_tracks/models/list.php');
 
 /**
  * Joomla Tracks Component Individuals Model

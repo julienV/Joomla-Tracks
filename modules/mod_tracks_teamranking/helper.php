@@ -31,7 +31,7 @@ class modTracksTeamRanking
     if ( $this->_model == null )
     {
       require_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'models'.DS.'teamranking.php');
-      $this->_model = new TracksFrontModelTeamRanking();
+      $this->_model = new TracksModelTeamRanking();
       $this->_model->setProjectId($params->get('project_id'));
     }
     return $this->_model;      

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 /**
 * @version    $Id$ 
@@ -22,7 +23,7 @@ require_once( 'base.php' );
  * @package		Tracks
  * @since 0.1
  */
-class TracksFrontModelProjectindividuals extends baseModel
+class TracksModelProjectindividuals extends baseModel
 {
 	/**
 	 * associated project

@@ -38,7 +38,7 @@ class modTracksResults
     if ( $this->_model == null )
     {
       require_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'models'.DS.'roundresult.php');
-      $this->_model = new TracksFrontModelRoundResult();
+      $this->_model = new TracksModelRoundResult();
     }
     return $this->_model;      
   }

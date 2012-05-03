@@ -31,6 +31,7 @@ class BaseController extends JController
       JRequest::setVar('view', 'projects' );
     }
     $viewName = JRequest::getCmd( 'view' );
+    $layout   = JRequest::getCmd( 'layout' );
     
     $showmenu = true;
     switch (strtolower($viewName))
@@ -55,7 +56,7 @@ class BaseController extends JController
       	break;      	
     }
     
-    if ($showmenu) 
+    if ($showmenu && $layout != 'modal') 
     {
 	    $this->ShowMenuStart();
 			parent::display();

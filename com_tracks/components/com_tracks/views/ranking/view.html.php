@@ -23,7 +23,7 @@ jimport( 'joomla.application.component.view');
  * @package		Tracks
  * @since 0.1
  */
-class TracksFrontViewRanking extends JView
+class TracksViewRanking extends JView
 {
   function display($tpl = null)
   {
