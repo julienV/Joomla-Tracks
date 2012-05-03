@@ -22,7 +22,7 @@ require_once( 'base.php' );
  * @package     Tracks
  * @since 0.1
  */
-class TracksFrontModelIndividuals extends baseModel
+class TracksModelIndividuals extends baseModel
 {
 
 	function __construct($config = array())

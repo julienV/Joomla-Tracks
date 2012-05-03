@@ -22,7 +22,7 @@ jimport('joomla.application.component.modellist');
  * @package		Tracks
  * @since 0.1
  */
-class TracksFrontModelTipsfrompro extends JModelList
+class TracksModelTipsfrompro extends JModelList
 {
 	
 	protected function getListQuery()

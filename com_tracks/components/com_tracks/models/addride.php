@@ -22,7 +22,7 @@ jimport('joomla.application.component.model');
  * @package		Tracks
  * @since 0.1
  */
-class TracksFrontModelAddride extends JModel
+class TracksModelAddride extends JModel
 {
 	protected $_result_id;
 	
@@ -114,8 +114,6 @@ class TracksFrontModelAddride extends JModel
     // Add to the pit wall
     require_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'helpers'.DS.'tools.php');
     TracksHelperTools::addUpdate( "Added ride photo"  , 1 , '' , 15 );
-
-
 		
 		return true;
 	}

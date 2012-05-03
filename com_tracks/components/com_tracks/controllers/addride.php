@@ -23,7 +23,7 @@ jimport('joomla.filesystem.folder');
  * @package		Tracks
  * @since 0.1
  */
-class TracksFrontControllerAddride extends JController
+class TracksControllerAddride extends JController
 {	
 	public function add()
 	{
@@ -37,8 +37,6 @@ class TracksFrontControllerAddride extends JController
 		$result_id = JRequest::getInt('rid');
 		$id = JRequest::getInt('id');
 		$ind = JRequest::getInt('ind');
-
-
   	
 		$maxwidth = 960;
 		

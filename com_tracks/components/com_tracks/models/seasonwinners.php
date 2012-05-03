@@ -23,7 +23,7 @@ require_once( 'base.php' );
  * @package		Tracks
  * @since 0.1
  */
-class TracksFrontModelSeasonwinners extends baseModel
+class TracksModelSeasonwinners extends baseModel
 {
 	protected $_season_id = 0;
 	

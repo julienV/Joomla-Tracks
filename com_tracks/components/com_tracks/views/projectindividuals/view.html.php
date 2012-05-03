@@ -71,7 +71,7 @@ class TracksViewProjectindividuals extends JView
   		}
   	}
   	
-  	uasort($individuals, array('TracksFrontViewProjectindividuals', '_sortRanking'));
+  	uasort($individuals, array('TracksViewProjectindividuals', '_sortRanking'));
   	
   	return $individuals;
   }

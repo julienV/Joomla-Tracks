@@ -23,7 +23,7 @@ jimport( 'joomla.application.component.view');
  * @package		Tracks
  * @since 1.0
  */
-class TracksFrontViewSeasonWinners extends JView
+class TracksViewSeasonWinners extends JView
 {
     function display($tpl = null)
     {
@@ -43,7 +43,7 @@ class TracksFrontViewSeasonWinners extends JView
     	$title = JText::sprintf('COM_TRACKS_SEASON_WINNERS_S', $season->name);
     	$breadcrumbs->addItem( $season->name, 'index.php?option=com_tracks&view=seasonwinnners&s=' . $season->slug );
     	
-    	uasort($winners, array('TracksFrontViewSeasonWinners', '_sortByRider'));
+    	uasort($winners, array('TracksViewSeasonWinners', '_sortByRider'));
 
     	$this->assignRef( 'season',    $season );
     	$this->assignRef( 'winners',   $winners );
