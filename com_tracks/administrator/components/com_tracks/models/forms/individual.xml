@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form>
+	
+	<field
+		name="user_id"
+		type="user"
+		label="COM_TRACKS_User"
+		description="COM_TRACKS_User"
+		class="inputbox"		
+		/>
 		
 	<field
 		name="picture"

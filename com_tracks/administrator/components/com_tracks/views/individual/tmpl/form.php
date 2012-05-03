@@ -42,7 +42,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 			}				
 		});
 	
-		$('picture').addEvent('change', function(){
+		document.id('picture').addEvent('change', function(){
 			if (this.get('value')) {
 				$('picture_preview').empty().adopt(
 						new Element('img', {
@@ -56,7 +56,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 			}
 		}).fireEvent('change');
 	
-		$('picture_small').addEvent('change', function(){
+		document.id('picture_small').addEvent('change', function(){
 			if (this.get('value')) {
 				$('picture_small_preview').empty().adopt(
 						new Element('img', {
@@ -70,7 +70,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 			}
 		}).fireEvent('change');
 	
-		$('picture_background').addEvent('change', function(){
+		document.id('picture_background').addEvent('change', function(){
 			if (this.get('value')) {
 				$('picture_background_preview').empty().adopt(
 						new Element('img', {
@@ -83,14 +83,22 @@ defined('_JEXEC') or die('Restricted access'); ?>
 				$('picture_background_preview').empty();
 			}
 		}).fireEvent('change');
-		
-	});
 
+	});
+	
 	Joomla.submitbutton = function (pressbutton) {
 		var form = document.adminForm;
 		if (pressbutton == 'cancel') {
 			Joomla.submitform( pressbutton );
 			return;
+		}
+		if (document.id('user_id_id').value && document.id('user_id_id').value != currentuser) {
+			if (confirm('<?php echo JText::_('COM_TRACKS_Individual_email_user_confirm', true ); ?>')) {
+				document.id('emailuser').value = 1;
+			}
+			else {
+				document.id('emailuser').value = 0;
+			}
 		}
 
 		// do field validation
@@ -100,6 +108,8 @@ defined('_JEXEC') or die('Restricted access'); ?>
 			Joomla.submitform( pressbutton );
 		}
 	}
+
+	var currentuser = <?php echo $this->object->user_id ? $this->object->user_id : 0; ?>;
 </script>
 <style type="text/css">
 	table.paramlist td.paramlist_key {
@@ -167,12 +177,10 @@ defined('_JEXEC') or die('Restricted access'); ?>
     
 		<tr>
 			<td width="100" align="right" class="key">
-				<label for="user_id">
-					<?php echo JText::_('COM_TRACKS_User' ); ?>:
-				</label>
+				<?php echo $this->form->getLabel('user_id'); ?>
 			</td>
 			<td>
-				<?php echo $this->lists['users']; ?>
+				<?php echo $this->form->getInput('user_id'); ?>
       </td>
 		</tr>
 		
@@ -370,6 +378,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 <input type="hidden" name="option" value="com_tracks" />
 <input type="hidden" name="controller" value="individual" />
+<input type="hidden" name="emailuser" id="emailuser" value="0" />
 <input type="hidden" name="cid[]" value="<?php echo $this->object->id; ?>" />
 <input type="hidden" name="task" value="" />
 </form>

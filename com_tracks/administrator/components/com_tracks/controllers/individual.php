@@ -80,6 +80,25 @@ class TracksControllerIndividual extends BaseController
       $link = 'index.php?option=com_tracks&controller=individual&task=edit&cid[]='.$returnid;
     }
     
+    if (JRequest::getInt('emailuser'))
+    {
+    	$mailer = JFactory::getMailer();
+    	$mailer->isHtml(true);
+    	 
+    	$model->setId($returnid);
+    	$ind = $model->getData();
+    	 
+    	$user = JFactory::getUser($ind->user_id);
+    	 
+    	$mailer->addRecipient($user->email);
+    	$mailer->setSubject('Welcome to xjetski');
+    	$mailer->setBody(sprintf('A profile was created for you on xjetski, you can visit it here: %s',
+    			JHTML::link(JURI::root().TracksHelperRoute::getIndividualRoute($returnid), $ind->first_name.' '.$ind->last_name)));
+    	if ($mailer->send()) {
+    		$msg .= '<br/>'.Jtext::_('COM_TRACKS_XJ_WELCOME_EMAIL_SENT');
+    	}
+    }
+    
     // Add to the pit wall
     TracksHelperTools::addUpdate("New rider added" , 0 , '' , 1);
     // add fancy domain name
