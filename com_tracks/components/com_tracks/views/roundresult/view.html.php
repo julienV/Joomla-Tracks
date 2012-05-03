@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 /**
 * @version    $Id: view.html.php 77 2008-04-30 03:32:25Z julienv $ 

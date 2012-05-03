@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 /**
 * @version    $Id: controller.php 109 2008-05-24 11:05:07Z julienv $ 

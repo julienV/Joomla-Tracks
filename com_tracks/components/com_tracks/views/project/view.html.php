@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 /**
 * @version    $Id: view.html.php 43 2008-02-24 23:47:38Z julienv $ 
@@ -49,4 +48,3 @@ class TracksViewProject extends JView
     	parent::display($tpl);
     }
 }
-?>

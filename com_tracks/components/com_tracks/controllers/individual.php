@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 /**
 * @version    $Id: individual.php 140 2008-06-10 16:47:22Z julienv $ 
@@ -229,4 +228,3 @@ class TracksControllerIndividual extends JController
 		$this->setRedirect(JRoute::_(TracksHelperRoute::getTipsRoute()), $msg, $msgtype);
 	}  
 }
-?>

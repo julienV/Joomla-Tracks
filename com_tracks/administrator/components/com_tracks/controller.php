@@ -94,24 +94,4 @@ class TracksController extends BaseController
 		$db->setQuery($query);
 		$res = $db->query();
 	}
-
-	/**
-	 * send a welcome email to user assigned to an individual
-	 */
-	public function welcomeindividual()
-	{
-		$id = JRequest::getInt('id');
-		$user_id = JRequest::getInt('uid');
-		
-		$db = &JFactory::getDbo();
-		$query = $db->getQuery(true);
-		
-		$query->select('user_id, id');
-		$query->from('#__tracks_individuals');
-		$query->where('id = '.$id);
-		$db->setQuery($query);
-		$res = $db->loadObject();
-		
-		echo '<pre>';print_r($res); echo '</pre>';exit;
-	}
 }
