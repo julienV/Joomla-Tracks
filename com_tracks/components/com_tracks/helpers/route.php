@@ -166,6 +166,7 @@ class TracksHelperRoute
 							break;
 							
 						case 'ranking':
+						case 'teamranking':
 							if ((int) @$item->query['p'] == (int) @$query['p']) {
 								return $item;
 							}					
