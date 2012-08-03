@@ -27,21 +27,21 @@ class TracksViewProjectindividuals extends JView
 {
   function display($tpl = null)
   {
-    $mainframe = &JFactory::getApplication();
+    $mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 
     $project_id = JRequest::getVar( 'p', 0, '', 'int' );
     $params = $mainframe->getParams();
     
-    $model =& $this->getModel();
+    $model = $this->getModel();
     $individuals = $model->getIndividuals( $project_id );
     $project  = $model->getProject( $project_id );
-    $projectparams = & $model->getParams($project_id);
+    $projectparams = $model->getParams($project_id);
 
-    $breadcrumbs =& $mainframe->getPathWay();
+    $breadcrumbs = $mainframe->getPathWay();
     $breadcrumbs->addItem( $project->name. ' ' . JText::_('COM_TRACKS_Participants' ), 'index.php?option=com_tracks&view=projectindividuals&p=' . $project_id );
 
-    $document =& JFactory::getDocument();
+    $document = JFactory::getDocument();
     $document->setTitle( $project->name. ' ' . JText::_('COM_TRACKS_Participants' ) );
 
     $this->assignRef( 'params',    $params );

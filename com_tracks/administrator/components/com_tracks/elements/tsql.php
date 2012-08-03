@@ -35,7 +35,7 @@ class JElementTSql extends JElement
 
     function fetchElement($name, $value, &$node, $control_name)
     {
-        $db = & JFactory::getDBO();
+        $db = JFactory::getDBO();
         $db->setQuery($node->attributes('query'));
         // return JHTML::_('select.genericlist', $db->loadObjectList(), ''.$control_name.'['.$name.']', 'class="inputbox"', 'value', $name, $value, $control_name.$name);
         return JHTML::_('select.genericlist', $db->loadObjectList(), ''.$control_name.'['.$name.']', 'class="inputbox"', $name, 'text', $value, $control_name.$name);

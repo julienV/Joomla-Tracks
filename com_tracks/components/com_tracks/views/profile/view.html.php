@@ -27,17 +27,17 @@ class TracksViewProfile extends JView
 {
     function display($tpl = null)
     {
-        $mainframe = &JFactory::getApplication();
+        $mainframe = JFactory::getApplication();
         $option = JRequest::getCmd('option');
         
-        $user   =& JFactory::getUser();
+        $user   = JFactory::getUser();
         
         if (!$user->id) {
           print JText::_('COM_TRACKS_You_must_register_to_access_this_page');
           return;
         }
                 
-    	  $model =& $this->getModel();
+    	  $model = $this->getModel();
         $data = $model->getData( $user->id );
         
         if (!$data->id) 

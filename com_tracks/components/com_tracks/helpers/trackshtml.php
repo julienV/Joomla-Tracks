@@ -26,7 +26,7 @@ class HTMLTracks
   */
   function usersSelect( $name, $active, $nouser = 0, $javascript = NULL, $order = 'name', $reg = 1 )
   {
-    $db =& JFactory::getDBO();
+    $db = JFactory::getDBO();
 
     $and = '';
     if ( $reg ) {

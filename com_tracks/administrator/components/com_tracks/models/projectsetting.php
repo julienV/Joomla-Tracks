@@ -48,7 +48,7 @@ class TracksModelProjectsetting extends TracksModelItem
 	
 	function __construct()
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 		
 		parent::__construct();
@@ -142,7 +142,7 @@ class TracksModelProjectsetting extends TracksModelItem
    */
   function store($data)
   {
-    $row =& $this->getTable();
+    $row = $this->getTable();
     
     // Bind the form fields to the items table
     if (!$row->bind($data)) {

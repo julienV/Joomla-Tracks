@@ -18,7 +18,7 @@ defined('_JEXEC') or die('Restricted access');
 
 if (version_compare(JVERSION, '1.6.0', '<'))
 {
-	$acl =& JFactory::getACL();
+	$acl = JFactory::getACL();
 	$acl->addACL( 'com_tracks', 'manage', 'users', 'super administrator' );
 	/* Additional access groups */
 	$acl->addACL( 'com_tracks', 'manage', 'users', 'administrator' );

@@ -28,7 +28,7 @@ class TracksViewMenu extends JView
 {
   function display($tpl = null)
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 		$document = JFactory::getDocument();
 		$uri = JURI::getInstance();
@@ -37,8 +37,8 @@ class TracksViewMenu extends JView
 			return $this->_displayEnd();
 		}
 		
-		$project	= & $this->get( 'Data' );
-    $pane     = & JPane::getInstance('sliders');
+		$project	= $this->get( 'Data' );
+    $pane     = JPane::getInstance('sliders');
     $view     = JRequest::getCmd( 'view' );
     $state    = $this->get('state');
     $document->addScript('components/com_tracks/assets/js/menu.js');
@@ -64,7 +64,7 @@ class TracksViewMenu extends JView
 		$this->assignRef('project',  $project);
     $this->assignRef('pane',     $pane);
     $this->assignRef('lists',    $lists);    
-    $this->assignRef('referer',  $uri->toString());     
+    $this->assign('referer',  $uri->toString());     
 		
 		parent::display('tablepane');
 	}

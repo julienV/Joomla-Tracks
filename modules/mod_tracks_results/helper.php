@@ -62,7 +62,7 @@ class modTracksResults
 	{
     if ( $this->_round ) return $this->_round;
     
-    $db = &JFactory::getDBO();
+    $db = JFactory::getDBO();
     
     $sql = ' SELECT pr.id AS projectround_id, pr.start_date, pr.end_date, pr.round_id, '
          . ' r.name, '

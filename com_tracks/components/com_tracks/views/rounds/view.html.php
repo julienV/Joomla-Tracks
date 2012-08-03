@@ -27,16 +27,16 @@ class TracksViewRounds extends JView
 {
     function display($tpl = null)
     {
-    	$mainframe = &JFactory::getApplication();
+    	$mainframe = JFactory::getApplication();
 	$option = JRequest::getCmd('option');
     	          
-        $model =& $this->getModel();
+        $model = $this->getModel();
         $rows = $model->getRounds();
         
-        $document =& JFactory::getDocument();
+        $document = JFactory::getDocument();
         $document->setTitle( JText::_('COM_TRACKS_All_rounds' ) );
         
-        $breadcrumbs =& $mainframe->getPathWay();
+        $breadcrumbs = $mainframe->getPathWay();
         $breadcrumbs->addItem( JText::_('COM_TRACKS_All_rounds' ), 
             'index.php?option=com_tracks&view=rounds' );
         

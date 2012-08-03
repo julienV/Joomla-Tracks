@@ -146,10 +146,10 @@ class TracksHelperRoute
 	 */
 	protected static function _findItem($query)
 	{
-		$component =& JComponentHelper::getComponent('com_tracks');
-		$menus	= & JSite::getMenu();
+		$component = JComponentHelper::getComponent('com_tracks');
+		$menus	= JSite::getMenu();
 		$items	= $menus->getItems('component_id', $component->id);
-		$user 	= & JFactory::getUser();
+		$user 	= JFactory::getUser();
 				
 		if ($items) 
 		{

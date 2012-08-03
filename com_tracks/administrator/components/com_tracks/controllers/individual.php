@@ -112,8 +112,8 @@ class TracksControllerIndividual extends BaseController
 	 */
 	function element()
 	{
-		$model  = &$this->getModel( 'individuals' );
-		$view = &$this->getView( 'individuals', 'html' );
+		$model  = $this->getModel( 'individuals' );
+		$view = $this->getView( 'individuals', 'html' );
 		$view->setLayout( 'element' );
 		$view->setModel( $model, true );
 		$view->display();

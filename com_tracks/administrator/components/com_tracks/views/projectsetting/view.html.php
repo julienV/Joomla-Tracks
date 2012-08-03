@@ -37,24 +37,24 @@ class TracksViewProjectsetting extends TracksView
 		}
 
 		//get the project
-		$projectsettings =& $this->get('data');
+		$projectsettings = $this->get('data');
 		
 		parent::display($tpl);
 	}
 
 	function _displayForm($tpl)
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 
-		$db		=& JFactory::getDBO();
-		$uri 	=& JFactory::getURI();
-		$user 	=& JFactory::getUser();
-    $document = & JFactory::getDocument();
+		$db		= JFactory::getDBO();
+		$uri 	= JFactory::getURI();
+		$user 	= JFactory::getUser();
+    $document = JFactory::getDocument();
     
     JHTML::_('behavior.tooltip');
 				
-		$object =& $this->get('data');
+		$object = $this->get('data');
     
 		JForm::addFormPath(JPATH_COMPONENT.DS.'projectparameters'.DS.'default');
 		if (strstr($object->xml, '.xml')) {

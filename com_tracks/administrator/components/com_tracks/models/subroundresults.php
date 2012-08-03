@@ -65,7 +65,7 @@ class TracksModelSubroundResults extends TracksModelList
 
 	function _buildContentOrderBy()
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 
 		$filter_order		= $mainframe->getUserStateFromRequest( $option.'.viewsubroundresults.filter_order',		'filter_order',		'rr.rank',	'cmd' );
@@ -82,7 +82,7 @@ class TracksModelSubroundResults extends TracksModelList
 
 	function _buildContentWhere()
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 
 		$where 		= ' WHERE rr.subround_id = '.$this->subround_id;

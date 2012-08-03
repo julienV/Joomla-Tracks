@@ -218,8 +218,8 @@ class TracksControllerProjectround extends BaseController
    */
   function element()
   {
-    $model  = &$this->getModel( 'projectroundElement' );
-    $view = &$this->getView( 'projectroundElement', 'html' );
+    $model  = $this->getModel( 'projectroundElement' );
+    $view = $this->getView( 'projectroundElement', 'html' );
     $view->setModel( $model, true );
     $view->display();
   }

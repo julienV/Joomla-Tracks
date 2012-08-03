@@ -27,21 +27,21 @@ class TracksViewTeamRanking extends JView
 {
     function display($tpl = null)
     {
-        $mainframe = &JFactory::getApplication();
+        $mainframe = JFactory::getApplication();
         $option = JRequest::getCmd('option');
         
         $project_id = JRequest::getVar( 'p', 0, '', 'int' );
         
-        $model =& $this->getModel();
+        $model = $this->getModel();
         $rankings = $model->getTeamRankings( $project_id );
         $project  = $model->getProject( $project_id );
-        $projectparams = & $model->getParams($project->id);
+        $projectparams = $model->getParams($project->id);
         $params = $mainframe->getParams('com_tracks');
                 
-        $breadcrumbs =& $mainframe->getPathWay();
+        $breadcrumbs = $mainframe->getPathWay();
         $breadcrumbs->addItem( $project->name. ' ' . JText::_('COM_TRACKS_Team_Rankings' ), 'index.php?option=com_tracks&view=teamranking&p=' . $project_id );
         
-        $document =& JFactory::getDocument();
+        $document = JFactory::getDocument();
         $document->setTitle( $project->name. ' ' . JText::_('COM_TRACKS_Team_Rankings' ) );
         
         $this->assignRef( 'project',    $project );                

@@ -27,13 +27,13 @@ class TracksViewTeam extends JView
 {
     function display($tpl = null)
     {
-        $mainframe = &JFactory::getApplication();
+        $mainframe = JFactory::getApplication();
 $option = JRequest::getCmd('option');
-				$dispatcher = & JDispatcher::getInstance();
+				$dispatcher = JDispatcher::getInstance();
         
         $id = JRequest::getVar( 't', 0, '', 'int' );
                 
-        $model =& $this->getModel();
+        $model = $this->getModel();
         $data = $model->getData( $id );
         
         $individuals = $this->get('Individuals');
@@ -41,11 +41,11 @@ $option = JRequest::getCmd('option');
 				// parse description with content plugins
 				$data->description = JHTML::_('content.prepare', $data->description);
 
-        $breadcrumbs =& $mainframe->getPathWay();
+        $breadcrumbs = $mainframe->getPathWay();
         $breadcrumbs->addItem( $data->name, 
                         'index.php?option=com_tracks&view=team&i=' . $id );
         
-        $document =& JFactory::getDocument();
+        $document = JFactory::getDocument();
         $document->setTitle( $data->name );
         
         $this->assignRef( 'data',           $data );

@@ -14,7 +14,7 @@
 defined('_JEXEC') or die('Restricted access'); ?>
 
 <?php
-$user 	=& JFactory::getUser();
+$user 	= JFactory::getUser();
 
 //Ordering allowed ?
 $ordering = ($this->lists['order'] == 'obj.ordering');
@@ -63,7 +63,7 @@ $function	= JRequest::getCmd('function', 'jSelectIndividual');
 		$k = 0;
 		for ($i=0, $n=count( $this->items ); $i < $n; $i++)
 		{
-			$row = &$this->items[$i];
+			$row = $this->items[$i];
 			?>
 			<tr class="<?php echo "row$k"; ?>">
 				<td>

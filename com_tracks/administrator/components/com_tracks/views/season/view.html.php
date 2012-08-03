@@ -27,7 +27,7 @@ class TracksViewSeason extends JView
 {
 	function display($tpl = null)
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 
 		if($this->getLayout() == 'form') {
@@ -36,27 +36,27 @@ class TracksViewSeason extends JView
 		}
 
 		//get the project
-		$season =& $this->get('data');
+		$season = $this->get('data');
 		
 		parent::display($tpl);
 	}
 
 	function _displayForm($tpl)
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 
-		$db		=& JFactory::getDBO();
-		$uri 	=& JFactory::getURI();
-		$user 	=& JFactory::getUser();
-		$model	=& $this->getModel();
+		$db		= JFactory::getDBO();
+		$uri 	= JFactory::getURI();
+		$user 	= JFactory::getUser();
+		$model	= $this->getModel();
 
-    $document = & JFactory::getDocument();
+    $document = JFactory::getDocument();
     $document->addStyleSheet('components/com_tracks/assets/css/tracksbackend.css');
     
 		$lists = array();
 		//get the project
-		$season	=& $this->get('data');
+		$season	= $this->get('data');
 		$isNew		= ($season->id < 1);
 
 		// fail if checked out not by 'me'

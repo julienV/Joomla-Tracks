@@ -62,8 +62,8 @@ class TracksControllerProject extends BaseController
 					$model = $this->getModel('project');
 					$model->checkout();
 					/*
-					 $view =& $this->getView('','html');
-					 $seasonsModel  =& $this->getModel('seasons');
+					 $view = $this->getView('','html');
+					 $seasonsModel  = $this->getModel('seasons');
 					 //print_r($seasonsModel);
 					 $view->setModel($seasonsModel);*/
 				} break;
@@ -77,7 +77,7 @@ class TracksControllerProject extends BaseController
 	 */
 	function select()
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 		// get cid array from address
 		$cid	= JRequest::getVar('cid', array(0), '', 'array');

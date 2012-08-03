@@ -155,7 +155,7 @@ class TracksModelProject extends TracksModelItem
 	 */
 	function publish($cid = array(), $publish = 1)
 	{
-		$user 	=& JFactory::getUser();
+		$user 	= JFactory::getUser();
 		if (count( $cid ))
 		{
 			JArrayHelper::toInteger($cid);
@@ -253,7 +253,7 @@ class TracksModelProject extends TracksModelItem
 		$count = 0;
 		foreach ($cid as $projectid)
 		{
-			$project = &$this->getTable();
+			$project = $this->getTable();
 			if (!$project->load($projectid)) {
 				$this->setError(JText::_('COM_TRACKS_UNKOWN_PROJECT').': '.$projectid);
 				return false;
@@ -270,7 +270,7 @@ class TracksModelProject extends TracksModelItem
 			}
 			
 			// now copy rounds
-			$db = &JFactory::getDbo();
+			$db = JFactory::getDbo();
 			$query = $db->getQuery(true);
 			
 			$query->select('sr.id as subround_id, sr.projectround_id');
@@ -319,7 +319,7 @@ class TracksModelProject extends TracksModelItem
 			}
 			
 			// and last the participant
-			$db = &JFactory::getDbo();
+			$db = JFactory::getDbo();
 			$query = $db->getQuery(true);
 			
 			$query->select('pi.id');

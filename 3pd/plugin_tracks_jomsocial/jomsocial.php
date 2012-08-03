@@ -31,7 +31,7 @@ class plgTracksJomsocial extends JPlugin {
 
 	public function getProfileLink($user_id, &$object, &$attribs = array())
 	{
-    $user = & CFactory::getUser($user_id);
+    $user = CFactory::getUser($user_id);
     //parameters
     $params = $this->params;
     

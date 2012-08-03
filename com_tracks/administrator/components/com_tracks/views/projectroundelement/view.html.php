@@ -27,13 +27,13 @@ class TracksViewProjectroundElement extends JView
 {
   function display()
   {
-    $mainframe = &JFactory::getApplication();
+    $mainframe = JFactory::getApplication();
 $option = JRequest::getCmd('option');
     
     // Initialize variables
-    $db     = &JFactory::getDBO();
+    $db     = JFactory::getDBO();
 
-    $document = & JFactory::getDocument();
+    $document = JFactory::getDocument();
     $document->setTitle('Project Round Selection');
 
     JHTML::_('behavior.modal');
@@ -45,8 +45,8 @@ $option = JRequest::getCmd('option');
     
     $lists = $this->_getLists();
 
-    $rows = &$this->get('List');
-    $page = &$this->get('Pagination');
+    $rows = $this->get('List');
+    $page = $this->get('Pagination');
     JHTML::_('behavior.tooltip');
     
     $function = JRequest::getCmd('function', 'jSelectBook');
@@ -143,11 +143,11 @@ $option = JRequest::getCmd('option');
 
   function _getLists()
   {
-    $mainframe = &JFactory::getApplication();
+    $mainframe = JFactory::getApplication();
 $option = JRequest::getCmd('option');
 
     // Initialize variables
-    $db   = &JFactory::getDBO();
+    $db   = JFactory::getDBO();
 
     // Get some variables from the request
     $projectid      = JRequest::getVar( 'projectid', -1, '', 'int' );

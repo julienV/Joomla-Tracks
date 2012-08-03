@@ -48,9 +48,9 @@ class TracksControllerQuickAdd extends BaseController
 
 	function addpi()
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
-		$db = &JFactory::getDBO();
+		$db = JFactory::getDBO();
 		$individualid = JRequest::getInt("individualid", 0);
 		$name = JRequest::getVar("quickadd", '', 'request', 'string');
 		$pid = JRequest::getInt("pid", 0);
@@ -92,9 +92,9 @@ class TracksControllerQuickAdd extends BaseController
 
 	function add()
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
-		$db = &JFactory::getDBO();
+		$db = JFactory::getDBO();
 		$individualid = JRequest::getInt("individualid", 0);
 		$name = JRequest::getVar("quickadd", '', 'request', 'string');
 		$srid = JRequest::getInt("srid", 0);

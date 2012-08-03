@@ -29,10 +29,10 @@ class TracksViewSubrounds extends TracksView
 {
 	function display($tpl = null)
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 
-		$round =& $this->get('Round');
+		$round = $this->get('Round');
 		
 		// Set toolbar items for the page
 		JToolBarHelper::title( JText::sprintf('COM_TRACKS_Subrounds_for', $round->roundname) , 'generic.png' );
@@ -45,18 +45,18 @@ class TracksViewSubrounds extends TracksView
     JToolBarHelper::unpublish();
 		JToolBarHelper::help( 'screen.tracks', true );
         
-		$db		=& JFactory::getDBO();
-		$uri	=& JFactory::getURI();
+		$db		= JFactory::getDBO();
+		$uri	= JFactory::getURI();
 
 		$filter_order		= $mainframe->getUserStateFromRequest( $option.'.viewsubrounds.filter_order',		'filter_order',		'obj.ordering',	'cmd' );
 		$filter_order_Dir	= $mainframe->getUserStateFromRequest( $option.'.viewsubrounds.filter_order_Dir',	'filter_order_Dir',	'',				'word' );
 
 		// Get data from the model
-		//$model	=& $this->getModel( );
+		//$model	= $this->getModel( );
 		//print_r($model);
-		$items		= & $this->get( 'Data' );
-		$total		= & $this->get( 'Total' );
-		$pagination = & $this->get( 'Pagination' );
+		$items		= $this->get( 'Data' );
+		$total		= $this->get( 'Total' );
+		$pagination = $this->get( 'Pagination' );
 
 		// build list of categories
 		//$javascript 	= 'onchange="document.adminForm.submit();"';

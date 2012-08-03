@@ -31,7 +31,7 @@ class TracksModelProjects extends baseModel
     */
     function getProjects()
     {
-    	$app = &JFactory::getApplication();
+    	$app = JFactory::getApplication();
     	$params = $app->getParams( 'com_tracks' );
     	
     	$order = $params->get('order', 0);

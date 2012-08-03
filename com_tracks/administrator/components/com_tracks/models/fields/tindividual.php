@@ -41,7 +41,7 @@ class JFormFieldTIndividual extends JFormField
 		$title = null;
 		if ($this->value)
 		{
-			$db = &JFactory::getDbo();
+			$db = JFactory::getDbo();
 			$query = $db->getQuery(true);
 			
 			$query->select('i.last_name, i.first_name');

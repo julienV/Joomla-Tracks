@@ -29,7 +29,7 @@ class TracksViewTeams extends TracksView
 {
 	function display($tpl = null)
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 
 		// Set toolbar items for the page
@@ -39,8 +39,8 @@ class TracksViewTeams extends TracksView
 		JToolBarHelper::addNewX();
     JToolBarHelper::help( 'screen.tracks', true );
                 
-		$db		=& JFactory::getDBO();
-		$uri	=& JFactory::getURI();
+		$db		= JFactory::getDBO();
+		$uri	= JFactory::getURI();
 
 		$filter_order		= $mainframe->getUserStateFromRequest( $option.'.viewteams.filter_order',		'filter_order',		'obj.name',	'cmd' );
 		$filter_order_Dir	= $mainframe->getUserStateFromRequest( $option.'.viewteams.filter_order_Dir',	'filter_order_Dir',	'ASC',				'word' );
@@ -48,11 +48,11 @@ class TracksViewTeams extends TracksView
 		$search				= JString::strtolower( $search );
 
 		// Get data from the model
-		//$model	=& $this->getModel( );
+		//$model	= $this->getModel( );
 		//print_r($model);
-		$items		= & $this->get( 'Data' );
-		$total		= & $this->get( 'Total' );
-		$pagination = & $this->get( 'Pagination' );
+		$items		= $this->get( 'Data' );
+		$total		= $this->get( 'Total' );
+		$pagination = $this->get( 'Pagination' );
 
 		// search filter
 		$lists['search']= $search;

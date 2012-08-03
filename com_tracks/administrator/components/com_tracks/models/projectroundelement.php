@@ -42,7 +42,7 @@ class TracksModelProjectroundElement extends JModel
    */
   function getList()
   {
-    $mainframe = &JFactory::getApplication();
+    $mainframe = JFactory::getApplication();
 $option = JRequest::getCmd('option');
 
     if (!empty($this->_list)) {
@@ -50,7 +50,7 @@ $option = JRequest::getCmd('option');
     }
 
     // Initialize variables
-    $db   =& $this->getDBO();
+    $db   = $this->getDBO();
     $filter = null;
 
     // Get some variables from the request

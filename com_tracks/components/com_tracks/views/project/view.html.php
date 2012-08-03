@@ -27,18 +27,18 @@ class TracksViewProject extends JView
 {
     function display($tpl = null)
     {
-    	$mainframe = &JFactory::getApplication();
+    	$mainframe = JFactory::getApplication();
     	
     	          
-    	$model =& $this->getModel();
+    	$model = $this->getModel();
     	$results = $model->getResults( JRequest::getVar( 'p', 0, '', 'int' ) );
     	$project = $model->getProject( JRequest::getVar( 'p', 0, '', 'int' ) );
-    	$params =& $model->getParams();
+    	$params = $model->getParams();
 
-    	$document =& JFactory::getDocument();
+    	$document = JFactory::getDocument();
     	$document->setTitle( $project->name );
 
-    	$breadcrumbs =& $mainframe->getPathWay();
+    	$breadcrumbs = $mainframe->getPathWay();
     	$breadcrumbs->addItem( $project->name, 'index.php?option=com_tracks&view=project&p=' . $project->id );
 
     	$this->assignRef( 'results',    $results );

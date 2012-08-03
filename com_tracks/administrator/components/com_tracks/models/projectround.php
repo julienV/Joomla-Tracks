@@ -80,7 +80,7 @@ class TracksModelProjectround extends TracksModelItem
 	 */
 	function publish($cid = array(), $publish = 1)
 	{
-		$user 	=& JFactory::getUser();
+		$user 	= JFactory::getUser();
 
 		if (count( $cid ))
 		{
@@ -158,7 +158,7 @@ class TracksModelProjectround extends TracksModelItem
    */
   function assign($cids, $project_id)
   {
-    $row =& $this->getTable();
+    $row = $this->getTable();
     
     $i = 0;
     for ($i=0, $n=count( $cids ); $i < $n; $i++)
@@ -200,7 +200,7 @@ class TracksModelProjectround extends TracksModelItem
       
       if (is_array($subrounds))
       {
-        $subround =& $this->getTable('Subround');
+        $subround = $this->getTable('Subround');
         
       	foreach ($subrounds AS $s)
       	{

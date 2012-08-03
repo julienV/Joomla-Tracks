@@ -28,14 +28,14 @@ class TracksViewProject extends JView
 {
     function display($tpl = null)
     {
-			$mainframe = &JFactory::getApplication();
+			$mainframe = JFactory::getApplication();
 			$option = JRequest::getCmd('option');
     	  	          
-    	$model =& $this->getModel();
+    	$model = $this->getModel();
       $results = $model->getResults( JRequest::getVar( 'p', 0, '', 'int' ) );
       $project = $model->getProject( JRequest::getVar( 'p', 0, '', 'int' ) );
         
-      $document =& JFactory::getDocument();
+      $document = JFactory::getDocument();
       
       $v = new vcalendar();                          // initiate new CALENDAR
       $v->setConfig( 'project'.$project->id

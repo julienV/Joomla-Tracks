@@ -53,7 +53,7 @@ class TracksModelProjectsettings extends TracksModelList
 	
 	function __construct()
 	{
-    $mainframe = &JFactory::getApplication();
+    $mainframe = JFactory::getApplication();
 $option = JRequest::getCmd('option');
     
     parent::__construct();
@@ -110,7 +110,7 @@ $option = JRequest::getCmd('option');
     // add missing records
     foreach ($notfound AS $file)
     {
-    	$new = & $this->getTable('Projectsetting');
+    	$new = $this->getTable('Projectsetting');
     	$new->xml = $file;
     	$new->project_id = $this->_project_id;
     	if ($new->check() && $new->store()) {
@@ -141,7 +141,7 @@ $option = JRequest::getCmd('option');
 
 	function _buildContentOrderBy()
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 
 		$filter_order		= $mainframe->getUserStateFromRequest( $option.'.viewcompetitions.filter_order',		'filter_order',		'obj.ordering',	'cmd' );
@@ -158,7 +158,7 @@ $option = JRequest::getCmd('option');
 
 	function _buildContentWhere()
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 
 		$filter_state		= $mainframe->getUserStateFromRequest( $option.'.viewcompetitions.filter_state',		'filter_state',		'',				'word' );

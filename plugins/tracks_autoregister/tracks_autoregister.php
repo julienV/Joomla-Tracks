@@ -38,13 +38,13 @@ class plgUserTracks_autoregister extends JPlugin {
 	 */
 	function onUserAfterSave($user, $isnew, $success, $msg)
 	{
-		$app = &JFactory::getApplication();
+		$app = JFactory::getApplication();
 		
 		// Require tracks individual table
 		require_once (JPATH_ADMINISTRATOR.DS.'components'.DS.'com_tracks'.DS.'tables'.DS.'individual.php');
 		if ($isnew) 
 		{
-			$table = &Jtable::getInstance('Individual', 'Table');
+			$table = Jtable::getInstance('Individual', 'Table');
 			
 			if ($this->params->get('map_name', 0) == 0)
 			{

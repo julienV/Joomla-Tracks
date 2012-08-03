@@ -27,22 +27,22 @@ class TracksViewRoundResult extends JView
 {
     function display($tpl = null)
     {
-    	$mainframe = &Jfactory::getApplication();
+    	$mainframe = JFactory::getApplication();
     	$params = $mainframe->getParams();
     	$ordering = $params->def('subround_order', 0);
     	$ordering = ($ordering) ? 'DESC':'ASC';
     	$projectround_id = JRequest::getVar( 'pr', 0, '', 'int' );
     	
-    	$model =& $this->getModel();
+    	$model = $this->getModel();
     	$subroundresults = $model->getSubrounds($projectround_id, 0, $ordering);
     	$round = $model->getRound( $projectround_id );
     	$project = $model->getRoundProject($projectround_id);
-    	$projectparams = & $model->getParams($project->id);
+    	$projectparams = $model->getParams($project->id);
 
-    	$breadcrumbs =& $mainframe->getPathWay();
+    	$breadcrumbs = $mainframe->getPathWay();
     	$breadcrumbs->addItem( $round->name,  'index.php?option=com_tracks&view=roundresult&pr=' . $projectround_id );
 
-    	$document =& JFactory::getDocument();
+    	$document = JFactory::getDocument();
     	$document->setTitle( $round->name . ' - ' . $project->name );
 
     	//print_r($subroundresults);exit;

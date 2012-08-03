@@ -45,9 +45,9 @@ class plgButtonTracks_individual extends JPlugin
 	 */
 	function onDisplayyyyy($name)
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 
-		$doc = & JFactory::getDocument();
+		$doc = JFactory::getDocument();
 		$template = $mainframe->getTemplate();
 		
 		$declaration	="

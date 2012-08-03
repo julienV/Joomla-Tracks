@@ -81,7 +81,7 @@ class TracksModelProjectresults extends baseModel
 	 */
 	public function getRounds()
 	{
-		$db = &JFactory::getDbo();
+		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
 		
 		$query->select('psr.id AS subround_id, srt.name AS subround_name');
@@ -124,7 +124,7 @@ class TracksModelProjectresults extends baseModel
 	
 	protected function _getResults()
 	{
-		$db = &JFactory::getDbo();
+		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
 		
 		$query->select('psr.id AS subround_id, rr.rank, rr.individual_id');

@@ -14,7 +14,7 @@
 defined('_JEXEC') or die('Restricted access'); 
 jimport( 'joomla.filter.output' );
 
-$dispatcher = & JDispatcher::getInstance();
+$dispatcher = JDispatcher::getInstance();
 JPluginHelper::importPlugin('content');
 
 ?>

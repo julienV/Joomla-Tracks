@@ -29,7 +29,7 @@ class TracksViewProjectindividuals extends TracksView
 {
 	function display($tpl = null)
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');		
 		
     if($this->getLayout() == 'assign') 
@@ -39,7 +39,7 @@ class TracksViewProjectindividuals extends TracksView
 		}
     $project_id = $mainframe->getUserState( $option.'project' );
 		
-		$document = &JFactory::getDocument();
+		$document = JFactory::getDocument();
 		$document->addScript(JURI::base() . 'components/com_tracks/assets/js/autocompleter/1_2/Autocompleter.js');
 		$document->addScript(JURI::base() . 'components/com_tracks/assets/js/autocompleter/1_2/Autocompleter.Local.js');
 		$document->addScript(JURI::base() . 'components/com_tracks/assets/js/autocompleter/1_2/Autocompleter.Request.js');
@@ -55,8 +55,8 @@ class TracksViewProjectindividuals extends TracksView
 		JToolBarHelper::addNewX();
     JToolBarHelper::help( 'screen.tracks', true );
         
-		$db		=& JFactory::getDBO();
-		$uri	=& JFactory::getURI();
+		$db		= JFactory::getDBO();
+		$uri	= JFactory::getURI();
 
 		//$filter_state		= $mainframe->getUserStateFromRequest( $option.'.viewprojectindividuals.filter_state',		'filter_state',		'',				'word' );
 		$filter_order		= $mainframe->getUserStateFromRequest( $option.'.viewprojectindividuals.filter_order',		'filter_order',		't.name',	'cmd' );
@@ -65,11 +65,11 @@ class TracksViewProjectindividuals extends TracksView
 		$search				= JString::strtolower( $search );
 
 		// Get data from the model
-		//$model	=& $this->getModel( );
+		//$model	= $this->getModel( );
 		//print_r($model);
-		$items		= & $this->get( 'Data' );
-		$total		= & $this->get( 'Total' );
-		$pagination = & $this->get( 'Pagination' );
+		$items		= $this->get( 'Data' );
+		$total		= $this->get( 'Total' );
+		$pagination = $this->get( 'Pagination' );
 
 		// build list of categories
 		//$javascript 	= 'onchange="document.adminForm.submit();"';
@@ -96,7 +96,7 @@ class TracksViewProjectindividuals extends TracksView
 	
 	function _displayAssign($tpl = null)
 	{
-    $mainframe = &JFactory::getApplication();
+    $mainframe = JFactory::getApplication();
 $option = JRequest::getCmd('option');
 		
 		// Set toolbar items for the page
@@ -106,29 +106,29 @@ $option = JRequest::getCmd('option');
 		JToolBarHelper::cancel('cancelassign');
     JToolBarHelper::help( 'screen.tracks', true );
     
-		$db		=& JFactory::getDBO();
-		$uri	=& JFactory::getURI();
+		$db		= JFactory::getDBO();
+		$uri	= JFactory::getURI();
 		
     // Get data from the model
-    // $model =& $this->getModel();
+    // $model = $this->getModel();
     // print_r($model);
     
 		//build the html select list for teams
     $teamoptions[] = JHTML::_('select.option',  '0', '- '. JText::_('COM_TRACKS_Select_a_team' ) .' -','id', 'name' );
-    if ( $res = & $this->get('Teams') ) {
+    if ( $res = $this->get('Teams') ) {
       $teamoptions = array_merge( $teamoptions, $res );
     }
     
     //build the html select list for projects
     $projects[] = JHTML::_('select.option',  '0', '- '. JText::_('COM_TRACKS_Select_a_project' ) .' -','value', 'text' );
-    if ( $res = & $this->get('projectsListOptions') ) {
+    if ( $res = $this->get('projectsListOptions') ) {
       $projects = array_merge( $projects, $res );
     }
     $lists['projects'] = JHTML::_('select.genericlist',  $projects, 'project_id', 'class="inputbox" size="1"', 'value', 'text');
     unset($projects);
     
     // get player names
-		$players		= & $this->get( 'assignList' );
+		$players		= $this->get( 'assignList' );
 		
 		$this->assignRef('user',		JFactory::getUser());
 		$this->assignRef('players',		$players);

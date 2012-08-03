@@ -190,7 +190,7 @@ class JLVImageTool {
 	function modalimage($image_path, $alt, $maxdim, $attribs = array())
 	{
 		jimport('joomla.filesystem.file');
-		$app = &JFactory::getApplication();
+		$app = JFactory::getApplication();
 		$base = $app->isAdmin() ? $app->getSiteURL() : JURI::base();
 		
 		if (empty($image_path) || !file_exists($image_path)) {
@@ -230,7 +230,7 @@ class JLVImageTool {
 	function getThumbUrl($image_path, $maxdim)
 	{
 		jimport('joomla.filesystem.file');
-		$app = &JFactory::getApplication();
+		$app = JFactory::getApplication();
 		$base = $app->isAdmin() ? $app->getSiteURL() : JURI::base();
 
 		if (!JFile::exists($image_path)) {

@@ -27,7 +27,7 @@ class TracksViewProjects extends JView
 {
     function display($tpl = null)
     {
-        $model =& $this->getModel();
+        $model = $this->getModel();
         $projects = $model->getProjects();
         
         $this->assignRef( 'projects',	$projects );

@@ -29,7 +29,7 @@ class TracksViewProjectsettings extends TracksView
 {
 	function display($tpl = null)
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
     
 		// Set toolbar items for the page
@@ -38,18 +38,18 @@ class TracksViewProjectsettings extends TracksView
     JToolBarHelper::deleteList(JText::_('COM_TRACKS_DELETESETTINGSCONFIRM'));
     JToolBarHelper::help( 'screen.tracks.projectsettings', true );
         
-		$db		=& JFactory::getDBO();
-		$uri	=& JFactory::getURI();
+		$db		= JFactory::getDBO();
+		$uri	= JFactory::getURI();
 		
     $filter_order   = $mainframe->getUserStateFromRequest( $option.'.settings.filter_order',   'filter_order',   'obj.xml', 'cmd' );
     $filter_order_Dir = $mainframe->getUserStateFromRequest( $option.'.settings.filter_order_Dir', 'filter_order_Dir', '',       'word' );
 		
 		// Get data from the model
-		//$model	=& $this->getModel( );
+		//$model	= $this->getModel( );
 		//print_r($model);
-		$items		= & $this->get( 'Data' );
-		$total		= & $this->get( 'Total' );
-		$pagination = & $this->get( 'Pagination' );
+		$items		= $this->get( 'Data' );
+		$total		= $this->get( 'Total' );
+		$pagination = $this->get( 'Pagination' );
 
 		// build list of categories
 		//$javascript 	= 'onchange="document.adminForm.submit();"';

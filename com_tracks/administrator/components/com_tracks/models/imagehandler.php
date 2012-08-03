@@ -42,7 +42,7 @@ class TracksModelImagehandler extends JModel
 	{
 		parent::__construct();
 
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 
 		$limit		= $mainframe->getUserStateFromRequest( 'com_tracks.imageselect'.'limit', 'limit', $mainframe->getCfg('list_limit'), 'int');

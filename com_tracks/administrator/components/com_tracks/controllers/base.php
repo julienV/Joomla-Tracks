@@ -24,7 +24,7 @@ jimport('joomla.application.component.controller');
  */
 class BaseController extends JController
 {
-  function display()
+  public function display($cachable = false, $urlparams = false)
   {
     // Set a default view if none exists
     if ( ! JRequest::getCmd( 'view' ) ) {
@@ -68,15 +68,15 @@ class BaseController extends JController
 
 	function ShowMenuStart()
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 
-		$document =& JFactory::getDocument();
+		$document = JFactory::getDocument();
 
 		$viewType	= $document->getType();
-		$view = & $this->getView( 'Menu', $viewType );
+		$view = $this->getView( 'Menu', $viewType );
 
-		if ($model = & $this->getModel('Menu', 'TracksModel')) 
+		if ($model = $this->getModel('Menu', 'TracksModel')) 
 		{
 			// Push the model into the view (as default)
 			$view->setModel($model, true);
@@ -87,15 +87,15 @@ class BaseController extends JController
 
 	function ShowMenuEnd()
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 
-		$document =& JFactory::getDocument();
+		$document = JFactory::getDocument();
 
 		$viewType	= $document->getType();
-		$view = & $this->getView( 'Menu', $viewType );
+		$view = $this->getView( 'Menu', $viewType );
 
-		if ($model = & $this->getModel('Menu', 'TracksModel')) 
+		if ($model = $this->getModel('Menu', 'TracksModel')) 
 		{
 			// Push the model into the view (as default)
 			$view->setModel($model, true);

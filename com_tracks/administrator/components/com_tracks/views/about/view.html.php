@@ -29,16 +29,16 @@ class TracksViewAbout extends TracksView
 {
 	function display($tpl = null)
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 
         // Set toolbar items for the page
         JToolBarHelper::title(   JText::_('COM_TRACKS_About_Tracks' ), 'help_header' );
         JToolBarHelper::back();
         
-        $db     =& JFactory::getDBO();
-        $uri    =& JFactory::getURI();
-        $user   =& JFactory::getUser();
+        $db     = JFactory::getDBO();
+        $uri    = JFactory::getURI();
+        $user   = JFactory::getUser();
         
         parent::display($tpl);
 	}

@@ -55,7 +55,7 @@ class TracksModelList extends JModel
   function __construct()
   {
     parent::__construct();
-    $mainframe = &JFactory::getApplication();
+    $mainframe = JFactory::getApplication();
 $option = JRequest::getCmd('option');
 
     // Get the pagination request variables

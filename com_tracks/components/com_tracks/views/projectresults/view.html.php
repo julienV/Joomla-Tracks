@@ -27,7 +27,7 @@ class TracksViewProjectresults extends JView
 {
   function display($tpl = null)
   {
-    $mainframe = &JFactory::getApplication();
+    $mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 
     $project_id = JRequest::getVar( 'p', 0, '', 'int' );
@@ -41,10 +41,10 @@ class TracksViewProjectresults extends JView
     
     $title = JText::sprintf('COM_TRACKS_view_project_results', $project->name );
     
-    $breadcrumbs =& $mainframe->getPathWay();
+    $breadcrumbs = $mainframe->getPathWay();
     $breadcrumbs->addItem( $title, TracksHelperRoute::getProjectResultRoute($project_id) );
 
-    $document =& JFactory::getDocument();
+    $document = JFactory::getDocument();
     $document->setTitle( $title );
 
     $this->assignRef( 'params',    $params );

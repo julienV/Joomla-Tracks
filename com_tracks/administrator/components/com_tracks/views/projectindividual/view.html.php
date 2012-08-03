@@ -29,7 +29,7 @@ class TracksViewProjectindividual extends JView
 {
 	function display($tpl = null)
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 
 		if($this->getLayout() == 'form') {
@@ -38,26 +38,26 @@ class TracksViewProjectindividual extends JView
 		}
 
 		//get the project
-		$projectindividual =& $this->get('data');
+		$projectindividual = $this->get('data');
 		
 		parent::display($tpl);
 	}
 
 	function _displayForm($tpl)
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 
-		$db		=& JFactory::getDBO();
-		$uri 	=& JFactory::getURI();
-		$user 	=& JFactory::getUser();
-		$model	=& $this->getModel();
+		$db		= JFactory::getDBO();
+		$uri 	= JFactory::getURI();
+		$user 	= JFactory::getUser();
+		$model	= $this->getModel();
 
 		JHTML::_('behavior.formvalidation');
 		
 		$lists = array();
 		//get the project
-		$projectindividual	=& $this->get('data');
+		$projectindividual	= $this->get('data');
 		$isNew		= ($projectindividual->id < 1);
 
 		// fail if checked out not by 'me'

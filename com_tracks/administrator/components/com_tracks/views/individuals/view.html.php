@@ -46,8 +46,8 @@ class TracksViewIndividuals extends JView
     JToolBarHelper::assign();
     JToolBarHelper::help( 'screen.tracks', true );
         
-		$db		=& JFactory::getDBO();
-		$uri	=& JFactory::getURI();
+		$db		= JFactory::getDBO();
+		$uri	= JFactory::getURI();
 
 		$filter_order		= $mainframe->getUserStateFromRequest( $option.'.viewindividuals.filter_order',		'filter_order',		'obj.last_name',	'cmd' );
 		$filter_order_Dir	= $mainframe->getUserStateFromRequest( $option.'.viewindividuals.filter_order_Dir',	'filter_order_Dir',	'ASC',				'word' );
@@ -55,11 +55,11 @@ class TracksViewIndividuals extends JView
 		$search				= JString::strtolower( $search );
 
 		// Get data from the model
-		//$model	=& $this->getModel( );
+		//$model	= $this->getModel( );
 		//print_r($model);
-		$items		= & $this->get( 'Data' );
-		$total		= & $this->get( 'Total' );
-		$pagination = & $this->get( 'Pagination' );
+		$items		= $this->get( 'Data' );
+		$total		= $this->get( 'Total' );
+		$pagination = $this->get( 'Pagination' );
 		
 		// search filter
 		$lists['search']= $search;
@@ -86,7 +86,7 @@ class TracksViewIndividuals extends JView
 		//add css and submenu to document
 		$document->addStyleSheet('components/com_tracks/assets/css/tracksbackend.css');
 		
-		$uri	=& JFactory::getURI();
+		$uri	= JFactory::getURI();
 	
 		$filter_order		= $mainframe->getUserStateFromRequest( $option.'.viewindividuals.filter_order',		'filter_order',		'obj.last_name',	'cmd' );
 		$filter_order_Dir	= $mainframe->getUserStateFromRequest( $option.'.viewindividuals.filter_order_Dir',	'filter_order_Dir',	'ASC',				'word' );
@@ -94,11 +94,11 @@ class TracksViewIndividuals extends JView
 		$search				= JString::strtolower( $search );
 	
 		// Get data from the model
-		//$model	=& $this->getModel( );
+		//$model	= $this->getModel( );
 		//print_r($model);
-		$items		= & $this->get( 'Data' );
-		$total		= & $this->get( 'Total' );
-		$pagination = & $this->get( 'Pagination' );
+		$items		= $this->get( 'Data' );
+		$total		= $this->get( 'Total' );
+		$pagination = $this->get( 'Pagination' );
 	
 		// search filter
 		$lists['search']= $search;

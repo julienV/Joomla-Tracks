@@ -25,7 +25,7 @@ class ImageSelect
 	
 	function getSelector($fieldname, $fieldpreview_name, $type, $value)
 	{
-    $document = & JFactory::getDocument();
+    $document = JFactory::getDocument();
     
     JHTML::_('behavior.modal');
     
@@ -73,7 +73,7 @@ class ImageSelect
   {
     jimport('joomla.filesystem.file');
         
-    $params = & JComponentHelper::getParams('com_tracks');
+    $params = JComponentHelper::getParams('com_tracks');
 
     $sizelimit  = $params->get('image_max_size', 120)*1024; //size limit in kb
     $imagesize  = $file['size'];

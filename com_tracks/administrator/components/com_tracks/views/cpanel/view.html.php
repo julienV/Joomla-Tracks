@@ -29,7 +29,7 @@ class TracksViewCpanel extends TracksView
 {
 	function display($tpl = null)
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 
 		// Set toolbar items for the page
@@ -43,8 +43,8 @@ class TracksViewCpanel extends TracksView
     JToolBarHelper::help( 'screen.tracks', true );
 
         
-		$db		=& JFactory::getDBO();
-		$uri	=& JFactory::getURI();
+		$db		= JFactory::getDBO();
+		$uri	= JFactory::getURI();
 
 		$filter_state		= $mainframe->getUserStateFromRequest( $option.'filter_state',		'filter_state',		'',				'word' );
 		$filter_order		= $mainframe->getUserStateFromRequest( $option.'filter_order',		'filter_order',		'p.ordering',	'cmd' );
@@ -53,12 +53,12 @@ class TracksViewCpanel extends TracksView
 		$search				= JString::strtolower( $search );
 
 		// Get data from the model
-		//$model	=& $this->getModel( );
+		//$model	= $this->getModel( );
 		//print_r($model);
 		/*
-		$items		= & $this->get( 'Data' );
-		$total		= & $this->get( 'Total' );
-		$pagination = & $this->get( 'Pagination' );
+		$items		= $this->get( 'Data' );
+		$total		= $this->get( 'Total' );
+		$pagination = $this->get( 'Pagination' );
 */
 		// build list of categories
 		$javascript 	= 'onchange="document.adminForm.submit();"';

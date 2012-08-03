@@ -27,7 +27,7 @@ class TracksView extends JView
 {
     function display($tpl = null)
     {
-    	$document  = & JFactory::getDocument();
+    	$document  = JFactory::getDocument();
 	    //add css and submenu to document
 	    $document->addStyleSheet('components/com_tracks/assets/css/tracksbackend.css');
     	parent::display($tpl);

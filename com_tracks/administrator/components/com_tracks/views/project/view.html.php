@@ -30,7 +30,7 @@ class TracksViewProject extends TracksView
 {
 	function display($tpl = null)
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 
 		if($this->getLayout() == 'form') {
@@ -39,27 +39,27 @@ class TracksViewProject extends TracksView
 		}
 
 		//get the project
-		$project =& $this->get('data');
+		$project = $this->get('data');
 		
 		parent::display($tpl);
 	}
 
 	function _displayForm($tpl)
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 
-		$db		=& JFactory::getDBO();
-		$uri 	=& JFactory::getURI();
-		$user 	=& JFactory::getUser();
-		$model	=& $this->getModel();
+		$db		= JFactory::getDBO();
+		$uri 	= JFactory::getURI();
+		$user 	= JFactory::getUser();
+		$model	= $this->getModel();
 
-    $document = & JFactory::getDocument();
+    $document = JFactory::getDocument();
     $document->addStyleSheet('components/com_tracks/assets/css/tracksbackend.css');
     
 		$lists = array();
 		//get the project
-		$project	=& $this->get('data');
+		$project	= $this->get('data');
 		$isNew		= ($project->id < 1);
 
 		// fail if checked out not by 'me'
@@ -82,7 +82,7 @@ class TracksViewProject extends TracksView
 		
 		//build the html select list for competition
 	    $competitions[] = JHTML::_('select.option',  '', '- '. JText::_('COM_TRACKS_Select_a_Competition' ) .' -','id', 'name' );
-	    if ( $res = & $this->get('Competitions') ) {
+	    if ( $res = $this->get('Competitions') ) {
 	      $competitions = array_merge( $competitions, $res );
 	    }
 	    $lists['competitions'] = JHTML::_('select.genericlist',  $competitions, 'competition_id', 'class="inputbox required" size="1"', 'id', 'name', $project->competition_id);
@@ -90,7 +90,7 @@ class TracksViewProject extends TracksView
 	    
 	    //build the html select list for season
 	    $seasons[] = JHTML::_('select.option',  '', '- '. JText::_('COM_TRACKS_Select_a_Season' ) .' -','id', 'name' );
-	    if ( $res = & $this->get('Seasons') ) {
+	    if ( $res = $this->get('Seasons') ) {
 	      $seasons = array_merge( $seasons, $res );
 	    }
 	    $lists['seasons'] = JHTML::_('select.genericlist',  $seasons, 'season_id', 'class="inputbox required" size="1"', 'id', 'name', $project->season_id);

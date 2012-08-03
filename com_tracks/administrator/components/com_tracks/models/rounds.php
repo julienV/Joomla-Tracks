@@ -44,7 +44,7 @@ class TracksModelRounds extends TracksModelList
 
 	function _buildContentOrderBy()
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 
 		$filter_order		= $mainframe->getUserStateFromRequest( $option.'.viewrounds.filter_order',		'filter_order',		'obj.name',	'cmd' );
@@ -61,7 +61,7 @@ class TracksModelRounds extends TracksModelList
 
 	function _buildContentWhere()
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 
 		$filter_state		= $mainframe->getUserStateFromRequest( $option.'.viewrounds.filter_state',		'filter_state',		'',				'word' );

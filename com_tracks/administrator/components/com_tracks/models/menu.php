@@ -50,7 +50,7 @@ class TracksModelMenu extends JModel
 	{
 		if (!$this->_data)
 		{
-			$db = &JFactory::getDbo();
+			$db = JFactory::getDbo();
 			$query = $db->getQuery(true);
 			
 			$query->select('p.id, p.name');
@@ -69,7 +69,7 @@ class TracksModelMenu extends JModel
 	 */
 	public function getProjectsOptions()
 	{
-		$db = &JFactory::getDbo();
+		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
 		
 		$query->select('p.id AS value, p.name AS text');

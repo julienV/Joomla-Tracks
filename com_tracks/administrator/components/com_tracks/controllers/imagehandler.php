@@ -48,7 +48,7 @@ class TracksControllerImagehandler extends JController
 	 */
 	function upload()
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 		
 		// Check for request forgeries
@@ -105,7 +105,7 @@ class TracksControllerImagehandler extends JController
 	 */
 	function delete()
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 
 		// Set FTP credentials, if given

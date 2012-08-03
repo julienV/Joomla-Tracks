@@ -44,7 +44,7 @@ class TracksModelProjectrounds extends TracksModelList
 
 	function _buildContentOrderBy()
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 
 		$filter_order		= $mainframe->getUserStateFromRequest( $option.'.viewprojectrounds.filter_order',		'filter_order',		'obj.ordering',	'cmd' );
@@ -61,7 +61,7 @@ class TracksModelProjectrounds extends TracksModelList
 
 	function _buildContentWhere()
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
     $project_id = $mainframe->getUserState( $option.'project' );
     

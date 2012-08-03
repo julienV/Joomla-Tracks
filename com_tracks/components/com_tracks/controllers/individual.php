@@ -40,7 +40,7 @@ class TracksControllerIndividual extends JController
 	 */
 	function edit()
 	{
-    $user   =& JFactory::getUser();
+    $user   = JFactory::getUser();
     if (!$user->get('id')) {
       $this->setRedirect(JURI::base(), JText::_('COM_TRACKS_Please_login_to_be_able_to_edit_your_tracks_profile'), 'error' );
       $this->redirect();
@@ -59,7 +59,7 @@ class TracksControllerIndividual extends JController
     // Check for request forgeries
     JRequest::checkToken() or jexit( 'Invalid Token' );
 
-    $user  =& JFactory::getUser();
+    $user  = JFactory::getUser();
     $id = JRequest::getVar( 'i', 0, 'post', 'int' );
 
     // perform security checks

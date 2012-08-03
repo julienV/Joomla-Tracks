@@ -76,7 +76,7 @@ class TracksModelSubroundResult extends TracksModelItem
 	 */
 	function publish($cid = array(), $publish = 1)
 	{
-		$user 	=& JFactory::getUser();
+		$user 	= JFactory::getUser();
 
 		if (count( $cid ))
 		{
@@ -107,7 +107,7 @@ class TracksModelSubroundResult extends TracksModelItem
 	 */
 	function saveranks($cid = array(), $rank, $bonus_points, $performance, $individual, $team, $subround_id)
 	{
-		$row =& $this->getTable('projectroundresult');
+		$row = $this->getTable('projectroundresult');
 		
 		// update ordering values
 		for( $i=0; $i < count($cid); $i++ )
@@ -223,7 +223,7 @@ class TracksModelSubroundResult extends TracksModelItem
    */
   function store($data)
   {
-    $row =& $this->getTable();
+    $row = $this->getTable();
 
     // Bind the form fields to the items table
     if (!$row->bind($data)) {

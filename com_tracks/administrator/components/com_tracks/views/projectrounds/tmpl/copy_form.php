@@ -14,7 +14,7 @@
 defined('_JEXEC') or die('Restricted access'); ?>
 
 <?php
-$user 	=& JFactory::getUser();
+$user 	= JFactory::getUser();
 
 JHTML::_('behavior.tooltip');
 ?>
@@ -57,7 +57,7 @@ JHTML::_('behavior.tooltip');
 	$k = 0;
 	for ($i=0, $n=count( $this->rounds ); $i < $n; $i++)
 	{
-		$row = &$this->rounds[$i];
+		$row = $this->rounds[$i];
 		?>
 		<tr class="<?php echo "row$k"; ?>">
 			<td>

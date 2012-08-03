@@ -27,7 +27,7 @@ class TracksViewProjectround extends TracksView
 {
 	function display($tpl = null)
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 
 		if($this->getLayout() == 'form') {
@@ -36,27 +36,27 @@ class TracksViewProjectround extends TracksView
 		}
 
 		//get the project
-		$projectround =& $this->get('data');
+		$projectround = $this->get('data');
 		
 		parent::display($tpl);
 	}
 
 	function _displayForm($tpl)
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 
-		$db		=& JFactory::getDBO();
-		$uri 	=& JFactory::getURI();
-		$user 	=& JFactory::getUser();
-		$model	=& $this->getModel();
+		$db		= JFactory::getDBO();
+		$uri 	= JFactory::getURI();
+		$user 	= JFactory::getUser();
+		$model	= $this->getModel();
 
-    $document = & JFactory::getDocument();
+    $document = JFactory::getDocument();
     $document->addStyleSheet('components/com_tracks/assets/css/tracksbackend.css');
     
 		$lists = array();
 		//get the project
-		$projectround	=& $this->get('data');
+		$projectround	= $this->get('data');
 		$isNew		= ($projectround->id < 1);
 
 		// fail if checked out not by 'me'
@@ -80,7 +80,7 @@ class TracksViewProjectround extends TracksView
 		
 		//build the html select list for rounds
 	    $rounds[] = JHTML::_('select.option',  '', '- '. JText::_('COM_TRACKS_Select_a_round' ) .' -','id', 'name' );
-	    if ( $res = & $this->get('Rounds') ) {
+	    if ( $res = $this->get('Rounds') ) {
 	      $rounds = array_merge( $rounds, $res );
 	    }
 	    $lists['rounds'] = JHTML::_('select.genericlist',  $rounds, 'round_id', 'class="inputbox required" size="1"', 'id', 'name', $projectround->round_id);

@@ -47,7 +47,7 @@ class TracksRankingTool extends JObject {
 	{
 		parent::__construct();
 		
-		$this->_db = &JFactory::getDBO();
+		$this->_db = JFactory::getDBO();
 		
 		if ($projectid) {
 			$this->setProjectId($projectid);

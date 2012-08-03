@@ -14,7 +14,7 @@
 defined('_JEXEC') or die('Restricted access'); ?>
 
 <?php
-$user 	=& JFactory::getUser();
+$user 	= JFactory::getUser();
 
 //Ordering allowed ?
 //$ordering = ($this->lists['order'] == 'obj.ordering');
@@ -120,7 +120,7 @@ Joomla.submitbutton = function(pressbutton)
 	
 	for ($i=0, $n=count( $this->items ); $i < $n; $i++)
 	{
-		$row = &$this->items[$i];
+		$row = $this->items[$i];
 
 		$link 	= JRoute::_( 'index.php?option=com_tracks&controller=subroundresult&task=edit&cid[]='. $row->id );
 

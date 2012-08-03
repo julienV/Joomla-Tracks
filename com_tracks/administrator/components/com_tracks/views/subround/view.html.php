@@ -27,7 +27,7 @@ class TracksViewSubround extends JView
 {
 	function display($tpl = null)
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 
 		if($this->getLayout() == 'form') {
@@ -36,25 +36,25 @@ class TracksViewSubround extends JView
 		}
 
 		//get the project
-		$subround =& $this->get('data');
+		$subround = $this->get('data');
 		
 		parent::display($tpl);
 	}
 
 	function _displayForm($tpl)
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 
-		$db		=& JFactory::getDBO();
-		$uri 	=& JFactory::getURI();
-		$user 	=& JFactory::getUser();
-		$model	=& $this->getModel();
+		$db		= JFactory::getDBO();
+		$uri 	= JFactory::getURI();
+		$user 	= JFactory::getUser();
+		$model	= $this->getModel();
 
 		JHTML::_('behavior.formvalidation');
 		
 		//get the project
-		$object	=& $this->get('data');
+		$object	= $this->get('data');
 		$isNew		= ($object->id < 1);
 
 		// fail if checked out not by 'me'
@@ -77,7 +77,7 @@ class TracksViewSubround extends JView
 		}
 		    
 		//editor
-    $editor =& JFactory::getEditor();
+    $editor = JFactory::getEditor();
 		
     $this->assignRef('editor', $editor);  
 		$this->assignRef('object',		$object);

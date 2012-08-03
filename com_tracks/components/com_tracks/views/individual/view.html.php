@@ -27,7 +27,7 @@ class TracksViewIndividual extends JView
 {
 	function display($tpl = null)
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 
 		if ($this->getLayout() == 'form') {
@@ -35,21 +35,21 @@ class TracksViewIndividual extends JView
 			return;
 		}
 
-		$user   =& JFactory::getUser();
+		$user   = JFactory::getUser();
 		$params = $mainframe->getParams( 'com_tracks' );
-		$document =& JFactory::getDocument();
+		$document = JFactory::getDocument();
 		
-		$dispatcher = & JDispatcher::getInstance();
+		$dispatcher = JDispatcher::getInstance();
     JPluginHelper::importPlugin('tracks');
     
     JPluginHelper::importPlugin('content');
 
-		$data = & $this->get('Data');
+		$data = $this->get('Data');
 		$raceResults = $this->sortResultsByProject($this->get('RaceResults'));
 
 		$show_edit_link = ( $user->id && $user->id == $data->user_id ) || $user->authorise('core.manage', 'com_tracks');
 
-		$breadcrumbs =& $mainframe->getPathWay();
+		$breadcrumbs = $mainframe->getPathWay();
 		$breadcrumbs->addItem( $data->first_name . ' ' . $data->last_name,
                         'index.php?option=com_tracks&view=individual&i=' . $data->id );
 
@@ -82,29 +82,29 @@ class TracksViewIndividual extends JView
 
   function _displayForm($tpl)
   {
-    $mainframe = &JFactory::getApplication();
+    $mainframe = JFactory::getApplication();
 $option = JRequest::getCmd('option');
     
-    $db   =& JFactory::getDBO();
-    $uri  =& JFactory::getURI();
-    $user   =& JFactory::getUser();
+    $db   = JFactory::getDBO();
+    $uri  = JFactory::getURI();
+    $user   = JFactory::getUser();
     
     if (!$user->get('id')) {
       $mainframe->redirect(JURI::base(), JText::_('COM_TRACKS_VIEW_INDIVIDUAL_PLEASE_LOGIN_TO_EDIT_PROFILE'), 'error' );
     }
       
-    $profile = &JModel::getInstance('profile', 'TracksModel');
+    $profile = JModel::getInstance('profile', 'TracksModel');
     $this->setModel($profile, true);
                 
     // Get the page/component configuration
-    $params = &$mainframe->getParams();
+    $params = $mainframe->getParams();
     
     $params->set('page_title',  JText::_( 'COM_TRACKS_VIEW_INDIVIDUAL_TITLE' ));
-    $document = &JFactory::getDocument();
+    $document = JFactory::getDocument();
     $document->setTitle( $params->get( 'page_title' ) );
     
     //get the individual
-    $object = & $this->get('Data');
+    $object = $this->get('Data');
     $isNew = ($object->id > 0) ? 0 : 1;
     
     $lists = array();
@@ -134,7 +134,7 @@ $option = JRequest::getCmd('option');
     $lists['users'] = HTMLTracks::usersSelect('user_id', $object->user_id, 1, NULL, 'name', 0);
     
     //editor
-    $editor =& JFactory::getEditor();
+    $editor = JFactory::getEditor();
     
     $this->assignRef( 'editor', $editor );   
     $this->assignRef( 'lists', $lists);

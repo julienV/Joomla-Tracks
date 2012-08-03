@@ -38,7 +38,7 @@ class TracksModelRound extends TracksModelItem
 	 */
 	function publish($cid = array(), $publish = 1)
 	{
-		$user 	=& JFactory::getUser();
+		$user 	= JFactory::getUser();
 
 		if (count( $cid ))
 		{
@@ -70,7 +70,7 @@ class TracksModelRound extends TracksModelItem
 	 */
 	function store($data)
 	{
-		$row =& $this->getTable();
+		$row = $this->getTable();
 
 		// Bind the form fields to the items table
 		if (!$row->bind($data)) {

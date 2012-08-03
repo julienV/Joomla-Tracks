@@ -29,9 +29,9 @@ class TracksViewSubroundResults extends TracksView
 {
 	function display($tpl = null)
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
-    $document = &JFactory::getDocument();
+    $document = JFactory::getDocument();
     
     $document->addScript(JURI::base() . 'components/com_tracks/assets/js/autocompleter/1_2/Autocompleter.js');
     $document->addScript(JURI::base() . 'components/com_tracks/assets/js/autocompleter/1_2/Autocompleter.Local.js');
@@ -41,7 +41,7 @@ class TracksViewSubroundResults extends TracksView
     $document->addStyleSheet(JURI::base() . 'components/com_tracks/assets/css/Autocompleter1_2.css');
     
 
-		$subround =& $this->get('SubroundInfo');
+		$subround = $this->get('SubroundInfo');
 		
 		// Set toolbar items for the page
 		JToolBarHelper::title(   JText::sprintf('COM_TRACKS_Subround_results_s_s', $subround->roundname, $subround->subroundname) , 'generic.png' );
@@ -54,18 +54,18 @@ class TracksViewSubroundResults extends TracksView
     JToolBarHelper::deleteList();
 		JToolBarHelper::help( 'screen.tracks', true );
         
-		$db		=& JFactory::getDBO();
-		$uri	=& JFactory::getURI();
+		$db		= JFactory::getDBO();
+		$uri	= JFactory::getURI();
 
 		$filter_order		= $mainframe->getUserStateFromRequest( $option.'.viewsubroundresults.filter_order',		'filter_order',		'rr.rank',	'cmd' );
 		$filter_order_Dir	= $mainframe->getUserStateFromRequest( $option.'.viewsubroundresults.filter_order_Dir',	'filter_order_Dir',	'',				'word' );
 
 		// Get data from the model
-		//$model	=& $this->getModel( );
+		//$model	= $this->getModel( );
 		//print_r($model);
-		$items		= & $this->get( 'Data' );
-		$total		= & $this->get( 'Total' );
-		$pagination = & $this->get( 'Pagination' );
+		$items		= $this->get( 'Data' );
+		$total		= $this->get( 'Total' );
+		$pagination = $this->get( 'Pagination' );
 
 		// build list of categories
 		//$javascript 	= 'onchange="document.adminForm.submit();"';

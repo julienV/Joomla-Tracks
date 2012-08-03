@@ -36,7 +36,7 @@ class TracksHelper
   public static function filterProject($query, $active = NULL)
   {
     // Initialize variables
-    $db = & JFactory::getDBO();
+    $db = JFactory::getDBO();
 
     $projects[] = JHTML::_('select.option', '0', '- '.JText::_('COM_TRACKS_Select_Project').' -');
     $db->setQuery($query);
@@ -58,7 +58,7 @@ class TracksHelper
   public static function filterCompetition($query, $active = NULL)
   {
     // Initialize variables
-    $db = & JFactory::getDBO();
+    $db = JFactory::getDBO();
 
     $objects[] = JHTML::_('select.option', '0', '- '.JText::_('COM_TRACKS_Select_Competition').' -');
     if ($query == '')
@@ -86,7 +86,7 @@ class TracksHelper
   public static function filterSeason($query, $active = NULL)
   {
     // Initialize variables
-    $db = & JFactory::getDBO();
+    $db = JFactory::getDBO();
 
     $objects[] = JHTML::_('select.option', '0', '- '.JText::_('COM_TRACKS_Select_Season').' -');
     if ($query == '')
@@ -108,7 +108,7 @@ class TracksHelper
   */
   public static function usersSelect( $name, $active, $nouser = 0, $javascript = NULL, $order = 'name', $reg = 1 )
   {
-    $db =& JFactory::getDBO();
+    $db = JFactory::getDBO();
 
     $and = '';
     if ( $reg ) {

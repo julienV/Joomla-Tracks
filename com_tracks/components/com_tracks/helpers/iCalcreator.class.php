@@ -1259,7 +1259,7 @@ class vcalendar {
     if( 3 > count( $rows ))
       return FALSE;                   /* err 10 */
     $comp    = $subcomp = null;
-    $actcomp = & $this;
+    $actcomp = $this;
     $nl      = $this->getConfig( 'nl' );
     $calsync = 0;
             /* identify components and update unparsed data within component */
@@ -6283,11 +6283,11 @@ class calendarComponent {
     if( $unparsedtext ) {
       $this->unparsed = array();
       if( is_array( $unparsedtext )) {
-        $comp = & $this;
+        $comp = $this;
         foreach ( $unparsedtext as $line ) {
           if( 'END:VALARM' == strtoupper( substr( $line, 0, 10 ))) {
             $this->setComponent( $comp );
-            $comp =  & $this;
+            $comp = $this;
             continue;
           }
           elseif( 'BEGIN:VALARM' == strtoupper( substr( $line, 0, 12 ))) {

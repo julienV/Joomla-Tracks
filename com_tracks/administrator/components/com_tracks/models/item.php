@@ -112,7 +112,7 @@ abstract class TracksModelItem extends JModelAdmin
 	{
 		if ($this->_id)
 		{
-			$project = & $this->getTable();
+			$project = $this->getTable();
 			if(! $project->checkin($this->_id)) {
 				$this->setError($this->_db->getErrorMsg());
 				return false;
@@ -135,11 +135,11 @@ abstract class TracksModelItem extends JModelAdmin
 		{
 			// Make sure we have a user id to checkout the article with
 			if (is_null($uid)) {
-				$user	=& JFactory::getUser();
+				$user	= JFactory::getUser();
 				$uid	= $user->get('id');
 			}
 			// Lets get to it and checkout the thing...
-			$project = & $this->getTable();
+			$project = $this->getTable();
 			if(!$project->checkout($uid, $this->_id)) {
 				$this->setError($this->_db->getErrorMsg());
 				return false;
@@ -159,7 +159,7 @@ abstract class TracksModelItem extends JModelAdmin
 	 */
 	function store($data)
 	{
-		$row =& $this->getTable();
+		$row = $this->getTable();
 
 		// Bind the form fields to the items table
 		if (!$row->bind($data)) {
@@ -200,7 +200,7 @@ abstract class TracksModelItem extends JModelAdmin
 	{
 		$cids = JRequest::getVar( 'cid', array(0), 'post', 'array' );
 
-		$row =& $this->getTable();
+		$row = $this->getTable();
 
 		if (count( $cids ))
 		{
@@ -223,7 +223,7 @@ abstract class TracksModelItem extends JModelAdmin
 	 */
 	function move($direction)
 	{
-		$row =& $this->getTable();
+		$row = $this->getTable();
 		if (!$row->load($this->_id)) {
 			$this->setError($this->_db->getErrorMsg());
 			return false;
@@ -246,7 +246,7 @@ abstract class TracksModelItem extends JModelAdmin
 	 */
 	function saveorder($cid = array(), $order)
 	{
-		$row =& $this->getTable();
+		$row = $this->getTable();
 
 		// update ordering values
 		for( $i=0; $i < count($cid); $i++ )

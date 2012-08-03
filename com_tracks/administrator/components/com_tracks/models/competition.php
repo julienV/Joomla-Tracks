@@ -64,7 +64,7 @@ class TracksModelCompetition extends TracksModelItem
 	 */
 	function publish($cid = array(), $publish = 1)
 	{
-		$user 	=& JFactory::getUser();
+		$user 	= JFactory::getUser();
 
 		if (count( $cid ))
 		{

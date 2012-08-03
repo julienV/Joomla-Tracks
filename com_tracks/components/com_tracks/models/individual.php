@@ -122,7 +122,7 @@ class TracksModelIndividual extends baseModel
 	
 	function getRaceResults()
 	{
-		$app = &JFactory::getApplication();
+		$app = JFactory::getApplication();
 		$params = $app->getParams( 'com_tracks' );
     
 		$ind = $this->getData();
@@ -181,7 +181,7 @@ class TracksModelIndividual extends baseModel
 		require_once (JPATH_COMPONENT_ADMINISTRATOR.DS.'tables'.DS.'individual.php');
 		
     $table = $this->getTable('individual');
-    $params = &JComponentHelper::getParams('com_tracks');
+    $params = JComponentHelper::getParams('com_tracks');
     
   	$user   = JFactory::getUser();
     $username = $user->get('username');

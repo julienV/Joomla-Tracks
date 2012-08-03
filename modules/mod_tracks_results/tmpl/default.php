@@ -16,7 +16,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 <?php
 JHTML::_('behavior.tooltip', '.mod-result-tip', array('className' => 'tip-mod-result'));
-$document = &JFactory::getDocument(); 
+$document = JFactory::getDocument(); 
 $document->addStyleSheet( JURI::base() . 'modules/mod_tracks_results/mod_tracks_results.css' );
 $document->addScript( JURI::base() . 'modules/mod_tracks_results/mod_tracks_results.js' );
 ?>

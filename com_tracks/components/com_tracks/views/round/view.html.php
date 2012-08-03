@@ -27,21 +27,21 @@ class TracksViewRound extends JView
 {
     function display($tpl = null)
     {
-        $mainframe = &JFactory::getApplication();
+        $mainframe = JFactory::getApplication();
 $option = JRequest::getCmd('option');
         
-				$dispatcher = & JDispatcher::getInstance();
+				$dispatcher = JDispatcher::getInstance();
 		
         $round_id = JRequest::getVar( 'r', 0, '', 'int' );
                 
-    		$model =& $this->getModel();
+    		$model = $this->getModel();
         $round = $model->getRound( $round_id );
                 
-        $breadcrumbs =& $mainframe->getPathWay();
+        $breadcrumbs = $mainframe->getPathWay();
         $breadcrumbs->addItem( $round->name, 
                         'index.php?view=round&r=' . $round_id );
         
-        $document =& JFactory::getDocument();
+        $document = JFactory::getDocument();
         $document->setTitle( $round->name );
         
         // parse description with content plugins

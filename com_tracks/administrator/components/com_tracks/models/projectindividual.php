@@ -84,7 +84,7 @@ class TracksModelProjectindividual extends TracksModelItem
 	 */
 	function publish($cid = array(), $publish = 1)
 	{
-		$user 	=& JFactory::getUser();
+		$user 	= JFactory::getUser();
 
 		if (count( $cid ))
 		{
@@ -180,7 +180,7 @@ class TracksModelProjectindividual extends TracksModelItem
 	 */
 	function store($data)
 	{
-		$row =& $this->getTable();
+		$row = $this->getTable();
 
 		// Bind the form fields to the items table
 		if (!$row->bind($data)) {
@@ -232,7 +232,7 @@ class TracksModelProjectindividual extends TracksModelItem
         continue;
 	    }
       
-      $new =& $this->getTable();
+      $new = $this->getTable();
       $new->bind($row);
 	    // Store the item to the database
 	    if (!$new->store()) {

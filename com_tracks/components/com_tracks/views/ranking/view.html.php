@@ -27,25 +27,25 @@ class TracksViewRanking extends JView
 {
   function display($tpl = null)
   {
-    $mainframe = &JFactory::getApplication();
+    $mainframe = JFactory::getApplication();
     $option = JRequest::getCmd('option');
 
     $project_id = JRequest::getVar( 'p', 0, '', 'int' );
     
-    $model =& $this->getModel();
-    $rankings =& $model->getRankings( $project_id );
-    $project  =& $model->getProject( $project_id );
+    $model = $this->getModel();
+    $rankings = $model->getRankings( $project_id );
+    $project  = $model->getProject( $project_id );
         
-    $params =& $model->getParams( $project_id );
+    $params = $model->getParams( $project_id );
     
     $viewparams = $mainframe->getParams( 'com_tracks' );
     
     $params->merge( $viewparams );
 
-    $breadcrumbs =& $mainframe->getPathWay();
+    $breadcrumbs = $mainframe->getPathWay();
     $breadcrumbs->addItem( $project->name. ' ' . JText::_('COM_TRACKS_Rankings' ), 'index.php?option=com_tracks&view=ranking&p=' . $project_id );
 
-    $document =& JFactory::getDocument();
+    $document = JFactory::getDocument();
     $document->setTitle( $project->name. ' ' . JText::_('COM_TRACKS_Rankings' ) );
 
     $this->assignRef( 'params',    $params );

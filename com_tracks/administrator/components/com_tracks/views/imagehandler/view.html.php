@@ -33,10 +33,10 @@ class TracksViewImagehandler extends JView  {
 	 */
 	function display($tpl = null)
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 		
-		$document =& JFactory::getDocument();
+		$document = JFactory::getDocument();
 		
 		if($this->getLayout() == 'upload') {
 			$this->_displayupload($tpl);
@@ -60,7 +60,7 @@ class TracksViewImagehandler extends JView  {
 
 		//get images
 		$images 	= $this->get('Images');
-		$pageNav 	= & $this->get('Pagination');
+		$pageNav 	= $this->get('Pagination');
 		
 		if (count($images) > 0 || $search) {
 			$this->assignRef('images', 	$images);
@@ -83,7 +83,7 @@ class TracksViewImagehandler extends JView  {
 	function setImage($index = 0)
 	{
 		if (isset($this->images[$index])) {
-			$this->_tmp_img = &$this->images[$index];
+			$this->_tmp_img = $this->images[$index];
 		} else {
 			$this->_tmp_img = new JObject;
 		}
@@ -99,9 +99,9 @@ class TracksViewImagehandler extends JView  {
 	function _displayupload($tpl = null)
 	{
 		//initialise variables
-		$document	= & JFactory::getDocument();
-		$uri 		= & JFactory::getURI();
-		$params = & JComponentHelper::getParams('com_tracks');
+		$document	= JFactory::getDocument();
+		$uri 		= JFactory::getURI();
+		$params = JComponentHelper::getParams('com_tracks');
     $type     = JRequest::getVar( 'type' );
     $folder = ImageSelect::getfolder($type);
     $field  = JRequest::getVar( 'field' );
@@ -110,7 +110,7 @@ class TracksViewImagehandler extends JView  {
 		$task 		= JRequest::getVar( 'task' );
 		
 		jimport('joomla.client.helper');
-		$ftp =& JClientHelper::setCredentialsFromRequest('ftp');
+		$ftp = JClientHelper::setCredentialsFromRequest('ftp');
 
 		//assign data to template
 		$this->assignRef('params'  	, $params);

@@ -24,9 +24,4 @@ jimport('joomla.application.component.controller');
  */
 class TracksController extends BaseController
 {
-  function display()
-  {
-		parent::display();
-	}
 }
-?>

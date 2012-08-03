@@ -41,7 +41,7 @@ class TracksModelProfile extends baseModel
 	
 	function getData()
 	{
-		$user = &Jfactory::getUser();
+		$user = JFactory::getUser();
 		if ( $this->_id )
 		{
 			$query =  ' SELECT i.* '

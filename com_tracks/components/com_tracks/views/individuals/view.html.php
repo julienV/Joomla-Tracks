@@ -27,17 +27,17 @@ class TracksViewIndividuals extends JView
 {
     function display($tpl = null)
     {
-    	$mainframe = &JFactory::getApplication();
+    	$mainframe = JFactory::getApplication();
 			$option = JRequest::getCmd('option');
 			$params = $mainframe->getParams('com_tracks');
     	          
-        $model =& $this->getModel();
+        $model = $this->getModel();
         $rows = $model->getData();
         
-        $document =& JFactory::getDocument();
+        $document = JFactory::getDocument();
         $document->setTitle( JText::_('COM_TRACKS_All_Individuals' ) );
         
-        $breadcrumbs =& $mainframe->getPathWay();
+        $breadcrumbs = $mainframe->getPathWay();
         $breadcrumbs->addItem( JText::_('COM_TRACKS_All_Individuals' ), 
             'index.php?option=com_tracks&view=individuals' );
         

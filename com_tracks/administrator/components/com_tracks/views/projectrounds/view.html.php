@@ -29,7 +29,7 @@ class TracksViewProjectrounds extends TracksView
 {
 	function display($tpl = null)
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 
 	  if($this->getLayout() == 'copy_form') 
@@ -48,8 +48,8 @@ class TracksViewProjectrounds extends TracksView
     JToolBarHelper::customX( 'copy', 'copy.png', 'copy_f2.png', JText::_('COM_TRACKS_COPY'), true );
     JToolBarHelper::help( 'screen.tracks', true );
         
-		$db		=& JFactory::getDBO();
-		$uri	=& JFactory::getURI();
+		$db		= JFactory::getDBO();
+		$uri	= JFactory::getURI();
 
 		$filter_state		= $mainframe->getUserStateFromRequest( $option.'.viewprojectrounds.filter_state',		'filter_state',		'',				'word' );
 		$filter_order		= $mainframe->getUserStateFromRequest( $option.'.viewprojectrounds.filter_order',		'filter_order',		'obj.ordering',	'cmd' );
@@ -58,11 +58,11 @@ class TracksViewProjectrounds extends TracksView
 		$search				= JString::strtolower( $search );
 
 		// Get data from the model
-		//$model	=& $this->getModel( );
+		//$model	= $this->getModel( );
 		//print_r($model);
-		$items		= & $this->get( 'Data' );
-		$total		= & $this->get( 'Total' );
-		$pagination = & $this->get( 'Pagination' );
+		$items		= $this->get( 'Data' );
+		$total		= $this->get( 'Total' );
+		$pagination = $this->get( 'Pagination' );
 
 		// build list of categories
 		//$javascript 	= 'onchange="document.adminForm.submit();"';
@@ -89,7 +89,7 @@ class TracksViewProjectrounds extends TracksView
 
   function _displayCopy($tpl = null)
   {
-    $mainframe = &JFactory::getApplication();
+    $mainframe = JFactory::getApplication();
 $option = JRequest::getCmd('option');
     
     // Set toolbar items for the page
@@ -99,23 +99,23 @@ $option = JRequest::getCmd('option');
     JToolBarHelper::cancel('cancelcopy');
     JToolBarHelper::help( 'screen.tracks', true );
     
-    $db   =& JFactory::getDBO();
-    $uri  =& JFactory::getURI();
+    $db   = JFactory::getDBO();
+    $uri  = JFactory::getURI();
     
     // Get data from the model
-    // $model =& $this->getModel();
+    // $model = $this->getModel();
     // print_r($model);
     
     //build the html select list for projects
     $projects[] = JHTML::_('select.option',  '0', '- '. JText::_('COM_TRACKS_Select_a_project' ) .' -','value', 'text' );
-    if ( $res = & $this->get('projectsListOptions') ) {
+    if ( $res = $this->get('projectsListOptions') ) {
       $projects = array_merge( $projects, $res );
     }
     $lists['projects'] = JHTML::_('select.genericlist',  $projects, 'project_id', 'class="inputbox" size="1"', 'value', 'text');
     unset($projects);
     
     // get player names
-    $rounds    = & $this->get( 'RoundsList' );
+    $rounds    = $this->get( 'RoundsList' );
     
     $this->assignRef('user',    JFactory::getUser());
     $this->assignRef('rounds',   $rounds);

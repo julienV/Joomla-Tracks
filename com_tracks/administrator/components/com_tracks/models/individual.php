@@ -58,7 +58,7 @@ class TracksModelIndividual extends TracksModelItem
 	 */
 	function store($data)
 	{
-		$row =& $this->getTable();
+		$row = $this->getTable();
 
 		// Bind the form fields to the items table
 		if (!$row->bind($data)) {
@@ -134,7 +134,7 @@ class TracksModelIndividual extends TracksModelItem
   {
     $cids = JRequest::getVar( 'cid', array(0), 'post', 'array' );
 
-    $row =& $this->getTable();
+    $row = $this->getTable();
 
     $rec = 0;
     if (count( $cids ))

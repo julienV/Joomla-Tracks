@@ -29,7 +29,7 @@ class TracksViewIndividual extends TracksView
 {
 	function display($tpl = null)
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 
 		if($this->getLayout() == 'form') {
@@ -38,24 +38,24 @@ class TracksViewIndividual extends TracksView
 		}
 
 		//get the object
-		$object =& $this->get('data');
+		$object = $this->get('data');
 		
 		parent::display($tpl);
 	}
 
 	function _displayForm($tpl)
 	{
-		$mainframe = &JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 
-		$db		=& JFactory::getDBO();
-		$uri 	=& JFactory::getURI();
-		$user 	=& JFactory::getUser();
-		$model	=& $this->getModel();
+		$db		= JFactory::getDBO();
+		$uri 	= JFactory::getURI();
+		$user 	= JFactory::getUser();
+		$model	= $this->getModel();
 
 		$lists = array();
 		//get the project
-		$object	=& $this->get('data');
+		$object	= $this->get('data');
 		$isNew		= ($object->id < 1);
 
 		// fail if checked out not by 'me'
@@ -80,7 +80,7 @@ class TracksViewIndividual extends TracksView
     $lists['countries'] = JHTML::_('select.genericlist', $countries, 'country_code', '', 'value', 'text', $object->country_code);
 		
 		//editor
-		$editor =& JFactory::getEditor();
+		$editor = JFactory::getEditor();
 		
     $this->assignRef( 'editor', $editor );   
 		$this->assignRef( 'lists', $lists);
