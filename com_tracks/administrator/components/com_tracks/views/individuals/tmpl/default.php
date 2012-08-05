@@ -61,6 +61,9 @@ JHTML::_('behavior.tooltip');
 				<?php echo JHTML::_('grid.sort',  'COM_TRACKS_FIRST_NAME', 'obj.first_name', $this->lists['order_Dir'], $this->lists['order'] ); ?>
 			</th>
       <th class="title" nowrap="nowrap"><?php echo JText::_('COM_TRACKS_ALIAS'); ?></th>
+			<th class="title">
+				<?php echo JHTML::_('grid.sort',  'COM_TRACKS_INVIDUAL_USER_NAME', 'ui.username', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+			</th>
 			<th width="1%" nowrap="nowrap">
 				<?php echo JHTML::_('grid.sort',  'ID', 'obj.id', $this->lists['order_Dir'], $this->lists['order'] ); ?>
 			</th>
@@ -68,7 +71,7 @@ JHTML::_('behavior.tooltip');
 	</thead>
 	<tfoot>
 		<tr>
-			<td colspan="6">
+			<td colspan="7">
 				<?php echo $this->pagination->getListFooter(); ?>
 			</td>
 		</tr>
@@ -111,6 +114,11 @@ JHTML::_('behavior.tooltip');
 				?>
 			</td>
       <td align="center"><?php echo $row->alias;?></td>
+			<td>
+				<?php
+				echo $row->individual_username;
+				?>
+			</td>
 			<td align="center">
 				<?php echo $row->id; ?>
 			</td>
