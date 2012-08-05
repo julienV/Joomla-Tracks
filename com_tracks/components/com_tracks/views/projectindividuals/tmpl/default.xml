@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-	<layout title="COM_TRACKS_Standard_project_individuals_ranking_layout">
+	<layout title="COM_TRACKS_Standard_project_individuals_layout">
 		<message>
 			<![CDATA[COM_TRACKS_Displays_project_individuals]]>
 		</message>
