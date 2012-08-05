@@ -33,7 +33,7 @@ class TracksModelIndividuals extends TracksModelList
 
 		$query = ' SELECT obj.id, obj.first_name, obj.last_name, obj.alias, obj.checked_out, obj.checked_out_time, '
       . ' u.name AS editor, '
-      . ' ui.username AS individual_username '
+      . ' ui.username AS individual_username, ui.name AS individual_user_name '
 			. ' FROM #__tracks_individuals AS obj '
 			. ' LEFT JOIN #__users AS u ON u.id = obj.checked_out '
 			. ' LEFT JOIN #__users AS ui ON ui.id = obj.user_id '

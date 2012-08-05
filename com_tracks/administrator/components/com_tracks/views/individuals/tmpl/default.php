@@ -62,7 +62,7 @@ JHTML::_('behavior.tooltip');
 			</th>
       <th class="title" nowrap="nowrap"><?php echo JText::_('COM_TRACKS_ALIAS'); ?></th>
 			<th class="title">
-				<?php echo JHTML::_('grid.sort',  'COM_TRACKS_INVIDUAL_USER_NAME', 'ui.username', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+				<?php echo JHTML::_('grid.sort',  'COM_TRACKS_INVIDUAL_USER_NAME', 'ui.name', $this->lists['order_Dir'], $this->lists['order'] ); ?>
 			</th>
 			<th width="1%" nowrap="nowrap">
 				<?php echo JHTML::_('grid.sort',  'ID', 'obj.id', $this->lists['order_Dir'], $this->lists['order'] ); ?>
@@ -116,7 +116,7 @@ JHTML::_('behavior.tooltip');
       <td align="center"><?php echo $row->alias;?></td>
 			<td>
 				<?php
-				echo $row->individual_username;
+				echo $row->individual_user_name;
 				?>
 			</td>
 			<td align="center">

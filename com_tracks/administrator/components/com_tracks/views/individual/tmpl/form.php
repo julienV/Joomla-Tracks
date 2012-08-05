@@ -119,20 +119,16 @@ defined('_JEXEC') or die('Restricted access'); ?>
         <input class="text_area" type="text" name="nickname" id="nickname" size="32" maxlength="40" value="<?php echo $this->object->nickname; ?>" />
 			</li>
 			<li>
-				<label for="user_id">
-					<?php echo JText::_('COM_TRACKS_User' ); ?>:
-				</label>
-				<?php echo $this->lists['users']; ?>
+				<?php echo $this->form->getLabel('user_id'); ?>
+				<?php echo $this->form->getInput('user_id'); ?> 
 			</li>
 			<li>
 				<?php echo $this->form->getLabel('picture'); ?>
 				<?php echo $this->form->getInput('picture'); ?> 
-				<span id="picture_preview"></span>
 			</li>
 			<li>				
 				<?php echo $this->form->getLabel('picture_small'); ?>
 				<?php echo $this->form->getInput('picture_small'); ?>
-				<span id="picture_small_preview"></span>
 			</li>
 			<li>				
         <label for="height">
@@ -196,13 +192,12 @@ defined('_JEXEC') or die('Restricted access'); ?>
 				</label>
 				<input class="text_area" type="text" name="country" id="country" size="30" maxlength="50" value="<?php echo $this->object->country; ?>" />
 			</li>
-			<li>
-				<label for="description">
-					<?php echo JText::_('COM_TRACKS_Description' ); ?>:
-				</label>
-				<?php echo $this->editor->display('description', $this->object->description, '100%', '400', '70', '15'); ?>
-			</li>
-		</ul>				
+		</ul>		
+				
+		<div class="clr"></div>
+		<?php echo $this->form->getLabel('description'); ?>
+		<div class="clr"></div>
+		<?php echo $this->form->getInput('description'); ?>
 	</fieldset>
 </div>
 

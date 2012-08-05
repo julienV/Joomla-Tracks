@@ -2,19 +2,38 @@
 <form>
 		
 	<field
+		name="user_id"
+		type="user"
+		class="inputbox"
+		default="0"
+		label="COM_TRACKS_User"
+		description="COM_TRACKS_User"
+		/>
+					
+	<field
+		name="description"
+		type="editor"
+		label="COM_TRACKS_Description"
+		description="COM_TRACKS_Description" 
+		filter="JComponentHelper::filterText" buttons="true"
+		/>
+		
+	<field
 		name="picture"
-		type="media"
+		type="media"			
 		label="COM_TRACKS_INDIVIDUALPICTURE"
 		description="COM_TRACKS_INDIVIDUALPICTUREDESC"
 		class="inputbox"
-		directory="com_tracks"/>
+		preview="show"
+		directory="images/com_tracks/individuals/"/>	
 		
 	<field
 		name="picture_small"
-		type="media"
+		type="media"			
 		label="COM_TRACKS_INDIVIDUALSMALLPICTURE"
 		description="COM_TRACKS_INDIVIDUALSMALLPICTUREDESC"
 		class="inputbox"
-		directory="com_tracks"/>
-		
+		preview="show"
+		directory="images/com_tracks/individuals/"/>		
+				
 </form>
