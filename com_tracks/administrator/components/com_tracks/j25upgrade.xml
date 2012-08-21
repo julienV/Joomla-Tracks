@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE jupgrade>
+<jupgrade>
+	
+	<name>Tracks for Joomla 2.5</name>
+	
+	<installer>
+		<file>administrator/components/com_tracks/extras/jupgrade/jupgrade.php</file>
+		<class>jUpgradeComponentTracks</class>
+	</installer>
+
+	<!-- The tables to copy to the new site. -->
+	<tables>
+		<table>tracks_projects</table>
+		<table>tracks_competitions</table>
+		<table>tracks_seasons</table>
+		<table>tracks_teams</table>
+		<table>tracks_clubs</table>
+		<table>tracks_individuals</table>
+		<table>tracks_rounds</table>
+		<table>tracks_subroundtypes</table>
+		<table>tracks_projects_rounds</table>
+		<table>tracks_projects_subrounds</table>
+		<table>tracks_projects_individuals</table>
+		<table>tracks_projects_teams</table>
+		<table>tracks_rounds_results</table>
+		<table>tracks_project_settings</table>
+	</tables>
+
+	<!-- The folders to copy to the new site. -->
+	<folders>
+		<folder>media/com_tracks</folder>
+	</folders>
+	
+</jupgrade>
