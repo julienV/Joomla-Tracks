@@ -37,7 +37,11 @@ class TracksModelRoundResult extends baseModel
      */              
     function reorder($a, $b)
     {
-      if ( $a->rank == 0 && $b->rank == 0 ) {
+      if ( $a->rank == 0 && $b->rank == 0 ) 
+      {
+      	if ($a->bonus_points != $b->bonus_points) {
+      		return $a->bonus_points < $b->bonus_points ? 1 : -1;
+      	}
         return strcmp( $a->last_name.$a->first_name, $b->last_name.$b->first_name );
       }
       else if ( $a->rank == 0 ) {
@@ -47,7 +51,13 @@ class TracksModelRoundResult extends baseModel
         return false;
       }
       else {
-        return $a->rank > $b->rank;
+      	if ($a->rank != $b->rank) {
+        	return $a->rank < $b->rank ? -1 : 1;
+      	}
+      	if ($a->bonus_points != $b->bonus_points) {
+      		return $a->bonus_points < $b->bonus_points ? 1 : -1;
+      	}
+        return strcmp( $a->last_name.$a->first_name, $b->last_name.$b->first_name );      	
       }      
     }
     
