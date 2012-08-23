@@ -71,6 +71,18 @@ defined('_JEXEC') or die('Restricted access'); ?>
 			<?php echo $this->form->getInput('short_name'); ?>
 		</li>
 		<li>
+			<?php echo $this->form->getLabel('country'); ?> 
+			<?php echo $this->form->getInput('country'); ?>
+		</li>
+		<li>
+			<?php echo $this->form->getLabel('picture'); ?> 
+			<?php echo $this->form->getInput('picture'); ?>
+		</li>
+		<li>
+			<?php echo $this->form->getLabel('thumbnail'); ?> 
+			<?php echo $this->form->getInput('thumbnail'); ?>
+		</li>
+		<li>
 			<?php echo $this->form->getLabel('published'); ?> 
 			<?php echo $this->form->getInput('published'); ?>
 		</li>

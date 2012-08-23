@@ -5,7 +5,7 @@ defined('_JEXEC') or die('Restricted access');
 jimport('joomla.form.formfield');
 
 /**
- * Book form field class
+ * Individual form field class
  */
 class JFormFieldTIndividual extends JFormField
 {

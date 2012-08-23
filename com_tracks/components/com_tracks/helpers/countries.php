@@ -16,7 +16,12 @@ defined('_JEXEC') or die('Restricted access');
 
 class TracksCountries 
 {
-	function getCountries()
+	/**
+	 * returns countries iso2 and name from iso3
+	 * 
+	 * @return array
+	 */
+	public static function getCountries()
 	{
 		$country["AFG"]= Array( "iso2" => "AF", "name" => "Afghanistan, Islamic Republic ");
 		$country["ALA"]= Array( "iso2" => "AX", "name" => "Åland Islands");
@@ -268,8 +273,12 @@ class TracksCountries
     return $country;
 	}
 	
-
-  function getCountrycoordArray()
+	/**
+	 * returns countries coodirnates array
+	 * 
+	 * @return array
+	 */
+  public static function getCountrycoordArray()
   {
     $countrycoord = array();
     $countrycoord['AD']= array(42.5  , 1.5);
@@ -515,7 +524,14 @@ class TracksCountries
     return $countrycoord;
   }
 
-	function getCountryOptions($value_tag = 'value', $text_tag = 'text')
+  /**
+   * return countries as options
+   * 
+   * @param string $value_tag
+   * @param string $text_tag
+   * @return array
+   */
+	public static function getCountryOptions($value_tag = 'value', $text_tag = 'text')
 	{
 		$countries = self::getCountries();
 		$options = array();
@@ -527,7 +543,13 @@ class TracksCountries
 		return $options;
 	}
 	
-  function convertIso2to3($iso_code_2)
+	/**
+	 * convert iso2 to iso3
+	 * 
+	 * @param string $iso_code_2
+	 * @return string
+	 */
+  public static function convertIso2to3($iso_code_2)
 	{
 		$convert2to3["AF"]="AFG";
 		$convert2to3["AX"]="ALA";
@@ -782,8 +804,14 @@ class TracksCountries
 		}
 		else return null;
 	}
-	
-	function convertIso3to2($iso_code_3)
+		
+	/**
+	 * convert iso3 to iso2
+	 * 
+	 * @param string $iso_code_3
+	 * @return string
+	 */
+  public static function convertIso3to2($iso_code_3)
 	{
 		$convert3to2["AFG"]="AF";
 		$convert3to2["ALA"]="AX";
@@ -1044,7 +1072,7 @@ class TracksCountries
 	 * 
 	 * @param $iso_code
 	 */
-	function getIsoFlag($iso_code)
+	public static function getIsoFlag($iso_code)
 	{
 		if (strlen($iso_code) == 3) {
 			$iso_code = self::convertIso3to2($iso_code);
@@ -1063,7 +1091,7 @@ class TracksCountries
 	 * @param string: additional html attributes for the img tag
 	 * @return string: html code for the flag image
 	 */
-	function getCountryFlag($countrycode, $attributes = '')
+	public static function getCountryFlag($countrycode, $attributes = '')
 	{
 		$src = self::getIsoFlag($countrycode);
 		if (!$src) {
@@ -1078,7 +1106,7 @@ class TracksCountries
    * @param string: an iso country code, e.g AUT
    * @return string: a country name
    */
-	function getCountryName($iso)
+	public static function getCountryName($iso)
 	{
 		if (strlen($iso) == 2) {
 			$iso = self::convertIso2to3($iso);
@@ -1095,7 +1123,7 @@ class TracksCountries
    * @param string: an iso3 country code, e.g AUT
    * @return string: a country full name
    */
-	function getCountryFullName($iso)
+	public static function getCountryFullName($iso)
 	{
 		if (strlen($iso) == 2) {
 			$iso = self::convertIso2to3($iso);
@@ -1109,7 +1137,7 @@ class TracksCountries
    * @param string: an iso3 country code, e.g AUT
    * @return string: a country name, short form
    */
-	function getShortCountryName($iso)
+	public static function getShortCountryName($iso)
 	{
 		if (strlen($iso) == 2) {
 			$iso = self::convertIso2to3($iso);
@@ -1122,4 +1150,3 @@ class TracksCountries
 		return JText::_($parts[0]);
 	}
 }
-?>

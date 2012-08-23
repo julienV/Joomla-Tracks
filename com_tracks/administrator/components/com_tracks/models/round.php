@@ -159,4 +159,3 @@ class TracksModelRound extends TracksModelItem
 		return JTable::getInstance($type, $prefix, $config);
 	}
 }
-?>

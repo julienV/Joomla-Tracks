@@ -39,6 +39,33 @@
 				value="0">
 				JUNPUBLISHED</option>
 		</field>
+		
+		<field
+			name="country"
+			type="country"			
+			label="COM_TRACKS_FIELD_COUNTRY_LABEL"
+			description="COM_TRACKS_FIELD_COUNTRY_DESC"
+			class="inputbox">
+			<option value="">COM_TRACKS_FIELD_COUNTRY_SELECT_COUNTRY</option>
+		</field>	
+		
+		<field
+			name="picture"
+			type="media"			
+			label="COM_TRACKS_ROUND_PICTURE_LABEL"
+			description="COM_TRACKS_ROUND_PICTURE_DESC"
+			class="inputbox"
+			preview="show"
+			directory="images/com_tracks/rounds/"/>	
+			
+		<field
+			name="thumbnail"
+			type="media"			
+			label="COM_TRACKS_ROUND_THUMBNAIL_LABEL"
+			description="COM_TRACKS_ROUND_THUMBNAIL_DESC"
+			class="inputbox"
+			preview="show"
+			directory="images/com_tracks/rounds/"/>		
 	
 		<field
 			name="description"
