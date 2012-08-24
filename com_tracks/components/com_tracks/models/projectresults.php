@@ -93,6 +93,8 @@ class TracksModelProjectresults extends baseModel
 		$query->join('INNER', '#__tracks_rounds AS r ON r.id = pr.round_id');
 		$query->where('pr.project_id = '.$this->_project_id);
 		$query->where('CHAR_LENGTH(srt.points_attribution) > 0 ');
+		$query->where('pr.published = 1');
+		$query->where('psr.published = 1');
 		$query->order('pr.ordering, psr.ordering');
 		$db->setQuery($query);
 		$res = $db->loadObjectList();
@@ -134,6 +136,8 @@ class TracksModelProjectresults extends baseModel
 		$query->join('INNER', '#__tracks_projects_rounds AS pr ON pr.id = psr.projectround_id');
 		$query->join('INNER', '#__tracks_rounds AS r ON r.id = pr.round_id');
 		$query->where('pr.project_id = '.$this->_project_id);
+		$query->where('pr.published = 1');
+		$query->where('psr.published = 1');
 		$db->setQuery($query);
 		$res = $db->loadObjectList();
 		
