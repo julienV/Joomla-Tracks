@@ -19,27 +19,27 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <table class="raceResults" cellspacing="0" cellpadding="0" summary="">
   <thead>
     <tr>
-      <th><?php echo JText::_('COM_TRACKS_POSITION_SHORT' ); ?></th>
+      <th class="rank"><?php echo JText::_('COM_TRACKS_POSITION_SHORT' ); ?></th>
       
       <?php if ($this->params->get('shownumber')): ?>
-      <th><?php echo JText::_('COM_TRACKS_NUMBER_SHORT' ); ?></th>
+      <th class="number"><?php echo JText::_('COM_TRACKS_NUMBER_SHORT' ); ?></th>
       <?php endif; ?>
       
       <?php if ($this->params->get('showflag')): ?>
-      <th><?php echo JText::_('COM_TRACKS_COUNTRY_SHORT' ); ?></th>
+      <th class="country"><?php echo JText::_('COM_TRACKS_COUNTRY_SHORT' ); ?></th>
       <?php endif; ?>
       
-      <th><?php echo JText::_('COM_TRACKS_Individual' ); ?></th>
+      <th class="name"><?php echo JText::_('COM_TRACKS_Individual' ); ?></th>
       
       <?php if ($this->params->get('showteams')): ?>
-      <th><?php echo JText::_('COM_TRACKS_Team' ); ?></th>
+      <th class="team"><?php echo JText::_('COM_TRACKS_Team' ); ?></th>
       <?php endif; ?>
       
       <?php foreach ($this->rounds as $r): ?>
-      <th colspan="<?php echo count($r->subrounds); ?>" class="hasTip" title="<?php echo $r->round_name; ?>"><?php echo substr($r->short_name, 0, 6); ?></th>
+      <th colspan="<?php echo count($r->subrounds); ?>" class="hasTip result" title="<?php echo $r->round_name; ?>"><?php echo substr($r->short_name, 0, 6); ?></th>
       <?php endforeach; ?>
       
-      <th><?php echo JText::_('COM_TRACKS_Points' ); ?></th>
+      <th class="points"><?php echo JText::_('COM_TRACKS_Points' ); ?></th>
     </tr>
   </thead>
   <tbody>
@@ -51,28 +51,28 @@ defined('_JEXEC') or die('Restricted access'); ?>
       $link_team = JRoute::_( TracksHelperRoute::getTeamRoute($ranking->teamslug, $this->project->slug) ); 
       ?>
       <tr class="<?php echo ($i ? 'd1' : 'd0'); ?>">
-        <td><?php echo $ranking->rank; ?></td>
+        <td class="rank"><?php echo $ranking->rank; ?></td>
         
         <?php if ($this->params->get('shownumber')): ?>
-	      <td><?php echo $ranking->number; ?></td>
+	      <td class="number"><?php echo $ranking->number; ?></td>
 	      <?php endif; ?>
 	      
 	      <?php if ($this->params->get('showflag')): ?>
-	      <td>
+	      <td class="country">
 	        <?php if ( $ranking->country_code ): ?>
             <?php echo TracksCountries::getCountryFlag($ranking->country_code); ?>
           <?php endif; ?>
         </td>
 	      <?php endif; ?>
 	      
-        <td>
+        <td class="name">
           <a href="<?php echo $link_ind; ?>"
   				   title="<?php echo JText::_('COM_TRACKS_Details' ); ?>">
           <?php echo $ranking->first_name . ' ' . $ranking->last_name; ?>
           </a>
         </td>
         <?php  if ($this->params->get('showteams')): ?>
-        <td>
+        <td class="team">
         	<?php if ($ranking->team_id): ?>
           <a href="<?php echo $link_team; ?>"
              title="<?php echo JText::_('COM_TRACKS_Details' ); ?>"> 
@@ -84,11 +84,11 @@ defined('_JEXEC') or die('Restricted access'); ?>
 	      	<?php $i = 1;?>
 	      <?php foreach ($this->rounds as $round): ?>
 	      	<?php foreach ($round->subrounds as $subround): ?>
-	      		<td><?php echo isset($ranking->results[$subround->subround_id]) ? $ranking->results[$subround->subround_id] : '-'; ?></td>
+	      		<td class="result"><?php echo isset($ranking->results[$subround->subround_id]) ? $ranking->results[$subround->subround_id] : '-'; ?></td>
 	      	<?php endforeach; ?>
 	      <?php endforeach; ?>
         
-        <td><?php echo $ranking->points; ?></td>
+        <td class="points"><?php echo $ranking->points; ?></td>
 	      
       </tr>
       <?php    
