@@ -118,3 +118,13 @@ div.project-inds span {
 div.project-inds div {
 	padding-left: 4px;
 }
+
+/* round view */
+img.round-image {
+	float:left;
+	padding-right: 5px;
+}
+
+div.tracks-clear {
+	clear:both;
+}

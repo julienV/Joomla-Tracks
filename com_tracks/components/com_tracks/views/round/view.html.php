@@ -25,31 +25,35 @@ jimport( 'joomla.application.component.view');
  */
 class TracksViewRound extends JView
 {
-    function display($tpl = null)
-    {
-        $mainframe = JFactory::getApplication();
-$option = JRequest::getCmd('option');
-        
-				$dispatcher = JDispatcher::getInstance();
-		
-        $round_id = JRequest::getVar( 'r', 0, '', 'int' );
-                
-    		$model = $this->getModel();
-        $round = $model->getRound( $round_id );
-                
-        $breadcrumbs = $mainframe->getPathWay();
-        $breadcrumbs->addItem( $round->name, 
-                        'index.php?view=round&r=' . $round_id );
-        
-        $document = JFactory::getDocument();
-        $document->setTitle( $round->name );
-        
-        // parse description with content plugins
-				$round->description = JHTML::_('content.prepare', $round->description);
-				
-        $this->assignRef( 'round',    $round );
+	function display($tpl = null)
+	{
+		$mainframe = JFactory::getApplication();
+		$params = $mainframe->getParams();
+		$option = JRequest::getCmd('option');
 
-        parent::display($tpl);
-    }
+		$dispatcher = JDispatcher::getInstance();
+
+		$round_id = JRequest::getVar( 'r', 0, '', 'int' );
+
+		$model = $this->getModel();
+		$round = $model->getRound( $round_id );
+
+		$breadcrumbs = $mainframe->getPathWay();
+		$breadcrumbs->addItem( $round->name,
+				'index.php?view=round&r=' . $round_id );
+
+		$document = JFactory::getDocument();
+		$document->setTitle( $round->name );
+
+		// parse description with content plugins
+		$round->description = JHTML::_('content.prepare', $round->description);
+		
+		$picture = JLVImageTool::modalimage($round->picture, $round->name, 150);
+
+		$this->assignRef( 'round',    $round );
+		$this->assignRef( 'params',   $params );	
+		$this->assignRef( 'picture',  $picture );	
+
+		parent::display($tpl);
+	}
 }
-?>

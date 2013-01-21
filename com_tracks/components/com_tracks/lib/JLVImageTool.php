@@ -33,7 +33,7 @@ class JLVImageTool {
 	 * @param string $height The height of the image
 	 * @return true when success
 	 */
-	function thumb($file, $save, $width, $height)
+	public static function thumb($file, $save, $width, $height)
 	{
 		//GD-Lib > 2.0 only!
 		@unlink($save);
@@ -130,7 +130,7 @@ class JLVImageTool {
 	 *
 	 * @return int
 	 */
-	function gdVersion($user_ver = 0)
+	public static function gdVersion($user_ver = 0)
 	{
 		if (! extension_loaded('gd')) {
 			return;
@@ -187,7 +187,7 @@ class JLVImageTool {
 	 * @param string int maximum dimension in pixels
 	 * @param array other attributes
 	 */
-	function modalimage($image_path, $alt, $maxdim, $attribs = array())
+	public static function modalimage($image_path, $alt, $maxdim, $attribs = array())
 	{
 		jimport('joomla.filesystem.file');
 		$app = JFactory::getApplication();
@@ -227,7 +227,7 @@ class JLVImageTool {
 	 * @param string image_path full image path, or relative to joomla root
 	 * @return url or false if it doesn't exists
 	 */
-	function getThumbUrl($image_path, $maxdim)
+	public static function getThumbUrl($image_path, $maxdim)
 	{
 		jimport('joomla.filesystem.file');
 		$app = JFactory::getApplication();
@@ -277,7 +277,7 @@ class JLVImageTool {
 	}
 
 
-	function check($file, $settings)
+	public static function check($file, $settings)
 	{
 		jimport('joomla.filesystem.file');
 
