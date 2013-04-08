@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: default.php 101 2008-05-22 08:32:12Z julienv $ 
+* @version    $Id: default.php 101 2008-05-22 08:32:12Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -9,7 +9,7 @@
 * is derivative of works licensed under the GNU General Public License or
 * other free or open source software licenses.
 * See COPYRIGHT.php for copyright notices and details.
-*/ 
+*/
 
 // no direct access
 defined('_JEXEC') or die('Restricted access'); ?>
@@ -20,10 +20,10 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <?php if (count($this->results)): ?>
 <?php foreach ($this->results as $k => $project): ?>
 <h3>
-<?php echo $k; ?>
+<?php echo $project[0]->projectname; ?>
 <?php if ($this->params->get('indview_results_showcompetition', 1) || $this->params->get('indview_results_showseason', 1)) {
   $html = ' (';
-  $elements = array();  
+  $elements = array();
   if ($this->params->get('indview_results_showcompetition', 1)) {
     $elements[] = $project[0]->competitionname;
   }
@@ -38,35 +38,35 @@ defined('_JEXEC') or die('Restricted access'); ?>
 </h3>
 <table class="raceResults">
   <thead>
-    <tr>    
+    <tr>
       <?php if ($this->params->get('indview_results_showteam', 1)): ?>
       <th><?php echo JText::_('COM_TRACKS_TEAM'); ?></th>
-      <?php endif; ?>     
+      <?php endif; ?>
       <th><?php echo JText::_('COM_TRACKS_ROUND'); ?></th>
       <?php if ($this->params->get('indview_results_showrace', 1)): ?>
 	    <th><?php echo JText::_('COM_TRACKS_RACE'); ?></th>
-      <?php endif; ?>     
+      <?php endif; ?>
       <?php if ($this->params->get('indview_results_showperformance', 1)): ?>
       <th><?php echo JText::_('COM_TRACKS_PERFORMANCE'); ?></th>
-      <?php endif; ?>    
+      <?php endif; ?>
       <?php if ($this->params->get('indview_results_showrank', 1)): ?>
 	    <th><?php echo JText::_('COM_TRACKS_RANK'); ?></th>
-      <?php endif; ?>     
+      <?php endif; ?>
       <?php if ($this->params->get('indview_results_points', 1)): ?>
 	    <th><?php echo JText::_('COM_TRACKS_POINTS'); ?></th>
-      <?php endif; ?>     
+      <?php endif; ?>
     </tr>
   </thead>
   <tbody>
     <?php foreach ($project as $result): ?>
-    <tr<?php echo ($result->rank == 1 ? 'class="winner"' : ''); ?>>    
+    <tr<?php echo ($result->rank == 1 ? 'class="winner"' : ''); ?>>
       <?php if ($this->params->get('indview_results_showteam', 1)): ?>
       <td><?php echo $result->teamname; ?></td>
       <?php endif; ?>
       <td><?php echo JHTML::link(JRoute::_(TracksHelperRoute::getRoundResultRoute($result->prslug)), $result->roundname); ?></td>
       <?php if ($this->params->get('indview_results_showrace', 1)): ?>
       <td><?php echo $result->subroundname; ?></td>
-      <?php endif; ?> 
+      <?php endif; ?>
       <?php if ($this->params->get('indview_results_showperformance', 1)): ?>
       <td><?php echo $result->performance; ?></td>
       <?php endif; ?>

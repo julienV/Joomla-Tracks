@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: view.html.php 77 2008-04-30 03:32:25Z julienv $ 
+* @version    $Id: view.html.php 77 2008-04-30 03:32:25Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -38,10 +38,10 @@ class TracksViewIndividual extends JView
 		$user   = JFactory::getUser();
 		$params = $mainframe->getParams( 'com_tracks' );
 		$document = JFactory::getDocument();
-		
+
 		$dispatcher = JDispatcher::getInstance();
     JPluginHelper::importPlugin('tracks');
-    
+
     JPluginHelper::importPlugin('content');
 
 		$data = $this->get('Data');
@@ -54,7 +54,7 @@ class TracksViewIndividual extends JView
                         'index.php?option=com_tracks&view=individual&i=' . $data->id );
 
 		$document->setTitle( $data->first_name . ' ' . $data->last_name );
-				
+
 		// allow content plugins
 		$data->description = JHTML::_('content.prepare', $data->description);
 
@@ -66,7 +66,7 @@ class TracksViewIndividual extends JView
 
 		parent::display($tpl);
 	}
-	
+
 	function sortResultsByProject($results)
 	{
 		$projects = array();
@@ -74,39 +74,39 @@ class TracksViewIndividual extends JView
 
 		foreach ($results AS $r)
 		{
-			@$projects[$r->projectname][] = $r;
+			@$projects[$r->project_id][] = $r;
 		}
 		return $projects;
 	}
-    
+
 
   function _displayForm($tpl)
   {
     $mainframe = JFactory::getApplication();
 $option = JRequest::getCmd('option');
-    
+
     $db   = JFactory::getDBO();
     $uri  = JFactory::getURI();
     $user   = JFactory::getUser();
-    
+
     if (!$user->get('id')) {
       $mainframe->redirect(JURI::base(), JText::_('COM_TRACKS_VIEW_INDIVIDUAL_PLEASE_LOGIN_TO_EDIT_PROFILE'), 'error' );
     }
-      
+
     $profile = JModel::getInstance('profile', 'TracksModel');
     $this->setModel($profile, true);
-                
+
     // Get the page/component configuration
     $params = $mainframe->getParams();
-    
+
     $params->set('page_title',  JText::_( 'COM_TRACKS_VIEW_INDIVIDUAL_TITLE' ));
     $document = JFactory::getDocument();
     $document->setTitle( $params->get( 'page_title' ) );
-    
+
     //get the individual
     $object = $this->get('Data');
     $isNew = ($object->id > 0) ? 0 : 1;
-    
+
     $lists = array();
 
     // countries
@@ -114,8 +114,8 @@ $option = JRequest::getCmd('option');
     $countries[] = JHTML::_('select.option', '', JTEXT::_('COM_TRACKS_SELECT_COUNTRY'));
     $countries = array_merge($countries, TracksCountries::getCountryOptions());
     $lists['countries'] = JHTML::_('select.genericlist', $countries, 'country_code', '', 'value', 'text', $object->country_code);
-    
-    if ( $user->authorise('core.manage', 'com_tracks') 
+
+    if ( $user->authorise('core.manage', 'com_tracks')
       || ( $object->user_id && ($user->id == $object->user_id) )
       || ( $isNew && $user->id )
        ) {
@@ -124,19 +124,19 @@ $option = JRequest::getCmd('option');
     else {
       $can_edit = false;
     }
-    
+
     if (!$can_edit) {
       JError::raiseError( 403, JText::_( 'COM_TRACKS_ACCESS_FORBIDDEN' ));
-      return;  
+      return;
     }
-    
+
     // users list
     $lists['users'] = HTMLTracks::usersSelect('user_id', $object->user_id, 1, NULL, 'name', 0);
-    
+
     //editor
     $editor = JFactory::getEditor();
-    
-    $this->assignRef( 'editor', $editor );   
+
+    $this->assignRef( 'editor', $editor );
     $this->assignRef( 'lists', $lists);
     $this->assignRef( 'object', $object);
     $this->assignRef( 'params', $params);

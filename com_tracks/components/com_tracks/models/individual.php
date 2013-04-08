@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: roundresult.php 61 2008-04-24 15:20:36Z julienv $ 
+* @version    $Id: roundresult.php 61 2008-04-24 15:20:36Z julienv $
 * @package    JoomlaTracks
 * @copyright    Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license      GNU/GPL, see LICENSE.php
@@ -25,16 +25,16 @@ require_once (JPATH_COMPONENT_ADMINISTRATOR.DS.'helpers'.DS.'imageselect.php');
  * @since 0.1
  */
 class TracksModelIndividual extends baseModel
-{ 
+{
 	/**
 	 * individual id
 	 *
 	 * @var int
-	 */  
+	 */
 	var $_id = 0;
-	
+
 	var $_data = null;
-	
+
 	function __construct($config = array())
 	{
 		parent::__construct($config = array());
@@ -54,7 +54,7 @@ class TracksModelIndividual extends baseModel
     // Set new details ID and wipe data
     $this->_id      = $id;
   }
-	
+
 	function getData()
 	{
 		if ( !$this->_data )
@@ -65,47 +65,47 @@ class TracksModelIndividual extends baseModel
 
 			$this->_db->setQuery( $query );
 
-			if ( $result = $this->_db->loadObjectList() ) 
+			if ( $result = $this->_db->loadObjectList() )
 			{
-				$this->_data = $result[0];				
+				$this->_data = $result[0];
         $attribs['class']="pic";
-			
+
         if ($this->_data->picture != '') {
           $this->_data->picture = JHTML::image(JURI::root().$this->_data->picture, $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
         } else {
           $this->_data->picture = JHTML::image(JURI::base().'media/com_tracks/images/misc/tnnophoto.jpg', $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
         }
-        
+
         if ($this->_data->picture_small != '') {
           $this->_data->picture_small = JHTML::image(JURI::root().$this->_data->picture_small, $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
         } else {
           $this->_data->picture_small = JHTML::image(JURI::base().'media/com_tracks/images/misc/tnnophoto.jpg', $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
         }
-        
-        $this->_loadProjectDetails();                
+
+        $this->_loadProjectDetails();
 			}
 			else {
 				$this->_initData();
 			}
 		}
-		
+
 		return $this->_data;
 	}
-	
+
 	/**
 	 * add info relevant to the individual in the current project, if a project is set
-	 *  
+	 *
 	 */
 	function _loadProjectDetails()
 	{
 		if ($this->_project_id && $this->_data)
 		{
-			$query = ' SELECT t.name as team_name, pi.number, ' 
+			$query = ' SELECT t.name as team_name, pi.number, '
 			       . ' CASE WHEN CHAR_LENGTH( t.alias ) THEN CONCAT_WS( \':\', t.id, t.alias ) ELSE t.id END AS teamslug, '
 			       . ' CASE WHEN CHAR_LENGTH( p.alias ) THEN CONCAT_WS( \':\', p.id, p.alias ) ELSE t.id END AS projectslug '
-			       . ' FROM #__tracks_projects_individuals AS pi ' 
-			       . ' LEFT JOIN #__tracks_teams AS t ON t.id = pi.team_id ' 
-			       . ' LEFT JOIN #__tracks_projects AS p ON p.id = pi.project_id ' 
+			       . ' FROM #__tracks_projects_individuals AS pi '
+			       . ' LEFT JOIN #__tracks_teams AS t ON t.id = pi.team_id '
+			       . ' LEFT JOIN #__tracks_projects AS p ON p.id = pi.project_id '
 			       . ' WHERE pi.project_id = ' . $this->_db->Quote($this->_project_id)
 			       . '   AND pi.individual_id = '. $this->_id;
 			       ;
@@ -116,19 +116,19 @@ class TracksModelIndividual extends baseModel
 		else {
 			$this->_data->projectdata = null;
 		}
-			
+
 		return $this->_data;
 	}
-	
+
 	function getRaceResults()
 	{
 		$app = JFactory::getApplication();
 		$params = $app->getParams( 'com_tracks' );
-    
+
 		$ind = $this->getData();
 		if (!$ind->id) return null;
-		
-		$query = ' SELECT rr.rank, rr.performance, rr.bonus_points, '
+
+		$query = ' SELECT rr.rank, rr.performance, rr.bonus_points, pr.project_id, '
            . '        r.name AS roundname, r.id as pr, '
 		       . '        srt.name AS subroundname, '
            . '        srt.points_attribution, '
@@ -144,7 +144,7 @@ class TracksModelIndividual extends baseModel
 		       . ' INNER JOIN #__tracks_projects_rounds AS pr ON pr.id = psr.projectround_id '
 		       . ' INNER JOIN #__tracks_rounds AS r ON r.id = pr.round_id'
 		       . ' INNER JOIN #__tracks_projects AS p ON p.id = pr.project_id'
-           . ' INNER JOIN #__tracks_seasons AS s ON s.id = p.season_id'  
+           . ' INNER JOIN #__tracks_seasons AS s ON s.id = p.season_id'
            . ' INNER JOIN #__tracks_competitions AS c ON c.id = p.competition_id '
            . ' LEFT JOIN  #__tracks_teams AS t ON t.id = rr.team_id'
            . ' WHERE rr.individual_id = ' . $this->_db->Quote($this->_id)
@@ -153,20 +153,20 @@ class TracksModelIndividual extends baseModel
     if ($params->get('indview_results_onlypointssubrounds', 1)) {
     	$query .= ' AND CHAR_LENGTH(srt.points_attribution) > 0 ';
     }
-    
+
     if ($params->get('indview_results_ordering', 1) == 0) {
     	$query .= ' ORDER BY s.ordering DESC, c.ordering DESC, p.ordering DESC, pr.ordering ASC, psr.ordering ASC';
     }
     else {
     	$query .= ' ORDER BY s.ordering ASC, c.ordering ASC, p.ordering ASC, pr.ordering ASC, psr.ordering ASC';
     }
-    
+
 		if (!$result = $this->_getList($query)) {
 			//echo $this->_db->getQuery();
 		}
 		return $result;
 	}
-    
+
 
   /**
    * Method to store the individual data
@@ -179,17 +179,17 @@ class TracksModelIndividual extends baseModel
   {
 		// Require the base controller
 		require_once (JPATH_COMPONENT_ADMINISTRATOR.DS.'tables'.DS.'individual.php');
-		
+
     $table = $this->getTable('individual');
     $params = JComponentHelper::getParams('com_tracks');
-    
+
   	$user   = JFactory::getUser();
     $username = $user->get('username');
-    
-    if ($data['id']) 
+
+    if ($data['id'])
     {
     	$table->load($data['id']);
-    	
+
     	if ($table->user_id != $user->get('id') && !$user->authorise('core.manage', 'com_tracks')) {
     		JError::raiseError(403, JText::_('COM_TRACKS_ACCESS_NOT_ALLOWED'));
     	}
@@ -200,14 +200,14 @@ class TracksModelIndividual extends baseModel
       $this->setError($this->_db->getErrorMsg());
       return false;
     }
-    
+
     $targetpath = 'images'.DS.$params->get('default_individual_images_folder', 'tracks/individuals');
-    
+
     jimport('joomla.filesystem.file');
     jimport('joomla.filesystem.folder');
-    
+
     if ( !empty($picture['name']) )  {
-    	
+
 	    $base_Dir = JPATH_SITE.DS.$targetpath.DS;
 	    if (!JFolder::exists($base_Dir)) {
 	    	JFolder::create($base_Dir);
@@ -236,11 +236,11 @@ class TracksModelIndividual extends baseModel
       //keep image if edited and left blank
       unset($table->picture);
     }//end image upload if
-    
+
     if ( !empty($picture_small['name']) )  {
 
       jimport('joomla.filesystem.file');
-      
+
       $base_Dir = JPATH_SITE.DS.$targetpath.DS.'small'.DS;
       if (!JFolder::exists($base_Dir)) {
       	JFolder::create($base_Dir);
@@ -268,17 +268,17 @@ class TracksModelIndividual extends baseModel
       //keep image if edited and left blank
       unset($table->picture_small);
     }//end image upload if
-    
+
     // Store the individual to the database
     if (!$table->save($data)) {
       $this->setError( $user->getError() );
       return false;
     }
     $this->_id = $table->id;
-    
+
     return $this->_id;
   }
-  
+
   /**
    * returns individual id if stored.
    *
@@ -288,7 +288,7 @@ class TracksModelIndividual extends baseModel
   {
   	return $this->_id;
   }
-  
+
   function _initData()
   {
       $object = new stdClass();
