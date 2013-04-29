@@ -51,7 +51,7 @@ class plgButtonTracks_individual extends JPlugin
 		$template = $mainframe->getTemplate();
 		
 		$declaration	="
-		.button2-left .tracks_individual 	{ background: url(components/com_tracks/assets/images/indiv_editor_button.png) 100% 0 no-repeat; } ";
+		.button2-left .tracks_individual 	{ background: url(media/com_tracks/images/indiv_editor_button.png) 100% 0 no-repeat; } ";
 		
 		$doc->addStyleDeclaration($declaration);
 
@@ -95,7 +95,7 @@ class plgButtonTracks_individual extends JPlugin
 		$app = JFactory::getApplication();
 		if ($app->isAdmin()) {
 			$declaration	="
-			.button2-left .tracks_individual 	{ background: url(components/com_tracks/assets/images/indiv_editor_button.png) 100% 0 no-repeat; } ";
+			.button2-left .tracks_individual 	{ background: url(media/com_tracks/images/indiv_editor_button.png) 100% 0 no-repeat; } ";
 			$doc->addStyleDeclaration($declaration);
 		}
 		

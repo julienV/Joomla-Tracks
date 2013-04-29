@@ -1,107 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="1.7.0" method="upgrade">
-  	<name>COM_TRACKS</name>
-  	<author>Julien Vonthron</author>
-  	<authorEmail>julien.vonthron@gmail.com</authorEmail>
-    <authorUrl>http://www.jlv-solutions.com</authorUrl>	
-  	<creationDate>VERSION_CREATION_DATE</creationDate>
-  	<copyright>(C) 2008,2009,2010,2011,2012 Julien Vonthron. All rights reserved.</copyright>
-  	<license>http://www.gnu.org/licenses/gpl.html</license>
-  	<version>1.0.7</version>
-  	<description>COM_TRACKS_XML_DESC</description>
+	<name>COM_TRACKS</name>
+	<author>Julien Vonthron</author>
+	<authorEmail>julien.vonthron@gmail.com</authorEmail>
+	<authorUrl>http://www.jlv-solutions.com</authorUrl>
+	<creationDate>VERSION_CREATION_DATE</creationDate>
+	<copyright>(C) 2008,2009,2010,2011,2012 Julien Vonthron. All rights	reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl.html</license>
+	<version>1.0.7</version>
+	<description>COM_TRACKS_XML_DESC</description>
+
+
+	<!-- Runs on install/uninstall/update -->
+	<scriptfile>installscript.php</scriptfile>
 	
+	<!-- Install Database Section -->
+	<install>
+		<sql>
+			<file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+		</sql>
+	</install>
 	
-		<!-- Runs on install/uninstall/update -->
-		<scriptfile>installscript.php</scriptfile>
-	  <!-- Install Database Section -->
-  	<install>
-  		  <sql>
-            <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
-  		  </sql>
-  	</install>
-	  <!-- Uninstall Database Section -->
-  	<uninstall>
- 		  <sql>
-            <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
- 		  </sql>
-  	</uninstall>	
-		<update> <!-- Runs on update; New in 1.6 -->
-			<schemas>
-				<schemapath type="mysql">sql/updates/mysql</schemapath>
-			</schemas>
-		</update>
+	<!-- Uninstall Database Section -->
+	<uninstall>
+		<sql>
+			<file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+		</sql>
+	</uninstall>
 	
-	  <files folder="components/com_tracks">
-			  <filename>tracks.php</filename>
-			  <filename>tracks.core.php</filename>
-			  <filename>controller.php</filename>
-        <filename>router.php</filename>
-			  <filename>index.html</filename>
-        <folder>assets</folder>
-        <folder>controllers</folder>
-        <folder>css</folder>
-        <folder>helpers</folder>
-        <folder>language</folder>
-        <folder>lib</folder>
-			  <folder>models</folder>
-			  <folder>sports</folder>
-			  <folder>views</folder>
-    </files>
+	<update> <!-- Runs on update; New in 1.6 -->
+		<schemas>
+			<schemapath type="mysql">sql/updates/mysql</schemapath>
+		</schemas>
+	</update>
+
+	<files folder="site">
+		<filename>tracks.php</filename>
+		<filename>tracks.core.php</filename>
+		<filename>controller.php</filename>
+		<filename>router.php</filename>
+		<filename>index.html</filename>
+		<folder>controllers</folder>
+		<folder>helpers</folder>
+		<folder>language</folder>
+		<folder>lib</folder>
+		<folder>models</folder>
+		<folder>sports</folder>
+		<folder>views</folder>
+	</files>
     
     <!-- Site Main Media File Copy Section -->
-	  <media destination="com_tracks" folder="components/com_tracks">
-      <folder>images</folder>
-	  </media>
-     
-  
-    <administration>
-	
-    		<!-- Administration Menu Section -->
-        <menu img="../administrator/components/com_tracks/assets/images/tracks_logo_16.png">COM_TRACKS_TRACKS</menu>
-    		<submenu>
-    	      <menu link="option=com_tracks">COM_TRACKS_PROJECTS</menu>
-    	      <menu link="option=com_tracks&amp;view=competitions">COM_TRACKS_Competitions</menu>
-    	      <menu link="option=com_tracks&amp;view=seasons">COM_TRACKS_Seasons</menu>
-    	      <menu link="option=com_tracks&amp;view=individuals">COM_TRACKS_Individuals</menu>
-    	      <menu link="option=com_tracks&amp;view=teams">COM_TRACKS_Teams</menu>
-    	      <menu link="option=com_tracks&amp;view=rounds">COM_TRACKS_Rounds</menu>
-    	      <menu link="option=com_tracks&amp;view=about">COM_TRACKS_About_Tracks</menu>
-        </submenu>
-    		
-    		<!-- Administration Main File Copy Section -->
-    		<!-- Note the folder attribute: This attribute describes the folder
-    			to copy FROM in the package to install therefore files copied
-    			in this section are copied from /admin/ in the package -->
-    
-    		<files folder="administrator/components/com_tracks">
-      			<filename>admin.tracks.php</filename>
-            <filename>access.xml</filename>
-            <filename>config.xml</filename>
-      			<filename>controller.php</filename>
-            <filename>helper.php</filename>
-      			<filename>index.html</filename>
-            <filename>license.txt</filename>
-            <filename>copyright.txt</filename>
-            <folder>abstract</folder>
-            <folder>assets</folder>
-      			<folder>controllers</folder>
-      			<folder>elements</folder>
-            <folder>help</folder>
-            <folder>helpers</folder>
-       			<folder>language</folder>
-      			<folder>models</folder>
-      			<folder>projectparameters</folder>
-						<folder>sql</folder>
-      			<folder>tables</folder>
-      			<folder>views</folder>
-    		</files>
+	<media destination="com_tracks" folder="media">
+		<filename>index.html</filename>
+		<folder>css</folder>
+		<folder>images</folder>
+		<folder>js</folder>
+	</media>
 
-	  </administration>	  
+	<administration>
+
+		<!-- Administration Menu Section -->
+		<menu
+			img="../media/com_tracks/images/tracks_logo_16.png">COM_TRACKS_TRACKS</menu>
+		<submenu>
+			<menu link="option=com_tracks">COM_TRACKS_PROJECTS</menu>
+			<menu link="option=com_tracks&amp;view=competitions">COM_TRACKS_Competitions</menu>
+			<menu link="option=com_tracks&amp;view=seasons">COM_TRACKS_Seasons</menu>
+			<menu link="option=com_tracks&amp;view=individuals">COM_TRACKS_Individuals</menu>
+			<menu link="option=com_tracks&amp;view=teams">COM_TRACKS_Teams</menu>
+			<menu link="option=com_tracks&amp;view=rounds">COM_TRACKS_Rounds</menu>
+			<menu link="option=com_tracks&amp;view=about">COM_TRACKS_About_Tracks</menu>
+		</submenu>
+
+		<!-- Administration Main File Copy Section -->
+		<!-- Note the folder attribute: This attribute describes the folder to 
+			copy FROM in the package to install therefore files copied in this section 
+			are copied from /admin/ in the package -->
+
+		<files folder="admin">
+			<filename>tracks.php</filename>
+			<filename>access.xml</filename>
+			<filename>config.xml</filename>
+			<filename>controller.php</filename>
+			<filename>helper.php</filename>
+			<filename>index.html</filename>
+			<filename>license.txt</filename>
+			<filename>copyright.txt</filename>
+			<folder>abstract</folder>
+			<folder>controllers</folder>
+			<folder>elements</folder>
+			<folder>help</folder>
+			<folder>helpers</folder>
+			<folder>language</folder>
+			<folder>models</folder>
+			<folder>projectparameters</folder>
+			<folder>sql</folder>
+			<folder>tables</folder>
+			<folder>views</folder>
+		</files>
+
+	</administration>	  
 	  
-		<!-- UPDATESERVER DEFINITION -->
-		<updateservers>
-			<!-- Note: No spaces or linebreaks allowed between the server tags -->
-			<server type="extension" priority="1" name="Tracks Update Site">http://www.jlv-solutions.com/updates/tracks-update.xml</server>
-		</updateservers>
-		
+	<!-- UPDATESERVER DEFINITION -->
+	<updateservers>
+		<!-- Note: No spaces or linebreaks allowed between the server tags -->
+		<server type="extension" priority="1" name="Tracks Update Site">http://www.jlv-solutions.com/updates/tracks-update.xml
+		</server>
+	</updateservers>
 </extension>
