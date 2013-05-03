@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Tracks" default="dev-release" basedir=".">
+	<property file="build/build.properties" />
+	
+	<!-- Default properties, set only if not already assigned in the build.properties file -->
+	<property name="dirs.root" value="." />
+	<property name="src" value="." />
+	<property name="dirs.component" value="component" />
+	<property name="dirs.languages" value="languages" />
+	<property name="dirs.modules" value="modules" />
+	<property name="dirs.release" value="release" />
+	<property name="dirs.plugins" value="plugins" />
+	<property name="dirs.3pd" value="3pd" />
+	<property name="dirs.tmp" value="tmp" />
+	<property name="version" value="dev" />
+
+	<property name="dirs.bin" value="bin" />
+	<property name="dirs.bin.libxml" value="${dirs.bin}/libxml" />
+	<property name="dirs.bin.fop" value="${dirs.bin}/fop" />
+	<property name="dirs.bin.dbxsl" value="${dirs.bin}/dbxsl" />
+	<property name="dirs.bin.release" value="../release" />
+
+	<taskdef name="gitversion" classname="build.phingext.GitVersionTask" />
+	<taskdef name="gitdate" classname="build.phingext.GitDateTask" />
+		
+	<!--
+	====================================================================================================
+	Tasks - General
+	====================================================================================================
+	-->
+	
+	<target name="all" description="Makes everything"
+		depends="dev-release">
+	</target>
+	
+	<target name="dev-release" description="Makes the release"
+		depends="new-release,setup-properties,release">
+	</target>
+
+	<target name="new-release" description="Create the release directory afresh">
+		<!-- Recreate the release directory -->
+		<delete dir="${dirs.release}" quiet="yes" includeemptydirs="false" />
+		<mkdir dir="${dirs.release}" />
+	</target>
+	
+	<target name="setup-properties" description="Set up version and build properties">
+		<!-- Initialize the build.date timestamp -->
+		<tstamp>
+			<format property="build.date" pattern="%Y-%m-%d" />
+		</tstamp>
+
+		<!-- Initialize the version if it's not set -->
+		<if>
+			<equals arg1="${version}" arg2="dev" />
+			<then>
+				<gitversion workingcopy="${dirs.root}" propertyname="git.lastrevision" />
+				<gitdate workingcopy="${dirs.root}" propertyname="git.timestamp" />
+				<!--<property name="version" value="rev${git.lastrevision}" override="true" />-->
+				<property name="version" value="${git.lastrevision}-${git.timestamp}" override="true" />
+			</then>
+		</if>
+	</target>
+	
+	<!--
+	====================================================================================================
+	Tasks - Joomla! packages
+	====================================================================================================
+	-->
+	
+	<target name="release" description="Tracks Installation Package for Joomla! 1.6+"
+		depends="new-release,setup-properties">
+
+		<copy todir="${dirs.tmp}/component" >
+			<fileset dir="${dirs.component}">
+				<include name="**" />
+			</fileset>
+			<filterchain>
+				<replacetokens begintoken="##" endtoken="##">
+					<token key="DATE" value="${build.date}" />
+					<token key="VERSION" value="${version}" />
+				</replacetokens>
+			</filterchain>
+		</copy>
+		
+		<!-- Create the package -->
+		<tar basedir="${dirs.tmp}/component" destfile="${dirs.release}/com_tracks-${version}.tar.gz" includeemptydirs="true" compression="gzip" />
+		
+		<!-- admin modules -->
+		<foreach param="dirname" absparam="absname" target="zipfolder">
+			<property name="myp" value="modules/admin" />
+		  	<fileset dir="${dirs.modules}/admin">
+		  	<type type="dir"/>
+	        <depth max="0" min="0" />
+		  </fileset>
+		</foreach>
+		
+		<!-- site modules -->
+		<foreach param="dirname" absparam="absname" target="zipfolder">
+			<property name="myp" value="modules/site" />
+		  	<fileset dir="${dirs.modules}/site">
+		  	<type type="dir"/>
+	        <depth max="0" min="0" />
+		  </fileset>
+		</foreach>
+		
+		<!-- languages -->
+		<foreach param="dirname" absparam="absname" target="zipfolder">
+			<property name="myp" value="language" />
+		  <fileset dir="${dirs.languages}">
+		  	<type type="dir"/>
+	        <depth max="0" min="0" />
+		  </fileset>
+		</foreach>
+
+		<!-- plugins -->
+		<foreach param="pdirname" absparam="pabsname" target="zipplugins">
+			<fileset dir="${dirs.root}/plugins">
+				<type type="dir"/>
+				<depth max="0" min="0" />
+			</fileset>
+		</foreach>
+		
+		<delete dir="${dirs.tmp}" quiet="yes" includeemptydirs="false" />
+	</target>
+	
+	<target name="zipplugins">
+	    <echo msg="handling plugins group ${pdirname}" />
+		<foreach param="dirname" absparam="absname" target="zipfolder">
+			<property name="myp" value="plugins" />
+			<fileset dir="${pabsname}">
+				<type type="dir"/>
+				<depth max="0" min="0" />
+			</fileset>
+		</foreach>
+	</target>
+	
+	<target name="zipfolder">
+	    <echo msg="packaging ${dirname} ${absname}" />
+		<copy todir="${dirs.tmp}/${dirname}" >
+			<fileset dir="${absname}">
+				<include name="**" />
+			</fileset>
+			<filterchain>
+				<replacetokens begintoken="##" endtoken="##">
+					<token key="DATE" value="${build.date}" />
+					<token key="VERSION" value="${version}" />
+				</replacetokens>
+			</filterchain>
+		</copy>
+		<mkdir dir="${dirs.release}/${myp}" />
+		<!-- Create the package -->
+		<tar basedir="${dirs.tmp}/${dirname}" destfile="${dirs.release}/${myp}/${dirname}-${version}.tar.gz" includeemptydirs="true" compression="gzip" />
+	</target>
+	
+	<target name="site" description="Copies files to a existing joomla site" depends="setup-properties">
+        <echo message="Copying administrator component..." />
+
+        <!-- Manifest & install script -->
+        <echo message="Copying manifest..." />
+        <copy file="${dirs.component}/${comp.name}.xml"
+            tofile="${www.dir}/administrator/components/com_${comp.name}/${comp.name}.xml" overwrite="true">
+            <!-- trick to replace extension folders in the manifest-->
+            <filterchain>
+        	  <replaceregexp>
+        		<regexp pattern="folder=&quot;admin&quot;" replace="folder=&quot;administrator/components/com_${comp.name}&quot;"/>
+        	  </replaceregexp>
+          	  <replaceregexp>
+          		<regexp pattern="folder=&quot;site&quot;" replace="folder=&quot;components/com_${comp.name}&quot;"/>
+          	  </replaceregexp>
+				<replacetokens begintoken="##" endtoken="##">
+					<token key="DATE" value="${build.date}" />
+					<token key="VERSION" value="${version}" />
+				</replacetokens>
+            </filterchain>
+        </copy>
+        <copy file="${dirs.component}/install.php"
+            tofile="${www.dir}/administrator/components/com_${comp.name}/install.php" overwrite="true" />
+
+        <!-- Backend component -->
+        <copy todir="${www.dir}/administrator/components/com_${comp.name}" overwrite="true">
+            <fileset dir="${dirs.component}/admin">
+                <include name="**" />
+                <!-- Exclude the manifest to avoid overwriting the previously copied -->
+                <exclude name="${comp.name}.xml" />
+            </fileset>
+        </copy>
+
+        <!-- Frontend component -->
+        <echo message="Copying frontend component..." />
+        <copy todir="${www.dir}/components/com_${comp.name}" overwrite="true">
+            <fileset dir="${dirs.component}/site" />
+        </copy>
+
+        <!-- Media -->
+        <copy todir="${www.dir}/media" overwrite="true">
+            <fileset dir="${dirs.component}/media">
+                <include name="**" />
+            </fileset>
+        </copy>
+
+        <!-- Modules - Site -->
+        <copy todir="${www.dir}/modules" overwrite="true">
+            <fileset dir="${dirs.root}/modules/site">
+                <include name="**" />
+            </fileset>
+
+			<filterchain>
+				<replacetokens begintoken="##" endtoken="##">
+					<token key="DATE" value="${build.date}" />
+					<token key="VERSION" value="${version}" />
+				</replacetokens>
+			</filterchain>
+        </copy>
+
+        <!-- Modules - Admin -->
+        <copy todir="${www.dir}/administrator/modules" overwrite="true">
+            <fileset dir="${dirs.root}/modules/admin">
+                <include name="**" />
+            </fileset>
+
+			<filterchain>
+				<replacetokens begintoken="##" endtoken="##">
+					<token key="DATE" value="${build.date}" />
+					<token key="VERSION" value="${version}" />
+				</replacetokens>
+			</filterchain>
+        </copy>
+
+        <!-- Plugins -->
+        <copy todir="${www.dir}/plugins" overwrite="true">
+            <fileset dir="${dirs.root}/plugins">
+                <include name="**" />
+            </fileset>
+
+			<filterchain>
+				<replacetokens begintoken="##" endtoken="##">
+					<token key="DATE" value="${build.date}" />
+					<token key="VERSION" value="${version}" />
+				</replacetokens>
+			</filterchain>
+        </copy>
+
+    </target>
+</project>

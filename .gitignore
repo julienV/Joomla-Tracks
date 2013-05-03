@@ -3,3 +3,6 @@
 .project
 .buildpath
 .settings
+
+release
+build/build.properties

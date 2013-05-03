@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="1.7" type="plugin" group="user" method="upgrade">
   <name>PLG_USER_TRACKS_AUTOREGISTER</name>
-  <creationDate>VERSION_CREATION_DATE</creationDate>
+	<creationDate>##DATE##</creationDate>
   <author>Julien Vonthron</author>
   <authorEmail>jlv@jlv-solutions.com</authorEmail>
   <authorUrl>http://www.jlv-solutions.com</authorUrl> 
   <copyright>(C) 2010 Julien Vonthron. All rights reserved.</copyright>
   <license>http://www.gnu.org/licenses/gpl-3.0.html GNU/GPL</license>
-  <version>VERSION_NUMBER</version>
+	<version>##VERSION##</version>
   <description>PLG_USER_TRACKS_AUTOREGISTER_XML_DESCRIPTION</description>
   
   <files>

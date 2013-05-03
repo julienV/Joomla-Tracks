@@ -4,32 +4,42 @@
 	version="1.7"
 	client="site"
 	method="upgrade">
-	<name>mod_tracks_team_ranking</name>
+	<name>mod_tracks_results</name>
  	<author>Julien Vonthron</author>
  	<authorEmail>julien.vonthron@gmail.com</authorEmail>
   <authorUrl>http://www.jlv-solutions.com</authorUrl>	
- 	<creationDate>VERSION_CREATION_DATE</creationDate>
+	<creationDate>##DATE##</creationDate>
  	<copyright>(C) 2008,2009,2010 Julien Vonthron. All rights reserved.</copyright>
  	<license>http://www.gnu.org/licenses/gpl.html</license>
- 	<version>VERSION_NUMBER</version>
-	<description>MOD_TRACKS_TEAM_RANKING_DESC</description>
+	<version>##VERSION##</version>
+	<description>MOD_TRACKS_RESULTS_DESC</description>
 	<files>
-		<filename module="mod_tracks_teamranking">mod_tracks_teamranking.php</filename>
+		<filename module="mod_tracks_results">mod_tracks_results.php</filename>
+    <filename>mod_tracks_results.css</filename>
+    <filename>mod_tracks_results.js</filename>
     <filename>index.html</filename>
     <filename>helper.php</filename>
     <filename>tmpl/default.php</filename>
-    <filename>tmpl/index.html</filename>
+    <filename>tmpl/index.html</filename>  
     <folder>language</folder>
 	</files>
-
+      
 	<config>  
 		<fields name="params">
-		
 			<fieldset name="basic">
-				<field name="count" type="text" default="5" label="MOD_TRACKS_TEAM_RANKING_Count" description="MOD_TRACKS_TEAM_RANKING_The_number_of_rows_to_display" />
-				<field name="project_id" type="sql" default="" label="MOD_TRACKS_TEAM_RANKING_Select_a_project" description="MOD_TRACKS_TEAM_RANKING_Select_a_project" query="SELECT id AS value, name AS project_id FROM #__tracks_projects ORDER BY name ASC" />
-			</fieldset>
-			
+				<field name="count" type="text" default="5" label="MOD_TRACKS_RESULTS_Count" description="MOD_TRACKS_RESULTS_The_number_of_rows_to_display" />
+				<field name="project_id" type="sql" default="0" label="MOD_TRACKS_RESULTS_Select_a_project" description="MOD_TRACKS_RESULTS_Select_a_project" query="SELECT name AS project_id, id AS value FROM #__tracks_projects ORDER BY name ASC" />
+		    <field name="subroundtype_id" type="sql" default="0" label="MOD_TRACKS_RESULTS_Select_a_subround_type" description="MOD_TRACKS_RESULTS_Select_a_subround_type" query="SELECT id AS value, name AS subroundtype_id FROM #__tracks_subroundtypes ORDER BY name ASC" />
+		    <field name="showteams" type="radio" default="1" label="MOD_TRACKS_RESULTS_Show_teams" description="">
+		      <option value="0">JNo</option>
+		      <option value="1">JYes</option>
+		    </field>
+		    <field name="showpoints" type="radio" default="1" label="MOD_TRACKS_RESULTS_Show_points" description="">
+		      <option value="0">JNo</option>
+		      <option value="1">JYes</option>
+		    </field>
+	    </fieldset>
+		  
 			<fieldset
 				name="advanced">
 				<field
@@ -63,9 +73,8 @@
 					label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
 					description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
 			</fieldset>
-			
 		</fields>
-	</config>  
+	</config>
 	
 	<!-- UPDATESERVER DEFINITION -->
 	<updateservers>

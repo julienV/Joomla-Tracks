@@ -4,15 +4,15 @@
 	<author>Julien Vonthron</author>
 	<authorEmail>julien.vonthron@gmail.com</authorEmail>
 	<authorUrl>http://www.jlv-solutions.com</authorUrl>
-	<creationDate>VERSION_CREATION_DATE</creationDate>
+	<creationDate>##DATE##</creationDate>
 	<copyright>(C) 2008,2009,2010,2011,2012 Julien Vonthron. All rights	reserved.</copyright>
 	<license>http://www.gnu.org/licenses/gpl.html</license>
-	<version>1.0.7</version>
+	<version>##VERSION##</version>
 	<description>COM_TRACKS_XML_DESC</description>
 
 
 	<!-- Runs on install/uninstall/update -->
-	<scriptfile>installscript.php</scriptfile>
+	<scriptfile>install.php</scriptfile>
 	
 	<!-- Install Database Section -->
 	<install>
@@ -50,7 +50,7 @@
 	</files>
     
     <!-- Site Main Media File Copy Section -->
-	<media destination="com_tracks" folder="media">
+	<media destination="com_tracks" folder="media/com_tracks">
 		<filename>index.html</filename>
 		<folder>css</folder>
 		<folder>images</folder>
