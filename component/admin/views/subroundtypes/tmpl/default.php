@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: default.php 80 2008-04-30 20:17:37Z julienv $ 
+* @version    $Id: default.php 80 2008-04-30 20:17:37Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -50,6 +50,9 @@ JHTML::_('behavior.tooltip');
         <?php echo JHTML::_('grid.sort',  'COM_TRACKS_Note', 'obj.note', $this->lists['order_Dir'], $this->lists['order'] ); ?>
       </th>
       <th width="20" nowrap="nowrap">
+        <?php echo JHTML::_('grid.sort',  'COM_TRACKS_count_in_rankings', 'obj.count_points', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+      </th>
+      <th width="20" nowrap="nowrap">
         <?php echo JHTML::_('grid.sort',  'COM_TRACKS_Points', 'obj.points_attribution', $this->lists['order_Dir'], $this->lists['order'] ); ?>
       </th>
 			<th width="1%" nowrap="nowrap">
@@ -59,7 +62,7 @@ JHTML::_('behavior.tooltip');
 	</thead>
 	<tfoot>
 		<tr>
-			<td colspan="6">
+			<td colspan="16">
 				<?php echo $this->pagination->getListFooter(); ?>
 			</td>
 		</tr>
@@ -96,6 +99,9 @@ JHTML::_('behavior.tooltip');
 			</td>
       <td>
         <?php echo $row->note; ?>
+      </td>
+      <td>
+        <?php echo $row->count_points ? JHTML::image('admin/tick.png', JText::_('JYES'), null, true) : ''; ?>
       </td>
       <td>
         <?php echo (strlen($row->points_attribution) > 20 ? substr($row->points_attribution, 0, 17).'...' : $row->points_attribution); ?>

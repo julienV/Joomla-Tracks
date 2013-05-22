@@ -7,17 +7,17 @@ lang_map = af_ZA: af-ZA, am_ET: am-ET, ar_AE: ar-AE, ar_BH: ar-BH, ar_DZ: ar-DZ,
 
 [tracks.17-admin-com_tracks-ini]
 file_filter = languages/<lang>/component/admin/<lang>.com_tracks.ini
-source_file = com_tracks/administrator/components/com_tracks/language/en-GB/en-GB.com_tracks.ini
+source_file = component/admin/language/en-GB/en-GB.com_tracks.ini
 source_lang = en-GB
 
 [tracks.17-admin-com_tracks-sys-ini]
 file_filter = languages/<lang>/component/admin/<lang>.com_tracks.sys.ini
-source_file = com_tracks/administrator/components/com_tracks/language/en-GB/en-GB.com_tracks.sys.ini
+source_file = component/admin/language/en-GB/en-GB.com_tracks.sys.ini
 source_lang = en-GB
 
 [tracks.17-site-com_tracks-ini]
 file_filter = languages/<lang>/component/site/<lang>.com_tracks.ini
-source_file = com_tracks/components/com_tracks/language/en-GB/en-GB.com_tracks.ini
+source_file = component/site/language/en-GB/en-GB.com_tracks.ini
 source_lang = en-GB
 
 [tracks.17-plg_tracks_cb-ini]
@@ -32,45 +32,45 @@ source_lang = en-GB
 
 [tracks.17-plg_user_tracks_autoregister-ini]
 file_filter = languages/<lang>/plugins/tracks_autoregister/<lang>.plg_user_tracks_autoregister.ini
-source_file = plugins/tracks_autoregister/language/en-GB/en-GB.plg_user_tracks_autoregister.ini
+source_file = plugins/user/tracks_autoregister/language/en-GB/en-GB.plg_user_tracks_autoregister.ini
 source_lang = en-GB
 
 [tracks.17-plg_search_trackssearch-ini]
 file_filter = languages/<lang>/plugins/tracks_search/<lang>.plg_search_trackssearch.ini
-source_file = plugins/tracks_search/language/en-GB/en-GB.plg_search_trackssearch.ini
+source_file = plugins/search/tracks_search/language/en-GB/en-GB.plg_search_trackssearch.ini
 source_lang = en-GB
 
 [tracks.17-plg_search_trackssearch-sys-ini]
 file_filter = languages/<lang>/plugins/tracks_search/<lang>.plg_search_trackssearch.sys.ini
-source_file = plugins/tracks_search/language/en-GB/en-GB.plg_search_trackssearch.sys.ini
+source_file = plugins/search/tracks_search/language/en-GB/en-GB.plg_search_trackssearch.sys.ini
 source_lang = en-GB
 
 [tracks.17-mod_tracks_teamranking-ini]
 file_filter = languages/<lang>/modules/mod_tracks_teamranking/<lang>.mod_tracks_teamranking.ini
-source_file = modules/mod_tracks_teamranking/language/en-GB/en-GB.mod_tracks_teamranking.ini
+source_file = modules/site/mod_tracks_teamranking/language/en-GB/en-GB.mod_tracks_teamranking.ini
 source_lang = en-GB
 
 [tracks.17-mod_tracks_teamranking-sys-ini]
 file_filter = languages/<lang>/modules/mod_tracks_teamranking/<lang>.mod_tracks_teamranking.sys.ini
-source_file = modules/mod_tracks_teamranking/language/en-GB/en-GB.mod_tracks_teamranking.sys.ini
+source_file = modules/site/mod_tracks_teamranking/language/en-GB/en-GB.mod_tracks_teamranking.sys.ini
 source_lang = en-GB
 
 [tracks.17-mod_tracks_results-ini]
 file_filter = languages/<lang>/modules/mod_tracks_results/<lang>.mod_tracks_results.ini
-source_file = modules/mod_tracks_results/language/en-GB/en-GB.mod_tracks_results.ini
+source_file = modules/site/mod_tracks_results/language/en-GB/en-GB.mod_tracks_results.ini
 source_lang = en-GB
 
 [tracks.17-mod_tracks_results-sys-ini]
 file_filter = languages/<lang>/modules/mod_tracks_results/<lang>.mod_tracks_results.sys.ini
-source_file = modules/mod_tracks_results/language/en-GB/en-GB.mod_tracks_results.sys.ini
+source_file = modules/site/mod_tracks_results/language/en-GB/en-GB.mod_tracks_results.sys.ini
 source_lang = en-GB
 
 [tracks.17-mod_tracks_ranking-ini]
 file_filter = languages/<lang>/modules/mod_tracks_ranking/<lang>.mod_tracks_ranking.ini
-source_file = modules/mod_tracks_ranking/language/en-GB/en-GB.mod_tracks_ranking.ini
+source_file = modules/site/mod_tracks_ranking/language/en-GB/en-GB.mod_tracks_ranking.ini
 source_lang = en-GB
 
 [tracks.17-mod_tracks_ranking-sys-ini]
 file_filter = languages/<lang>/modules/mod_tracks_ranking/<lang>.mod_tracks_ranking.sys.ini
-source_file = modules/mod_tracks_ranking/language/en-GB/en-GB.mod_tracks_ranking.sys.ini
+source_file = modules/site/mod_tracks_ranking/language/en-GB/en-GB.mod_tracks_ranking.sys.ini
 source_lang = en-GB

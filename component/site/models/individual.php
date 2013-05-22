@@ -131,7 +131,7 @@ class TracksModelIndividual extends baseModel
 		$query = ' SELECT rr.rank, rr.performance, rr.bonus_points, pr.project_id, '
            . '        r.name AS roundname, r.id as pr, '
 		       . '        srt.name AS subroundname, '
-           . '        srt.points_attribution, '
+           . '        srt.points_attribution, srt.count_points, '
            . '        p.name AS projectname, '
            . '        c.name AS competitionname, '
            . '        s.name AS seasonname, '
@@ -151,7 +151,7 @@ class TracksModelIndividual extends baseModel
            . '   AND p.published AND pr.published AND psr.published '
            ;
     if ($params->get('indview_results_onlypointssubrounds', 1)) {
-    	$query .= ' AND CHAR_LENGTH(srt.points_attribution) > 0 ';
+    	$query .= ' AND srt.count_points = 1 ';
     }
 
     if ($params->get('indview_results_ordering', 1) == 0) {

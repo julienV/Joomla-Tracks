@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: default.php 135 2008-06-08 21:50:12Z julienv $ 
+* @version    $Id: default.php 135 2008-06-08 21:50:12Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -20,39 +20,43 @@ defined('_JEXEC') or die('Restricted access'); ?>
   <thead>
     <tr>
       <th><?php echo JText::_('COM_TRACKS_POSITION_SHORT' ); ?></th>
-      
+
       <?php if ($this->params->get('shownumber',1)): ?>
       <th><?php echo JText::_('COM_TRACKS_NUMBER_SHORT' ); ?></th>
       <?php endif; ?>
-      
+
       <?php if ($this->params->get('showflag',1)): ?>
       <th><?php echo JText::_('COM_TRACKS_COUNTRY_SHORT' ); ?></th>
       <?php endif; ?>
-      
+
       <th><?php echo JText::_('COM_TRACKS_Individual' ); ?></th>
-      
+
       <?php if ($this->params->get('showteams',1)): ?>
       <th><?php echo JText::_('COM_TRACKS_Team' ); ?></th>
       <?php endif; ?>
-      
+
       <th><?php echo JText::_('COM_TRACKS_Points' ); ?></th>
       <th><?php echo JText::_('COM_TRACKS_Wins' ); ?></th>
       <th><?php echo JText::_('COM_TRACKS_Best_rank' ); ?></th>
-      
+
       <?php if ($this->params->get('rk_show_top3')): ?>
       <th><?php echo JText::_('COM_TRACKS_TABLE_HEADER_TOP3' ); ?></th>
       <?php endif; ?>
-      
+
       <?php if ($this->params->get('rk_show_top5')): ?>
       <th><?php echo JText::_('COM_TRACKS_TABLE_HEADER_TOP5' ); ?></th>
       <?php endif; ?>
-      
+
       <?php if ($this->params->get('rk_show_top10')): ?>
       <th><?php echo JText::_('COM_TRACKS_TABLE_HEADER_TOP10' ); ?></th>
       <?php endif; ?>
-      
+
       <?php if ($this->params->get('rk_show_average')): ?>
       <th><?php echo JText::_('COM_TRACKS_TABLE_HEADER_AVERAGE' ); ?></th>
+      <?php endif; ?>
+
+      <?php if ($this->params->get('rk_show_starts')): ?>
+      <th><?php echo JText::_('COM_TRACKS_TABLE_HEADER_STARTS' ); ?></th>
       <?php endif; ?>
     </tr>
   </thead>
@@ -61,16 +65,16 @@ defined('_JEXEC') or die('Restricted access'); ?>
     $i = 0;
     foreach( $this->rankings AS $ranking )
     {
-      $link_ind = JRoute::_( TracksHelperRoute::getIndividualRoute($ranking->slug, $this->project->slug) ); 
-      $link_team = JRoute::_( TracksHelperRoute::getTeamRoute($ranking->teamslug, $this->project->slug) ); 
+      $link_ind = JRoute::_( TracksHelperRoute::getIndividualRoute($ranking->slug, $this->project->slug) );
+      $link_team = JRoute::_( TracksHelperRoute::getTeamRoute($ranking->teamslug, $this->project->slug) );
       ?>
       <tr class="<?php echo ($i ? 'd1' : 'd0'); ?>">
         <td><?php echo $ranking->rank; ?></td>
-        
+
         <?php if ($this->params->get('shownumber',1)): ?>
 	      <td><?php echo $ranking->number; ?></td>
 	      <?php endif; ?>
-	      
+
 	      <?php if ($this->params->get('showflag',1)): ?>
 	      <td>
 	        <?php if ( $ranking->country_code ): ?>
@@ -78,7 +82,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
           <?php endif; ?>
         </td>
 	      <?php endif; ?>
-	      
+
         <td>
           <a href="<?php echo $link_ind; ?>"
   				   title="<?php echo JText::_('COM_TRACKS_Details' ); ?>">
@@ -89,7 +93,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
         <td>
         	<?php if ($ranking->team_id): ?>
           <a href="<?php echo $link_team; ?>"
-             title="<?php echo JText::_('COM_TRACKS_Details' ); ?>"> 
+             title="<?php echo JText::_('COM_TRACKS_Details' ); ?>">
             <?php echo $ranking->team_name; ?></a>
           <?php endif; ?>
         </td>
@@ -97,15 +101,15 @@ defined('_JEXEC') or die('Restricted access'); ?>
         <td><?php echo $ranking->points; ?></td>
         <td><?php echo $ranking->wins; ?></td>
         <td><?php echo $ranking->best_rank; ?></td>
-      
+
 	      <?php if ($this->params->get('rk_show_top3')): ?>
 	      <td><?php echo TracksHelperTools::getTop3($ranking); ?></td>
 	      <?php endif; ?>
-	      
+
 	      <?php if ($this->params->get('rk_show_top5')): ?>
 	      <td><?php echo TracksHelperTools::getTop5($ranking); ?></td>
 	      <?php endif; ?>
-	      
+
 	      <?php if ($this->params->get('rk_show_top10')): ?>
 	      <td><?php echo TracksHelperTools::getTop10($ranking); ?></td>
 	      <?php endif; ?>
@@ -113,10 +117,14 @@ defined('_JEXEC') or die('Restricted access'); ?>
 	      <?php if ($this->params->get('rk_show_average')): ?>
 	      <td><?php echo TracksHelperTools::getAverageFinish($ranking); ?></td>
 	      <?php endif; ?>
-	      
+
+	      <?php if ($this->params->get('rk_show_starts')): ?>
+	      <td><?php echo TracksHelperTools::getStarts($ranking); ?></td>
+	      <?php endif; ?>
+
       </tr>
-      <?php    
-      $i = 1 - $i; 
+      <?php
+      $i = 1 - $i;
     }
     ?>
   </tbody>
@@ -125,4 +133,4 @@ defined('_JEXEC') or die('Restricted access'); ?>
   <?php echo HTMLtracks::footer( ); ?>
 </p>
 </div>
-  
+

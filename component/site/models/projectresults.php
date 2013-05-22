@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: ranking.php 126 2008-06-05 21:17:18Z julienv $ 
+* @version    $Id: ranking.php 126 2008-06-05 21:17:18Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -28,7 +28,7 @@ class TracksModelProjectresults extends baseModel
 	 * associated project
 	 */
 	var $project = null;
-	
+
 	/**
 	 * reference to ranking class
 	 * @var unknown_type
@@ -39,15 +39,15 @@ class TracksModelProjectresults extends baseModel
 	 * project id
 	 */
 	var $_project_id = null;
-	
+
 	var $_data = null;
-	
+
 	public function __construct($projectid = null)
 	{
 		parent::__construct();
-		
+
 		$projectid = $projectid ? $projectid : JRequest::getInt('p');
-		
+
 		if ($projectid) {
 			$this->setProjectId($projectid);
 		}
@@ -63,7 +63,7 @@ class TracksModelProjectresults extends baseModel
 		$this->_rankingtool = null;
 		return true;
 	}
-	
+
 	public function getData()
 	{
 		if (!$this->_data)
@@ -71,19 +71,19 @@ class TracksModelProjectresults extends baseModel
 			$this->_data = $this->_getRankings();
 			$this->_getResults();
 		}
-		return $this->_data; 
+		return $this->_data;
 	}
-	
+
 	/**
 	 * return project rounds and subrounds
-	 * 
+	 *
 	 * @return array
 	 */
 	public function getRounds()
 	{
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
-		
+
 		$query->select('psr.id AS subround_id, srt.name AS subround_name');
 		$query->select('r.id AS round_id, r.name AS round_name');
 		$query->select('CASE WHEN CHAR_LENGTH(r.short_name) THEN r.short_name ELSE r.name END AS short_name');
@@ -92,20 +92,20 @@ class TracksModelProjectresults extends baseModel
 		$query->join('INNER', '#__tracks_projects_rounds AS pr ON pr.id = psr.projectround_id');
 		$query->join('INNER', '#__tracks_rounds AS r ON r.id = pr.round_id');
 		$query->where('pr.project_id = '.$this->_project_id);
-		$query->where('CHAR_LENGTH(srt.points_attribution) > 0 ');
+		$query->where('srt.count_points > 0 ');
 		$query->where('pr.published = 1');
 		$query->where('psr.published = 1');
 		$query->order('pr.ordering, psr.ordering');
 		$db->setQuery($query);
 		$res = $db->loadObjectList();
-		
+
 		if (!$res) {
 			return false;
 		}
-		
+
 		// group by rounds
 		$rounds = array();
-		foreach ($res as $r) 
+		foreach ($res as $r)
 		{
 			if (isset($rounds[$r->round_id])) {
 				$rounds[$r->round_id]->subrounds[] = $r;
@@ -122,13 +122,13 @@ class TracksModelProjectresults extends baseModel
 		}
 		return $rounds;
 	}
-	
-	
+
+
 	protected function _getResults()
 	{
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
-		
+
 		$query->select('psr.id AS subround_id, rr.rank, rr.individual_id');
 		$query->from('#__tracks_rounds_results AS rr');
 		$query->join('INNER', '#__tracks_projects_subrounds AS psr ON psr.id = rr.subround_id');
@@ -140,11 +140,11 @@ class TracksModelProjectresults extends baseModel
 		$query->where('psr.published = 1');
 		$db->setQuery($query);
 		$res = $db->loadObjectList();
-		
+
 		if (!$res) {
 			return false;
 		}
-		
+
 		// index by individual, then subround_id
 		$individuals = array();
 		foreach ($res as $r)
@@ -154,11 +154,11 @@ class TracksModelProjectresults extends baseModel
 			}
 			@$this->_data[$r->individual_id]->results[$r->subround_id] = $r->rank;
 		}
-		
+
 		return $this->_data;
 	}
-	
-	
+
+
 	/**
 	 * Gets the project individuals ranking
 	 *
@@ -169,6 +169,6 @@ class TracksModelProjectresults extends baseModel
 	{
 		return $this->_getRankingTool()->getIndividualsRankings();
 	}
-	
-	
+
+
 }

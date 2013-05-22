@@ -1,21 +1,21 @@
 <?php
 /**
-* @version    $Id: controller.php 109 2008-05-24 11:05:07Z julienv $ 
-* @package    JoomlaTracks
-* @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
-* @license		GNU/GPL, see LICENSE.php
-* Joomla Tracks is free software. This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-* See COPYRIGHT.php for copyright notices and details.
-*/
+ * @version    $Id: controller.php 109 2008-05-24 11:05:07Z julienv $
+ * @package    JoomlaTracks
+ * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
+ * @license		GNU/GPL, see LICENSE.php
+ * Joomla Tracks is free software. This version may have been modified pursuant
+ * to the GNU General Public License, and as distributed it includes or
+ * is derivative of works licensed under the GNU General Public License or
+ * other free or open source software licenses.
+ * See COPYRIGHT.php for copyright notices and details.
+ */
 
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die();
 
 class TracksRankingTool extends JObject {
-		
+
 	/**
 	 * project id
 	 */
@@ -36,19 +36,19 @@ class TracksRankingTool extends JObject {
 	 * init teams
 	 */
 	var $_teams = null;
-	
+
 	/**
 	 * reference to database object
 	 * @var object
 	 */
 	var $_db = null;
-	
+
 	function __construct($projectid = null)
 	{
 		parent::__construct();
-		
+
 		$this->_db = JFactory::getDBO();
-		
+
 		if ($projectid) {
 			$this->setProjectId($projectid);
 		}
@@ -61,7 +61,7 @@ class TracksRankingTool extends JObject {
 		$this->_results = null;
 		return true;
 	}
-	
+
 	/**
 	 * Gets the project individuals ranking of whole rounds or only specified one
 	 *
@@ -71,10 +71,10 @@ class TracksRankingTool extends JObject {
 	function getIndividualsRankings($projectround_id = null)
 	{
 		$individuals = $this->_initIndividuals();
-		
+
 		if ( $results = $this->_getResults() )
 		{
-			foreach ( $results as $r )
+			foreach ($results as $r)
 			{
 				if (!isset($individuals[$r->id])) {
 					continue;
@@ -85,31 +85,31 @@ class TracksRankingTool extends JObject {
 				// always count the bonus points
 				$points = $r->bonus_points;
 				// points for the round only if countpoints is set to true
-				if (!empty($r->points_attribution))
+				if ($r->count_points)
 				{
-          $points_attrib = explode(',', $r->points_attribution);
-					if ( isset( $points_attrib[$r->rank-1] ) ) {
-						$points += $points_attrib[$r->rank-1];
+					$points_attrib = explode(',', $r->points_attribution);
+					if ($r->points_attribution && isset($points_attrib[$r->rank-1])) {
+						$points += (int) $points_attrib[$r->rank-1];
 					}
-	
-					if ( $r->rank > 0 ) // rank = 0 means 'did not participate'
+
+					if ($r->rank > 0) // rank = 0 means 'did not participate'
 					{
-						if ( $individuals[$r->id]->best_rank ) {
+						if ($individuals[$r->id]->best_rank) {
 							$individuals[$r->id]->best_rank = min( $individuals[$r->id]->best_rank, $r->rank );
 						}
 						else { // best_rank was 0, not a rank
 							$individuals[$r->id]->best_rank = $r->rank;
 						}
-						if ( $r->rank == 1 ) {
+						if ($r->rank == 1) {
 							$individuals[$r->id]->wins++;
 						}
-						
+
 						$individuals[$r->id]->finishes[] = $r->rank;
 					}
 				}
 				$individuals[$r->id]->points += $points;
 			}
-			uasort( $individuals, array( $this, "orderRankings" ) );
+			uasort($individuals, array( $this, "orderRankings" ));
 			$rank = 1;
 			$previous = null;
 			foreach ( $individuals as $k => $value )
@@ -122,7 +122,7 @@ class TracksRankingTool extends JObject {
 				}
 				$previous = $individuals[$k];
 				$rank++;
-			}			
+			}
 			return $individuals;
 		}
 		return $individuals;
@@ -137,7 +137,7 @@ class TracksRankingTool extends JObject {
 	function getTeamsRankings()
 	{
 		$teams = $this->_initTeams();
-		
+
 		if ( $results = $this->_getResults() )
 		{
 			foreach ( $results as $r )
@@ -147,13 +147,13 @@ class TracksRankingTool extends JObject {
 				}
 				// points for the round
 				$points = $r->bonus_points;
-				if (!empty($r->points_attribution))
+				if ($r->count_points)
 				{
 					$points_attrib = explode(',', $r->points_attribution);
-					if ( isset( $points_attrib[$r->rank-1] ) ) {
+					if ($r->points_attribution && isset($points_attrib[$r->rank-1])) {
 						$points += $points_attrib[$r->rank-1];
 					}
-					 
+
 					if ( $r->rank > 0 )
 					{
 						if ($teams[$r->team_id]->best_rank ) {
@@ -183,7 +183,7 @@ class TracksRankingTool extends JObject {
 				}
 				$previous = $teams[$k];
 				$rank++;
-			}			
+			}
 			return $teams;
 		}
 		return $teams;
@@ -191,7 +191,7 @@ class TracksRankingTool extends JObject {
 
 	/**
 	 * return individual ranking for the project or only specified round
-	 * 
+	 *
 	 * @param int individual_id
 	 * @param int project round
 	 * @return array
@@ -204,15 +204,15 @@ class TracksRankingTool extends JObject {
 
 	/**
 	 * return team ranking for the project
-	 * 
+	 *
 	 * @param int team_id
 	 */
 	function getTeamRanking($team_id)
 	{
 		$ranking = $this->getTeamsRankings();
 		return $ranking[$team_id];
-	}	
-		
+	}
+
 	/**
 	 * Return the round results
 	 *
@@ -224,15 +224,15 @@ class TracksRankingTool extends JObject {
 		if (empty($this->_results))
 		{
 			$query =  ' SELECT rr.individual_id as id, rr.rank, rr.bonus_points, rr.team_id, '
-			       . '   sr.projectround_id, srt.points_attribution '
-			       . ' FROM #__tracks_rounds_results AS rr '
-			       . ' INNER JOIN #__tracks_projects_subrounds AS sr ON sr.id = rr.subround_id '
-			       . ' INNER JOIN #__tracks_subroundtypes AS srt ON srt.id = sr.type '
-			       . ' INNER JOIN #__tracks_projects_rounds AS pr ON pr.id = sr.projectround_id '
-			       . ' WHERE pr.project_id = ' . $this->_project_id
-			       . '   AND pr.published = 1 '
-			       . '   AND sr.published = 1 '
-			       ;
+			. '   sr.projectround_id, srt.points_attribution, srt.count_points '
+			. ' FROM #__tracks_rounds_results AS rr '
+			. ' INNER JOIN #__tracks_projects_subrounds AS sr ON sr.id = rr.subround_id '
+			. ' INNER JOIN #__tracks_subroundtypes AS srt ON srt.id = sr.type '
+			. ' INNER JOIN #__tracks_projects_rounds AS pr ON pr.id = sr.projectround_id '
+			. ' WHERE pr.project_id = ' . $this->_project_id
+			. '   AND pr.published = 1 '
+			. '   AND sr.published = 1 '
+			;
 
 			$this->_db->setQuery( $query );
 			$this->_results = $this->_db->loadObjectList();
@@ -255,7 +255,7 @@ class TracksRankingTool extends JObject {
 			. ' WHERE pi.project_id = ' . $this->_project_id
 			. ' ORDER BY pi.number ASC, i.last_name ASC, i.first_name ASC '
 			;
-	
+
 			$this->_db->setQuery( $query );
 			$this->_individuals = $this->_db->loadObjectList('id');
 		}
@@ -269,7 +269,7 @@ class TracksRankingTool extends JObject {
 				$result->best_rank = 0;
 				$result->wins = 0;
 				$result->rank = null;
-				$result->finishes = array();		
+				$result->finishes = array();
 				$results[$i] = $result;
 			}
 		}
@@ -287,7 +287,7 @@ class TracksRankingTool extends JObject {
 			. ' INNER JOIN #__tracks_teams AS t ON t.id = pi.team_id '
 			. ' WHERE pi.project_id = ' . $this->_project_id
 			. ' ORDER BY t.name ';
-		
+
 			$this->_db->setQuery( $query );
 			$this->_teams = $this->_db->loadObjectList('team_id');
 		}
@@ -338,7 +338,7 @@ class TracksRankingTool extends JObject {
 		}
 		return 0;
 	}
-          
+
 	/**
 	 * order rankings by points, wins, best_rank
 	 *
@@ -356,7 +356,7 @@ class TracksRankingTool extends JObject {
 		}
 		return 0;
 	}
-          
+
 	/**
 	 * order rankings by points, wins, best_rank
 	 *

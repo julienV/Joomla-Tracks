@@ -74,6 +74,15 @@ defined('_JEXEC') or die('Restricted access'); ?>
 							size="32" maxlength="100" value="<?php echo $this->object->note?>" />
 					</li>
 					<li>
+						<label for="count_points" class="hasTip"
+							title="<?php echo JText::_('COM_TRACKS_count_points'); ?>"
+							rel="<?php echo JText::_('COM_TRACKS_count_points_DESC'); ?>">
+							<?php echo JText::_('COM_TRACKS_count_points' ); ?>:
+						</label>
+						<?php $options = array(JHtml::_('select.option', 0, JText::_('JNO')), JHtml::_('select.option', 1, JText::_('JYES'))); ?>
+						<?php echo JHtml::_('select.genericlist', $options, 'count_points', null, 'value', 'text', $this->object->count_points); ?>
+					</li>
+					<li>
 						<label for="points_attribution"> <?php echo JText::_('COM_TRACKS_Points' ); ?>:
 						</label>
 						<input class="text_area" type="text" name="points_attribution" id="points_attribution"

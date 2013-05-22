@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: roundresult.php 121 2008-05-30 08:33:23Z julienv $ 
+* @version    $Id: roundresult.php 121 2008-05-30 08:33:23Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -24,20 +24,20 @@ require_once( 'base.php' );
  */
 class TracksModelRoundResult extends baseModel
 {
-	 
+
 	var $subrounds;
-		
+
     /**
-     * call back function to place the individual with 
+     * call back function to place the individual with
      * position 0 in the end
      *
      * @param mixed result
      * @param mixed result
-     * @return bool          
-     */              
+     * @return bool
+     */
     function reorder($a, $b)
     {
-      if ( $a->rank == 0 && $b->rank == 0 ) 
+      if ( $a->rank == 0 && $b->rank == 0 )
       {
       	if ($a->bonus_points != $b->bonus_points) {
       		return $a->bonus_points < $b->bonus_points ? 1 : -1;
@@ -57,19 +57,19 @@ class TracksModelRoundResult extends baseModel
       	if ($a->bonus_points != $b->bonus_points) {
       		return $a->bonus_points < $b->bonus_points ? 1 : -1;
       	}
-        return strcmp( $a->last_name.$a->first_name, $b->last_name.$b->first_name );      	
-      }      
+        return strcmp( $a->last_name.$a->first_name, $b->last_name.$b->first_name );
+      }
     }
-    
+
     /**
     * Gets the sub-round results
-    * 
+    *
     * @param int projectround_id
     * @return string The projects to be displayed to the user
     */
     function _getSubroundResults( $subround_id = 0 )
     {
-        $query = 	' SELECT rr.*, pr.project_id AS project_id, srt.points_attribution, '
+        $query = 	' SELECT rr.*, pr.project_id AS project_id, srt.points_attribution, srt.count_points, '
                 . ' i.first_name, i.last_name, i.country_code, i.country_code, pi.number, '
                 . ' t.name AS team_name, t.short_name AS team_short_name, t.acronym AS team_acronym, t.picture_small AS team_logo, '
                 . ' CASE WHEN CHAR_LENGTH( i.alias ) THEN CONCAT_WS( \':\', i.id, i.alias ) ELSE i.id END AS slug, '
@@ -83,15 +83,15 @@ class TracksModelRoundResult extends baseModel
                 . ' LEFT JOIN #__tracks_teams AS t ON t.id = rr.team_id '
                 . ' WHERE rr.subround_id = ' . $subround_id
         ;
-                
+
         $this->_db->setQuery( $query );
-        
+
         $ranked = false;
         if ( $result = $this->_db->loadObjectList() )
         {
           // reorder by rank, with rank 0 in the end.
           uasort($result, array ($this, "reorder"));
-          
+
           if ( count( $result ) )
           {
             foreach ( $result as $k => $r )
@@ -110,13 +110,13 @@ class TracksModelRoundResult extends baseModel
           }
         }
         if ($ranked) {
-	        return $result;      	
+	        return $result;
         }
         else { // no results yet !
 					return false;
 				}
     }
-    
+
     function getRound( $projectround_id )
     {
     	if ( $projectround_id )
@@ -126,17 +126,17 @@ class TracksModelRoundResult extends baseModel
                 . ' INNER JOIN #__tracks_rounds AS r ON r.id = pr.round_id '
                 . ' INNER JOIN #__tracks_projects AS p ON p.id = pr.project_id '
                 . ' WHERE pr.id = ' . $projectround_id;
-                
+
             $this->_db->setQuery( $query );
-        
+
             if ( $result = $this->_db->loadObjectList() ) {
             	return $result[0];
             }
-            else return $result;            
+            else return $result;
     	}
     	else return null;
     }
-    
+
     /**
      * return results for subrounds
      *
@@ -157,22 +157,22 @@ class TracksModelRoundResult extends baseModel
                 ;
         if ($subroundtype_id) $query .= ' AND srt.id = ' . $subroundtype_id;
         $query .= ' ORDER BY sr.ordering ' . $ordering;
-                
+
         $this->_db->setQuery( $query );
-        
+
         $subrounds = $this->_db->loadObjectList();
-        
+
         if ( $subrounds && count($subrounds) )
         {
         	for ($i = 0, $n = count($subrounds); $i < $n; $i++ ) {
         		$subrounds[$i]->results = $this->_getSubroundResults($subrounds[$i]->id);
         	}
         }
-        return $subrounds;  
+        return $subrounds;
       }
       else return null;
     }
-    
+
     /**
      * get associated project
      *
@@ -187,7 +187,7 @@ class TracksModelRoundResult extends baseModel
 					$query = ' SELECT pr.project_id '
 	               . ' FROM #__tracks_projects_rounds AS pr '
 					       . ' WHERE pr.id = ' . $projectround_id;
-	
+
 					$this->_db->setQuery( $query );
 					if ( $result = $this->_db->loadresult() ) {
 						$this->setProjectId($result);

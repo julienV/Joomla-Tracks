@@ -114,6 +114,7 @@ CREATE TABLE IF NOT EXISTS `#__tracks_subroundtypes` (
   `name` varchar(40) NOT NULL,
   `alias` varchar(100) NOT NULL default '',
   `note` varchar(100) NOT NULL,
+  `count_points` tinyint(2) NOT NULL,
   `points_attribution` varchar(250) NOT NULL,
   `description` text NULL,
   `checked_out` int(11) NOT NULL,

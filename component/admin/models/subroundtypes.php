@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    .2 $Id$ 
+* @version    .2 $Id$
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -31,7 +31,7 @@ class TracksModelSubroundTypes extends TracksModelList
 		$where		= $this->_buildContentWhere();
 		$orderby	= $this->_buildContentOrderBy();
 
-		$query = ' SELECT obj.id, obj.name, obj.note, obj.points_attribution, obj.checked_out, obj.checked_out_time, '
+		$query = ' SELECT obj.id, obj.name, obj.note, obj.points_attribution, obj.count_points, obj.checked_out, obj.checked_out_time, '
       . ' u.name AS editor '
 			. ' FROM #__tracks_subroundtypes AS obj '
 			. ' LEFT JOIN #__users AS u ON u.id = obj.checked_out '
@@ -73,7 +73,7 @@ class TracksModelSubroundTypes extends TracksModelList
 		if ($search) {
 			$where[] = 'LOWER( obj.name )'
                   . ' LIKE '.$this->_db->Quote('%'.$search.'%');
-		}	
+		}
 		if ( $filter_state ) {
 			if ( $filter_state == 'P' ) {
 				$where[] = 'obj.published = 1';
@@ -81,7 +81,7 @@ class TracksModelSubroundTypes extends TracksModelList
 				$where[] = 'obj.published = 0';
 			}
 		}
-		
+
 		$where 		= ( count( $where ) ? ' WHERE '. implode( ' AND ', $where ) : '' );
 
 		return $where;

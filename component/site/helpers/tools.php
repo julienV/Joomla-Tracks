@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id$ 
+* @version    $Id$
 * @package    JoomlaTracks
 * @copyright  Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license    GNU/GPL, see LICENSE.php
@@ -17,7 +17,7 @@ defined('_JEXEC') or die('Restricted access');
 class TracksHelperTools
 {
 	/**
-	 * return earned points from result object 
+	 * return earned points from result object
 	 * @param object result (requires bonus_points, points_attribution, rank)
 	 * @return float points
 	 */
@@ -34,7 +34,7 @@ class TracksHelperTools
 		}
 		return $points;
 	}
-	
+
 	/**
 	 * returns number of top 3 for ranking row object
 	 * @param object $rankingrow
@@ -51,7 +51,7 @@ class TracksHelperTools
 		}
 		return $count;
 	}
-	
+
 	/**
 	 * returns number of top 5 for ranking row object
 	 * @param object $rankingrow
@@ -68,7 +68,7 @@ class TracksHelperTools
 		}
 		return $count;
 	}
-	
+
 	/**
 	 * returns number of top 10 for ranking row object
 	 * @param object $rankingrow
@@ -85,7 +85,7 @@ class TracksHelperTools
 		}
 		return $count;
 	}
-	
+
 	/**
 	 * returns average finish for ranking row object
 	 * @param object $rankingrow
@@ -97,5 +97,16 @@ class TracksHelperTools
 			return 0;
 		}
 		return round(array_sum($rankingrow->finishes) / count($rankingrow->finishes), 2);
+	}
+
+	/**
+	 * returns total number of starts to ranking subrounds
+	 *
+	 * @param   object  $rankingrow  ranking object
+	 * @return int
+	 */
+	public static function getStarts($rankingrow)
+	{
+		return count($rankingrow->finishes);
 	}
 }
