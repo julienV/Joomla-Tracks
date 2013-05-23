@@ -14,7 +14,7 @@
 // no direct access
 defined('_JEXEC') or die('Restricted access');
 
-class TracksHelperTools
+abstract class TracksHelperTools
 {
 	/**
 	 * return earned points from result object
@@ -108,5 +108,39 @@ class TracksHelperTools
 	public static function getStarts($rankingrow)
 	{
 		return count($rankingrow->finishes);
+	}
+
+	/**
+	 * returns true if the string date is valid
+	 *
+	 * @param   string  $date
+	 * @return boolean
+	 */
+	public static function isValidDate($date)
+	{
+		if (!$date || strstr($date, '0000-00-00'))
+		{
+			return false;
+		}
+
+		return strtotime($date);
+	}
+
+	/**
+	 * returns a formatted date
+	 *
+	 * @param   string  $date    date from db
+	 * @param   string  $format  format to convert to
+	 *
+	 * @return string
+	 */
+	public static function formatDate($date, $format = null)
+	{
+		if (!$format)
+		{
+			$format = JComponentHelper::getParams('com_tracks')->get('date_format', 'Y-m-d');
+		}
+
+		return date($format, strtotime($date));
 	}
 }

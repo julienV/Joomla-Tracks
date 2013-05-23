@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: default.php 101 2008-05-22 08:32:12Z julienv $ 
+* @version    $Id: default.php 101 2008-05-22 08:32:12Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -9,7 +9,7 @@
 * is derivative of works licensed under the GNU General Public License or
 * other free or open source software licenses.
 * See COPYRIGHT.php for copyright notices and details.
-*/ 
+*/
 
 // no direct access
 defined('_JEXEC') or die('Restricted access'); ?>
@@ -19,7 +19,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <h1><?php echo $this->data->first_name . ' ' . $this->data->last_name; ?></h1>
 
 <?php if ($this->show_edit_link): ?>
-<div id="editprofile"><a href="<?php echo JRoute::_( TracksHelperRoute::getEditIndividualRoute($this->data->id).'&task=edit' ); ?>" 
+<div id="editprofile"><a href="<?php echo JRoute::_( TracksHelperRoute::getEditIndividualRoute($this->data->id).'&task=edit' ); ?>"
        title ="<?php echo JText::_('COM_TRACKS_Edit_profile' ) ?>">
           <?php echo JText::_('COM_TRACKS_Edit_profile' ); ?>
           </a></div>
@@ -28,7 +28,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <!-- Content -->
 <table class="contentpaneopen">
 <tbody>
-<?php 
+<?php
   $link = null;
   $res = $this->dispatcher->trigger( 'getProfileLink', array( $this->data->user_id, &$link ));
   if (!empty($link)): ?>
@@ -118,7 +118,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
       </td>
     </tr>
     <?php endif; ?>
-    <?php if (strtotime($this->data->dob)): ?>
+    <?php if (TracksHelperTools::isValidDate($this->data->dob)): ?>
     <tr>
       <td width="100" align="right" class="key">
         <label for="dob">
@@ -126,7 +126,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
         </label>
       </td>
       <td>
-      <?php echo $this->data->dob; ?>
+      <?php echo TracksHelperTools::formatDate($this->data->dob); ?>
       </td>
     </tr>
     <?php endif; ?>
@@ -219,5 +219,5 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <p class="copyright">
   <?php echo HTMLtracks::footer( ); ?>
 </p>
-    
+
 </div><!-- end of tracks -->
