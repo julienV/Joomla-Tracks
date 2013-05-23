@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    0.2 $Id$ 
+* @version    0.2 $Id$
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -32,28 +32,28 @@ class TracksViewSubroundResults extends TracksView
 		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
     $document = JFactory::getDocument();
-    
-    $document->addScript(JURI::base() . 'media/com_tracks/js/autocompleter/1_2/Autocompleter.js');
-    $document->addScript(JURI::base() . 'media/com_tracks/js/autocompleter/1_2/Autocompleter.Local.js');
-    $document->addScript(JURI::base() . 'media/com_tracks/js/autocompleter/1_2/Autocompleter.Request.js');
-    $document->addScript(JURI::base() . 'media/com_tracks/js/autocompleter/1_2/Observer.js');
-    $document->addScript(JURI::base() . 'media/com_tracks/js/quickadd1_2.js');
-    $document->addStyleSheet(JURI::base() . 'media/com_tracks/css/Autocompleter1_2.css');
-    
+
+    $document->addScript(JURI::root() . 'media/com_tracks/js/autocompleter/1_2/Autocompleter.js');
+    $document->addScript(JURI::root() . 'media/com_tracks/js/autocompleter/1_2/Autocompleter.Local.js');
+    $document->addScript(JURI::root() . 'media/com_tracks/js/autocompleter/1_2/Autocompleter.Request.js');
+    $document->addScript(JURI::root() . 'media/com_tracks/js/autocompleter/1_2/Observer.js');
+    $document->addScript(JURI::root() . 'media/com_tracks/js/quickadd1_2.js');
+    $document->addStyleSheet(JURI::root() . 'media/com_tracks/css/Autocompleter1_2.css');
+
 
 		$subround = $this->get('SubroundInfo');
-		
+
 		// Set toolbar items for the page
 		JToolBarHelper::title(   JText::sprintf('COM_TRACKS_Subround_results_s_s', $subround->roundname, $subround->subroundname) , 'generic.png' );
 		//JToolBarHelper::custom('massadd', 'default', 'default', JText::_('COM_TRACKS_Mass_Add'), false);
-    JToolBarHelper::custom('back', 'back.png', 'back.png', JText::_('COM_TRACKS_back'), false); 
+    JToolBarHelper::custom('back', 'back.png', 'back.png', JText::_('COM_TRACKS_back'), false);
 		JToolBarHelper::save( 'saveranks', 'Save' );
 		JToolBarHelper::editListX();
 		JToolBarHelper::addNewX();
     JToolBarHelper::custom('addall', 'default', 'default', JText::_('COM_TRACKS_Add_all'), false);
     JToolBarHelper::deleteList();
 		JToolBarHelper::help( 'screen.tracks', true );
-        
+
 		$db		= JFactory::getDBO();
 		$uri	= JFactory::getURI();
 
@@ -69,7 +69,7 @@ class TracksViewSubroundResults extends TracksView
 
 		// build list of categories
 		//$javascript 	= 'onchange="document.adminForm.submit();"';
-		
+
 		// state filter
 		//$lists['state']	= JHTML::_('grid.state',  $filter_state );
 

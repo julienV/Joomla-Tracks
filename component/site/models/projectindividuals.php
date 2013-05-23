@@ -60,7 +60,7 @@ class TracksModelProjectindividuals extends baseModel
         if ($obj->picture != '') {
           $obj->picture = JHTML::image(JURI::root().$obj->picture, $obj->first_name. ' ' . $obj->last_name, $attribs);
         } else {
-          $obj->picture = JHTML::image(JURI::base().'media/com_tracks/images/misc/tnnophoto.jpg', $obj->first_name. ' ' . $obj->last_name, $attribs);
+          $obj->picture = JHTML::image(JURI::root().'media/com_tracks/images/misc/tnnophoto.jpg', $obj->first_name. ' ' . $obj->last_name, $attribs);
         }
     }
     return $result;

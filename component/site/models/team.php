@@ -64,7 +64,7 @@ class TracksModelTeam extends baseModel
 				if ($this->_data->picture != '') {
 					$this->_data->picture = JHTML::image(JURI::root().'media/com_tracks/images/teams/'.$this->_data->picture, $this->_data->name, $attribs);
 				} else {
-					//$this->_data->picture = JHTML::image(JURI::base().'media/com_tracks/images/misc/tnnophoto.jpg', $this->_data->name, $attribs);
+					//$this->_data->picture = JHTML::image(JURI::root().'media/com_tracks/images/misc/tnnophoto.jpg', $this->_data->name, $attribs);
 				}
 			}
 			else return $result;

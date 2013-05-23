@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: view.html.php 140 2008-06-10 16:47:22Z julienv $ 
+* @version    $Id: view.html.php 140 2008-06-10 16:47:22Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -30,23 +30,23 @@ class TracksViewProjectindividuals extends TracksView
 	function display($tpl = null)
 	{
 		$mainframe = JFactory::getApplication();
-		$option = JRequest::getCmd('option');		
-		
-    if($this->getLayout() == 'assign') 
+		$option = JRequest::getCmd('option');
+
+    if($this->getLayout() == 'assign')
     {
 			$this->_displayAssign($tpl);
 			return;
 		}
     $project_id = $mainframe->getUserState( $option.'project' );
-		
+
 		$document = JFactory::getDocument();
-		$document->addScript(JURI::base() . 'media/com_tracks/js/autocompleter/1_2/Autocompleter.js');
-		$document->addScript(JURI::base() . 'media/com_tracks/js/autocompleter/1_2/Autocompleter.Local.js');
-		$document->addScript(JURI::base() . 'media/com_tracks/js/autocompleter/1_2/Autocompleter.Request.js');
-		$document->addScript(JURI::base() . 'media/com_tracks/js/autocompleter/1_2/Observer.js');
-		$document->addScript(JURI::base() . 'media/com_tracks/js/quickadd1_2.js');
-		$document->addStyleSheet(JURI::base() . 'media/com_tracks/css/Autocompleter1_2.css');
-		
+		$document->addScript(JURI::root() . 'media/com_tracks/js/autocompleter/1_2/Autocompleter.js');
+		$document->addScript(JURI::root() . 'media/com_tracks/js/autocompleter/1_2/Autocompleter.Local.js');
+		$document->addScript(JURI::root() . 'media/com_tracks/js/autocompleter/1_2/Autocompleter.Request.js');
+		$document->addScript(JURI::root() . 'media/com_tracks/js/autocompleter/1_2/Observer.js');
+		$document->addScript(JURI::root() . 'media/com_tracks/js/quickadd1_2.js');
+		$document->addStyleSheet(JURI::root() . 'media/com_tracks/css/Autocompleter1_2.css');
+
 		// Set toolbar items for the page
 		JToolBarHelper::title(   JText::_('COM_TRACKS_Project_Participants' ), 'generic.png' );
 		JToolBarHelper::back();
@@ -54,7 +54,7 @@ class TracksViewProjectindividuals extends TracksView
 		JToolBarHelper::editListX();
 		JToolBarHelper::addNewX();
     JToolBarHelper::help( 'screen.tracks', true );
-        
+
 		$db		= JFactory::getDBO();
 		$uri	= JFactory::getURI();
 
@@ -73,7 +73,7 @@ class TracksViewProjectindividuals extends TracksView
 
 		// build list of categories
 		//$javascript 	= 'onchange="document.adminForm.submit();"';
-		
+
 		// state filter
 		//$lists['state']	= JHTML::_('grid.state',  $filter_state );
 
@@ -90,35 +90,35 @@ class TracksViewProjectindividuals extends TracksView
 		$this->assignRef('pagination',	$pagination);
 		$this->assignRef('request_url',	$uri->toString());
 		$this->assignRef('project_id',  $project_id);
-		
+
 		parent::display($tpl);
 	}
-	
+
 	function _displayAssign($tpl = null)
 	{
     $mainframe = JFactory::getApplication();
 $option = JRequest::getCmd('option');
-		
+
 		// Set toolbar items for the page
 		JToolBarHelper::title(   JText::_('COM_TRACKS_Assign_Participants' ), 'generic.png' );
 		JToolBarHelper::back();
 		JToolBarHelper::save('saveassign', 'Save');
 		JToolBarHelper::cancel('cancelassign');
     JToolBarHelper::help( 'screen.tracks', true );
-    
+
 		$db		= JFactory::getDBO();
 		$uri	= JFactory::getURI();
-		
+
     // Get data from the model
     // $model = $this->getModel();
     // print_r($model);
-    
+
 		//build the html select list for teams
     $teamoptions[] = JHTML::_('select.option',  '0', '- '. JText::_('COM_TRACKS_Select_a_team' ) .' -','id', 'name' );
     if ( $res = $this->get('Teams') ) {
       $teamoptions = array_merge( $teamoptions, $res );
     }
-    
+
     //build the html select list for projects
     $projects[] = JHTML::_('select.option',  '0', '- '. JText::_('COM_TRACKS_Select_a_project' ) .' -','value', 'text' );
     if ( $res = $this->get('projectsListOptions') ) {
@@ -126,16 +126,16 @@ $option = JRequest::getCmd('option');
     }
     $lists['projects'] = JHTML::_('select.genericlist',  $projects, 'project_id', 'class="inputbox" size="1"', 'value', 'text');
     unset($projects);
-    
+
     // get player names
 		$players		= $this->get( 'assignList' );
-		
+
 		$this->assignRef('user',		JFactory::getUser());
 		$this->assignRef('players',		$players);
     $this->assignRef('teamoptions',   $teamoptions);
     $this->assignRef('lists',   $lists);
 		$this->assignRef('request_url',	$uri->toString());
-		
+
 		parent::display($tpl);
   }
 }

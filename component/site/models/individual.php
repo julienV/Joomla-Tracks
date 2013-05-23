@@ -73,13 +73,13 @@ class TracksModelIndividual extends baseModel
         if ($this->_data->picture != '') {
           $this->_data->picture = JHTML::image(JURI::root().$this->_data->picture, $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
         } else {
-          $this->_data->picture = JHTML::image(JURI::base().'media/com_tracks/images/misc/tnnophoto.jpg', $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
+          $this->_data->picture = JHTML::image(JURI::root().'media/com_tracks/images/misc/tnnophoto.jpg', $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
         }
 
         if ($this->_data->picture_small != '') {
           $this->_data->picture_small = JHTML::image(JURI::root().$this->_data->picture_small, $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
         } else {
-          $this->_data->picture_small = JHTML::image(JURI::base().'media/com_tracks/images/misc/tnnophoto.jpg', $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
+          $this->_data->picture_small = JHTML::image(JURI::root().'media/com_tracks/images/misc/tnnophoto.jpg', $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
         }
 
         $this->_loadProjectDetails();

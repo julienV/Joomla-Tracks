@@ -1078,7 +1078,7 @@ class TracksCountries
 			$iso_code = self::convertIso3to2($iso_code);
 		}
 		if ($iso_code) {
-			$path = JURI::base() . 'media/com_tracks/images/flags/'.strtolower($iso_code).'.png';
+			$path = JURI::root() . 'media/com_tracks/images/flags/'.strtolower($iso_code).'.png';
 			return $path;
 		}
 		else return null;

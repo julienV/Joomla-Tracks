@@ -17,7 +17,7 @@ defined('_JEXEC') or die();
 jimport('joomla.application.component.controller');
 
 $document = JFactory::getDocument();
-$document->addStyleSheet( JURI::base() . 'media/com_tracks/css/tracks.css', 'text/css', null, array( 'id' => 'tracksstyleSheet' ) );
+$document->addStyleSheet( JURI::root() . 'media/com_tracks/css/tracks.css', 'text/css', null, array( 'id' => 'tracksstyleSheet' ) );
 
 /**
  * Tracks Component Controller

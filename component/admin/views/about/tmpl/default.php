@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: default.php 20 2008-02-09 01:29:03Z julienv $ 
+* @version    $Id: default.php 20 2008-02-09 01:29:03Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -18,7 +18,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <table id="abouttracks">
 	<tr>
 		<td>
-		  <img src="<?php echo JURI::base() ?>media/com_tracks/images/tracks_logo_250.png"/>
+		  <img src="<?php echo JURI::root() ?>media/com_tracks/images/tracks_logo_250.png"/>
 		</td>
 		<td>
       <h2><?php echo JText::_('COM_TRACKS_About_Tracks'); ?></h2>

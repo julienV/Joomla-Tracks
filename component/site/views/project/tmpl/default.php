@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: default.php 101 2008-05-22 08:32:12Z julienv $ 
+* @version    $Id: default.php 101 2008-05-22 08:32:12Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -9,16 +9,16 @@
 * is derivative of works licensed under the GNU General Public License or
 * other free or open source software licenses.
 * See COPYRIGHT.php for copyright notices and details.
-*/ 
+*/
  // no direct access
 defined('_JEXEC') or die('Restricted access'); ?>
-<?php 
+<?php
   /**
    * return formated string for round start date - end date
    *
-   * @param object round (must have variables start_date, end_date) 
-   * @return string html     
-   */        
+   * @param object round (must have variables start_date, end_date)
+   * @return string html
+   */
   function formatRoundStartEnd( $round )
   {
     if ( $round->start_date && $round->start_date != '0000-00-00 00:00:00' )
@@ -29,10 +29,10 @@ defined('_JEXEC') or die('Restricted access'); ?>
         $format_end = 'j F Y';
         if ( JHTML::date( $round->start_date, 'Ym' ) == JHTML::date( $round->end_date, 'Ym' ) ) {
           // no need to display twice the month and year here
-          $format_start = 'j';  
+          $format_start = 'j';
         }
         else {
-          $format_start = 'j F Y';        
+          $format_start = 'j F Y';
         }
         return JHTML::date( $round->start_date, $format_start ). ' - ' . JHTML::date( $round->end_date, $format_end );
       }
@@ -57,17 +57,17 @@ defined('_JEXEC') or die('Restricted access'); ?>
 			<th><?php echo JText::_('COM_TRACKS_Date' ); ?></th>
 			<th><?php echo JText::_('COM_TRACKS_Winner' ); ?></th>
 		</tr>
-		<?php 
+		<?php
 		$k = 0;
 		foreach( $this->results AS $result )
-		{			
-      $link_round = JRoute::_( TracksHelperRoute::getRoundResultRoute($result->slug) );			
+		{
+      $link_round = JRoute::_( TracksHelperRoute::getRoundResultRoute($result->slug) );
       ?>
       <tr class="<?php echo ($k++ % 2 ? 'd1' : 'd0'); ?>">
         <td>
           <a href="<?php echo $link_round; ?>" title ="<?php echo JText::_('COM_TRACKS_Display' ) ?>">
-          <?php 
-          echo $result->round_name; 
+          <?php
+          echo $result->round_name;
           ?>
           </a>
         </td>
@@ -75,20 +75,20 @@ defined('_JEXEC') or die('Restricted access'); ?>
         <td>
         	<?php if ($result->winner): ?>
         	<?php foreach ($result->winner as $winner): ?>
-        	<div class="winner"><?php echo $winner->first_name . ' ' . $winner->last_name 
+        	<div class="winner"><?php echo $winner->first_name . ' ' . $winner->last_name
 					            . ($this->params->get('showteams', 1) && $winner->team_name ? ' ('.$winner->team_name.')' : ''); ?></div>
         	<?php endforeach; ?>
         	<?php endif; ?>
         </td>
       </tr>
-      <?php			
+      <?php
 		}
 		?>
 	</tbody>
 </table>
 <div class="icalbutton">
   <a href="<?php echo JRoute::_(TracksHelperRoute::getProjectRoute($this->project->slug).'&format=ical') ?>" title="<?php echo JText::_('COM_TRACKS_ICAL_EXPORT'); ?>">
-    <img src="<?php echo JURI::base().'/media/com_tracks/images/ical.gif'; ?>"  alt="<?php echo JText::_('COM_TRACKS_ICAL_EXPORT'); ?>"/>
+    <img src="<?php echo JURI::root().'/media/com_tracks/images/ical.gif'; ?>"  alt="<?php echo JText::_('COM_TRACKS_ICAL_EXPORT'); ?>"/>
   </a>
 </div>
 
