@@ -56,7 +56,7 @@
 				<gitversion workingcopy="${dirs.root}" propertyname="git.lastrevision" />
 				<gitdate workingcopy="${dirs.root}" propertyname="git.timestamp" />
 				<!--<property name="version" value="rev${git.lastrevision}" override="true" />-->
-				<property name="version" value="${git.lastrevision}-${git.timestamp}" override="true" />
+				<property name="version" value="${git.lastrevision}" override="true" />
 			</then>
 		</if>
 	</target>

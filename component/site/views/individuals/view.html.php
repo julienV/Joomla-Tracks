@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: view.html.php 43 2008-02-24 23:47:38Z julienv $ 
+* @version    $Id: view.html.php 43 2008-02-24 23:47:38Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -30,21 +30,35 @@ class TracksViewIndividuals extends JView
     	$mainframe = JFactory::getApplication();
 			$option = JRequest::getCmd('option');
 			$params = $mainframe->getParams('com_tracks');
-    	          
+
         $model = $this->getModel();
         $rows = $model->getData();
-        
+
         $document = JFactory::getDocument();
         $document->setTitle( JText::_('COM_TRACKS_All_Individuals' ) );
-        
+
         $breadcrumbs = $mainframe->getPathWay();
-        $breadcrumbs->addItem( JText::_('COM_TRACKS_All_Individuals' ), 
+        $breadcrumbs->addItem( JText::_('COM_TRACKS_All_Individuals' ),
             'index.php?option=com_tracks&view=individuals' );
-        
+
         $this->assignRef( 'rows',    $rows );
         $this->assignRef( 'params',  $params );
-        
+
         parent::display($tpl);
     }
+
+	/**
+	 * returns first letter of word
+	 *
+	 * @param   string  $word       a word
+	 * @param   bool    $uppercase  return uppercase ?
+	 *
+	 * @return string
+	 */
+	public function firstLetter($word, $uppercase = true)
+	{
+		$first = mb_substr($word, 0, 1);
+
+		return $uppercase ? mb_convert_case($first, 1) : $first;
+	}
 }
-?>
