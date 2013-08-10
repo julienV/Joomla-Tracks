@@ -1,9 +1,8 @@
 <?php
 /**
-* @version    $Id: admin.tracks.php 125 2008-06-05 21:11:14Z julienv $ 
-* @package    JoomlaTracks
-* @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
-* @license		GNU/GPL, see LICENSE.php
+* @package   JoomlaTracks
+* @copyright Copyright (C) 2008 Julien Vonthron. All rights reserved.
+* @license   GNU/GPL, see LICENSE.php
 * Joomla Tracks is free software. This version may have been modified pursuant
 * to the GNU General Public License, and as distributed it includes or
 * is derivative of works licensed under the GNU General Public License or
@@ -11,13 +10,13 @@
 * See COPYRIGHT.php for copyright notices and details.
 */
 
-// no direct access
-defined( '_JEXEC' ) or die( 'Restricted access' );
+// No direct access
+defined('_JEXEC') or die('Restricted access');
 
 // Access check.
-if (!JFactory::getUser()->authorise('core.manage', 'com_tracks')) 
+if (!JFactory::getUser()->authorise('core.manage', 'com_tracks'))
 {
-	return JError::raiseWarning(404, JText::_('JERROR_ALERTNOAUTHOR'));
+	throw new Exception(JText::_('JERROR_ALERTNOAUTHOR'), 404);
 }
 
 // Require the base controller
@@ -31,25 +30,15 @@ require_once(JPATH_COMPONENT_SITE.DS.'helpers'.DS.'countries.php');
 // and the abstract view
 require_once (JPATH_COMPONENT.DS.'abstract'.DS.'tracksview.php');
 
-// Require specific controller if requested
-if($controller = JRequest::getWord('controller')) {
-	$path = JPATH_COMPONENT.DS.'controllers'.DS.$controller.'.php';
-	if (file_exists($path)) {
-		require_once $path;
-	} else {
-		$controller = '';
-	}
+defined('_JEXEC') or die();
+
+// Load FOF
+include_once JPATH_LIBRARIES.'/fof/include.php';
+if(!defined('FOF_INCLUDED'))
+{
+	throw new Exception('FOF is not installed', 500);
+
+	return;
 }
 
-// Set the table directory
-JTable::addIncludePath( JPATH_COMPONENT.DS.'tables' );
-
-// Create the controller
-$classname	= 'TracksController'.ucfirst($controller);
-$controller	= new $classname( );
-
-// Perform the Request task
-$controller->execute( JRequest::getCmd('task'));
-$controller->redirect();
-
-?>
+FOFDispatcher::getTmpInstance('com_tracks')->dispatch();
