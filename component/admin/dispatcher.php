@@ -18,5 +18,5 @@ defined('_JEXEC') or die();
  */
 class TracksDispatcher extends FOFDispatcher
 {
-	public $defaultView = 'cpanel';
+	public $defaultView = 'projects';
 }
