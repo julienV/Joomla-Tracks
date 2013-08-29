@@ -38,4 +38,9 @@ class TracksToolbar extends FOFToolbar
 
 		return parent::renderToolbar($view, $task, $input);
 	}
+
+	public function renderSubmenu()
+	{
+		return;
+	}
 }

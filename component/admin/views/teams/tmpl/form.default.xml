@@ -28,7 +28,7 @@
 
 		<field name="name" type="text"
 			   show_link="true"
-			   url="index.php?option=com_tracks&amp;view=teams&amp;id=[ITEM:ID]"
+			   url="index.php?option=com_tracks&amp;view=team&amp;id=[ITEM:ID]"
 			   class="tracksitem"
 			   empty_replacement="(no name)"
 				/>
@@ -37,7 +37,13 @@
 
 		<field name="acronym" type="text" />
 
-		<field name="admin_id" type="user" sortable="true" tdwidth="10%" show_avatar="false" show_username="true" show_id="false" />
+		<field name="admin_id"
+			   type="user" sortable="true" tdwidth="10%"
+			   show_avatar="false"
+			   show_username="true"
+			   show_email="false"
+			   show_name="false"
+			   show_id="false" />
 
 		<field name="country_code" type="text" />
 	</fieldset>

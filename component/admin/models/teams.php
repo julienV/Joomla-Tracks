@@ -16,5 +16,15 @@ defined('_JEXEC') or die();
 
 class TracksModelTeams extends FOFModel
 {
+	/**
+	 * Public class constructor
+	 *
+	 * @param   type  $config  The configuration array
+	 */
+	public function __construct($config = array())
+	{
+		parent::__construct($config);
 
+		$this->setState('form_name', 'teams');
+	}
 }

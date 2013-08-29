@@ -110,7 +110,7 @@
 		/>
 
 	<field
-		name="admin"
+		name="admin_id"
 		type="user"
 		class="inputbox"
 		default="0"

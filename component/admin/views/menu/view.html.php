@@ -43,16 +43,6 @@ class TracksViewMenu extends FOFViewHtml
 		$state = $this->get('state');
 		$document->addScript(JUri::root() . 'media/com_tracks/js/menu.js');
 
-		//Create Submenu
-		JSubMenuHelper::addEntry(JText::_('COM_TRACKS_PROJECTS'), 'index.php?option=com_tracks&view=projects', $view == 'projects');
-		JSubMenuHelper::addEntry(JText::_('COM_TRACKS_COMPETITIONS'), 'index.php?option=com_tracks&view=competitions', $view == 'competitions');
-		JSubMenuHelper::addEntry(JText::_('COM_TRACKS_SEASONS'), 'index.php?option=com_tracks&view=seasons', $view == 'seasons');
-		JSubMenuHelper::addEntry(JText::_('COM_TRACKS_TEAMS'), 'index.php?option=com_tracks&view=teams', $view == 'teams');
-		JSubMenuHelper::addEntry(JText::_('COM_TRACKS_INDIVIDUALS'), 'index.php?option=com_tracks&view=individuals', $view == 'individuals');
-		JSubMenuHelper::addEntry(JText::_('COM_TRACKS_ROUNDS'), 'index.php?option=com_tracks&view=rounds', $view == 'rounds');
-		JSubMenuHelper::addEntry(JText::_('COM_TRACKS_SUBROUNDTYPES'), 'index.php?option=com_tracks&view=subroundtypes', $view == 'subroundtypes');
-		JSubMenuHelper::addEntry(JText::_('COM_TRACKS_ABOUT'), 'index.php?option=com_tracks&view=about', $view == 'about');
-
 		$lists = array();
 		$options = array(JHTML::_('select.option', 0, JText::_('COM_TRACKS_SELECT_A_PROJECT')));
 		$moreopts = $this->get('ProjectsOptions');
@@ -71,5 +61,17 @@ class TracksViewMenu extends FOFViewHtml
 	function _displayEnd($tpl = null)
 	{
 		parent::display('tablepane');
+	}
+
+	/**
+	 * Executes before rendering the page for the Add task.
+	 *
+	 * @param   string  $tpl  Subtemplate to use
+	 *
+	 * @return  boolean  Return true to allow rendering of the page
+	 */
+	protected function onAdd($tpl = null)
+	{
+		return true;
 	}
 }
