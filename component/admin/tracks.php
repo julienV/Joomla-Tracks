@@ -30,8 +30,6 @@ require_once(JPATH_COMPONENT_SITE.DS.'helpers'.DS.'countries.php');
 // and the abstract view
 require_once (JPATH_COMPONENT.DS.'abstract'.DS.'tracksview.php');
 
-defined('_JEXEC') or die();
-
 // Load FOF
 include_once JPATH_LIBRARIES.'/fof/include.php';
 if(!defined('FOF_INCLUDED'))

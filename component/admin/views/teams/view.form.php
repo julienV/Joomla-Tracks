@@ -1,6 +1,6 @@
 <?php
 /**
- * @version    .2 $Id$
+ * @version    $Id: view.html.php 140 2008-06-10 16:47:22Z julienv $
  * @package    JoomlaTracks
  * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
  * @license		GNU/GPL, see LICENSE.php
@@ -14,7 +14,7 @@
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die();
 
-class TracksModelTeams extends FOFModel
+class TracksViewTeams extends TracksMenuViewFOF
 {
 
 }

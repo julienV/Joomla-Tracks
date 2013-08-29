@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: controller.php 133 2008-06-08 10:24:29Z julienv $ 
+* @version    $Id: controller.php 133 2008-06-08 10:24:29Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -22,16 +22,15 @@ jimport('joomla.application.component.controller');
  * @package		Tracks
  * @since 0.1
  */
-class TracksControllerMenu extends JController
+class TracksControllerMenu extends FOFController
 {
   public function updateproject()
   {
   	$app = JFactory::getApplication();
   	$option = JRequest::getCmd('option');
-  	
+
   	$app->setUserState($option.'project', JRequest::getInt('glproject'));
   	$msg = JText::_('COM_TRACKS_PROJECT_SELECTED');
   	$this->setRedirect(JRequest::getVar('referer'), $msg);
   }
 }
-?>

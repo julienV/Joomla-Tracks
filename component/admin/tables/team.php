@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: team.php 72 2008-04-29 13:14:29Z julienv $ 
+* @version    $Id: team.php 72 2008-04-29 13:14:29Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -23,15 +23,17 @@ jimport('joomla.filter.input');
 * @package		Tracks
 * @since 0.1
 */
-class TableTeam extends JTable
+class TracksTableTeam extends FOFTable
 {
 	/**
-	 * Constructor
+	 * constructor
 	 *
-	 * @param object Database connector object
-	 * @since 1.0
+	 * @param   string    $table  name of the table
+	 * @param   string    $key    table primary key
+	 * @param   database  &$db    A database connector object
 	 */
-	function __construct(& $db) {
+	public function __construct($table, $key, &$db)
+	{
 		parent::__construct('#__tracks_teams', 'id', $db);
 	}
 

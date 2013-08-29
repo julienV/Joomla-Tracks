@@ -1,6 +1,6 @@
 <?php
 /**
- * @version    .2 $Id$
+ * @version    $Id: view.html.php 140 2008-06-10 16:47:22Z julienv $
  * @package    JoomlaTracks
  * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
  * @license		GNU/GPL, see LICENSE.php
@@ -14,7 +14,27 @@
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die();
 
-class TracksModelTeams extends FOFModel
+class TracksMenuViewFOF extends FOFViewForm
 {
+	protected function preRender()
+	{
+		parent::preRender();
 
+		$input = array(
+			'task' => 'read',
+			'layout' => 'start'
+		);
+		FOFDispatcher::getTmpInstance('com_tracks', 'menu', array('input' => $input))->dispatch();
+	}
+
+	protected function postRender()
+	{
+		parent::postRender();
+
+		$input = array(
+			'task' => 'read',
+			'layout' => 'end'
+		);
+		FOFDispatcher::getTmpInstance('com_tracks', 'menu', array('input' => $input))->dispatch();
+	}
 }

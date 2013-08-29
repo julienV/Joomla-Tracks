@@ -70,8 +70,6 @@ class TracksViewTeam extends JView
 		{
 			$model->checkout( $user->get('id') );
 		}
-    $imageselect = ImageSelect::getSelector('picture', 'picture_preview', 'teams', $object->picture);
-    $miniimageselect = ImageSelect::getSelector('picture_small', 'mini_picture_preview', 'teams', $object->picture_small);
 
     //editor
 		$editor = JFactory::getEditor();
@@ -86,8 +84,6 @@ class TracksViewTeam extends JView
 
 		$this->assignRef('lists',		$lists);
 		$this->assignRef('object',		$object);
-    $this->assignRef( 'imageselect', $imageselect);
-    $this->assignRef( 'miniimageselect', $miniimageselect);
 
 		parent::display($tpl);
 	}

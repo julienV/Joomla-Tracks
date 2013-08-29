@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Tracks" default="dev-release" basedir=".">
 	<property file="build/build.properties" />
-	
+
 	<!-- Default properties, set only if not already assigned in the build.properties file -->
 	<property name="dirs.root" value="." />
 	<property name="src" value="." />
@@ -22,17 +22,17 @@
 
 	<taskdef name="gitversion" classname="build.phingext.GitVersionTask" />
 	<taskdef name="gitdate" classname="build.phingext.GitDateTask" />
-		
+
 	<!--
 	====================================================================================================
 	Tasks - General
 	====================================================================================================
 	-->
-	
+
 	<target name="all" description="Makes everything"
 		depends="dev-release">
 	</target>
-	
+
 	<target name="dev-release" description="Makes the release"
 		depends="new-release,setup-properties,release">
 	</target>
@@ -42,7 +42,7 @@
 		<delete dir="${dirs.release}" quiet="yes" includeemptydirs="false" />
 		<mkdir dir="${dirs.release}" />
 	</target>
-	
+
 	<target name="setup-properties" description="Set up version and build properties">
 		<!-- Initialize the build.date timestamp -->
 		<tstamp>
@@ -60,13 +60,13 @@
 			</then>
 		</if>
 	</target>
-	
+
 	<!--
 	====================================================================================================
 	Tasks - Joomla! packages
 	====================================================================================================
 	-->
-	
+
 	<target name="release" description="Tracks Installation Package for Joomla! 1.6+"
 		depends="new-release,setup-properties">
 
@@ -81,10 +81,10 @@
 				</replacetokens>
 			</filterchain>
 		</copy>
-		
+
 		<!-- Create the package -->
 		<tar basedir="${dirs.tmp}/component" destfile="${dirs.release}/com_tracks-${version}.tar.gz" includeemptydirs="true" compression="gzip" />
-		
+
 		<!-- admin modules -->
 		<foreach param="dirname" absparam="absname" target="zipfolder">
 			<property name="myp" value="modules/admin" />
@@ -93,7 +93,7 @@
 	        <depth max="0" min="0" />
 		  </fileset>
 		</foreach>
-		
+
 		<!-- site modules -->
 		<foreach param="dirname" absparam="absname" target="zipfolder">
 			<property name="myp" value="modules/site" />
@@ -102,7 +102,7 @@
 	        <depth max="0" min="0" />
 		  </fileset>
 		</foreach>
-		
+
 		<!-- languages -->
 		<foreach param="dirname" absparam="absname" target="zipfolder">
 			<property name="myp" value="language" />
@@ -119,10 +119,10 @@
 				<depth max="0" min="0" />
 			</fileset>
 		</foreach>
-		
+
 		<delete dir="${dirs.tmp}" quiet="yes" includeemptydirs="false" />
 	</target>
-	
+
 	<target name="zipplugins">
 	    <echo msg="handling plugins group ${pdirname}" />
 		<foreach param="dirname" absparam="absname" target="zipfolder">
@@ -133,7 +133,7 @@
 			</fileset>
 		</foreach>
 	</target>
-	
+
 	<target name="zipfolder">
 	    <echo msg="packaging ${dirname} ${absname}" />
 		<copy todir="${dirs.tmp}/${dirname}" >
@@ -151,12 +151,13 @@
 		<!-- Create the package -->
 		<tar basedir="${dirs.tmp}/${dirname}" destfile="${dirs.release}/${myp}/${dirname}-${version}.tar.gz" includeemptydirs="true" compression="gzip" />
 	</target>
-	
+
 	<target name="site" description="Copies files to a existing joomla site" depends="setup-properties">
         <echo message="Copying administrator component..." />
 
         <!-- Manifest & install script -->
         <echo message="Copying manifest..." />
+		<delete dir="${www.dir}/administrator/components/com_${comp.name}" quiet="yes" includeemptydirs="true" />
         <copy file="${dirs.component}/${comp.name}.xml"
             tofile="${www.dir}/administrator/components/com_${comp.name}/${comp.name}.xml" overwrite="true">
             <!-- trick to replace extension folders in the manifest-->
@@ -187,6 +188,7 @@
 
         <!-- Frontend component -->
         <echo message="Copying frontend component..." />
+		<delete dir="${www.dir}/components/com_${comp.name}" quiet="yes" includeemptydirs="true" />
         <copy todir="${www.dir}/components/com_${comp.name}" overwrite="true">
             <fileset dir="${dirs.component}/site" />
         </copy>

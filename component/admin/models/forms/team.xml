@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<field
+		name="id"
+		type="text"
+		default="0"
+		label="JGLOBAL_FIELD_ID_LABEL"
+		description ="JGLOBAL_FIELD_ID_DESC"
+		class="readonly"
+		readonly="true"/>
+
+	<field
+		name="name"
+		type="text"
+		label="COM_TRACKS_NAME"
+		description="COM_TRACKS_NAME_DESC"
+		class="inputbox"
+		required="true"/>
+
+	<field
+		name="alias"
+		type="text"
+		label="COM_TRACKS_alias"
+		description="COM_TRACKS_alias_DESC"
+		class="inputbox"/>
+
+	<field
+		name="short_name"
+		type="text"
+		label="COM_TRACKS_TEAM_SHORT_NAME"
+		description="COM_TRACKS_TEAM_SHORT_NAME_DESC"
+		class="inputbox"
+		size="20"
+		maxlength="20"
+		required="false"/>
+
+	<field
+		name="acronym"
+		type="text"
+		label="COM_TRACKS_TEAM_ACRONYM"
+		description="COM_TRACKS_TEAM_ACRONYM_DESC"
+		class="inputbox"
+		size="6"
+		maxlength="6"
+		required="false"/>
+
+	<field
+		name="checked_out"
+		type="hidden"
+		filter="unset"/>
+
+	<field
+		name="checked_out_time"
+		type="hidden"
+		filter="unset"/>
+
+	<field
+		name="published"
+		type="list"
+		class="inputbox"
+		default="1"
+		size="1"
+		label="JSTATUS"
+		description="JFIELD_PUBLISHED_DESC">
+		<option
+				value="1">
+			JPUBLISHED</option>
+		<option
+				value="0">
+			JUNPUBLISHED</option>
+		<option
+				value="2">
+			JARCHIVED</option>
+		<option
+				value="-2">
+			JTRASHED</option>
+	</field>
+
+	<field
+		name="picture"
+		type="media"
+		label="COM_TRACKS_INDIVIDUALPICTURE"
+		description="COM_TRACKS_INDIVIDUALPICTUREDESC"
+		class="inputbox"
+		preview="show"
+		directory="images/com_tracks/individuals/"/>
+
+	<field
+		name="picture_small"
+		type="media"
+		label="COM_TRACKS_INDIVIDUALSMALLPICTURE"
+		description="COM_TRACKS_INDIVIDUALSMALLPICTUREDESC"
+		class="inputbox"
+		preview="show"
+		directory="images/com_tracks/individuals/"/>
+
+	<field
+		name="country_code"
+		type="tracks_country"
+		label="COM_TRACKS_COUNTRY"
+		description="COM_TRACKS_COUNTRY"
+		/>
+
+	<field
+		name="description"
+		type="editor"
+		label="COM_TRACKS_Description"
+		description="COM_TRACKS_Description"
+		filter="JComponentHelper::filterText" buttons="true"
+		/>
+
+	<field
+		name="admin"
+		type="user"
+		class="inputbox"
+		default="0"
+		label="COM_TRACKS_TEAM_ADMIN"
+		description="COM_TRACKS_TEAM_ADMIN_DESC"
+		/>
+</form>
