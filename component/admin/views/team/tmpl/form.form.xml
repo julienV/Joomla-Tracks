@@ -104,10 +104,15 @@
 
 		<field
 			name="country_code"
-			type="tracks_country"
+			type="model"
 			label="COM_TRACKS_COUNTRY"
 			description="COM_TRACKS_COUNTRY"
-			/>
+			model="TracksModelCountries"
+			key_field="value"
+			value_field="text"
+			>
+			<option value=""></option>
+		</field>
 
 		<field
 			name="admin_id"
