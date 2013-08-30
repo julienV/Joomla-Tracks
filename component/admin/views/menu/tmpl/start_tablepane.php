@@ -19,7 +19,7 @@ $pane = JPane::getInstance('sliders');
 <form name="tracksnav" id="tracksnav" action="index.php" method="post">
 	<?php echo $this->lists->get('project'); ?>
 	<input name="option" type="hidden" value="com_tracks">
-	<input name="controller" type="hidden" value="menu">
+	<input name="view" type="hidden" value="menu">
 	<input name="task" type="hidden" value="">
 	<input name="referer" type="hidden" value="<?php echo $this->referer; ?>">
 </form>

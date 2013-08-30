@@ -41,11 +41,13 @@ class TracksViewMenu extends FOFViewHtml
 		$project = $this->get('Data');
 		$view = JRequest::getCmd('view');
 		$state = $this->get('state');
+		JHtml::_('behavior.framework');
 		$document->addScript(JUri::root() . 'media/com_tracks/js/menu.js');
 
 		$lists = array();
 		$options = array(JHTML::_('select.option', 0, JText::_('COM_TRACKS_SELECT_A_PROJECT')));
 		$moreopts = $this->get('ProjectsOptions');
+
 		if ($moreopts)
 		{
 			$options = array_merge($options, $moreopts);
