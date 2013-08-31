@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: competition.php 10 2008-02-03 13:19:59Z julienv $ 
+* @version    $Id: competition.php 10 2008-02-03 13:19:59Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -23,15 +23,17 @@ jimport('joomla.filter.input');
 * @package		Tracks
 * @since 0.1
 */
-class TableCompetition extends JTable
+class TracksTableCompetition extends FOFTable
 {
 	/**
-	 * Constructor
+	 * constructor
 	 *
-	 * @param object Database connector object
-	 * @since 1.0
+	 * @param   string   $table  name of the table
+	 * @param   string   $key    table primary key
+	 * @param   database &$db    A database connector object
 	 */
-	function __construct(& $db) {
+	public function __construct($table, $key, &$db)
+	{
 		parent::__construct('#__tracks_competitions', 'id', $db);
 	}
 
@@ -40,17 +42,18 @@ class TableCompetition extends JTable
 	 *
 	 * @access public
 	 * @return boolean True on success
-	 * @since 1.0
+	 * @since  1.0
 	 */
 	function check()
 	{
-    $alias = JFilterOutput::stringURLSafe($this->name);
+		$alias = JFilterOutput::stringURLSafe($this->name);
 
-    if(empty($this->alias) || $this->alias === $alias ) {
-      $this->alias = $alias;
-    }
-		//should check name unicity
+		if (empty($this->alias) || $this->alias === $alias)
+		{
+			$this->alias = $alias;
+		}
+
+		// Should check name unicity
 		return true;
 	}
 }
-?>

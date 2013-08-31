@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form
+	lessfiles="media://com_tracks/css/tracksbackend.less||media://com_tracks/css/tracksbackend.css"
+	validate="true"
+	>
+	<fieldset name="basic_configuration"
+			  label="COM_TRACKS_COMPETITIONS_GROUP_BASIC"
+			  description="COM_TRACKS_COMPETITIONS_GROUP_BASIC_DESC"
+			  class="span6"
+			>
+		<field
+			name="id"
+			type="text"
+			default="0"
+			label="JGLOBAL_FIELD_ID_LABEL"
+			description ="JGLOBAL_FIELD_ID_DESC"
+			class="readonly"
+			readonly="true"/>
+
+		<field
+			name="name"
+			type="text"
+			label="COM_TRACKS_NAME"
+			description="COM_TRACKS_NAME_DESC"
+			class="inputbox"
+			required="true"/>
+
+		<field
+			name="alias"
+			type="text"
+			label="COM_TRACKS_alias"
+			description="COM_TRACKS_alias_DESC"
+			class="inputbox"/>
+
+		<field
+			name="checked_out"
+			type="hidden"
+			filter="unset"/>
+
+		<field
+			name="checked_out_time"
+			type="hidden"
+			filter="unset"/>
+
+		<field
+			name="published"
+			type="list"
+			class="inputbox"
+			default="1"
+			size="1"
+			label="JSTATUS"
+			description="JFIELD_PUBLISHED_DESC">
+			<option
+					value="1">
+				JPUBLISHED</option>
+			<option
+					value="0">
+				JUNPUBLISHED</option>
+		</field>
+	</fieldset>
+</form>
