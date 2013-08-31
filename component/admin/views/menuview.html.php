@@ -27,6 +27,12 @@ class TracksMenuViewFOF extends FOFViewForm
 		FOFDispatcher::getTmpInstance('com_tracks', 'menu', array('input' => $input))->dispatch();
 	}
 
+	/**
+	 * Runs after rendering the view template, echoing HTML to put after the
+	 * view template's generated HTML
+	 *
+	 * @return  void
+	 */
 	protected function postRender()
 	{
 		parent::postRender();
