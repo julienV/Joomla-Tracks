@@ -2,16 +2,16 @@
 /**
  * @version    $Id: project.php 67 2008-04-24 16:41:27Z julienv $
  * @package    JoomlaTracks
- * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
- * @license		GNU/GPL, see LICENSE.php
- * Joomla Tracks is free software. This version may have been modified pursuant
- * to the GNU General Public License, and as distributed it includes or
- * is derivative of works licensed under the GNU General Public License or
- * other free or open source software licenses.
- * See COPYRIGHT.php for copyright notices and details.
+ * @copyright  Copyright (C) 2008 Julien Vonthron. All rights reserved.
+ * @license    GNU/GPL, see LICENSE.php
+ *             Joomla Tracks is free software. This version may have been modified pursuant
+ *             to the GNU General Public License, and as distributed it includes or
+ *             is derivative of works licensed under the GNU General Public License or
+ *             other free or open source software licenses.
+ *             See COPYRIGHT.php for copyright notices and details.
  */
 
-// no direct access
+// No direct access
 defined('_JEXEC') or die('Restricted access');
 
 // Include library dependencies
@@ -20,39 +20,39 @@ jimport('joomla.filter.input');
 /**
  * Project Table class
  *
- * @package		Tracks
- * @since 0.1
+ * @package  Tracks
+ * @since    0.1
  */
-class TableProject extends JTable
+class TracksTableProject extends FOFTable
 {
 	/**
 	 * Constructor
 	 *
 	 * @param object Database connector object
+	 *
 	 * @since 1.0
 	 */
-	function __construct(& $db) {
+	public function __construct($table, $key, &$db)
+	{
 		parent::__construct('#__tracks_projects', 'id', $db);
 	}
 
-	/**
-	 * Overloaded bind function
-	 *
-	 * @acces public
-	 * @param array $hash named array
-	 * @return null|string	null is operation was satisfactory, otherwise returns an error
-	 * @see JTable:bind
-	 * @since 1.5
-	 */
-	function bind($array, $ignore = '')
+	function onAfterBind($src)
 	{
-		if (key_exists( 'params', $array ) && is_array( $array['params'] )) {
-			$registry = new JRegistry();
-			$registry->loadArray($array['params']);
-			$array['params'] = $registry->toString();
+		// If the source value is an object, get its accessible properties.
+		if (is_object($src))
+		{
+			$src = get_object_vars($src);
 		}
-		//print_r($array);exit;
-		return parent::bind($array, $ignore);
+
+		if (array_key_exists('params', $src) && is_array($src['params']))
+		{
+			$registry = new JRegistry();
+			$registry->loadArray($src['params']);
+			$src['params'] = $registry->toString();
+		}
+
+		return true;
 	}
 
 	/**
@@ -60,34 +60,35 @@ class TableProject extends JTable
 	 *
 	 * @access public
 	 * @return boolean True on success
-	 * @since 1.0
+	 * @since  1.0
 	 */
 	function check()
-	{	
+	{
 		$result = true;
-		if ( $this->name == '' )
+		if ($this->name == '')
 		{
-			$this->setError( JText::_('COM_TRACKS__Name_is_mandatory ' ) );
+			$this->setError(JText::_('COM_TRACKS__Name_is_mandatory '));
 			return false;
 		}
-		
-    $alias = JFilterOutput::stringURLSafe($this->name);
 
-    if(empty($this->alias) || $this->alias === $alias ) {
-      $this->alias = $alias;
-    }
-    
-		if ( !$this->season_id )
+		$alias = JFilterOutput::stringURLSafe($this->name);
+
+		if (empty($this->alias) || $this->alias === $alias)
 		{
-			$this->setError( JText::_('COM_TRACKS__Season_is_mandatory ' ) );
+			$this->alias = $alias;
+		}
+
+		if (!$this->season_id)
+		{
+			$this->setError(JText::_('COM_TRACKS__Season_is_mandatory '));
 			return false;
 		}
-		if ( !$this->competition_id )
+
+		if (!$this->competition_id)
 		{
-			$this->setError( JText::_('COM_TRACKS__Competition_is_mandatory ' ) );
+			$this->setError(JText::_('COM_TRACKS__Competition_is_mandatory '));
 			return false;
 		}
 		return true;
 	}
 }
-?>

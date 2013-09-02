@@ -1,9 +1,9 @@
 <?php
 /**
-* @version    $Id: projects.php 110 2008-05-26 16:47:13Z julienv $ 
+* @version    $Id: projects.php 110 2008-05-26 16:47:13Z julienv $
 * @package    JoomlaTracks
-* @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
-* @license		GNU/GPL, see LICENSE.php
+* @copyright  Copyright (C) 2008 Julien Vonthron. All rights reserved.
+* @license    GNU/GPL, see LICENSE.php
 * Joomla Tracks is free software. This version may have been modified pursuant
 * to the GNU General Public License, and as distributed it includes or
 * is derivative of works licensed under the GNU General Public License or
@@ -15,78 +15,71 @@
 defined('_JEXEC') or die();
 
 jimport('joomla.application.component.model');
-require_once (JPATH_COMPONENT.DS.'models'.DS.'list.php');
 
 /**
  * Joomla Tracks Component Projects Model
  *
- * @package		Tracks
- * @since 0.1
+ * @package  Tracks
+ * @since    0.1
  */
-class TracksModelProjects extends TracksModelList
+class TracksModelProjects extends FOFModel
 {
-	function _buildQuery()
+	/**
+	 * Builds the SELECT query
+	 *
+	 * @param   boolean  $overrideLimits  Are we requested to override the set limits?
+	 *
+	 * @return  JDatabaseQuery
+	 */
+	public function buildQuery($overrideLimits = false)
 	{
-		// Get the WHERE and ORDER BY clauses for the query
-		$where		= $this->_buildContentWhere();
-		$orderby	= $this->_buildContentOrderBy();
+		$table = $this->getTable();
+		$db = $this->getDbo();
 
-		$query = ' SELECT p.*, s.name AS season, l.name AS competition, u.name AS editor '
-			. ' FROM #__tracks_projects AS p '
-			. ' LEFT JOIN #__tracks_seasons AS s ON s.id = p.season_id '
-			. ' LEFT JOIN #__tracks_competitions AS l ON l.id = p.competition_id '
-			. ' LEFT JOIN #__users AS u ON u.id = p.checked_out '
-			. $where
-			. $orderby
-		;
+		$query = $db->getQuery(true);
 
-		return $query;
-	}
+		$query->select('p.*');
+		$query->from('#__tracks_projects AS p');
 
-	function _buildContentOrderBy()
-	{
-		$mainframe = JFactory::getApplication();
-		$option = JRequest::getCmd('option');
+		$query->select('c.name as competition_name');
+		$query->join('left', '#__tracks_competitions AS c on c.id = p.competition_id');
 
-		$filter_order		= $mainframe->getUserStateFromRequest( $option.'filter_order',		'filter_order',		'p.ordering',	'cmd' );
-		$filter_order_Dir	= $mainframe->getUserStateFromRequest( $option.'filter_order_Dir',	'filter_order_Dir',	'',				'word' );
+		$query->select('s.name as season_name');
+		$query->join('left', '#__tracks_seasons AS s on s.id = p.season_id');
 
-		if ($filter_order == 'p.ordering'){
-			$orderby 	= ' ORDER BY p.ordering '.$filter_order_Dir;
-		} else {
-			$orderby 	= ' ORDER BY '.$filter_order.' '.$filter_order_Dir.' , p.ordering ';
-		}
+		if (!$overrideLimits)
+		{
+			$order = $this->getState('filter_order', null, 'cmd');
 
-		return $orderby;
-	}
+			if (!in_array($order, array_keys($table->getData())))
+			{
+				$order = 'id';
+			}
 
-	function _buildContentWhere()
-	{
-		$mainframe = JFactory::getApplication();
-		$option = JRequest::getCmd('option');
+			$order = $db->qn($order);
 
-		$filter_state		= $mainframe->getUserStateFromRequest( $option.'filter_state',		'filter_state',		'',				'word' );
-		$filter_order		= $mainframe->getUserStateFromRequest( $option.'filter_order',		'filter_order',		'p.ordering',	'cmd' );
-		$filter_order_Dir	= $mainframe->getUserStateFromRequest( $option.'filter_order_Dir',	'filter_order_Dir',	'',				'word' );
-		$search				= $mainframe->getUserStateFromRequest( $option.'search',			'search',			'',				'string' );
-		$search				= JString::strtolower( $search );
+			$dir = $this->getState('filter_order_Dir', 'ASC', 'cmd');
+			$query->order($order . ' ' . $dir);
 
-		$where = array();
+			$filter = $this->getState('competition_name');
+			if ($filter)
+			{
+				$query->where('c.name LIKE (' . $db->quote('%' . $filter . '%')  . ')');
+			}
 
-		if ($search) {
-			$where[] = 'LOWER(p.name) LIKE '.$this->_db->Quote('%'.$search.'%');
-		}
-		if ( $filter_state ) {
-			if ( $filter_state == 'P' ) {
-				$where[] = 'p.published = 1';
-			} else if ($filter_state == 'U' ) {
-				$where[] = 'p.published = 0';
+			$filter = $this->getState('season_name');
+			if ($filter)
+			{
+				$query->where('s.name LIKE (' . $db->quote('%' . $filter . '%')  . ')');
+			}
+
+			$filter = $this->getState('published', '');
+			if ($filter != '')
+			{
+				$query->where('p.published = ' . $db->quote($filter));
 			}
 		}
 
-		$where 		= ( count( $where ) ? ' WHERE '. implode( ' AND ', $where ) : '' );
-
-		return $where;
+		return $query;
 	}
 }
-?>
