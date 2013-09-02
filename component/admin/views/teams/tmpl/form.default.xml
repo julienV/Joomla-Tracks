@@ -26,11 +26,12 @@
 	<fieldset name="items">
 		<field name="id" type="selectrow"/>
 
-		<field name="name" type="text"
+		<field name="name" type="title"
 			   show_link="true"
 			   url="index.php?option=com_tracks&amp;view=team&amp;id=[ITEM:ID]"
 			   class="tracksitem"
 			   empty_replacement="(no name)"
+			   slug_field="alias"
 				/>
 
 		<field name="short_name" type="text" />

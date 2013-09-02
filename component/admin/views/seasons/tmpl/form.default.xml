@@ -13,9 +13,6 @@
 		<header name="name" type="fieldsearchable" sortable="true"
 		        buttons="yes" buttonclass="btn"
 			/>
-		<header name="alias" label="COM_TRACKS_ALIAS" type="fieldsearchable" sortable="true"
-		        buttons="yes" buttonclass="btn"
-			/>
 		<header name="published" type="published" sortable="true"
 		        show_archived="false" show_trash="false"
 			/>
@@ -25,14 +22,13 @@
 	<fieldset name="items">
 		<field name="id" type="selectrow"/>
 
-		<field name="name" type="text"
+		<field name="name" type="title"
 		       show_link="true"
 		       url="index.php?option=com_tracks&amp;view=season&amp;id=[ITEM:ID]"
 		       class="tracksitem"
 		       empty_replacement="(no name)"
+			   slug_field="alias"
 			/>
-
-		<field name="alias" type="text" />
 
 		<field name="published" type="published"/>
 

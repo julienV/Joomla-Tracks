@@ -1,6 +1,6 @@
 <?php
 /**
- * @version    $Id: round.php 80 2008-04-30 20:17:37Z julienv $
+ * @version    2.0
  * @package    JoomlaTracks
  * @copyright  Copyright (C) 2008 Julien Vonthron. All rights reserved.
  * @license    GNU/GPL, see LICENSE.php
@@ -42,7 +42,9 @@ class TracksTableRound extends FOFTable
 	 * Overloaded check method to ensure data integrity
 	 *
 	 * @access public
+	 *
 	 * @return boolean True on success
+	 *
 	 * @since  1.0
 	 */
 	function check()
@@ -54,7 +56,6 @@ class TracksTableRound extends FOFTable
 			$this->alias = $alias;
 		}
 
-		// Should check name unicity
 		return true;
 	}
 }

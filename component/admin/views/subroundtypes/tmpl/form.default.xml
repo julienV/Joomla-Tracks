@@ -13,10 +13,9 @@
 		<header name="name" type="fieldsearchable" sortable="true"
 		        buttons="yes" buttonclass="btn"
 			/>
-		<header name="published" type="published" sortable="true"
-		        show_archived="false" show_trash="false"
-			/>
-		<header name="ordering" type="ordering" sortable="true" />
+		<header name="note" label="COM_TRACKS_NOTE" type="field"/>
+		<header name="count_points" type="fieldselectable" label="COM_TRACKS_count_in_rankings" sortable="true" />
+		<header name="points_attribution" label="COM_TRACKS_POINTS" type="field"/>
 	</headerset>
 
 	<fieldset name="items">
@@ -24,14 +23,16 @@
 
 		<field name="name" type="title"
 		       show_link="true"
-		       url="index.php?option=com_tracks&amp;view=round&amp;id=[ITEM:ID]"
+		       url="index.php?option=com_tracks&amp;view=subroundtype&amp;id=[ITEM:ID]"
 		       class="tracksitem"
 		       empty_replacement="(no name)"
 			   slug_field="alias"
 			/>
 
-		<field name="published" type="published"/>
+		<field name="note" type="text" />
 
-		<field name="ordering" type="ordering" />
+		<field name="count_points" type="boolean"/>
+
+		<field name="points_attribution" type="text" size="10"/>
 	</fieldset>
 </form>
