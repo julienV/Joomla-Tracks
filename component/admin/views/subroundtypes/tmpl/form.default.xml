@@ -31,7 +31,7 @@
 
 		<field name="note" type="text" />
 
-		<field name="count_points" type="boolean"/>
+		<field name="count_points" type="Jlvyesno"/>
 
 		<field name="points_attribution" type="text" size="10"/>
 	</fieldset>
