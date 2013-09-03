@@ -26,12 +26,12 @@ FOFTemplateUtils::addCSS('media://com_tracks/css/tracksbackend.css');
 
 <form id="adminForm" class="form-validate " name="adminForm" method="post" action="index.php">
 	<input type="hidden" name="option" value="com_tracks" />
-	<input type="hidden" name="view" value="rounds" />
+	<input type="hidden" name="view" value="projects" />
 	<input type="hidden" name="task" value="" />
 	<input type="hidden" name="id" value="<?php echo $this->item->id ?>" />
 	<input type="hidden" name="<?php echo JFactory::getSession()->getFormToken();?>" value="1" />
 
-	<div class="width-100 fltlft">
+	<div class="width-60 fltlft">
 		<fieldset class="adminform"><legend><?php echo JText::_('COM_TRACKS_General' ); ?></legend>
 
 			<ul class="adminformlist">
@@ -69,35 +69,37 @@ FOFTemplateUtils::addCSS('media://com_tracks/css/tracksbackend.css');
 
 	<div class="width-40 fltrt">
 		<?php
+		$params = JForm::getInstance('project', JPATH_COMPONENT . '/models/project.xml');
+		$params->bind($this->item);
 		// Iterate through the normal form fieldsets and display each one.
-//		foreach ($this->params->getFieldsets() as $fieldsets => $fieldset):
-//			?>
-<!--			<fieldset class="adminform">-->
-<!--				<legend>-->
-<!--					--><?php //echo JText::_($fieldset->name); ?>
-<!--				</legend>-->
-<!--				<dl>-->
-<!--					--><?php
-//					// Iterate through the fields and display them.
-//					foreach($this->params->getFieldset($fieldset->name) as $field):
-//						// If the field is hidden, only use the input.
-//						if ($field->hidden):
-//							echo $field->input;
-//						else:
-//							?>
-<!--							<dt>-->
-<!--								--><?php //echo $field->label; ?>
-<!--							</dt>-->
-<!--							<dd--><?php //echo ($field->type == 'Editor' || $field->type == 'Textarea') ? ' style="clear: both; margin: 0;"' : ''?><!-->-->
-<!--								--><?php //echo $field->input ?>
-<!--							</dd>-->
-<!--						--><?php
-//						endif;
-//					endforeach;
-//					?>
-<!--				</dl>-->
-<!--			</fieldset>-->
-<!--		--><?php
-//		endforeach;
+		foreach ($params->getFieldsets() as $fieldsets => $fieldset):
+			?>
+			<fieldset class="adminform">
+				<legend>
+					<?php echo JText::_($fieldset->name); ?>
+				</legend>
+				<dl>
+					<?php
+					// Iterate through the fields and display them.
+					foreach($params->getFieldset($fieldset->name) as $field):
+						// If the field is hidden, only use the input.
+						if ($field->hidden):
+							echo $field->input;
+						else:
+							?>
+							<dt>
+								<?php echo $field->label; ?>
+							</dt>
+							<dd<?php echo ($field->type == 'Editor' || $field->type == 'Textarea') ? ' style="clear: both; margin: 0;"' : ''?>>
+								<?php echo $field->input ?>
+							</dd>
+						<?php
+						endif;
+					endforeach;
+					?>
+				</dl>
+			</fieldset>
+		<?php
+		endforeach;
 		?>
 </form>

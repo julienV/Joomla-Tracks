@@ -90,5 +90,9 @@
 				type="hidden"
 				filter="unset"/>
 
+		<field
+				name="params"
+				type="hidden"
+				class="inputbox"/>
 	</fieldset>
 </form>

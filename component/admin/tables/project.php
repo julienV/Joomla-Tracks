@@ -96,21 +96,47 @@ class TracksTableProject extends FOFTable
 	/**
 	 * Fires after loading a record, automatically unserialises the extra params
 	 *
-	 * @param object $result The loaded row
+	 * @param   boolean  $result  was it loaded correctly ?
 	 *
 	 * @return bool
 	 */
-	protected function onAfterLoad(&$result)
+	protected function onAfterLoad($result)
 	{
-		if (is_string($result->params))
-		{
-			$params = new JRegistry();
-			$params->loadString($result->params);
-			$result->params = $params;
-		}
-
 		parent::onAfterLoad($result);
 
+		if (is_string($this->params))
+		{
+			$registry = new JRegistry();
+			$registry->loadString($this->params);
+			$this->params = $registry->toArray();
+		}
+
 		return $result;
+	}
+
+	/**
+	 * The event which runs before storing (saving) data to the database
+	 *
+	 * @param   boolean  $updateNulls  Should nulls be saved as nulls (true) or just skipped over (false)?
+	 *
+	 * @return  boolean  True to allow saving
+	 */
+	protected function onBeforeStore($updateNulls)
+	{
+		$res = parent::onBeforeStore($updateNulls);
+
+		if (!$res)
+		{
+			return $res;
+		}
+
+		if ($this->params && is_array($this->params))
+		{
+			$registry = new JRegistry();
+			$registry->loadArray($this->params);
+			$this->params = $registry->toString();
+		}
+
+		return true;
 	}
 }
