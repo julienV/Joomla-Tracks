@@ -91,4 +91,26 @@ class TracksTableProject extends FOFTable
 		}
 		return true;
 	}
+
+
+	/**
+	 * Fires after loading a record, automatically unserialises the extra params
+	 *
+	 * @param object $result The loaded row
+	 *
+	 * @return bool
+	 */
+	protected function onAfterLoad(&$result)
+	{
+		if (is_string($result->params))
+		{
+			$params = new JRegistry();
+			$params->loadString($result->params);
+			$result->params = $params;
+		}
+
+		parent::onAfterLoad($result);
+
+		return $result;
+	}
 }
