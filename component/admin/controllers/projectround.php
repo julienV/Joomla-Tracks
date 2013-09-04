@@ -72,4 +72,25 @@ class TracksControllerProjectround extends FOFController
 
 		parent::display();
 	}
+
+	/**
+	 * Execute something before applySave is called. Return false to prevent
+	 * applySave from executing.
+	 *
+	 * @param   array  &$data  The data upon which applySave will act
+	 *
+	 * @return  boolean  True to allow applySave to run
+	 */
+	protected function onBeforeApplySave(&$data)
+	{
+		if (!isset($data['project_id']) || !$data['project_id'])
+		{
+			// Current project
+			$app = JFactory::getApplication();
+			$option = $app->input->getCmd('option', 'com_tracks');
+			$data['project_id'] = $app->getUserState($option . 'project');
+		}
+
+		return true;
+	}
 }

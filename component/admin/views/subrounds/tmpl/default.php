@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: default.php 127 2008-06-06 02:43:26Z julienv $ 
+* @version    $Id: default.php 127 2008-06-06 02:43:26Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -16,8 +16,10 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <?php
 $user 	= JFactory::getUser();
 
+FOFTemplateUtils::addCSS("media://com_tracks/css/tracksbackend.css");
+
 //Ordering allowed ?
-$ordering = ($this->lists['order'] == 'obj.ordering');
+$ordering = ($this->lists->order == 'obj.ordering');
 
 JHTML::_('behavior.tooltip');
 ?>
@@ -35,7 +37,17 @@ Joomla.submitbutton = function (pressbutton)
 </script>
 
 <div id="tracksmain">
-<form action="<?php echo $this->request_url; ?>" method="post" name="adminForm" id="adminForm">
+	<form name="adminForm" id="adminForm" action="index.php" method="post">
+		<input type="hidden" name="option" id="option" value="com_tracks" />
+		<input type="hidden" name="view" id="view" value="subrounds" />
+		<input type="hidden" name="task" id="task" value="browse" />
+		<input type="hidden" name="prid" id="prid" value="<?php echo JFactory::getApplication()->input->getInt('prid', 0); ?>" />
+		<input type="hidden" name="boxchecked" id="boxchecked" value="0" />
+		<input type="hidden" name="hidemainmenu" id="hidemainmenu" value="0" />
+		<input type="hidden" name="filter_order" id="filter_order" value="<?php echo $this->lists->order ?>" />
+		<input type="hidden" name="filter_order_Dir" id="filter_order_Dir" value="<?php echo $this->lists->order_Dir ?>" />
+		<input type="hidden" name="<?php echo JFactory::getSession()->getFormToken();?>" value="1" />
+
 <div id="editcell">
 	<table class="adminlist">
 	<thead>
@@ -47,20 +59,20 @@ Joomla.submitbutton = function (pressbutton)
 				<input type="checkbox" name="toggle" value="" onclick="checkAll(<?php echo count( $this->items ); ?>);" />
 			</th>
 			<th class="title">
-				<?php echo JHTML::_('grid.sort',  'COM_TRACKS_Type', 'sr.name', $this->lists['order_Dir'], $this->lists['order'] ); ?>
-			</th>    
+				<?php echo JHTML::_('grid.sort',  'COM_TRACKS_Type', 'sr.name', $this->lists->order_Dir, $this->lists->order ); ?>
+			</th>
       <th class="title">
         <?php echo JText::_('COM_TRACKS_Results' ); ?>
       </th>
       <th width="5%" nowrap="nowrap">
-        <?php echo JHTML::_('grid.sort',  'Published', 'obj.published', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+        <?php echo JHTML::_('grid.sort',  'Published', 'obj.published', $this->lists->order_Dir, $this->lists->order ); ?>
       </th>
       <th width="8%" nowrap="nowrap">
-        <?php echo JHTML::_('grid.sort',  'Order', 'obj.ordering', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+        <?php echo JHTML::_('grid.sort',  'Order', 'obj.ordering', $this->lists->order_Dir, $this->lists->order ); ?>
         <?php echo JHTML::_('grid.order',  $this->items ); ?>
       </th>
 			<th width="1%" nowrap="nowrap">
-				<?php echo JHTML::_('grid.sort',  'ID', 'obj.id', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+				<?php echo JHTML::_('grid.sort',  'ID', 'obj.id', $this->lists->order_Dir, $this->lists->order ); ?>
 			</th>
 		</tr>
 	</thead>
@@ -74,16 +86,16 @@ Joomla.submitbutton = function (pressbutton)
 	<tbody>
 	<?php
 	$k = 0;
-	
+
 	for ($i=0, $n=count( $this->items ); $i < $n; $i++)
 	{
 		$row = $this->items[$i];
 
-		$link 	= JRoute::_( 'index.php?option=com_tracks&controller=subround&task=edit&cid[]='. $row->id );
-    $link_results = JRoute::_( 'index.php?option=com_tracks&view=subroundresults&srid='. $row->id );
-		
+		$link 	= JRoute::_( 'index.php?option=com_tracks&view=subround&id=' . $row->id );
+        $link_results = JRoute::_( 'index.php?option=com_tracks&view=subroundresults&srid='. $row->id );
+
 		$checked 	= JHTML::_('grid.checkedout',   $row, $i );
-    $published  = JHTML::_('grid.published', $row, $i );
+		$published  = JHTML::_('grid.published', $row, $i );
 		?>
 		<tr class="<?php echo "row$k"; ?>">
 			<td>
@@ -94,12 +106,12 @@ Joomla.submitbutton = function (pressbutton)
 			</td>
 			<td>
 				<?php
-				if ( JTable::isCheckedOut($this->user->get ('id'), $row->checked_out ) ) {
-					echo $row->srtype;
+				if ( JTable::isCheckedOut($user->get ('id'), $row->checked_out ) ) {
+					echo $row->name;
 				} else {
 				  ?>
 					<a href="<?php echo $link; ?>" title="<?php echo JText::_('COM_TRACKS_Edit_Subround' ); ?>">
-						<?php echo $row->srtype; ?>
+						<?php echo $row->name; ?>
 					</a>
 				  <?php
 				}
@@ -107,7 +119,7 @@ Joomla.submitbutton = function (pressbutton)
 			</td>
       <td>
         <?php
-        if (  JTable::isCheckedOut($this->user->get ('id'), $row->checked_out ) ) {
+        if (  JTable::isCheckedOut($user->get ('id'), $row->checked_out ) ) {
           echo JText::_('COM_TRACKS_edit_locked' );
         } else {
         ?>
@@ -116,7 +128,7 @@ Joomla.submitbutton = function (pressbutton)
         <?php
         }
         ?>
-      </td>      
+      </td>
       <td align="center"><?php echo $published;?></td>
       <td class="order">
         <span><?php echo $this->pagination->orderUpIcon( $i, $i > 0 , 'orderup', 'Move Up', $ordering ); ?></span>
@@ -125,7 +137,7 @@ Joomla.submitbutton = function (pressbutton)
         <input type="text" name="order[]" size="5" value="<?php echo $row->ordering;?>" <?php echo $disabled ?> class="text_area" style="text-align: center" />
       </td>
 			<td align="center">
-        <?php echo $row->id; ?>  			
+        <?php echo $row->id; ?>
 			</td>
 		</tr>
 		<?php
@@ -136,11 +148,5 @@ Joomla.submitbutton = function (pressbutton)
 	</table>
 </div>
 
-<input type="hidden" name="controller" value="subround" />
-<input type="hidden" name="task" value="" />
-<input type="hidden" name="boxchecked" value="0" />
-<input type="hidden" name="filter_order" value="<?php echo $this->lists['order']; ?>" />
-<input type="hidden" name="filter_order_Dir" value="" />
-<input type="hidden" name="projectround" value="<?php echo $this->projectround_id; ?>" />
 </form>
 </div>

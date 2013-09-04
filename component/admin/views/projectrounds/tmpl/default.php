@@ -97,14 +97,14 @@ JHTML::_('behavior.tooltip');
 				<th class="title">
 					<?php echo JText::_('COM_TRACKS_Dates' ); ?>
 				</th>
-				<th width="5%" nowrap="nowrap"><?php echo JHTML::_('grid.sort',  'Published', 'obj.published', $this->lists->order_Dir, $this->lists->order ); ?>
+				<th width="5%" nowrap="nowrap"><?php echo JHTML::_('grid.sort',  'Published', 'sr.published', $this->lists->order_Dir, $this->lists->order ); ?>
 				</th>
 				<th width="8%" nowrap="nowrap">
-					<?php echo JHTML::_('grid.sort',  'Order', 'obj.ordering', $this->lists->order_Dir, $this->lists->order ); ?>
+					<?php echo JHTML::_('grid.sort',  'Order', 'sr.ordering', $this->lists->order_Dir, $this->lists->order ); ?>
 					<?php echo JHTML::_('grid.order',  $this->items ); ?>
 				</th>
 				<th width="1%" nowrap="nowrap">
-					<?php echo JHTML::_('grid.sort',  'ID', 'obj.id', $this->lists->order_Dir, $this->lists->order ); ?>
+					<?php echo JHTML::_('grid.sort',  'ID', 'sr.id', $this->lists->order_Dir, $this->lists->order ); ?>
 				</th>
 			</tr>
 		</thead>
