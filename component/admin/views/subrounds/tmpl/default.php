@@ -15,6 +15,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 <?php
 $user 	= JFactory::getUser();
+$model = $this->getModel();
 
 FOFTemplateUtils::addCSS("media://com_tracks/css/tracksbackend.css");
 
@@ -41,7 +42,7 @@ Joomla.submitbutton = function (pressbutton)
 		<input type="hidden" name="option" id="option" value="com_tracks" />
 		<input type="hidden" name="view" id="view" value="subrounds" />
 		<input type="hidden" name="task" id="task" value="browse" />
-		<input type="hidden" name="prid" id="prid" value="<?php echo JFactory::getApplication()->input->getInt('prid', 0); ?>" />
+		<input type="hidden" name="projectround_id" id="projectround_id" value="<?php echo JFactory::getApplication()->input->getInt('projectround_id', 0); ?>" />
 		<input type="hidden" name="boxchecked" id="boxchecked" value="0" />
 		<input type="hidden" name="hidemainmenu" id="hidemainmenu" value="0" />
 		<input type="hidden" name="filter_order" id="filter_order" value="<?php echo $this->lists->order ?>" />
@@ -91,7 +92,7 @@ Joomla.submitbutton = function (pressbutton)
 	{
 		$row = $this->items[$i];
 
-		$link 	= JRoute::_( 'index.php?option=com_tracks&view=subround&id=' . $row->id );
+		$link 	= JRoute::_( 'index.php?option=com_tracks&view=subround&id=' . $row->id . '&projectround_id=' . $model->getState('projectround_id'));
         $link_results = JRoute::_( 'index.php?option=com_tracks&view=subroundresults&srid='. $row->id );
 
 		$checked 	= JHTML::_('grid.checkedout',   $row, $i );

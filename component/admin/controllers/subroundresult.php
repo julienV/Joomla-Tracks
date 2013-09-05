@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    0.2 $Id$ 
+* @version    0.2 $Id$
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -24,7 +24,7 @@ jimport('joomla.application.component.controller');
  */
 class TracksControllerSubroundresult extends BaseController
 {
-  
+
   function __construct()
 	{
 		parent::__construct();
@@ -34,9 +34,9 @@ class TracksControllerSubroundresult extends BaseController
 		$this->registerTask( 'edit', 'display' );
 		$this->registerTask( 'apply', 'save' );
 	}
-  
+
 	function display() {
-	    
+
 	  switch($this->getTask())
 		{
 		  case 'add'     :
@@ -64,7 +64,7 @@ class TracksControllerSubroundresult extends BaseController
 		}
 		parent::display();
 	}
-	
+
   function save()
 	{
 		$post	= JRequest::get('post');
@@ -77,7 +77,7 @@ class TracksControllerSubroundresult extends BaseController
 			$msg = JText::_('COM_TRACKS_Subround_result_saved' );
 			$msgtype = 'message';
 		} else {
-			$msg = JText::_('COM_TRACKS_Error_Saving_subround_result' ).$model->getError();     
+			$msg = JText::_('COM_TRACKS_Error_Saving_subround_result' ).$model->getError();
 			$msgtype = 'error';
 		}
 
@@ -91,20 +91,20 @@ class TracksControllerSubroundresult extends BaseController
 		}
 		$this->setRedirect($link, $msg, $msgtype);
 	}
-	
+
 	function addall()
 	{
 		$model = $this->getModel('subroundResult');
-		
+
 		if ($model->addAll()) {
 			$msg = JText::_('COM_TRACKS_Imported_participants' );
       $msgtype = 'message';
 		}
-		else {			
-      $msg = JText::_('COM_TRACKS_Error_importing_participants' ).$model->getError();     
+		else {
+      $msg = JText::_('COM_TRACKS_Error_importing_participants' ).$model->getError();
       $msgtype = 'error';
       $this->setError($msg);
-		}		
+		}
     parent::display();
 	}
 
@@ -119,9 +119,9 @@ class TracksControllerSubroundresult extends BaseController
 		}
 
 		$model = $this->getModel('subroundresult');
-		
+
 		$msg = '';
-		
+
 		if(!$model->delete($cid)) {
 			$msg = JText::_('COM_TRACKS_Error_while_removing_participants');
 		}
@@ -142,9 +142,9 @@ class TracksControllerSubroundresult extends BaseController
   {
     $model = $this->getModel('subroundresults');
     $infos = $model->getSubroundInfo();
-    $this->setRedirect( 'index.php?option=com_tracks&view=subrounds&prid='.$infos->projectround_id);
+    $this->setRedirect( 'index.php?option=com_tracks&view=subrounds&projectround_id='.$infos->projectround_id);
   }
-  
+
 	function saveorder()
 	{
 		$cid 	= JRequest::getVar( 'cid', array(), 'post', 'array' );
@@ -158,7 +158,7 @@ class TracksControllerSubroundresult extends BaseController
 		$msg = 'New ordering saved';
 		$this->setRedirect( 'index.php?option=com_tracks&view=subroundresult', $msg );
 	}
-	
+
 	function saveranks()
 	{
 		$mainframe = JFactory::getApplication();
@@ -171,7 +171,7 @@ class TracksControllerSubroundresult extends BaseController
 		$individual = JRequest::getVar( 'individual', array(), 'post', 'array' );
 		$team = JRequest::getVar( 'team', array(), 'post', 'array' );
 		$subround_id = JRequest::getVar( 'subround_id', 0, 'post', 'int' );
-		
+
 		JArrayHelper::toInteger($cid);
 		JArrayHelper::toInteger($rank);
 //    JArrayHelper::toInteger($bonus_points);

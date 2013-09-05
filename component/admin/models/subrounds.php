@@ -36,7 +36,7 @@ class TracksModelSubrounds extends FOFModel
 
 		// Current project
 		$app = JFactory::getApplication();
-		$projectround_id = $this->getState('prid');
+		$projectround_id = $this->getState('projectround_id');
 
 		$query = $db->getQuery(true);
 
@@ -102,69 +102,6 @@ class TracksModelSubrounds extends FOFModel
 		return true;
 	}
 
-	function _buildQuery()
-	{
-		// Get the WHERE and ORDER BY clauses for the query
-		$where		= $this->_buildContentWhere();
-		$orderby	= $this->_buildContentOrderBy();
-
-		$query = ' SELECT obj.*, sr.name AS srtype, u.name AS editor '
-			. ' FROM #__tracks_projects_subrounds AS obj '
-			. ' INNER JOIN #__tracks_subroundtypes AS sr ON (sr.id = obj.type) '
-			. ' LEFT JOIN #__users AS u ON u.id = obj.checked_out '
-			. $where
-			. $orderby
-		;
-
-		return $query;
-	}
-
-	function _buildContentOrderBy()
-	{
-		$mainframe = JFactory::getApplication();
-		$option = JRequest::getCmd('option');
-
-		$filter_order		= $mainframe->getUserStateFromRequest( $option.'.viewsubrounds.filter_order',		'filter_order',		'obj.ordering',	'cmd' );
-		$filter_order_Dir	= $mainframe->getUserStateFromRequest( $option.'.viewsubrounds.filter_order_Dir',	'filter_order_Dir',	'',				'word' );
-
-		if ($filter_order == 'obj.ordering'){
-			$orderby 	= ' ORDER BY obj.ordering '.$filter_order_Dir;
-		} else {
-			$orderby 	= ' ORDER BY '.$filter_order.' '.$filter_order_Dir.' , obj.ordering ';
-		}
-
-		return $orderby;
-	}
-
-	function _buildContentWhere()
-	{
-		$mainframe = JFactory::getApplication();
-		$option = JRequest::getCmd('option');
-    $prid = JRequest::getVar('prid',0);
-
-		$filter_state		= $mainframe->getUserStateFromRequest( $option.'.viewsubrounds.filter_state',		'filter_state',		'',				'word' );
-		$search				= $mainframe->getUserStateFromRequest( $option.'.viewsubrounds.search',			'search',			'',				'string' );
-		$search				= JString::strtolower( $search );
-
-		$where = array();
-
-		if ($search) {
-			$where[] = 'LOWER(sr.name) LIKE '.$this->_db->Quote('%'.$search.'%');
-		}
-		if ( $filter_state ) {
-			if ( $filter_state == 'P' ) {
-				$where[] = 'obj.published = 1';
-			} else if ($filter_state == 'U' ) {
-				$where[] = 'obj.published = 0';
-			}
-		}
-
-		$where 		= ' WHERE  obj.projectround_id = ' . $prid
-                . implode( ' AND ', $where );
-
-		return $where;
-	}
-
 	function getRound()
 	{
 		$query = ' SELECT r.name AS roundname, '
@@ -172,7 +109,7 @@ class TracksModelSubrounds extends FOFModel
 			. ' FROM #__tracks_projects_rounds AS pr '
 			. ' INNER JOIN #__tracks_rounds AS r ON r.id = pr.round_id '
 			. ' INNER JOIN #__tracks_projects AS p ON p.id = pr.project_id '
-			. ' WHERE pr.id=' . $this->getState('prid');;
+			. ' WHERE pr.id=' . $this->getState('projectround_id');
 		$this->_db->setQuery($query);
 		$res = $this->_db->loadObject();
 		//echo "debug: "; print_r($res);exit;

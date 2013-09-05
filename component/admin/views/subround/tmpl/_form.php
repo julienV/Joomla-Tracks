@@ -14,7 +14,6 @@
 defined('_JEXEC') or die('Restricted access'); ?>
 
 <?php JHTML::_('behavior.tooltip'); ?>
-<?php JHTML::_('behavior.formvalidation'); ?>
 
 <?php
 	// Set toolbar items for the page
@@ -33,6 +32,19 @@ defined('_JEXEC') or die('Restricted access'); ?>
 ?>
 
 <script language="javascript" type="text/javascript">
+
+	window.addEvent('domready', function(){
+      document.formvalidator.setHandler('notzero',
+        function (value) {
+          if(value=="0") {
+            return false;
+          } else {
+            return true;
+          }
+        }
+      );
+	});
+
 	Joomla.submitbutton = function (pressbutton) {
 		var form = document.adminForm;
 		if (pressbutton == 'cancel') {
@@ -40,65 +52,66 @@ defined('_JEXEC') or die('Restricted access'); ?>
 			return;
 		}
 
-    // do field validation
-    var validator = document.formvalidator;
-    if ( validator.validate(form.round_id) === false ){
-      alert( "<?php echo JText::_('COM_TRACKS_ROUND_ID_IS_REQUIRED', true ); ?>" );
-    } else {
-      Joomla.submitform( pressbutton );
-    }
+		var validator = document.formvalidator;
+		// do field validation
+		if (!validator.validate(form.type)){
+			alert( "<?php echo JText::_('COM_TRACKS_You_must_chose_a_type', true ); ?>" );
+		} else {
+			Joomla.submitform( pressbutton );
+		}
 	}
 </script>
+<style type="text/css">
+	table.paramlist td.paramlist_key {
+		width: 92px;
+		text-align: left;
+		height: 30px;
+	}
+</style>
 
 <div id="tracksmain">
 <form action="index.php" method="post" name="adminForm" id="adminForm">
 <div class="width-70">
 	<fieldset class="adminform">
-		<legend><?php echo JText::_('COM_TRACKS_Projectround' ); ?></legend>
-		
+		<legend><?php echo JText::_('COM_TRACKS_Subround' ); ?></legend>
+
 		<ul class="adminformlist">
 			<li>
-				<label for="round_id">
-					<?php echo JText::_('COM_TRACKS_ROUND' ); ?>:
-				</label>
-				<?php echo $this->lists['rounds']; ?>
+				<?php echo $this->form->getLabel('type'); ?>
+				<?php echo $this->form->getInput('type'); ?>
 			</li>
 			<li>
-				<label for="published"><?php echo JText::_('COM_TRACKS_Published' ); ?>:</label>
-        <?php echo $this->lists['published']; ?>
+				<?php echo $this->form->getLabel('published'); ?>
+				<?php echo $this->form->getInput('published'); ?>
 			</li>
 			<li>
-				<label for="last_name">
-					<?php echo JText::_('COM_TRACKS_Round_start' ); ?>:
-				</label>
-				<?php 
-		    echo  JHTML::calendar( $this->projectround->start_date, 'start_date', 'start_date', '%Y-%m-%d %H:%M:%S' );
-		    ?>
+				<?php echo $this->form->getLabel('start_date'); ?>
+				<?php echo $this->form->getInput('start_date'); ?>
 			</li>
 			<li>
-				<label for="last_name">
-					<?php echo JText::_('COM_TRACKS_Round_end' ); ?>:
-				</label>
-			<?php 
-	        echo  JHTML::calendar( $this->projectround->end_date, 'end_date', 'end_date', '%Y-%m-%d %H:%M:%S' );
-	        ?>
+				<?php echo $this->form->getLabel('end_date'); ?>
+				<?php echo $this->form->getInput('end_date'); ?>
 			</li>
-			<li>
-				<label for="ordering">
-	          <?php echo JText::_('COM_TRACKS_Ordering' ); ?>:
-	        </label>
-	        <?php echo $this->lists['ordering']; ?>
-			</li>
-			</ul>
+		</ul>
+		
+		<div class="clr"></div>
+		<?php echo $this->form->getLabel('description'); ?>
+		<div class="clr"></div>
+		<?php echo $this->form->getInput('description'); ?>
+		<div class="clr"></div>
+		<?php echo $this->form->getLabel('comment'); ?>
+		<div class="clr"></div>
+		<?php echo $this->form->getInput('comment'); ?>
+	
 	</fieldset>
 </div>
 
 <div class="clr"></div>
 
 <input type="hidden" name="option" value="com_tracks" />
-<input type="hidden" name="controller" value="projectround" />
-<input type="hidden" name="cid[]" value="<?php echo $this->projectround->id; ?>" />
-<input type="hidden" name="project_id" value="<?php echo $this->projectround->project_id; ?>" />
+<input type="hidden" name="controller" value="subround" />
+<input type="hidden" name="cid[]" value="<?php echo $this->object->id; ?>" />
+<input type="hidden" name="projectround_id" value="<?php echo $this->object->projectround_id; ?>" />
 <input type="hidden" name="task" value="" />
 </form>
 </div>

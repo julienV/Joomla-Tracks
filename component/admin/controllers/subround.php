@@ -22,25 +22,89 @@ defined('_JEXEC') or die();
  */
 class TracksControllerSubround extends FOFController
 {
-	public function onBeforeBrowse()
+	/**
+	 * Public constructor of the Controller class
+	 *
+	 * @param   array  $config  Optional configuration parameters
+	 */
+	public function __construct($config = array())
 	{
+		parent::__construct($config);
+
 		// Do I have a form?
 		$model = $this->getThisModel();
 
-		$prid = $this->input->getInt('prid', 0);
+		$prid = $this->input->getInt('projectround_id', 0);
 
 		if (!$prid)
 		{
-			throw new Exception('prid is required', 500);
+			throw new Exception('projectround_id is required', 500);
 		}
 
-		$model->setState('prid', $prid);
-
-		return true;
+		$model->setState('projectround_id', $prid);
 	}
 
 	public function back()
 	{
 		$this->setRedirect('index.php?option=com_tracks&view=projectrounds');
+	}
+
+	/**
+	 * Cancel the edit, check in the record and return to the Browse task
+	 *
+	 * @return  void
+	 */
+	public function cancel()
+	{
+		$model = $this->getThisModel();
+
+		if (!$model->getId())
+		{
+			$model->setIDsFromRequest();
+		}
+
+		$model->checkin();
+
+		// Remove any saved data
+		JFactory::getSession()->set($model->getHash() . 'savedata', null);
+
+		// Redirect to the display task
+
+		if ($customURL = $this->input->get('returnurl', '', 'string'))
+		{
+			$customURL = base64_decode($customURL);
+		}
+
+		$url = !empty($customURL) ? $customURL : 'index.php?option=com_tracks&view=subrounds&projectround_id=' . $model->getState('projectround_id');
+		$this->setRedirect($url);
+
+		return true;
+	}
+
+	/**
+	 * Registers a redirection with an optional message. The redirection is
+	 * carried out when you use the redirect method.
+	 *
+	 * @param   string  $url   The URL to redirect to
+	 * @param   string  $msg   The message to be pushed to the application
+	 * @param   string  $type  The message type to be pushed to the application, e.g. 'error'
+	 *
+	 * @return  FOFController  This object to support chaining
+	 */
+	public function setRedirect($url, $msg = null, $type = null)
+	{
+		$uri = JURI::getInstance($url);
+
+		$prid = $this->input->getInt('projectround_id', 0);
+
+		if (!$prid)
+		{
+			throw new Exception('projectround_id is required', 500);
+		}
+
+		$uri->setVar('projectround_id', $prid);
+		$url = $uri->toString();
+
+		return parent::setRedirect($url, $msg, $type);
 	}
 }

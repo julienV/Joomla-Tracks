@@ -123,7 +123,7 @@ JHTML::_('behavior.tooltip');
 			$row = $this->items[$i];
 
 			$link 	= JRoute::_( 'index.php?option=com_tracks&view=projectround&id='. $row->id );
-			$link_results	= JRoute::_( 'index.php?option=com_tracks&view=subrounds&prid='. $row->id );
+			$link_results	= JRoute::_( 'index.php?option=com_tracks&view=subrounds&projectround_id='. $row->id );
 
 			$checked 	= JHTML::_('grid.checkedout',   $row, $i );
 			$published 	= JHTML::_('grid.published', $row, $i );
