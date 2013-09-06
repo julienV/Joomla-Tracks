@@ -43,4 +43,14 @@ class TracksToolbar extends FOFToolbar
 	{
 		return;
 	}
+
+	public function onProjectindividualsBrowse()
+	{
+		JToolBarHelper::title('Tracks &ndash; ' . JText::_('COM_TRACKS_Project_Participants' ), 'generic.png');
+
+		JToolBarHelper::back();
+		JToolBarHelper::deleteList(JText::_('COM_TRACKS_DELETEPROJECTINDIVIDUALCONFIRM'));
+		JToolBarHelper::editListX();
+		JToolBarHelper::addNewX();
+	}
 }
