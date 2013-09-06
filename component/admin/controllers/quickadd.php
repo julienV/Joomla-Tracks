@@ -11,30 +11,22 @@ jimport('joomla.application.component.controller');
  * @package	 Tracks
  * @since 0.1
  */
-class TracksControllerQuickAdd extends BaseController
+class TracksControllerQuickAdd extends FOFController
 {
+	protected $modelName = 'TracksModelQuickadd';
 
-	function __construct()
+	public function search()
 	{
-		parent::__construct();
-
-		// Register Extra tasks
-		$this->registerTask( 'search',  'search' );
-		$this->registerTask( 'add', 'add' );
-	}
-  
-	function search() 
-	{
-		require_once(JPATH_COMPONENT.DS.'models'.DS.'quickadd.php');
-		$model = new TracksModelQuickAdd();
-		$query = JRequest::getVar("query", "", "", "string");
+		$model = $this->getThisModel();
+		$query = $this->input->get("query", "", "", "string");
 		$results = $model->getList($query);
 		$response = array(
 			"totalCount" => count($results),
 			"rows" => array(),
 		);
 
-		foreach ($results as $row) {
+		foreach ($results as $row)
+		{
 			$response["rows"][] = array(
 				"id" => $row->id,
 				"name" => $row->first_name." ".$row->last_name,
@@ -46,18 +38,23 @@ class TracksControllerQuickAdd extends BaseController
 		exit;
 	}
 
-	function addpi()
+	/**
+	 * add a project individual
+	 */
+	public function addpi()
 	{
 		$mainframe = JFactory::getApplication();
-		$option = JRequest::getCmd('option');
+		$option = $this->input->getCmd('option', 'com_tracks');
 		$db = JFactory::getDBO();
-		$individualid = JRequest::getInt("individualid", 0);
-		$name = JRequest::getVar("quickadd", '', 'request', 'string');
-		$pid = JRequest::getInt("pid", 0);
+
+		$individualid = $this->input->getInt("individualid", 0);
+		$name = $this->input->get("quickadd", '', 'request', 'string');
+		$pid = $this->input->getInt("pid", 0);
 		$projectid = $mainframe->getUserState($option."project");
 
 		// add the new individual as their name was sent through.
-		if (!$individualid) {
+		if (!$individualid)
+		{
 			require_once(JPATH_COMPONENT.DS.'models'.DS.'individual.php');
 			$model = new TracksModelIndividual();
 			$name = explode(" ", $name);
@@ -68,13 +65,14 @@ class TracksControllerQuickAdd extends BaseController
 				"last_name" => $lastname,
 			);
 			$individualid = $model->store($data);
-			
-			if (!$individualid) {
+
+			if (!$individualid)
+			{
 				$msg = Jtext::_('COM_TRACKS_Error_adding_individual').': '.$model->getError();
-				$this->setRedirect("index.php?option=com_tracks&view=subroundresults&srid=".$srid, $msg, 'error');
+				$this->setRedirect("index.php?option=com_tracks&view=subroundresults&subround_id=".$srid, $msg, 'error');
 			}
 		}
-			
+
 		// check if indivual belongs to project
 		$query = ' SELECT individual_id FROM #__tracks_projects_individuals '
 		       . ' WHERE project_id = '. $db->Quote($projectid)
@@ -90,20 +88,22 @@ class TracksControllerQuickAdd extends BaseController
 		$this->setRedirect("index.php?option=com_tracks&view=projectindividuals");
 	}
 
-	function add()
+	public function add()
 	{
 		$mainframe = JFactory::getApplication();
-		$option = JRequest::getCmd('option');
+		$option = $this->input->getCmd('option', 'com_tracks');
+
 		$db = JFactory::getDBO();
-		$individualid = JRequest::getInt("individualid", 0);
-		$name = JRequest::getVar("quickadd", '', 'request', 'string');
-		$srid = JRequest::getInt("srid", 0);
+
+		$individualid = $this->input->getInt("individualid", 0);
+		$name = $this->input->get("quickadd", '', 'request', 'string');
+		$srid = $this->input->getInt("subround_id", 0);
 		$projectid = $mainframe->getUserState($option."project");
 
 		// add the new individual as their name was sent through.
-		if (!$individualid) {
-			require_once(JPATH_COMPONENT.DS.'models'.DS.'individual.php');
-			$model = new TracksModelIndividual();
+		if (!$individualid)
+		{
+			$model = FOFModel::getAnInstance('Individuals', 'TracksModel');
 			$name = explode(" ", $name);
 			$firstname = ucfirst(array_shift($name));
 			$lastname = ucfirst(implode(" ", $name));
@@ -111,14 +111,17 @@ class TracksControllerQuickAdd extends BaseController
 				"first_name" => $firstname,
 				"last_name" => $lastname,
 			);
-			$individualid = $model->store($data);
-			
-			if (!$individualid) {
+			$res = $model->save($data);
+
+			if (!$res)
+			{
 				$msg = Jtext::_('COM_TRACKS_Error_adding_individual').': '.$model->getError();
-				$this->setRedirect("index.php?option=com_tracks&view=subroundresults&srid=".$srid, $msg, 'error');
+				$this->setRedirect("index.php?option=com_tracks&view=subroundresults&subround_id=" . $srid, $msg, 'error');
 			}
+
+			$individualid = $model->getId();
 		}
-			
+
 		// check if indivual belongs to project
 		$query = ' SELECT individual_id FROM #__tracks_projects_individuals '
 		       . ' WHERE project_id = '. $db->Quote($projectid)
@@ -132,12 +135,13 @@ class TracksControllerQuickAdd extends BaseController
 		}
 
 		// assign the individual to the subround.
-		if ($individualid && $srid) {
+		if ($individualid && $srid)
+		{
 			$db->setQuery("INSERT INTO #__tracks_rounds_results (individual_id, subround_id) VALUES (".$individualid.", ".$srid.")");
 			$db->query();
 		}
 
-		$this->setRedirect("index.php?option=com_tracks&view=subroundresults&srid=".$srid);
+		$this->setRedirect("index.php?option=com_tracks&view=subroundresults&subround_id=" . $srid);
 	}
 }
 

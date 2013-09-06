@@ -24,6 +24,13 @@ JHTML::_('behavior.tooltip');
 
 $model = $this->getModel();
 FOFTemplateUtils::addCSS("media://com_tracks/css/tracksbackend.css");
+
+FOFTemplateUtils::addJS('media://com_tracks/js/autocompleter/1_2/Autocompleter.js');
+FOFTemplateUtils::addJS('media://com_tracks/js/autocompleter/1_2/Autocompleter.Local.js');
+FOFTemplateUtils::addJS('media://com_tracks/js/autocompleter/1_2/Autocompleter.Request.js');
+FOFTemplateUtils::addJS('media://com_tracks/js/autocompleter/1_2/Observer.js');
+FOFTemplateUtils::addJS('media://com_tracks/js/quickadd1_2.js');
+FOFTemplateUtils::addCSS('media://com_tracks/css/Autocompleter1_2.css');
 ?>
 <style>
 .search-item {
@@ -64,7 +71,9 @@ Joomla.submitbutton = function(pressbutton)
 </script>
 
 <div id="tracksmain">
-<form action="<?php echo $this->site_url; ?>administrator/index.php?option=com_tracks&view=quickadd&task=add" method="post">
+<form action="index.php?option=com_tracks&view=quickadd&task=add" method="post">
+	<input type="hidden" name="subround_id" value="<?php echo $model->getState('subround_id'); ?>" />
+
 	<table>
 		<tr>
 			<td class="hasTip" title="<?php echo JText::_('COM_TRACKS_QUICK_ADD').'::'.JText::_('COM_TRACKS_QUICK_ADD_TIP'); ?>"><?php echo JText::_('COM_TRACKS_QUICK_ADD'); ?>:</td>
@@ -77,6 +86,13 @@ Joomla.submitbutton = function(pressbutton)
 <br />
 
 <form action="<?php echo $this->request_url; ?>" method="post" name="adminForm" id="adminForm">
+	<input type="hidden" name="view" value="subroundresults" />
+	<input type="hidden" name="subround_id" value="<?php echo $model->getState('subround_id'); ?>" />
+	<input type="hidden" name="task" value="" />
+	<input type="hidden" name="boxchecked" value="0" />
+	<input type="hidden" name="filter_order" value="<?php echo $this->lists->order; ?>" />
+	<input type="hidden" name="filter_order_Dir" value="" />
+
 	<div id="editcell">
 		<table class="adminlist">
 		<thead>
@@ -177,12 +193,6 @@ Joomla.submitbutton = function(pressbutton)
 		</tbody>
 		</table>
 	</div>
-
-	<input type="hidden" name="view" value="subroundresults" />
-	<input type="hidden" name="subround_id" value="<?php echo $model->getState('subround_id'); ?>" />
-	<input type="hidden" name="task" value="" />
-	<input type="hidden" name="boxchecked" value="0" />
-	<input type="hidden" name="filter_order" value="<?php echo $this->lists->order; ?>" />
-	<input type="hidden" name="filter_order_Dir" value="" />
 </form>
+
 </div>
