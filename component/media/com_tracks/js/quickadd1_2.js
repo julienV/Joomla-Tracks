@@ -16,7 +16,7 @@ Autocompleter.Request.JSONIndividual = new Class({
 		this.choices.empty();
 		this.cached = tokens;
 		var type = tokens && $type(tokens);
-		if (!type || (type == 'array' && !tokens.length) || (type == 'hash' && !tokens.getLength())) {			
+		if (!type || (type == 'array' && !tokens.length) || (type == 'hash' && !tokens.getLength())) {
 			(this.options.emptyChoices || this.hideChoices).call(this);
 		} else {
 			if (this.options.maxChoices < tokens.length && !this.options.overflow) tokens.length = this.options.maxChoices;
@@ -27,7 +27,7 @@ Autocompleter.Request.JSONIndividual = new Class({
 			}, this);
 			this.showChoices();
 		}
-	}, 	
+	},
 
 	choiceSelect: function(choice) {
 		if (choice) this.choiceOver(choice);
@@ -40,9 +40,9 @@ Autocompleter.Request.JSONIndividual = new Class({
 });
 
 window.addEvent('domready', function () {
-	
-	new Autocompleter.Request.JSONIndividual('quickadd', 
-			'index.php?option=com_tracks&controller=quickadd&task=search', {
+
+	new Autocompleter.Request.JSONIndividual('quickadd',
+			'index.php?option=com_tracks&view=quickadd&task=search', {
         'postVar': 'query'
     });
 

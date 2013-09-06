@@ -23,6 +23,13 @@ $ordering = ($this->lists->order == 'obj.ordering');
 JHTML::_('behavior.tooltip');
 FOFTemplateUtils::addCSS('media://com_tracks/css/tracksbackend.css');
 
+FOFTemplateUtils::addJS('media://com_tracks/js/autocompleter/1_2/Autocompleter.js');
+FOFTemplateUtils::addJS('media://com_tracks/js/autocompleter/1_2/Autocompleter.Local.js');
+FOFTemplateUtils::addJS('media://com_tracks/js/autocompleter/1_2/Autocompleter.Request.js');
+FOFTemplateUtils::addJS('media://com_tracks/js/autocompleter/1_2/Observer.js');
+FOFTemplateUtils::addJS('media://com_tracks/js/quickadd1_2.js');
+FOFTemplateUtils::addCSS('media://com_tracks/css/Autocompleter1_2.css');
+
 JToolBarHelper::title('Tracks &ndash; ' . JText::_('COM_TRACKS_Project_Participants' ), 'generic.png');
 ?>
 <div id="tracksmain">
@@ -36,12 +43,15 @@ JToolBarHelper::title('Tracks &ndash; ' . JText::_('COM_TRACKS_Project_Participa
 			<td><input type="hidden" id="individualid" name="individualid" value=""><input type="submit" name="submit2" id="submit2" value="<?php echo JText::_('COM_TRACKS_ADD_PARTICIPANT'); ?>" /></td>
 		</tr>
 	</table>
-	<input name="option" type="hidden" value="com_tracks"/>
-	<input name="controller" type="hidden" value="quickadd"/>
-	<input name="task" type="hidden" value="addpi"/>
+	<input name="option" type="hidden" value="com_tracks" />
+	<input name="view" type="hidden" value="quickadd" />
+	<input name="value" type="hidden" value="quickadd" />
+	<input name="task" type="hidden" value="addpi" />
+	<input type="hidden" name="<?php echo JFactory::getSession()->getFormToken();?>" value="1" />
 </form>
 
-<form action="<?php echo $this->request_url; ?>" method="post" name="adminForm" id="adminForm">
+<form action="index.php" method="post" name="adminForm" id="adminForm">
+	<input type="hidden" name="option" value="com_tracks" />
 	<input type="hidden" name="view" value="projectindividuals" />
 	<input type="hidden" name="task" value="" />
 	<input type="hidden" name="boxchecked" value="0" />
