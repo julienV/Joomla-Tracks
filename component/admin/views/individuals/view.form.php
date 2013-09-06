@@ -23,7 +23,7 @@ jimport( 'joomla.application.component.view');
  * @package		Tracks
  * @since 0.1
  */
-class TracksViewIndividuals extends TracksMenuViewFOF
+class TracksViewIndividuals extends TracksMenuViewFormFOF
 {
 	/**
 	 * Runs before rendering the view template, echoing HTML to put before the

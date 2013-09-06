@@ -25,6 +25,7 @@ class TracksDispatcher extends FOFDispatcher
 		// Load the base classes
 		require_once JPATH_COMPONENT_ADMINISTRATOR.'/views/view.html.php';
 		require_once JPATH_COMPONENT_ADMINISTRATOR.'/views/menuview.html.php';
+		require_once JPATH_COMPONENT_ADMINISTRATOR.'/views/menuview.form.php';
 
 		return true;
 	}

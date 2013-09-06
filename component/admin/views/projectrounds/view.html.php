@@ -22,7 +22,7 @@ jimport( 'joomla.application.component.view');
  * @package  Tracks
  * @since    0.1
  */
-class TracksViewProjectrounds extends FOFViewHtml
+class TracksViewProjectrounds extends TracksMenuViewFOF
 {
 	function _display($tpl = null)
 	{
@@ -121,32 +121,4 @@ $option = JRequest::getCmd('option');
 
     parent::display($tpl);
   }
-
-	protected function preRender()
-	{
-		parent::preRender();
-
-		$input = array(
-			'task' => 'read',
-			'layout' => 'start'
-		);
-		FOFDispatcher::getTmpInstance('com_tracks', 'menu', array('input' => $input))->dispatch();
-	}
-
-	/**
-	 * Runs after rendering the view template, echoing HTML to put after the
-	 * view template's generated HTML
-	 *
-	 * @return  void
-	 */
-	protected function postRender()
-	{
-		parent::postRender();
-
-		$input = array(
-			'task' => 'read',
-			'layout' => 'end'
-		);
-		FOFDispatcher::getTmpInstance('com_tracks', 'menu', array('input' => $input))->dispatch();
-	}
 }

@@ -14,7 +14,33 @@
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die();
 
-class TracksViewCompetitions extends TracksMenuViewFormFOF
+class TracksMenuViewFormFOF extends FOFViewForm
 {
+	protected function preRender()
+	{
+		parent::preRender();
 
+		$input = array(
+			'task' => 'read',
+			'layout' => 'start'
+		);
+		FOFDispatcher::getTmpInstance('com_tracks', 'menu', array('input' => $input))->dispatch();
+	}
+
+	/**
+	 * Runs after rendering the view template, echoing HTML to put after the
+	 * view template's generated HTML
+	 *
+	 * @return  void
+	 */
+	protected function postRender()
+	{
+		parent::postRender();
+
+		$input = array(
+			'task' => 'read',
+			'layout' => 'end'
+		);
+		FOFDispatcher::getTmpInstance('com_tracks', 'menu', array('input' => $input))->dispatch();
+	}
 }

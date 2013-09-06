@@ -18,41 +18,41 @@
 			readonly="true"/>
 
 		<field
-				name="type"
-				type="model"
-				model="TracksModelSubroundtypes"
-				key_field="id"
-				value_field="name"
-				label="COM_TRACKS_ROUND"
-				description="COM_TRACKS_ROUND"
-				class="inputbox"
-				required="true"/>
+			name="type"
+			type="model"
+			model="TracksModelSubroundtypes"
+			key_field="id"
+			value_field="name"
+			label="COM_TRACKS_ROUND"
+			description="COM_TRACKS_ROUND"
+			class="inputbox"
+			required="true"/>
 
 		<field
-				name="start_date"
-				type="calendar"
-				format="%Y-%m-%d %H:%M:%S"
-				label="COM_TRACKS_Round_start"
-				description="COM_TRACKS_Round_start"
-				class="inputbox"/>
+			name="start_date"
+			type="calendar"
+			format="%Y-%m-%d %H:%M:%S"
+			label="COM_TRACKS_Round_start"
+			description="COM_TRACKS_Round_start"
+			class="inputbox"/>
 
 		<field
-				name="end_date"
-				type="calendar"
-				format="%Y-%m-%d %H:%M:%S"
-				label="COM_TRACKS_Round_end"
-				description="COM_TRACKS_Round_end"
-				class="inputbox"
-				required="true"/>
+			name="end_date"
+			type="calendar"
+			format="%Y-%m-%d %H:%M:%S"
+			label="COM_TRACKS_Round_end"
+			description="COM_TRACKS_Round_end"
+			class="inputbox"
+			required="true"/>
 
 		<field
-				name="published"
-				type="list"
-				class="inputbox"
-				default="1"
-				size="1"
-				label="JSTATUS"
-				description="JFIELD_PUBLISHED_DESC">
+			name="published"
+			type="list"
+			class="inputbox"
+			default="1"
+			size="1"
+			label="JSTATUS"
+			description="JFIELD_PUBLISHED_DESC">
 			<option
 					value="1">
 				JPUBLISHED</option>
@@ -62,20 +62,20 @@
 		</field>
 
 		<field
-				name="description"
-				type="editor"
-				label="COM_TRACKS_SUBROUND_DESCRIPTION"
-				description="COM_TRACKS_SUBROUND_DESCRIPTION_DESC"
-				filter="JComponentHelper::filterText" buttons="true"
-				/>
+			name="description"
+			type="editor"
+			label="COM_TRACKS_SUBROUND_DESCRIPTION"
+			description="COM_TRACKS_SUBROUND_DESCRIPTION_DESC"
+			filter="JComponentHelper::filterText" buttons="true"
+			/>
 
 		<field
-				name="comment"
-				type="editor"
-				label="COM_TRACKS_SUBROUND_COMMENT"
-				description="COM_TRACKS_SUBROUND_COMMENT_DESC"
-				filter="JComponentHelper::filterText" buttons="true"
-				/>
+			name="comment"
+			type="editor"
+			label="COM_TRACKS_SUBROUND_COMMENT"
+			description="COM_TRACKS_SUBROUND_COMMENT_DESC"
+			filter="JComponentHelper::filterText" buttons="true"
+			/>
 
 		<field
 			name="checked_out"

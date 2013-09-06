@@ -16,5 +16,24 @@ defined('_JEXEC') or die();
 
 class TracksModelIndividuals extends FOFModel
 {
+	/**
+	 * Builds the SELECT query
+	 *
+	 * @param   boolean $overrideLimits  Are we requested to override the set limits?
+	 *
+	 * @return  JDatabaseQuery
+	 */
+	public function buildQuery($overrideLimits = false)
+	{
+		$db = JFactory::getDbo();
+		$query = parent::buildQuery($overrideLimits);
 
+		$filter = $this->getState('search');
+		if ($filter)
+		{
+			$query->where('LOWER( CONCAT(first_name, last_name) ) LIKE ' . $db->quote('%' . $filter . '%'));
+		}
+
+		return $query;
+	}
 }

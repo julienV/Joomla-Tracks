@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: default.php 33 2008-02-15 15:41:48Z julienv $ 
+* @version    $Id: default.php 33 2008-02-15 15:41:48Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -17,9 +17,10 @@ defined('_JEXEC') or die('Restricted access'); ?>
 $user 	= JFactory::getUser();
 
 //Ordering allowed ?
-$ordering = ($this->lists['order'] == 'obj.ordering');
+$ordering = ($this->lists->order == 'obj.ordering');
 
 JHTML::_('behavior.tooltip');
+FOFTemplateUtils::addCSS('media://com_tracks/css/tracksbackend.css');
 ?>
 <div id="tracksmain">
 
@@ -30,7 +31,7 @@ JHTML::_('behavior.tooltip');
 			<td class="hasTip" title="<?php echo JText::_('COM_TRACKS_QUICK_ADD').'::'.JText::_('COM_TRACKS_QUICK_ADD_TIP'); ?>"><?php echo JText::_('COM_TRACKS_QUICK_ADD'); ?>:</td>
 			<td><input type="text" name="quickadd" id="quickadd" /></td>
 			<td><input type="hidden" id="individualid" name="individualid" value=""><input type="submit" name="submit2" id="submit2" value="<?php echo JText::_('COM_TRACKS_ADD_PARTICIPANT'); ?>" /></td>
-		</tr>	
+		</tr>
 	</table>
 	<input name="option" type="hidden" value="com_tracks"/>
 	<input name="controller" type="hidden" value="quickadd"/>
@@ -42,7 +43,7 @@ JHTML::_('behavior.tooltip');
 <tr>
 	<td align="left" width="100%">
 		<?php echo JText::_('COM_TRACKS_Filter' ); ?>:
-		<input type="text" name="search" id="search" value="<?php echo $this->lists['search'];?>" class="text_area" onchange="document.adminForm.submit();" />
+		<input type="text" name="search" id="search" value="<?php echo $this->lists->search;?>" class="text_area" onchange="document.adminForm.submit();" />
 		<button onclick="this.form.submit();"><?php echo JText::_('COM_TRACKS_Go' ); ?></button>
 		<button onclick="document.getElementById('search').value='';this.form.submit();"><?php echo JText::_('COM_TRACKS_Reset' ); ?></button>
 	</td>
@@ -59,16 +60,16 @@ JHTML::_('behavior.tooltip');
 				<input type="checkbox" name="toggle" value="" onclick="checkAll(<?php echo count( $this->items ); ?>);" />
 			</th>
       <th width="5">
-        <?php echo JHTML::_('grid.sort',  'COM_TRACKS_Number', 'obj.number', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+        <?php echo JHTML::_('grid.sort',  'COM_TRACKS_Number', 'obj.number', $this->lists->order_Dir, $this->lists->order ); ?>
       </th>
 			<th class="title">
-				<?php echo JHTML::_('grid.sort',  'COM_TRACKS_Name', 'i.last_name', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+				<?php echo JHTML::_('grid.sort',  'COM_TRACKS_Name', 'i.last_name', $this->lists->order_Dir, $this->lists->order ); ?>
 			</th>
 			<th class="title">
-				<?php echo JHTML::_('grid.sort',  'COM_TRACKS_Team', 't.name', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+				<?php echo JHTML::_('grid.sort',  'COM_TRACKS_Team', 't.name', $this->lists->order_Dir, $this->lists->order ); ?>
 			</th>
 			<th width="1%" nowrap="nowrap">
-				<?php echo JHTML::_('grid.sort',  'ID', 'obj.id', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+				<?php echo JHTML::_('grid.sort',  'ID', 'obj.id', $this->lists->order_Dir, $this->lists->order ); ?>
 			</th>
 		</tr>
 	</thead>
@@ -86,7 +87,7 @@ JHTML::_('behavior.tooltip');
 	{
 		$row = $this->items[$i];
 
-		$link 	= JRoute::_( 'index.php?option=com_tracks&controller=projectindividual&task=edit&cid[]='. $row->id );
+		$link 	= JRoute::_( 'index.php?option=com_tracks&view=projectindividual&id='. $row->id );
 
 		$checked 	= JHTML::_('grid.checkedout',   $row, $i );
 
@@ -103,7 +104,7 @@ JHTML::_('behavior.tooltip');
       </td>
 			<td>
 				<?php
-				if (  JTable::isCheckedOut($this->user->get ('id'), $row->checked_out ) ) {
+				if (  JTable::isCheckedOut($user->get('id'), $row->checked_out ) ) {
 					echo $row->last_name.', '.$row->first_name;
 				} else {
 				?>
@@ -128,10 +129,10 @@ JHTML::_('behavior.tooltip');
 	</table>
 </div>
 
-<input type="hidden" name="controller" value="projectindividual" />
+<input type="hidden" name="view" value="projectindividuals" />
 <input type="hidden" name="task" value="" />
 <input type="hidden" name="boxchecked" value="0" />
-<input type="hidden" name="filter_order" value="<?php echo $this->lists['order']; ?>" />
+<input type="hidden" name="filter_order" value="<?php echo $this->lists->order; ?>" />
 <input type="hidden" name="filter_order_Dir" value="" />
 </form>
 </div>

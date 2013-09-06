@@ -93,7 +93,7 @@ Joomla.submitbutton = function (pressbutton)
 		$row = $this->items[$i];
 
 		$link 	= JRoute::_( 'index.php?option=com_tracks&view=subround&id=' . $row->id . '&projectround_id=' . $model->getState('projectround_id'));
-        $link_results = JRoute::_( 'index.php?option=com_tracks&view=subroundresults&srid='. $row->id );
+        $link_results = JRoute::_( 'index.php?option=com_tracks&view=subroundresults&subround_id='. $row->id );
 
 		$checked 	= JHTML::_('grid.checkedout',   $row, $i );
 		$published  = JHTML::_('grid.published', $row, $i );

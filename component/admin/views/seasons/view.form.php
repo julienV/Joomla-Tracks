@@ -14,7 +14,7 @@
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die();
 
-class TracksViewSeasons extends TracksMenuViewFOF
+class TracksViewSeasons extends TracksMenuViewFormFOF
 {
 
 }
