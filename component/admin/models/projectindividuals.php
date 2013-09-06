@@ -40,9 +40,17 @@ class TracksModelProjectindividuals extends FOFModel
 		// Current project
 		$project_id = (int) $this->getState('project_id');
 
+		if (!$project_id)
+		{
+			$app = JFactory::getApplication();
+			$option = $app->input->getCmd('option', 'com_tracks');
+			$project_id = $app->getUserState($option. 'project');
+		}
+
 		$query = $db->getQuery(true);
 
 		$query->select('obj.*, i.first_name, i.last_name, t.name as team_name, u.name AS editor');
+		$query->select('CASE WHEN CHAR_LENGTH(i.first_name) THEN CONCAT(i.last_name, ' . $db->quote(', ') . ', i.first_name) ELSE i.last_name END AS name');
 
 		$query->from('#__tracks_projects_individuals AS obj');
 		$query->join('inner', '#__tracks_individuals AS i ON i.id = obj.individual_id');
@@ -51,8 +59,6 @@ class TracksModelProjectindividuals extends FOFModel
 
 		$query->where('obj.project_id = ' . $project_id);
 
-		if (!$overrideLimits)
-		{
 			$order = $this->getState('filter_order', null, 'cmd');
 			$dir = $this->getState('filter_order_Dir', 'ASC', 'cmd');
 
@@ -75,11 +81,10 @@ class TracksModelProjectindividuals extends FOFModel
 
 				case 'name':
 				default:
-					$order = $db->qn('i.last_name') . ' ' . $dir . ', ' . $db->qn('i.last_name') . ' ' . $dir;
+					$order = $db->qn('i.last_name') . ' ' . $dir . ', ' . $db->qn('i.first_name') . ' ' . $dir;
 					$query->order($order);
 					break;
 			}
-		}
 
 		$filter = $this->getState('search');
 		if ($filter)

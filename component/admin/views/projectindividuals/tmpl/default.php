@@ -61,16 +61,16 @@ FOFTemplateUtils::addCSS('media://com_tracks/css/tracksbackend.css');
 				<input type="checkbox" name="toggle" value="" onclick="checkAll(<?php echo count( $this->items ); ?>);" />
 			</th>
       <th width="5">
-        <?php echo JHTML::_('grid.sort',  'COM_TRACKS_Number', 'obj.number', $this->lists->order_Dir, $this->lists->order ); ?>
+        <?php echo JHTML::_('grid.sort',  'COM_TRACKS_Number', 'number', $this->lists->order_Dir, $this->lists->order ); ?>
       </th>
 			<th class="title">
-				<?php echo JHTML::_('grid.sort',  'COM_TRACKS_Name', 'i.last_name', $this->lists->order_Dir, $this->lists->order ); ?>
+				<?php echo JHTML::_('grid.sort',  'COM_TRACKS_Name', 'name', $this->lists->order_Dir, $this->lists->order ); ?>
 			</th>
 			<th class="title">
-				<?php echo JHTML::_('grid.sort',  'COM_TRACKS_Team', 't.name', $this->lists->order_Dir, $this->lists->order ); ?>
+				<?php echo JHTML::_('grid.sort',  'COM_TRACKS_Team', 'team', $this->lists->order_Dir, $this->lists->order ); ?>
 			</th>
 			<th width="1%" nowrap="nowrap">
-				<?php echo JHTML::_('grid.sort',  'ID', 'obj.id', $this->lists->order_Dir, $this->lists->order ); ?>
+				<?php echo JHTML::_('grid.sort',  'ID', 'id', $this->lists->order_Dir, $this->lists->order ); ?>
 			</th>
 		</tr>
 	</thead>

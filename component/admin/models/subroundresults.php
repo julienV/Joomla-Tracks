@@ -39,12 +39,11 @@ class TracksModelSubroundResults extends FOFModel
 
 		$query = $db->getQuery(true);
 
-		$query->select('rr.individual_id, rr.team_id, rr.subround_id, rr.rank');
+		$query->select('rr.id, rr.individual_id, rr.team_id, rr.subround_id, rr.rank');
 		$query->select('rr.performance, rr.bonus_points, rr.comment');
 		$query->select('CASE WHEN CHAR_LENGTH(rr.number) THEN rr.number ELSE pi.number END AS number');
 		$query->select('pi.id AS piid');
 		$query->select('i.first_name, i.last_name');
-		$query->select('t.name as team_name, u.name AS editor');
 
 		$query->from('#__tracks_rounds_results AS rr');
 		$query->join('inner', '#__tracks_projects_subrounds AS sr ON sr.id = rr.subround_id');
@@ -59,20 +58,42 @@ class TracksModelSubroundResults extends FOFModel
 		if (!$overrideLimits)
 		{
 			$order = $this->getState('filter_order', null, 'cmd');
-
-			$allowed = array_keys($table->getData());
-			$allowed[] = 'team_name';
-			$allowed[] = 'last_name';
-
-			if (!in_array($order, $allowed))
-			{
-				$order = 'rr.rank';
-			}
-
-			$order = $db->qn($order);
-
 			$dir = $this->getState('filter_order_Dir', 'ASC', 'cmd');
-			$query->order($order . ' ' . $dir);
+
+			$alpha = $db->qn('i.last_name') . ' ASC, ' . $db->qn('i.first_name') . ' ASC';
+
+			switch ($order)
+			{
+				case 'number':
+					$col = $db->qn('number');
+					$query->order($col . ' ' . $dir . ', ' . $alpha);
+					break;
+
+				case 'participant':
+					$order = $db->qn('i.last_name') . ' ' . $dir . ', ' . $db->qn('i.first_name') . ' ' . $dir;
+					$query->order($order);
+					break;
+
+				case 'team':
+					$col = $db->qn('t.name');
+					$query->order($col . ' ' . $dir . ', ' . $alpha);
+					break;
+
+				case 'performance':
+					$order = $db->qn('rr.performance');
+					$query->order($order . ' ' . $dir . ', ' . $alpha);
+					break;
+
+				case 'bonus_points':
+					$order = $db->qn('rr.bonus_points');
+					$query->order($order . ' ' . $dir . ', ' . $alpha);
+					break;
+
+				case 'rank':
+				default:
+					$query->order($db->qn('rr.rank') . ' = 0 ' . $dir . ', ' . $db->qn('rr.rank') . ' ' . $dir . ', ' . $alpha);
+					break;
+			}
 		}
 
 		$filter = $this->getState('filter_state', '');
@@ -84,63 +105,25 @@ class TracksModelSubroundResults extends FOFModel
 		return $query;
 	}
 
-	function _buildQuery()
-	{
-		// Get the WHERE and ORDER BY clauses for the query
-		$where = $this->_buildContentWhere();
-		$orderby = $this->_buildContentOrderBy();
-
-		$query = ' SELECT rr.*,
-								pi.id AS piid, pi.team_id, pi.individual_id, pi.number,
-								i.first_name, i.last_name,
-								t.name as team_name, u.name AS editor '
-			. ' FROM #__tracks_rounds_results AS rr '
-			. ' INNER JOIN #__tracks_projects_subrounds AS sr ON sr.id = rr.subround_id '
-			. ' INNER JOIN #__tracks_projects_rounds AS pr ON pr.id = sr.projectround_id '
-			. ' INNER JOIN #__tracks_individuals AS i ON (i.id = rr.individual_id) '
-			. ' INNER JOIN #__tracks_projects_individuals AS pi ON (pi.individual_id = rr.individual_id AND pr.project_id = pi.project_id ) '
-			. ' LEFT JOIN #__tracks_teams AS t ON (t.id = pi.team_id) '
-			. ' LEFT JOIN #__users AS u ON u.id = rr.checked_out '
-			. $where
-			. $orderby;
-		return $query;
-	}
-
-	function _buildContentOrderBy()
-	{
-		$mainframe = JFactory::getApplication();
-		$option = JRequest::getCmd('option');
-
-		$filter_order = $mainframe->getUserStateFromRequest($option . '.viewsubroundresults.filter_order', 'filter_order', 'rr.rank', 'cmd');
-		$filter_order_Dir = $mainframe->getUserStateFromRequest($option . '.viewsubroundresults.filter_order_Dir', 'filter_order_Dir', '', 'word');
-
-		if ($filter_order == 'rr.rank')
-		{
-			$orderby = ' ORDER BY rr.rank ' . $filter_order_Dir . ', i.last_name ASC, i.first_name ASC ';
-		}
-		else
-		{
-			$orderby = ' ORDER BY ' . $filter_order . ' ' . $filter_order_Dir;
-		}
-
-		return $orderby;
-	}
-
 	public function getSubroundInfo()
 	{
-		$query = ' SELECT sr.projectround_id, '
-			. ' r.name AS roundname, '
-			. ' srt.name AS subroundname, sr.id AS subround_id, '
-			. ' p.name AS projectname '
-			. ' FROM #__tracks_projects_rounds AS pr '
-			. ' INNER JOIN #__tracks_rounds AS r ON r.id = pr.round_id '
-			. ' INNER JOIN #__tracks_projects_subrounds AS sr ON sr.projectround_id = pr.id '
-			. ' INNER JOIN #__tracks_subroundtypes AS srt ON sr.type = srt.id '
-			. ' INNER JOIN #__tracks_projects AS p ON p.id = pr.project_id '
-			. ' WHERE sr.id=' . $this->subround_id;
-		$this->_db->setQuery($query);
-		$res = $this->_db->loadObject();
-		//echo "debug: ";	print_r($res);exit;
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+
+		$query->select('sr.projectround_id, sr.id AS subround_id');
+		$query->select('r.name AS roundname');
+		$query->select('p.name AS projectname');
+		$query->select('srt.name AS subroundname');
+		$query->from('#__tracks_projects_rounds AS pr');
+		$query->join('INNER', '#__tracks_rounds AS r ON r.id = pr.round_id');
+		$query->join('INNER', '#__tracks_projects_subrounds AS sr ON sr.projectround_id = pr.id');
+		$query->join('INNER', '#__tracks_subroundtypes AS srt ON sr.type = srt.id');
+		$query->join('INNER', '#__tracks_projects AS p ON p.id = pr.project_id');
+		$query->where('sr.id = ' . $this->getState('subround_id'));
+
+		$db->setQuery($query);
+		$res = $db->loadObject();
+
 		return $res;
 	}
 
