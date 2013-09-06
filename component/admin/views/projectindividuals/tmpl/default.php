@@ -15,6 +15,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 <?php
 $user 	= JFactory::getUser();
+$model = $this->getModel();
 
 //Ordering allowed ?
 $ordering = ($this->lists->order == 'obj.ordering');
@@ -43,7 +44,7 @@ FOFTemplateUtils::addCSS('media://com_tracks/css/tracksbackend.css');
 <tr>
 	<td align="left" width="100%">
 		<?php echo JText::_('COM_TRACKS_Filter' ); ?>:
-		<input type="text" name="search" id="search" value="<?php echo $this->lists->search;?>" class="text_area" onchange="document.adminForm.submit();" />
+		<input type="text" name="search" id="search" value="<?php echo $model->getState('search'); ?>" class="text_area" onchange="document.adminForm.submit();" />
 		<button onclick="this.form.submit();"><?php echo JText::_('COM_TRACKS_Go' ); ?></button>
 		<button onclick="document.getElementById('search').value='';this.form.submit();"><?php echo JText::_('COM_TRACKS_Reset' ); ?></button>
 	</td>
