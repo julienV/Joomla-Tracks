@@ -92,6 +92,7 @@ Joomla.submitbutton = function(pressbutton)
 	<input type="hidden" name="boxchecked" value="0" />
 	<input type="hidden" name="filter_order" value="<?php echo $this->lists->order; ?>" />
 	<input type="hidden" name="filter_order_Dir" value="" />
+	<input type="hidden" name="<?php echo JFactory::getSession()->getFormToken();?>" value="1" />
 
 	<div id="editcell">
 		<table class="adminlist">

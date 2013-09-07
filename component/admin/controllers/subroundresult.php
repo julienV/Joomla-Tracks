@@ -49,7 +49,7 @@ class TracksControllerSubroundresult extends FOFController
 	 */
 	public function addall()
 	{
-		$model = $this->getModel('subroundResult');
+		$model = $this->getModel('Subroundresults');
 
 		if ($model->addAll())
 		{
@@ -60,10 +60,9 @@ class TracksControllerSubroundresult extends FOFController
 		{
 			$msg = JText::_('COM_TRACKS_Error_importing_participants') . $model->getError();
 			$msgtype = 'error';
-			$this->setError($msg);
 		}
 
-		parent::display();
+		$this->setRedirect('index.php?option=com_tracks&view=subroundresults', $msg, $msgtype);
 	}
 
 
