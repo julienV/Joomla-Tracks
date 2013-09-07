@@ -29,8 +29,6 @@ FOFTemplateUtils::addJS('media://com_tracks/js/autocompleter/1_2/Autocompleter.R
 FOFTemplateUtils::addJS('media://com_tracks/js/autocompleter/1_2/Observer.js');
 FOFTemplateUtils::addJS('media://com_tracks/js/quickadd1_2.js');
 FOFTemplateUtils::addCSS('media://com_tracks/css/Autocompleter1_2.css');
-
-JToolBarHelper::title('Tracks &ndash; ' . JText::_('COM_TRACKS_Project_Participants' ), 'generic.png');
 ?>
 <div id="tracksmain">
 

@@ -44,9 +44,23 @@ class TracksToolbar extends FOFToolbar
 		return;
 	}
 
+	public function onProjectsBrowse()
+	{
+		// Set toolbar items for the page
+		JToolBarHelper::title(JText::_('COM_TRACKS'), 'tracks');
+
+		JToolBarHelper::addNewX();
+		JToolBarHelper::editListX();
+		JToolBarHelper::deleteList(JText::_('COM_TRACKS_DELETEPROJECTSCONFIRM'));
+		JToolBarHelper::publishList();
+		JToolBarHelper::unpublishList();
+		JToolBarHelper::preferences('com_tracks', '600', '500');
+		JToolBarHelper::help( 'screen.tracks', true );
+	}
+
 	public function onProjectindividualsBrowse()
 	{
-		JToolBarHelper::title('Tracks &ndash; ' . JText::_('COM_TRACKS_Project_Participants' ), 'generic.png');
+		JToolBarHelper::title(JText::_('COM_TRACKS') . ' &ndash; ' . JText::_('COM_TRACKS_Project_Participants' ), 'tracks');
 
 		JToolBarHelper::back();
 		JToolBarHelper::deleteList(JText::_('COM_TRACKS_DELETEPROJECTINDIVIDUALCONFIRM'));
@@ -56,7 +70,7 @@ class TracksToolbar extends FOFToolbar
 
 	public function onIndividualsBrowse()
 	{
-		JToolBarHelper::title(JText::_('COM_TRACKS_Individuals'), 'generic.png' );
+		JToolBarHelper::title(JText::_('COM_TRACKS_Individuals'), 'tracks' );
 
 		JToolBarHelper::deleteList();
 		JToolBarHelper::editListX();
@@ -66,9 +80,39 @@ class TracksToolbar extends FOFToolbar
 
 	public function onIndividualsAssign()
 	{
-		JToolBarHelper::title(JText::_('COM_TRACKS_Individuals'), 'generic.png' );
+		JToolBarHelper::title(JText::_('COM_TRACKS_Individuals'), 'tracks' );
 
 		JToolBarHelper::save('saveassign', 'Save');
 		JToolBarHelper::back();
+	}
+
+	public function onTeamsBrowse()
+	{
+		JToolBarHelper::title(JText::_('COM_TRACKS') . ' &ndash; ' . JText::_('COM_TRACKS_TEAMS' ), 'tracks');
+
+		JToolBarHelper::addNewX();
+		JToolBarHelper::editListX();
+		JToolBarHelper::deleteList();
+	}
+
+	public function onSubroundtypesBrowse()
+	{
+		JToolBarHelper::title(JText::_('COM_TRACKS') . ' &ndash; ' . JText::_('COM_TRACKS_SUBROUND_TYPES' ), 'tracks');
+
+		JToolBarHelper::addNewX();
+		JToolBarHelper::editListX();
+		JToolBarHelper::deleteList();
+	}
+
+	public function onSubroundresultsBrowse()
+	{
+		JToolBarHelper::title(JText::_('COM_TRACKS') . ' &ndash; ' . JText::_('COM_TRACKS_RESULTS' ), 'tracks');
+
+		JToolBarHelper::addNewX();
+		JToolBarHelper::editListX();
+		JToolBarHelper::save( 'saveranks', 'Save' );
+		JToolBarHelper::custom('addall', 'default', 'default', JText::_('COM_TRACKS_Add_all'), false);
+		JToolBarHelper::deleteList();
+		JToolBarHelper::custom('back', 'back.png', 'back.png', JText::_('COM_TRACKS_back'), false);
 	}
 }

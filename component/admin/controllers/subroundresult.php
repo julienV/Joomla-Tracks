@@ -67,7 +67,7 @@ class TracksControllerSubroundresult extends FOFController
 	}
 
 
-	function back()
+	public function back()
 	{
 		$model = $this->getModel('subroundresults');
 		$infos = $model->getSubroundInfo();

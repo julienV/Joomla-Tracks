@@ -37,34 +37,10 @@ FOFTemplateUtils::addCSS('media://com_tracks/css/tracksbackend.css');
 					<?php echo $this->form->getInput('alias'); ?>
 				</li>
 				<li>
-					<?php echo $this->form->getLabel('short_name'); ?>
-					<?php echo $this->form->getInput('short_name'); ?>
-				</li>
-				<li>
 					<?php echo $this->form->getLabel('published'); ?>
 					<?php echo $this->form->getInput('published'); ?>
 				</li>
-				<li>
-					<?php echo $this->form->getLabel('picture'); ?>
-					<?php echo $this->form->getInput('picture'); ?>
-				</li>
-				<li>
-					<?php echo $this->form->getLabel('picture_small'); ?>
-					<?php echo $this->form->getInput('picture_small'); ?>
-				</li>
-				<li>
-					<?php echo $this->form->getLabel('country_code'); ?>
-					<?php echo $this->form->getInput('country_code'); ?>
-				</li>
-				<li>
-					<?php echo $this->form->getLabel('admin_id'); ?>
-					<?php echo $this->form->getInput('admin_id'); ?>
-				</li>
 			</ul>
-			<div class="clr"></div>
-				<?php echo $this->form->getLabel('description'); ?>
-				<?php echo $this->form->getInput('description'); ?>
-			<div class="clr"></div>
 		</fieldset>
 	</div>
 </form>
