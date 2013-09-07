@@ -95,13 +95,15 @@ class TracksControllerSubroundresult extends FOFController
 		if ($model->saveranks($cid, $rank, $bonus_points, $performance, $individual, $team, $subround_id))
 		{
 			$msg = 'Results saved';
+			$msgtype = 'message';
 		}
 		else
 		{
 			$msg = 'Error saving results';
+			$msgtype = 'error';
 		}
 
-		$this->setRedirect('index.php?option=com_tracks&view=subroundresults&srid=' . $subround_id, $msg);
+		$this->setRedirect('index.php?option=com_tracks&view=subroundresults', $msg, $msgtype);
 	}
 
 	/**

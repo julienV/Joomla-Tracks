@@ -23,6 +23,8 @@ JHTML::_('behavior.mootools');
 JHTML::_('behavior.tooltip');
 
 $model = $this->getModel();
+$round = $model->getSubroundInfo();
+
 FOFTemplateUtils::addCSS("media://com_tracks/css/tracksbackend.css");
 
 FOFTemplateUtils::addJS('media://com_tracks/js/autocompleter/1_2/Autocompleter.js');
@@ -71,17 +73,20 @@ Joomla.submitbutton = function(pressbutton)
 </script>
 
 <div id="tracksmain">
-<form action="index.php?option=com_tracks&view=quickadd&task=add" method="post">
-	<input type="hidden" name="subround_id" value="<?php echo $model->getState('subround_id'); ?>" />
 
-	<table>
-		<tr>
-			<td class="hasTip" title="<?php echo JText::_('COM_TRACKS_QUICK_ADD').'::'.JText::_('COM_TRACKS_QUICK_ADD_TIP'); ?>"><?php echo JText::_('COM_TRACKS_QUICK_ADD'); ?>:</td>
-			<td><input type="text" name="quickadd" id="quickadd" /></td>
-			<td><input type="hidden" id="individualid" name="individualid" value=""><input type="submit" name="submit2" id="submit2" value="<?php echo JText::_('COM_TRACKS_ADD_PARTICIPANT'); ?>" /></td>
-		</tr>
-	</table>
-</form>
+	<h3 class="subroundtitle"><?php echo $round->subroundname . ' - ' . $round->roundname . ' - ' . $round->projectname; ?></h3>
+
+	<form action="index.php?option=com_tracks&view=quickadd&task=add" method="post">
+		<input type="hidden" name="subround_id" value="<?php echo $model->getState('subround_id'); ?>" />
+
+		<table>
+			<tr>
+				<td class="hasTip" title="<?php echo JText::_('COM_TRACKS_QUICK_ADD').'::'.JText::_('COM_TRACKS_QUICK_ADD_TIP'); ?>"><?php echo JText::_('COM_TRACKS_QUICK_ADD'); ?>:</td>
+				<td><input type="text" name="quickadd" id="quickadd" /></td>
+				<td><input type="hidden" id="individualid" name="individualid" value=""><input type="submit" name="submit2" id="submit2" value="<?php echo JText::_('COM_TRACKS_ADD_PARTICIPANT'); ?>" /></td>
+			</tr>
+		</table>
+	</form>
 
 <br />
 

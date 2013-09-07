@@ -138,7 +138,7 @@ class TracksModelSubroundResults extends FOFModel
 	 */
 	public function saveranks($cid = array(), $rank, $bonus_points, $performance, $individual, $team, $subround_id)
 	{
-		$row = $this->getTable('projectroundresult');
+		$row = $this->getTable('subroundresult');
 
 		// update ordering values
 		for ($i = 0; $i < count($cid); $i++)

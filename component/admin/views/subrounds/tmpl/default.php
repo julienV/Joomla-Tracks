@@ -19,8 +19,11 @@ $model = $this->getModel();
 
 FOFTemplateUtils::addCSS("media://com_tracks/css/tracksbackend.css");
 
+
 //Ordering allowed ?
 $ordering = ($this->lists->order == 'obj.ordering');
+
+$round = $model->getRound();
 
 JHTML::_('behavior.tooltip');
 ?>
@@ -38,6 +41,9 @@ Joomla.submitbutton = function (pressbutton)
 </script>
 
 <div id="tracksmain">
+
+	<h3 class="subroundtitle"><?php echo $round->roundname . ' - ' . $round->projectname; ?></h3>
+
 	<form name="adminForm" id="adminForm" action="index.php" method="post">
 		<input type="hidden" name="option" id="option" value="com_tracks" />
 		<input type="hidden" name="view" id="view" value="subrounds" />

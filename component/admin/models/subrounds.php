@@ -34,8 +34,7 @@ class TracksModelSubrounds extends FOFModel
 		$table = $this->getTable();
 		$db = $this->getDbo();
 
-		// Current project
-		$app = JFactory::getApplication();
+		// Current project round
 		$projectround_id = $this->getState('projectround_id');
 
 		$query = $db->getQuery(true);
@@ -102,17 +101,25 @@ class TracksModelSubrounds extends FOFModel
 		return true;
 	}
 
-	function getRound()
+	/**
+	 * returns round info
+	 *
+	 * @return object
+	 */
+	public function getRound()
 	{
-		$query = ' SELECT r.name AS roundname, '
-			. ' p.name AS projectname '
-			. ' FROM #__tracks_projects_rounds AS pr '
-			. ' INNER JOIN #__tracks_rounds AS r ON r.id = pr.round_id '
-			. ' INNER JOIN #__tracks_projects AS p ON p.id = pr.project_id '
-			. ' WHERE pr.id=' . $this->getState('projectround_id');
-		$this->_db->setQuery($query);
-		$res = $this->_db->loadObject();
-		//echo "debug: "; print_r($res);exit;
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+
+		$query->select('r.name AS roundname, p.name AS projectname');
+		$query->from('#__tracks_projects_rounds AS pr');
+		$query->join('INNER', '#__tracks_rounds AS r ON r.id = pr.round_id');
+		$query->join('INNER', '#__tracks_projects AS p ON p.id = pr.project_id');
+		$query->where('pr.id = ' . $this->getState('projectround_id'));
+
+		$db->setQuery($query);
+		$res = $db->loadObject();
+
 		return $res;
 	}
 }
