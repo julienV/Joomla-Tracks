@@ -80,6 +80,13 @@ class TracksModelProjectrounds extends FOFModel
 			$query->where('pr.published = ' . $db->quote($filter));
 		}
 
+		// For copy form
+		$filter = $this->getState('cid');
+		if ($filter && is_array($filter) && count($filter))
+		{
+			$query->where('pr.id IN (' . implode(', ', $filter) . ')');
+		}
+
 		return $query;
 	}
 
@@ -132,15 +139,19 @@ class TracksModelProjectrounds extends FOFModel
 	/**
 	 * return list of projects for select.
 	 *
-	 *
+	 * @return array
 	 */
-	public function getProjectsListOptions()
+	public function getProjectsOptions()
 	{
-		$query = ' SELECT id AS value, name AS text '
-			. ' FROM #__tracks_projects '
-			. ' ORDER BY name';
-		$this->_db->setQuery($query);
-		$res = $this->_db->loadObjectList();
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+
+		$query->select('id AS value, name AS text');
+		$query->from('#__tracks_projects');
+		$query->order('name');
+
+		$db->setQuery($query);
+		$res = $db->loadObjectList();
 
 		return $res;
 	}

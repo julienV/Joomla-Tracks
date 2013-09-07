@@ -26,25 +26,24 @@ class TracksControllerProjectround extends FOFController
 {
 	public function savecopy()
 	{
-		$app = JFactory::getApplication();
-		$option = $app->input->getCmd('option', '');
-
-		$cid = $app->input->get('cid', array(), 'post', 'array');
-		$project_id = $app->input->getInt('project_id', 0);
+		$option     = $this->input->getCmd('option', '');
+		$cid        = $this->input->get('cid', array(), 'post', 'array');
+		$project_id = $this->input->getInt('project_id', 0);
 		JArrayHelper::toInteger($cid);
-		JArrayHelper::toInteger($team_id);
 
 		if (count($cid) < 1)
 		{
 			throw new Exception(JText::_('COM_TRACKS_Select_an_round_to_copy'), 500);
 		}
 
-		$model = $this->getModel('projectround');
+		$model = $this->getModel('projectrounds');
+
 		if (!$model->assign($cid, $project_id))
 		{
 			echo "<script> alert('" . $model->getError(true) . "');</script>\n";
 		}
-		$app->setUserState($option . 'project', $project_id);
+
+		JFactory::getApplication()->setUserState($option . 'project', $project_id);
 		$link = 'index.php?option=com_tracks&view=projectrounds';
 		$this->setRedirect($link);
 	}
@@ -66,11 +65,15 @@ class TracksControllerProjectround extends FOFController
 	 */
 	public function copy()
 	{
-		JRequest::setVar('view', 'projectrounds');
-		JRequest::setVar('layout', 'copy_form');
-		JRequest::setVar('hidemainmenu', 1);
+		$cid = $this->input->get('cid', '', 'array');
+		JArrayHelper::toInteger($cid);
 
-		parent::display();
+		$model = $this->getThisModel();
+		$model->setState('cid', $cid);
+
+		$this->layout = 'copy_form';
+
+		return $this->browse();
 	}
 
 	/**

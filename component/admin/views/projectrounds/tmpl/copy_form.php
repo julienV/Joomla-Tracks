@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: assign.php 142 2008-06-10 17:00:28Z julienv $ 
+* @version    $Id: assign.php 142 2008-06-10 17:00:28Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -15,6 +15,9 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 <?php
 $user 	= JFactory::getUser();
+$model = $this->getModel();
+
+FOFTemplateUtils::addCSS("media://com_tracks/css/tracksbackend.css");
 
 JHTML::_('behavior.tooltip');
 ?>
@@ -23,11 +26,11 @@ JHTML::_('behavior.tooltip');
     if (pressbutton) {
       document.adminForm.task.value=pressbutton;
     }
-    
+
     // do field validation
     if (pressbutton == "savecopy" && document.adminForm.project_id.value == "0"){
-      alert( "<?php echo JText::_('COM_TRACKS_You_must_select_a_project', true ); ?>" );
-    } else {    
+      alert( "<?php echo JText::_('COM_TRACKS_YOU_MUST_SELECT_A_PROJECT', true ); ?>" );
+    } else {
 	    if (typeof document.adminForm.onsubmit == "function") {
 	      document.adminForm.onsubmit();
 	    }
@@ -35,51 +38,56 @@ JHTML::_('behavior.tooltip');
     }
   }
 </script>
-<div id="tracksmain">
-<form action="<?php echo $this->request_url; ?>" method="post" name="adminForm" id="adminForm">
-<div id="projectsel">
-<?php echo JText::_('COM_TRACKS_Copy_to' ) . $this->lists['projects']; ?>
-</div>
-<div id="editcell">
-	<table class="adminlist">
-	<thead>
-		<tr>
-			<th width="5">
-				<?php echo JText::_('COM_TRACKS_Id' ); ?>
-			</th>
-			<th class="title">
-        <?php echo JText::_('COM_TRACKS_Name' ); ?>
-			</th>
-		</tr>
-	</thead>
-	<tbody>
-	<?php
-	$k = 0;
-	for ($i=0, $n=count( $this->rounds ); $i < $n; $i++)
-	{
-		$row = $this->rounds[$i];
-		?>
-		<tr class="<?php echo "row$k"; ?>">
-			<td>
-				<?php echo $row->id; ?>
-				<input id="cb<?php echo $i; ?>" type="hidden" value="<?php echo $row->id; ?>" name="cid[]"/>
-			</td>
-			<td>
-				<?php
-				echo $row->name;
-				?>
-			</td>
-		</tr>
-		<?php
-		$k = 1 - $k;
-	}
-	?>
-	</tbody>
-	</table>
-</div>
 
-<input type="hidden" name="controller" value="projectround" />
-<input type="hidden" name="task" value="" />
-<input type="hidden" name="boxchecked" value="0" />
+<div id="tracksmain">
+
+	<form action="index.php" method="post" name="adminForm" id="adminForm">
+		<input type="hidden" name="option" value="com_tracks" />
+		<input type="hidden" name="view" value="projectrounds" />
+		<input type="hidden" name="task" value="" />
+		<input type="hidden" name="boxchecked" value="0" />
+
+	<div id="projectsel">
+		<?php echo JText::_('COM_TRACKS_ASSIGN_TO') . JHTML::_('select.genericlist',  $model->getProjectsOptions(), 'project_id', 'class="inputbox"', 'value', 'text'); ?>
+	</div>
+
+	<div id="editcell">
+		<table class="adminlist">
+		<thead>
+			<tr>
+				<th width="5">
+					<?php echo JText::_('COM_TRACKS_Id' ); ?>
+				</th>
+				<th class="title">
+	        <?php echo JText::_('COM_TRACKS_Name' ); ?>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+		<?php
+		$k = 0;
+		for ($i=0, $n = count( $this->items ); $i < $n; $i++)
+		{
+			$row = $this->items[$i];
+			?>
+			<tr class="<?php echo "row$k"; ?>">
+				<td>
+					<?php echo $row->id; ?>
+					<input id="cb<?php echo $i; ?>" type="hidden" value="<?php echo $row->id; ?>" name="cid[]"/>
+				</td>
+				<td>
+					<?php
+					echo $row->name;
+					?>
+				</td>
+			</tr>
+			<?php
+			$k = 1 - $k;
+		}
+		?>
+		</tbody>
+		</table>
+	</div>
+
 </form>
 </div>

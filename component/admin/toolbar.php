@@ -115,4 +115,25 @@ class TracksToolbar extends FOFToolbar
 		JToolBarHelper::deleteList();
 		JToolBarHelper::custom('back', 'back.png', 'back.png', JText::_('COM_TRACKS_back'), false);
 	}
+
+	public function onProjectroundsBrowse()
+	{
+		JToolBarHelper::title(   JText::_('COM_TRACKS_Project_Rounds' ), 'tracks' );
+
+		JToolBarHelper::addNewX();
+		JToolBarHelper::editListX();
+		JToolBarHelper::customX( 'copy', 'copy.png', 'copy_f2.png', JText::_('COM_TRACKS_COPY'), true );
+		JToolBarHelper::publish();
+		JToolBarHelper::unpublish();
+		JToolBarHelper::deleteList(JText::_('COM_TRACKS_DELETEROUNDSCONFIRM'));
+		JToolBarHelper::help( 'screen.tracks', true );
+	}
+
+	public function onProjectroundsCopy()
+	{
+		JToolBarHelper::title(JText::_('COM_TRACKS_PROJECT_ROUNDS_COPY'), 'tracks' );
+
+		JToolBarHelper::save('savecopy', 'Save');
+		JToolBarHelper::back();
+	}
 }
