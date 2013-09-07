@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form
+		lessfiles="media://com_tracks/css/tracksbackend.less||media://com_tracks/css/tracksbackend.css"
+		validate="true"
+		>
+	<fieldset name="basic_configuration"
+			  label="COM_TRACKS_PROJECTS_GROUP_BASIC"
+			  description="COM_TRACKS_PROJECTS_GROUP_BASIC_DESC"
+			  class="span6"
+			>
+
+		<field
+			name="id"
+			type="text"
+			default="0"
+			label="JGLOBAL_FIELD_ID_LABEL"
+			description ="JGLOBAL_FIELD_ID_DESC"
+			class="readonly"
+			readonly="true"/>
+
+		<field
+				name="name"
+				type="text"
+				label="COM_TRACKS_NAME"
+				description="COM_TRACKS_NAME_DESC"
+				class="inputbox"
+				required="true"/>
+
+		<field
+				name="alias"
+				type="text"
+				label="COM_TRACKS_alias"
+				description="COM_TRACKS_alias_DESC"
+				class="inputbox"/>
+
+		<field
+				name="published"
+				type="list"
+				class="inputbox"
+				default="1"
+				size="1"
+				label="JSTATUS"
+				description="JFIELD_PUBLISHED_DESC">
+			<option
+					value="1">
+				JPUBLISHED</option>
+			<option
+					value="0">
+				JUNPUBLISHED</option>
+		</field>
+
+		<field
+				name="competition_id"
+				type="model"
+				label="COM_TRACKS_COMPETITION"
+				description="COM_TRACKS_PROJECT_COMPETITION_DESC"
+				model="TracksModelCompetitions"
+				key_field="id"
+				value_field="name"
+				>
+		</field>
+
+		<field
+				name="season_id"
+				type="model"
+				label="COM_TRACKS_SEASON"
+				description="COM_TRACKS_PROJECT_SEASON_DESC"
+				model="TracksModelSeasons"
+				key_field="id"
+				value_field="name"
+				>
+		</field>
+
+		<field
+			name="admin_id"
+			type="user"
+			class="inputbox"
+			default="0"
+			label="COM_TRACKS_Administrator"
+			description="COM_TRACKS_Administrator"
+			/>
+
+		<field
+				name="checked_out"
+				type="hidden"
+				filter="unset"/>
+
+		<field
+				name="checked_out_time"
+				type="hidden"
+				filter="unset"/>
+
+		<field
+				name="params"
+				type="hidden"
+				class="inputbox"/>
+	</fieldset>
+</form>

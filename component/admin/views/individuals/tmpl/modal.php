@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: default.php 140 2008-06-10 16:47:22Z julienv $ 
+* @version    $Id: default.php 140 2008-06-10 16:47:22Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -17,10 +17,12 @@ defined('_JEXEC') or die('Restricted access'); ?>
 $user 	= JFactory::getUser();
 
 //Ordering allowed ?
-$ordering = ($this->lists['order'] == 'obj.ordering');
 JHTML::_('behavior.tooltip');
 
 $function	= JRequest::getCmd('function', 'jSelectIndividual');
+
+$model = $this->getModel();
+$search = $model->getState('search');
 ?>
 
 <form action="<?php echo JRoute::_('index.php?option=com_tracks&view=individuals&layout=modal&tmpl=component&function='.$function);?>" method="post" name="adminForm" id="adminForm">
@@ -28,26 +30,26 @@ $function	= JRequest::getCmd('function', 'jSelectIndividual');
 	<tr>
 		<td align="left" width="100%">
 			<?php echo JText::_('COM_TRACKS_Filter' ); ?>:
-			<input type="text" name="search" id="search" value="<?php echo $this->lists['search'];?>" class="text_area" onchange="document.adminForm.submit();" />
+			<input type="text" name="search" id="search" value="<?php echo $search;?>" class="text_area" onchange="document.adminForm.submit();" />
 			<button onclick="this.form.submit();"><?php echo JText::_('COM_TRACKS_Go' ); ?></button>
 			<button onclick="document.getElementById('search').value='';this.form.submit();"><?php echo JText::_('COM_TRACKS_Reset' ); ?></button>
 		</td>
 	</tr>
 	</table>
-	
+
 	<div id="editcell">
 		<table class="adminlist">
 		<thead>
 			<tr>
 				<th class="title">
-					<?php echo JHTML::_('grid.sort',  'COM_TRACKS_LAST_NAME', 'obj.last_name', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+					<?php echo JHTML::_('grid.sort',  'COM_TRACKS_LAST_NAME', 'obj.last_name', $this->lists->order_Dir, $this->lists->order ); ?>
 				</th>
 				<th class="title">
-					<?php echo JHTML::_('grid.sort',  'COM_TRACKS_FIRST_NAME', 'obj.first_name', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+					<?php echo JHTML::_('grid.sort',  'COM_TRACKS_FIRST_NAME', 'obj.first_name', $this->lists->order_Dir, $this->lists->order ); ?>
 				</th>
 	      <th class="title" nowrap="nowrap"><?php echo JText::_('COM_TRACKS_ALIAS'); ?></th>
 				<th width="1%" nowrap="nowrap">
-					<?php echo JHTML::_('grid.sort',  'ID', 'obj.id', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+					<?php echo JHTML::_('grid.sort',  'ID', 'obj.id', $this->lists->order_Dir, $this->lists->order ); ?>
 				</th>
 			</tr>
 		</thead>
@@ -67,10 +69,10 @@ $function	= JRequest::getCmd('function', 'jSelectIndividual');
 			?>
 			<tr class="<?php echo "row$k"; ?>">
 				<td>
-					<a class="pointer" 
-					   onclick="if (window.parent) window.parent.<?php echo $this->escape($function);?>('<?php 
-					                    echo $row->id; ?>', '<?php 
-					                    echo $this->escape(addslashes($row->last_name)); ?>', '<?php 
+					<a class="pointer"
+					   onclick="if (window.parent) window.parent.<?php echo $this->escape($function);?>('<?php
+					                    echo $row->id; ?>', '<?php
+					                    echo $this->escape(addslashes($row->last_name)); ?>', '<?php
 					                    echo $this->escape(addslashes($row->first_name)); ?>');"><?php echo $this->escape($row->last_name); ?></a>
 				</td>
 				<td>
@@ -90,10 +92,10 @@ $function	= JRequest::getCmd('function', 'jSelectIndividual');
 		</tbody>
 		</table>
 	</div>
-		
+
 	<input type="hidden" name="task" value="" />
 	<input type="hidden" name="boxchecked" value="0" />
-	<input type="hidden" name="filter_order" value="<?php echo $this->lists['order']; ?>" />
-	<input type="hidden" name="filter_order_Dir" value="<?php echo $this->lists['order_Dir']; ?>" />
+	<input type="hidden" name="filter_order" value="<?php echo $this->lists->order; ?>" />
+	<input type="hidden" name="filter_order_Dir" value="<?php echo $this->lists->order_Dir; ?>" />
 </form>
 </div>

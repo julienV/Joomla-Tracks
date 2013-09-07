@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form
+	lessfiles="media://com_tracks/css/tracksbackend.less||media://com_tracks/css/tracksbackend.css"
+	validate="true"
+	>
+	<fieldset name="basic_configuration"
+			  label="COM_TRACKS_SUBROUND_GROUP_BASIC"
+			  description="COM_TRACKS_SUBROUND_GROUP_BASIC_DESC"
+			  class="span6"
+			>
+		<field
+			name="id"
+			type="text"
+			default="0"
+			label="JGLOBAL_FIELD_ID_LABEL"
+			description ="JGLOBAL_FIELD_ID_DESC"
+			class="readonly"
+			readonly="true"/>
+
+		<field
+			name="type"
+			type="model"
+			model="TracksModelSubroundtypes"
+			key_field="id"
+			value_field="name"
+			label="COM_TRACKS_ROUND"
+			description="COM_TRACKS_ROUND"
+			class="inputbox"
+			required="true"/>
+
+		<field
+			name="start_date"
+			type="calendar"
+			format="%Y-%m-%d %H:%M:%S"
+			label="COM_TRACKS_Round_start"
+			description="COM_TRACKS_Round_start"
+			class="inputbox"/>
+
+		<field
+			name="end_date"
+			type="calendar"
+			format="%Y-%m-%d %H:%M:%S"
+			label="COM_TRACKS_Round_end"
+			description="COM_TRACKS_Round_end"
+			class="inputbox"
+			required="true"/>
+
+		<field
+			name="published"
+			type="list"
+			class="inputbox"
+			default="1"
+			size="1"
+			label="JSTATUS"
+			description="JFIELD_PUBLISHED_DESC">
+			<option
+					value="1">
+				JPUBLISHED</option>
+			<option
+					value="0">
+				JUNPUBLISHED</option>
+		</field>
+
+		<field
+			name="description"
+			type="editor"
+			label="COM_TRACKS_SUBROUND_DESCRIPTION"
+			description="COM_TRACKS_SUBROUND_DESCRIPTION_DESC"
+			filter="JComponentHelper::filterText" buttons="true"
+			/>
+
+		<field
+			name="comment"
+			type="editor"
+			label="COM_TRACKS_SUBROUND_COMMENT"
+			description="COM_TRACKS_SUBROUND_COMMENT_DESC"
+			filter="JComponentHelper::filterText" buttons="true"
+			/>
+
+		<field
+			name="checked_out"
+			type="hidden"
+			filter="unset"/>
+
+		<field
+			name="checked_out_time"
+			type="hidden"
+			filter="unset"/>
+
+	</fieldset>
+</form>

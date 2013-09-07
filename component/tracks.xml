@@ -13,21 +13,21 @@
 
 	<!-- Runs on install/uninstall/update -->
 	<scriptfile>install.php</scriptfile>
-	
+
 	<!-- Install Database Section -->
 	<install>
 		<sql>
 			<file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
 		</sql>
 	</install>
-	
+
 	<!-- Uninstall Database Section -->
 	<uninstall>
 		<sql>
 			<file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
 		</sql>
 	</uninstall>
-	
+
 	<update> <!-- Runs on update; New in 1.6 -->
 		<schemas>
 			<schemapath type="mysql">sql/updates/mysql</schemapath>
@@ -48,7 +48,7 @@
 		<folder>sports</folder>
 		<folder>views</folder>
 	</files>
-    
+
     <!-- Site Main Media File Copy Section -->
 	<media destination="com_tracks" folder="media/com_tracks">
 		<filename>index.html</filename>
@@ -73,8 +73,8 @@
 		</submenu>
 
 		<!-- Administration Main File Copy Section -->
-		<!-- Note the folder attribute: This attribute describes the folder to 
-			copy FROM in the package to install therefore files copied in this section 
+		<!-- Note the folder attribute: This attribute describes the folder to
+			copy FROM in the package to install therefore files copied in this section
 			are copied from /admin/ in the package -->
 
 		<files folder="admin">
@@ -82,6 +82,8 @@
 			<filename>access.xml</filename>
 			<filename>config.xml</filename>
 			<filename>controller.php</filename>
+			<filename>dispatcher.php</filename>
+			<filename>toolbar.php</filename>
 			<filename>helper.php</filename>
 			<filename>index.html</filename>
 			<filename>license.txt</filename>
@@ -99,8 +101,8 @@
 			<folder>views</folder>
 		</files>
 
-	</administration>	  
-	  
+	</administration>
+
 	<!-- UPDATESERVER DEFINITION -->
 	<updateservers>
 		<!-- Note: No spaces or linebreaks allowed between the server tags -->

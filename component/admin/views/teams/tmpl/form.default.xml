@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form
+	lessfiles="media://com_tracks/css/tracksbackend.less||media://com_tracks/css/tracksbackend.css"
+	type="browse"
+	show_header="1"
+	show_filters="1"
+	show_pagination="1"
+	norows_placeholder="COM_TRACKS_COMMON_NORECORDS"
+		>
+
+	<headerset>
+		<header name="id" type="rowselect" tdwidth="20" />
+		<header name="name" type="fieldsearchable" sortable="true"
+				buttons="yes" buttonclass="btn"
+				/>
+		<header name="short_name" label="COM_TRACKS_TEAM_SHORT_NAME" type="fieldsearchable" sortable="true"
+				buttons="yes" buttonclass="btn"
+				/>
+		<header name="acronym" type="fieldsearchable" sortable="true"
+				buttons="yes" buttonclass="btn"
+				/>
+		<header name="admin" type="fieldsearchable" sortable="true" tdwidth="12%" />
+		<header name="country_code" type="fieldsearchable" sortable="true" tdwidth="12%" />
+	</headerset>
+
+	<fieldset name="items">
+		<field name="id" type="selectrow"/>
+
+		<field name="name" type="title"
+			   show_link="true"
+			   url="index.php?option=com_tracks&amp;view=team&amp;id=[ITEM:ID]"
+			   class="tracksitem"
+			   empty_replacement="(no name)"
+			   slug_field="alias"
+				/>
+
+		<field name="short_name" type="text" />
+
+		<field name="acronym" type="text" />
+
+		<field name="admin_id"
+			   type="user" sortable="true" tdwidth="10%"
+			   show_avatar="false"
+			   show_username="true"
+			   show_email="false"
+			   show_name="false"
+			   show_id="false" />
+
+		<field name="country_code" type="text" />
+	</fieldset>
+</form>

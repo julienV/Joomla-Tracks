@@ -1,15 +1,15 @@
 <?php
 /**
-* @version    $Id: team.php 72 2008-04-29 13:14:29Z julienv $ 
-* @package    JoomlaTracks
-* @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
-* @license		GNU/GPL, see LICENSE.php
-* Joomla Tracks is free software. This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-* See COPYRIGHT.php for copyright notices and details.
-*/
+ * @version        $Id: team.php 72 2008-04-29 13:14:29Z julienv $
+ * @package        JoomlaTracks
+ * @copyright      Copyright (C) 2008 Julien Vonthron. All rights reserved.
+ * @license        GNU/GPL, see LICENSE.php
+ *                 Joomla Tracks is free software. This version may have been modified pursuant
+ *                 to the GNU General Public License, and as distributed it includes or
+ *                 is derivative of works licensed under the GNU General Public License or
+ *                 other free or open source software licenses.
+ *                 See COPYRIGHT.php for copyright notices and details.
+ */
 
 // no direct access
 defined('_JEXEC') or die('Restricted access');
@@ -18,20 +18,22 @@ defined('_JEXEC') or die('Restricted access');
 jimport('joomla.filter.input');
 
 /**
-* Teams Table class
-*
-* @package		Tracks
-* @since 0.1
-*/
-class TableTeam extends JTable
+ * Teams Table class
+ *
+ * @package        Tracks
+ * @since          0.1
+ */
+class TracksTableTeam extends FOFTable
 {
 	/**
-	 * Constructor
+	 * constructor
 	 *
-	 * @param object Database connector object
-	 * @since 1.0
+	 * @param   string   $table  name of the table
+	 * @param   string   $key    table primary key
+	 * @param   database &$db    A database connector object
 	 */
-	function __construct(& $db) {
+	public function __construct($table, $key, &$db)
+	{
 		parent::__construct('#__tracks_teams', 'id', $db);
 	}
 
@@ -40,17 +42,18 @@ class TableTeam extends JTable
 	 *
 	 * @access public
 	 * @return boolean True on success
-	 * @since 1.0
+	 * @since  1.0
 	 */
 	function check()
 	{
-    $alias = JFilterOutput::stringURLSafe($this->name);
+		$alias = JFilterOutput::stringURLSafe($this->name);
 
-    if(empty($this->alias) || $this->alias === $alias ) {
-      $this->alias = $alias;
-    }
-		//should check name unicity
+		if (empty($this->alias) || $this->alias === $alias)
+		{
+			$this->alias = $alias;
+		}
+
+		// Should check name unicity
 		return true;
 	}
 }
-?>

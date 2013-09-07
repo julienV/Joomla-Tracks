@@ -1,108 +1,67 @@
 <?php
 /**
-* @version    $Id: form.php 96 2008-05-02 10:35:43Z julienv $ 
-* @package    JoomlaTracks
-* @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
-* @license		GNU/GPL, see LICENSE.php
-* Joomla Tracks is free software. This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-* See COPYRIGHT.php for copyright notices and details.
-*/
+ * @version    2.0
+ * @package    JoomlaTracks
+ * @copyright  Copyright (C) 2008 Julien Vonthron. All rights reserved.
+ * @license    GNU/GPL, see LICENSE.php
+ * Joomla Tracks is free software. This version may have been modified pursuant
+ * to the GNU General Public License, and as distributed it includes or
+ * is derivative of works licensed under the GNU General Public License or
+ * other free or open source software licenses.
+ * See COPYRIGHT.php for copyright notices and details.
+ */
 
-defined('_JEXEC') or die('Restricted access'); ?>
+// Check to ensure this file is included in Joomla!
+defined('_JEXEC') or die();
 
-<?php JHTML::_('behavior.tooltip'); ?>
+$editor = JFactory::getEditor();
 
-<?php
-	// Set toolbar items for the page
-	$edit		= JRequest::getVar('edit',true);
-	$text = !$edit ? JText::_('COM_TRACKS_New' ) : JText::_('COM_TRACKS_Edit' );
-	JToolBarHelper::title(   JText::_('COM_TRACKS_Project' ).': <small><small>[ ' . $text.' ]</small></small>' );
-	JToolBarHelper::save();
-	JToolBarHelper::apply();
-	if (!$edit)  {
-		JToolBarHelper::cancel();
-	} else {
-		// for existing items the button is renamed `close`
-		JToolBarHelper::cancel( 'cancel', 'Close' );
-	}
-    JToolBarHelper::help( 'screen.tracks.edit', true );
+$this->loadHelper('select');
+$this->loadHelper('filtering');
+
+FOFTemplateUtils::addCSS('media://com_tracks/css/tracksbackend.css');
+$model = $this->getModel();
+
+$subround = $model->getSubroundInfo();
 ?>
 
-<script type="text/javascript">
-	Joomla.submitbutton = function (pressbutton) {
-		var form = document.adminForm;
-		if (pressbutton == 'cancel') {
-			Joomla.submitform( pressbutton );
-			return;
-	}
+<form id="adminForm" class="form-validate " name="adminForm" method="post" action="index.php">
+	<input type="hidden" name="option" value="com_tracks" />
+	<input type="hidden" name="view" value="subroundresults" />
+	<input type="hidden" name="task" value="" />
+	<input type="hidden" name="id" value="<?php echo $this->item->id ?>" />
+	<input type="hidden" name="subround_id" value="<?php echo $model->getState('subround_id'); ?>" />
+	<input type="hidden" name="<?php echo JFactory::getSession()->getFormToken();?>" value="1" />
 
-		// do field validation
-		if (form.subround_id.value == ""){
-			alert( "<?php echo JText::_('COM_TRACKS_Result_item_must_have_subround_id', true ); ?>" );
-		} else {
-			Joomla.submitform( pressbutton );
-		}
-	}
-</script>
+	<div class="width-100 fltlft">
+		<fieldset class="adminform"><legend>
+				<?php
+				echo $subround->roundname . ' - '
+					. $subround->subroundname . ' - '
+					. JText::_('COM_TRACKS_Result' ); ?></legend></legend>
 
-<div id="tracksmain">
-<form action="index.php" method="post" name="adminForm" id="adminForm">
-<div class="width-50">
-	<fieldset class="adminform">
-		<legend>
-		  <?php 
-		  echo $this->result->round_name . ' - ' 
-		     . $this->result->typename . ' - '
-		     . JText::_('COM_TRACKS_Result' ); ?></legend>
-
-		<ul class="adminformlist">
-			<li>
-				<label for="individual">
-					<?php echo JText::_('COM_TRACKS_Individual' ); ?>:
-				</label>
-			  <?php if (!$edit): ?>
-        <?php echo $this->lists['participants'] ; ?>
-			  <?php else: ?>
-				<?php echo $this->result->first_name . ' ' . $this->result->last_name ; ?>
-				<?php endif; ?>
-			</li>
-			<li>
-				<label for="rank">
-          <?php echo JText::_('COM_TRACKS_Rank' ); ?>:
-        </label>
-        <input class="text_area" type="text" name="rank" id="rank" size="3" maxlength="3" value="<?php echo $this->result->rank; ?>" />
-			</li>
-			<li>
-				<label for="bonus_points">
-          <?php echo JText::_('COM_TRACKS_Bonus_points' ); ?>:
-        </label>
-        <input class="text_area" type="text" name="bonus_points" id="bonus_points" size="3" maxlength="3" value="<?php echo $this->result->bonus_points; ?>" />
-			</li>
-			<li>
-				<label for="performance">
-          <?php echo JText::_('COM_TRACKS_Performance' ); ?>:
-        </label>
-        <input class="text_area" type="text" name="performance" id="performance" size="10" maxlength="20" value="<?php echo $this->result->performance; ?>" />
-			</li>
-			<li>
-				<label for="name">
-          <?php echo JText::_('COM_TRACKS_Comment' ); ?>:
-        </label>
-        <?php echo $this->editor->display('comment', $this->result->comment, '100%', '200', '70', '10'); ?>
-			</li>
-			</ul>				
-	</fieldset>
-</div>
-
-<div class="clr"></div>
-
-<input type="hidden" name="option" value="com_tracks" />
-<input type="hidden" name="controller" value="subroundresult" />
-<input type="hidden" name="cid[]" value="<?php echo $this->result->id; ?>" />
-<input type="hidden" name="subround_id" value="<?php echo $this->result->subround_id; ?>" />
-<input type="hidden" name="task" value="" />
+			<ul class="adminformlist">
+				<li>
+					<?php echo $this->form->getLabel('individual_id'); ?>
+					<?php echo $this->form->getInput('individual_id'); ?>
+				</li>
+				<li>
+					<?php echo $this->form->getLabel('rank'); ?>
+					<?php echo $this->form->getInput('rank'); ?>
+				</li>
+				<li>
+					<?php echo $this->form->getLabel('bonus_points'); ?>
+					<?php echo $this->form->getInput('bonus_points'); ?>
+				</li>
+				<li>
+					<?php echo $this->form->getLabel('performance'); ?>
+					<?php echo $this->form->getInput('performance'); ?>
+				</li>
+			</ul>
+			<div class="clr"></div>
+			<?php echo $this->form->getLabel('comment'); ?>
+			<div class="clr"></div>
+			<?php echo $this->form->getInput('comment'); ?>
+		</fieldset>
+	</div>
 </form>
-</div>

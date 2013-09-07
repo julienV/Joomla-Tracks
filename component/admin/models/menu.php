@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: list.php 7 2008-01-30 10:37:37Z julienv $ 
+* @version    $Id: list.php 7 2008-01-30 10:37:37Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -24,26 +24,26 @@ jimport('joomla.application.component.model');
  * @package   Tracks
  * @since 2.5
  */
-class TracksModelMenu extends JModel
+class TracksModelMenu extends FOFModel
 {
 	protected $_p, $_s, $_c;
-	
+
 	protected $_data = null;
-		
+
 	public function __construct($config = array())
 	{
 		parent::__construct($config);
-		
+
 		$app = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 		$this->setState('project', $app->getUserState($option.'project', 0));
 		$this->setState('season', $app->getUserState($option.'season', 0));
 		$this->setState('competition', $app->getUserState($option.'competition', 0));
 	}
-	
+
 	/**
 	 * return project data
-	 * 
+	 *
 	 * @return object
 	 */
 	public function getData()
@@ -52,7 +52,7 @@ class TracksModelMenu extends JModel
 		{
 			$db = JFactory::getDbo();
 			$query = $db->getQuery(true);
-			
+
 			$query->select('p.id, p.name');
 			$query->from('#__tracks_projects AS p');
 			$query->where('p.id = '.$this->getState('project'));
@@ -61,23 +61,36 @@ class TracksModelMenu extends JModel
 		}
 		return $this->_data;
 	}
-	
+
 	/**
 	 * return projects as options
-	 * 
+	 *
 	 * @return array
 	 */
 	public function getProjectsOptions()
 	{
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
-		
+
 		$query->select('p.id AS value, p.name AS text');
 		$query->from('#__tracks_projects AS p');
 		$query->order('p.name');
 		$db->setQuery($query);
 		$res = $db->loadObjectList();
-		
+
 		return $res;
+	}
+
+	/**
+	 * Returns a list of items
+	 *
+	 * @param   boolean  $overrideLimits  Should I override set limits?
+	 * @param   string   $group           The group by clause
+	 *
+	 * @return  array
+	 */
+	public function &getItemList($overrideLimits = false, $group = '')
+	{
+		return;
 	}
 }

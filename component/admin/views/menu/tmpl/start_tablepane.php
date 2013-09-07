@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: default.php 69 2008-04-24 18:11:26Z julienv $ 
+* @version    $Id: default.php 69 2008-04-24 18:11:26Z julienv $
 * @package    JoomlaTracks
 * @copyright    Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license      GNU/GPL, see LICENSE.php
@@ -11,27 +11,30 @@
 * See COPYRIGHT.php for copyright notices and details.
 */
 
-defined('_JEXEC') or die('Restricted access'); ?>
+defined('_JEXEC') or die('Restricted access');
+
+$pane = JPane::getInstance('sliders');
+?>
 
 <form name="tracksnav" id="tracksnav" action="index.php" method="post">
-	<?php echo $this->lists['project']; ?>
-	<input name="option" type="hidden" value="com_tracks"> 
-	<input name="controller" type="hidden" value="menu"> 
-	<input name="task" type="hidden" value=""> 
-	<input name="referer" type="hidden" value="<?php echo $this->referer; ?>"> 
+	<?php echo $this->lists->get('project'); ?>
+	<input name="option" type="hidden" value="com_tracks">
+	<input name="view" type="hidden" value="menu">
+	<input name="task" type="hidden" value="">
+	<input name="referer" type="hidden" value="<?php echo $this->referer; ?>">
 </form>
 
 <table class="tracks-main">
 
 <td class="main-row tracks-main-menu">
 <?php
-echo $this->pane->startPane( 'tracksnav' );
+echo $pane->startPane( 'tracksnav' );
 if ( $this->project )
 {
-	echo $this->pane->startPanel( $this->project->name, 'projectpanel' );
+	echo $pane->startPanel( $this->project->name, 'projectpanel' );
   ?>
 	<table class="adminlist">
-	<!-- 
+	<!--
     <tr>
       <td>
       <a href="<?php echo JRoute::_( 'index.php?option=com_tracks&view=projectsettings' ); ?>"
@@ -53,9 +56,9 @@ if ( $this->project )
 		</tr>
 	</table>
   <?php
-  echo $this->pane->endPanel();
+  echo $pane->endPanel();
 }
-echo $this->pane->startPanel( JText::_('COM_TRACKS_General'), 'generalpanel' );
+echo $pane->startPanel( JText::_('COM_TRACKS_General'), 'generalpanel' );
   ?>
   <table class="adminlist">
     <tr>
@@ -108,8 +111,8 @@ echo $this->pane->startPanel( JText::_('COM_TRACKS_General'), 'generalpanel' );
     </tr>
   </table>
   <?php
-  echo $this->pane->endPanel(); 
-  echo $this->pane->startPanel( JText::_('COM_TRACKS_About'), 'aboutpanel' );
+  echo $pane->endPanel();
+  echo $pane->startPanel( JText::_('COM_TRACKS_About'), 'aboutpanel' );
   ?>
   <table class="adminlist">
     <tr>
@@ -131,7 +134,7 @@ echo $this->pane->startPanel( JText::_('COM_TRACKS_General'), 'generalpanel' );
       </td>
     </tr>
     <tr>
-      <td>  
+      <td>
       <form action="https://www.paypal.com/cgi-bin/webscr" method="post" class="tracksdonate" target="_blank">
 		  <input type="hidden" name="cmd" value="_s-xclick">
 		  <input type="hidden" name="hosted_button_id" value="2314656">
@@ -142,7 +145,7 @@ echo $this->pane->startPanel( JText::_('COM_TRACKS_General'), 'generalpanel' );
     </tr>
   </table>
   <?php
-  echo $this->pane->endPanel(); 
-  echo $this->pane->endPane(); ?>
+  echo $pane->endPanel();
+  echo $pane->endPane(); ?>
   </td>
   <td class="main-row">

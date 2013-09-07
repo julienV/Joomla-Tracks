@@ -1,9 +1,9 @@
 <?php
 /**
-* @version    $Id: view.html.php 91 2008-05-02 09:41:23Z julienv $ 
+* @version    2.0
 * @package    JoomlaTracks
-* @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
-* @license		GNU/GPL, see LICENSE.php
+* @copyright  Copyright (C) 2008 Julien Vonthron. All rights reserved.
+* @license    GNU/GPL, see LICENSE.php
 * Joomla Tracks is free software. This version may have been modified pursuant
 * to the GNU General Public License, and as distributed it includes or
 * is derivative of works licensed under the GNU General Public License or
@@ -16,28 +16,25 @@ defined('_JEXEC') or die();
 
 jimport( 'joomla.application.component.view');
 
-require_once (JPATH_COMPONENT.DS.'abstract'.DS.'tracksview.php');
-
 /**
  * HTML View class for the Tracks component
  *
- * @static
- * @package		Tracks
- * @since 0.1
+ * @package  Tracks
+ * @since    0.1
  */
-class TracksViewProjectrounds extends TracksView
+class TracksViewProjectrounds extends TracksMenuViewFOF
 {
-	function display($tpl = null)
+	function _display($tpl = null)
 	{
 		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
 
-	  if($this->getLayout() == 'copy_form') 
+	  if($this->getLayout() == 'copy_form')
     {
       $this->_displayCopy($tpl);
       return;
     }
-    
+
 		// Set toolbar items for the page
 		JToolBarHelper::title(   JText::_('COM_TRACKS_Project_Rounds' ), 'generic.png' );
 		JToolBarHelper::publish();
@@ -47,7 +44,7 @@ class TracksViewProjectrounds extends TracksView
     JToolBarHelper::deleteList(JText::_('COM_TRACKS_DELETEROUNDSCONFIRM'));
     JToolBarHelper::customX( 'copy', 'copy.png', 'copy_f2.png', JText::_('COM_TRACKS_COPY'), true );
     JToolBarHelper::help( 'screen.tracks', true );
-        
+
 		$db		= JFactory::getDBO();
 		$uri	= JFactory::getURI();
 
@@ -66,7 +63,7 @@ class TracksViewProjectrounds extends TracksView
 
 		// build list of categories
 		//$javascript 	= 'onchange="document.adminForm.submit();"';
-		
+
 		// state filter
 		$lists['state']	= JHTML::_('grid.state',  $filter_state );
 
@@ -85,27 +82,27 @@ class TracksViewProjectrounds extends TracksView
 
 		parent::display($tpl);
 	}
-	
+
 
   function _displayCopy($tpl = null)
   {
     $mainframe = JFactory::getApplication();
 $option = JRequest::getCmd('option');
-    
+
     // Set toolbar items for the page
     JToolBarHelper::title(   JText::_('COM_TRACKS_COPYROUNDS' ), 'generic.png' );
     JToolBarHelper::back();
     JToolBarHelper::save('savecopy', 'Copy');
     JToolBarHelper::cancel('cancelcopy');
     JToolBarHelper::help( 'screen.tracks', true );
-    
+
     $db   = JFactory::getDBO();
     $uri  = JFactory::getURI();
-    
+
     // Get data from the model
     // $model = $this->getModel();
     // print_r($model);
-    
+
     //build the html select list for projects
     $projects[] = JHTML::_('select.option',  '0', '- '. JText::_('COM_TRACKS_Select_a_project' ) .' -','value', 'text' );
     if ( $res = $this->get('projectsListOptions') ) {
@@ -113,16 +110,15 @@ $option = JRequest::getCmd('option');
     }
     $lists['projects'] = JHTML::_('select.genericlist',  $projects, 'project_id', 'class="inputbox" size="1"', 'value', 'text');
     unset($projects);
-    
+
     // get player names
     $rounds    = $this->get( 'RoundsList' );
-    
+
     $this->assignRef('user',    JFactory::getUser());
     $this->assignRef('rounds',   $rounds);
     $this->assignRef('lists',   $lists);
     $this->assignRef('request_url', $uri->toString());
-    
+
     parent::display($tpl);
   }
 }
-?>

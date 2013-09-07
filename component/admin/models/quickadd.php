@@ -3,18 +3,14 @@
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die();
 
-jimport('joomla.application.component.model');
-require_once (JPATH_COMPONENT.DS.'models'.DS.'list.php');
-
 /**
  * Joomla Tracks Component person search Model
  *
- * @package     Tracks
- * @since 0.2
+ * @package  Tracks
+ * @since    0.2
  */
-class TracksModelQuickAdd extends JModel
+class TracksModelQuickAdd extends FOFModel
 {
-
 	function getList($query)
 	{
         $sql = "SELECT * ";
@@ -26,7 +22,4 @@ class TracksModelQuickAdd extends JModel
 		$results = $this->_getList($sql);
 		return $results;
 	}
-
 }
-
-?>

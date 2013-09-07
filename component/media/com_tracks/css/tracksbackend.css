@@ -1,5 +1,9 @@
 @CHARSET "UTF-8";
 
+.icon-48-tracks {
+    background-image: url("../images/icon-48-tracks.png");
+}
+
 table.tracks-main {
 	width: 95%;
 }
@@ -12,7 +16,7 @@ table.tracks-main td.main-row {
 table.tracks-main td.tracks-main-menu {
 	width: 100px;
 }
-	
+
 /* submenu styling */
 #settings-submenu {
 	list-style: none;
@@ -103,7 +107,7 @@ div.imageinfo {
 
 div.image {
 	/*  padding-top: 10px; removed because of the button icons */
-	
+
 }
 
 div.pnav {
@@ -127,11 +131,11 @@ table.paramlist td.paramlist_key {
 }
 
 .adminform label.invalid {
-  color:red;	
+  color:red;
 }
 
 .adminform input.invalid, .adminform select.invalid {
-  border: 1px solid red;  
+  border: 1px solid red;
 }
 
 /* about */

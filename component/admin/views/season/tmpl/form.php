@@ -1,90 +1,70 @@
 <?php
 /**
-* @version    $Id: form.php 94 2008-05-02 10:28:05Z julienv $ 
-* @package    JoomlaTracks
-* @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
-* @license		GNU/GPL, see LICENSE.php
-* Joomla Tracks is free software. This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-* See COPYRIGHT.php for copyright notices and details.
-*/
+ * @package AkeebaReleaseSystem
+ * @copyright Copyright (c)2010-2013 Nicholas K. Dionysopoulos
+ * @license GNU General Public License version 3, or later
+ * @version $Id$
+ */
 
-defined('_JEXEC') or die('Restricted access'); ?>
+defined('_JEXEC') or die();
 
-<?php JHTML::_('behavior.tooltip'); ?>
-<?php JHTML::_('behavior.formvalidation'); ?>
+$editor = JFactory::getEditor();
 
-<?php
-	// Set toolbar items for the page
-	$edit		= JRequest::getVar('edit',true);
-	$text = !$edit ? JText::_('COM_TRACKS_New' ) : JText::_('COM_TRACKS_Edit' );
-	JToolBarHelper::title(   JText::_('COM_TRACKS_Project' ).': <small><small>[ ' . $text.' ]</small></small>' );
-	JToolBarHelper::save();
-	JToolBarHelper::apply();
-	if (!$edit)  {
-		JToolBarHelper::cancel();
-	} else {
-		// for existing items the button is renamed `close`
-		JToolBarHelper::cancel( 'cancel', 'Close' );
-	}
-	JToolBarHelper::help( 'screen.tracks.edit', true );
+$this->loadHelper('select');
+$this->loadHelper('filtering');
+
+FOFTemplateUtils::addCSS('media://com_tracks/css/tracksbackend.css');
+
 ?>
 
-<script language="javascript" type="text/javascript">
-	Joomla.submitbutton = function (pressbutton) {
-		var form = document.adminForm;
-		if (pressbutton == 'cancel') {
-			Joomla.submitform( pressbutton );
-			return;
-		}
+<form id="adminForm" class="form-validate " name="adminForm" method="post" action="index.php">
+	<input type="hidden" name="option" value="com_tracks" />
+	<input type="hidden" name="view" value="seasons" />
+	<input type="hidden" name="task" value="" />
+	<input type="hidden" name="id" value="<?php echo $this->item->id ?>" />
+	<input type="hidden" name="<?php echo JFactory::getSession()->getFormToken();?>" value="1" />
 
-		// do field validation
-    var validator = document.formvalidator;
-    if ( validator.validate(form.name) === false ){
-      alert( "<?php echo JText::_('COM_TRACKS_SEASON_NAME_IS_REQUIRED', true ); ?>" );
-    } else {
-      Joomla.submitform( pressbutton );
-    }
-	}
-</script>
-
-<div id="tracksmain">
-<form action="index.php" method="post" name="adminForm" id="adminForm">
-<div class="width-50">
-	<fieldset class="adminform">
-		<legend><?php echo JText::_('COM_TRACKS_Season' ); ?></legend>
-
-		<ul class="adminformlist">
-			<li>
-				<label for="name">
-					<?php echo JText::_('COM_TRACKS_Name' ); ?>:
-				</label>
-				<input class="text_area required" type="text" name="name" id="name" size="32" maxlength="250" value="<?php echo $this->season->name?>" />
-			</li>
-			<li>		
-				<label for="alias"> <?php echo JText::_('COM_TRACKS_Alias' ); ?>:</label>
-				<input class="text_area" type="text" name="alias" id="alias"
-	      size="32" maxlength="250" value="<?php echo $this->season->alias?>" />
-			</li>
-			<li>
-				<label for="published"><?php echo JText::_('COM_TRACKS_Published' ); ?>:</label>
-			<?php echo $this->lists['published']; ?>
-			</li>
-			<li>		
-				<label for="ordering"> <?php echo JText::_('COM_TRACKS_Ordering' ); ?>:</label>
-				<?php echo $this->lists['ordering']; ?>
-			</li>
-		</ul>					
-	</fieldset>
-</div>
-
-<div class="clr"></div>
-
-<input type="hidden" name="option" value="com_tracks" />
-<input type="hidden" name="controller" value="season" />
-<input type="hidden" name="cid[]" value="<?php echo $this->season->id; ?>" />
-<input type="hidden" name="task" value="" />
+	<div class="width-100 fltlft">
+		<fieldset class="adminform">
+			<legend><?php echo JText::_('COM_TRACKS_SEASON_BASIC_LABEL'); ?></legend>
+			<ul class="adminformlist">
+				<li>
+					<?php echo $this->form->getLabel('name'); ?>
+					<?php echo $this->form->getInput('name'); ?>
+				</li>
+				<li>
+					<?php echo $this->form->getLabel('alias'); ?>
+					<?php echo $this->form->getInput('alias'); ?>
+				</li>
+				<li>
+					<?php echo $this->form->getLabel('short_name'); ?>
+					<?php echo $this->form->getInput('short_name'); ?>
+				</li>
+				<li>
+					<?php echo $this->form->getLabel('published'); ?>
+					<?php echo $this->form->getInput('published'); ?>
+				</li>
+				<li>
+					<?php echo $this->form->getLabel('picture'); ?>
+					<?php echo $this->form->getInput('picture'); ?>
+				</li>
+				<li>
+					<?php echo $this->form->getLabel('picture_small'); ?>
+					<?php echo $this->form->getInput('picture_small'); ?>
+				</li>
+				<li>
+					<?php echo $this->form->getLabel('country_code'); ?>
+					<?php echo $this->form->getInput('country_code'); ?>
+				</li>
+				<li>
+					<?php echo $this->form->getLabel('admin_id'); ?>
+					<?php echo $this->form->getInput('admin_id'); ?>
+				</li>
+			</ul>
+			<div class="clr"></div>
+				<?php echo $this->form->getLabel('description'); ?>
+				<?php echo $this->form->getInput('description'); ?>
+			<div class="clr"></div>
+		</fieldset>
+	</div>
 </form>
-</div>
