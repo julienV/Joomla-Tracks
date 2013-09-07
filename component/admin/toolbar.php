@@ -53,4 +53,22 @@ class TracksToolbar extends FOFToolbar
 		JToolBarHelper::editListX();
 		JToolBarHelper::addNewX();
 	}
+
+	public function onIndividualsBrowse()
+	{
+		JToolBarHelper::title(JText::_('COM_TRACKS_Individuals'), 'generic.png' );
+
+		JToolBarHelper::deleteList();
+		JToolBarHelper::editListX();
+		JToolBarHelper::addNewX();
+		JToolBarHelper::assign();
+	}
+
+	public function onIndividualsAssign()
+	{
+		JToolBarHelper::title(JText::_('COM_TRACKS_Individuals'), 'generic.png' );
+
+		JToolBarHelper::save('saveassign', 'Save');
+		JToolBarHelper::back();
+	}
 }

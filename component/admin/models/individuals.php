@@ -34,6 +34,56 @@ class TracksModelIndividuals extends FOFModel
 			$query->where('LOWER( CONCAT(first_name, last_name) ) LIKE ' . $db->quote('%' . $filter . '%'));
 		}
 
+		$filter = $this->getState('cid');
+		if ($filter && is_array($filter) && count($filter))
+		{
+			$query->where('id IN (' . implode(', ', $filter) . ')');
+		}
+
 		return $query;
+	}
+
+	/**
+	 * return list of projects for select.
+	 *
+	 * @return array
+	 */
+	public function getProjectsOptions()
+	{
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+
+		$query->select('id AS value, name AS text');
+		$query->from('#__tracks_projects');
+		$query->order('name');
+
+		$db->setQuery($query);
+		$res = $db->loadObjectList();
+
+		return $res;
+	}
+
+	/**
+	 * Method to return a teams array (id, name)
+	 *
+	 * @access  public
+	 *
+	 * @return  array seasons
+	 *
+	 * @since   1.5
+	 */
+	public function getTeamsOptions()
+	{
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+
+		$query->select('id, name');
+		$query->from('#__tracks_teams');
+		$query->order('name');
+
+		$db->setQuery($query);
+		$res = $db->loadObjectList();
+
+		return $res;
 	}
 }

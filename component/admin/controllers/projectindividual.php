@@ -69,47 +69,4 @@ class TracksControllerProjectindividual extends FOFController
 
 		return true;
 	}
-
-	/**
-	 * save and assign
-	 *
-	 * @return void
-	 */
-	public function saveassign()
-	{
-		$cid = $this->input->get( 'cid', array(), 'post', 'array' );
-		$team_id = $this->input->get( 'team_id', array(), 'post', 'array' );
-		$numbers = $this->input->get( 'number', array(), 'post', 'array' );
-		$project_id = $this->input->get( 'project_id', 0, 'post', 'int' );
-		JArrayHelper::toInteger($cid);
-		JArrayHelper::toInteger($team_id);
-
-		if (count( $cid ) < 1)
-		{
-			throw new Exception(JText::_('COM_TRACKS_Select_an_individual_to_assign'), 500);
-		}
-
-		$rows = array();
-
-		foreach ($cid as $k => $id)
-		{
-			$row = new stdclass();
-			$row->individual_id = $cid[$k];
-			$row->team_id = $team_id[$k];
-			$row->number = $numbers[$k];
-			$row->project_id = $project_id;
-			$rows[] = $row;
-		}
-
-		$msg='';
-		$model = $this->getModel('projectindividual');
-
-		if(!$model->assign($rows))
-		{
-			$msg = $model->getError(true);
-		}
-
-		$link = 'index.php?option=com_tracks&view=projectindividuals';
-		$this->setRedirect($link, $msg);
-	}
 }

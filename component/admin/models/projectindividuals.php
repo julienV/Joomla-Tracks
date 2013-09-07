@@ -135,9 +135,8 @@ class TracksModelProjectindividuals extends FOFModel
 	 */
 	public function assign($rows)
 	{
-		$i = 0;
-		// count inserted
 		$rec = 0;
+		$new = $this->getTable();
 		for ($i = 0, $n = count($rows); $i < $n; $i++)
 		{
 			$row =& $rows[$i];
@@ -150,18 +149,21 @@ class TracksModelProjectindividuals extends FOFModel
 
 			if (count($this->_db->loadObjectList()))
 			{
-				// already assigned
+				// Already assigned
 				continue;
 			}
 
-			$new = $this->getTable();
+			$new->reset();
+			$new->set('id', null);
 			$new->bind($row);
+
 			// Store the item to the database
 			if (!$new->store())
 			{
 				$this->setError($this->_db->getErrorMsg());
 				return false;
 			}
+
 			$rec++;
 		}
 
