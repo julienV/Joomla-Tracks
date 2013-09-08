@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: roundresult.php 61 2008-04-24 15:20:36Z julienv $ 
+* @version    $Id: roundresult.php 61 2008-04-24 15:20:36Z julienv $
 * @package    JoomlaTracks
 * @copyright    Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license      GNU/GPL, see LICENSE.php
@@ -24,20 +24,20 @@ require_once( 'base.php' );
  * @since 0.1
  */
 class TracksModelTeam extends baseModel
-{   		
+{
 	var $_individuals = null;
-	
+
 	function __construct($config = array())
 	{
 		parent::__construct($config);
-		
+
 		$id = JRequest::getInt('t');
 		$project = JRequest::getInt('p');
-		
+
 		$this->setId($id);
 		$this->setProjectId($project);
 	}
-		
+
 
 	function setId($id)
 	{
@@ -45,9 +45,9 @@ class TracksModelTeam extends baseModel
 		$this->_data        = null;
 		$this->_individuals = null;
 	}
-	
+
 	function getData()
-	{		 
+	{
 		if ( empty($this->_data) )
 		{
 			$query =  ' SELECT t.* '
@@ -56,13 +56,13 @@ class TracksModelTeam extends baseModel
 
 			$this->_db->setQuery( $query );
 
-			if ( $result = $this->_db->loadObject() ) 
+			if ( $result = $this->_db->loadObject() )
 			{
 				$this->_data = $result;
 				$attribs['class']="pic";
-			  
+
 				if ($this->_data->picture != '') {
-					$this->_data->picture = JHTML::image(JURI::root().'media/com_tracks/images/teams/'.$this->_data->picture, $this->_data->name, $attribs);
+					$this->_data->picture = JHTML::image(JURI::root().'/'.$this->_data->picture, $this->_data->name, $attribs);
 				} else {
 					//$this->_data->picture = JHTML::image(JURI::root().'media/com_tracks/images/misc/tnnophoto.jpg', $this->_data->name, $attribs);
 				}
@@ -74,12 +74,12 @@ class TracksModelTeam extends baseModel
 		}
 		return $this->_data;
 	}
-    
+
 	function getIndividuals()
 	{
 		if (empty($this->_individuals))
 		{
-			$query = ' SELECT p.name as project_name, i.*, pi.number, pi.project_id, s.name, ' 
+			$query = ' SELECT p.name as project_name, i.*, pi.number, pi.project_id, s.name, '
 			       . ' CASE WHEN CHAR_LENGTH( i.alias ) THEN CONCAT_WS( \':\', i.id, i.alias ) ELSE i.id END AS slug, '
 			       . ' CASE WHEN CHAR_LENGTH( p.alias ) THEN CONCAT_WS( \':\', p.id, p.alias ) ELSE p.id END AS projectslug '
 			       . ' FROM #__tracks_individuals AS i '
@@ -92,7 +92,7 @@ class TracksModelTeam extends baseModel
 			       ;
 			$this->_db->setQuery($query);
 			$res = $this->_db->loadObjectList();
-			
+
 			// sort by projects
 			$proj = array();
 			foreach ((array) $res as $i)
@@ -102,7 +102,7 @@ class TracksModelTeam extends baseModel
 				}
 				$proj[$i->project_id][] = $i;
 			}
-			
+
 			$this->_individuals = $proj;
 		}
 		return $this->_individuals;

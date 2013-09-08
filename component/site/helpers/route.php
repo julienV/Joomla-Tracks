@@ -63,10 +63,10 @@ class TracksHelperRoute
 	public static function getEditIndividualRoute($id = 0)
 	{
 		$parts = array( "option" => "com_tracks",
-		                "view"   => "individual",
-		                "controller" => "individual" );
+		                "view"   => "individualedit",
+		                "task" => "edit" );
 		if ($id) {
-			$parts['i'] = $id;
+			$parts['id'] = $id;
 		}
 		return self::buildUrl( $parts );
 	}

@@ -32,6 +32,7 @@ require_once (JPATH_COMPONENT.DS.'controller.php');
 switch (JFactory::getApplication()->input->getCmd('view', ''))
 {
 	case 'teamedit':
+	case 'individualedit':
 		FOFDispatcher::getTmpInstance('com_tracks')->dispatch();
 		return;
 }

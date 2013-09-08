@@ -19,7 +19,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <h1><?php echo $this->data->first_name . ' ' . $this->data->last_name; ?></h1>
 
 <?php if ($this->show_edit_link): ?>
-<div id="editprofile"><a href="<?php echo JRoute::_( TracksHelperRoute::getEditIndividualRoute($this->data->id).'&task=edit' ); ?>"
+<div id="editprofile"><a href="<?php echo JRoute::_( TracksHelperRoute::getEditIndividualRoute($this->data->id) ); ?>"
        title ="<?php echo JText::_('COM_TRACKS_Edit_profile' ) ?>">
           <?php echo JText::_('COM_TRACKS_Edit_profile' ); ?>
           </a></div>

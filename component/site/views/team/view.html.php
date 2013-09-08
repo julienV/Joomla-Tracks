@@ -49,7 +49,7 @@ class TracksViewTeam extends JView
 		$document->setTitle($data->name);
 
 		$user = JFactory::getUser();
-		$this->canEdit = $user->authorise('core.manage', 'com_tracks') || $user->get('id') == $data->admin_id;
+		$this->canEdit = $user->get('id') && ($user->authorise('core.manage', 'com_tracks') || $user->get('id') == $data->admin_id);
 
 		$this->data = $data;
 		$this->individuals = $individuals;

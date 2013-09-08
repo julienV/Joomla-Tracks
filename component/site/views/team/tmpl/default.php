@@ -34,6 +34,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <div id="teamdetails">
 	<?php echo $this->data->description; ?>
 </div>
+<div class="clear"></div>
 
 <?php if (count($this->individuals)): ?>
 	<h2 class="team-inds"><?php echo JTExt::_('COM_TRACKS_VIEW_TEAM_INDIVIDUALS'); ?></h2>

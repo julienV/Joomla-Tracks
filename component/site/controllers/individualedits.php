@@ -20,7 +20,7 @@ defined('_JEXEC') or die();
  * @package  Tracks
  * @since    2.0
  */
-class TracksControllerTeamedits extends FOFController
+class TracksControllerIndividualedits extends FOFController
 {
 	public function cancel()
 	{
@@ -36,7 +36,7 @@ class TracksControllerTeamedits extends FOFController
 		// Remove any saved data
 		JFactory::getSession()->set($model->getHash() . 'savedata', null);
 
-		$url = TracksHelperRoute::getTeamRoute($model->getId());
+		$url = TracksHelperRoute::getIndividualRoute($model->getId());
 		$this->setRedirect($url);
 
 		return true;
@@ -50,9 +50,9 @@ class TracksControllerTeamedits extends FOFController
 		if ($result)
 		{
 			$id  = $model->getId();
-			$url = TracksHelperRoute::getTeamRoute($id);
+			$url = TracksHelperRoute::getIndividualRoute($id);
 
-			$this->setRedirect($url, JText::_('COM_TRACKS_TEAM_SAVED'));
+			$this->setRedirect($url, JText::_('COM_TRACKS_INDIVIDUAL_SAVED'));
 			return true;
 		}
 
