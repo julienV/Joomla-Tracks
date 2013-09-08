@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id$ 
+* @version    $Id$
 * @package    JoomlaTracks
 * @copyright  Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license    GNU/GPL, see LICENSE.php
@@ -14,7 +14,7 @@
 defined('_JEXEC') or die('Restricted access');
 
 class TracksHelperRoute
-{	
+{
 	/**
 	 * return link to details view of specified event
 	 * @param int $id
@@ -30,7 +30,7 @@ class TracksHelperRoute
 		}
 		return self::buildUrl( $parts );
 	}
-	
+
 	/**
 	 * return link to details view of specified event
 	 * @param int $id
@@ -46,11 +46,11 @@ class TracksHelperRoute
 		}
 		return self::buildUrl( $parts );
 	}
-	
+
 	public static function getIndividualRoute($id = 0, $project = 0)
 	{
 		$parts = array( "option" => "com_tracks",
-		                "view"   => "individual" );		
+		                "view"   => "individual" );
 		if ($id) {
 			$parts['i'] = $id;
 		}
@@ -59,32 +59,32 @@ class TracksHelperRoute
 		}
 		return self::buildUrl( $parts );
 	}
-	
+
 	public static function getEditIndividualRoute($id = 0)
 	{
 		$parts = array( "option" => "com_tracks",
 		                "view"   => "individual",
-		                "controller" => "individual" );		
+		                "controller" => "individual" );
 		if ($id) {
 			$parts['i'] = $id;
 		}
 		return self::buildUrl( $parts );
 	}
-	
+
 	public static function getProjectRoute($id = 0)
 	{
 		$parts = array( "option" => "com_tracks",
-		                "view"   => "project" );		
+		                "view"   => "project" );
 		if ($id) {
 			$parts['p'] = $id;
 		}
 		return self::buildUrl( $parts );
 	}
-	
+
 	public static function getTeamRoute($id = 0, $project = 0)
 	{
 		$parts = array( "option" => "com_tracks",
-		                "view"   => "team" );		
+		                "view"   => "team" );
 		if ($id) {
 			$parts['t'] = $id;
 		}
@@ -93,46 +93,70 @@ class TracksHelperRoute
 		}
 		return self::buildUrl( $parts );
 	}
-	
+
+	/**
+	 * Get edit team route
+	 *
+	 * @param   int  $id      team id
+	 * @param   int $project  the project id, if being edited from a project
+	 *
+	 * @return string
+	 */
+	public static function getTeamEditRoute($id = 0, $project = 0)
+	{
+		$parts = array( "option" => "com_tracks",
+			"view"   => "teamedit",
+			"task" => "edit");
+
+		$parts['id'] = $id;
+
+		if ($project)
+		{
+			$parts['project_id'] = $project;
+		}
+
+		return self::buildUrl( $parts );
+	}
+
 	public static function getRankingRoute($id = 0)
 	{
 		$parts = array( "option" => "com_tracks",
-		                "view"   => "ranking" );		
+		                "view"   => "ranking" );
 		if ($id) {
 			$parts['p'] = $id;
 		}
 		return self::buildUrl( $parts );
 	}
-	
+
 	public static function getProjectResultRoute($id = 0)
 	{
 		$parts = array( "option" => "com_tracks",
-		                "view"   => "projectresults" );		
+		                "view"   => "projectresults" );
 		if ($id) {
 			$parts['p'] = $id;
 		}
 		return self::buildUrl( $parts );
 	}
-	
+
 	public static function getTeamRankingRoute($id = 0)
 	{
 		$parts = array( "option" => "com_tracks",
-		                "view"   => "teamranking" );		
+		                "view"   => "teamranking" );
 		if ($id) {
 			$parts['p'] = $id;
 		}
 		return self::buildUrl( $parts );
 	}
-	
+
 	public static function buildUrl($parts)
-	{		
+	{
 		if($item = self::_findItem($parts)) {
 			$parts['Itemid'] = $item->id;
 		};
-		
+
 		return 'index.php?'.JURI::buildQuery( $parts );
 	}
-	
+
 	/**
 	 * Determines the Itemid
 	 *
@@ -150,46 +174,46 @@ class TracksHelperRoute
 		$menus	= JSite::getMenu();
 		$items	= $menus->getItems('component_id', $component->id);
 		$user 	= JFactory::getUser();
-				
-		if ($items) 
+
+		if ($items)
 		{
 			foreach($items as $item)
-			{	
+			{
 				if ((@$item->query['view'] == $query['view']))
-				{					
+				{
 					switch ($query['view'])
 					{
 						case 'individual':
 							if ((int) @$item->query['i'] == (int) @$query['i']) {
 								return $item;
-							}					
+							}
 							break;
-							
+
 						case 'ranking':
 						case 'teamranking':
 							if ((int) @$item->query['p'] == (int) @$query['p']) {
 								return $item;
-							}					
+							}
 							break;
-							
+
 						case 'round':
 							if ((int) @$item->query['r'] == (int) @$query['r']) {
 								return $item;
-							}						
+							}
 						  break;
-							
+
 						case 'roundresult':
 							if ((int) @$item->query['pr'] == (int) @$query['pr']) {
 								return $item;
-							}						
+							}
 						  break;
-						  
+
 						case 'team':
 							if ((int) @$item->query['t'] == (int) @$query['t']) {
 								return $item;
-							}					
+							}
 							break;
-							
+
 						default:
 							if (!isset($query['id']) || (int) @$item->query['id'] == (int) @$query['id']) {
 								return $item;

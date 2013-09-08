@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: default.php 101 2008-05-22 08:32:12Z julienv $ 
+* @version    $Id: default.php 101 2008-05-22 08:32:12Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -9,13 +9,20 @@
 * is derivative of works licensed under the GNU General Public License or
 * other free or open source software licenses.
 * See COPYRIGHT.php for copyright notices and details.
-*/ 
+*/
  // no direct access
 defined('_JEXEC') or die('Restricted access'); ?>
 
 <div id="tracks">
 <!-- Title -->
 <h1><?php echo $this->data->name; ?></h1>
+	<?php if ($this->canEdit): ?>
+		<?php
+			$url = TracksHelperRoute::getTeamEditRoute($this->data->id);
+			$link = JHtml::link($url, JText::_('COM_TRACKS_EDIT'));
+		?>
+		<div class="tracks-edit-link"><?php echo $link; ?></div>
+	<?php endif; ?>
 
 <!-- Content -->
 <?php if ($this->data->picture): ?>

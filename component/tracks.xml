@@ -78,19 +78,21 @@
 			are copied from /admin/ in the package -->
 
 		<files folder="admin">
-			<filename>tracks.php</filename>
 			<filename>access.xml</filename>
 			<filename>config.xml</filename>
 			<filename>controller.php</filename>
+			<filename>copyright.txt</filename>
 			<filename>dispatcher.php</filename>
-			<filename>toolbar.php</filename>
+			<filename>fof.xml</filename>
 			<filename>helper.php</filename>
 			<filename>index.html</filename>
 			<filename>license.txt</filename>
-			<filename>copyright.txt</filename>
+			<filename>toolbar.php</filename>
+			<filename>tracks.php</filename>
 			<folder>abstract</folder>
 			<folder>controllers</folder>
 			<folder>elements</folder>
+			<folder>fields</folder>
 			<folder>help</folder>
 			<folder>helpers</folder>
 			<folder>language</folder>

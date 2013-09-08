@@ -20,7 +20,7 @@ table#tracksprofile th {
 	width: 140px;
 	font-weight: bold;
 	background-color: #F6F6F6;
-} 
+}
 
 #tracks ul.individualsGallery {
 	list-style-image:none;
@@ -127,4 +127,8 @@ img.round-image {
 
 div.tracks-clear {
 	clear:both;
+}
+
+div.team-page div.edit-pic {
+    display: inline-block;
 }

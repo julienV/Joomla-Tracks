@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: tracks.php 109 2008-05-24 11:05:07Z julienv $ 
+* @version    $Id: tracks.php 109 2008-05-24 11:05:07Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -14,11 +14,27 @@
 // no direct access
 defined('_JEXEC') or die('Restricted access');
 
+// Load FOF
+include_once JPATH_LIBRARIES.'/fof/include.php';
+if(!defined('FOF_INCLUDED'))
+{
+	throw new Exception('FOF is not installed', 500);
+
+	return;
+}
+
 // require core
 require_once (JPATH_COMPONENT.DS.'tracks.core.php');
 
 // Require the base controller
 require_once (JPATH_COMPONENT.DS.'controller.php');
+
+switch (JFactory::getApplication()->input->getCmd('view', ''))
+{
+	case 'teamedit':
+		FOFDispatcher::getTmpInstance('com_tracks')->dispatch();
+		return;
+}
 
 // Require specific controller if requested
 if($controller = JRequest::getWord('controller')) {

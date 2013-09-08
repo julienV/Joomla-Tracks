@@ -87,8 +87,8 @@
 		<field
 			name="picture"
 			type="media"
-			label="COM_TRACKS_INDIVIDUALPICTURE"
-			description="COM_TRACKS_INDIVIDUALPICTUREDESC"
+			label="COM_TRACKS_TEAM_PICTURE"
+			description="COM_TRACKS_TEAM_PICTURE_DESC"
 			class="inputbox"
 			preview="show"
 			directory="images/com_tracks/individuals/"/>
@@ -96,8 +96,8 @@
 		<field
 			name="picture_small"
 			type="media"
-			label="COM_TRACKS_INDIVIDUALSMALLPICTURE"
-			description="COM_TRACKS_INDIVIDUALSMALLPICTUREDESC"
+			label="COM_TRACKS_TEAM_SMALL_PICTURE"
+			description="COM_TRACKS_TEAM_SMALL_PICTURE_DESC"
 			class="inputbox"
 			preview="show"
 			directory="images/com_tracks/individuals/"/>

@@ -39,7 +39,20 @@ class TracksController extends JController
 		parent::__construct($config);
 	}
 
-	function display()
+	/**
+	 * Typical view method for MVC based architecture
+	 *
+	 * This function is provide as a default implementation, in most cases
+	 * you will need to override it in your own controllers.
+	 *
+	 * @param   boolean  $cachable   If true, the view output will be cached
+	 * @param   array    $urlparams  An array of safe url parameters and their variable types, for valid values see {@link JFilterInput::clean()}.
+	 *
+	 * @return  JController  A JController object to support chaining.
+	 *
+	 * @since   11.1
+	 */
+	public function display($cachable = false, $urlparams = false)
 	{
 		// Set a default view if none exists
 		if ( ! JRequest::getCmd( 'view' ) ) {
@@ -49,4 +62,3 @@ class TracksController extends JController
 		parent::display();
 	}
 }
-?>
