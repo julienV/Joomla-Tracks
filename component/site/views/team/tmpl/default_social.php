@@ -37,7 +37,7 @@ foreach ($socials as $s)
 if ($show):
 ?>
 <div class="team-social">
-	<h3><?php echo JTExt::_('COM_TRACKS_VIEW_TEAM_INDIVIDUALS'); ?></h3>
+	<h3><?php echo JTExt::_('COM_TRACKS_TEAM_SOCIAL_LINKS'); ?></h3>
 	<ul>
 		<?php if ($this->data->url): ?>
 			<li><span class="social-lbl"><?php echo JText::_('COM_TRACKS_TEAM_SOCIAL_URL'); ?></span>

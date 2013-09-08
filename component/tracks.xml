@@ -35,11 +35,12 @@
 	</update>
 
 	<files folder="site">
-		<filename>tracks.php</filename>
-		<filename>tracks.core.php</filename>
 		<filename>controller.php</filename>
-		<filename>router.php</filename>
+		<filename>dispatcher.php</filename>
 		<filename>index.html</filename>
+		<filename>router.php</filename>
+		<filename>tracks.core.php</filename>
+		<filename>tracks.php</filename>
 		<folder>controllers</folder>
 		<folder>helpers</folder>
 		<folder>language</folder>
