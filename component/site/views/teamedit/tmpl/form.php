@@ -79,6 +79,18 @@ JHtml::_('behavior.formvalidation');
 	</fieldset>
 
 	<fieldset>
+		<legend><?php echo Jtext::_('COM_TRACKS_ITEMS_GROUP_VEHICLE'); ?></legend>
+
+		<div class="formelm">
+			<?php echo $this->form->getLabel('vehicle_picture'); ?>
+			<div class="edit-pic"><?php echo $this->form->getInput('vehicle_picture'); ?></div>
+		</div>
+
+		<?php echo $this->form->getInput('vehicle_description'); ?>
+
+	</fieldset>
+
+	<fieldset>
 		<legend><?php echo Jtext::_('COM_TRACKS_TEAM_SOCIAL_LINKS'); ?></legend>
 
 		<div class="formelm">

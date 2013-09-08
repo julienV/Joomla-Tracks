@@ -92,7 +92,7 @@
 			description="COM_TRACKS_TEAM_PICTURE_DESC"
 			class="inputbox"
 			preview="show"
-			directory="images/com_tracks/individuals/"/>
+			directory="images/com_tracks/teams/"/>
 
 		<field
 			name="picture_small"
@@ -101,7 +101,7 @@
 			description="COM_TRACKS_TEAM_SMALL_PICTURE_DESC"
 			class="inputbox"
 			preview="show"
-			directory="images/com_tracks/individuals/"/>
+			directory="images/com_tracks/teams/"/>
 
 		<field
 			name="country_code"
@@ -126,8 +126,8 @@
 	</fieldset>
 
 	<fieldset name="description_group"
-			  label="COM_TODO_ITEMS_GROUP_DESCRIPTION"
-			  description="COM_TODO_ITEMS_GROUP_DESCRIPTION_DESC"
+			  label="COM_TRACKS_ITEMS_GROUP_DESCRIPTION"
+			  description="COM_TRACKS_ITEMS_GROUP_DESCRIPTION_DESC"
 			  class="span6"
 			>
 
@@ -138,6 +138,29 @@
 			description="COM_TRACKS_Description"
 			filter="JComponentHelper::filterText" buttons="true"
 			/>
+	</fieldset>
+
+	<fieldset name="vehicle_group"
+			  label="COM_TRACKS_ITEMS_GROUP_VEHICLE"
+			  description="COM_TRACKS_ITEMS_GROUP_VEHICLE_DESC"
+			  class="span6"
+			>
+		<field
+				name="vehicle_picture"
+				type="media"
+				label="COM_TRACKS_TEAM_VEHICLE_PICTURE"
+				description="COM_TRACKS_TEAM_VEHICLE_PICTURE_DESC"
+				class="inputbox"
+				preview="show"
+				directory="images/com_tracks/vehicles/"/>
+
+		<field
+				name="vehicle_description"
+				type="editor"
+				label="COM_TRACKS_VEHICLE_DESCRIPTION"
+				description="COM_TRACKS_VEHICLE_DESCRIPTION_DESC"
+				filter="JComponentHelper::filterText" buttons="true"
+				/>
 	</fieldset>
 
 	<fieldset name="social"

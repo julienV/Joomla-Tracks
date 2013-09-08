@@ -106,4 +106,20 @@ FOFTemplateUtils::addCSS('media://com_tracks/css/tracksbackend.css');
 				</li>
 		</fieldset>
 	</div>
+
+	<div class="width-60 fltlft">
+		<fieldset class="adminform">
+			<legend><?php echo JText::_('COM_TRACKS_ITEMS_GROUP_VEHICLE'); ?></legend>
+			<ul class="adminformlist">
+				<li>
+					<?php echo $this->form->getLabel('vehicle_picture'); ?>
+					<?php echo $this->form->getInput('vehicle_picture'); ?>
+				</li>
+			</ul>
+			<div class="clr"></div>
+			<?php echo $this->form->getLabel('vehicle_description'); ?>
+			<?php echo $this->form->getInput('vehicle_description'); ?>
+			<div class="clr"></div>
+		</fieldset>
+	</div>
 </form>

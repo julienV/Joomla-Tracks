@@ -38,6 +38,8 @@ defined('_JEXEC') or die('Restricted access'); ?>
 </div>
 <div class="clear"></div>
 
+<?php echo $this->loadTemplate('vehicle'); ?>
+
 <?php if (count($this->individuals)): ?>
 	<h2 class="team-inds"><?php echo JTExt::_('COM_TRACKS_VIEW_TEAM_INDIVIDUALS'); ?></h2>
 	<?php foreach ($this->individuals as $proj): ?>

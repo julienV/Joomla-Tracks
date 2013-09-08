@@ -56,6 +56,8 @@ CREATE TABLE IF NOT EXISTS `#__tracks_teams` (
   `instagram` varchar(255) NULL,
   `pinterest` varchar(255) NULL,
   `vimeo` varchar(255) NULL,
+  `vehicle_description` text NULL,
+  `vehicle_picture` varchar(255) NULL,
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL,
   PRIMARY KEY  (`id`)
