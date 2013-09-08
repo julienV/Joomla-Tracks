@@ -27,6 +27,8 @@ JHtml::_('behavior.formvalidation');
 	}
 </script>
 
+<h2><?php echo JText::_('COM_TRACKS_VIEW_TEAM_EDIT'); ?></h2>
+
 <div class="edit team-page">
 <form id="adminForm" class="form-validate " name="adminForm" method="post" action="index.php">
 	<input type="hidden" value="com_tracks" name="option">
@@ -76,5 +78,49 @@ JHtml::_('behavior.formvalidation');
 		<?php echo $this->form->getInput('description'); ?>
 	</fieldset>
 
+	<fieldset>
+		<legend><?php echo Jtext::_('COM_TRACKS_TEAM_SOCIAL_LINKS'); ?></legend>
+
+		<div class="formelm">
+			<?php echo $this->form->getLabel('url'); ?>
+			<?php echo $this->form->getInput('url'); ?>
+		</div>
+
+		<div class="formelm">
+			<?php echo $this->form->getLabel('facebook'); ?>
+			<?php echo $this->form->getInput('facebook'); ?>
+		</div>
+
+		<div class="formelm">
+			<?php echo $this->form->getLabel('twitter'); ?>
+			<?php echo $this->form->getInput('twitter'); ?>
+		</div>
+
+		<div class="formelm">
+			<?php echo $this->form->getLabel('googleplus'); ?>
+			<?php echo $this->form->getInput('googleplus'); ?>
+		</div>
+
+		<div class="formelm">
+			<?php echo $this->form->getLabel('youtube'); ?>
+			<?php echo $this->form->getInput('youtube'); ?>
+		</div>
+
+		<div class="formelm">
+			<?php echo $this->form->getLabel('instagram'); ?>
+			<?php echo $this->form->getInput('instagram'); ?>
+		</div>
+
+		<div class="formelm">
+			<?php echo $this->form->getLabel('pinterest'); ?>
+			<?php echo $this->form->getInput('pinterest'); ?>
+		</div>
+
+		<div class="formelm">
+			<?php echo $this->form->getLabel('vimeo'); ?>
+			<?php echo $this->form->getInput('vimeo'); ?>
+		</div>
+
+	</fieldset>
 </form>
 </div>

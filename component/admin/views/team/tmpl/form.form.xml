@@ -4,10 +4,11 @@
 	validate="true"
 	>
 	<fieldset name="basic_configuration"
-			  label="COM_TRACKS_TEAMS_GROUP_BASIC"
-			  description="COM_TRACKS_TEAMS_GROUP_BASIC_DESC"
-			  class="span6"
-			>
+		  label="COM_TRACKS_TEAMS_GROUP_BASIC"
+		  description="COM_TRACKS_TEAMS_GROUP_BASIC_DESC"
+		  class="span6"
+		>
+
 		<field
 			name="id"
 			type="text"
@@ -137,5 +138,69 @@
 			description="COM_TRACKS_Description"
 			filter="JComponentHelper::filterText" buttons="true"
 			/>
+	</fieldset>
+
+	<fieldset name="social"
+		  label="COM_TRACKS_TEAM_SOCIAL_LINKS"
+		  description="COM_TRACKS_TEAM_SOCIAL_LINKS_DESC"
+		  class="span6"
+		>
+
+		<field
+			name="url"
+			type="url"
+			label="COM_TRACKS_TEAM_SOCIAL_URL"
+			description="COM_TRACKS_TEAM_SOCIAL_URL_DESC"
+			class="inputbox"/>
+
+		<field
+			name="facebook"
+			type="text"
+			label="COM_TRACKS_TEAM_SOCIAL_FACEBOOK"
+			description="COM_TRACKS_TEAM_SOCIAL_FACEBOOK_DESC"
+			class="inputbox"/>
+
+		<field
+			name="twitter"
+			type="text"
+			label="COM_TRACKS_TEAM_SOCIAL_TWITTER"
+			description="COM_TRACKS_TEAM_SOCIAL_TWITTER_DESC"
+			class="inputbox"/>
+
+		<field
+			name="googleplus"
+			type="text"
+			label="COM_TRACKS_TEAM_SOCIAL_GOOGLEPLUS"
+			description="COM_TRACKS_TEAM_SOCIAL_GOOGLEPLUS_DESC"
+			class="inputbox"/>
+
+		<field
+			name="youtube"
+			type="text"
+			label="COM_TRACKS_TEAM_SOCIAL_YOUTUBE"
+			description="COM_TRACKS_TEAM_SOCIAL_YOUTUBE_DESC"
+			class="inputbox"/>
+
+		<field
+			name="instagram"
+			type="text"
+			label="COM_TRACKS_TEAM_SOCIAL_INSTAGRAM"
+			description="COM_TRACKS_TEAM_SOCIAL_INSTAGRAM_DESC"
+			class="inputbox"/>
+
+		<field
+			name="pinterest"
+			type="text"
+			label="COM_TRACKS_TEAM_SOCIAL_PINTEREST"
+			description="COM_TRACKS_TEAM_SOCIAL_PINTEREST_DESC"
+			class="inputbox"/>
+
+		<field
+			name="vimeo"
+			type="text"
+			label="COM_TRACKS_TEAM_SOCIAL_VIMEO"
+			description="COM_TRACKS_TEAM_SOCIAL_VIMEO_DESC"
+			class="inputbox"/>
+
 	</fieldset>
 </form>
