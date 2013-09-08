@@ -22,6 +22,16 @@ defined('_JEXEC') or die();
  */
 class TracksControllerIndividualedits extends FOFController
 {
+	/**
+	 * Public constructor of the Controller class
+	 *
+	 * @param   array  $config  Optional configuration parameters
+	 */
+	public function __construct($config = array())
+	{
+		parent::__construct($config);
+	}
+
 	public function cancel()
 	{
 		$model = $this->getThisModel();
@@ -57,5 +67,96 @@ class TracksControllerIndividualedits extends FOFController
 		}
 
 		return $result;
+	}
+
+	protected function onBeforeAdd()
+	{
+		return $this->onBeforeEdit();
+	}
+
+	public function add()
+	{
+		return $this->edit();
+	}
+
+	/**
+	 * ACL check before editing a record
+	 *
+	 * @return  boolean  True to allow the method to run
+	 */
+	protected function onBeforeEdit()
+	{
+		$user = JFactory::getUser();
+
+		if (!($user))
+		{
+			throw new Exception('access not allowed', 403);
+		}
+
+		$id = $this->input->getInt('id', 0);
+
+		if (!$id)
+		{
+			$allow_register = JComponentHelper::getParams('com_tracks')->get('user_registration', 0);
+
+			if (!$allow_register)
+			{
+				throw new Exception('Create individuals not allowed', 403);
+			}
+
+			// If the user is logged, check if he already has a profile
+			$model = $this->getThisModel();
+			$ind = $model->getUserIndividual($user->get('id'));
+
+			$model->setId($ind);
+		}
+
+		return true;
+	}
+
+	/**
+	 * Execute something before applySave is called. Return false to prevent
+	 * applySave from executing.
+	 *
+	 * @param   array  &$data  The data upon which applySave will act
+	 *
+	 * @return  boolean  True to allow applySave to run
+	 */
+	protected function onBeforeApplySave(&$data)
+	{
+		if (!$data['id'])
+		{
+			if (!JComponentHelper::getParams('com_tracks')->get('user_registration', 0))
+			{
+				throw new Exception('Create individuals not allowed', 403);
+			}
+
+			// Set user id to current user
+			$data['user_id'] = JFactory::getUser()->get('id');
+
+			return true;
+		}
+
+		// Else, make sure the user can actually edit this record
+		$model = $this->getThisModel();
+		$model->setId((int) $data['id']);
+		$ind = $model->getItem();
+
+		$user = JFactory::getUser();
+
+		if (!$ind->user_id && !$user->authorise('core.manage', 'com_tracks'))
+		{
+			throw new Exception('Edit individuals not allowed', 403);
+		}
+		elseif (!$ind->user_id)
+		{
+			$data['user_id'] = JFactory::getUser()->get('id');
+		}
+		elseif (!($ind->user_id == JFactory::getUser()->get('id') || $user->authorise('core.manage', 'com_tracks')))
+		{
+			throw new Exception('Edit individuals not allowed', 403);
+		}
+
+		return true;
 	}
 }

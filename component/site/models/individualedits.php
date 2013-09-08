@@ -38,4 +38,31 @@ class TracksModelIndividualedits extends FOFModel
 	{
 		return JPATH_COMPONENT_ADMINISTRATOR . '/views/individual/tmpl/form.form.xml';
 	}
+
+	/**
+	 * return individual id for user
+	 *
+	 * @param   int  $user_id  user id
+	 *
+	 * @return int
+	 */
+	public function getUserIndividual($user_id)
+	{
+		if (!$user_id)
+		{
+			return false;
+		}
+
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+
+		$query->select('id');
+		$query->from('#__tracks_individuals');
+		$query->where('user_id = ' . (int) $user_id);
+
+		$db->setQuery($query);
+		$res = $db->loadResult();
+
+		return $res;
+	}
 }
