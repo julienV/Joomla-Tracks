@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Tracks" default="dev-release" basedir=".">
+<project name="Tracks" default="site" basedir=".">
 	<property file="build/build.properties" />
 
 	<!-- Default properties, set only if not already assigned in the build.properties file -->
@@ -151,6 +151,12 @@
 		<!-- Create the package -->
 		<tar basedir="${dirs.tmp}/${dirname}" destfile="${dirs.release}/${myp}/${dirname}-${version}.tar.gz" includeemptydirs="true" compression="gzip" />
 	</target>
+
+	<!--
+	====================================================================================================
+	Tasks - Copy to test site
+	====================================================================================================
+	-->
 
 	<target name="site" description="Copies files to a existing joomla site" depends="setup-properties">
         <echo message="Copying administrator component..." />

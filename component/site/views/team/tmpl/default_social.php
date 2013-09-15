@@ -13,79 +13,21 @@
  // no direct access
 defined('_JEXEC') or die('Restricted access');
 
-$socials = array(
-	'url',
-	'facebook',
-	'twitter',
-	'googleplus',
-	'youtube',
-	'instagram',
-	'pinterest',
-	'vimeo',
-);
+$socials = TracksHelperTools::getTeamSocialItems($this->data);
 
-$show = false;
-
-foreach ($socials as $s)
-{
-	if ($this->data->{$s})
-	{
-		$show = true;
-		break;
-	}
-}
-if ($show):
+if (count($socials)):
 ?>
 <div class="team-social">
 	<h3><?php echo JTExt::_('COM_TRACKS_TEAM_SOCIAL_LINKS'); ?></h3>
 	<ul>
-		<?php if ($this->data->url): ?>
-			<li><span class="social-lbl"><?php echo JText::_('COM_TRACKS_TEAM_SOCIAL_URL'); ?></span>
-			<a href="<?php echo $this->data->url; ?>"><?php echo $this->data->url; ?></a>
-			</li>
-		<?php endif ;?>
+		<?php foreach ($socials as $name => $s): ?>
 
-		<?php if ($this->data->facebook): ?>
-			<li><span class="social-lbl"><?php echo JText::_('COM_TRACKS_TEAM_SOCIAL_facebook'); ?></span>
-				<?php echo JHtml::link('http://www.facebook.com/' . $this->data->facebook, $this->data->facebook);?>
-			</li>
-		<?php endif ;?>
 
-		<?php if ($this->data->twitter): ?>
-			<li><span class="social-lbl"><?php echo JText::_('COM_TRACKS_TEAM_SOCIAL_twitter'); ?></span>
-				<?php echo JHtml::link('http://www.twitter.com/' . $this->data->twitter, $this->data->twitter);?>
+			<li class="ts-<?php echo $name; ?>"><span class="social-lbl"><?php echo $s->label; ?></span>
+				<?php echo JHtml::link($s->link, JHtml::image($s->icon, $s->label, null, true)); ?>
 			</li>
-		<?php endif ;?>
 
-		<?php if ($this->data->googleplus): ?>
-			<li><span class="social-lbl"><?php echo JText::_('COM_TRACKS_TEAM_SOCIAL_googleplus'); ?></span>
-				<?php echo JHtml::link('http://plus.google.com/' . $this->data->googleplus, $this->data->googleplus);?>
-			</li>
-		<?php endif ;?>
-
-		<?php if ($this->data->youtube): ?>
-			<li><span class="social-lbl"><?php echo JText::_('COM_TRACKS_TEAM_SOCIAL_youtube'); ?></span>
-				<?php echo JHtml::link('http://www.youtube.com/user/' . $this->data->youtube, $this->data->youtube);?>
-			</li>
-		<?php endif ;?>
-
-		<?php if ($this->data->instagram): ?>
-			<li><span class="social-lbl"><?php echo JText::_('COM_TRACKS_TEAM_SOCIAL_instagram'); ?></span>
-				<?php echo JHtml::link('http://www.instagram.com/' . $this->data->instagram, $this->data->instagram);?>
-			</li>
-		<?php endif ;?>
-
-		<?php if ($this->data->pinterest): ?>
-			<li><span class="social-lbl"><?php echo JText::_('COM_TRACKS_TEAM_SOCIAL_pinterest'); ?></span>
-				<?php echo JHtml::link('http://www.pinterest.com/' . $this->data->pinterest, $this->data->pinterest);?>
-			</li>
-		<?php endif ;?>
-
-		<?php if ($this->data->vimeo): ?>
-			<li><span class="social-lbl"><?php echo JText::_('COM_TRACKS_TEAM_SOCIAL_vimeo'); ?></span>
-				<?php echo JHtml::link('http://www.vimeo.com/' . $this->data->pinterest, $this->data->vimeo);?>
-			</li>
-		<?php endif ;?>
+		<?php endforeach ;?>
 	</ul>
 </div>
 <?php endif;

@@ -34,7 +34,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <div id="teamdetails">
 	<?php echo $this->data->description; ?>
 
-	<?php echo $this->loadTemplate('social'); ?>
+	<?php // echo $this->loadTemplate('social'); ?>
 </div>
 <div class="clear"></div>
 
