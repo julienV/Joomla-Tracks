@@ -175,45 +175,52 @@ class com_tracksInstallerScript
 		$installer = new JInstaller();
 
 		// Install plugins
-		foreach ($manifest->plugins->plugin as $plugin)
+		if (isset($manifest->plugins))
 		{
-			$attributes = $plugin->attributes();
-			$plg = $source . '/' . $attributes['folder'] . '/' . $attributes['plugin'];
-
-			$new = ($attributes['new']) ? '&nbsp;(<span class="green">New in v.' . $attributes['new'] . '!</span>)' : '';
-
-			if ($installer->install($plg))
+			foreach ($manifest->plugins->plugin as $plugin)
 			{
-				// Autopublish the plugin
-				$query = ' UPDATE #__extensions SET enabled = 1 WHERE folder = ' . $db->Quote($attributes['group']) . ' AND element = ' . $db->Quote($attributes['plugin']);
-				$db->setQuery($query);
-				$db->query();
-				$this->installed_plugs[] = array('plugin' => $attributes['plugin'] . $new, 'group' => $attributes['group'], 'upgrade' => true);
-			}
-			else
-			{
-				$this->installed_plugs[] = array('plugin' => $attributes['plugin'], 'group' => $attributes['group'], 'upgrade' => false);
-				$this->iperror[] = JText::_('Error installing plugin') . ': ' . $attributes['plugin'];
+				$attributes = $plugin->attributes();
+				$plg = $source . '/' . $attributes['folder'] . '/' . $attributes['plugin'];
+
+				$new = ($attributes['new']) ? '&nbsp;(<span class="green">New in v.' . $attributes['new'] . '!</span>)' : '';
+
+				if ($installer->install($plg))
+				{
+					// Autopublish the plugin
+					$query = ' UPDATE #__extensions SET enabled = 1 WHERE folder = ' . $db->Quote($attributes['group']) . ' AND element = ' . $db->Quote($attributes['plugin']);
+					$db->setQuery($query);
+					$db->query();
+					$this->installed_plugs[] = array('plugin' => $attributes['plugin'] . $new, 'group' => $attributes['group'], 'upgrade' => true);
+				}
+				else
+				{
+					$this->installed_plugs[] = array('plugin' => $attributes['plugin'], 'group' => $attributes['group'], 'upgrade' => false);
+					$this->iperror[] = JText::_('Error installing plugin') . ': ' . $attributes['plugin'];
+				}
 			}
 		}
-		return true;
 
 		// Install modules
-		foreach ($manifest->modules->module as $module)
+		if (isset($manifest->modules))
 		{
-			$attributes = $module->attributes();
-			$mod = $source . '/' . $attributes['folder'] . '/' . $attributes['module'];
-			$new = ($attributes['new']) ? '&nbsp;(<span class="green">New in v.' . $attributes['new'] . '!</span>)' : '';
-			if ($installer->install($mod))
+			foreach ($manifest->modules->module as $module)
 			{
-				$this->installed_mods[] = array('module' => $attributes['module'] . $new, 'upgrade' => true);
-			}
-			else
-			{
-				$this->installed_mods[] = array('module' => $attributes['module'], 'upgrade' => false);
-				$this->iperror[] = JText::_('Error installing module') . ': ' . $attributes['module'];
+				$attributes = $module->attributes();
+				$mod = $source . '/' . $attributes['folder'] . '/' . $attributes['module'];
+				$new = ($attributes['new']) ? '&nbsp;(<span class="green">New in v.' . $attributes['new'] . '!</span>)' : '';
+				if ($installer->install($mod))
+				{
+					$this->installed_mods[] = array('module' => $attributes['module'] . $new, 'upgrade' => true);
+				}
+				else
+				{
+					$this->installed_mods[] = array('module' => $attributes['module'], 'upgrade' => false);
+					$this->iperror[] = JText::_('Error installing module') . ': ' . $attributes['module'];
+				}
 			}
 		}
+
+		return true;
 	}
 
 	/**
