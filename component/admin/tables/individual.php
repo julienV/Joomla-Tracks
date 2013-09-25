@@ -58,4 +58,64 @@ class TracksTableIndividual extends FOFTable
 		// Should check name unicity
 		return true;
 	}
+	/**
+	 * Check out (lock) a record
+	 *
+	 * @param   integer  $userId  The locking user's ID
+	 * @param   integer  $oid     The primary key value of the record to lock
+	 *
+	 * @return  boolean  True on success
+	 */
+	public function checkout($userId, $oid = null)
+	{
+		$fldLockedBy = $this->getColumnAlias('locked_by');
+		$fldLockedOn = $this->getColumnAlias('locked_on');
+
+		if (!(in_array($fldLockedBy, $this->getKnownFields())
+			|| in_array($fldLockedOn, $this->getKnownFields())))
+		{
+			return true;
+		}
+
+
+		$k = $this->_tbl_key;
+
+		if ($oid !== null)
+		{
+			$this->$k = $oid;
+		}
+
+		// No primary key defined, stop here
+		if (!$this->$k)
+		{
+			return false;
+		}
+
+		$date = JFactory::getDate();
+
+		if (FOFPlatform::getInstance()->checkVersion(JVERSION, '3.0', 'ge'))
+		{
+			$time = $date->toSql();
+		}
+		else
+		{
+			$time = $date->toMysql();
+		}
+
+		$query = $this->_db->getQuery(true)
+			->update($this->_db->qn($this->_tbl))
+			->set(
+				array(
+					$this->_db->qn($fldLockedBy) . ' = ' . $this->_db->q((int) $userId),
+					$this->_db->qn($fldLockedOn) . ' = ' . $this->_db->q($time)
+				)
+			)
+			->where($this->_db->qn($this->_tbl_key) . ' = ' . $this->_db->q($this->$k));
+		$this->_db->setQuery((string) $query);
+
+		$this->$fldLockedBy = $userId;
+		$this->$fldLockedOn = $time;
+
+		return $this->_db->execute();
+	}
 }

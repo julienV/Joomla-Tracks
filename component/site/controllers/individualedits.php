@@ -71,12 +71,21 @@ class TracksControllerIndividualedits extends FOFController
 
 	protected function onBeforeAdd()
 	{
-		return $this->onBeforeEdit();
-	}
+		$user = JFactory::getUser();
 
-	public function add()
-	{
-		return $this->edit();
+		if (!($user))
+		{
+			throw new Exception('access not allowed', 403);
+		}
+
+		$allow_register = JComponentHelper::getParams('com_tracks')->get('user_registration', 0);
+
+		if (!$allow_register)
+		{
+			throw new Exception('Create individuals not allowed', 403);
+		}
+
+		return true;
 	}
 
 	/**
@@ -93,25 +102,14 @@ class TracksControllerIndividualedits extends FOFController
 			throw new Exception('access not allowed', 403);
 		}
 
-		$id = $this->input->getInt('id', 0);
-
-		if (!$id)
-		{
-			$allow_register = JComponentHelper::getParams('com_tracks')->get('user_registration', 0);
-
-			if (!$allow_register)
-			{
-				throw new Exception('Create individuals not allowed', 403);
-			}
-
-			// If the user is logged, check if he already has a profile
-			$model = $this->getThisModel();
-			$ind = $model->getUserIndividual($user->get('id'));
-
-			$model->setId($ind);
-		}
-
 		return true;
+	}
+
+	protected function onBeforeSave()
+	{
+		$user = JFactory::getUser();
+
+		return $user->get('id');
 	}
 
 	/**

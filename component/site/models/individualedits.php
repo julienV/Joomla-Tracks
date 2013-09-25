@@ -65,4 +65,22 @@ class TracksModelIndividualedits extends FOFModel
 
 		return $res;
 	}
+
+	/**
+	 * Checks out the current item
+	 *
+	 * @return  boolean
+	 */
+	public function checkout()
+	{
+		$table = $this->getTable($this->table);
+		$status = $table->checkout(FOFPlatform::getInstance()->getUser()->id, $this->id);
+
+		if (!$status)
+		{
+			$this->setError($table->getError());
+		}
+
+		return $status;
+	}
 }

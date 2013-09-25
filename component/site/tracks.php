@@ -33,6 +33,7 @@ switch (JFactory::getApplication()->input->getCmd('view', ''))
 {
 	case 'teamedit':
 	case 'individualedit':
+	case 'profile':
 		FOFDispatcher::getTmpInstance('com_tracks')->dispatch();
 		return;
 }
