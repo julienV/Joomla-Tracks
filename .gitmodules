@@ -1,0 +1,3 @@
+[submodule "redCORE"]
+	path = redCORE
+	url = git@github.com:redCOMPONENT-COM/redCORE.git
