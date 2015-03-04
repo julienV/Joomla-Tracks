@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: base.php 54 2008-04-22 14:50:30Z julienv $ 
+* @version    $Id: base.php 54 2008-04-22 14:50:30Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -30,16 +30,16 @@ class baseModel extends JModel
     var $project = null;
 
     var $_project_id = null;
-    
+
 		/**
 		 * reference to ranking class
 		 * @var unknown_type
 		 */
 		var $_rankingtool = null;
-		
+
 		var $_id = 0;
-		
-		/** 
+
+		/**
 		 * caching for data
 		 */
 		var $_data = null;
@@ -47,17 +47,17 @@ class baseModel extends JModel
 		function __construct($config = array())
 		{
 			parent::__construct($config);
-			
+
 			$project = JRequest::getInt('p');
-			
+
 			$this->setProjectId($project);
 		}
-	
+
 		/**
 		 * set id of object to display
-		 * 
+		 *
 		 * depends on view context...
-		 * 
+		 *
 		 * @param int $id
 		 */
 		function setId($id)
@@ -65,10 +65,10 @@ class baseModel extends JModel
 			$this->_id = (int) $id;
 			$this->_data = null;
 		}
-    
+
 		/**
 		 * set id of project to display
-		 * 
+		 *
 		 * @param int $id
 		 */
 		function setProjectId($id)
@@ -76,15 +76,15 @@ class baseModel extends JModel
 			$this->_project_id = (int) $id;
 			$this->project = null;
 		}
-		
-		
-		
+
+
+
     /**
      * returns project object
-     * 
-     * @param int project_id          
+     *
+     * @param int project_id
      * @return object project
-     */              
+     */
     function getProject( $project_id = 0 )
     {
     	if ( $this->project && ( $project_id == 0 || $project_id == $this->project->id ) ) {
@@ -93,7 +93,7 @@ class baseModel extends JModel
       if ($project_id && $project_id != $this->_project_id) {
       	$this->setProjectId($project_id);
       }
-      
+
       $query =   ' SELECT p.*, s.name as season_name, c.name as competition_name, '
                . ' CASE WHEN CHAR_LENGTH( p.alias ) THEN CONCAT_WS( \':\', p.id, p.alias ) ELSE p.id END AS slug, '
                . ' CASE WHEN CHAR_LENGTH( s.alias ) THEN CONCAT_WS( \':\', s.id, s.alias ) ELSE s.id END AS season_slug, '
@@ -102,9 +102,9 @@ class baseModel extends JModel
                . ' INNER JOIN #__tracks_seasons AS s ON s.id = p.season_id '
                . ' INNER JOIN #__tracks_competitions AS c ON c.id = p.competition_id '
                . ' WHERE p.id = ' . $this->_project_id;
-                
+
       $this->_db->setQuery( $query );
-        
+
       if ( $result = $this->_db->loadObjectList() ) {
         $this->project = $result[0];
       	return $this->project;
@@ -112,20 +112,20 @@ class baseModel extends JModel
       else {
         return $result;
       }
-    }    
-        
+    }
+
     function getParams($project_id = 0, $xml='')
     {
       $project = $this->getProject( $project_id );
-    	if ($xml == '') 
+    	if ($xml == '')
     	{
 				$params = new JRegistry;
 				$params->loadString($project->params);
-				
-//        $file   = JPATH_COMPONENT_ADMINISTRATOR.DS.'models'.DS.'project.xml';
+
+//        $file   = JPATH_COMPONENT_ADMINISTRATOR. '/' .'models'. '/' .'project.xml';
 //        $params = new JParameter( $project->params, $file );
     	}
-    	else 
+    	else
     	{
 		    $query = ' SELECT settings '
 		           . ' FROM #__tracks_project_settings '
@@ -136,7 +136,7 @@ class baseModel extends JModel
 	      if ($settings = $this->_db->loadObject())
 	      {
 					$params = new JRegistry;
-					$params->loadString($settings);	      	
+					$params->loadString($settings);
 	      }
 	      else {
 	      	$params = false;
@@ -144,20 +144,20 @@ class baseModel extends JModel
     	}
       return $params;
     }
-	
+
 	function _reset()
 	{
 		$this->_project_id = 0;
 		$this->_id         = 0;
 		$this->project     = null;
 	}
-    
+
 	function _getRankingTool()
 	{
-		if (empty($this->_rankingtool)) 
+		if (empty($this->_rankingtool))
 		{
 			// sport specific, for later ?
-			require_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'sports'.DS.'default'.DS.'rankingtool.php');
+			require_once (JPATH_SITE. '/' .'components'. '/' .'com_tracks'. '/' .'sports'. '/' .'default'. '/' .'rankingtool.php');
 			$this->_rankingtool = new TracksRankingTool($this->_project_id);
 		}
 		return $this->_rankingtool;

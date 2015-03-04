@@ -12,22 +12,22 @@
 // ensure this file is being included by a parent file
 if ( ! ( defined( '_VALID_CB' ) || defined( '_JEXEC' ) || defined( '_VALID_MOS' ) ) ) { die( 'Direct Access to this location is not allowed.' ); }
 
-DEFINE('_TRACKS_ADMIN', JPATH_ADMINISTRATOR.DS.'components'.DS.'com_tracks');
-DEFINE('_TRACKS_SITE', JPATH_BASE.DS.'components'.DS.'com_tracks');
+DEFINE('_TRACKS_ADMIN', JPATH_ADMINISTRATOR. '/' .'components'. '/' .'com_tracks');
+DEFINE('_TRACKS_SITE', JPATH_BASE. '/' .'components'. '/' .'com_tracks');
 
 
 class getTracksTab extends cbTabHandler {
-	
+
 	function getTracksTab() {
 		$this->cbTabHandler();
 	}
-	
+
 	function getDisplayTab($tab,$user,$ui) {
 		global $_CB_framework, $_CB_database, $mainframe;
-    
+
 		//parameters
 		$params = $this->params;
-    
+
 		$return="";
 		$query = "SELECT i.* "
 		. "\n FROM #__tracks_individuals AS i "
@@ -42,21 +42,21 @@ class getTracksTab extends cbTabHandler {
 			$return .= "</div>";
 			return $return;
 		}
-    		
+
 		$return .= $this->_writeTabDescription( $tab, $user );
-		
+
 		$individual = $items[0];
 		// individual
 		$return .= '<div class="tracksprofile">';
 		$individualURL= JRoute::_( 'index.php?option=com_tracks&amp;view=individual&amp;i=' . $individual->id);
 		$return .= '<a href="'.$individualURL.'">'.$individual->first_name.' '.$individual->last_name.'</a>';
     $return .= '</div>';
-    
-	    
-    if ($params->get('show_history')) 
+
+
+    if ($params->get('show_history'))
     {
-      require_once(_TRACKS_SITE.DS.'models'.DS.'ranking.php');
-    
+      require_once(_TRACKS_SITE. '/' .'models'. '/' .'ranking.php');
+
 			$query = "SELECT pi.number, pi.project_id, p.name as projectname, t.name as teamname, s.name as seasonname"
 	    . "\n FROM #__tracks_projects_individuals AS pi "
 	    . "\n INNER JOIN #__tracks_projects AS p ON p.id = pi.project_id "
@@ -69,8 +69,8 @@ class getTracksTab extends cbTabHandler {
 	    $_CB_database->setQuery( $query );
 	    //print $_CB_database->getQuery();
 	    $items = $_CB_database->loadObjectList();
-	    
-	    if(count($items)>0) 
+
+	    if(count($items)>0)
 	    {
 	      $return .= '<div class="tracksproject">';
 	    	$return .= '<div class="">'.JText::_('History').'</div>';
@@ -114,24 +114,24 @@ class getTracksTab extends cbTabHandler {
 	        }
 	        $return .= '<td><a href="'.$link.'" title="'.JText::_('Display').'">'.$project->projectname.'</td>';
 	        if ($params->get('show_season')) {
-	          $return .= '<td>'.$project->seasonname.'</td>'; 
+	          $return .= '<td>'.$project->seasonname.'</td>';
 	        }
 	        if ($params->get('show_rank')) {
-	          $return .= '<td>'.$rank->rank.'</td>';      
+	          $return .= '<td>'.$rank->rank.'</td>';
 	        }
 	        if ($params->get('show_points')) {
-	          $return .= '<td>'.$rank->points.'</td>';     
+	          $return .= '<td>'.$rank->points.'</td>';
 	        }
 	        if ($params->get('show_wins')) {
-	          $return .= '<td>'.$rank->wins.'</td>';   
+	          $return .= '<td>'.$rank->wins.'</td>';
 	        }
 	        if ($params->get('show_bestrank')) {
-	          $return .= '<td>'.$rank->best_rank.'</td>'; 
-	        } 
+	          $return .= '<td>'.$rank->best_rank.'</td>';
+	        }
 	        $return .= '</tr>';
-	    	}      
-	      $return .= '</table>';  
-	      $return .= '</div>';    	
+	    	}
+	      $return .= '</table>';
+	      $return .= '</div>';
 	    }
     }
 		return $return;

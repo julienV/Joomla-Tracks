@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    0.2 $Id$ 
+* @version    0.2 $Id$
 * @package    JoomlaTracks
 * @copyright  Copyright (C) 2008-2009 Julien Vonthron. All rights reserved.
 * @license    GNU/GPL, see LICENSE.php
@@ -13,18 +13,18 @@
 
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
- 
+
 // Import library dependencies
 jimport('joomla.event.plugin');
 
 // include jomsocial core
-require_once( JPATH_BASE.DS.'components'.DS.'com_community'.DS.'libraries'.DS.'core.php');
+require_once( JPATH_BASE. '/' .'components'. '/' .'com_community'. '/' .'libraries'. '/' .'core.php');
 
 JPlugin::loadLanguage( 'plg_tracks_jomsocial', JPATH_ADMINISTRATOR );
 
 class plgTracksJomsocial extends JPlugin {
- 
-	public function plgTracksJomsocial(&$subject, $config = array()) 
+
+	public function plgTracksJomsocial(&$subject, $config = array())
 	{
 		parent::__construct($subject, $config);
 	}
@@ -34,15 +34,15 @@ class plgTracksJomsocial extends JPlugin {
     $user = CFactory::getUser($user_id);
     //parameters
     $params = $this->params;
-    
+
 		if (!$user || $params->get('view_individual_link', '1') == 0) {
 			return true;
 		}
-		
+
     JHTML::_('behavior.tooltip');
     $name = $user->getDisplayName();
     $url = CRoute::_('index.php?option=com_community&view=profile&userid=' . $user_id);
-    
+
     switch ($params->get('view_individual_link', '1'))
     {
     	case 2:
@@ -53,8 +53,8 @@ class plgTracksJomsocial extends JPlugin {
     	default:
     		$text = JText::_('PLG_TRACKS_JOMSOCIAL_VIEW_USER_PROFILE');
     		break;
-    }    
-    
+    }
+
     $attribs = array_merge($attribs, array('alt' => $user->get('username')));
     $object->text = JHTML::link($url, $text, $attribs);
 		return true;

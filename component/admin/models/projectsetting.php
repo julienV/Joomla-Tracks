@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: project.php 15 2008-02-06 00:37:43Z julienv $ 
+* @version    $Id: project.php 15 2008-02-06 00:37:43Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -16,7 +16,7 @@
 defined('_JEXEC') or die();
 
 jimport('joomla.application.component.model');
-require_once (JPATH_COMPONENT.DS.'models'.DS.'item.php');
+require_once (JPATH_COMPONENT. '/' .'models'. '/' .'item.php');
 
 /**
  * Joomla Tracks Component Project settings Model
@@ -45,21 +45,21 @@ class TracksModelProjectsetting extends TracksModelItem
 	 * @var array
 	 */
 	var $_data = null;
-	
+
 	function __construct()
 	{
 		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
-		
+
 		parent::__construct();
-		
+
 		$project_id = $mainframe->getUserState( $option.'project', 0 );
-    $this->set('_project_id', $project_id);    
-    
+    $this->set('_project_id', $project_id);
+
     $array = JRequest::getVar('cid',  0, '', 'array');
-    $this->setId((int)$array[0]);		
+    $this->setId((int)$array[0]);
 	}
-	
+
   /**
    * Method to set the identifier
    *
@@ -72,7 +72,7 @@ class TracksModelProjectsetting extends TracksModelItem
     $this->_id      = $id;
     $this->_data  = null;
   }
-	  
+
 
   /**
    * Method to get an item
@@ -86,7 +86,7 @@ class TracksModelProjectsetting extends TracksModelItem
 
     return $this->_data;
   }
-  
+
   /**
    * Method to load content round data
    *
@@ -106,7 +106,7 @@ class TracksModelProjectsetting extends TracksModelItem
     }
     return true;
   }
-  
+
   /**
    * Method to initialise the data
    *
@@ -131,7 +131,7 @@ class TracksModelProjectsetting extends TracksModelItem
   	}
   	return true;
   }
-  
+
 
   /**
    * Method to store the item
@@ -143,7 +143,7 @@ class TracksModelProjectsetting extends TracksModelItem
   function store($data)
   {
     $row = $this->getTable();
-    
+
     // Bind the form fields to the items table
     if (!$row->bind($data)) {
       $this->setError($this->_db->getErrorMsg());
@@ -166,7 +166,7 @@ class TracksModelProjectsetting extends TracksModelItem
     }
     return $row->id;
   }
-  
+
   /**
   * Returns a Table object, always creating it
   *

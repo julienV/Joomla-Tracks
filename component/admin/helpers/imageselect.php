@@ -167,7 +167,7 @@ class ImageSelect
   			return "individuals";
   			break;
       case "individuals_small":
-        return "individuals".DS."small";
+        return "individuals". '/' ."small";
         break;
       case "teams":
         return "teams";

@@ -14,7 +14,7 @@
 // no direct access
 defined('_JEXEC') or die('Restricted access');
 
-abstract class TracksHelperTools
+abstract class TrackslibHelperTools
 {
 	/**
 	 * return earned points from result object

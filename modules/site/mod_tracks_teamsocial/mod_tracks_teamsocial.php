@@ -25,8 +25,8 @@ if (!defined('FOF_INCLUDED'))
 }
 
 // Include the syndicate functions only once
-require_once (dirname(__FILE__).DS.'helper.php');
-include_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'helpers'.DS.'route.php');
+require_once (dirname(__FILE__). '/' .'helper.php');
+include_once (JPATH_SITE. '/' .'components'. '/' .'com_tracks'. '/' .'helpers'. '/' .'route.php');
 
 $team_id = 0;
 // Find team id

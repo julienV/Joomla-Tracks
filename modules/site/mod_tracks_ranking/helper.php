@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: tracks.php 109 2008-05-24 11:05:07Z julienv $ 
+* @version    $Id: tracks.php 109 2008-05-24 11:05:07Z julienv $
 * @package    JoomlaTracks
 * @subpackage RankingModule
 * @copyright  Copyright (C) 2008 Julien Vonthron. All rights reserved.
@@ -15,7 +15,7 @@
 // no direct access
 defined('_JEXEC') or die('Restricted access');
 
-//require_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'helpers'.DS.'route.php');
+//require_once (JPATH_SITE. '/' .'components'. '/' .'com_tracks'. '/' .'helpers'. '/' .'route.php');
 
 class modTracksRanking
 {
@@ -25,27 +25,27 @@ class modTracksRanking
 	 * @var object
 	 */
   var $_model = null;
-  
+
   function _getModel($params)
-  {       
+  {
     if ( $this->_model == null )
     {
-      require_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'models'.DS.'ranking.php');
+      require_once (JPATH_SITE. '/' .'components'. '/' .'com_tracks'. '/' .'models'. '/' .'ranking.php');
       $this->_model = new TracksModelRanking();
       $this->_model->setProjectId($params->get('project_id'));
     }
-    return $this->_model;      
+    return $this->_model;
   }
-  
+
   function getList(&$params)
-	{ 
+	{
     $model = $this->_getModel($params);
 		return $model->getRankings();
 	}
-	
+
 	function getProject(&$params)
 	{
-	  $model = $this->_getModel($params);    
+	  $model = $this->_getModel($params);
     return $model->getProject();
 	}
 }

@@ -24,10 +24,10 @@ if(!defined('FOF_INCLUDED'))
 }
 
 // require core
-require_once (JPATH_COMPONENT.DS.'tracks.core.php');
+require_once (JPATH_COMPONENT. '/' .'tracks.core.php');
 
 // Require the base controller
-require_once (JPATH_COMPONENT.DS.'controller.php');
+require_once (JPATH_COMPONENT. '/' .'controller.php');
 
 switch (JFactory::getApplication()->input->getCmd('view', ''))
 {
@@ -40,7 +40,7 @@ switch (JFactory::getApplication()->input->getCmd('view', ''))
 
 // Require specific controller if requested
 if($controller = JRequest::getWord('controller')) {
-    $path = JPATH_COMPONENT.DS.'controllers'.DS.$controller.'.php';
+    $path = JPATH_COMPONENT. '/' .'controllers'. '/' .$controller.'.php';
     if (file_exists($path)) {
         require_once $path;
     } else {

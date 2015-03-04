@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: tracks.php 109 2008-05-24 11:05:07Z julienv $ 
+* @version    $Id: tracks.php 109 2008-05-24 11:05:07Z julienv $
 * @package    JoomlaTracks
 * @subpackage RankingModule
 * @copyright  Copyright (C) 2008 Julien Vonthron. All rights reserved.
@@ -12,11 +12,11 @@
 * See COPYRIGHT.php for copyright notices and details.
 */
 // no direct access
-defined('_JEXEC') or die('Restricted access'); 
+defined('_JEXEC') or die('Restricted access');
 
 JHTML::_('behavior.tooltip', '.mod-ranking-tip', array('className' => 'tip-mod-ranking'));
 
-$img_dir = JPATH_SITE.DS;
+$img_dir = JPATH_SITE.'/';
 ?>
 <div class="mod_tracksranking">
 
@@ -35,8 +35,8 @@ $img_dir = JPATH_SITE.DS;
     $count = 0;
     foreach( $list AS $ranking )
     {
-      $link_ind = JRoute::_( TracksHelperRoute::getIndividualRoute($ranking->slug, $project->slug) ); 
-      $link_team = JRoute::_( TracksHelperRoute::getTeamRoute($ranking->teamslug, $project->slug) ); 
+      $link_ind = JRoute::_( TracksHelperRoute::getIndividualRoute($ranking->slug, $project->slug) );
+      $link_team = JRoute::_( TracksHelperRoute::getTeamRoute($ranking->teamslug, $project->slug) );
       ?>
       <tr>
         <td><?php echo $rank++; ?></td>
@@ -52,7 +52,7 @@ $img_dir = JPATH_SITE.DS;
         <?php if ($showteams) { ?>
         <td>
           <a href="<?php echo $link_team; ?>"
-             title="<?php echo JText::_( 'MOD_TRACKS_RANKING_Details' ); ?>"> 
+             title="<?php echo JText::_( 'MOD_TRACKS_RANKING_Details' ); ?>">
             <?php echo $ranking->team_acronym; ?>
           </a>
         </td>
@@ -67,11 +67,11 @@ $img_dir = JPATH_SITE.DS;
     ?>
   </tbody>
 </table>
-<?php 
+<?php
 $link = JRoute::_( TracksHelperRoute::getRankingRoute($project->slug) );
 ?>
 <a class="fulltablelink" href="<?php echo $link; ?>"
-             title="<?php echo JText::_('MOD_TRACKS_RANKING_View_full_table' ); ?>"> 
+             title="<?php echo JText::_('MOD_TRACKS_RANKING_View_full_table' ); ?>">
             <?php echo JText::_('MOD_TRACKS_RANKING_View_full_table' ); ?>
 </a>
 </div>

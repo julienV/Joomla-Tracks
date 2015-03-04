@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: view.html.php 91 2008-05-02 09:41:23Z julienv $ 
+* @version    $Id: view.html.php 91 2008-05-02 09:41:23Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -16,7 +16,7 @@ defined('_JEXEC') or die();
 
 jimport( 'joomla.application.component.view');
 
-require_once (JPATH_COMPONENT.DS.'abstract'.DS.'tracksview.php');
+require_once (JPATH_COMPONENT. '/' .'abstract'. '/' .'tracksview.php');
 
 /**
  * HTML View class for the Tracks component
@@ -31,19 +31,19 @@ class TracksViewProjectsettings extends TracksView
 	{
 		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
-    
+
 		// Set toolbar items for the page
 		JToolBarHelper::title(   JText::_('COM_TRACKS_PROJECTSETTINGS' ), 'generic.png' );
 		JToolBarHelper::editListX();
     JToolBarHelper::deleteList(JText::_('COM_TRACKS_DELETESETTINGSCONFIRM'));
     JToolBarHelper::help( 'screen.tracks.projectsettings', true );
-        
+
 		$db		= JFactory::getDBO();
 		$uri	= JFactory::getURI();
-		
+
     $filter_order   = $mainframe->getUserStateFromRequest( $option.'.settings.filter_order',   'filter_order',   'obj.xml', 'cmd' );
     $filter_order_Dir = $mainframe->getUserStateFromRequest( $option.'.settings.filter_order_Dir', 'filter_order_Dir', '',       'word' );
-		
+
 		// Get data from the model
 		//$model	= $this->getModel( );
 		//print_r($model);
@@ -53,7 +53,7 @@ class TracksViewProjectsettings extends TracksView
 
 		// build list of categories
 		//$javascript 	= 'onchange="document.adminForm.submit();"';
-		
+
 		// table ordering
 		$lists['order_Dir'] = $filter_order_Dir;
 		$lists['order'] = $filter_order;

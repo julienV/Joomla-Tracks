@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id$ 
+* @version    $Id$
 * @package    JoomlaTracks
 * @copyright  Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license    GNU/GPL, see LICENSE.php
@@ -49,13 +49,13 @@ class TracksModelImagehandler extends JModel
 		$limitstart = $mainframe->getUserStateFromRequest( 'com_tracks.imageselect'.'limitstart', 'limitstart', 0, 'int' );
 		$search 	= $mainframe->getUserStateFromRequest( 'com_tracks.search', 'search', '', 'string' );
 		$search 	= trim(JString::strtolower( $search ) );
-		
+
 		$this->setState('limit', $limit);
 		$this->setState('limitstart', $limitstart);
 		$this->setState('search', $search);
 
 	}
-	
+
 	function getState($property = null)
 	{
 		static $set;
@@ -78,14 +78,14 @@ class TracksModelImagehandler extends JModel
 	function getImages()
 	{
 		$list = $this->getList();
-	
+
 		$listimg = array();
-		
+
 		$s = $this->getState('limitstart')+1;
-		
+
 		for ( $i = ($s - 1); $i < $s + $this->getState('limit'); $i++ ) {
 			if ($i+1 <= $this->getState('total') ) {
-				
+
 					$list[$i]->size = $this->_parseSize(filesize($list[$i]->path));
 
 					$info = @getimagesize($list[$i]->path);
@@ -102,12 +102,12 @@ class TracksModelImagehandler extends JModel
 						$list[$i]->width_60 = $list[$i]->width;
 						$list[$i]->height_60 = $list[$i]->height;
 					}
-				
-				
+
+
     			$listimg[] = $list[$i];
 			}
 		}
-				
+
 		return $listimg;
 	}
 
@@ -131,8 +131,8 @@ class TracksModelImagehandler extends JModel
 		$search = $this->getState('search');
 
 		// Initialize variables
-		$basePath = JPATH_SITE.DS.'media'.DS.'com_tracks'.DS.'images'.DS.$folder;
-		
+		$basePath = JPATH_SITE. '/' .'media'. '/' .'com_tracks'. '/' .'images'. '/' .$folder;
+
 		$images 	= array ();
 
 		// Get the list of files and folders from the given folder
@@ -142,31 +142,31 @@ class TracksModelImagehandler extends JModel
 		if ($fileList !== false) {
 			foreach ($fileList as $file)
 			{
-				if (is_file($basePath.DS.$file) && substr($file, 0, 1) != '.' && strtolower($file) !== 'index.html') {
+				if (is_file($basePath. '/' .$file) && substr($file, 0, 1) != '.' && strtolower($file) !== 'index.html') {
 
 					if ( $search == '') {
 						$tmp = new JObject();
 						$tmp->name = $file;
-						$tmp->path = JPath::clean($basePath.DS.$file);
-						
+						$tmp->path = JPath::clean($basePath. '/' .$file);
+
 						$images[] = $tmp;
-						
+
 					} elseif(stristr( $file, $search)) {
 						$tmp = new JObject();
 						$tmp->name = $file;
-						$tmp->path = JPath::clean($basePath.DS.$file);
-							
+						$tmp->path = JPath::clean($basePath. '/' .$file);
+
 						$images[] = $tmp;
-					
+
 					}
 				}
 			}
 		}
 
 		$list = $images;
-		
+
 		$this->setState('total', count($list));
-		
+
 		return $list;
 	}
 
@@ -186,7 +186,7 @@ class TracksModelImagehandler extends JModel
 
 		return $this->_pagination;
 	}
-	
+
 	/**
 	 * Build display size
 	 *

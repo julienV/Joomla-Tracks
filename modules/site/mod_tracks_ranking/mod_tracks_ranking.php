@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: tracks.php 109 2008-05-24 11:05:07Z julienv $ 
+* @version    $Id: tracks.php 109 2008-05-24 11:05:07Z julienv $
 * @package    JoomlaTracks
 * @subpackage RankingModule
 * @copyright  Copyright (C) 2008 Julien Vonthron. All rights reserved.
@@ -16,9 +16,9 @@
 defined('_JEXEC') or die('Restricted access');
 
 // Include the syndicate functions only once
-require_once (dirname(__FILE__).DS.'helper.php');
-include_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'helpers'.DS.'route.php');
-include_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'lib'.DS.'JLVImageTool.php');
+require_once (dirname(__FILE__). '/' .'helper.php');
+include_once (JPATH_SITE. '/' .'components'. '/' .'com_tracks'. '/' .'helpers'. '/' .'route.php');
+include_once (JPATH_SITE. '/' .'components'. '/' .'com_tracks'. '/' .'lib'. '/' .'JLVImageTool.php');
 
 $limit = intval( $params->get('count', 5) );
 $showteams = intval( $params->get('showteams', 1) );

@@ -14,7 +14,7 @@
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
 jimport( 'joomla.application.component.view');
-require_once (JPATH_COMPONENT.DS.'helpers'.DS.'imageselect.php');
+require_once (JPATH_COMPONENT. '/' .'helpers'. '/' .'imageselect.php');
 
 /**
  * View class for tracks imageselect screen

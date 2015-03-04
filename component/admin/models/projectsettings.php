@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: competitions.php 15 2008-02-06 00:37:43Z julienv $ 
+* @version    $Id: competitions.php 15 2008-02-06 00:37:43Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -15,7 +15,7 @@
 defined('_JEXEC') or die();
 
 jimport('joomla.application.component.model');
-require_once (JPATH_COMPONENT.DS.'models'.DS.'list.php');
+require_once (JPATH_COMPONENT. '/' .'models'. '/' .'list.php');
 
 /**
  * Joomla Tracks Component Seasons Model
@@ -30,7 +30,7 @@ class TracksModelProjectsettings extends TracksModelList
 	 *
 	 * @var int
 	 */
-	var $_project_id;	
+	var $_project_id;
 	/**
 	 * list of xml files
 	 *
@@ -50,18 +50,18 @@ class TracksModelProjectsettings extends TracksModelList
 	 */
 	var $_data = null;
 	var $_total = null;
-	
+
 	function __construct()
 	{
     $mainframe = JFactory::getApplication();
 $option = JRequest::getCmd('option');
-    
+
     parent::__construct();
-    
+
     $id = $mainframe->getUserState( $option.'project', 0 );
-    $this->set('_project_id', $id);		
+    $this->set('_project_id', $id);
 	}
-	
+
 	/**
 	 * get the settings list.
 	 * In the future, the base folder for xml files could depend on project type
@@ -70,13 +70,13 @@ $option = JRequest::getCmd('option');
 	 */
 	function getData()
 	{
-		
+
 		//first, list all the xml config files
 		//TODO: make the base folder depend on project type
-		$this->_xmlfolder = JPATH_COMPONENT.DS.'projectparameters'.DS.'default';
+		$this->_xmlfolder = JPATH_COMPONENT. '/' .'projectparameters'. '/' .'default';
 
 		$files = array();
-		if ($handle = opendir($this->_xmlfolder)) 
+		if ($handle = opendir($this->_xmlfolder))
     {
     	while ( $file = readdir($handle) )
     	{
@@ -87,10 +87,10 @@ $option = JRequest::getCmd('option');
     	}
     }
     else {
-      JError::raiseError(500, JText::_('COM_TRACKS_FOLDERNOTFOUND' ).': '.$this->_xmlfolder );    	
+      JError::raiseError(500, JText::_('COM_TRACKS_FOLDERNOTFOUND' ).': '.$this->_xmlfolder );
     }
     $this->_files = $files;
-    
+
     // now, we have to check that each files has an associated record. otherwise, create one !
     $query = ' SELECT * FROM #__tracks_project_settings AS ps WHERE ps.project_id = ' . $this->_db->Quote($this->_project_id);
     $this->_db->setQuery($query);
@@ -106,7 +106,7 @@ $option = JRequest::getCmd('option');
     	}
     }
     $notfound = array_diff($files, $found);
-    
+
     // add missing records
     foreach ($notfound AS $file)
     {
@@ -117,12 +117,12 @@ $option = JRequest::getCmd('option');
     		$records[] = $new;
     	}
     }
-    
+
     $this->_total = count($records);
-    
+
     return $records;
 	}
-	
+
 	function _buildQuery()
 	{
 		// Get the WHERE and ORDER BY clauses for the query
@@ -182,7 +182,7 @@ $option = JRequest::getCmd('option');
 
 		return $where;
 	}
-	
+
   /**
    * Method to get the total number of items
    *

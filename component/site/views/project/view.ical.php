@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: view.html.php 43 2008-02-24 23:47:38Z julienv $ 
+* @version    $Id: view.html.php 43 2008-02-24 23:47:38Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -15,7 +15,7 @@
 defined('_JEXEC') or die();
 
 jimport( 'joomla.application.component.view');
-require_once (JPATH_COMPONENT.DS.'helpers'.DS.'iCalcreator.class.php');
+require_once (JPATH_COMPONENT. '/' .'helpers'. '/' .'iCalcreator.class.php');
 
 /**
  * HTML View class for the Tracks component
@@ -30,13 +30,13 @@ class TracksViewProject extends JView
     {
 			$mainframe = JFactory::getApplication();
 			$option = JRequest::getCmd('option');
-    	  	          
+
     	$model = $this->getModel();
       $results = $model->getResults( JRequest::getVar( 'p', 0, '', 'int' ) );
       $project = $model->getProject( JRequest::getVar( 'p', 0, '', 'int' ) );
-        
+
       $document = JFactory::getDocument();
-      
+
       $v = new vcalendar();                          // initiate new CALENDAR
       $v->setConfig( 'project'.$project->id
              , $mainframe->getCfg('live_site') );                   // config with site domain
@@ -44,12 +44,12 @@ class TracksViewProject extends JView
 			               , $project->name );          // set some X-properties, name, content.. .
 			$v->setProperty( 'X-WR-CALDESC'
 			               , JText::_('COM_TRACKS_Project_calendar') );
-			$v->setConfig( "filename", 'project_'.$project->id.'.ics' ); 
+			$v->setConfig( "filename", 'project_'.$project->id.'.ics' );
 
 			foreach ((array) $results AS $result)
 			{
 				if (!ereg('([0-9]{4})-([0-9]{1,2})-([0-9]{1,2}) ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})',$result->start_date, $start_date)) {
-					continue; 
+					continue;
 				}
 				$e = new vevent();                             // initiate a new EVENT
 				$e->setProperty( 'categories', $project->name );                   // catagorize
@@ -62,7 +62,7 @@ class TracksViewProject extends JView
 			  }
 			  $description = array();
 			  $description[] = $result->round_name;
-			  if ($result->winner && $result->winner->last_name) 
+			  if ($result->winner && $result->winner->last_name)
 			  {
 			  	$winner = JText::_('COM_TRACKS_Winner').$result->winner->first_name.' '.$result->winner->last_name;
 			  	if ($result->winner->team_name) {
@@ -75,10 +75,10 @@ class TracksViewProject extends JView
 				               , $description );    // describe the event
 				$e->setProperty( 'location'
 				               , $result->round_name );                     // locate the event
-				
+
 				$v->addComponent( $e );                        // add component to calendar
 			}
-			
+
 			/* alt. production */
 			// $v->returnCalendar();                       // generate and redirect output to user browser
 			/* alt. dev. and test */

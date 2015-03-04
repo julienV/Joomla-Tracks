@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: view.html.php 7 2008-01-30 10:37:37Z julienv $ 
+* @version    $Id: view.html.php 7 2008-01-30 10:37:37Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -16,7 +16,7 @@ defined('_JEXEC') or die();
 
 jimport( 'joomla.application.component.view');
 
-require_once (JPATH_COMPONENT.DS.'abstract'.DS.'tracksview.php');
+require_once (JPATH_COMPONENT. '/' .'abstract'. '/' .'tracksview.php');
 
 /**
  * HTML View class for the Tracks component
@@ -35,11 +35,11 @@ class TracksViewAbout extends TracksView
         // Set toolbar items for the page
         JToolBarHelper::title(   JText::_('COM_TRACKS_About_Tracks' ), 'help_header' );
         JToolBarHelper::back();
-        
+
         $db     = JFactory::getDBO();
         $uri    = JFactory::getURI();
         $user   = JFactory::getUser();
-        
+
         parent::display($tpl);
 	}
 }

@@ -1,27 +1,24 @@
 <?php
 /**
-* @version    $Id: controller.php 133 2008-06-08 10:24:29Z julienv $ 
-* @package    JoomlaTracks
-* @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
-* @license		GNU/GPL, see LICENSE.php
-* Joomla Tracks is free software. This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-* See COPYRIGHT.php for copyright notices and details.
-*/
+ * @package    Tracks.Admin
+ * @copyright  Tracks (C) 2008-2014 Julien Vonthron. All rights reserved.
+ * @license    GNU General Public License version 2 or later
+ */
 
-// Check to ensure this file is included in Joomla!
-defined('_JEXEC') or die();
-
-jimport('joomla.application.component.controller');
+// No direct access
+defined('_JEXEC') or die('Restricted access');
 
 /**
  * Tracks Component Controller
  *
- * @package		Tracks
- * @since 0.1
+ * @package  Tracks.Admin
+ * @since    3.0
  */
-class TracksController extends BaseController
+class TracksController extends JControllerLegacy
 {
+	/**
+	 * @var    string The default view.
+	 * @since  2.5
+	 */
+	protected $default_view = 'cpanel';
 }

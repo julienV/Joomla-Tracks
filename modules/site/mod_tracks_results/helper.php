@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: helper.php 123 2008-05-30 09:23:23Z julienv $ 
+* @version    $Id: helper.php 123 2008-05-30 09:23:23Z julienv $
 * @package    JoomlaTracks
 * @subpackage ResultsModule
 * @copyright  Copyright (C) 2008 Julien Vonthron. All rights reserved.
@@ -15,7 +15,7 @@
 // no direct access
 defined('_JEXEC') or die('Restricted access');
 
-//require_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'helpers'.DS.'route.php');
+//require_once (JPATH_SITE. '/' .'components'. '/' .'com_tracks'. '/' .'helpers'. '/' .'route.php');
 
 class modTracksResults
 {
@@ -25,24 +25,24 @@ class modTracksResults
 	 * @var object
 	 */
   var $_model = null;
-  
+
   /**
 	 * Round to display
 	 *
 	 * @var object
 	 */
   var $_round = null;
-  
+
   function _getModel()
-  {       
+  {
     if ( $this->_model == null )
     {
-      require_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'models'.DS.'roundresult.php');
+      require_once (JPATH_SITE. '/' .'components'. '/' .'com_tracks'. '/' .'models'. '/' .'roundresult.php');
       $this->_model = new TracksModelRoundResult();
     }
-    return $this->_model;      
+    return $this->_model;
   }
-  
+
   function getList(&$params)
 	{
     $model = $this->_getModel();
@@ -51,19 +51,19 @@ class modTracksResults
 		if ($result) return $result[0];
 		else return null;
 	}
-	
+
 	function getProject(&$params)
 	{
-	  $model = $this->_getModel();    
+	  $model = $this->_getModel();
     return $model->getProject( $params->get('project_id') );
 	}
-	
+
 	function getRound(&$params)
 	{
     if ( $this->_round ) return $this->_round;
-    
+
     $db = JFactory::getDBO();
-    
+
     $sql = ' SELECT pr.id AS projectround_id, pr.start_date, pr.end_date, pr.round_id, '
          . ' r.name, '
          . ' CASE WHEN CHAR_LENGTH( r.alias ) THEN CONCAT_WS( \':\', r.id, r.alias ) ELSE r.id END AS slug '
@@ -75,19 +75,19 @@ class modTracksResults
          ;
     $db->setQuery( $sql );
     $rounds = $db->loadObjectList();
-    
+
     if ( $db->getErrorNum() ) {
       echo $db->getErrorMsg();
     }
-    
+
     if ( $rounds )
     {
       $this->_round = $rounds[0];
-      
+
       // advance round until round start date is in the future.
       foreach ($rounds as $r)
       {
-        if ( $r->start_date != '0000-00-00 00:00:00' ) 
+        if ( $r->start_date != '0000-00-00 00:00:00' )
         {
           if ( strtotime($r->start_date) > time() ) {
             break;

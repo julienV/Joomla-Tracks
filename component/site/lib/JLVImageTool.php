@@ -37,7 +37,7 @@ class JLVImageTool {
 	{
 		//GD-Lib > 2.0 only!
 		@unlink($save);
-		
+
 		if (!file_exists(dirname($save))) {
 			JFolder::create(dirname($save));
 		}
@@ -183,7 +183,7 @@ class JLVImageTool {
 	 * otherwise, just display the full size picture
 	 *
 	 * @param string image_path full image path, or relative to joomla root
-	 * @param string alt attribute 
+	 * @param string alt attribute
 	 * @param string int maximum dimension in pixels
 	 * @param array other attributes
 	 */
@@ -192,11 +192,11 @@ class JLVImageTool {
 		jimport('joomla.filesystem.file');
 		$app = JFactory::getApplication();
 		$base = $app->isAdmin() ? $app->getSiteURL() : JURI::base();
-		
+
 		if (empty($image_path) || !file_exists($image_path)) {
 			return false;
 		}
-		
+
 		// make path relative to joomla root
 		$image_dir_rel = str_replace(JPATH_SITE, '', dirname($image_path));
 		if ($image_dir_rel[0] == '/' || $image_dir_rel[0] == '\\') {
@@ -213,7 +213,7 @@ class JLVImageTool {
 		else {
 			$attribs['class'] = 'imodal';
 		}
-		
+
 		$thumb = JHTML::image($thumb_path, $alt, $attribs);
 		$html = JHTML::link($image_dir_rel_path.'/'.basename($image_path), $thumb, $attribs);
 
@@ -237,14 +237,14 @@ class JLVImageTool {
 			throw new Exception('Image not found');
 			return false;
 		}
-		
+
 		// make path relative to joomla root
 		$image_dir_rel = str_replace(JPATH_SITE, '', dirname($image_path));
 		if ($image_dir_rel[0] == '/' || $image_dir_rel[0] == '\\') {
 			$image_dir_rel = substr($image_dir_rel, 1);
 		}
 		$image_dir_rel_path = $base.str_replace("\\", "/", $image_dir_rel);
-		
+
 		if ($maxdim)
 		{
 			$width  = $maxdim;
@@ -259,14 +259,14 @@ class JLVImageTool {
 
 
 		$thumb_name = md5($img_name).$width.'_'.$height.'.png';
-		$thumb_path = $img_dir.DS.'small'.DS.$thumb_name;
+		$thumb_path = $img_dir. '/' .'small'. '/' .$thumb_name;
 
-		//		echo JPATH_SITE.DS.'images'.DS.'redevent'.DS.$folder.DS.'small'.DS.$image;
+		//		echo JPATH_SITE. '/' .'images'. '/' .'redevent'. '/' .$folder. '/' .'small'. '/' .$image;
 		if (JFile::exists($thumb_path))
 		{
 			return $image_dir_rel_path.'/small/'.$thumb_name;
 		}
-		else 
+		else
 		{
 			//try to generate the thumb
 			if (self::thumb($image_path, $thumb_path, $width, $height)) {

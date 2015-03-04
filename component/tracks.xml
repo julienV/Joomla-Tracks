@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="component" version="1.7.0" method="upgrade">
+<extension type="component" version="2.5.0" method="upgrade">
 	<name>COM_TRACKS</name>
 	<author>Julien Vonthron</author>
 	<authorEmail>julien.vonthron@gmail.com</authorEmail>
 	<authorUrl>http://www.jlv-solutions.com</authorUrl>
 	<creationDate>##DATE##</creationDate>
-	<copyright>(C) 2008,2009,2010,2011,2012 Julien Vonthron. All rights	reserved.</copyright>
+	<copyright>(C) 2008-2015 Julien Vonthron. All rights	reserved.</copyright>
 	<license>http://www.gnu.org/licenses/gpl.html</license>
 	<version>##VERSION##</version>
 	<description>COM_TRACKS_XML_DESC</description>
-
 
 	<!-- Runs on install/uninstall/update -->
 	<scriptfile>install.php</scriptfile>
@@ -28,7 +27,7 @@
 		</sql>
 	</uninstall>
 
-	<update> <!-- Runs on update; New in 1.6 -->
+	<update>
 		<schemas>
 			<schemapath type="mysql">sql/updates/mysql</schemapath>
 		</schemas>
@@ -36,7 +35,6 @@
 
 	<files folder="site">
 		<filename>controller.php</filename>
-		<filename>dispatcher.php</filename>
 		<filename>index.html</filename>
 		<filename>router.php</filename>
 		<filename>tracks.core.php</filename>
@@ -51,11 +49,8 @@
 	</files>
 
     <!-- Site Main Media File Copy Section -->
-	<media destination="com_tracks" folder="media/com_tracks">
-		<filename>index.html</filename>
-		<folder>css</folder>
-		<folder>images</folder>
-		<folder>js</folder>
+	<media folder="media">
+		<folder>com_tracks</folder>
 	</media>
 
 	<administration>
@@ -106,10 +101,8 @@
 
 	</administration>
 
-	<!-- UPDATESERVER DEFINITION -->
-	<updateservers>
-		<!-- Note: No spaces or linebreaks allowed between the server tags -->
-		<server type="extension" priority="1" name="Tracks Update Site">http://www.jlv-solutions.com/updates/tracks-update.xml
-		</server>
-	</updateservers>
+	<!-- Libraries to install -->
+	<libraries>
+		<library name="tracks"/>
+	</libraries>
 </extension>

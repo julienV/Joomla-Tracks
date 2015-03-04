@@ -55,7 +55,7 @@ class TracksControllerQuickAdd extends FOFController
 		// add the new individual as their name was sent through.
 		if (!$individualid)
 		{
-			require_once(JPATH_COMPONENT.DS.'models'.DS.'individual.php');
+			require_once(JPATH_COMPONENT. '/' .'models'. '/' .'individual.php');
 			$model = new TracksModelIndividual();
 			$name = explode(" ", $name);
 			$firstname = ucfirst(array_shift($name));

@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: tracks.php 109 2008-05-24 11:05:07Z julienv $ 
+* @version    $Id: tracks.php 109 2008-05-24 11:05:07Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -24,8 +24,8 @@ if (version_compare(JVERSION, '1.6.0', '<'))
 	$acl->addACL( 'com_tracks', 'manage', 'users', 'administrator' );
 }
 
-require_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'helpers'.DS.'trackshtml.php');
-require_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'helpers'.DS.'countries.php');
-require_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'helpers'.DS.'route.php');
-require_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'helpers'.DS.'tools.php');
-require_once (JPATH_SITE.DS.'components'.DS.'com_tracks'.DS.'lib'.DS.'JLVImageTool.php');
+require_once (JPATH_SITE. '/' .'components'. '/' .'com_tracks'. '/' .'helpers'. '/' .'trackshtml.php');
+require_once (JPATH_SITE. '/' .'components'. '/' .'com_tracks'. '/' .'helpers'. '/' .'countries.php');
+require_once (JPATH_SITE. '/' .'components'. '/' .'com_tracks'. '/' .'helpers'. '/' .'route.php');
+require_once (JPATH_SITE. '/' .'components'. '/' .'com_tracks'. '/' .'helpers'. '/' .'tools.php');
+require_once (JPATH_SITE. '/' .'components'. '/' .'com_tracks'. '/' .'lib'. '/' .'JLVImageTool.php');

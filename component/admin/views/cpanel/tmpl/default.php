@@ -1,121 +1,58 @@
 <?php
 /**
-* @version    $Id: default.php 68 2008-04-24 17:46:02Z julienv $ 
-* @package    JoomlaTracks
-* @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
-* @license		GNU/GPL, see LICENSE.php
-* Joomla Tracks is free software. This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-* See COPYRIGHT.php for copyright notices and details.
-*/
+ * @package     Tracks
+ * @subpackage  Admin
+ * @copyright   Tracks (C) 2008-2014 Julien Vonthron. All rights reserved.
+ * @license     GNU General Public License version 2 or later
+ */
+defined('_JEXEC') or die('Restricted access');
 
-defined('_JEXEC') or die('Restricted access'); ?>
+$return = base64_encode('index.php?option=com_tracks');
 
-<?php
-$user 	= JFactory::getUser();
-
-//Ordering allowed ?
-$ordering = ($this->lists['order'] == 'p.ordering');
-
-JHTML::_('behavior.tooltip');
+$icons = array(
+	array('link' => 'index.php?option=com_tracks&view=projects', 'icon' => 'icon-flag-checkered', 'text' => JText::_('COM_TRACKS_PROJECTS'), 'access' => 'core.edit'),
+	array('link' => 'index.php?option=com_tracks&view=competitions', 'icon' => 'icon-trophy', 'text' => JText::_('COM_TRACKS_COMPETITIONS'), 'access' => 'core.edit'),
+	array('link' => 'index.php?option=com_tracks&view=seasons', 'icon' => 'icon-calendar', 'text' => JText::_('COM_TRACKS_seasons'), 'access' => 'core.edit'),
+	array('link' => 'index.php?option=com_tracks&view=teams', 'icon' => 'icon-group', 'text' => JText::_('COM_TRACKS_teams'), 'access' => 'core.edit'),
+	array('link' => 'index.php?option=com_tracks&view=individuals', 'icon' => 'icon-user', 'text' => JText::_('COM_TRACKS_individuals'), 'access' => 'core.edit'),
+	array('link' => 'index.php?option=com_tracks&view=rounds', 'icon' => 'icon-calendar-empty', 'text' => JText::_('COM_TRACKS_rounds'), 'access' => 'core.edit'),
+	array('link' => 'index.php?option=com_tracks&view=subroundtypes', 'icon' => 'icon-ellipsis-vertical', 'text' => JText::_('COM_TRACKS_subroundtypes'), 'access' => 'core.edit'),
+	array('link' => 'index.php?option=com_tracks&view=about', 'icon' => 'icon-question', 'text' => JText::_('COM_TRACKS_about'), 'access' => 'core.edit'),
+);
 ?>
-<form action="<?php echo $this->request_url; ?>" method="post"
-	name="adminForm">
-<table>
-	<tr>
-		<td align="right" width="100%"><?php echo JText::_('COM_TRACKS_Filter' ); ?>: <input
-			type="text" name="search" id="search"
-			value="<?php echo $this->lists['search'];?>" class="text_area"
-			onchange="document.adminForm.submit();" />
-		<button onclick="this.form.submit();"><?php echo JText::_('COM_TRACKS_Go' ); ?></button>
-		<button
-			onclick="document.getElementById('search').value='';this.form.submit();"><?php echo JText::_('COM_TRACKS_Reset' ); ?></button>
-		</td>
-		<td nowrap="nowrap"><?php
-		echo $this->lists['state'];
-		?></td>
-	</tr>
-</table>
-<div id="editcell">
-<table class="adminlist">
-	<thead>
-		<tr>
-			<th width="5"><?php echo JText::_('COM_TRACKS_NUM' ); ?></th>
-			<th width="20"><input type="checkbox" name="toggle" value=""
-				onclick="checkAll(<?php echo count( $this->items ); ?>);" /></th>
-			<th class="title" nowrap="nowrap"><?php echo JHTML::_('grid.sort',  'Name', 'p.name', $this->lists['order_Dir'], $this->lists['order'] ); ?>
-			</th>
-			<th class="title" nowrap="nowrap"><?php echo JHTML::_('grid.sort',  'Competition', 'l.name', $this->lists['order_Dir'], $this->lists['order'] ); ?>
-			</th>
-			<th class="title" nowrap="nowrap"><?php echo JHTML::_('grid.sort',  'Season', 's.name', $this->lists['order_Dir'], $this->lists['order'] ); ?>
-			</th>
-			<th width="5%" nowrap="nowrap"><?php echo JHTML::_('grid.sort',  'Published', 'p.published', $this->lists['order_Dir'], $this->lists['order'] ); ?>
-			</th>
-			<th width="8%" nowrap="nowrap"><?php echo JHTML::_('grid.sort',  'Order', 'p.ordering', $this->lists['order_Dir'], $this->lists['order'] ); ?>
-			<?php echo JHTML::_('grid.order',  $this->items ); ?></th>
-			<th width="1%" nowrap="nowrap"><?php echo JHTML::_('grid.sort',  'ID', 'p.id', $this->lists['order_Dir'], $this->lists['order'] ); ?>
-			</th>
-		</tr>
-	</thead>
-	<tfoot>
-		<tr>
-			<td colspan="9"><?php echo $this->pagination->getListFooter(); ?></td>
-		</tr>
-	</tfoot>
-	<tbody>
-	<?php
-	$k = 0;
-	for ($i=0, $n=count( $this->items ); $i < $n; $i++)
-	{
-		$row = $this->items[$i];
 
-		$link 	= JRoute::_( 'index.php?option=com_tracks&controller=project&task=edit&cid[]='. $row->id );
-		$link_select 	= JRoute::_( 'index.php?option=com_tracks&controller=project&task=select&cid[]='. $row->id );
+<script type="text/javascript">
+	Joomla.submitbutton = function (pressbutton) {
+		submitbutton(pressbutton);
+	};
+</script>
 
-		$checked 	= JHTML::_('grid.checkedout',   $row, $i );
-		$published 	= JHTML::_('grid.published', $row, $i );
-
-		?>
-		<tr class="<?php echo "row$k"; ?>">
-			<td><?php echo $this->pagination->getRowOffset( $i ); ?></td>
-			<td><?php echo $checked; ?></td>
-			<td><?php
-			if (  JTable::isCheckedOut($this->user->get ('id'), $row->checked_out ) ) {
-				echo $row->title;
-			} else 
-      {
-				?> <a href="<?php echo $link; ?>"
-				title="<?php echo JText::_('COM_TRACKS_Edit_Project' ); ?>"> <?php echo $row->name; ?></a> | 
-				<a href="<?php echo $link_select; ?>"
-				title="<?php echo JText::_('COM_TRACKS_Select_project' ); ?>"> <?php echo JText::_('COM_TRACKS_select' ); ?></a>
-				<?php
-      }
-?></td>
-			<td><?php echo $row->competition;?></td>
-			<td><?php echo $row->season;?></td>
-			<td align="center"><?php echo $published;?></td>
-			<td class="order"><span><?php echo $this->pagination->orderUpIcon( $i, $i > 0 , 'orderup', 'Move Up', true ); ?></span>
-			<span><?php echo $this->pagination->orderDownIcon( $i, $n, $i < $n, 'orderdown', 'Move Down', true ); ?></span>
-			<?php $disabled = true ?  '' : 'disabled="disabled"'; ?> <input
-				type="text" name="order[]" size="5"
-				value="<?php echo $row->ordering;?>" <?php echo $disabled; ?>
-				class="text_area" style="text-align: center" /></td>
-			<td align="center"><?php echo $row->id; ?></td>
-		</tr>
-		<?php
-		$k = 1 - $k;
-}
-?>
-	</tbody>
-</table>
+<div class="row-fluid">
+	<div class="span9 tracksDashboardMainIcons">
+		<?php $iconsRow = array_chunk($icons, 6); ?>
+		<?php foreach ($iconsRow as $row) : ?>
+			<p></p>
+			<div class="row-fluid">
+				<?php foreach ($row as $icon) : ?>
+					<?php if ($this->user->authorise($icon['access'], 'com_tracks')): ?>
+						<div class="span2">
+							<a href="<?php echo $icon['link']; ?>" class="tracks-cpanel-icon-link">
+								<div class="tracks-cpanel-icon-wrapper">
+									<div class="tracks-cpanel-icon">
+										<i class="<?php echo $icon['icon']; ?> icon-5x"></i>
+									</div>
+									<?php if (isset($icon['stat'])): ?>
+										<span class="badge tracks-cpanel-count"><?php echo $icon['stat'] ?></span>
+									<?php endif; ?>
+								</div>
+								<div class="tracks-cpanel-text">
+									<?php echo $icon['text']; ?>
+								</div>
+							</a>
+						</div>
+					<?php endif; ?>
+				<?php endforeach; ?>
+			</div>
+		<?php endforeach; ?>
+	</div>
 </div>
-
-<input type="hidden" name="controller" value="project" /> 
-<input type="hidden" name="task" value="" />
-<input type="hidden" name="boxchecked" value="0" />
-<input type="hidden" name="filter_order" value="<?php echo $this->lists['order']; ?>" />
-<input type="hidden" name="filter_order_Dir" value="" />
-</form>
-

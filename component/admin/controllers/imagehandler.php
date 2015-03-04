@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id$ 
+* @version    $Id$
 * @package    JoomlaTracks
 * @copyright  Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license    GNU/GPL, see LICENSE.php
@@ -16,7 +16,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 
 jimport('joomla.application.component.controller');
 jimport('joomla.filesystem.file');
-require_once (JPATH_COMPONENT.DS.'helpers'.DS.'imageselect.php');
+require_once (JPATH_COMPONENT. '/' .'helpers'. '/' .'imageselect.php');
 
 /**
  * Tracks Component Imagehandler Controller
@@ -50,7 +50,7 @@ class TracksControllerImagehandler extends JController
 	{
 		$mainframe = JFactory::getApplication();
 		$option = JRequest::getCmd('option');
-		
+
 		// Check for request forgeries
 		JRequest::checkToken() or die( 'Invalid Token' );
 
@@ -58,14 +58,14 @@ class TracksControllerImagehandler extends JController
 		//$task 		= JRequest::getVar( 'task' );
     $type     = JRequest::getVar( 'type' );
     $folder = ImageSelect::getfolder($type);
-		
+
 		// Set FTP credentials, if given
 		jimport('joomla.client.helper');
 		JClientHelper::setCredentialsFromRequest('ftp');
 		//$ftp = JClientHelper::getCredentials('ftp');
 
 		//set the target directory
-	  $base_Dir = JPATH_SITE.DS.'media'.DS.'com_tracks'.DS.'images'.DS.$folder.DS;
+	  $base_Dir = JPATH_SITE. '/' .'media'. '/' .'com_tracks'. '/' .'images'. '/' .$folder. '/';
 
 		//do we have an upload?
 		if (empty($file['name'])) {
@@ -84,7 +84,7 @@ class TracksControllerImagehandler extends JController
 		$filename = ImageSelect::sanitize($base_Dir, $file['name']);
 		$filepath = $base_Dir . $filename;
 
-		//upload the image		
+		//upload the image
 		if (!JFile::upload($file['tmp_name'], $filepath)) {
 			echo "<script> alert('".JText::_('COM_TRACKS_UPLOAD_FAILED' )."'); window.history.go(-1); </script>\n";
 			$mainframe->close();
@@ -125,8 +125,8 @@ class TracksControllerImagehandler extends JController
 					continue;
 				}
 
-				$fullPath = JPath::clean(JPATH_SITE.DS.'media'.DS.'com_tracks'.DS.'images'.DS.$folder.DS.$image);
-				$fullPaththumb = JPath::clean(JPATH_SITE.DS.'media'.DS.'com_tracks'.DS.'images'.DS.$folder.DS.'small'.DS.$image);
+				$fullPath = JPath::clean(JPATH_SITE. '/' .'media'. '/' .'com_tracks'. '/' .'images'. '/' .$folder. '/' .$image);
+				$fullPaththumb = JPath::clean(JPATH_SITE. '/' .'media'. '/' .'com_tracks'. '/' .'images'. '/' .$folder. '/' .'small'. '/' .$image);
 				if (is_file($fullPath)) {
 					JFile::delete($fullPath);
 					if (JFile::exists($fullPaththumb)) {

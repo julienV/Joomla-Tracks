@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: view.html.php 94 2008-05-02 10:28:05Z julienv $ 
+* @version    $Id: view.html.php 94 2008-05-02 10:28:05Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -30,7 +30,7 @@ class TracksViewProjectsetting extends TracksView
     $this->setLayout('form');
 		$this->_displayForm($tpl);
     return;
-    
+
 		if($this->setLayout() == 'form') {
 			$this->_displayForm($tpl);
 			return;
@@ -38,7 +38,7 @@ class TracksViewProjectsetting extends TracksView
 
 		//get the project
 		$projectsettings = $this->get('data');
-		
+
 		parent::display($tpl);
 	}
 
@@ -51,12 +51,12 @@ class TracksViewProjectsetting extends TracksView
 		$uri 	= JFactory::getURI();
 		$user 	= JFactory::getUser();
     $document = JFactory::getDocument();
-    
+
     JHTML::_('behavior.tooltip');
-				
+
 		$object = $this->get('data');
-    
-		JForm::addFormPath(JPATH_COMPONENT.DS.'projectparameters'.DS.'default');
+
+		JForm::addFormPath(JPATH_COMPONENT. '/' .'projectparameters'. '/' .'default');
 		if (strstr($object->xml, '.xml')) {
 			$xml = substr($object->xml, 0, -4);
 		}
@@ -65,10 +65,10 @@ class TracksViewProjectsetting extends TracksView
 		}
 		$projectparams = JForm::getInstance('form', $xml);
 		$projectparams->bind(array('params' => $object->settings));
-    
+
     $this->assignRef('object', $object);
     $this->assignRef('projectparams', $projectparams);
-		
+
 		parent::display($tpl);
 	}
 }

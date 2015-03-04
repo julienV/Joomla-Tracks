@@ -206,6 +206,13 @@
             </fileset>
         </copy>
 
+		<!-- Library -->
+		<copy todir="${www.dir}/libraries" overwrite="true">
+			<fileset dir="${dirs.root}/component/libraries">
+				<include name="**" />
+			</fileset>
+		</copy>
+
         <!-- Modules - Site -->
         <copy todir="${www.dir}/modules" overwrite="true">
             <fileset dir="${dirs.root}/modules/site">
