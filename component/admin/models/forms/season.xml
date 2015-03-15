@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form
-	lessfiles="media://com_tracks/css/tracksbackend.less||media://com_tracks/css/tracksbackend.css"
-	validate="true"
-	>
+<form>
 	<fieldset name="basic_configuration"
 			  label="COM_TRACKS_SEASONS_GROUP_BASIC"
 			  description="COM_TRACKS_SEASONS_GROUP_BASIC_DESC"
@@ -10,10 +7,8 @@
 			>
 		<field
 				name="id"
-				type="text"
+				type="hidden"
 				default="0"
-				label="JGLOBAL_FIELD_ID_LABEL"
-				description ="JGLOBAL_FIELD_ID_DESC"
 				class="readonly"
 				readonly="true"/>
 
