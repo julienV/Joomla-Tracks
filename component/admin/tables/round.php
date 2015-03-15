@@ -1,42 +1,24 @@
 <?php
 /**
- * @version    2.0
- * @package    JoomlaTracks
- * @copyright  Copyright (C) 2008 Julien Vonthron. All rights reserved.
- * @license    GNU/GPL, see LICENSE.php
- *                 Joomla Tracks is free software. This version may have been modified pursuant
- *                 to the GNU General Public License, and as distributed it includes or
- *                 is derivative of works licensed under the GNU General Public License or
- *                 other free or open source software licenses.
- *                 See COPYRIGHT.php for copyright notices and details.
+ * @package     Tracks
+ * @subpackage  Admin
+ * @copyright   Tracks (C) 2008-2015 Julien Vonthron. All rights reserved.
+ * @license     GNU General Public License version 2 or later
  */
 
-// No direct access
-defined('_JEXEC') or die('Restricted access');
-
-// Include library dependencies
-jimport('joomla.filter.input');
+defined('_JEXEC') or die();
 
 /**
  * Rounds Table class
  * Rounds can be GP for formula one, stages for multi-day bicyle racing, etc...
  *
- * @package  Tracks
- * @since    0.1
+ * @package     Tracks
+ * @subpackage  Admin
+ * @since       0.1
  */
-class TracksTableRound extends FOFTable
+class TracksTableRound extends RTable
 {
-	/**
-	 * constructor
-	 *
-	 * @param   string           $table  name of the table
-	 * @param   string           $key    table primary key
-	 * @param   JDatabaseDriver  &$db    A database connector object
-	 */
-	public function __construct($table, $key, &$db)
-	{
-		parent::__construct('#__tracks_rounds', 'id', $db);
-	}
+	protected $_tableName = 'tracks_rounds';
 
 	/**
 	 * Overloaded check method to ensure data integrity
@@ -47,7 +29,7 @@ class TracksTableRound extends FOFTable
 	 *
 	 * @since  1.0
 	 */
-	function check()
+	public function check()
 	{
 		$alias = JFilterOutput::stringURLSafe($this->name);
 
