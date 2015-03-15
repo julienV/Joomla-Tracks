@@ -86,7 +86,8 @@ class TracksModelTeams extends RModelList
 		$query = $db->getQuery(true);
 
 		// Select the required fields from the table.
-		$query->select($this->getState('list.select',
+		$query->select(
+			$this->getState('list.select',
 				array(
 					'obj.*',
 					'u.name AS admin_name'

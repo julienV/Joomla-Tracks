@@ -25,23 +25,18 @@ JHtml::_('behavior.formvalidation');
 	});
 </script>
 <form
-	action="index.php?option=com_tracks&task=team.edit&id=<?php echo $this->item->id; ?>"
+	action="index.php?option=com_tracks&task=individual.edit&id=<?php echo $this->item->id; ?>"
 	method="post" name="adminForm" class="form-validate form-horizontal" id="adminForm">
 
-	<ul class="nav nav-tabs" id="teamTab">
+	<ul class="nav nav-tabs" id="individualTab">
 		<li class="active">
 			<a href="#basic" data-toggle="tab">
-				<strong><?php echo JText::_('COM_TRACKS_TEAM'); ?></strong>
+				<strong><?php echo JText::_('COM_TRACKS_INDIVIDUAL'); ?></strong>
 			</a>
 		</li>
 		<li>
-			<a href="#vehicle_group" data-toggle="tab">
-				<strong><?php echo JText::_('COM_TRACKS_TEAM_GROUP_VEHICLE'); ?></strong>
-			</a>
-		</li>
-		<li>
-			<a href="#social" data-toggle="tab">
-				<strong><?php echo JText::_('COM_TRACKS_TEAM_SOCIAL_LINKS'); ?></strong>
+			<a href="#address" data-toggle="tab">
+				<strong><?php echo JText::_('COM_TRACKS_INDIVIDUALS_GROUP_ADDRESS'); ?></strong>
 			</a>
 		</li>
 	</ul>
@@ -51,10 +46,26 @@ JHtml::_('behavior.formvalidation');
 			<div class="row-fluid">
 				<div class="control-group">
 					<div class="control-label">
-						<?php echo $this->form->getLabel('name'); ?>
+						<?php echo $this->form->getLabel('first_name'); ?>
 					</div>
 					<div class="controls">
-						<?php echo $this->form->getInput('name'); ?>
+						<?php echo $this->form->getInput('first_name'); ?>
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="control-label">
+						<?php echo $this->form->getLabel('last_name'); ?>
+					</div>
+					<div class="controls">
+						<?php echo $this->form->getInput('last_name'); ?>
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="control-label">
+						<?php echo $this->form->getLabel('nickname'); ?>
+					</div>
+					<div class="controls">
+						<?php echo $this->form->getInput('nickname'); ?>
 					</div>
 				</div>
 				<div class="control-group">
@@ -67,26 +78,50 @@ JHtml::_('behavior.formvalidation');
 				</div>
 				<div class="control-group">
 					<div class="control-label">
-						<?php echo $this->form->getLabel('short_name'); ?>
+						<?php echo $this->form->getLabel('country_code'); ?>
 					</div>
 					<div class="controls">
-						<?php echo $this->form->getInput('short_name'); ?>
+						<?php echo $this->form->getInput('country_code'); ?>
 					</div>
 				</div>
 				<div class="control-group">
 					<div class="control-label">
-						<?php echo $this->form->getLabel('acronym'); ?>
+						<?php echo $this->form->getLabel('height'); ?>
 					</div>
 					<div class="controls">
-						<?php echo $this->form->getInput('acronym'); ?>
+						<?php echo $this->form->getInput('height'); ?>
 					</div>
 				</div>
 				<div class="control-group">
 					<div class="control-label">
-						<?php echo $this->form->getLabel('published'); ?>
+						<?php echo $this->form->getLabel('weight'); ?>
 					</div>
 					<div class="controls">
-						<?php echo $this->form->getInput('published'); ?>
+						<?php echo $this->form->getInput('weight'); ?>
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="control-label">
+						<?php echo $this->form->getLabel('dob'); ?>
+					</div>
+					<div class="controls">
+						<?php echo $this->form->getInput('dob'); ?>
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="control-label">
+						<?php echo $this->form->getLabel('hometown'); ?>
+					</div>
+					<div class="controls">
+						<?php echo $this->form->getInput('hometown'); ?>
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="control-label">
+						<?php echo $this->form->getLabel('user_id'); ?>
+					</div>
+					<div class="controls">
+						<?php echo $this->form->getInput('user_id'); ?>
 					</div>
 				</div>
 				<div class="control-group">
@@ -107,22 +142,6 @@ JHtml::_('behavior.formvalidation');
 				</div>
 				<div class="control-group">
 					<div class="control-label">
-						<?php echo $this->form->getLabel('country_code'); ?>
-					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('country_code'); ?>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="control-label">
-						<?php echo $this->form->getLabel('admin_id'); ?>
-					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('admin_id'); ?>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="control-label">
 						<?php echo $this->form->getLabel('description'); ?>
 					</div>
 					<div class="controls">
@@ -132,104 +151,52 @@ JHtml::_('behavior.formvalidation');
 			</div>
 		</div>
 
-		<div class="tab-pane" id="vehicle_group">
-			<div class="well fieldset-description"><?php echo JText::_('COM_TRACKS_TEAM_GROUP_VEHICLE_DESC'); ?></div>
+		<div class="tab-pane" id="address">
+			<div class="well fieldset-description"><?php echo JText::_('COM_TRACKS_INDIVIDUALS_GROUP_ADDRESS_DESC'); ?></div>
 			<div class="row-fluid">
 				<div class="control-group">
 					<div class="control-label">
-						<?php echo $this->form->getLabel('vehicle_picture'); ?>
+						<?php echo $this->form->getLabel('address'); ?>
 					</div>
 					<div class="controls">
-						<?php echo $this->form->getInput('vehicle_picture'); ?>
+						<?php echo $this->form->getInput('address'); ?>
 					</div>
 				</div>
 				<div class="control-group">
 					<div class="control-label">
-						<?php echo $this->form->getLabel('vehicle_description'); ?>
+						<?php echo $this->form->getLabel('postcode'); ?>
 					</div>
 					<div class="controls">
-						<?php echo $this->form->getInput('vehicle_description'); ?>
+						<?php echo $this->form->getInput('postcode'); ?>
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="control-label">
+						<?php echo $this->form->getLabel('city'); ?>
+					</div>
+					<div class="controls">
+						<?php echo $this->form->getInput('city'); ?>
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="control-label">
+						<?php echo $this->form->getLabel('state'); ?>
+					</div>
+					<div class="controls">
+						<?php echo $this->form->getInput('state'); ?>
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="control-label">
+						<?php echo $this->form->getLabel('country'); ?>
+					</div>
+					<div class="controls">
+						<?php echo $this->form->getInput('country'); ?>
 					</div>
 				</div>
 			</div>
 		</div>
 
-		<div class="tab-pane" id="social">
-			<div class="row-fluid">
-				<div class="control-group">
-					<div class="control-label">
-						<?php echo $this->form->getLabel('url'); ?>
-					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('url'); ?>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="control-label">
-						<?php echo $this->form->getLabel('facebook'); ?>
-					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('facebook'); ?>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="control-label">
-						<?php echo $this->form->getLabel('twitter'); ?>
-					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('twitter'); ?>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="control-label">
-						<?php echo $this->form->getLabel('facebook'); ?>
-					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('facebook'); ?>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="control-label">
-						<?php echo $this->form->getLabel('googleplus'); ?>
-					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('googleplus'); ?>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="control-label">
-						<?php echo $this->form->getLabel('youtube'); ?>
-					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('youtube'); ?>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="control-label">
-						<?php echo $this->form->getLabel('instagram'); ?>
-					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('instagram'); ?>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="control-label">
-						<?php echo $this->form->getLabel('pinterest'); ?>
-					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('pinterest'); ?>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="control-label">
-						<?php echo $this->form->getLabel('vimeo'); ?>
-					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('vimeo'); ?>
-					</div>
-				</div>
-			</div>
-		</div>
 	</div>
 	<?php echo $this->form->getInput('id'); ?>
 	<input type="hidden" name="task" value="" />

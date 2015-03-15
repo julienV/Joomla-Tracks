@@ -1,39 +1,182 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form>
-		
+	<fieldset name="basic_configuration"
+			  label="COM_TRACKS_INDIVIDUALS_GROUP_BASIC"
+			  description="COM_TRACKS_INDIVIDUALS_GROUP_BASIC_DESC"
+			  class="span6"
+			>
+
+		<field
+				name="id"
+				type="hidden"
+				default="0"
+				class="readonly"
+				readonly="true"/>
+
+		<field
+				name="last_name"
+				type="text"
+				label="COM_TRACKS_LAST_NAME"
+				description="COM_TRACKS_LAST_NAME_DESC"
+				class="inputbox"
+				required="true"/>
+
+		<field
+				name="first_name"
+				type="text"
+				label="COM_TRACKS_FIRST_NAME"
+				description="COM_TRACKS_FIRST_NAME_DESC"
+				class="inputbox"
+				required="false"/>
+
+		<field
+				name="nickname"
+				type="text"
+				label="COM_TRACKS_Nickname"
+				description="COM_TRACKS_Nickname"
+				class="inputbox"
+				required="false"/>
+
+		<field
+				name="alias"
+				type="text"
+				label="COM_TRACKS_alias"
+				description="COM_TRACKS_alias_DESC"
+				class="inputbox"/>
+
+		<field
+				name="country_code"
+				type="rcountry"
+				label="COM_TRACKS_COUNTRY"
+				description="COM_TRACKS_COUNTRY"
+				>
+			<option value="">JSELECT</option>
+		</field>
+
+		<field
+				name="height"
+				type="text"
+				label="COM_TRACKS_Height"
+				description="COM_TRACKS_Height"
+				class="inputbox"/>
+
+		<field
+				name="weight"
+				type="text"
+				label="COM_TRACKS_Weight"
+				description="COM_TRACKS_Weight"
+				class="inputbox"/>
+
+		<field
+				name="dob"
+				type="calendar"
+				label="COM_TRACKS_Date_of_birth_YYYY_MM_DD"
+				description="COM_TRACKS_Date_of_birth_YYYY_MM_DD_DESC"
+				class="inputbox"/>
+
+		<field
+				name="hometown"
+				type="text"
+				label="COM_TRACKS_Hometown"
+				description="COM_TRACKS_Hometown"
+				class="inputbox"/>
+
+		<field
+				name="user_id"
+				type="user"
+				class="inputbox"
+				default="0"
+				label="COM_TRACKS_User"
+				description="COM_TRACKS_User"
+				/>
+
+
+		<field
+				name="picture"
+				type="rmedia"
+				label="COM_TRACKS_INDIVIDUALPICTURE"
+				description="COM_TRACKS_INDIVIDUALPICTUREDESC"
+				class="inputbox"
+				preview="show"
+				directory="images/com_tracks/individuals/"/>
+
+		<field
+				name="picture_small"
+				type="rmedia"
+				label="COM_TRACKS_INDIVIDUALSMALLPICTURE"
+				description="COM_TRACKS_INDIVIDUALSMALLPICTUREDESC"
+				class="inputbox"
+				preview="show"
+				directory="images/com_tracks/individuals/"/>
+
+	</fieldset>
+
+	<fieldset name="fs_description"
+			  label="COM_TRACKS_INDIVIDUALS_GROUP_DESCRIPTION"
+			  description="COM_TRACKS_INDIVIDUALS_GROUP_DESCRIPTION_DESC"
+			  class="span9"
+			>
+
+		<field
+				name="description"
+				type="editor"
+				label="COM_TRACKS_Description"
+				description="COM_TRACKS_Description"
+				filter="JComponentHelper::filterText" buttons="true"
+				/>
+	</fieldset>
+
+	<fieldset name="address"
+			  label="COM_TRACKS_INDIVIDUALS_GROUP_ADDRESS"
+			  description="COM_TRACKS_INDIVIDUALS_GROUP_ADDRESS_DESC"
+			  class="span6"
+			>
+		<field
+				name="address"
+				type="text"
+				label="COM_TRACKS_Address"
+				description="COM_TRACKS_Address"
+				class="inputbox"/>
+
+		<field
+				name="postcode"
+				type="text"
+				label="COM_TRACKS_Postcode"
+				description="COM_TRACKS_Postcode"
+				class="inputbox"/>
+
+		<field
+				name="city"
+				type="text"
+				label="COM_TRACKS_City"
+				description="COM_TRACKS_City"
+				class="inputbox"/>
+
+		<field
+				name="state"
+				type="text"
+				label="COM_TRACKS_State"
+				description="COM_TRACKS_State"
+				class="inputbox"/>
+
+		<field
+				name="country"
+				type="rcountry"
+				label="COM_TRACKS_INDIVIDUAL_ADDRESS_COUNTRY"
+				description="COM_TRACKS_INDIVIDUAL_ADDRESS_COUNTRY_DESC"
+				>
+			<option value="">JSELECT</option>
+		</field>
+
+	</fieldset>
+
 	<field
-		name="user_id"
-		type="user"
-		class="inputbox"
-		default="0"
-		label="COM_TRACKS_User"
-		description="COM_TRACKS_User"
-		/>
-					
+			name="checked_out"
+			type="hidden"
+			filter="unset"/>
+
 	<field
-		name="description"
-		type="editor"
-		label="COM_TRACKS_Description"
-		description="COM_TRACKS_Description" 
-		filter="JComponentHelper::filterText" buttons="true"
-		/>
-		
-	<field
-		name="picture"
-		type="media"			
-		label="COM_TRACKS_INDIVIDUALPICTURE"
-		description="COM_TRACKS_INDIVIDUALPICTUREDESC"
-		class="inputbox"
-		preview="show"
-		directory="images/com_tracks/individuals/"/>	
-		
-	<field
-		name="picture_small"
-		type="media"			
-		label="COM_TRACKS_INDIVIDUALSMALLPICTURE"
-		description="COM_TRACKS_INDIVIDUALSMALLPICTUREDESC"
-		class="inputbox"
-		preview="show"
-		directory="images/com_tracks/individuals/"/>		
-				
+			name="checked_out_time"
+			type="hidden"
+			filter="unset"/>
 </form>
