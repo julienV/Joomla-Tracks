@@ -92,6 +92,7 @@
 			<folder>help</folder>
 			<folder>helpers</folder>
 			<folder>language</folder>
+			<folder>layouts</folder>
 			<folder>models</folder>
 			<folder>projectparameters</folder>
 			<folder>sql</folder>
