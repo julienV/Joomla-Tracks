@@ -11,7 +11,7 @@ defined('_JEXEC') or die;
 /**
  * Base view.
  *
- * @package     Redevent
+ * @package     Tracks
  * @subpackage  View
  * @since       3.0
  */

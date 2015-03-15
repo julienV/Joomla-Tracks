@@ -1,48 +1,42 @@
 <?php
 /**
- * @version        $Id: team.php 72 2008-04-29 13:14:29Z julienv $
- * @package        JoomlaTracks
- * @copyright      Copyright (C) 2008 Julien Vonthron. All rights reserved.
- * @license        GNU/GPL, see LICENSE.php
- *                 Joomla Tracks is free software. This version may have been modified pursuant
- *                 to the GNU General Public License, and as distributed it includes or
- *                 is derivative of works licensed under the GNU General Public License or
- *                 other free or open source software licenses.
- *                 See COPYRIGHT.php for copyright notices and details.
+ * @package     Tracks
+ * @subpackage  Admin
+ * @copyright   Tracks (C) 2008-2015 Julien Vonthron. All rights reserved.
+ * @license     GNU General Public License version 2 or later
  */
 
-// no direct access
-defined('_JEXEC') or die('Restricted access');
-
-// Include library dependencies
-jimport('joomla.filter.input');
+defined('_JEXEC') or die();
 
 /**
- * Teams Table class
+ * Tracks Component Team Table
  *
- * @package        Tracks
- * @since          0.1
+ * @package     Tracks
+ * @subpackage  Admin
+ * @since       3.0
  */
-class TracksTableTeam extends FOFTable
+class TracksTableTeam extends RTable
 {
 	/**
-	 * constructor
+	 * The name of the table
 	 *
-	 * @param   string   $table  name of the table
-	 * @param   string   $key    table primary key
-	 * @param   database &$db    A database connector object
+	 * @var string
+	 * @since 0.9.1
 	 */
-	public function __construct($table, $key, &$db)
-	{
-		parent::__construct('#__tracks_teams', 'id', $db);
-	}
+	protected $_tableName = 'tracks_teams';
+
+	/**
+	 * The primary key of the table
+	 *
+	 * @var string
+	 * @since 0.9.1
+	 */
+	protected $_tableKey = 'id';
 
 	/**
 	 * Overloaded check method to ensure data integrity
 	 *
-	 * @access public
 	 * @return boolean True on success
-	 * @since  1.0
 	 */
 	function check()
 	{
@@ -53,7 +47,6 @@ class TracksTableTeam extends FOFTable
 			$this->alias = $alias;
 		}
 
-		// Should check name unicity
 		return true;
 	}
 }

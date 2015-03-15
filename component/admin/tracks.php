@@ -13,7 +13,7 @@ $redcoreLoader = JPATH_LIBRARIES . '/redcore/bootstrap.php';
 
 if (!file_exists($redcoreLoader) || !JPluginHelper::isEnabled('system', 'redcore'))
 {
-	throw new Exception(JText::_('COM_REDEVENT_REDCORE_REQUIRED'), 404);
+	throw new Exception(JText::_('COM_TRACKS_REDCORE_REQUIRED'), 404);
 }
 
 include_once $redcoreLoader;

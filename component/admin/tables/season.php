@@ -18,7 +18,7 @@ defined('_JEXEC') or die();
 class TracksTableSeason extends RTable
 {
 	/**
-	 * The name of the table with category
+	 * The name of the table
 	 *
 	 * @var string
 	 * @since 0.9.1

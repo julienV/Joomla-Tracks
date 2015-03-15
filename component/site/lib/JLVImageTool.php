@@ -261,7 +261,6 @@ class JLVImageTool {
 		$thumb_name = md5($img_name).$width.'_'.$height.'.png';
 		$thumb_path = $img_dir. '/' .'small'. '/' .$thumb_name;
 
-		//		echo JPATH_SITE. '/' .'images'. '/' .'redevent'. '/' .$folder. '/' .'small'. '/' .$image;
 		if (JFile::exists($thumb_path))
 		{
 			return $image_dir_rel_path.'/small/'.$thumb_name;
@@ -310,7 +309,7 @@ class JLVImageTool {
 		foreach($html_tags as $tag) {
 			// A tag is '<tagname ', so we need to add < and a space or '<tagname>'
 			if(stristr($xss_check, '<'.$tag.' ') || stristr($xss_check, '<'.$tag.'>')) {
-				RedeventError::raiseWarning(100, 'IE_XSS');
+				JError::raiseWarning(100, 'IE_XSS');
 				return false;
 			}
 		}

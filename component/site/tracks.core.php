@@ -25,7 +25,5 @@ if (version_compare(JVERSION, '1.6.0', '<'))
 }
 
 require_once (JPATH_SITE. '/' .'components'. '/' .'com_tracks'. '/' .'helpers'. '/' .'trackshtml.php');
-require_once (JPATH_SITE. '/' .'components'. '/' .'com_tracks'. '/' .'helpers'. '/' .'countries.php');
 require_once (JPATH_SITE. '/' .'components'. '/' .'com_tracks'. '/' .'helpers'. '/' .'route.php');
-require_once (JPATH_SITE. '/' .'components'. '/' .'com_tracks'. '/' .'helpers'. '/' .'tools.php');
 require_once (JPATH_SITE. '/' .'components'. '/' .'com_tracks'. '/' .'lib'. '/' .'JLVImageTool.php');

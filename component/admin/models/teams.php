@@ -1,30 +1,120 @@
 <?php
 /**
- * @version    .2 $Id$
- * @package    JoomlaTracks
- * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
- * @license		GNU/GPL, see LICENSE.php
- * Joomla Tracks is free software. This version may have been modified pursuant
- * to the GNU General Public License, and as distributed it includes or
- * is derivative of works licensed under the GNU General Public License or
- * other free or open source software licenses.
- * See COPYRIGHT.php for copyright notices and details.
+ * @package     Tracks
+ * @subpackage  Admin
+ * @copyright   Tracks (C) 2008-2015 Julien Vonthron. All rights reserved.
+ * @license     GNU General Public License version 2 or later
  */
 
-// Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die();
 
-class TracksModelTeams extends FOFModel
+/**
+ * Tracks Component teams Model
+ *
+ * @package     Tracks
+ * @subpackage  Admin
+ * @since       3.0
+ */
+class TracksModelTeams extends RModelList
 {
 	/**
-	 * Public class constructor
+	 * Name of the filter form to load
 	 *
-	 * @param   type  $config  The configuration array
+	 * @var  string
+	 */
+	protected $filterFormName = 'filter_teams';
+
+	/**
+	 * Limitstart field used by the pagination
+	 *
+	 * @var  string
+	 */
+	protected $limitField = 'teams_limit';
+
+	/**
+	 * Limitstart field used by the pagination
+	 *
+	 * @var  string
+	 */
+	protected $limitstartField = 'auto';
+
+	/**
+	 * Constructor.
+	 *
+	 * @param   array  $config  Configs
+	 *
+	 * @see     JController
 	 */
 	public function __construct($config = array())
 	{
-		parent::__construct($config);
+		if (empty($config['filter_fields']))
+		{
+			$config['filter_fields'] = array(
+				'name', 'obj.name',
+				'id', 'obj.id',
+				'ordering', 'obj.ordering',
+			);
+		}
 
-		$this->setState('form_name', 'teams');
+		parent::__construct($config);
+	}
+
+	/**
+	 * Method to get a store id based on model configuration state.
+	 *
+	 * @param   string  $id  A prefix for the store id.
+	 *
+	 * @return  string       A store id.
+	 */
+	protected function getStoreId($id = '')
+	{
+		// Compile the store id.
+		$id .= ':' . $this->getState('filter.search');
+
+		return parent::getStoreId($id);
+	}
+
+	/**
+	 * Build an SQL query to load the list data.
+	 *
+	 * @return  object  Query object
+	 */
+	protected function getListQuery()
+	{
+		// Create a new query object.
+		$db    = $this->getDbo();
+		$query = $db->getQuery(true);
+
+		// Select the required fields from the table.
+		$query->select($this->getState('list.select',
+				array(
+					'obj.*',
+					'u.name AS admin_name'
+				)
+			)
+		);
+		$query->from($db->qn('#__tracks_teams', 'obj'))
+			->join('LEFT', $db->qn('#__users') . ' AS u ON ' . $db->qn('obj.admin_id') . ' = ' . $db->qn('u.id'));
+
+		// Filter: like / search
+		$search = $this->getState('filter.search', '');
+
+		if (!empty($search))
+		{
+			if (stripos($search, 'id:') === 0)
+			{
+				$query->where('obj.id = ' . (int) substr($search, 3));
+			}
+			else
+			{
+				$search = $db->Quote('%' . $db->escape($search, true) . '%');
+				$query->where('obj.name LIKE ' . $search);
+			}
+		}
+
+		// Add the list ordering clause.
+		$query->order($db->escape($this->getState('list.ordering', 'obj.name')) . ' ' . $db->escape($this->getState('list.direction', 'ASC')));
+
+		return $query;
 	}
 }

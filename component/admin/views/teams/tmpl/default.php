@@ -12,19 +12,12 @@ JHtml::_('rdropdown.init');
 JHtml::_('rbootstrap.tooltip');
 JHtml::_('rjquery.chosen', 'select');
 
-$saveOrderUrl = 'index.php?option=com_tracks&task=competitions.saveOrderAjax&tmpl=component';
 $listOrder = $this->escape($this->state->get('list.ordering'));
 $listDirn = $this->escape($this->state->get('list.direction'));
-$saveOrder = ($listOrder == 'obj.ordering' && strtolower($listDirn) == 'asc');
 
 $user = JFactory::getUser();
 $userId = $user->id;
 $search = $this->state->get('filter.search');
-
-if (($saveOrder) && ($this->canEdit))
-{
-	JHTML::_('rsortablelist.sortable', 'table-items', 'adminForm', strtolower($listDirn), $saveOrderUrl, false, true);
-}
 ?>
 <script type="text/javascript">
 	Joomla.submitbutton = function (pressbutton)
@@ -39,16 +32,16 @@ if (($saveOrder) && ($this->canEdit))
 			form.task.value = pressbutton;
 		}
 
-		if (pressbutton == 'competitions.delete')
+		if (pressbutton == 'teams.delete')
 		{
-			var r = confirm('<?php echo JText::_("COM_TRACKS_COMPETITION_DELETE_COMFIRM")?>');
+			var r = confirm('<?php echo JText::_("COM_TRACKS_TEAM_DELETE_COMFIRM")?>');
 			if (r == true)    form.submit();
 			else return false;
 		}
 		form.submit();
 	}
 </script>
-<form action="index.php?option=com_tracks&view=competitions" class="admin" id="adminForm" method="post" name="adminForm">
+<form action="index.php?option=com_tracks&view=teams" class="admin" id="adminForm" method="post" name="adminForm">
 	<?php
 	echo RLayoutHelper::render(
 		'searchtools.default',
@@ -85,24 +78,24 @@ if (($saveOrder) && ($this->canEdit))
 					<?php else : ?>
 						<?php echo JHTML::_('grid.checkall'); ?>
 					<?php endif; ?>
-				</th>
-				<th width="30" nowrap="nowrap">
-					<?php echo JHTML::_('rsearchtools.sort', 'JSTATUS', 'obj.published', $listDirn, $listOrder); ?>
-				</th>
 				<?php if ($this->canEdit) : ?>
 					<th width="1" nowrap="nowrap">
-					</th>
-				<?php endif; ?>
-				<?php if (($search == '') && ($this->canEdit)) : ?>
-					<th width="40">
-						<?php echo JHTML::_('rsearchtools.sort', '<i class=\'icon-sort\'></i>', 'obj.ordering', $listDirn, $listOrder); ?>
 					</th>
 				<?php endif; ?>
 				<th class="title" width="auto">
 					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_NAME', 'obj.name', $listDirn, $listOrder); ?>
 				</th>
+				<th class="title" width="auto">
+					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_TEAM_SHORT_NAME', 'obj.short_name', $listDirn, $listOrder); ?>
+				</th>
+				<th class="title" width="auto">
+					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_TEAM_ACRONYM', 'obj.acronym', $listDirn, $listOrder); ?>
+				</th>
+				<th class="title" width="auto">
+					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_TEAM_ADMIN', 'u.name', $listDirn, $listOrder); ?>
+				</th>
 				<th width="10">
-					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_ID', 'obj.id', $listDirn, $listOrder); ?>
+					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_COUNTRY', 'obj.country_code', $listDirn, $listOrder); ?>
 				</th>
 			</tr>
 			</thead>
@@ -117,34 +110,15 @@ if (($saveOrder) && ($this->canEdit))
 					<td>
 						<?php echo JHtml::_('grid.id', $i, $row->id); ?>
 					</td>
-					<td>
-						<?php if ($this->canEditState) : ?>
-							<?php echo JHtml::_('rgrid.published', $row->published, $i, 'competitions.', true, 'cb'); ?>
-						<?php else : ?>
-							<?php if ($row->published) : ?>
-								<a class="btn btn-small disabled"><i class="icon-ok-sign icon-green"></i></a>
-							<?php else : ?>
-								<a class="btn btn-small disabled"><i class="icon-remove-sign icon-red"></i></a>
-							<?php endif; ?>
-						<?php endif; ?>
-					</td>
 					<?php if ($this->canEdit) : ?>
 						<td>
 							<?php if ($row->checked_out) : ?>
 								<?php
 								$editor = JFactory::getUser($row->checked_out);
 								$canCheckin = $row->checked_out == $userId || $row->checked_out == 0;
-								echo JHtml::_('rgrid.checkedout', $i, $editor->name, $row->checked_out_time, 'competitions.', $canCheckin);
+								echo JHtml::_('rgrid.checkedout', $i, $editor->name, $row->checked_out_time, 'teams.', $canCheckin);
 								?>
 							<?php endif; ?>
-						</td>
-					<?php endif; ?>
-					<?php if (($search == '') && ($this->canEdit)) : ?>
-						<td class="order nowrap center">
-						<span class="sortable-handler hasTooltip <?php echo ($saveOrder) ? '' : 'inactive'; ?>">
-							<i class="icon-move"></i>
-						</span>
-							<input type="text" style="display:none" name="order[]" value="<?php echo $orderkey + 1;?>" class="text-area-order" />
 						</td>
 					<?php endif; ?>
 					<td>
@@ -152,8 +126,20 @@ if (($saveOrder) && ($this->canEdit))
 						<?php if (($row->checked_out) || (!$this->canEdit)) : ?>
 							<?php echo $itemTitle; ?>
 						<?php else : ?>
-							<?php echo JHtml::_('link', 'index.php?option=com_tracks&task=competition.edit&id=' . $row->id, $itemTitle); ?>
+							<?php echo JHtml::_('link', 'index.php?option=com_tracks&task=team.edit&id=' . $row->id, $itemTitle); ?>
 						<?php endif; ?>
+					</td>
+					<td>
+						<?php echo $row->short_name; ?>
+					</td>
+					<td>
+						<?php echo $row->acronym; ?>
+					</td>
+					<td>
+						<?php echo $row->admin_name; ?>
+					</td>
+					<td>
+						<?php echo TrackslibHelperCountries::getCountryFlag($row->country_code); ?>
 					</td>
 					<td>
 						<?php echo $row->id; ?>

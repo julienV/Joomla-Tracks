@@ -37,13 +37,13 @@ $configurationLink = 'index.php?option=com_redcore&view=config&layout=edit&compo
 
 <ul class="nav nav-pills nav-stacked redmember-sidebar">
 	<?php foreach ($icons as $icon) : ?>
-		<?php if ($user->authorise($icon['access'], 'com_redevent')): ?>
+		<?php if ($user->authorise($icon['access'], 'com_tracks')): ?>
 			<?php $class = ($active === $icon['view']) ? 'active' : ''; ?>
 			<li class="<?php echo $class; ?>">
 				<?php if ($icon['view'] == 'configuration') : ?>
 					<?php $link = $configurationLink; ?>
 				<?php else : ?>
-					<?php $link = JRoute::_('index.php?option=com_redevent&view=' . $icon['view']); ?>
+					<?php $link = JRoute::_('index.php?option=com_tracks&view=' . $icon['view']); ?>
 				<?php endif; ?>
 				<a href="<?php echo $link; ?>">
 					<i class="<?php echo $icon['icon']; ?>"></i>

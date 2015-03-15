@@ -30,7 +30,7 @@ if (!class_exists('Com_RedcoreInstallerScript'))
 }
 
 /**
- * Custom installation of Redevent.
+ * Custom installation of Tracks.
  *
  * @package     Redevent
  * @subpackage  Install
