@@ -2,12 +2,13 @@
 /**
  * @package     Tracks
  * @subpackage  Admin
- * @copyright   Tracks (C) 2008-2014 Julien Vonthron. All rights reserved.
+ * @copyright   Tracks (C) 2008-2015 Julien Vonthron. All rights reserved.
  * @license     GNU General Public License version 2 or later
  */
 defined('_JEXEC') or die('Restricted access');
 
 $return = base64_encode('index.php?option=com_tracks');
+$configurationLink = 'index.php?option=com_redcore&view=config&layout=edit&component=com_tracks&return=' . $return;
 
 $icons = array(
 	array('link' => 'index.php?option=com_tracks&view=projects', 'icon' => 'icon-flag-checkered', 'text' => JText::_('COM_TRACKS_PROJECTS'), 'access' => 'core.edit'),
@@ -18,6 +19,7 @@ $icons = array(
 	array('link' => 'index.php?option=com_tracks&view=rounds', 'icon' => 'icon-calendar-empty', 'text' => JText::_('COM_TRACKS_rounds'), 'access' => 'core.edit'),
 	array('link' => 'index.php?option=com_tracks&view=subroundtypes', 'icon' => 'icon-ellipsis-vertical', 'text' => JText::_('COM_TRACKS_subroundtypes'), 'access' => 'core.edit'),
 	array('link' => 'index.php?option=com_tracks&view=about', 'icon' => 'icon-question', 'text' => JText::_('COM_TRACKS_about'), 'access' => 'core.edit'),
+	array('link' => $configurationLink, 'icon' => 'icon-gears', 'text' => JText::_('COM_TRACKS_SETTINGS'), 'access' => 'core.manage'),
 );
 ?>
 

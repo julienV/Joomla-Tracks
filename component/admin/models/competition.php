@@ -9,12 +9,13 @@
 defined('_JEXEC') or die();
 
 /**
- * Tracks Component Competitions Controller
+ * Tracks Component competitions Model
  *
  * @package     Tracks
  * @subpackage  Admin
  * @since       3.0
  */
-class TracksControllerCompetitions extends RControllerAdmin
+class TracksModelCompetition extends RModelAdmin
 {
+
 }

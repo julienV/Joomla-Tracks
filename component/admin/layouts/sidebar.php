@@ -2,7 +2,7 @@
 /**
  * @package     Tracks
  * @subpackage  Admin
- * @copyright   Tracks (C) 2008-2014 Julien Vonthron. All rights reserved.
+ * @copyright   Tracks (C) 2008-2015 Julien Vonthron. All rights reserved.
  * @license     GNU General Public License version 2 or later
  */
 
@@ -26,12 +26,13 @@ $icons = array(
 	array('view' => 'rounds', 'icon' => 'icon-calendar-empty', 'text' => JText::_('COM_TRACKS_rounds'), 'access' => 'core.edit'),
 	array('view' => 'subroundtypes', 'icon' => 'icon-ellipsis-vertical', 'text' => JText::_('COM_TRACKS_subroundtypes'), 'access' => 'core.edit'),
 	array('view' => 'about', 'icon' => 'icon-question', 'text' => JText::_('COM_TRACKS_about'), 'access' => 'core.edit'),
+	array('view' => 'configuration', 'icon' => 'icon-gears', 'text' => JText::_('COM_TRACKS_SETTINGS'), 'access' => 'core.manage'),
 );
 
 // Configuration link
 $uri = JUri::getInstance();
 $return = base64_encode('index.php' . $uri->toString(array('query')));
-$configurationLink = 'index.php?option=com_redcore&view=config&layout=edit&component=com_redevent&return=' . $return;
+$configurationLink = 'index.php?option=com_redcore&view=config&layout=edit&component=com_tracks&return=' . $return;
 ?>
 
 <ul class="nav nav-pills nav-stacked redmember-sidebar">
