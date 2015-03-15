@@ -17,7 +17,7 @@ $icons = array(
 	array('link' => 'index.php?option=com_tracks&view=teams', 'icon' => 'icon-group', 'text' => JText::_('COM_TRACKS_teams'), 'access' => 'core.edit'),
 	array('link' => 'index.php?option=com_tracks&view=individuals', 'icon' => 'icon-user', 'text' => JText::_('COM_TRACKS_individuals'), 'access' => 'core.edit'),
 	array('link' => 'index.php?option=com_tracks&view=rounds', 'icon' => 'icon-calendar-empty', 'text' => JText::_('COM_TRACKS_rounds'), 'access' => 'core.edit'),
-	array('link' => 'index.php?option=com_tracks&view=subroundtypes', 'icon' => 'icon-ellipsis-vertical', 'text' => JText::_('COM_TRACKS_subroundtypes'), 'access' => 'core.edit'),
+	array('link' => 'index.php?option=com_tracks&view=eventtypes', 'icon' => 'icon-ellipsis-vertical', 'text' => JText::_('COM_TRACKS_eventtypes'), 'access' => 'core.edit'),
 	array('link' => 'index.php?option=com_tracks&view=about', 'icon' => 'icon-question', 'text' => JText::_('COM_TRACKS_about'), 'access' => 'core.edit'),
 	array('link' => $configurationLink, 'icon' => 'icon-gears', 'text' => JText::_('COM_TRACKS_SETTINGS'), 'access' => 'core.manage'),
 );

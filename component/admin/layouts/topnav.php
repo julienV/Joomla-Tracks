@@ -25,7 +25,6 @@ $icons = array(
 	array('view' => 'individuals', 'icon' => 'icon-user', 'text' => JText::_('COM_TRACKS_individuals'), 'access' => 'core.edit'),
 	array('view' => 'rounds', 'icon' => 'icon-calendar-empty', 'text' => JText::_('COM_TRACKS_rounds'), 'access' => 'core.edit'),
 	array('view' => 'eventtypes', 'icon' => 'icon-ellipsis-vertical', 'text' => JText::_('COM_TRACKS_eventtypes'), 'access' => 'core.edit'),
-	array('view' => 'about', 'icon' => 'icon-question', 'text' => JText::_('COM_TRACKS_about'), 'access' => 'core.edit'),
 	array('view' => 'configuration', 'icon' => 'icon-gears', 'text' => JText::_('COM_TRACKS_SETTINGS'), 'access' => 'core.manage'),
 );
 
@@ -35,7 +34,8 @@ $return = base64_encode('index.php' . $uri->toString(array('query')));
 $configurationLink = 'index.php?option=com_redcore&view=config&layout=edit&component=com_tracks&return=' . $return;
 ?>
 
-<ul class="nav nav-pills nav-stacked redmember-sidebar">
+<span class="divider-vertical pull-left"></span>
+<ul class="nav">
 	<?php foreach ($icons as $icon) : ?>
 		<?php if ($user->authorise($icon['access'], 'com_tracks')): ?>
 			<?php $class = ($active === $icon['view']) ? 'active' : ''; ?>

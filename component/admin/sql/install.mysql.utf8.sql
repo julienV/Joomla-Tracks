@@ -115,14 +115,13 @@ CREATE TABLE IF NOT EXISTS `#__tracks_rounds` (
   `picture` varchar(250) NULL,
   `thumbnail` varchar(250) NULL,
   `description` text NULL,
-  `ordering` int(11) NOT NULL,
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL,
   `published` tinyint(1) NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
-CREATE TABLE IF NOT EXISTS `#__tracks_subroundtypes` (
+CREATE TABLE IF NOT EXISTS `#__tracks_eventtypes` (
   `id` int(11) NOT NULL auto_increment,
   `name` varchar(40) NOT NULL,
   `alias` varchar(100) NOT NULL default '',
@@ -150,7 +149,7 @@ CREATE TABLE IF NOT EXISTS `#__tracks_projects_rounds` (
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
-CREATE TABLE IF NOT EXISTS `#__tracks_projects_subrounds` (
+CREATE TABLE IF NOT EXISTS `#__tracks_events` (
   `id` int(11) NOT NULL auto_increment,
   `projectround_id` int(11) NOT NULL,
   `type` int(11) NOT NULL,
@@ -193,7 +192,7 @@ CREATE TABLE IF NOT EXISTS `#__tracks_rounds_results` (
   `individual_id` int(11) NOT NULL,
   `team_id` int(11) NOT NULL,
   `number` varchar(8) NULL,
-  `subround_id` int(11) NOT NULL,
+  `event_id` int(11) NOT NULL,
   `rank` int(11) NOT NULL,
   `performance` VARCHAR(30) NOT NULL DEFAULT '',
   `bonus_points` float NOT NULL,
@@ -201,7 +200,7 @@ CREATE TABLE IF NOT EXISTS `#__tracks_rounds_results` (
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL,
   PRIMARY KEY  (`id`),
-  UNIQUE KEY `pr_ind` (`individual_id`,`subround_id`)
+  UNIQUE KEY `event_individual` (`individual_id`,`event_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `#__tracks_project_settings` (

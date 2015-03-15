@@ -32,17 +32,17 @@ $search = $this->state->get('filter.search');
 			form.task.value = pressbutton;
 		}
 
-		if (pressbutton == 'rounds.delete')
+		if (pressbutton == 'eventtypes.delete')
 		{
-			var r = confirm('<?php echo JText::_("COM_TRACKS_ROUND_DELETE_COMFIRM")?>');
+			var r = confirm('<?php echo JText::_("COM_TRACKS_EVENTTYPE_DELETE_COMFIRM")?>');
 			if (r == true)    form.submit();
 			else return false;
 		}
 		form.submit();
 	}
 </script>
-<div class="well"><?php echo JText::_('COM_TRACKS_ROUNDS_EXPLANATION'); ?></div>
-<form action="index.php?option=com_tracks&view=rounds" class="admin" id="adminForm" method="post" name="adminForm">
+<div class="well"><?php echo JText::_('COM_TRACKS_EVENTTYPES_EXPLANATION'); ?></div>
+<form action="index.php?option=com_tracks&view=eventtypes" class="admin" id="adminForm" method="post" name="adminForm">
 	<?php
 	echo RLayoutHelper::render(
 		'searchtools.default',
@@ -80,9 +80,6 @@ $search = $this->state->get('filter.search');
 						<?php echo JHTML::_('grid.checkall'); ?>
 					<?php endif; ?>
 				</th>
-				<th width="30" nowrap="nowrap">
-					<?php echo JHTML::_('rsearchtools.sort', 'JSTATUS', 'obj.published', $listDirn, $listOrder); ?>
-				</th>
 				<?php if ($this->canEdit) : ?>
 					<th width="1" nowrap="nowrap">
 					</th>
@@ -90,8 +87,14 @@ $search = $this->state->get('filter.search');
 				<th class="title" width="auto">
 					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_NAME', 'obj.name', $listDirn, $listOrder); ?>
 				</th>
+				<th width="auto">
+					<?php echo JText::_('COM_TRACKS_NOTE'); ?>
+				</th>
 				<th width="10">
-					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_COUNTRY', 'obj.country', $listDirn, $listOrder); ?>
+					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_count_in_rankings', 'obj.count_points', $listDirn, $listOrder); ?>
+				</th>
+				<th width="auto">
+					<?php echo JText::_('COM_TRACKS_POINTS'); ?>
 				</th>
 				<th width="10">
 					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_ID', 'obj.id', $listDirn, $listOrder); ?>
@@ -109,24 +112,13 @@ $search = $this->state->get('filter.search');
 					<td>
 						<?php echo JHtml::_('grid.id', $i, $row->id); ?>
 					</td>
-					<td>
-						<?php if ($this->canEditState) : ?>
-							<?php echo JHtml::_('rgrid.published', $row->published, $i, 'rounds.', true, 'cb'); ?>
-						<?php else : ?>
-							<?php if ($row->published) : ?>
-								<a class="btn btn-small disabled"><i class="icon-ok-sign icon-green"></i></a>
-							<?php else : ?>
-								<a class="btn btn-small disabled"><i class="icon-remove-sign icon-red"></i></a>
-							<?php endif; ?>
-						<?php endif; ?>
-					</td>
 					<?php if ($this->canEdit) : ?>
 						<td>
 							<?php if ($row->checked_out) : ?>
 								<?php
 								$editor = JFactory::getUser($row->checked_out);
 								$canCheckin = $row->checked_out == $userId || $row->checked_out == 0;
-								echo JHtml::_('rgrid.checkedout', $i, $editor->name, $row->checked_out_time, 'rounds.', $canCheckin);
+								echo JHtml::_('rgrid.checkedout', $i, $editor->name, $row->checked_out_time, 'eventtypes.', $canCheckin);
 								?>
 							<?php endif; ?>
 						</td>
@@ -136,11 +128,17 @@ $search = $this->state->get('filter.search');
 						<?php if (($row->checked_out) || (!$this->canEdit)) : ?>
 							<?php echo $itemTitle; ?>
 						<?php else : ?>
-							<?php echo JHtml::_('link', 'index.php?option=com_tracks&task=round.edit&id=' . $row->id, $itemTitle); ?>
+							<?php echo JHtml::_('link', 'index.php?option=com_tracks&task=eventtype.edit&id=' . $row->id, $itemTitle); ?>
 						<?php endif; ?>
 					</td>
 					<td>
-						<?php echo TrackslibHelperCountries::getCountryFlag($row->country); ?>
+						<?php echo $row->note; ?>
+					</td>
+					<td>
+						<?php echo $row->count_points; ?>
+					</td>
+					<td>
+						<?php echo $row->points_attribution; ?>
 					</td>
 					<td>
 						<?php echo $row->id; ?>
