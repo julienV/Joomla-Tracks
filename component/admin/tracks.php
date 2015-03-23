@@ -9,7 +9,19 @@
 // No direct access
 defined('_JEXEC') or die('Restricted access');
 
-$redcoreLoader = JPATH_LIBRARIES . '/redcore/bootstrap.php';
+$tracksLoader = JPATH_LIBRARIES . '/tracks/bootstrap.php';
+
+if (!file_exists($tracksLoader))
+{
+	throw new Exception(JText::_('COM_TRACKS_LIB_INIT_FAILED'), 404);
+}
+
+include_once $tracksLoader;
+
+// Bootstraps Tracks
+TrackslibBootstrap::bootstrap();
+
+$tracksLoader = JPATH_LIBRARIES . '/redcore/bootstrap.php';
 
 if (!file_exists($redcoreLoader) || !JPluginHelper::isEnabled('system', 'redcore'))
 {

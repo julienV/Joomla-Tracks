@@ -34,6 +34,13 @@ class TracksTableSeason extends RTable
 	protected $_tableKey = 'id';
 
 	/**
+	 * Field name to publish/unpublish/trash table registers. Ex: state
+	 *
+	 * @var  string
+	 */
+	protected $_tableFieldState = 'published';
+
+	/**
 	 * Overloaded check method to ensure data integrity
 	 *
 	 * @access  public

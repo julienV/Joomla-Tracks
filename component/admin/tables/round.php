@@ -21,6 +21,13 @@ class TracksTableRound extends RTable
 	protected $_tableName = 'tracks_rounds';
 
 	/**
+	 * Field name to publish/unpublish/trash table registers. Ex: state
+	 *
+	 * @var  string
+	 */
+	protected $_tableFieldState = 'published';
+
+	/**
 	 * Overloaded check method to ensure data integrity
 	 *
 	 * @access public

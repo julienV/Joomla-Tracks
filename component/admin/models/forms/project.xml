@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form
-		lessfiles="media://com_tracks/css/tracksbackend.less||media://com_tracks/css/tracksbackend.css"
-		validate="true"
-		>
+<form addfieldpath="/libraries/tracks/form/fields">
 	<fieldset name="basic_configuration"
 			  label="COM_TRACKS_PROJECTS_GROUP_BASIC"
 			  description="COM_TRACKS_PROJECTS_GROUP_BASIC_DESC"
-			  class="span6"
 			>
 
 		<field
 			name="id"
-			type="text"
+			type="hidden"
 			default="0"
 			label="JGLOBAL_FIELD_ID_LABEL"
 			description ="JGLOBAL_FIELD_ID_DESC"
@@ -51,23 +47,16 @@
 
 		<field
 				name="competition_id"
-				type="model"
+				type="trackscompetition"
 				label="COM_TRACKS_COMPETITION"
-				description="COM_TRACKS_PROJECT_COMPETITION_DESC"
-				model="TracksModelCompetitions"
-				key_field="id"
-				value_field="name"
-				>
+				description="COM_TRACKS_PROJECT_COMPETITION_DESC">
 		</field>
 
 		<field
 				name="season_id"
-				type="model"
+				type="tracksseason"
 				label="COM_TRACKS_SEASON"
 				description="COM_TRACKS_PROJECT_SEASON_DESC"
-				model="TracksModelSeasons"
-				key_field="id"
-				value_field="name"
 				>
 		</field>
 
@@ -79,16 +68,6 @@
 			label="COM_TRACKS_Administrator"
 			description="COM_TRACKS_Administrator"
 			/>
-
-		<field
-				name="checked_out"
-				type="hidden"
-				filter="unset"/>
-
-		<field
-				name="checked_out_time"
-				type="hidden"
-				filter="unset"/>
 
 		<field
 				name="params"

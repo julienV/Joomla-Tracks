@@ -10,6 +10,9 @@
 	<version>##VERSION##</version>
 	<description>Tracks library</description>
 	<files>
+		<filename>bootstrap.php</filename>
+		<filename>tracks.xml</filename>
+		<folder>form</folder>
 		<folder>helper</folder>
 		<folder>view</folder>
 	</files>
