@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+
+	<field
+		name="currentproject"
+		type="tracksproject"
+		label="COM_TRACKS_PROJECT"
+		description="COM_TRACKS_PROJECT_DESC"
+		onchange="this.form.submit();"
+			>
+		<option value="">COM_TRACKS_SELECT_PROJECT</option>
+	</field>
+
+</form>

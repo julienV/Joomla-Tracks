@@ -15,7 +15,7 @@ defined('_JEXEC') or die();
  * @subpackage  Admin
  * @since       3.0
  */
-class TracksModelSeasons extends RModelList
+class TracksModelSeasons extends TrackslibModelList
 {
 	/**
 	 * Name of the filter form to load

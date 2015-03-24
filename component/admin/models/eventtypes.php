@@ -14,7 +14,7 @@
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die();
 
-class TracksModelEventtypes extends RModelList
+class TracksModelEventtypes extends TrackslibModelList
 {
 	/**
 	 * Name of the filter form to load

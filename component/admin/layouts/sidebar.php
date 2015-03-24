@@ -33,9 +33,46 @@ $icons = array(
 $uri = JUri::getInstance();
 $return = base64_encode('index.php' . $uri->toString(array('query')));
 $configurationLink = 'index.php?option=com_redcore&view=config&layout=edit&component=com_tracks&return=' . $return;
-?>
 
-<ul class="nav nav-pills nav-stacked redmember-sidebar">
+if ($currentproject = JFactory::getApplication()->getUserState('currentproject'))
+{
+
+	$projectIcons = array(
+		array('view' => 'projectrounds', 'icon' => 'icon-calendar-empty', 'text' => JText::_('COM_TRACKS_PROJECT_ROUNDS'), 'access' => 'core.edit'),
+		array('view' => 'participants', 'icon' => 'icon-user', 'text' => JText::_('COM_TRACKS_PARTICIPANTS'), 'access' => 'core.edit'),
+	);
+}
+
+?>
+<?php if (isset($data['view']->projectSwitch)): ?>
+	<?php $form = $data['view']->projectSwitch; ?>
+	<form action="index.php?option=com_tracks&task=project.select&return=<?php echo $return; ?>" method="post" id="project-switch">
+		<?php echo $form->getField('currentproject')->input; ?>
+	</form>
+<?php endif; ?>
+
+<?php if ($currentproject): ?>
+<ul class="nav nav-pills nav-stacked tracks-sidebar">
+	<?php foreach ($projectIcons as $icon) : ?>
+		<?php if ($user->authorise($icon['access'], 'com_tracks')): ?>
+			<?php $class = ($active === $icon['view']) ? 'active' : ''; ?>
+			<li class="<?php echo $class; ?>">
+				<?php if ($icon['view'] == 'configuration') : ?>
+					<?php $link = $configurationLink; ?>
+				<?php else : ?>
+					<?php $link = JRoute::_('index.php?option=com_tracks&view=' . $icon['view']); ?>
+				<?php endif; ?>
+				<a href="<?php echo $link; ?>">
+					<i class="<?php echo $icon['icon']; ?>"></i>
+					<?php echo $icon['text']; ?>
+				</a>
+			</li>
+		<?php endif; ?>
+	<?php endforeach; ?>
+</ul>
+<?php endif; ?>
+
+<ul class="nav nav-pills nav-stacked tracks-sidebar">
 	<?php foreach ($icons as $icon) : ?>
 		<?php if ($user->authorise($icon['access'], 'com_tracks')): ?>
 			<?php $class = ($active === $icon['view']) ? 'active' : ''; ?>

@@ -89,6 +89,13 @@ abstract class TrackslibViewAdmin extends RViewAdmin
 	protected $logoutReturnUri = 'index.php';
 
 	/**
+	 * Show the project switch
+	 *
+	 * @var  boolean
+	 */
+	protected $showProjectSwitch = true;
+
+	/**
 	 * Constructor
 	 *
 	 * @param   array  $config  A named configuration array for object construction.<br/>
@@ -115,4 +122,23 @@ abstract class TrackslibViewAdmin extends RViewAdmin
 			'view' => $this
 		);
 	}
+
+	/**
+	 * Execute and display a template script.
+	 *
+	 * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
+	 *
+	 * @return  mixed  A string if successful, otherwise a Error object.
+	 */
+	public function display($tpl = null)
+	{
+		if ($this->showProjectSwitch)
+		{
+			$this->projectSwitch = $this->get('ProjectSwitchForm');
+		}
+
+		return parent::display($tpl);
+	}
+
+
 }
