@@ -8,19 +8,10 @@
 			placeholder="JSEARCH_FILTER"
 			class="js-enter-submits"
 			/>
-		<field
-				name="published"
-				type="rpublished"
-				onchange="this.form.submit();"
-				label="COM_TRACKS_FILTER_PUBLISHED"
-				statuses="0,1"
-				>
-			<option value="">COM_TRACKS_FILTER_PUBLISHED</option>
-		</field>
 	</fields>
 	<fields name="list">
 		<field
-			name="competitions_limit"
+			name="participants_limit"
 			type="rlimitbox"
 			class="inputbox input-mini chzn"
 			default="25"

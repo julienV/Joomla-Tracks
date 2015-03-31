@@ -9,13 +9,13 @@
 defined('_JEXEC') or die('Restricted access');
 
 /**
- * HTML View class for Tracks projectrounds
+ * HTML View class for Tracks participants
  *
  * @package     Tracks
  * @subpackage  Admin
  * @since       3.0
  */
-class TracksViewProjectrounds extends TrackslibViewAdmin
+class TracksViewParticipants extends TrackslibViewAdmin
 {
 	/**
 	 * Execute and display a template script.
@@ -73,7 +73,7 @@ class TracksViewProjectrounds extends TrackslibViewAdmin
 	 */
 	public function getTitle()
 	{
-		return JText::_('COM_TRACKS_PROJECTROUNDS');
+		return JText::_('COM_TRACKS_PARTICIPANTS');
 	}
 
 	/**
@@ -92,19 +92,19 @@ class TracksViewProjectrounds extends TrackslibViewAdmin
 
 		if ($user->authorise('core.create', 'com_tracks'))
 		{
-			$new = RToolbarBuilder::createNewButton('projectround.add');
+			$new = RToolbarBuilder::createNewButton('participant.add');
 			$firstGroup->addButton($new);
 		}
 
 		if ($user->authorise('core.edit', 'com_tracks'))
 		{
-			$edit = RToolbarBuilder::createEditButton('projectround.edit');
+			$edit = RToolbarBuilder::createEditButton('participant.edit');
 			$secondGroup->addButton($edit);
 		}
 
 		if ($user->authorise('core.delete', 'com_tracks'))
 		{
-			$delete = RToolbarBuilder::createDeleteButton('projectrounds.delete');
+			$delete = RToolbarBuilder::createDeleteButton('participants.delete');
 			$fourthGroup->addButton($delete);
 		}
 

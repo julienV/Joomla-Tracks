@@ -18,6 +18,82 @@ defined('_JEXEC') or die;
 abstract class TrackslibHelperTools
 {
 	/**
+	 * Get current project id (backend)
+	 *
+	 * @return int
+	 */
+	public static function getCurrentProjectId()
+	{
+		return (int) JFactory::getApplication()->getUserState('currentproject');
+	}
+
+	/**
+	 * Format round date
+	 *
+	 * @param   Object  $round  round
+	 *
+	 * @return bool|string|void
+	 */
+	public static function formatRoundStartEnd($round)
+	{
+		if (!self::isValidDate($round->start_date))
+		{
+			return false;
+		}
+
+		if (self::isValidDate($round->end_date))
+		{
+			// Both dates are defined.
+			$format_end = 'j F Y';
+
+			if (JHTML::date($round->start_date, 'Ym') === JHTML::date($round->end_date, 'Ym'))
+			{
+				// No need to display twice the month and year here
+				$format_start = 'j';
+			}
+			else
+			{
+				$format_start = 'j F Y';
+			}
+
+			return JHTML::date($round->start_date, $format_start) . ' - ' . JHTML::date($round->end_date, $format_end);
+		}
+		else
+		{
+			return JHTML::date($round->start_date, 'j F Y');
+		}
+
+		return;
+	}
+
+	/**
+	 * return true is a date is valid (not null, or 0000-00...)
+	 *
+	 * @param   string  $date  date
+	 *
+	 * @return boolean
+	 */
+	public static function isValidDate($date)
+	{
+		if (!$date)
+		{
+			return false;
+		}
+
+		if ($date === '0000-00-00' || $date === '0000-00-00 00:00:00')
+		{
+			return false;
+		}
+
+		if (!strtotime($date))
+		{
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
 	 * return earned points from result object
 	 * @param object result (requires bonus_points, points_attribution, rank)
 	 * @return float points
@@ -109,22 +185,6 @@ abstract class TrackslibHelperTools
 	public static function getStarts($rankingrow)
 	{
 		return count($rankingrow->finishes);
-	}
-
-	/**
-	 * returns true if the string date is valid
-	 *
-	 * @param   string  $date
-	 * @return boolean
-	 */
-	public static function isValidDate($date)
-	{
-		if (!$date || strstr($date, '0000-00-00'))
-		{
-			return false;
-		}
-
-		return strtotime($date);
 	}
 
 	/**

@@ -1,91 +1,136 @@
 <?php
 /**
- * @version        2.0
- * @package        JoomlaTracks
- * @copyright      Copyright (C) 2008 Julien Vonthron. All rights reserved.
- * @license        GNU/GPL, see LICENSE.php
- *                 Joomla Tracks is free software. This version may have been modified pursuant
- *                 to the GNU General Public License, and as distributed it includes or
- *                 is derivative of works licensed under the GNU General Public License or
- *                 other free or open source software licenses.
- *                 See COPYRIGHT.php for copyright notices and details.
+ * @package     Tracks
+ * @subpackage  Admin
+ * @copyright   Tracks (C) 2008-2015 Julien Vonthron. All rights reserved.
+ * @license     GNU General Public License version 2 or later
  */
 
-// Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die();
 
 /**
- * Joomla Tracks Component Projectrounds Model
+ * Tracks Component projects Model
  *
- * @package  Tracks
- * @since    0.1
+ * @package     Tracks
+ * @subpackage  Admin
+ * @since       3.0
  */
-class TracksModelProjectrounds extends FOFModel
+class TracksModelProjectrounds extends TrackslibModelList
 {
 	/**
-	 * Builds the SELECT query
+	 * Name of the filter form to load
 	 *
-	 * @param   boolean $overrideLimits  Are we requested to override the set limits?
-	 *
-	 * @return  JDatabaseQuery
+	 * @var  string
 	 */
-	public function buildQuery($overrideLimits = false)
+	protected $filterFormName = 'filter_projectrounds';
+
+	/**
+	 * Limitstart field used by the pagination
+	 *
+	 * @var  string
+	 */
+	protected $limitField = 'projectrounds_limit';
+
+	/**
+	 * Limitstart field used by the pagination
+	 *
+	 * @var  string
+	 */
+	protected $limitstartField = 'auto';
+
+	/**
+	 * Constructor.
+	 *
+	 * @param   array  $config  Configs
+	 *
+	 * @see     JController
+	 */
+	public function __construct($config = array())
 	{
-		$table = $this->getTable();
-		$db = $this->getDbo();
+		if (empty($config['filter_fields']))
+		{
+			$config['filter_fields'] = array(
+				'name', 'obj.name',
+				'dates', 'obj.dates',
+				'ordering', 'obj.ordering',
+			);
+		}
 
-		// Current project
-		$app = JFactory::getApplication();
-		$option = $app->input->getCmd('option', 'com_tracks');
-		$project_id = $app->getUserState($option . 'project');
+		parent::__construct($config);
+	}
 
+	/**
+	 * Method to get a store id based on model configuration state.
+	 *
+	 * @param   string  $id  A prefix for the store id.
+	 *
+	 * @return  string       A store id.
+	 */
+	protected function getStoreId($id = '')
+	{
+		// Compile the store id.
+		$id .= ':' . $this->getState('filter.search');
+		$id .= ':' . $this->getState('filter.published');
+
+		return parent::getStoreId($id);
+	}
+
+	/**
+	 * Build an SQL query to load the list data.
+	 *
+	 * @return  object  Query object
+	 */
+	protected function getListQuery()
+	{
+		// Create a new query object.
+		$db    = $this->_db;
 		$query = $db->getQuery(true);
 
-		$query->select('pr.*');
-		$query->from('#__tracks_projects_rounds AS pr');
+		// Select the required fields from the table.
+		$query->select(
+			$this->getState(
+				'list.select',
+				array(
+					'obj.*',
+					'r.name as name',
+				)
+			)
+		);
+		$query->from($db->qn('#__tracks_projects_rounds', 'obj'));
+		$query->join('inner', '#__tracks_rounds AS r on r.id = obj.round_id');
+		$query->where($db->qn('obj.project_id') . ' = ' . TrackslibHelperTools::getCurrentProjectId());
 
-		$query->select('r.name as name');
-		$query->join('inner', '#__tracks_rounds AS r ON r.id = pr.round_id');
+		// Filter: like / search
+		$search = $this->getState('filter.search', '');
 
-		$query->where('pr.project_id = ' . $project_id);
-
-		if (!$overrideLimits)
+		if (!empty($search))
 		{
-			$order = $this->getState('filter_order', null, 'cmd');
-
-			$allowed = array_keys($table->getData());
-			$allowed[] = 'name';
-			$allowed[] = 'r.name';
-
-			if (!in_array($order, $allowed))
+			if (stripos($search, 'id:') === 0)
 			{
-				$order = 'id';
+				$query->where('obj.id = ' . (int) substr($search, 3));
 			}
+			else
+			{
+				$search = $db->Quote('%' . $db->escape($search, true) . '%');
 
-			$order = $db->qn($order);
-
-			$dir = $this->getState('filter_order_Dir', 'ASC', 'cmd');
-			$query->order($order . ' ' . $dir);
+				// Match on season and competition name too
+				$or = array(
+					'obj.name LIKE ' . $search,
+					'r.name LIKE ' . $search,
+				);
+				$query->where('(' . implode(' OR ', $or) . ')');
+			}
 		}
 
-		$filter = $this->getState('search');
-		if ($filter)
+		$state = $this->getState('filter.published');
+
+		if (is_numeric($state))
 		{
-			$query->where('r.name LIKE (' . $db->quote('%' . $filter . '%') . ')');
+			$query->where($db->quoteName('obj.published') . ' = ' . $state);
 		}
 
-		$filter = $this->getState('filter_state', '');
-		if ($filter != '')
-		{
-			$query->where('pr.published = ' . $db->quote($filter));
-		}
-
-		// For copy form
-		$filter = $this->getState('cid');
-		if ($filter && is_array($filter) && count($filter))
-		{
-			$query->where('pr.id IN (' . implode(', ', $filter) . ')');
-		}
+		// Add the list ordering clause.
+		$query->order($db->escape($this->getState('list.ordering', 'obj.ordering')) . ' ' . $db->escape($this->getState('list.direction', 'ASC')));
 
 		return $query;
 	}
@@ -116,44 +161,6 @@ class TracksModelProjectrounds extends FOFModel
 		}
 
 		return true;
-	}
-
-	/**
-	 * return list of rounds in the submitted rounds list
-	 *
-	 *
-	 */
-	public function getRoundsList()
-	{
-		$cids = JRequest::getVar('cid', NULL, 'post', 'array');
-		if (!$cids) return NULL;
-		$query = ' SELECT obj.id, r.name AS name '
-			. ' FROM #__tracks_projects_rounds AS obj '
-			. ' INNER JOIN #__tracks_rounds AS r ON (r.id = obj.round_id) '
-			. ' WHERE obj.id IN (' . implode(',', $cids) . ')';
-		$this->_db->setQuery($query);
-		$res = $this->_db->loadObjectList();
-		return $res;
-	}
-
-	/**
-	 * return list of projects for select.
-	 *
-	 * @return array
-	 */
-	public function getProjectsOptions()
-	{
-		$db = JFactory::getDbo();
-		$query = $db->getQuery(true);
-
-		$query->select('id AS value, name AS text');
-		$query->from('#__tracks_projects');
-		$query->order('name');
-
-		$db->setQuery($query);
-		$res = $db->loadObjectList();
-
-		return $res;
 	}
 
 	/**

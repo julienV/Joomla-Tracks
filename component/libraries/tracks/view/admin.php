@@ -139,6 +139,4 @@ abstract class TrackslibViewAdmin extends RViewAdmin
 
 		return parent::display($tpl);
 	}
-
-
 }
