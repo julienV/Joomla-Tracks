@@ -18,6 +18,13 @@ defined('_JEXEC') or die('Restricted access');
 class TracksViewEvents extends TrackslibViewAdmin
 {
 	/**
+	 * Layout used to render the component
+	 *
+	 * @var  string
+	 */
+	protected $componentLayout = 'component.adminproject';
+
+	/**
 	 * Execute and display a template script.
 	 *
 	 * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
@@ -33,6 +40,7 @@ class TracksViewEvents extends TrackslibViewAdmin
 		$this->filterForm = $this->get('Form');
 		$this->activeFilters = $this->get('ActiveFilters');
 		$this->state = $this->get('State');
+		$this->breadcrumbs = $this->get('Breadcrumbs');
 
 		// Ordering
 		$this->ordering = array();

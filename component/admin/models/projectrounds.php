@@ -50,14 +50,41 @@ class TracksModelProjectrounds extends TrackslibModelList
 		if (empty($config['filter_fields']))
 		{
 			$config['filter_fields'] = array(
-				'name', 'obj.name',
-				'dates', 'obj.dates',
+				'name', 'r.name',
+				'start_date', 'obj.start_date',
 				'ordering', 'obj.ordering',
 			);
 		}
 
 		parent::__construct($config);
 	}
+
+	/**
+	 * Return Breadcrumbs
+	 *
+	 * @return array
+	 */
+	public function getBreadcrumbs()
+	{
+		$query = $this->_db->getQuery(true);
+
+		$query->select('id, name')
+			->from('#__tracks_projects')
+			->where('id = ' . $this->getState('project_id'));
+
+		$this->_db->setQuery($query);
+		$res = $this->_db->loadObject();
+
+		return array($res->name => false);
+	}
+
+	protected function populateState($ordering = 'ordering', $direction = 'asc')
+	{
+		$this->setState('project_id', TrackslibHelperTools::getCurrentProjectId());
+
+		parent::populateState($ordering, $direction);
+	}
+
 
 	/**
 	 * Method to get a store id based on model configuration state.
@@ -98,7 +125,7 @@ class TracksModelProjectrounds extends TrackslibModelList
 		);
 		$query->from($db->qn('#__tracks_projects_rounds', 'obj'));
 		$query->join('inner', '#__tracks_rounds AS r on r.id = obj.round_id');
-		$query->where($db->qn('obj.project_id') . ' = ' . TrackslibHelperTools::getCurrentProjectId());
+		$query->where($db->qn('obj.project_id') . ' = ' . $this->getState('project_id'));
 
 		// Filter: like / search
 		$search = $this->getState('filter.search', '');

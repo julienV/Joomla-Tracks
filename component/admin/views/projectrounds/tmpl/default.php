@@ -99,7 +99,7 @@ if (($saveOrder) && ($this->canEdit))
 					</th>
 				<?php endif; ?>
 				<th class="title" width="auto">
-					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_NAME', 'obj.name', $listDirn, $listOrder); ?>
+					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_NAME', 'r.name', $listDirn, $listOrder); ?>
 				</th>
 				<th width="auto">
 					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_DATES', 'obj.start_date', $listDirn, $listOrder); ?>

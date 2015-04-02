@@ -99,7 +99,7 @@ if (($saveOrder) && ($this->canEdit))
 					</th>
 				<?php endif; ?>
 				<th class="title" width="auto">
-					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_NAME', 'obj.name', $listDirn, $listOrder); ?>
+					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_NAME', 'e.name', $listDirn, $listOrder); ?>
 				</th>
 				<th width="auto">
 					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_DATES', 'obj.start_date', $listDirn, $listOrder); ?>
@@ -159,7 +159,7 @@ if (($saveOrder) && ($this->canEdit))
 						<?php if (($row->checked_out) || (!$this->canEdit)) : ?>
 							<?php echo $itemTitle; ?>
 						<?php else : ?>
-							<?php echo JHtml::_('link', 'index.php?option=com_tracks&task=event.edit&id=' . $row->id, $itemTitle); ?>
+							<?php echo JHtml::_('link', 'index.php?option=com_tracks&task=event.edit&id=' . $row->id . '&projectround_id=' . $row->projectround_id, $itemTitle); ?>
 						<?php endif; ?>
 					</td>
 					<td>

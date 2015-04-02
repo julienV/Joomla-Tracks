@@ -29,7 +29,11 @@ class TracksControllerEvent extends RControllerForm
 	{
 		$append = parent::getRedirectToItemAppend($recordId, $urlVar);
 
-		$projectround_id = $this->input->getInt('projectround_id');
+		if (!$projectround_id = $this->input->getInt('projectround_id'))
+		{
+			$fromForm = $this->input->get('jform', null, 'array');
+			$projectround_id = $fromForm['projectround_id'];
+		}
 
 		return $append . '&projectround_id=' . $projectround_id;
 	}

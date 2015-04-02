@@ -50,13 +50,39 @@ class TracksModelEvents extends TrackslibModelList
 		if (empty($config['filter_fields']))
 		{
 			$config['filter_fields'] = array(
-				'name', 'obj.name',
+				'name', 'e.name',
 				'id', 'obj.id',
+				'start_date', 'obj.start_date',
 				'ordering', 'obj.ordering',
 			);
 		}
 
 		parent::__construct($config);
+	}
+
+	/**
+	 * Return Breadcrumbs
+	 *
+	 * @return array
+	 */
+	public function getBreadcrumbs()
+	{
+		$query = $this->_db->getQuery(true);
+
+		$query->select('p.id as project_id, p.name AS project_name')
+			->select('pr.id AS projectround_id, r.name AS projectround_name')
+			->from('#__tracks_projects_rounds AS pr')
+			->join('INNER', '#__tracks_rounds AS r ON r.id = pr.round_id')
+			->join('INNER', '#__tracks_projects AS p ON p.id = pr.project_id')
+			->where('pr.id = ' . $this->getState('projectround_id'));
+
+		$this->_db->setQuery($query);
+		$res = $this->_db->loadObject();
+
+		return array(
+			$res->project_name => JRoute::_('index.php?option=com_tracks&view=projectrounds'),
+			$res->projectround_name => false
+			);
 	}
 
 	/**
