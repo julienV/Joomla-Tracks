@@ -115,7 +115,7 @@ if (($saveOrder) && ($this->canEdit))
 			<tbody>
 			<?php $n = count($this->items); ?>
 			<?php foreach ($this->items as $i => $row) : ?>
-				<?php $editEventsLink = JRoute::_('index.php?option=com_tracks&view=events&projectroundId=' . $row->id); ?>
+				<?php $editEventsLink = JRoute::_('index.php?option=com_tracks&view=events&projectround_id=' . $row->id); ?>
 				<?php $orderkey = array_search($row->id, $this->ordering[0]); ?>
 				<tr>
 					<td>

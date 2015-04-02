@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form>
+	<field
+			name="id"
+			type="hidden"
+			default="0"
+			class="readonly"
+			readonly="true"/>
 
 	<field
 		name="start_date"
@@ -62,4 +68,10 @@
 			filter="JComponentHelper::filterText" buttons="true"
 			/>
 
+	<field
+			name="projectround_id"
+			type="hidden"
+			default="0"
+			class="readonly"
+			readonly="true"/>
 </form>
