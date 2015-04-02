@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<fieldset name="basic_configuration"
+			  label="COM_TRACKS_PROJECTROUND_GROUP_BASIC"
+			  description="COM_TRACKS_PROJECTROUND_GROUP_BASIC_DESC"
+			>
+		<field
+			name="id"
+			type="hidden"
+			default="0"
+			class="readonly"
+			readonly="true"/>
+
+		<field
+				name="round_id"
+				type="tracksround"
+				label="COM_TRACKS_ROUND"
+				description="COM_TRACKS_ROUND"
+				class="inputbox"
+				required="true"/>
+
+		<field
+				name="start_date"
+				type="calendar"
+				format="%Y-%m-%d %H:%M:%S"
+				label="COM_TRACKS_Round_start"
+				description="COM_TRACKS_Round_start"
+				class="inputbox"/>
+
+		<field
+				name="end_date"
+				type="calendar"
+				format="%Y-%m-%d %H:%M:%S"
+				label="COM_TRACKS_Round_end"
+				description="COM_TRACKS_Round_end"
+				class="inputbox"/>
+
+		<field
+				name="published"
+				type="list"
+				class="inputbox"
+				default="1"
+				size="1"
+				label="JSTATUS"
+				description="JFIELD_PUBLISHED_DESC">
+			<option
+					value="1">
+				JPUBLISHED</option>
+			<option
+					value="0">
+				JUNPUBLISHED</option>
+		</field>
+
+		<field
+				name="description"
+				type="editor"
+				label="COM_TRACKS_PROJECT_ROUND_DESCRIPTION"
+				description="COM_TRACKS_PROJECT_ROUND_DESCRIPTION_DESC"
+				filter="JComponentHelper::filterText" buttons="true"
+				/>
+
+		<field
+				name="comment"
+				type="editor"
+				label="COM_TRACKS_PROJECT_ROUND_COMMENT"
+				description="COM_TRACKS_PROJECT_ROUND_COMMENT_DESC"
+				filter="JComponentHelper::filterText" buttons="true"
+				/>
+
+		<field
+				name="project_id"
+				type="hidden"
+				/>
+	</fieldset>
+</form>

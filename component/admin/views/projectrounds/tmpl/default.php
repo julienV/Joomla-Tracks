@@ -101,6 +101,12 @@ if (($saveOrder) && ($this->canEdit))
 				<th class="title" width="auto">
 					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_NAME', 'obj.name', $listDirn, $listOrder); ?>
 				</th>
+				<th width="auto">
+					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_DATES', 'obj.start_date', $listDirn, $listOrder); ?>
+				</th>
+				<th width="auto">
+					<?php echo JText::_('COM_TRACKS_EVENTS'); ?>
+				</th>
 				<th width="10">
 					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_ID', 'obj.id', $listDirn, $listOrder); ?>
 				</th>
@@ -109,6 +115,7 @@ if (($saveOrder) && ($this->canEdit))
 			<tbody>
 			<?php $n = count($this->items); ?>
 			<?php foreach ($this->items as $i => $row) : ?>
+				<?php $editEventsLink = JRoute::_('index.php?option=com_tracks&view=events&projectroundId=' . $row->id); ?>
 				<?php $orderkey = array_search($row->id, $this->ordering[0]); ?>
 				<tr>
 					<td>
@@ -154,6 +161,12 @@ if (($saveOrder) && ($this->canEdit))
 						<?php else : ?>
 							<?php echo JHtml::_('link', 'index.php?option=com_tracks&task=projectround.edit&id=' . $row->id, $itemTitle); ?>
 						<?php endif; ?>
+					</td>
+					<td>
+						<?php echo $row->start_date ? TrackslibHelperTools::formatRoundStartEnd($row) : ''; ?>
+					</td>
+					<td>
+						<?php echo JHtml::link($editEventsLink, JText::_('COM_TRACKS_EVENTS')); ?>
 					</td>
 					<td>
 						<?php echo $row->id; ?>

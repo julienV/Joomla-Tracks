@@ -9,13 +9,13 @@
 defined('_JEXEC') or die();
 
 /**
- * Tracks Component participants Model
+ * Tracks Component projectrounds Model
  *
  * @package     Tracks
  * @subpackage  Admin
  * @since       3.0
  */
-class TracksModelParticipant extends RModelAdmin
+class TracksModelProjectround extends RModelAdmin
 {
 	/**
 	 * Method to validate the form data.
