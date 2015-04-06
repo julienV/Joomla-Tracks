@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: view.html.php 135 2008-06-08 21:50:12Z julienv $ 
+* @version    $Id: view.html.php 135 2008-06-08 21:50:12Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -23,7 +23,7 @@ jimport( 'joomla.application.component.view');
  * @package		Tracks
  * @since 0.1
  */
-class TracksViewRanking extends JView
+class TracksViewRanking extends JViewLegacy
 {
   function display($tpl = null)
   {
@@ -31,15 +31,15 @@ class TracksViewRanking extends JView
     $option = JRequest::getCmd('option');
 
     $project_id = JRequest::getVar( 'p', 0, '', 'int' );
-    
+
     $model = $this->getModel();
     $rankings = $model->getRankings( $project_id );
     $project  = $model->getProject( $project_id );
-        
+
     $params = $model->getParams( $project_id );
-    
+
     $viewparams = $mainframe->getParams( 'com_tracks' );
-    
+
     $params->merge( $viewparams );
 
     $breadcrumbs = $mainframe->getPathWay();

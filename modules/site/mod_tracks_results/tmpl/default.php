@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: default.php 139 2008-06-10 14:20:13Z julienv $ 
+* @version    $Id: default.php 139 2008-06-10 14:20:13Z julienv $
 * @package    JoomlaTracks
 * @subpackage ResultsModule
 * @copyright  Copyright (C) 2008 Julien Vonthron. All rights reserved.
@@ -16,7 +16,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 <?php
 JHTML::_('behavior.tooltip', '.mod-result-tip', array('className' => 'tip-mod-result'));
-$document = JFactory::getDocument(); 
+$document = JFactory::getDocument();
 $document->addStyleSheet( JURI::base() . 'modules/mod_tracks_results/mod_tracks_results.css' );
 $document->addScript( JURI::base() . 'modules/mod_tracks_results/mod_tracks_results.js' );
 ?>
@@ -39,8 +39,8 @@ $document->addScript( JURI::base() . 'modules/mod_tracks_results/mod_tracks_resu
     $count = 0;
     foreach( $list->results AS $rows )
     {
-      $link_ind = JRoute::_( TracksHelperRoute::getIndividualRoute($rows->slug, $project->slug) ); 
-      $link_team = JRoute::_( TracksHelperRoute::getTeamRoute($rows->teamslug, $project->slug) );
+      $link_ind = JRoute::_( TrackslibHelperRoute::getIndividualRoute($rows->slug, $project->slug) );
+      $link_team = JRoute::_( TrackslibHelperRoute::getTeamRoute($rows->teamslug, $project->slug) );
       ?>
       <tr>
         <td><?php echo $rows->rank; ?></td>
@@ -50,7 +50,7 @@ $document->addScript( JURI::base() . 'modules/mod_tracks_results/mod_tracks_resu
               echo trim($rows->first_name . ' ' . $rows->last_name).'::'
                   . $rows->performance; ?>" class="mod-result-tip"><?php echo $rows->last_name; ?>
           </a>
-        </td> 
+        </td>
         <?php if ($showteams) { ?>
         <td>
           <a href="<?php echo $link_team; ?>"
@@ -74,11 +74,11 @@ $document->addScript( JURI::base() . 'modules/mod_tracks_results/mod_tracks_resu
 <?php else: ?>
 <span class="no_res"><?php echo JText::_('MOD_TRACKS_RESULTS_NO_RESULTS'); ?></span>
 <?php endif;?>
-<?php 
-$link = JRoute::_( TracksHelperRoute::getRoundResultRoute($round->projectround_id) );
+<?php
+$link = JRoute::_( TrackslibHelperRoute::getRoundResultRoute($round->projectround_id) );
 ?>
 <a class="fulltablelink" href="<?php echo $link; ?>"
-             title="<?php echo JText::_('MOD_TRACKS_RESULTS_View_full_table' ); ?>"> 
+             title="<?php echo JText::_('MOD_TRACKS_RESULTS_View_full_table' ); ?>">
             <?php echo JText::_('MOD_TRACKS_RESULTS_View_full_table' ); ?>
 </a>
 </div>

@@ -23,7 +23,7 @@ jimport('joomla.application.component.view');
  * @package        Tracks
  * @since          0.1
  */
-class TracksViewIndividual extends JView
+class TracksViewIndividual extends JViewLegacy
 {
 	function display($tpl = null)
 	{
@@ -114,7 +114,7 @@ class TracksViewIndividual extends JView
 		// countries
 		$countries = array();
 		$countries[] = JHTML::_('select.option', '', JTEXT::_('COM_TRACKS_SELECT_COUNTRY'));
-		$countries = array_merge($countries, TracksCountries::getCountryOptions());
+		$countries = array_merge($countries, TrackslibHelperCountries::getCountryOptions());
 		$lists['countries'] = JHTML::_('select.genericlist', $countries, 'country_code', '', 'value', 'text', $object->country_code);
 
 		if ($user->authorise('core.manage', 'com_tracks')
@@ -136,7 +136,7 @@ class TracksViewIndividual extends JView
 		}
 
 		// users list
-		$lists['users'] = HTMLTracks::usersSelect('user_id', $object->user_id, 1, NULL, 'name', 0);
+		$lists['users'] = TrackslibHelperTools::usersSelect('user_id', $object->user_id, 1, NULL, 'name', 0);
 
 		//editor
 		$editor = JFactory::getEditor();

@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: view.html.php 77 2008-04-30 03:32:25Z julienv $ 
+* @version    $Id: view.html.php 77 2008-04-30 03:32:25Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -23,28 +23,28 @@ jimport( 'joomla.application.component.view');
  * @package		Tracks
  * @since 0.1
  */
-class TracksViewTeamRanking extends JView
+class TracksViewTeamRanking extends JViewLegacy
 {
     function display($tpl = null)
     {
         $mainframe = JFactory::getApplication();
         $option = JRequest::getCmd('option');
-        
+
         $project_id = JRequest::getVar( 'p', 0, '', 'int' );
-        
+
         $model = $this->getModel();
         $rankings = $model->getTeamRankings( $project_id );
         $project  = $model->getProject( $project_id );
         $projectparams = $model->getParams($project->id);
         $params = $mainframe->getParams('com_tracks');
-                
+
         $breadcrumbs = $mainframe->getPathWay();
         $breadcrumbs->addItem( $project->name. ' ' . JText::_('COM_TRACKS_Team_Rankings' ), 'index.php?option=com_tracks&view=teamranking&p=' . $project_id );
-        
+
         $document = JFactory::getDocument();
         $document->setTitle( $project->name. ' ' . JText::_('COM_TRACKS_Team_Rankings' ) );
-        
-        $this->assignRef( 'project',    $project );                
+
+        $this->assignRef( 'project',    $project );
         $this->assignRef( 'rankings',	$rankings );
         $this->assignRef( 'projectparams',    $projectparams );
         $this->assignRef( 'params',    $params );

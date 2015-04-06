@@ -20,7 +20,7 @@ if ($this->data->vehicle_picture || $this->data->vehicle_description): ?>
 
 		<?php if ($this->data->vehicle_picture): ?>
 			<div id="vehicle-pic">
-				<?php echo JLVImageTool::modalimage(JPATH_SITE . '/' . $this->data->vehicle_picture, Jtext::_('COM_TRACKS_TEAM_VEHICLE_PICTURE'), 400); ?>
+				<?php echo TrackslibHelperImage::modalimage(JPATH_SITE . '/' . $this->data->vehicle_picture, Jtext::_('COM_TRACKS_TEAM_VEHICLE_PICTURE'), 400); ?>
 			</div>
 		<?php endif; ?>
 

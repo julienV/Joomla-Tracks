@@ -50,7 +50,7 @@ $first = $this->params->get('ordering') ? 'first_name' : 'last_name';
       <?php
       foreach ($c as $r)
       {
-        $link_round = JRoute::_(TracksHelperRoute::getIndividualRoute($r->slug));
+        $link_round = JRoute::_(TrackslibHelperRoute::getIndividualRoute($r->slug));
 	      $l = $this->firstLetter($r->$first);
 	      if ($l != $letter)
 	      {
@@ -75,6 +75,6 @@ $first = $this->params->get('ordering') ? 'first_name' : 'last_name';
 </table>
 <?php endif; ?>
 <p class="copyright">
-  <?php echo HTMLtracks::footer( ); ?>
+  <?php echo TrackslibHelperTools::footer( ); ?>
 </p>
 </div>

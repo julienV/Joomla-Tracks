@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: default.php 120 2008-05-30 01:59:54Z julienv $ 
+* @version    $Id: default.php 120 2008-05-30 01:59:54Z julienv $
 * @package    JoomlaTracks
 * @subpackage TeamRankingModule
 * @copyright  Copyright (C) 2008 Julien Vonthron. All rights reserved.
@@ -27,13 +27,13 @@ defined('_JEXEC') or die('Restricted access'); ?>
     $count = 0;
     foreach( $list AS $ranking )
     {
-      $link_team = JRoute::_( TracksHelperRoute::getTeamRoute($ranking->slug, $project->slug) ); 
+      $link_team = JRoute::_( TrackslibHelperRoute::getTeamRoute($ranking->slug, $project->slug) );
       ?>
       <tr>
         <td><?php echo $rank++; ?></td>
         <td>
           <a href="<?php echo $link_team; ?>"
-             title="<?php echo JText::_( 'MOD_TRACKS_TEAM_RANKING_Details' ); ?>"> 
+             title="<?php echo JText::_( 'MOD_TRACKS_TEAM_RANKING_Details' ); ?>">
             <?php echo $ranking->team_name; ?>
           </a>
         </td>
@@ -47,11 +47,11 @@ defined('_JEXEC') or die('Restricted access'); ?>
     ?>
   </tbody>
 </table>
-<?php 
-$link = JRoute::_( TracksHelperRoute::getTeamRankingRoute($project->slug) );
+<?php
+$link = JRoute::_( TrackslibHelperRoute::getTeamRankingRoute($project->slug) );
 ?>
 <a class="fulltablelink" href="<?php echo $link; ?>"
-             title="<?php echo JText::_('MOD_TRACKS_TEAM_RANKING_View_full_table' ); ?>"> 
+             title="<?php echo JText::_('MOD_TRACKS_TEAM_RANKING_View_full_table' ); ?>">
             <?php echo JText::_('MOD_TRACKS_TEAM_RANKING_View_full_table' ); ?>
 </a>
 </div>

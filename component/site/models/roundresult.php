@@ -67,21 +67,21 @@ class TracksModelRoundResult extends baseModel
     * @param int projectround_id
     * @return string The projects to be displayed to the user
     */
-    function _getSubroundResults( $subround_id = 0 )
+    function _getSubroundResults( $event_id = 0 )
     {
         $query = 	' SELECT rr.*, pr.project_id AS project_id, srt.points_attribution, srt.count_points, '
                 . ' i.first_name, i.last_name, i.country_code, i.country_code, pi.number, '
                 . ' t.name AS team_name, t.short_name AS team_short_name, t.acronym AS team_acronym, t.picture_small AS team_logo, '
                 . ' CASE WHEN CHAR_LENGTH( i.alias ) THEN CONCAT_WS( \':\', i.id, i.alias ) ELSE i.id END AS slug, '
                 . ' CASE WHEN CHAR_LENGTH( t.alias ) THEN CONCAT_WS( \':\', t.id, t.alias ) ELSE t.id END AS teamslug '
-                . ' FROM #__tracks_rounds_results AS rr '
-                . ' INNER JOIN #__tracks_projects_subrounds AS sr ON sr.id = rr.subround_id '
-                . ' INNER JOIN #__tracks_subroundtypes AS srt ON srt.id = sr.type '
+                . ' FROM #__tracks_events_results AS rr '
+                . ' INNER JOIN #__tracks_events AS sr ON sr.id = rr.event_id '
+                . ' INNER JOIN #__tracks_eventtypes AS srt ON srt.id = sr.type '
                 . ' INNER JOIN #__tracks_projects_rounds AS pr ON pr.id = sr.projectround_id '
                 . ' INNER JOIN #__tracks_individuals AS i ON i.id = rr.individual_id '
-                . ' INNER JOIN #__tracks_projects_individuals AS pi ON pi.individual_id = rr.individual_id AND pi.project_id = pr.project_id '
+                . ' INNER JOIN #__tracks_participants AS pi ON pi.individual_id = rr.individual_id AND pi.project_id = pr.project_id '
                 . ' LEFT JOIN #__tracks_teams AS t ON t.id = rr.team_id '
-                . ' WHERE rr.subround_id = ' . $subround_id
+                . ' WHERE rr.event_id = ' . $event_id
         ;
 
         $this->_db->setQuery( $query );
@@ -150,8 +150,8 @@ class TracksModelRoundResult extends baseModel
       if ( $projectround_id )
       {
         $query =  ' SELECT sr.*, srt.name AS typename, srt.points_attribution '
-                . ' FROM #__tracks_projects_subrounds AS sr '
-                . ' INNER JOIN #__tracks_subroundtypes AS srt ON srt.id = sr.type '
+                . ' FROM #__tracks_events AS sr '
+                . ' INNER JOIN #__tracks_eventtypes AS srt ON srt.id = sr.type '
                 . ' WHERE sr.projectround_id = ' . $projectround_id
                 . '   AND sr.published = 1 '
                 ;

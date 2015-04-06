@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: default.php 101 2008-05-22 08:32:12Z julienv $ 
+* @version    $Id: default.php 101 2008-05-22 08:32:12Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -9,7 +9,7 @@
 * is derivative of works licensed under the GNU General Public License or
 * other free or open source software licenses.
 * See COPYRIGHT.php for copyright notices and details.
-*/ 
+*/
  // no direct access
 defined('_JEXEC') or die('Restricted access'); ?>
 
@@ -24,16 +24,16 @@ defined('_JEXEC') or die('Restricted access'); ?>
 </table>
 
 <?php if ( $total = count( $this->rows ) ) : ?>
-<?php 
+<?php
 $columns = array();
 $i = 0;
-foreach ($this->rows as $r) 
+foreach ($this->rows as $r)
 {
   $column[floor($i/$total*3)][] = $r;
   $i++;
 }
 ?>
-    
+
 <table id="namelist">
   <tr>
     <?php $letter = strtoupper(substr($column[0][0]->name, 0, 1)); ?>
@@ -42,23 +42,23 @@ foreach ($this->rows as $r)
       <?php if ($k == 0): ?>
       <div class="letter"><?php echo $letter; ?></div>
       <?php endif; ?>
-      <?php 
-      foreach ($c as $r) 
+      <?php
+      foreach ($c as $r)
       {
-        $link_round = JRoute::_( TracksHelperRoute::getTeamRoute($r->slug) );
+        $link_round = JRoute::_( TrackslibHelperRoute::getTeamRoute($r->slug) );
         if ($letter != strtoupper(substr($r->name, 0, 1)))
         {
           $letter = strtoupper(substr($r->name, 0, 1)); ?>
           <div class="letter"><?php echo $letter; ?></div>
-          <?php 
-        } 
+          <?php
+        }
         ?>
         <a href="<?php echo $link_round; ?>" title ="<?php echo JText::_('COM_TRACKS_Display_details' ) ?>">
           <?php echo $r->name; ?>
           </a>
           <br />
-          <?php 
-      } ?>          
+          <?php
+      } ?>
     </td>
     <?php endforeach; ?>
   </tr>
@@ -66,6 +66,6 @@ foreach ($this->rows as $r)
 <?php endif; ?>
 
 <p class="copyright">
-  <?php echo HTMLtracks::footer( ); ?>
+  <?php echo TrackslibHelperTools::footer( ); ?>
 </p>
 </div>

@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: view.html.php 43 2008-02-24 23:47:38Z julienv $ 
+* @version    $Id: view.html.php 43 2008-02-24 23:47:38Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -23,25 +23,25 @@ jimport( 'joomla.application.component.view');
  * @package		Tracks
  * @since 0.1
  */
-class TracksViewRounds extends JView
+class TracksViewRounds extends JViewLegacy
 {
     function display($tpl = null)
     {
     	$mainframe = JFactory::getApplication();
 	$option = JRequest::getCmd('option');
-    	          
+
         $model = $this->getModel();
         $rows = $model->getRounds();
-        
+
         $document = JFactory::getDocument();
         $document->setTitle( JText::_('COM_TRACKS_All_rounds' ) );
-        
+
         $breadcrumbs = $mainframe->getPathWay();
-        $breadcrumbs->addItem( JText::_('COM_TRACKS_All_rounds' ), 
+        $breadcrumbs->addItem( JText::_('COM_TRACKS_All_rounds' ),
             'index.php?option=com_tracks&view=rounds' );
-        
+
         $this->assignRef( 'rows',    $rows );
-        
+
         parent::display($tpl);
     }
 }

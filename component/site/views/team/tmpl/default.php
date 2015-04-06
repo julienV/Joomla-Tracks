@@ -18,7 +18,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <h1><?php echo $this->data->name; ?></h1>
 	<?php if ($this->canEdit): ?>
 		<?php
-			$url = TracksHelperRoute::getTeamEditRoute($this->data->id);
+			$url = TrackslibHelperRoute::getTeamEditRoute($this->data->id);
 			$link = JHtml::link($url, JText::_('COM_TRACKS_EDIT'));
 		?>
 		<div class="tracks-edit-link"><?php echo $link; ?></div>
@@ -46,13 +46,13 @@ defined('_JEXEC') or die('Restricted access'); ?>
 	<div class="project-inds"><span class="project-title"><?php echo current($proj)->project_name; ?></span>
 	<?php foreach ($proj as $i): ?>
 	<?php $text = ($i->number ? $i->number.' ' : '').$i->first_name.' '.$i->last_name; ?>
-	<div class="team-ind"><?php echo JHTML::link(TracksHelperRoute::getIndividualRoute($i->slug, $i->projectslug), $text); ?></div>
+	<div class="team-ind"><?php echo JHTML::link(TrackslibHelperRoute::getIndividualRoute($i->slug, $i->projectslug), $text); ?></div>
 	<?php endforeach; ?>
 	</div>
 	<?php endforeach; ?>
 <?php endif; ?>
 <div class="clear"></div>
 <p class="copyright">
-  <?php echo HTMLtracks::footer( ); ?>
+  <?php echo TrackslibHelperTools::footer( ); ?>
 </p>
 </div>

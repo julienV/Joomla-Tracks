@@ -84,11 +84,11 @@ class TracksModelProjectresults extends baseModel
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
 
-		$query->select('psr.id AS subround_id, srt.name AS subround_name');
+		$query->select('psr.id AS event_id, srt.name AS subround_name');
 		$query->select('r.id AS round_id, r.name AS round_name');
 		$query->select('CASE WHEN CHAR_LENGTH(r.short_name) THEN r.short_name ELSE r.name END AS short_name');
-		$query->from('#__tracks_projects_subrounds AS psr');
-		$query->join('INNER', '#__tracks_subroundtypes AS srt ON srt.id = psr.type');
+		$query->from('#__tracks_events AS psr');
+		$query->join('INNER', '#__tracks_eventtypes AS srt ON srt.id = psr.type');
 		$query->join('INNER', '#__tracks_projects_rounds AS pr ON pr.id = psr.projectround_id');
 		$query->join('INNER', '#__tracks_rounds AS r ON r.id = pr.round_id');
 		$query->where('pr.project_id = '.$this->_project_id);
@@ -129,10 +129,10 @@ class TracksModelProjectresults extends baseModel
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
 
-		$query->select('psr.id AS subround_id, rr.rank, rr.individual_id');
-		$query->from('#__tracks_rounds_results AS rr');
-		$query->join('INNER', '#__tracks_projects_subrounds AS psr ON psr.id = rr.subround_id');
-		$query->join('INNER', '#__tracks_subroundtypes AS srt ON srt.id = psr.type');
+		$query->select('psr.id AS event_id, rr.rank, rr.individual_id');
+		$query->from('#__tracks_events_results AS rr');
+		$query->join('INNER', '#__tracks_events AS psr ON psr.id = rr.event_id');
+		$query->join('INNER', '#__tracks_eventtypes AS srt ON srt.id = psr.type');
 		$query->join('INNER', '#__tracks_projects_rounds AS pr ON pr.id = psr.projectround_id');
 		$query->join('INNER', '#__tracks_rounds AS r ON r.id = pr.round_id');
 		$query->where('pr.project_id = '.$this->_project_id);
@@ -145,14 +145,14 @@ class TracksModelProjectresults extends baseModel
 			return false;
 		}
 
-		// index by individual, then subround_id
+		// index by individual, then event_id
 		$individuals = array();
 		foreach ($res as $r)
 		{
 			if (!isset($this->_data[$r->individual_id])) {
 				continue;
 			}
-			@$this->_data[$r->individual_id]->results[$r->subround_id] = $r->rank;
+			@$this->_data[$r->individual_id]->results[$r->event_id] = $r->rank;
 		}
 
 		return $this->_data;

@@ -63,7 +63,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
       <?php if ($this->params->get('indview_results_showteam', 1)): ?>
       <td><?php echo $result->teamname; ?></td>
       <?php endif; ?>
-      <td><?php echo JHTML::link(JRoute::_(TracksHelperRoute::getRoundResultRoute($result->prslug)), $result->roundname); ?></td>
+      <td><?php echo JHTML::link(JRoute::_(TrackslibHelperRoute::getRoundResultRoute($result->prslug)), $result->roundname); ?></td>
       <?php if ($this->params->get('indview_results_showrace', 1)): ?>
       <td><?php echo $result->subroundname; ?></td>
       <?php endif; ?>
@@ -74,7 +74,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
       <td><?php echo $result->rank; ?></td>
       <?php endif; ?>
       <?php if ($this->params->get('indview_results_points', 1)): ?>
-      <td><?php echo TracksHelperTools::getSubroundPoints($result); ?></td>
+      <td><?php echo TrackslibHelperTools::getSubroundPoints($result); ?></td>
       <?php endif; ?>
     </tr>
     <?php endforeach; ?>

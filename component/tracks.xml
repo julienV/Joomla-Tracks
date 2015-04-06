@@ -8,6 +8,7 @@
 	<copyright>(C) 2008-2015 Julien Vonthron. All rights	reserved.</copyright>
 	<license>http://www.gnu.org/licenses/gpl.html</license>
 	<version>##VERSION##</version>
+	<redcore version="1.4.13" />
 	<description>COM_TRACKS_XML_DESC</description>
 
 	<!-- Runs on install/uninstall/update -->
@@ -37,7 +38,6 @@
 		<filename>controller.php</filename>
 		<filename>index.html</filename>
 		<filename>router.php</filename>
-		<filename>tracks.core.php</filename>
 		<filename>tracks.php</filename>
 		<folder>controllers</folder>
 		<folder>helpers</folder>
@@ -78,12 +78,8 @@
 			<filename>config.xml</filename>
 			<filename>controller.php</filename>
 			<filename>copyright.txt</filename>
-			<filename>dispatcher.php</filename>
-			<filename>fof.xml</filename>
-			<filename>helper.php</filename>
 			<filename>index.html</filename>
 			<filename>license.txt</filename>
-			<filename>toolbar.php</filename>
 			<filename>tracks.php</filename>
 			<folder>abstract</folder>
 			<folder>controllers</folder>

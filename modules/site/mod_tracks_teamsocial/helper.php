@@ -43,7 +43,7 @@ class modTracksTeamsocial
 		$db->setQuery($query);
 		$res = $db->loadObject();
 
-		$links = TracksHelperTools::getTeamSocialItems($res);
+		$links = TrackslibHelperTools::getTeamSocialItems($res);
 
 		return $links;
 	}

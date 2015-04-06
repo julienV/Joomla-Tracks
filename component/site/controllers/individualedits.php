@@ -46,7 +46,7 @@ class TracksControllerIndividualedits extends FOFController
 		// Remove any saved data
 		JFactory::getSession()->set($model->getHash() . 'savedata', null);
 
-		$url = TracksHelperRoute::getIndividualRoute($model->getId());
+		$url = TrackslibHelperRoute::getIndividualRoute($model->getId());
 		$this->setRedirect($url);
 
 		return true;
@@ -60,7 +60,7 @@ class TracksControllerIndividualedits extends FOFController
 		if ($result)
 		{
 			$id  = $model->getId();
-			$url = TracksHelperRoute::getIndividualRoute($id);
+			$url = TrackslibHelperRoute::getIndividualRoute($id);
 
 			$this->setRedirect($url, JText::_('COM_TRACKS_INDIVIDUAL_SAVED'));
 			return true;

@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: view.html.php 135 2008-06-08 21:50:12Z julienv $ 
+* @version    $Id: view.html.php 135 2008-06-08 21:50:12Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -23,7 +23,7 @@ jimport( 'joomla.application.component.view');
  * @package		Tracks
  * @since 0.1
  */
-class TracksViewProjectresults extends JView
+class TracksViewProjectresults extends JViewLegacy
 {
   function display($tpl = null)
   {
@@ -31,18 +31,18 @@ class TracksViewProjectresults extends JView
 		$option = JRequest::getCmd('option');
 
     $project_id = JRequest::getVar( 'p', 0, '', 'int' );
-    
+
     $data        = $this->get('data');
     $rounds      = $this->get('rounds');
     $project     = $this->get('project');
-    
+
     $params = $this->get('Params');
     $params->merge( JComponentHelper::getParams( 'com_tracks' ) );
-    
+
     $title = JText::sprintf('COM_TRACKS_view_project_results', $project->name );
-    
+
     $breadcrumbs = $mainframe->getPathWay();
-    $breadcrumbs->addItem( $title, TracksHelperRoute::getProjectResultRoute($project_id) );
+    $breadcrumbs->addItem( $title, TrackslibHelperRoute::getProjectResultRoute($project_id) );
 
     $document = JFactory::getDocument();
     $document->setTitle( $title );

@@ -27,8 +27,8 @@ class JFormFieldCountry extends JFormFieldList
 	protected function getOptions()
 	{
 		// Initialize variables.
-		$options = TracksCountries::getCountryOptions();
-		
+		$options = TrackslibHelperCountries::getCountryOptions();
+
 		// Merge any additional options in the XML definition.
 		$options = array_merge(parent::getOptions(), $options);
 

@@ -36,7 +36,7 @@ class TracksControllerTeamedits extends FOFController
 		// Remove any saved data
 		JFactory::getSession()->set($model->getHash() . 'savedata', null);
 
-		$url = TracksHelperRoute::getTeamRoute($model->getId());
+		$url = TrackslibHelperRoute::getTeamRoute($model->getId());
 		$this->setRedirect($url);
 
 		return true;
@@ -50,7 +50,7 @@ class TracksControllerTeamedits extends FOFController
 		if ($result)
 		{
 			$id  = $model->getId();
-			$url = TracksHelperRoute::getTeamRoute($id);
+			$url = TrackslibHelperRoute::getTeamRoute($id);
 
 			$this->setRedirect($url, JText::_('COM_TRACKS_TEAM_SAVED'));
 			return true;

@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: view.html.php 135 2008-06-08 21:50:12Z julienv $ 
+* @version    $Id: view.html.php 135 2008-06-08 21:50:12Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -23,7 +23,7 @@ jimport( 'joomla.application.component.view');
  * @package		Tracks
  * @since 0.1
  */
-class TracksViewProjectindividuals extends JView
+class TracksViewProjectindividuals extends JViewLegacy
 {
   function display($tpl = null)
   {
@@ -32,7 +32,7 @@ class TracksViewProjectindividuals extends JView
 
     $project_id = JRequest::getVar( 'p', 0, '', 'int' );
     $params = $mainframe->getParams();
-    
+
     $model = $this->getModel();
     $individuals = $model->getIndividuals( $project_id );
     $project  = $model->getProject( $project_id );

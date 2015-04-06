@@ -24,7 +24,7 @@ require_once (JPATH_COMPONENT. '/' .'helpers'. '/' .'iCalcreator.class.php');
  * @package		Tracks
  * @since 0.1
  */
-class TracksViewProject extends JView
+class TracksViewProject extends JViewLegacy
 {
     function display($tpl = null)
     {

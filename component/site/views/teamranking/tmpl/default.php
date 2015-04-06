@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: default.php 103 2008-05-23 15:45:29Z julienv $ 
+* @version    $Id: default.php 103 2008-05-23 15:45:29Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -9,7 +9,7 @@
 * is derivative of works licensed under the GNU General Public License or
 * other free or open source software licenses.
 * See COPYRIGHT.php for copyright notices and details.
-*/ 
+*/
  // no direct access
 defined('_JEXEC') or die('Restricted access'); ?>
 
@@ -29,17 +29,17 @@ defined('_JEXEC') or die('Restricted access'); ?>
       <th><?php echo JText::_('COM_TRACKS_Best_rank' ); ?></th>
     </tr>
     <?php
-    $k = 0; 
+    $k = 0;
     foreach( $this->rankings AS $ranking )
-    {     
-      $link_team = JRoute::_( TracksHelperRoute::getTeamRoute($ranking->slug, $this->project->slug) ); 
+    {
+      $link_team = JRoute::_( TrackslibHelperRoute::getTeamRoute($ranking->slug, $this->project->slug) );
       ?>
       <tr class="<?php echo ($k++ % 2 ? 'd1' : 'd0'); ?>">
         <td><?php echo $ranking->rank; ?></td>
         <?php if ($this->projectparams->get('showflag') && $this->params->get('showflag')): ?>
         <td>
           <?php if ( $ranking->country_code ): ?>
-          <img src="<?php echo TracksCountries::getIsoFlag($ranking->country_code); ?>"
+          <img src="<?php echo TrackslibHelperCountries::getIsoFlag($ranking->country_code); ?>"
              title="<?php echo $ranking->country_code; ?>"
              alt="<?php echo $ranking->country_code; ?>"/>
           <?php endif ?>
@@ -47,7 +47,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
         <?php endif; ?>
         <td>
             <a href="<?php echo $link_team; ?>"
-               title="<?php echo JText::_('COM_TRACKS_Details' ); ?>"> 
+               title="<?php echo JText::_('COM_TRACKS_Details' ); ?>">
             <?php echo $ranking->team_name; ?>
             <?php //echo JHTML::image('media/com_tracks/images/teams/'.$ranking->team_logo, $ranking->team_name, array('title' => $ranking->team_name, 'class' => 'ranking-logo')); ?>
             </a>
@@ -62,7 +62,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
   </tbody>
 </table>
 <p class="copyright">
-  <?php echo HTMLtracks::footer( ); ?>
+  <?php echo TrackslibHelperTools::footer( ); ?>
 </p>
 </div>
-  
+

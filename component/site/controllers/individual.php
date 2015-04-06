@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: individual.php 140 2008-06-10 16:47:22Z julienv $ 
+* @version    $Id: individual.php 140 2008-06-10 16:47:22Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -24,7 +24,7 @@ jimport('joomla.application.component.controller');
  */
 class TracksControllerIndividual extends JController
 {
-  
+
   function __construct()
 	{
 		parent::__construct();
@@ -33,7 +33,7 @@ class TracksControllerIndividual extends JController
 		$this->registerTask( 'add',  'edit' );
 		$this->registerTask( 'apply', 'save' );
 	}
-	
+
 	/**
 	 * display the edit form
 	 * @return void
@@ -45,14 +45,14 @@ class TracksControllerIndividual extends JController
       $this->setRedirect(JURI::base(), JText::_('COM_TRACKS_Please_login_to_be_able_to_edit_your_tracks_profile'), 'error' );
       $this->redirect();
     }
-    
+
 		JRequest::setVar( 'view', 'individual' );
 		JRequest::setVar( 'layout', 'form'  );
 		JRequest::setVar( 'hidemainmenu', 1);
-		
+
 		parent::display();
 	}
-	
+
 
   function save()
   {
@@ -67,15 +67,15 @@ class TracksControllerIndividual extends JController
       JError::raiseError( 403, JText::_('COM_TRACKS_Access_Forbidden') );
       return;
     }
-    
+
     // only autorize users can specify the user_id.
     if (!$user->authorise('core.manage', 'com_tracks')) {
     	$user_id = $user->get('id');
     }
     else {
-    	$user_id = JRequest::getVar( 'user_id', 0, 'post', 'int' );    	
+    	$user_id = JRequest::getVar( 'user_id', 0, 'post', 'int' );
     }
-    
+
     //clean request
     // first, save description...
     $post = JRequest::get( 'post' );
@@ -91,10 +91,10 @@ class TracksControllerIndividual extends JController
     $post['state'] = JRequest::getVar('state', '', 'post', 'string');
     $post['country'] = JRequest::getVar('country', '', 'post', 'string');
     $post['description'] = JRequest::getVar('description', '', 'post', 'string', JREQUEST_ALLOWRAW);
-        
+
     $picture           = JRequest::getVar( 'picture', '', 'files', 'array' );
     $picture_small     = JRequest::getVar( 'picture_small', '', 'files', 'array' );
-    
+
     // store data
     $model = $this->getModel('individual');
 
@@ -104,7 +104,7 @@ class TracksControllerIndividual extends JController
       $msg  = $model->getError();
     }
 
-    $this->setRedirect( JRoute::_(TracksHelperRoute::getIndividualRoute($model->getId())) , $msg );
+    $this->setRedirect( JRoute::_(TrackslibHelperRoute::getIndividualRoute($model->getId())) , $msg );
   }
 }
 ?>

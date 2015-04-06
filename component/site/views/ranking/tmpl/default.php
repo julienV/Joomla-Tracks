@@ -65,8 +65,8 @@ defined('_JEXEC') or die('Restricted access'); ?>
     $i = 0;
     foreach( $this->rankings AS $ranking )
     {
-      $link_ind = JRoute::_( TracksHelperRoute::getIndividualRoute($ranking->slug, $this->project->slug) );
-      $link_team = JRoute::_( TracksHelperRoute::getTeamRoute($ranking->teamslug, $this->project->slug) );
+      $link_ind = JRoute::_( TrackslibHelperRoute::getIndividualRoute($ranking->slug, $this->project->slug) );
+      $link_team = JRoute::_( TrackslibHelperRoute::getTeamRoute($ranking->teamslug, $this->project->slug) );
       ?>
       <tr class="<?php echo ($i ? 'd1' : 'd0'); ?>">
         <td><?php echo $ranking->rank; ?></td>
@@ -78,7 +78,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 	      <?php if ($this->params->get('showflag',1)): ?>
 	      <td>
 	        <?php if ( $ranking->country_code ): ?>
-            <?php echo TracksCountries::getCountryFlag($ranking->country_code); ?>
+            <?php echo TrackslibHelperCountries::getCountryFlag($ranking->country_code); ?>
           <?php endif; ?>
         </td>
 	      <?php endif; ?>
@@ -103,23 +103,23 @@ defined('_JEXEC') or die('Restricted access'); ?>
         <td><?php echo $ranking->best_rank; ?></td>
 
 	      <?php if ($this->params->get('rk_show_top3')): ?>
-	      <td><?php echo TracksHelperTools::getTop3($ranking); ?></td>
+	      <td><?php echo TrackslibHelperTools::getTop3($ranking); ?></td>
 	      <?php endif; ?>
 
 	      <?php if ($this->params->get('rk_show_top5')): ?>
-	      <td><?php echo TracksHelperTools::getTop5($ranking); ?></td>
+	      <td><?php echo TrackslibHelperTools::getTop5($ranking); ?></td>
 	      <?php endif; ?>
 
 	      <?php if ($this->params->get('rk_show_top10')): ?>
-	      <td><?php echo TracksHelperTools::getTop10($ranking); ?></td>
+	      <td><?php echo TrackslibHelperTools::getTop10($ranking); ?></td>
 	      <?php endif; ?>
 
 	      <?php if ($this->params->get('rk_show_average')): ?>
-	      <td><?php echo TracksHelperTools::getAverageFinish($ranking); ?></td>
+	      <td><?php echo TrackslibHelperTools::getAverageFinish($ranking); ?></td>
 	      <?php endif; ?>
 
 	      <?php if ($this->params->get('rk_show_starts')): ?>
-	      <td><?php echo TracksHelperTools::getStarts($ranking); ?></td>
+	      <td><?php echo TrackslibHelperTools::getStarts($ranking); ?></td>
 	      <?php endif; ?>
 
       </tr>
@@ -130,7 +130,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
   </tbody>
 </table>
 <p class="copyright">
-  <?php echo HTMLtracks::footer( ); ?>
+  <?php echo TrackslibHelperTools::footer( ); ?>
 </p>
 </div>
 

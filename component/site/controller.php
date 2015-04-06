@@ -1,64 +1,24 @@
 <?php
 /**
-* @version    $Id: controller.php 109 2008-05-24 11:05:07Z julienv $
-* @package    JoomlaTracks
-* @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
-* @license		GNU/GPL, see LICENSE.php
-* Joomla Tracks is free software. This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-* See COPYRIGHT.php for copyright notices and details.
-*/
+ * @package    Tracks.Site
+ * @copyright  Tracks (C) 2008-2015 Julien Vonthron. All rights reserved.
+ * @license    GNU General Public License version 2 or later
+ */
 
-// Check to ensure this file is included in Joomla!
-defined('_JEXEC') or die();
-
-jimport('joomla.application.component.controller');
-
-$document = JFactory::getDocument();
-$document->addStyleSheet( JURI::root() . 'media/com_tracks/css/tracks.css', 'text/css', null, array( 'id' => 'tracksstyleSheet' ) );
+// No direct access
+defined('_JEXEC') or die('Restricted access');
 
 /**
  * Tracks Component Controller
  *
- * @package		Tracks
- * @since 0.1
+ * @package  Tracks.Site
+ * @since    3.0
  */
-class TracksController extends JController
+class TracksController extends JControllerLegacy
 {
-	function __construct($config = array())
-	{
-		// frontpage Editor pagebreak proxying:
-		if(JRequest::getCmd('view') === 'individuals' && JRequest::getCmd('layout') === 'modal')
-		{
-			JHtml::_('stylesheet','system/adminlist.css', array(), true);
-			$config['base_path'] = JPATH_COMPONENT_ADMINISTRATOR;
-		}
-
-		parent::__construct($config);
-	}
-
 	/**
-	 * Typical view method for MVC based architecture
-	 *
-	 * This function is provide as a default implementation, in most cases
-	 * you will need to override it in your own controllers.
-	 *
-	 * @param   boolean  $cachable   If true, the view output will be cached
-	 * @param   array    $urlparams  An array of safe url parameters and their variable types, for valid values see {@link JFilterInput::clean()}.
-	 *
-	 * @return  JController  A JController object to support chaining.
-	 *
-	 * @since   11.1
+	 * @var    string The default view.
+	 * @since  2.5
 	 */
-	public function display($cachable = false, $urlparams = false)
-	{
-		// Set a default view if none exists
-		if ( ! JRequest::getCmd( 'view' ) ) {
-			JRequest::setVar('view', 'projects' );
-		}
-
-		parent::display();
-	}
+	protected $default_view = 'projects';
 }

@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: default.php 135 2008-06-08 21:50:12Z julienv $ 
+* @version    $Id: default.php 135 2008-06-08 21:50:12Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -20,8 +20,8 @@ defined('_JEXEC') or die('Restricted access'); ?>
     <?php
     foreach( $this->individuals AS $obj )
     {
-      $link_ind = JRoute::_( TracksHelperRoute::getIndividualRoute($obj->slug, $this->project->slug) ); 
-      $link_team = JRoute::_( TracksHelperRoute::getTeamRoute($obj->teamslug, $this->project->slug) );      
+      $link_ind = JRoute::_( TrackslibHelperRoute::getIndividualRoute($obj->slug, $this->project->slug) );
+      $link_team = JRoute::_( TrackslibHelperRoute::getTeamRoute($obj->teamslug, $this->project->slug) );
       ?>
       <li>
         <div>
@@ -34,32 +34,32 @@ defined('_JEXEC') or die('Restricted access'); ?>
 		        <a href="<?php echo $link_ind; ?>"
 	                title="<?php echo $obj->first_name . ' ' . $obj->last_name;; ?>">
 	           <?php
-		          // individual name 
+		          // individual name
 		          echo $obj->first_name . ' ' . $obj->last_name;
 			        ?>
 			      </a>
 		        <?php if ($this->projectparams->get('showflag')): ?>
 		          <?php if ( $obj->country_code ): ?>
-		          <?php echo TracksCountries::getCountryFlag($obj->country_code); ?>
+		          <?php echo TrackslibHelperCountries::getCountryFlag($obj->country_code); ?>
 	            <?php endif ?>
 	          <?php endif; ?>
           </p>
-	        
+
 	        <?php if ( $obj->team_name && $this->projectparams->get('showteams') && $this->params->get('showteams', 1)) : ?>
 	        <div>
 						<a href="<?php echo $link_team; ?>"
 						   title="<?php echo JText::_('COM_TRACKS_Details' ); ?>"> <?php echo $obj->team_name; ?>
 						</a>
-					</div> 
+					</div>
 					<?php endif; ?>
         </div>
       </li>
-      <?php     
+      <?php
     }
     ?>
 </ul>
 <div class=clear></div>
 <p class="copyright">
-  <?php echo HTMLtracks::footer( ); ?>
+  <?php echo TrackslibHelperTools::footer( ); ?>
 </p>
 </div>

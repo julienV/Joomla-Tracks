@@ -22,7 +22,7 @@ jimport('joomla.application.component.model');
  * @package		Tracks
  * @since 0.1
  */
-class baseModel extends JModel
+class baseModel extends RModel
 {
     /**
      * associated project

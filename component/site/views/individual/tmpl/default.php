@@ -19,7 +19,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <h1><?php echo $this->data->first_name . ' ' . $this->data->last_name; ?></h1>
 
 <?php if ($this->show_edit_link): ?>
-<div id="editprofile"><a href="<?php echo JRoute::_( TracksHelperRoute::getEditIndividualRoute($this->data->id) ); ?>"
+<div id="editprofile"><a href="<?php echo JRoute::_( TrackslibHelperRoute::getEditIndividualRoute($this->data->id) ); ?>"
        title ="<?php echo JText::_('COM_TRACKS_Edit_profile' ) ?>">
           <?php echo JText::_('COM_TRACKS_Edit_profile' ); ?>
           </a></div>
@@ -66,7 +66,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 				<?php echo JText::_( 'COM_TRACKS_INDIVIDUAL_TEAM' ); ?>:
       </td>
       <td>
-        <?php echo JHTML::link(TracksHelperRoute::getTeamRoute($this->data->projectdata->teamslug, $this->data->projectdata->projectslug), $this->data->projectdata->team_name); ?>
+        <?php echo JHTML::link(TrackslibHelperRoute::getTeamRoute($this->data->projectdata->teamslug, $this->data->projectdata->projectslug), $this->data->projectdata->team_name); ?>
       </td>
     </tr>
     <?php endif; ?>
@@ -114,11 +114,11 @@ defined('_JEXEC') or die('Restricted access'); ?>
         </label>
       </td>
       <td>
-        <?php echo TracksCountries::getCountryFlag($this->data->country_code); ?>
+        <?php echo TrackslibHelperCountries::getCountryFlag($this->data->country_code); ?>
       </td>
     </tr>
     <?php endif; ?>
-    <?php if (TracksHelperTools::isValidDate($this->data->dob)): ?>
+    <?php if (TrackslibHelperTools::isValidDate($this->data->dob)): ?>
     <tr>
       <td width="100" align="right" class="key">
         <label for="dob">
@@ -126,7 +126,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
         </label>
       </td>
       <td>
-      <?php echo TracksHelperTools::formatDate($this->data->dob); ?>
+      <?php echo TrackslibHelperTools::formatDate($this->data->dob); ?>
       </td>
     </tr>
     <?php endif; ?>
@@ -217,7 +217,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <?php endif; ?>
 
 <p class="copyright">
-  <?php echo HTMLtracks::footer( ); ?>
+  <?php echo TrackslibHelperTools::footer( ); ?>
 </p>
 
 </div><!-- end of tracks -->

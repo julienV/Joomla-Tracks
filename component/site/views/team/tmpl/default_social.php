@@ -13,7 +13,7 @@
  // no direct access
 defined('_JEXEC') or die('Restricted access');
 
-$socials = TracksHelperTools::getTeamSocialItems($this->data);
+$socials = TrackslibHelperTools::getTeamSocialItems($this->data);
 
 if (count($socials)):
 ?>

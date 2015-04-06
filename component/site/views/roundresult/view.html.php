@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: view.html.php 77 2008-04-30 03:32:25Z julienv $ 
+* @version    $Id: view.html.php 77 2008-04-30 03:32:25Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -23,7 +23,7 @@ jimport( 'joomla.application.component.view');
  * @package		Tracks
  * @since 0.1
  */
-class TracksViewRoundResult extends JView
+class TracksViewRoundResult extends JViewLegacy
 {
     function display($tpl = null)
     {
@@ -32,7 +32,7 @@ class TracksViewRoundResult extends JView
     	$ordering = $params->def('subround_order', 0);
     	$ordering = ($ordering) ? 'DESC':'ASC';
     	$projectround_id = JRequest::getVar( 'pr', 0, '', 'int' );
-    	
+
     	$model = $this->getModel();
     	$subroundresults = $model->getSubrounds($projectround_id, 0, $ordering);
     	$round = $model->getRound( $projectround_id );
@@ -52,7 +52,7 @@ class TracksViewRoundResult extends JView
     	$this->assignRef( 'project',        $project );
       $this->assignRef( 'projectparams',  $projectparams );
       $this->assignRef( 'params',         $params );
-      
+
     	parent::display($tpl);
     }
 }

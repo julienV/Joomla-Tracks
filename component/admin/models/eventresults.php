@@ -189,7 +189,7 @@ class TracksModelEventResults extends RModelList
 			else
 			{
 				$search = $db->Quote('%' . $db->escape($search, true) . '%');
-				$query->where('obj.name LIKE ' . $search);
+				$query->where('CONCAT(i.last_name, i.first_name) LIKE ' . $search);
 			}
 		}
 

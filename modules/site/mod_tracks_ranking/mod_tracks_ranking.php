@@ -18,7 +18,7 @@ defined('_JEXEC') or die('Restricted access');
 // Include the syndicate functions only once
 require_once (dirname(__FILE__). '/' .'helper.php');
 include_once (JPATH_SITE. '/' .'components'. '/' .'com_tracks'. '/' .'helpers'. '/' .'route.php');
-include_once (JPATH_SITE. '/' .'components'. '/' .'com_tracks'. '/' .'lib'. '/' .'JLVImageTool.php');
+include_once (JPATH_SITE. '/' .'components'. '/' .'com_tracks'. '/' .'lib'. '/' .'TrackslibHelperImage.php');
 
 $limit = intval( $params->get('count', 5) );
 $showteams = intval( $params->get('showteams', 1) );

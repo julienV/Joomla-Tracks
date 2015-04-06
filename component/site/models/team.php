@@ -83,7 +83,7 @@ class TracksModelTeam extends baseModel
 			       . ' CASE WHEN CHAR_LENGTH( i.alias ) THEN CONCAT_WS( \':\', i.id, i.alias ) ELSE i.id END AS slug, '
 			       . ' CASE WHEN CHAR_LENGTH( p.alias ) THEN CONCAT_WS( \':\', p.id, p.alias ) ELSE p.id END AS projectslug '
 			       . ' FROM #__tracks_individuals AS i '
-			       . ' INNER JOIN #__tracks_projects_individuals AS pi ON pi.individual_id = i.id '
+			       . ' INNER JOIN #__tracks_participants AS pi ON pi.individual_id = i.id '
 			       . ' INNER JOIN #__tracks_projects AS p ON pi.project_id = p.id '
 			       . ' INNER JOIN #__tracks_seasons AS s ON s.id = p.season_id '
 			       . ' WHERE pi.team_id = ' . $this->_db->Quote($this->_id)

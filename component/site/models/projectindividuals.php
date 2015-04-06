@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id$ 
+* @version    $Id$
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -28,20 +28,20 @@ class TracksModelProjectindividuals extends baseModel
 	 * associated project
 	 */
 	var $project = null;
-    	
-	function getIndividuals($project_id = 0) 
+
+	function getIndividuals($project_id = 0)
 	{
 		if (!$project_id) {
 			$this->setError(JText::_('COM_TRACKS_No_project_specified'));
 			return null;
 		}
-		
+
 		$query =  ' SELECT i.id, i.first_name, i.last_name, i.country_code, i.picture, i.picture_small, '
 		        . ' pi.number, pi.team_id, '
             . ' t.name as team_name, t.picture_small AS team_logo, '
             . ' CASE WHEN CHAR_LENGTH( i.alias ) THEN CONCAT_WS( \':\', i.id, i.alias ) ELSE i.id END AS slug, '
             . ' CASE WHEN CHAR_LENGTH( t.alias ) THEN CONCAT_WS( \':\', t.id, t.alias ) ELSE t.id END AS teamslug '
-						. ' FROM #__tracks_projects_individuals as pi '
+						. ' FROM #__tracks_participants as pi '
             . ' INNER JOIN #__tracks_individuals as i ON i.id = pi.individual_id '
             . ' LEFT JOIN #__tracks_teams as t ON t.id = pi.team_id '
             . ' WHERE pi.project_id = ' . $project_id
@@ -50,13 +50,13 @@ class TracksModelProjectindividuals extends baseModel
 		$this->_db->setQuery( $query );
 
 		$result = $this->_db->loadObjectList();
-		
+
 	  $count = count($result);
     for($i = 0; $i < $count; $i++)
     {
         $obj =& $result[$i];
         $attribs['class']="pic";
-        
+
         if ($obj->picture != '') {
           $obj->picture = JHTML::image(JURI::root().$obj->picture, $obj->first_name. ' ' . $obj->last_name, $attribs);
         } else {
@@ -65,5 +65,5 @@ class TracksModelProjectindividuals extends baseModel
     }
     return $result;
 	}
-    
+
 }

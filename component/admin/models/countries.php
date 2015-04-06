@@ -26,6 +26,6 @@ class TracksModelCountries extends FOFModel
 	 */
 	public function &getItemList($overrideLimits = false, $group = '')
 	{
-		return TracksCountries::getCountryOptions();
+		return TrackslibHelperCountries::getCountryOptions();
 	}
 }

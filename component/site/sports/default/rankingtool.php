@@ -225,9 +225,9 @@ class TracksRankingTool extends JObject {
 		{
 			$query =  ' SELECT rr.individual_id as id, rr.rank, rr.bonus_points, rr.team_id, '
 			. '   sr.projectround_id, srt.points_attribution, srt.count_points '
-			. ' FROM #__tracks_rounds_results AS rr '
-			. ' INNER JOIN #__tracks_projects_subrounds AS sr ON sr.id = rr.subround_id '
-			. ' INNER JOIN #__tracks_subroundtypes AS srt ON srt.id = sr.type '
+			. ' FROM #__tracks_events_results AS rr '
+			. ' INNER JOIN #__tracks_events AS sr ON sr.id = rr.event_id '
+			. ' INNER JOIN #__tracks_eventtypes AS srt ON srt.id = sr.type '
 			. ' INNER JOIN #__tracks_projects_rounds AS pr ON pr.id = sr.projectround_id '
 			. ' WHERE pr.project_id = ' . $this->_project_id
 			. '   AND pr.published = 1 '
@@ -249,7 +249,7 @@ class TracksRankingTool extends JObject {
 			. ' t.name AS team_name, t.short_name AS team_short_name, t.acronym AS team_acronym, t.picture_small AS team_logo,'
 			. ' CASE WHEN CHAR_LENGTH( i.alias ) THEN CONCAT_WS( \':\', i.id, i.alias ) ELSE i.id END AS slug, '
 			. ' CASE WHEN CHAR_LENGTH( t.alias ) THEN CONCAT_WS( \':\', t.id, t.alias ) ELSE t.id END AS teamslug '
-			. ' FROM #__tracks_projects_individuals AS pi '
+			. ' FROM #__tracks_participants AS pi '
 			. ' INNER JOIN #__tracks_individuals AS i ON i.id = pi.individual_id '
 			. ' LEFT JOIN #__tracks_teams AS t ON t.id = pi.team_id '
 			. ' WHERE pi.project_id = ' . $this->_project_id
@@ -283,7 +283,7 @@ class TracksRankingTool extends JObject {
 			$query =  ' SELECT DISTINCT pi.team_id, '
 			. ' t.name AS team_name, t.short_name AS team_short_name, t.acronym AS team_acronym, t.country_code, t.picture_small AS team_logo, '
 			. ' CASE WHEN CHAR_LENGTH( t.alias ) THEN CONCAT_WS( \':\', t.id, t.alias ) ELSE t.id END AS slug '
-			. ' FROM #__tracks_projects_individuals AS pi '
+			. ' FROM #__tracks_participants AS pi '
 			. ' INNER JOIN #__tracks_teams AS t ON t.id = pi.team_id '
 			. ' WHERE pi.project_id = ' . $this->_project_id
 			. ' ORDER BY t.name ';

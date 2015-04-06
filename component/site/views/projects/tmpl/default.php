@@ -1,16 +1,10 @@
 <?php
 /**
-* @version    $Id: default.php 132 2008-06-08 08:44:01Z julienv $ 
-* @package    JoomlaTracks
-* @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
-* @license		GNU/GPL, see LICENSE.php
-* Joomla Tracks is free software. This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-* See COPYRIGHT.php for copyright notices and details.
-*/ 
- // no direct access
+ * @package    Tracks.Site
+ * @copyright  Tracks (C) 2008-2015 Julien Vonthron. All rights reserved.
+ * @license    GNU General Public License version 2 or later
+ */
+
 defined('_JEXEC') or die('Restricted access'); ?>
 
 <div id="tracks">
@@ -29,9 +23,9 @@ defined('_JEXEC') or die('Restricted access'); ?>
   {
     foreach ( $this->projects as $project )
     {
-      $link_project = JRoute::_( TracksHelperRoute::getProjectRoute($project->slug) );
-      $link_ranking = JRoute::_( TracksHelperRoute::getRankingRoute($project->slug) );	
-      $link_teams_ranking = JRoute::_( TracksHelperRoute::getTeamRankingRoute($project->slug) );			     
+      $link_project = JRoute::_( TrackslibHelperRoute::getProjectRoute($project->slug) );
+      $link_ranking = JRoute::_( TrackslibHelperRoute::getRankingRoute($project->slug) );
+      $link_teams_ranking = JRoute::_( TrackslibHelperRoute::getTeamRankingRoute($project->slug) );
      ?>
       <tr>
         <td>
@@ -58,6 +52,6 @@ defined('_JEXEC') or die('Restricted access'); ?>
   ?>
 </table>
 <p class="copyright">
-  <?php echo HTMLtracks::footer( ); ?>
+  <?php echo TrackslibHelperTools::footer( ); ?>
 </p>
 </div>

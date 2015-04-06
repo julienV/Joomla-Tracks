@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: view.html.php 77 2008-04-30 03:32:25Z julienv $ 
+* @version    $Id: view.html.php 77 2008-04-30 03:32:25Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -23,7 +23,7 @@ jimport( 'joomla.application.component.view');
  * @package		Tracks
  * @since 0.1
  */
-class TracksViewRound extends JView
+class TracksViewRound extends JViewLegacy
 {
 	function display($tpl = null)
 	{
@@ -47,12 +47,12 @@ class TracksViewRound extends JView
 
 		// parse description with content plugins
 		$round->description = JHTML::_('content.prepare', $round->description);
-		
-		$picture = JLVImageTool::modalimage($round->picture, $round->name, 150);
+
+		$picture = TrackslibHelperImage::modalimage($round->picture, $round->name, 150);
 
 		$this->assignRef( 'round',    $round );
-		$this->assignRef( 'params',   $params );	
-		$this->assignRef( 'picture',  $picture );	
+		$this->assignRef( 'params',   $params );
+		$this->assignRef( 'picture',  $picture );
 
 		parent::display($tpl);
 	}

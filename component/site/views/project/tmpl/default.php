@@ -61,7 +61,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 		$k = 0;
 		foreach( $this->results AS $result )
 		{
-      $link_round = JRoute::_( TracksHelperRoute::getRoundResultRoute($result->slug) );
+      $link_round = JRoute::_( TrackslibHelperRoute::getRoundResultRoute($result->slug) );
       ?>
       <tr class="<?php echo ($k++ % 2 ? 'd1' : 'd0'); ?>">
         <td>
@@ -87,12 +87,12 @@ defined('_JEXEC') or die('Restricted access'); ?>
 	</tbody>
 </table>
 <div class="icalbutton">
-  <a href="<?php echo JRoute::_(TracksHelperRoute::getProjectRoute($this->project->slug).'&format=ical') ?>" title="<?php echo JText::_('COM_TRACKS_ICAL_EXPORT'); ?>">
+  <a href="<?php echo JRoute::_(TrackslibHelperRoute::getProjectRoute($this->project->slug).'&format=ical') ?>" title="<?php echo JText::_('COM_TRACKS_ICAL_EXPORT'); ?>">
     <img src="<?php echo JURI::root().'/media/com_tracks/images/ical.gif'; ?>"  alt="<?php echo JText::_('COM_TRACKS_ICAL_EXPORT'); ?>"/>
   </a>
 </div>
 
 <p class="copyright">
-  <?php echo HTMLtracks::footer( ); ?>
+  <?php echo TrackslibHelperTools::footer( ); ?>
 </p>
 </div>

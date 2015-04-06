@@ -35,14 +35,14 @@ $img_dir = JPATH_SITE.'/';
     $count = 0;
     foreach( $list AS $ranking )
     {
-      $link_ind = JRoute::_( TracksHelperRoute::getIndividualRoute($ranking->slug, $project->slug) );
-      $link_team = JRoute::_( TracksHelperRoute::getTeamRoute($ranking->teamslug, $project->slug) );
+      $link_ind = JRoute::_( TrackslibHelperRoute::getIndividualRoute($ranking->slug, $project->slug) );
+      $link_team = JRoute::_( TrackslibHelperRoute::getTeamRoute($ranking->teamslug, $project->slug) );
       ?>
       <tr>
         <td><?php echo $rank++; ?></td>
         <td>
         	<?php if ($params->get('showpicture', 1) && $ranking->picture_small): ?>
-        	<?php echo JLVImageTool::modalimage($img_dir.$ranking->picture_small, $ranking->first_name, 20); ?>
+        	<?php echo TrackslibHelperImage::modalimage($img_dir.$ranking->picture_small, $ranking->first_name, 20); ?>
         	<?php endif; ?>
           <a href="<?php echo $link_ind; ?>"
              title="<?php echo $ranking->last_name.($ranking->first_name ? ', '.$ranking->first_name : ''); ?>::" class="mod-ranking-tip">
@@ -68,7 +68,7 @@ $img_dir = JPATH_SITE.'/';
   </tbody>
 </table>
 <?php
-$link = JRoute::_( TracksHelperRoute::getRankingRoute($project->slug) );
+$link = JRoute::_( TrackslibHelperRoute::getRankingRoute($project->slug) );
 ?>
 <a class="fulltablelink" href="<?php echo $link; ?>"
              title="<?php echo JText::_('MOD_TRACKS_RANKING_View_full_table' ); ?>">
