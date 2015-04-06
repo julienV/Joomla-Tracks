@@ -20,6 +20,12 @@
 	<property name="dirs.bin.dbxsl" value="${dirs.bin}/dbxsl" />
 	<property name="dirs.bin.release" value="../release" />
 
+	<xmlproperty file="redCORE/redcore.xml" prefix="redCOREDetails" keepRoot="false" />
+	<property
+			name="redCOREVersion"
+			value="${redCOREDetails.version}"
+			override="true"/>
+
 	<taskdef name="gitversion" classname="build.phingext.GitVersionTask" />
 	<taskdef name="gitdate" classname="build.phingext.GitDateTask" />
 
@@ -66,9 +72,17 @@
 	Tasks - Joomla! packages
 	====================================================================================================
 	-->
+	<target name="copyredcore">
+		<phing phingfile="${dirs.root}/redCORE/redcore_copy_mandatory.xml"
+			   target="copyframework"
+			   haltonfailure="true">
+			<property name="redcoretargetdir" value="${dirs.tmp}/component/redCORE" />
+			<property name="redcorepath" value="${dirs.root}/redCORE" />
+		</phing>
+	</target>
 
-	<target name="release" description="Tracks Installation Package for Joomla! 1.6+"
-		depends="new-release,setup-properties">
+	<target name="release" description="Tracks Installation Package for Joomla!"
+			depends="setup-properties, new-release, copyredcore">
 
 		<copy todir="${dirs.tmp}/component" >
 			<fileset dir="${dirs.component}">
