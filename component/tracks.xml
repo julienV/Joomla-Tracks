@@ -78,12 +78,9 @@
 			<filename>config.xml</filename>
 			<filename>controller.php</filename>
 			<filename>copyright.txt</filename>
-			<filename>dispatcher.php</filename>
-			<filename>fof.xml</filename>
 			<filename>helper.php</filename>
 			<filename>index.html</filename>
 			<filename>license.txt</filename>
-			<filename>toolbar.php</filename>
 			<filename>tracks.php</filename>
 			<folder>abstract</folder>
 			<folder>controllers</folder>
