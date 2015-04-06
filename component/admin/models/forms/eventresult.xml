@@ -1,28 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form
-	lessfiles="media://com_tracks/css/tracksbackend.less||media://com_tracks/css/tracksbackend.css"
-	validate="true"
-	>
+<form>
 	<fieldset name="basic_configuration"
 			  label="COM_TRACKS_SUBROUNDRESULT_GROUP_BASIC"
 			  description="COM_TRACKS_SUBROUNDRESULT_GROUP_BASIC_DESC"
-			  class="span6"
 			>
 		<field
 			name="id"
-			type="text"
-			default="0"
-			label="JGLOBAL_FIELD_ID_LABEL"
-			description ="JGLOBAL_FIELD_ID_DESC"
-			class="readonly"
-			readonly="true"/>
+			type="hidden"
+			default="0"/>
+
+		<field
+			name="event_id"
+			type="hidden"
+			default="0"/>
 
 		<field
 			name="individual_id"
-			type="model"
-			model="TracksModelProjectindividuals"
-			key_field="individual_id"
-			value_field="name"
+			type="tracksparticipant"
 			label="COM_TRACKS_PARTICIPANT"
 			description="COM_TRACKS_PARTICIPANT"
 			class="inputbox"
@@ -56,16 +50,6 @@
 			description="COM_TRACKS_SUBROUND_COMMENT_DESC"
 			filter="JComponentHelper::filterText" buttons="true"
 			/>
-
-		<field
-			name="checked_out"
-			type="hidden"
-			filter="unset"/>
-
-		<field
-			name="checked_out_time"
-			type="hidden"
-			filter="unset"/>
 
 	</fieldset>
 </form>

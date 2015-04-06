@@ -1,204 +1,144 @@
 <?php
 /**
-* @version    $Id: default.php 127 2008-06-06 02:43:26Z julienv $
-* @package    JoomlaTracks
-* @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
-* @license		GNU/GPL, see LICENSE.php
-* Joomla Tracks is free software. This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-* See COPYRIGHT.php for copyright notices and details.
-*/
+ * @package     Tracks
+ * @subpackage  Admin
+ * @copyright   Tracks (C) 2008-2015 Julien Vonthron. All rights reserved.
+ * @license     GNU General Public License version 2 or later
+ */
+defined('_JEXEC') or die('Restricted access');
 
-defined('_JEXEC') or die('Restricted access'); ?>
+JHtml::_('behavior.keepalive');
+JHtml::_('rdropdown.init');
+JHtml::_('rbootstrap.tooltip');
+JHtml::_('rjquery.chosen', 'select');
 
-<?php
-$user 	= JFactory::getUser();
+$listOrder = $this->escape($this->state->get('list.ordering'));
+$listDirn = $this->escape($this->state->get('list.direction'));
 
-//Ordering allowed ?
-//$ordering = ($this->lists->order == 'obj.ordering');
+$user = JFactory::getUser();
+$userId = $user->id;
+$search = $this->state->get('filter.search');
 
-JHTML::_('behavior.mootools');
-JHTML::_('behavior.tooltip');
-
-$model = $this->getModel();
-$round = $model->getSubroundInfo();
-
-FOFTemplateUtils::addCSS("media://com_tracks/css/tracksbackend.css");
-
-FOFTemplateUtils::addJS('media://com_tracks/js/autocompleter/1_2/Autocompleter.js');
-FOFTemplateUtils::addJS('media://com_tracks/js/autocompleter/1_2/Autocompleter.Local.js');
-FOFTemplateUtils::addJS('media://com_tracks/js/autocompleter/1_2/Autocompleter.Request.js');
-FOFTemplateUtils::addJS('media://com_tracks/js/autocompleter/1_2/Observer.js');
-FOFTemplateUtils::addJS('media://com_tracks/js/quickadd1_2.js');
-FOFTemplateUtils::addCSS('media://com_tracks/css/Autocompleter1_2.css');
 ?>
-<style>
-.search-item {
-    font:normal 11px tahoma, arial, helvetica, sans-serif;
-    padding:3px 10px 3px 10px;
-    border:1px solid #fff;
-    border-bottom:1px solid #eeeeee;
-    white-space:normal;
-    color:#555;
-}
-.search-item h3 {
-    display:block;
-    font:inherit;
-    font-weight:bold;
-    color:#222;
-}
-
-.search-item h3 span {
-    float: right;
-    font-weight:normal;
-    margin:0 0 5px 5px;
-    width:100px;
-    display:block;
-    clear:none;
-}
-</style>
-
 <script type="text/javascript">
-Joomla.submitbutton = function(pressbutton)
-{
-  if (pressbutton == "saveranks"){
-  	checkAll_button( <?php echo count($this->items)-1; ?>, pressbutton );
-  }
-  else {
-	  Joomla.submitform(pressbutton);
-  }
-}
-</script>
-
-<div id="tracksmain">
-
-	<h3 class="subroundtitle"><?php echo $round->subroundname . ' - ' . $round->roundname . ' - ' . $round->projectname; ?></h3>
-
-	<form action="index.php?option=com_tracks&view=quickadd&task=add" method="post">
-		<input type="hidden" name="subround_id" value="<?php echo $model->getState('subround_id'); ?>" />
-
-		<table>
-			<tr>
-				<td class="hasTip" title="<?php echo JText::_('COM_TRACKS_QUICK_ADD').'::'.JText::_('COM_TRACKS_QUICK_ADD_TIP'); ?>"><?php echo JText::_('COM_TRACKS_QUICK_ADD'); ?>:</td>
-				<td><input type="text" name="quickadd" id="quickadd" /></td>
-				<td><input type="hidden" id="individualid" name="individualid" value=""><input type="submit" name="submit2" id="submit2" value="<?php echo JText::_('COM_TRACKS_ADD_PARTICIPANT'); ?>" /></td>
-			</tr>
-		</table>
-	</form>
-
-<br />
-
-<form action="<?php echo $this->request_url; ?>" method="post" name="adminForm" id="adminForm">
-	<input type="hidden" name="view" value="subroundresults" />
-	<input type="hidden" name="subround_id" value="<?php echo $model->getState('subround_id'); ?>" />
-	<input type="hidden" name="task" value="" />
-	<input type="hidden" name="boxchecked" value="0" />
-	<input type="hidden" name="filter_order" value="<?php echo $this->lists->order; ?>" />
-	<input type="hidden" name="filter_order_Dir" value="" />
-	<input type="hidden" name="<?php echo JFactory::getSession()->getFormToken();?>" value="1" />
-
-	<div id="editcell">
-		<table class="adminlist">
-		<thead>
-			<tr>
-				<th width="5">
-					<?php echo JText::_('COM_TRACKS_NUM' ); ?>
-				</th>
-				<th width="20">
-					<input type="checkbox" name="toggle" value="" onclick="checkAll(<?php echo count( $this->items ); ?>);" />
-				</th>
-	      <th width="5%">
-	        <?php echo JHTML::_('grid.sort',  'COM_TRACKS_Number', 'number', $this->lists->order_Dir, $this->lists->order ); ?>
-	      </th>
-				<th class="title">
-					<?php echo JHTML::_('grid.sort',  'COM_TRACKS_Participant', 'participant', $this->lists->order_Dir, $this->lists->order ); ?>
-				</th>
-				<th class="title">
-					<?php echo JHTML::_('grid.sort',  'COM_TRACKS_Team', 'team', $this->lists->order_Dir, $this->lists->order ); ?>
-				</th>
-	      <th class="title">
-	        <?php echo JHTML::_('grid.sort',  'COM_TRACKS_Performance', 'performance', $this->lists->order_Dir, $this->lists->order ); ?>
-	      </th>
-				<th width="5%">
-					<?php echo JHTML::_('grid.sort',  'COM_TRACKS_Rank', 'rank', $this->lists->order_Dir, $this->lists->order ); ?>
-				</th>
-	      <th width="5%">
-					<?php echo JHTML::_('grid.sort',  'COM_TRACKS_Bonus_points', 'bonus_points', $this->lists->order_Dir, $this->lists->order ); ?>
-	      </th>
-			</tr>
-		</thead>
-		<tfoot>
-			<tr>
-				<td colspan="9">
-					<?php echo $this->pagination->getListFooter(); ?>
-				</td>
-			</tr>
-		</tfoot>
-		<tbody>
-		<?php
-		$k = 0;
-
-		for ($i=0, $n=count( $this->items ); $i < $n; $i++)
+	Joomla.submitbutton = function (pressbutton)
+	{
+		submitbutton(pressbutton);
+	}
+	submitbutton = function (pressbutton)
+	{
+		var form = document.adminForm;
+		if (pressbutton)
 		{
-			$row = $this->items[$i];
-
-			$link 	= JRoute::_( 'index.php?option=com_tracks&view=subroundresult&id=' . $row->id . '&subround_id=' . $row->subround_id);
-
-			$checked 	= JHTML::_('grid.checkedout',   $row, $i );
-			?>
-			<tr class="<?php echo "row$k"; ?>">
-				<td>
-					<?php echo $this->pagination->getRowOffset( $i ); ?>
-					<input type="hidden"
-					       id="ind<?php echo $i; ?>" name="individual[]"
-					       value="<?php echo $row->individual_id; ?>" />
-					<input type="hidden"
-					       id="team<?php echo $i; ?>" name="team[]"
-					       value="<?php echo $row->team_id; ?>" />
-				</td>
-				<td>
-					<?php echo $checked; ?>
-				</td>
-	      <td align="center"><?php echo $row->number; ?></td>
-				<td>
-					<?php
-					if ( JTable::isCheckedOut($user->get('id'), $row->checked_out ) ) {
-						echo $row->last_name.', '.$row->first_name;
-					} else {
-					  ?>
-						<a href="<?php echo $link; ?>" title="<?php echo JText::_('COM_TRACKS_Edit_Project_Participant' ); ?>">
-							<?php echo $row->last_name. ', ' . $row->first_name; ?>
-						</a>
-					  <?php
-					}
-					?>
-				</td>
-				<td><?php echo $row->team_name; ?></td>
-				<td align="center">
-	        <input type="text" name="performance[]" size="20"
-					       value="<?php echo $row->performance;?>" class="text_area"
-					       style="text-align: center" />
-				</td>
-	      <td>
-	        <input type="text" name="rank[]" size="3"
-					       value="<?php echo $row->rank;?>" class="text_area"
-					       style="text-align: center" />
-	      </td>
-				<td>
-	        <input type="text" name="bonus_points[]" size="3"
-					       value="<?php echo $row->bonus_points;?>" class="text_area"
-					       style="text-align: center" />
-	      </td>
-			</tr>
-			<?php
-			$k = 1 - $k;
+			form.task.value = pressbutton;
 		}
-		?>
-		</tbody>
-		</table>
-	</div>
-</form>
 
-</div>
+		if (pressbutton == 'eventresults.delete')
+		{
+			var r = confirm('<?php echo JText::_("COM_TRACKS_EVENTRESULT_DELETE_COMFIRM")?>');
+			if (r == true)    form.submit();
+			else return false;
+		}
+		form.submit();
+	}
+</script>
+<form action="index.php?option=com_tracks&view=eventresults&event_id=<?php echo $this->state->get('event_id'); ?>" class="admin" id="adminForm" method="post" name="adminForm">
+	<?php
+	echo RLayoutHelper::render(
+		'searchtools.default',
+		array(
+			'view' => $this,
+			'options' => array(
+				'searchField' => 'search',
+				'searchFieldSelector' => '#filter_search',
+				'limitFieldSelector' => '#list_fields_limit',
+				'activeOrder' => $listOrder,
+				'activeDirection' => $listDirn
+			)
+		)
+	);
+	?>
+	<hr />
+	<?php if (empty($this->items)) : ?>
+		<div class="alert alert-info">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<div class="pagination-centered">
+				<h3><?php echo JText::_('COM_TRACKS_NOTHING_TO_DISPLAY'); ?></h3>
+			</div>
+		</div>
+	<?php else : ?>
+		<table class="table table-striped" id="table-items">
+			<thead>
+			<tr>
+				<th width="10" align="center">
+					<?php echo '#'; ?>
+				</th>
+				<th width="10">
+					<?php if (version_compare(JVERSION, '3.0', 'lt')) : ?>
+						<input type="checkbox" name="toggle" value="" onclick="Joomla.checkAll(this);" />
+					<?php else : ?>
+						<?php echo JHTML::_('grid.checkall'); ?>
+					<?php endif; ?>
+				</th>
+				<th width="30" nowrap="nowrap">
+					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_NUMBER', 'number', $listDirn, $listOrder); ?>
+				</th>
+				<th class="title" width="auto">
+					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_PARTICIPANT', 'participant', $listDirn, $listOrder); ?>
+				</th>
+				<th class="title" width="auto">
+					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_TEAM', 'team', $listDirn, $listOrder); ?>
+				</th>
+				<th width="auto">
+					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_PERFORMANCE', 'performance', $listDirn, $listOrder); ?>
+				</th>
+				<th width="auto">
+					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_RANK', 'rank', $listDirn, $listOrder); ?>
+				</th>
+				<th width="auto">
+					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_BONUS_POINTS', 'bonus_points', $listDirn, $listOrder); ?>
+				</th>
+			</tr>
+			</thead>
+			<tbody>
+			<?php $n = count($this->items); ?>
+			<?php foreach ($this->items as $i => $row) : ?>
+				<tr>
+					<td>
+						<?php echo $this->pagination->getRowOffset($i); ?>
+					</td>
+					<td>
+						<?php echo JHtml::_('grid.id', $i, $row->id); ?>
+					</td>
+					<td>
+						<?php echo $row->number; ?>
+					</td>
+					<td>
+						<?php $itemTitle = $row->first_name ? $row->last_name . ', ' . $row->first_name : $row->last_name; ?>
+						<?php echo JHtml::_('link', 'index.php?option=com_tracks&task=eventresult.edit&id=' . $row->id . '&event_id=' . $row->event_id, $itemTitle); ?>
+					</td>
+					<td>
+						<?php echo $row->team; ?>
+					</td>
+					<td>
+						<?php echo $row->performance; ?>
+					</td>
+					<td>
+						<?php echo $row->rank; ?>
+					</td>
+					<td>
+						<?php echo $row->bonus_points; ?>
+					</td>
+				</tr>
+			<?php endforeach; ?>
+			</tbody>
+		</table>
+		<?php echo $this->pagination->getPaginationLinks(null, array('showLimitBox' => false)); ?>
+	<?php endif; ?>
+	<input type="hidden" name="task" value=""/>
+	<input type="hidden" name="boxchecked" value="0"/>
+	<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>"/>
+	<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>"/>
+	<input type="hidden" name="projectround_id" value="<?php echo $this->state->get('projectround_id'); ?>"/>
+	<?php echo JHtml::_('form.token'); ?>
+</form>

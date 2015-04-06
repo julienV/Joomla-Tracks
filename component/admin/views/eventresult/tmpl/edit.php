@@ -25,48 +25,40 @@ JHtml::_('behavior.formvalidation');
 	});
 </script>
 <form
-	action="index.php?option=com_tracks&task=event.edit&id=<?php echo $this->item->id; ?>"
+	action="index.php?option=com_tracks&task=eventresult.edit&id=<?php echo $this->item->id; ?>"
 	method="post" name="adminForm" class="form-validate form-horizontal" id="adminForm">
 
 		<div class="row-fluid">
 			<div class="control-group">
 				<div class="control-label">
-					<?php echo $this->form->getLabel('type'); ?>
+					<?php echo $this->form->getLabel('individual_id'); ?>
 				</div>
 				<div class="controls">
-					<?php echo $this->form->getInput('type'); ?>
+					<?php echo $this->form->getInput('individual_id'); ?>
 				</div>
 			</div>
 			<div class="control-group">
 				<div class="control-label">
-					<?php echo $this->form->getLabel('start_date'); ?>
+					<?php echo $this->form->getLabel('rank'); ?>
 				</div>
 				<div class="controls">
-					<?php echo $this->form->getInput('start_date'); ?>
+					<?php echo $this->form->getInput('rank'); ?>
 				</div>
 			</div>
 			<div class="control-group">
 				<div class="control-label">
-					<?php echo $this->form->getLabel('end_date'); ?>
+					<?php echo $this->form->getLabel('bonus_points'); ?>
 				</div>
 				<div class="controls">
-					<?php echo $this->form->getInput('end_date'); ?>
+					<?php echo $this->form->getInput('bonus_points'); ?>
 				</div>
 			</div>
 			<div class="control-group">
 				<div class="control-label">
-					<?php echo $this->form->getLabel('published'); ?>
+					<?php echo $this->form->getLabel('performance'); ?>
 				</div>
 				<div class="controls">
-					<?php echo $this->form->getInput('published'); ?>
-				</div>
-			</div>
-			<div class="control-group">
-				<div class="control-label">
-					<?php echo $this->form->getLabel('description'); ?>
-				</div>
-				<div class="controls">
-					<?php echo $this->form->getInput('description'); ?>
+					<?php echo $this->form->getInput('performance'); ?>
 				</div>
 			</div>
 			<div class="control-group">
@@ -78,7 +70,7 @@ JHtml::_('behavior.formvalidation');
 				</div>
 			</div>
 		</div>
-	<?php echo $this->form->getInput('projectround_id'); ?>
+	<?php echo $this->form->getInput('event_id'); ?>
 	<?php echo $this->form->getInput('id'); ?>
 	<input type="hidden" name="task" value="" />
 	<?php echo JHtml::_('form.token'); ?>

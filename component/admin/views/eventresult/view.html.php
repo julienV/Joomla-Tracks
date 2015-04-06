@@ -9,13 +9,13 @@
 defined('_JEXEC') or die();
 
 /**
- * HTML View class for Tracks event edit
+ * HTML View class for Tracks eventresult edit
  *
  * @package     Tracks
  * @subpackage  Admin
  * @since       3.0
  */
-class TracksViewEvent extends TrackslibViewAdmin
+class TracksViewEventresult extends TrackslibViewAdmin
 {
 	/**
 	 * @var  boolean
@@ -61,7 +61,7 @@ class TracksViewEvent extends TrackslibViewAdmin
 			$subTitle = ' <small>' . JText::_('COM_TRACKS_EDIT') . '</small>';
 		}
 
-		return JText::_('COM_TRACKS_PAGETITLE_EDIT_EVENT') . $subTitle;
+		return JText::_('COM_TRACKS_PAGETITLE_EDIT_EVENTRESULT') . $subTitle;
 	}
 
 	/**
@@ -73,10 +73,10 @@ class TracksViewEvent extends TrackslibViewAdmin
 	{
 		$group = new RToolbarButtonGroup;
 
-		$save = RToolbarBuilder::createSaveButton('event.apply');
-		$saveAndClose = RToolbarBuilder::createSaveAndCloseButton('event.save');
-		$saveAndNew = RToolbarBuilder::createSaveAndNewButton('event.save2new');
-		$save2Copy = RToolbarBuilder::createSaveAsCopyButton('event.save2copy');
+		$save = RToolbarBuilder::createSaveButton('eventresult.apply');
+		$saveAndClose = RToolbarBuilder::createSaveAndCloseButton('eventresult.save');
+		$saveAndNew = RToolbarBuilder::createSaveAndNewButton('eventresult.save2new');
+		$save2Copy = RToolbarBuilder::createSaveAsCopyButton('eventresult.save2copy');
 
 		$group->addButton($save)
 			->addButton($saveAndClose)
@@ -85,11 +85,11 @@ class TracksViewEvent extends TrackslibViewAdmin
 
 		if (empty($this->item->id))
 		{
-			$cancel = RToolbarBuilder::createCancelButton('event.cancel');
+			$cancel = RToolbarBuilder::createCancelButton('eventresult.cancel');
 		}
 		else
 		{
-			$cancel = RToolbarBuilder::createCloseButton('event.cancel');
+			$cancel = RToolbarBuilder::createCloseButton('eventresult.cancel');
 		}
 
 		$group->addButton($cancel);

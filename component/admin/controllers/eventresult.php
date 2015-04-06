@@ -9,13 +9,13 @@
 defined('_JEXEC') or die();
 
 /**
- * Tracks Component event Controller
+ * Tracks Component event result Controller
  *
  * @package     Tracks
  * @subpackage  Admin
  * @since       3.0
  */
-class TracksControllerEvent extends RControllerForm
+class TracksControllerEventresult extends RControllerForm
 {
 	/**
 	 * Gets the URL arguments to append to an item redirect.
@@ -29,12 +29,12 @@ class TracksControllerEvent extends RControllerForm
 	{
 		$append = parent::getRedirectToItemAppend($recordId, $urlVar);
 
-		if (!$projectround_id = $this->input->getInt('projectround_id'))
+		if (!$event_id = $this->input->getInt('event_id'))
 		{
 			$fromForm = $this->input->get('jform', null, 'array');
-			$projectround_id = $fromForm['projectround_id'];
+			$event_id = $fromForm['event_id'];
 		}
 
-		return $append . '&projectround_id=' . $projectround_id;
+		return $append . '&event_id=' . $event_id;
 	}
 }

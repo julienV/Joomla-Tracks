@@ -187,7 +187,7 @@ CREATE TABLE IF NOT EXISTS `#__tracks_projects_teams` (
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
-CREATE TABLE IF NOT EXISTS `#__tracks_rounds_results` (
+CREATE TABLE IF NOT EXISTS `#__tracks_events_results` (
   `id` int(11) NOT NULL auto_increment,
   `individual_id` int(11) NOT NULL,
   `team_id` int(11) NOT NULL,
