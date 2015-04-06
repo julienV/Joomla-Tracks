@@ -46,8 +46,8 @@
 		<field
 			name="comment"
 			type="editor"
-			label="COM_TRACKS_SUBROUND_COMMENT"
-			description="COM_TRACKS_SUBROUND_COMMENT_DESC"
+			label="COM_TRACKS_COMMENT"
+			description="COM_TRACKS_RESULT_COMMENT_DESC"
 			filter="JComponentHelper::filterText" buttons="true"
 			/>
 

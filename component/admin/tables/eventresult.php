@@ -23,7 +23,7 @@ class TracksTableEventresult extends RTable
 	 * @var string
 	 * @since 0.9.1
 	 */
-	protected $_tableName = '__tracks_events_results';
+	protected $_tableName = 'tracks_events_results';
 
 	/**
 	 * Field name to publish/unpublish/trash table registers. Ex: state
