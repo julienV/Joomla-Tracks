@@ -43,4 +43,49 @@ class TracksModelEventresult extends RModelAdmin
 
 		return $item;
 	}
+
+	/**
+	 * Update performance
+	 *
+	 * @param   int     $id        result id
+	 * @param   string  $property  property to update
+	 * @param   string  $val       value
+	 *
+	 * @return bool
+	 */
+	public function update($id, $property, $val)
+	{
+		switch ($property)
+		{
+			case 'rank':
+				$val = (int) $val;
+				break;
+
+			case 'performance':
+				break;
+
+			case 'bonuspoints':
+				$property = 'bonus_points';
+				break;
+
+			default:
+				throw new RuntimeException('Unknown property');
+		}
+
+		$table = $this->getTable();
+
+		if (!$table->load($id))
+		{
+			throw new RuntimeException('Result not found');
+		}
+
+		$table->{$property} = $val;
+
+		if (!$table->store())
+		{
+			throw new RuntimeException('Update Result table failed');
+		}
+
+		return true;
+	}
 }

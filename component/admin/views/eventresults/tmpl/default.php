@@ -19,6 +19,8 @@ $user = JFactory::getUser();
 $userId = $user->id;
 $search = $this->state->get('filter.search');
 
+RHelperAsset::load('eventresults.js');
+RHelperAsset::load('tracksbackend.css');
 ?>
 <script type="text/javascript">
 	Joomla.submitbutton = function (pressbutton)
@@ -42,7 +44,7 @@ $search = $this->state->get('filter.search');
 		form.submit();
 	}
 </script>
-<form action="index.php?option=com_tracks&view=eventresults&event_id=<?php echo $this->state->get('event_id'); ?>" class="admin" id="adminForm" method="post" name="adminForm">
+<form action="index.php?option=com_tracks&view=eventresults&event_id=<?php echo $this->state->get('event_id'); ?>" class="admin eventresults" id="adminForm" method="post" name="adminForm">
 	<?php
 	echo RLayoutHelper::render(
 		'searchtools.default',
@@ -120,14 +122,14 @@ $search = $this->state->get('filter.search');
 					<td>
 						<?php echo $row->team; ?>
 					</td>
-					<td>
-						<?php echo $row->performance; ?>
+					<td class="ajaxupdate hasTooltip" object="performance" title="<?php echo RHtml::tooltipText(JText::_('COM_TRACKS_RESULTS_AJAXUPDATE_TIP')); ?>">
+						<div><?php echo $row->performance; ?></div>
 					</td>
-					<td>
-						<?php echo $row->rank; ?>
+					<td class="ajaxupdate hasTooltip" object="rank" title="<?php echo RHtml::tooltipText(JText::_('COM_TRACKS_RESULTS_AJAXUPDATE_TIP')); ?>">
+						<div><?php echo $row->rank; ?></div>
 					</td>
-					<td>
-						<?php echo $row->bonus_points; ?>
+					<td class="ajaxupdate hasTooltip" object="bonuspoints" title="<?php echo RHtml::tooltipText(JText::_('COM_TRACKS_RESULTS_AJAXUPDATE_TIP')); ?>">
+						<div><?php echo $row->bonus_points; ?></div>
 					</td>
 				</tr>
 			<?php endforeach; ?>
