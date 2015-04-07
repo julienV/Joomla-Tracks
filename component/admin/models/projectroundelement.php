@@ -1,148 +1,146 @@
 <?php
 /**
-* @version    $Id$ 
-* @package    JoomlaTracks
-* @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
-* @license		GNU/GPL, see LICENSE.php
-* Joomla Tracks is free software. This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-* See COPYRIGHT.php for copyright notices and details.
-*/
+ * @package     Tracks
+ * @subpackage  Admin
+ * @copyright   Tracks (C) 2008-2015 Julien Vonthron. All rights reserved.
+ * @license     GNU General Public License version 2 or later
+ */
 
-// no direct access
-defined('_JEXEC') or die('Restricted access');
-
-jimport( 'joomla.application.component.helper');
-jimport( 'joomla.application.component.model');
+defined('_JEXEC') or die();
 
 /**
- * Joomla Tracks Component ProjectroundElement Model
+ * Tracks Component projects Model
  *
- * @author Julien Vonthron <julien.vonthron@gmail.com>
- * @package   Tracks
- * @since 0.2
+ * @package     Tracks
+ * @subpackage  Admin
+ * @since       3.0
  */
-class TracksModelProjectroundElement extends JModel
+class TracksModelProjectroundelement extends TrackslibModelList
 {
-  /**
-   * rounds
-   *
-   * @var array
-   */
-  var $_list = null;
+	/**
+	 * Name of the filter form to load
+	 *
+	 * @var  string
+	 */
+	protected $filterFormName = 'filter_projectroundelement';
 
-  var $_page = null;
+	/**
+	 * Limitstart field used by the pagination
+	 *
+	 * @var  string
+	 */
+	protected $limitField = 'projectroundelement_limit';
 
-  /**
-   * Method to get rounds
-   *
-   * @since 1.5
-   */
-  function getList()
-  {
-    $mainframe = JFactory::getApplication();
-$option = JRequest::getCmd('option');
+	/**
+	 * Limitstart field used by the pagination
+	 *
+	 * @var  string
+	 */
+	protected $limitstartField = 'auto';
 
-    if (!empty($this->_list)) {
-      return $this->_list;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param   array  $config  Configs
+	 *
+	 * @see     JController
+	 */
+	public function __construct($config = array())
+	{
+		if (empty($config['filter_fields']))
+		{
+			$config['filter_fields'] = array(
+				'name', 'r.name',
+				'p.name',
+				'start_date', 'obj.start_date',
+				'ordering', 'obj.ordering',
+			);
+		}
 
-    // Initialize variables
-    $db   = $this->getDBO();
-    $filter = null;
+		parent::__construct($config);
+	}
 
-    // Get some variables from the request
-    $projectid      = JRequest::getVar( 'projectid', -1, '', 'int' );
-    $competitionid = $mainframe->getUserStateFromRequest('projectroundelement.competitionid',  'competitionid', -1, 'int');
-    $seasonid = $mainframe->getUserStateFromRequest('projectroundelement.seasonid',  'seasonid', -1, 'int');
-    $redirect     = $projectid;
-    $option       = JRequest::getCmd( 'option' );
-    $filter_order   = $mainframe->getUserStateFromRequest('projectroundelement.filter_order',    'filter_order',   '', 'cmd');
-    $filter_order_Dir = $mainframe->getUserStateFromRequest('projectroundelement.filter_order_Dir',  'filter_order_Dir', '', 'word');
-    $filter_state   = $mainframe->getUserStateFromRequest('projectroundelement.filter_state',    'filter_state',   '', 'word');
-    $filter_competitionid = $mainframe->getUserStateFromRequest('projectroundelement.filter_competitionid',  'filter_competitionid', -1, 'int');
-    $limit        = $mainframe->getUserStateFromRequest('global.list.limit',          'limit', $mainframe->getCfg('list_limit'), 'int');
-    $limitstart     = $mainframe->getUserStateFromRequest('projectroundelement.limitstart',      'limitstart',   0,  'int');
-    $search       = $mainframe->getUserStateFromRequest('projectroundelement.search',        'search',     '', 'string');
-    $search       = JString::strtolower($search);
+	/**
+	 * Method to get a store id based on model configuration state.
+	 *
+	 * @param   string  $id  A prefix for the store id.
+	 *
+	 * @return  string       A store id.
+	 */
+	protected function getStoreId($id = '')
+	{
+		// Compile the store id.
+		$id .= ':' . $this->getState('filter.search');
+		$id .= ':' . $this->getState('filter.published');
 
-    $where[] = "pr.published != 0";
+		return parent::getStoreId($id);
+	}
 
-    if (!$filter_order) {
-      $filter_order = 'p.name, r.name';
-    }
-    $order = ' ORDER BY '. $filter_order .' '. $filter_order_Dir .', p.ordering';
-    $all = 1;
+	/**
+	 * Build an SQL query to load the list data.
+	 *
+	 * @return  object  Query object
+	 */
+	protected function getListQuery()
+	{
+		// Create a new query object.
+		$db    = $this->_db;
+		$query = $db->getQuery(true);
 
-    /*
-     * Add the filter specific information to the where clause
-     */
-    // Section filter
-    if ($projectid > 0) {
-      $where[] = 'pr.project_id = '.(int) $projectid;
-    }
-    if ($competitionid > 0) {
-      $where[] = 'p.competition_id = '.$db->Quote($competitionid);
-    }
-    if ($seasonid > 0) {
-      $where[] = 'p.season_id = '.$db->Quote($seasonid);
-    }
+		// Select the required fields from the table.
+		$query->select(
+			$this->getState(
+				'list.select',
+				array(
+					'obj.*',
+					'r.name as name',
+					'p.name as project',
+				)
+			)
+		);
+		$query->from($db->qn('#__tracks_projects_rounds', 'obj'));
+		$query->join('inner', '#__tracks_rounds AS r on r.id = obj.round_id');
+		$query->join('inner', '#__tracks_projects AS p on p.id = obj.project_id');
 
-    // Only published projects
-    $where[] = 'p.published = 1';
+		// Filter: like / search
+		$search = $this->getState('filter.search', '');
 
-    // Keyword filter
-    if ($search) {
-      $where[] = 'LOWER( r.name ) LIKE '.$db->Quote( '%'.$db->getEscaped( $search, true ).'%', false );
-    }
+		if (!empty($search))
+		{
+			if (stripos($search, 'id:') === 0)
+			{
+				$query->where('obj.id = ' . (int) substr($search, 3));
+			}
+			else
+			{
+				$search = $db->Quote('%' . $db->escape($search, true) . '%');
 
-    // Build the where clause of the content record query
-    $where = (count($where) ? ' WHERE '.implode(' AND ', $where) : '');
+				// Match on season and competition name too
+				$or = array(
+					'obj.name LIKE ' . $search,
+					'r.name LIKE ' . $search,
+				);
+				$query->where('(' . implode(' OR ', $or) . ')');
+			}
+		}
 
-    // Get the total number of records
-    $query = 'SELECT pr.id, r.name, p.name AS project, c.name AS competition, s.name AS season' .
-        ' FROM #__tracks_projects_rounds AS pr' .
-        ' INNER JOIN #__tracks_rounds AS r ON r.id = pr.round_id' .
-        ' INNER JOIN #__tracks_projects AS p ON p.id = pr.project_id' .
-        ' INNER JOIN #__tracks_competitions AS c ON c.id = p.competition_id' .
-        ' INNER JOIN #__tracks_seasons AS s ON s.id = p.season_id' .
-        $where;
-    $db->setQuery($query);
-    $total = $db->loadResult();
+		$state = $this->getState('filter.published');
 
-    // Create the pagination object
-    jimport('joomla.html.pagination');
-    $this->_page = new JPagination($total, $limitstart, $limit);
+		if (is_numeric($state))
+		{
+			$query->where($db->quoteName('obj.published') . ' = ' . $state);
+		}
 
-    // Get the project rounds
-    $query = 'SELECT pr.id, r.name, p.name AS project, c.name AS competition, s.name AS season' .
-        ' FROM #__tracks_projects_rounds AS pr' .
-        ' INNER JOIN #__tracks_rounds AS r ON r.id = pr.round_id' .
-        ' INNER JOIN #__tracks_projects AS p ON p.id = pr.project_id' .
-        ' INNER JOIN #__tracks_competitions AS c ON c.id = p.competition_id' .
-        ' INNER JOIN #__tracks_seasons AS s ON s.id = p.season_id' .
-        $where .
-        $order;
-    $db->setQuery($query, $this->_page->limitstart, $this->_page->limit);
-    $this->_list = $db->loadObjectList();
+		$projectId = $this->getState('filter.projectId');
 
-    // If there is a db query error, throw a HTTP 500 and exit
-    if ($db->getErrorNum()) {
-      JError::raiseError( 500, $db->stderr() );
-      return false;
-    }
+		if (is_numeric($projectId))
+		{
+			$query->where($db->quoteName('obj.project_id') . ' = ' . $projectId);
+		}
 
-    return $this->_list;
-  }
+		// Add the list ordering clause.
+		$query->order($db->escape($this->getState('list.ordering', 'obj.ordering')) . ' ' . $db->escape($this->getState('list.direction', 'ASC')));
 
-  function getPagination()
-  {
-    if (is_null($this->_list) || is_null($this->_page)) {
-      $this->getList();
-    }
-    return $this->_page;
-  }
+		return $query;
+	}
 }
-?>

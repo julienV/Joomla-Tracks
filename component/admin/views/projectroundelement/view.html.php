@@ -1,35 +1,68 @@
 <?php
 /**
-* @version    $Id: view.html.php 94 2008-05-02 10:28:05Z julienv $ 
-* @package    JoomlaTracks
-* @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
-* @license		GNU/GPL, see LICENSE.php
-* Joomla Tracks is free software. This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-* See COPYRIGHT.php for copyright notices and details.
-*/
+ * @package     Tracks
+ * @subpackage  Admin
+ * @copyright   Tracks (C) 2008-2015 Julien Vonthron. All rights reserved.
+ * @license     GNU General Public License version 2 or later
+ */
 
-// Check to ensure this file is included in Joomla!
-defined('_JEXEC') or die();
-
-jimport( 'joomla.application.component.view');
+defined('_JEXEC') or die('Restricted access');
 
 /**
- * HTML View class for the Tracks component
+ * HTML View class for Tracks projectround element
  *
- * @static
- * @package		Tracks
- * @since 0.1
+ * @package     Tracks
+ * @subpackage  Admin
+ * @since       3.0
  */
-class TracksViewProjectroundElement extends JView
+class TracksViewProjectroundElement extends TrackslibViewAdmin
 {
-  function display()
+	/**
+	 * Execute and display a template script.
+	 *
+	 * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
+	 *
+	 * @return  mixed  A string if successful, otherwise a Error object.
+	 */
+	public function display($tpl = null)
+	{
+		$this->items = $this->get('Items');
+		$this->pagination = $this->get('Pagination');
+		$this->filterForm = $this->get('Form');
+		$this->activeFilters = $this->get('ActiveFilters');
+		$this->state = $this->get('State');
+		$this->function = JFactory::getApplication()->input->getCmd('function', 'jSelectProjectround');
+
+		parent::display($tpl);
+	}
+
+	/**
+	 * Get the page title
+	 *
+	 * @return  string  The title to display
+	 *
+	 * @since   0.9.1
+	 */
+	public function getTitle()
+	{
+		return JText::_('COM_TRACKS_PROJECTROUNDS');
+	}
+
+	/**
+	 * Get the tool-bar to render.
+	 *
+	 * @return  RToolbar
+	 */
+	public function getToolbar()
+	{
+		return false;
+	}
+
+  function _display()
   {
     $mainframe = JFactory::getApplication();
 $option = JRequest::getCmd('option');
-    
+
     // Initialize variables
     $db     = JFactory::getDBO();
 
@@ -42,13 +75,13 @@ $option = JRequest::getCmd('option');
     $document->addStyleSheet("templates/$template/css/general.css");
 
     $limitstart = JRequest::getVar('limitstart', '0', '', 'int');
-    
+
     $lists = $this->_getLists();
 
     $rows = $this->get('List');
     $page = $this->get('Pagination');
     JHTML::_('behavior.tooltip');
-    
+
     $function = JRequest::getCmd('function', 'jSelectBook');
     ?>
     <form action="index.php?option=com_tracks&amp;controller=projectround&amp;task=element&amp;tmpl=component" method="post" name="adminForm" id="adminForm">
@@ -177,17 +210,17 @@ $option = JRequest::getCmd('option');
     else {
     	$filter = "";
     }
-    
+
     // get list of categories for dropdown filter
     $query = 'SELECT p.id AS value, p.name AS text' .
         ' FROM #__tracks_projects AS p' .
         $filter .
         ' ORDER BY p.ordering';
-        
+
     $lists['projectid'] = TracksHelper::filterProject($query, $projectid);
     $lists['competitionid'] = TracksHelper::filterCompetition('', $competitionid);
     $lists['seasonid'] = TracksHelper::filterSeason('', $seasonid);
-    
+
     // table ordering
     $lists['order_Dir'] = $filter_order_Dir;
     $lists['order']   = $filter_order;
@@ -198,4 +231,3 @@ $option = JRequest::getCmd('option');
     return $lists;
   }
 }
-?>

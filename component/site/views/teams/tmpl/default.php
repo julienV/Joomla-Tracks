@@ -14,14 +14,9 @@
 defined('_JEXEC') or die('Restricted access'); ?>
 
 <div id="tracks">
+
 <!-- Title -->
-<table class="contentpaneopen">
-<tbody>
-<tr>
-<td class="contentheading" width="100%"><?php echo JText::_('COM_TRACKS_All_Teams' ); ?></td>
-</tr>
-</tbody>
-</table>
+<h2><?php echo JText::_('COM_TRACKS_All_Teams' ); ?></h2>
 
 <?php if ( $total = count( $this->rows ) ) : ?>
 <?php

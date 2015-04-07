@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields name="filter">
+		<field
+			name="search"
+			type="text"
+			label="COM_REDCORE_FILTER_SEARCH_DESC"
+			placeholder="JSEARCH_FILTER"
+			class="js-enter-submits"
+			/>
+		<field
+				name="projectId"
+				type="tracksproject"
+				onchange="this.form.submit();"
+				label="COM_TRACKS_FILTER_PROJECT"
+				>
+			<option value="">COM_TRACKS_FILTER_PROJECT</option>
+		</field>
+		<field
+				name="published"
+				type="rpublished"
+				onchange="this.form.submit();"
+				label="COM_TRACKS_FILTER_PUBLISHED"
+				statuses="0,1"
+				>
+			<option value="">COM_TRACKS_FILTER_PUBLISHED</option>
+		</field>
+	</fields>
+	<fields name="list">
+		<field
+			name="projectroundelement_limit"
+			type="rlimitbox"
+			class="inputbox input-mini chzn"
+			default="25"
+			label="JGLOBAL_ORDERING_LIST_LIMIT"
+			description="JGLOBAL_ORDERING_LIST_LIMIT_DESC"
+			onchange="this.form.submit();" />
+	</fields>
+</form>

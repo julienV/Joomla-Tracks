@@ -14,7 +14,7 @@
 defined('_JEXEC') or die('Restricted access'); ?>
 
 <div id="tracks">
-<h1><?php echo $this->project->name . ' ' . JText::_('COM_TRACKS_Team_Rankings' ); ?></h1>
+<h2><?php echo $this->project->name . ' ' . JText::_('COM_TRACKS_Team_Rankings' ); ?></h2>
 
 <table class="raceResults" cellspacing="0" cellpadding="0" summary="">
   <tbody>

@@ -23,18 +23,25 @@ jimport('joomla.application.component.view');
  * @package        Tracks
  * @since          0.1
  */
-class TracksViewProfile extends JViewLegacy
+class TracksViewProfile extends RViewSite
 {
-	function display($tpl = null)
+	/**
+	 * Execute and display a template script.
+	 *
+	 * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
+	 *
+	 * @return  mixed  A string if successful, otherwise a Error object.
+	 */
+	public function display($tpl = null)
 	{
+		RHelperAsset::load('tracks.css');
 		$mainframe = JFactory::getApplication();
-		$option = JRequest::getCmd('option');
-
 		$user = JFactory::getUser();
 
 		if (!$user->id)
 		{
 			print JText::_('COM_TRACKS_You_must_register_to_access_this_page');
+
 			return;
 		}
 
@@ -43,7 +50,7 @@ class TracksViewProfile extends JViewLegacy
 
 		if (!$data->id)
 		{
-			// no tracks individual associated to profile
+			// No tracks individual associated to profile
 			$params = $mainframe->getParams('com_tracks');
 			if ($params->get('user_registration'))
 			{

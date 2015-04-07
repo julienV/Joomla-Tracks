@@ -15,7 +15,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 <div id="tracks">
 <!-- Title -->
-<h1><?php echo $this->data->name; ?></h1>
+<h2><?php echo $this->data->name; ?></h2>
 	<?php if ($this->canEdit): ?>
 		<?php
 			$url = TrackslibHelperRoute::getTeamEditRoute($this->data->id);
@@ -41,7 +41,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <?php echo $this->loadTemplate('vehicle'); ?>
 
 <?php if (count($this->individuals)): ?>
-	<h2 class="team-inds"><?php echo JTExt::_('COM_TRACKS_VIEW_TEAM_INDIVIDUALS'); ?></h2>
+	<h3 class="team-inds"><?php echo JTExt::_('COM_TRACKS_VIEW_TEAM_INDIVIDUALS'); ?></h3>
 	<?php foreach ($this->individuals as $proj): ?>
 	<div class="project-inds"><span class="project-title"><?php echo current($proj)->project_name; ?></span>
 	<?php foreach ($proj as $i): ?>

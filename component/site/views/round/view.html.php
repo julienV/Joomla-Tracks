@@ -23,15 +23,20 @@ jimport( 'joomla.application.component.view');
  * @package		Tracks
  * @since 0.1
  */
-class TracksViewRound extends JViewLegacy
+class TracksViewRound extends RViewSite
 {
-	function display($tpl = null)
+	/**
+	 * Execute and display a template script.
+	 *
+	 * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
+	 *
+	 * @return  mixed  A string if successful, otherwise a Error object.
+	 */
+	public function display($tpl = null)
 	{
+		RHelperAsset::load('tracks.css');
 		$mainframe = JFactory::getApplication();
 		$params = $mainframe->getParams();
-		$option = JRequest::getCmd('option');
-
-		$dispatcher = JDispatcher::getInstance();
 
 		$round_id = JRequest::getVar( 'r', 0, '', 'int' );
 
