@@ -98,6 +98,7 @@
 
 		<!-- Create the package -->
 		<tar basedir="${dirs.tmp}/component" destfile="${dirs.release}/com_tracks-${version}.tar.gz" includeemptydirs="true" compression="gzip" />
+		<zip basedir="${dirs.tmp}/component" destfile="${dirs.release}/com_tracks-${version}.zip" includeemptydirs="true" />
 
 		<!-- admin modules -->
 		<foreach param="dirname" absparam="absname" target="zipfolder">
@@ -134,6 +135,16 @@
 			</fileset>
 		</foreach>
 
+		<!-- global zip -->
+		<zip destfile="${dirs.release}/tracks-all-unzip-first-${version}.zip">
+			<fileset dir="${dirs.release}" excludes="**.tar.gz">
+			</fileset>
+		</zip>
+		<tar destfile="${dirs.release}/tracks-all-unzip-first-${version}.tar.gz" includeemptydirs="true" compression="gzip">
+			<fileset dir="${dirs.release}" excludes="**.zip">
+			</fileset>
+		</tar>
+
 		<delete dir="${dirs.tmp}" quiet="yes" includeemptydirs="false" />
 	</target>
 
@@ -164,6 +175,7 @@
 		<mkdir dir="${dirs.release}/${myp}" />
 		<!-- Create the package -->
 		<tar basedir="${dirs.tmp}/${dirname}" destfile="${dirs.release}/${myp}/${dirname}-${version}.tar.gz" includeemptydirs="true" compression="gzip" />
+		<zip basedir="${dirs.tmp}/${dirname}" destfile="${dirs.release}/${myp}/${dirname}-${version}.zip" includeemptydirs="true" />
 	</target>
 
 	<!--
