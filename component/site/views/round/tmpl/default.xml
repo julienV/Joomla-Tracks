@@ -5,21 +5,21 @@
 	    <![CDATA[COM_TRACKS_Displays_a_round_details]]>
 	    </message>
 	</layout>
-	
+
 	<!-- Add fields to the request variables for the layout. -->
 	<fields name="request">
 		<fieldset name="request">
-			
-			<field name="r" type="sql"
-				query="SELECT id AS value, name AS r FROM #__tracks_rounds ORDER BY name ASC"
+
+			<field name="id" type="sql"
+				query="SELECT id AS value, name AS id FROM #__tracks_rounds ORDER BY name ASC"
 				default=""
 				description="COM_TRACKS_Select_a_round"
 				extension="com_tracks"
 				label="COM_TRACKS_Select_a_round"
 				required="true"
 			/>
-			
+
 		</fieldset>
 	</fields>
-	
+
 </metadata>

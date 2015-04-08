@@ -1,318 +1,303 @@
 <?php
 /**
-* @version    $Id: roundresult.php 61 2008-04-24 15:20:36Z julienv $
-* @package    JoomlaTracks
-* @copyright    Copyright (C) 2008 Julien Vonthron. All rights reserved.
-* @license      GNU/GPL, see LICENSE.php
-* Joomla Tracks is free software. This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-* See COPYRIGHT.php for copyright notices and details.
-*/
+ * @version      $Id: roundresult.php 61 2008-04-24 15:20:36Z julienv $
+ * @package      JoomlaTracks
+ * @copyright    Copyright (C) 2008 Julien Vonthron. All rights reserved.
+ * @license      GNU/GPL, see LICENSE.php
+ * Joomla Tracks is free software. This version may have been modified pursuant
+ * to the GNU General Public License, and as distributed it includes or
+ * is derivative of works licensed under the GNU General Public License or
+ * other free or open source software licenses.
+ * See COPYRIGHT.php for copyright notices and details.
+ */
 
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die();
-
-jimport('joomla.application.component.model');
-require_once( 'base.php' );
-require_once (JPATH_COMPONENT_ADMINISTRATOR. '/' .'helpers'. '/' .'imageselect.php');
 
 /**
  * Joomla Tracks Component Front page Model
  *
  * @package     Tracks
- * @since 0.1
+ * @since       0.1
  */
-class TracksModelIndividual extends baseModel
+class TracksModelIndividual extends RModelAdmin
 {
+	private $project_id = null;
+
+	public function __construct($config = array())
+	{
+		parent::__construct($config);
+
+		$this->project_id = JFactory::getApplication()->input->getInt('p', 0);
+	}
+
+
 	/**
-	 * individual id
+	 * Method to get a single record.
 	 *
-	 * @var int
+	 * @param   integer  $pk  The id of the primary key.
+	 *
+	 * @return  mixed    Object on success, false on failure.
 	 */
-	var $_id = 0;
-
-	var $_data = null;
-
-	function __construct($config = array())
+	public function getItem($pk = null)
 	{
-		parent::__construct($config = array());
-	  $id = JRequest::getInt('i');
-    $this->setId((int)$id);
-  }
+		$item = parent::getItem($pk);
 
-  /**
-   * Method to set the id
-   *
-   * @access  public
-   * @param int details ID number
-   */
-
-  function setId($id)
-  {
-    // Set new details ID and wipe data
-    $this->_id      = $id;
-  }
-
-	function getData()
-	{
-		if ( !$this->_data )
+		if ($item)
 		{
-			$query =  ' SELECT i.* '
-			. ' FROM #__tracks_individuals as i '
-			. ' WHERE i.id = ' . $this->_id;
+			$attribs['class'] = "pic";
 
-			$this->_db->setQuery( $query );
-
-			if ( $result = $this->_db->loadObjectList() )
+			if ($item->picture != '')
 			{
-				$this->_data = $result[0];
-        $attribs['class']="pic";
-
-        if ($this->_data->picture != '') {
-          $this->_data->picture = JHTML::image(JURI::root().$this->_data->picture, $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
-        } else {
-          $this->_data->picture = JHTML::image(JURI::root().'media/com_tracks/images/misc/tnnophoto.jpg', $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
-        }
-
-        if ($this->_data->picture_small != '') {
-          $this->_data->picture_small = JHTML::image(JURI::root().$this->_data->picture_small, $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
-        } else {
-          $this->_data->picture_small = JHTML::image(JURI::root().'media/com_tracks/images/misc/tnnophoto.jpg', $this->_data->first_name. ' ' . $this->_data->last_name, $attribs);
-        }
-
-        $this->_loadProjectDetails();
+				$item->picture = JHTML::image(JURI::root() . $item->picture, $item->first_name . ' ' . $item->last_name, $attribs);
 			}
-			else {
-				$this->_initData();
+			else
+			{
+				$item->picture = JHTML::image(JURI::root() . 'media/com_tracks/images/misc/tnnophoto.jpg', $item->first_name . ' ' . $item->last_name, $attribs);
 			}
+
+			if ($item->picture_small != '')
+			{
+				$item->picture_small = JHTML::image(JURI::root() . $item->picture_small, $item->first_name . ' ' . $item->last_name, $attribs);
+			}
+			else
+			{
+				$item->picture_small = JHTML::image(JURI::root() . 'media/com_tracks/images/misc/tnnophoto.jpg', $item->first_name . ' ' . $item->last_name, $attribs);
+			}
+
+			$item = $this->loadProjectDetails($item);
 		}
 
-		return $this->_data;
+		return $item;
 	}
 
 	/**
 	 * add info relevant to the individual in the current project, if a project is set
 	 *
+	 * @param   object  $item  item
+	 *
+	 * @return  mixed    Object on success, false on failure.
 	 */
-	function _loadProjectDetails()
+	protected function loadProjectDetails($item)
 	{
-		if ($this->_project_id && $this->_data)
+		if ($this->project_id && $item)
 		{
 			$query = ' SELECT t.name as team_name, pi.number, '
-			       . ' CASE WHEN CHAR_LENGTH( t.alias ) THEN CONCAT_WS( \':\', t.id, t.alias ) ELSE t.id END AS teamslug, '
-			       . ' CASE WHEN CHAR_LENGTH( p.alias ) THEN CONCAT_WS( \':\', p.id, p.alias ) ELSE t.id END AS projectslug '
-			       . ' FROM #__tracks_participants AS pi '
-			       . ' LEFT JOIN #__tracks_teams AS t ON t.id = pi.team_id '
-			       . ' LEFT JOIN #__tracks_projects AS p ON p.id = pi.project_id '
-			       . ' WHERE pi.project_id = ' . $this->_db->Quote($this->_project_id)
-			       . '   AND pi.individual_id = '. $this->_id;
-			       ;
+				. ' CASE WHEN CHAR_LENGTH( t.alias ) THEN CONCAT_WS( \':\', t.id, t.alias ) ELSE t.id END AS teamslug, '
+				. ' CASE WHEN CHAR_LENGTH( p.alias ) THEN CONCAT_WS( \':\', p.id, p.alias ) ELSE t.id END AS projectslug '
+				. ' FROM #__tracks_participants AS pi '
+				. ' LEFT JOIN #__tracks_teams AS t ON t.id = pi.team_id '
+				. ' LEFT JOIN #__tracks_projects AS p ON p.id = pi.project_id '
+				. ' WHERE pi.project_id = ' . $this->_db->Quote($this->project_id)
+				. '   AND pi.individual_id = ' . $item->id;
 			$this->_db->setQuery($query);
 			$res = $this->_db->loadObject();
-			$this->_data->projectdata = $res;
+			$item->projectdata = $res;
 		}
-		else {
-			$this->_data->projectdata = null;
+		else
+		{
+			$item->projectdata = null;
 		}
 
-		return $this->_data;
+		return $item;
 	}
 
-	function getRaceResults()
+	public function getRaceResults($pk = null)
 	{
+		$pk = (!empty($pk)) ? $pk : (int) $this->getState($this->getName() . '.id');
 		$app = JFactory::getApplication();
-		$params = $app->getParams( 'com_tracks' );
+		$params = $app->getParams('com_tracks');
 
-		$ind = $this->getData();
-		if (!$ind->id) return null;
-
-		$query = ' SELECT rr.rank, rr.performance, rr.bonus_points, pr.project_id, '
-           . '        r.name AS roundname, r.id as pr, '
-		       . '        srt.name AS subroundname, '
-           . '        srt.points_attribution, srt.count_points, '
-           . '        p.name AS projectname, '
-           . '        c.name AS competitionname, '
-           . '        s.name AS seasonname, '
-           . '        t.name AS teamname, '
-		       . ' CASE WHEN CHAR_LENGTH( r.alias ) THEN CONCAT_WS( \':\', pr.id, r.alias ) ELSE pr.id END AS prslug, '
-		       . ' CASE WHEN CHAR_LENGTH( r.alias ) THEN CONCAT_WS( \':\', r.id, r.alias ) ELSE r.id END AS rslug '
-		       . ' FROM #__tracks_events_results AS rr '
-		       . ' INNER JOIN #__tracks_events AS psr ON psr.id = rr.event_id '
-		       . ' INNER JOIN #__tracks_eventtypes AS srt ON srt.id = psr.type '
-		       . ' INNER JOIN #__tracks_projects_rounds AS pr ON pr.id = psr.projectround_id '
-		       . ' INNER JOIN #__tracks_rounds AS r ON r.id = pr.round_id'
-		       . ' INNER JOIN #__tracks_projects AS p ON p.id = pr.project_id'
-           . ' INNER JOIN #__tracks_seasons AS s ON s.id = p.season_id'
-           . ' INNER JOIN #__tracks_competitions AS c ON c.id = p.competition_id '
-           . ' LEFT JOIN  #__tracks_teams AS t ON t.id = rr.team_id'
-           . ' WHERE rr.individual_id = ' . $this->_db->Quote($this->_id)
-           . '   AND p.published AND pr.published AND psr.published '
-           ;
-    if ($params->get('indview_results_onlypointssubrounds', 1)) {
-    	$query .= ' AND srt.count_points = 1 ';
-    }
-
-    if ($params->get('indview_results_ordering', 1) == 0) {
-    	$query .= ' ORDER BY s.ordering DESC, c.ordering DESC, p.ordering DESC, pr.ordering ASC, psr.ordering ASC';
-    }
-    else {
-    	$query .= ' ORDER BY s.ordering ASC, c.ordering ASC, p.ordering ASC, pr.ordering ASC, psr.ordering ASC';
-    }
-
-		if (!$result = $this->_getList($query)) {
-			//echo $this->_db->getQuery();
+		if (!$pk)
+		{
+			return null;
 		}
-		return $result;
+
+		$query = $this->_db->getQuery(true);
+
+		$query->select('rr.rank, rr.performance, rr.bonus_points, pr.project_id')
+			->select('r.name AS roundname, r.id as pr')
+			->select('srt.name AS subroundname')
+			->select('srt.points_attribution, srt.count_points')
+			->select('p.name AS projectname')
+			->select('c.name AS competitionname')
+			->select('s.name AS seasonname')
+			->select('t.name AS teamname')
+			->select('CASE WHEN CHAR_LENGTH( r.alias ) THEN CONCAT_WS( \':\', pr.id, r.alias ) ELSE pr.id END AS prslug')
+			->select('CASE WHEN CHAR_LENGTH( r.alias ) THEN CONCAT_WS( \':\', r.id, r.alias ) ELSE r.id END AS rslug')
+			->from('#__tracks_events_results AS rr')
+			->join('INNER', '#__tracks_events AS psr ON psr.id = rr.event_id')
+			->join('INNER', '#__tracks_eventtypes AS srt ON srt.id = psr.type')
+			->join('INNER', '#__tracks_projects_rounds AS pr ON pr.id = psr.projectround_id')
+			->join('INNER', '#__tracks_rounds AS r ON r.id = pr.round_id')
+			->join('INNER', '#__tracks_projects AS p ON p.id = pr.project_id')
+			->join('INNER', '#__tracks_seasons AS s ON s.id = p.season_id')
+			->join('INNER', '#__tracks_competitions AS c ON c.id = p.competition_id')
+			->join('LEFT', '#__tracks_teams AS t ON t.id = rr.team_id')
+			->where('rr.individual_id = ' . $this->_db->Quote($pk))
+			->where('p.published')
+			->where('pr.published')
+			->where('psr.published');
+
+
+		if ($params->get('indview_results_onlypointssubrounds', 1))
+		{
+			$query->where('srt.count_points = 1');
+		}
+
+		if ($params->get('indview_results_ordering', 1) == 0)
+		{
+			$query->order('s.ordering DESC, c.ordering DESC, p.ordering DESC, pr.ordering ASC, psr.ordering ASC');
+		}
+		else
+		{
+			$query->order('s.ordering ASC, c.ordering ASC, p.ordering ASC, pr.ordering ASC, psr.ordering ASC');
+		}
+
+		$this->_db->setQuery($query);
+		$res = $this->_db->loadObjectList();
+
+		return $res;
 	}
 
 
-  /**
-   * Method to store the individual data
-   *
-   * @access  public
-   * @return  boolean True on success
-   * @since 1.5
-   */
-  function store($data, $picture, $picture_small)
-  {
+	/**
+	 * Method to store the individual data
+	 *
+	 * @access  public
+	 * @return  boolean True on success
+	 * @since   1.5
+	 */
+	function store($data, $picture, $picture_small)
+	{
 		// Require the base controller
-		require_once (JPATH_COMPONENT_ADMINISTRATOR. '/' .'tables'. '/' .'individual.php');
+		require_once(JPATH_COMPONENT_ADMINISTRATOR . '/' . 'tables' . '/' . 'individual.php');
 
-    $table = $this->getTable('individual');
-    $params = JComponentHelper::getParams('com_tracks');
+		$table = $this->getTable('individual');
+		$params = JComponentHelper::getParams('com_tracks');
 
-  	$user   = JFactory::getUser();
-    $username = $user->get('username');
+		$user = JFactory::getUser();
+		$username = $user->get('username');
 
-    if ($data['id'])
-    {
-    	$table->load($data['id']);
+		if ($data['id'])
+		{
+			$table->load($data['id']);
 
-    	if ($table->user_id != $user->get('id') && !$user->authorise('core.manage', 'com_tracks')) {
-    		JError::raiseError(403, JText::_('COM_TRACKS_ACCESS_NOT_ALLOWED'));
-    	}
-    }
+			if ($table->user_id != $user->get('id') && !$user->authorise('core.manage', 'com_tracks'))
+			{
+				JError::raiseError(403, JText::_('COM_TRACKS_ACCESS_NOT_ALLOWED'));
+			}
+		}
 
-    // Bind the form fields to the user table
-    if (!$table->bind($data)) {
-      $this->setError($this->_db->getErrorMsg());
-      return false;
-    }
+		// Bind the form fields to the user table
+		if (!$table->bind($data))
+		{
+			$this->setError($this->_db->getErrorMsg());
+			return false;
+		}
 
-    $targetpath = 'images'. '/' .$params->get('default_individual_images_folder', 'tracks/individuals');
+		$targetpath = 'images' . '/' . $params->get('default_individual_images_folder', 'tracks/individuals');
 
-    jimport('joomla.filesystem.file');
-    jimport('joomla.filesystem.folder');
+		jimport('joomla.filesystem.file');
+		jimport('joomla.filesystem.folder');
 
-    if ( !empty($picture['name']) )  {
+		if (!empty($picture['name']))
+		{
 
-	    $base_Dir = JPATH_SITE. '/' .$targetpath.'/';
-	    if (!JFolder::exists($base_Dir)) {
-	    	JFolder::create($base_Dir);
-	    }
+			$base_Dir = JPATH_SITE . '/' . $targetpath . '/';
+			if (!JFolder::exists($base_Dir))
+			{
+				JFolder::create($base_Dir);
+			}
 
-      //check the image
-      $check = ImageSelect::check($picture);
+			//check the image
+			$check = ImageSelect::check($picture);
 
-      if ($check === false) {
-	      $this->setError( 'IMAGE CHECK FAILED' );
-	      return false;
-      }
+			if ($check === false)
+			{
+				$this->setError('IMAGE CHECK FAILED');
+				return false;
+			}
 
-      //sanitize the image filename
-      $filename = ImageSelect::sanitize($base_Dir, $picture['name']);
-      $filepath = $base_Dir . $filename;
-      //dump($filepath);
+			//sanitize the image filename
+			$filename = ImageSelect::sanitize($base_Dir, $picture['name']);
+			$filepath = $base_Dir . $filename;
+			//dump($filepath);
 
-      if (!JFile::upload( $picture['tmp_name'], $filepath )) {
-        $this->setError( JText::_('COM_TRACKS_UPLOAD_FAILED' ) );
-        return false;
-      } else {
-        $table->picture = $targetpath. '/' .$filename;
-      }
-    } else {
-      //keep image if edited and left blank
-      unset($table->picture);
-    }//end image upload if
+			if (!JFile::upload($picture['tmp_name'], $filepath))
+			{
+				$this->setError(JText::_('COM_TRACKS_UPLOAD_FAILED'));
+				return false;
+			}
+			else
+			{
+				$table->picture = $targetpath . '/' . $filename;
+			}
+		}
+		else
+		{
+			//keep image if edited and left blank
+			unset($table->picture);
+		}//end image upload if
 
-    if ( !empty($picture_small['name']) )  {
+		if (!empty($picture_small['name']))
+		{
 
-      jimport('joomla.filesystem.file');
+			jimport('joomla.filesystem.file');
 
-      $base_Dir = JPATH_SITE. '/' .$targetpath. '/' .'small'.'/';
-      if (!JFolder::exists($base_Dir)) {
-      	JFolder::create($base_Dir);
-      }
+			$base_Dir = JPATH_SITE . '/' . $targetpath . '/' . 'small' . '/';
+			if (!JFolder::exists($base_Dir))
+			{
+				JFolder::create($base_Dir);
+			}
 
-      //check the image
-      $check = ImageSelect::check($picture_small);
+			//check the image
+			$check = ImageSelect::check($picture_small);
 
-      if ($check === false) {
-        $this->setError( 'IMAGE CHECK FAILED' );
-        return false;
-      }
+			if ($check === false)
+			{
+				$this->setError('IMAGE CHECK FAILED');
+				return false;
+			}
 
-      //sanitize the image filename
-      $filename = ImageSelect::sanitize($base_Dir, $picture_small['name']);
-      $filepath = $base_Dir . $filename;
+			//sanitize the image filename
+			$filename = ImageSelect::sanitize($base_Dir, $picture_small['name']);
+			$filepath = $base_Dir . $filename;
 
-      if (!JFile::upload( $picture_small['tmp_name'], $filepath )) {
-        $this->setError( JText::_('COM_TRACKS_UPLOAD_FAILED' ) );
-        return false;
-      } else {
-        $table->picture_small = $targetpath. '/' .'small'. '/' .$filename;
-      }
-    } else {
-      //keep image if edited and left blank
-      unset($table->picture_small);
-    }//end image upload if
+			if (!JFile::upload($picture_small['tmp_name'], $filepath))
+			{
+				$this->setError(JText::_('COM_TRACKS_UPLOAD_FAILED'));
+				return false;
+			}
+			else
+			{
+				$table->picture_small = $targetpath . '/' . 'small' . '/' . $filename;
+			}
+		}
+		else
+		{
+			//keep image if edited and left blank
+			unset($table->picture_small);
+		}//end image upload if
 
-    // Store the individual to the database
-    if (!$table->save($data)) {
-      $this->setError( $user->getError() );
-      return false;
-    }
-    $this->_id = $table->id;
+		// Store the individual to the database
+		if (!$table->save($data))
+		{
+			$this->setError($user->getError());
+			return false;
+		}
+		$this->id = $table->id;
 
-    return $this->_id;
-  }
+		return $this->id;
+	}
 
-  /**
-   * returns individual id if stored.
-   *
-   * @return int
-   */
-  function getId()
-  {
-  	return $this->_id;
-  }
-
-  function _initData()
-  {
-      $object = new stdClass();
-      $object->id               = 0;
-      $object->last_name        = "";
-      $object->first_name       = "";
-      $object->nickname         = "";
-      $object->dob              = null;
-      $object->height           = null;
-      $object->weight           = null;
-      $object->hometown         = null;
-      $object->country          = null;
-      $object->user_id          = 0;
-      $object->picture          = null;
-      $object->picture_small    = null;
-      $object->address          = null;
-      $object->postcode         = null;
-      $object->city             = null;
-      $object->state            = null;
-      $object->country_code     = null;
-      $object->description      = null;
-      $object->checked_out      = 0;
-      $object->checked_out_time = 0;
-      $this->_data          = $object;
-      return (boolean) $this->_data;
-  }
+	/**
+	 * returns individual id if stored.
+	 *
+	 * @return int
+	 */
+	public function getId()
+	{
+		return $this->getState($this->getName() . '.id');
+	}
 }

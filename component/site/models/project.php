@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: roundresult.php 43 2008-02-24 23:47:38Z julienv $ 
+* @version    $Id: roundresult.php 43 2008-02-24 23:47:38Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -24,15 +24,15 @@ require_once( 'base.php' );
  * @since 0.1
  */
 class TracksModelProject extends baseModel
-{	
+{
 	var $_rounds = null;
-	
+
 	function __construct($projectid = null)
 	{
 		parent::__construct();
-		
-		$projectid = $projectid ? $projectid : JRequest::getInt('p');
-		
+
+		$projectid = $projectid ? $projectid : JRequest::getInt('id');
+
 		if ($projectid) {
 			$this->setProjectId($projectid);
 		}
@@ -47,7 +47,7 @@ class TracksModelProject extends baseModel
 		$this->_rankingtool = null;
 		return true;
 	}
-	
+
 	/**
 	 * Gets winner of each round, indexed by projectround_id
 	 *
@@ -57,7 +57,7 @@ class TracksModelProject extends baseModel
 	function getWinners( $project_id )
 	{
 		$rounds = $this->getRounds();
-		$projectround_ids = array();	
+		$projectround_ids = array();
 		foreach ($rounds as $r) {
 			$projectround_ids[] = $r->projectround_id;
 		}
@@ -70,7 +70,7 @@ class TracksModelProject extends baseModel
 				$ranking = $rankingtool->getIndividualsRankings($pr);
 				$first = reset($ranking);
 				if ($first->best_rank) // was actually ranked (for rounds not finished, all rank can be 0)
-				{ 
+				{
 					$winners[$pr] = array();
 					foreach ($ranking as $r)
 					{
@@ -79,7 +79,7 @@ class TracksModelProject extends baseModel
 						}
 						else {
 							break;
-						}						
+						}
 					}
 				}
 				else {
@@ -123,7 +123,7 @@ class TracksModelProject extends baseModel
 				$projectround_ids[] = $r->projectround_id;
 			}
 			$winners = $this->getWinners( $projectround_ids );
-			
+
 			foreach ( $results as $k => $r )
 			{
 				if ( isset( $winners[$r->projectround_id] ) ) {

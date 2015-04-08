@@ -5,22 +5,22 @@
       <![CDATA[COM_TRACKS_Displays_a_round_result]]>
     </message>
   </layout>
-	
+
 	<!-- Add fields to the request variables for the layout. -->
 	<fields name="request" addfieldpath="administrator/components/com_tracks/models/fields">
 		<fieldset name="request">
-			
-			<field 
-				name="pr"
+
+			<field
+				name="id"
 				type="projectround"
-				label="COM_TRACKS_SELECT_A_PROJECT_ROUND" 
+				label="COM_TRACKS_SELECT_A_PROJECT_ROUND"
 				description="COM_TRACKS_SELECT_A_PROJECT_ROUND"
 				required="true"
 			/>
-			
+
 		</fieldset>
 	</fields>
-		
+
 		<!-- Add fields to the parameters object for the layout. -->
 	<fields name="params">
 		<fieldset name="basic" label="COM_TRACKS_FIELDSET_LAYOUT_OPTIONS">
@@ -32,7 +32,7 @@
 				<option value="0">JHIDE</option>
 				<option value="1">JSHOW</option>
 			</field>
-				
+
 			<field name="showflag" type="list"
 				label="COM_TRACKS_Display_country_flag"
 				description="COM_TRACKS_Display_country_flag"
@@ -40,17 +40,17 @@
         <option value="0">COM_TRACKS_No</option>
         <option value="1">COM_TRACKS_Yes</option>
 			</field>
-			
+
 			<field name="subround_order" type="radio"
-				default="0" 
+				default="0"
 				label="COM_TRACKS_Ordering_for_sub_rounds"
 				description="COM_TRACKS_Ordering_for_sub_rounds"
 			>
         <option value="0">COM_TRACKS_Ascending</option>
         <option value="1">COM_TRACKS_Descending</option>
 			</field>
-			
+
 		</fieldset>
 	</fields>
-	
+
 </metadata>

@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: teamranking.php 126 2008-06-05 21:17:18Z julienv $ 
+* @version    $Id: teamranking.php 126 2008-06-05 21:17:18Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -29,7 +29,7 @@ class TracksModelTeamRanking extends baseModel
 	 * associated project
 	 */
 	var $project = null;
-	
+
 	/**
 	 * reference to ranking class
 	 * @var unknown_type
@@ -40,13 +40,13 @@ class TracksModelTeamRanking extends baseModel
 	 * project id
 	 */
 	var $_project_id = null;
-	
+
 	function __construct($projectid = null)
 	{
 		parent::__construct();
-		
-		$projectid = $projectid ? $projectid : JRequest::getInt('p');
-		
+
+		$projectid = $projectid ? $projectid : JRequest::getInt('id');
+
 		if ($projectid) {
 			$this->setProjectId($projectid);
 		}
@@ -62,7 +62,7 @@ class TracksModelTeamRanking extends baseModel
 		$this->_rankingtool = null;
 		return true;
 	}
-         
+
 	/**
 	 * Gets the project teams ranking
 	 *

@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form
-		lessfiles="media://com_tracks/css/tracksbackend.less||media://com_tracks/css/tracksbackend.css"
-		validate="true"
-		>
+<form>
 	<fieldset name="basic_configuration"
 			  label="COM_TRACKS_INDIVIDUALS_GROUP_BASIC"
 			  description="COM_TRACKS_INDIVIDUALS_GROUP_BASIC_DESC"
@@ -10,13 +7,11 @@
 			>
 
 		<field
-			name="id"
-			type="text"
-			default="0"
-			label="JGLOBAL_FIELD_ID_LABEL"
-			description ="JGLOBAL_FIELD_ID_DESC"
-			class="readonly"
-			readonly="true"/>
+				name="id"
+				type="hidden"
+				default="0"
+				class="readonly"
+				readonly="true"/>
 
 		<field
 				name="last_name"
@@ -51,14 +46,11 @@
 
 		<field
 				name="country_code"
-				type="model"
+				type="rcountry"
 				label="COM_TRACKS_COUNTRY"
 				description="COM_TRACKS_COUNTRY"
-				model="TracksModelCountries"
-				key_field="value"
-				value_field="text"
 				>
-			<option value=""></option>
+			<option value="">JSELECT</option>
 		</field>
 
 		<field
@@ -76,7 +68,7 @@
 				class="inputbox"/>
 
 		<field
-				name="dod"
+				name="dob"
 				type="calendar"
 				label="COM_TRACKS_Date_of_birth_YYYY_MM_DD"
 				description="COM_TRACKS_Date_of_birth_YYYY_MM_DD_DESC"
@@ -89,33 +81,33 @@
 				description="COM_TRACKS_Hometown"
 				class="inputbox"/>
 
-	<field
-		name="user_id"
-		type="user"
-		class="inputbox"
-		default="0"
-		label="COM_TRACKS_User"
-		description="COM_TRACKS_User"
-		/>
+		<field
+				name="user_id"
+				type="user"
+				class="inputbox"
+				default="0"
+				label="COM_TRACKS_User"
+				description="COM_TRACKS_User"
+				/>
 
 
-	<field
-		name="picture"
-		type="media"
-		label="COM_TRACKS_INDIVIDUALPICTURE"
-		description="COM_TRACKS_INDIVIDUALPICTUREDESC"
-		class="inputbox"
-		preview="show"
-		directory="images/com_tracks/individuals/"/>
+		<field
+				name="picture"
+				type="rmedia"
+				label="COM_TRACKS_INDIVIDUALPICTURE"
+				description="COM_TRACKS_INDIVIDUALPICTUREDESC"
+				class="inputbox"
+				preview="show"
+				directory="images/com_tracks/individuals/"/>
 
-	<field
-		name="picture_small"
-		type="media"
-		label="COM_TRACKS_INDIVIDUALSMALLPICTURE"
-		description="COM_TRACKS_INDIVIDUALSMALLPICTUREDESC"
-		class="inputbox"
-		preview="show"
-		directory="images/com_tracks/individuals/"/>
+		<field
+				name="picture_small"
+				type="rmedia"
+				label="COM_TRACKS_INDIVIDUALSMALLPICTURE"
+				description="COM_TRACKS_INDIVIDUALSMALLPICTUREDESC"
+				class="inputbox"
+				preview="show"
+				directory="images/com_tracks/individuals/"/>
 
 	</fieldset>
 
@@ -169,14 +161,11 @@
 
 		<field
 				name="country"
-				type="model"
+				type="rcountry"
 				label="COM_TRACKS_INDIVIDUAL_ADDRESS_COUNTRY"
 				description="COM_TRACKS_INDIVIDUAL_ADDRESS_COUNTRY_DESC"
-				model="TracksModelCountries"
-				key_field="value"
-				value_field="text"
 				>
-			<option value=""></option>
+			<option value="">JSELECT</option>
 		</field>
 
 	</fieldset>

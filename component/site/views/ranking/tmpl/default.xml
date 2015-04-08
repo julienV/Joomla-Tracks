@@ -4,24 +4,24 @@
 		<message>
 			<![CDATA[COM_TRACKS_Standard_project_ranking_layout_tip]]>
 		</message>
-	</layout>	
-	
+	</layout>
+
 	<!-- Add fields to the request variables for the layout. -->
 	<fields name="request">
 		<fieldset name="request">
-			
-			<field name="p" type="sql"
-				query="SELECT id AS value, name AS p FROM #__tracks_projects ORDER BY name ASC"
+
+			<field name="id" type="sql"
+				query="SELECT id AS value, name AS id FROM #__tracks_projects ORDER BY name ASC"
 				default=""
 				description="COM_TRACKS_Select_a_project"
 				extension="com_tracks"
 				label="COM_TRACKS_Select_a_project"
 				required="true"
 			/>
-			
+
 		</fieldset>
 	</fields>
-		
+
 		<!-- Add fields to the parameters object for the layout. -->
 	<fields name="params">
 		<fieldset name="basic" label="COM_TRACKS_FIELDSET_LAYOUT_OPTIONS">
@@ -52,8 +52,8 @@
         <option value="0">COM_TRACKS_No</option>
         <option value="1">COM_TRACKS_Yes</option>
 			</field>
-				
+
 		</fieldset>
 	</fields>
-	
+
 </metadata>

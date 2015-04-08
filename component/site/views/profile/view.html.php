@@ -34,7 +34,6 @@ class TracksViewProfile extends RViewSite
 	 */
 	public function display($tpl = null)
 	{
-		RHelperAsset::load('tracks.css');
 		$mainframe = JFactory::getApplication();
 		$user = JFactory::getUser();
 
@@ -52,9 +51,10 @@ class TracksViewProfile extends RViewSite
 		{
 			// No tracks individual associated to profile
 			$params = $mainframe->getParams('com_tracks');
+
 			if ($params->get('user_registration'))
 			{
-				$mainframe->redirect('index.php?option=com_tracks&view=individualedit&task=add');
+				$mainframe->redirect('index.php?option=com_tracks&task=individual.add');
 			}
 			else
 			{

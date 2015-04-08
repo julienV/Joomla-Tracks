@@ -31,7 +31,7 @@ class TracksModelTeam extends baseModel
 	{
 		parent::__construct($config);
 
-		$id = JRequest::getInt('t');
+		$id = JRequest::getInt('id');
 		$project = JRequest::getInt('p');
 
 		$this->setId($id);

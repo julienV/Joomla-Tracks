@@ -5,13 +5,13 @@
         <![CDATA[COM_TRACKS_Displays_a_project_summary]]>
         </message>
     </layout>
-    
+
 		<!-- Add fields to the request variables for the layout. -->
 		<fields name="request">
 			<fieldset name="request">
-	
-				<field name="p" type="sql"
-					query="SELECT id AS value, name AS p FROM #__tracks_projects ORDER BY name ASC"
+
+				<field name="id" type="sql"
+					query="SELECT id AS value, name AS id FROM #__tracks_projects ORDER BY name ASC"
 					default=""
 					description="COM_TRACKS_Select_a_project"
 					extension="com_tracks"
@@ -20,5 +20,5 @@
 				/>
 			</fieldset>
 		</fields>
-    
+
 </metadata>

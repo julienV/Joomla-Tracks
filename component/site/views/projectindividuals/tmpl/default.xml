@@ -5,23 +5,23 @@
 			<![CDATA[COM_TRACKS_Displays_project_individuals]]>
 		</message>
 	</layout>
-	
+
 	<!-- Add fields to the request variables for the layout. -->
 	<fields name="request">
 		<fieldset name="request">
-			
-			<field name="p" type="sql"
-				query="SELECT id AS value, name AS p FROM #__tracks_projects ORDER BY name ASC"
+
+			<field name="id" type="sql"
+				query="SELECT id AS value, name AS id FROM #__tracks_projects ORDER BY name ASC"
 				default=""
 				description="COM_TRACKS_Select_a_project"
 				extension="com_tracks"
 				label="COM_TRACKS_Select_a_project"
 				required="true"
 			/>
-			
+
 		</fieldset>
 	</fields>
-		
+
 		<!-- Add fields to the parameters object for the layout. -->
 	<fields name="params">
 		<fieldset name="basic" label="COM_TRACKS_FIELDSET_LAYOUT_OPTIONS">
@@ -34,7 +34,7 @@
 				<option value="0">JHIDE</option>
 				<option value="1">JSHOW</option>
 			</field>
-				
+
 		</fieldset>
 	</fields>
 </metadata>

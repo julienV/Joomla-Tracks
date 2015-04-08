@@ -39,7 +39,7 @@ class TracksViewRoundResult extends RViewSite
 		$params = $mainframe->getParams();
 		$ordering = $params->def('subround_order', 0);
 		$ordering = ($ordering) ? 'DESC' : 'ASC';
-		$projectround_id = JRequest::getVar('pr', 0, '', 'int');
+		$projectround_id = JRequest::getVar('id', 0, '', 'int');
 
 		$model = $this->getModel();
 		$subroundresults = $model->getSubrounds($projectround_id, 0, $ordering);
@@ -48,13 +48,13 @@ class TracksViewRoundResult extends RViewSite
 		$projectparams = $model->getParams($project->id);
 
 		$breadcrumbs = $mainframe->getPathWay();
-		$breadcrumbs->addItem($round->name, 'index.php?option=com_tracks&view=roundresult&pr=' . $projectround_id);
+		$breadcrumbs->addItem($round->name, TrackslibHelperRoute::getRoundResultRoute($projectround_id));
 
 		$document = JFactory::getDocument();
 		$document->setTitle($round->name . ' - ' . $project->name);
 
 		//print_r($subroundresults);exit;
-		$this->assignRef('points_attrib', $points_attrib);
+//		$this->assignRef('points_attrib', $points_attrib);
 		$this->assignRef('results', $subroundresults);
 		$this->assignRef('round', $round);
 		$this->assignRef('project', $project);

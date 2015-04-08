@@ -1,6 +1,6 @@
 <?php
 /**
-* @version    $Id: ranking.php 126 2008-06-05 21:17:18Z julienv $ 
+* @version    $Id: ranking.php 126 2008-06-05 21:17:18Z julienv $
 * @package    JoomlaTracks
 * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
@@ -28,7 +28,7 @@ class TracksModelRanking extends baseModel
 	 * associated project
 	 */
 	var $project = null;
-	
+
 	/**
 	 * reference to ranking class
 	 * @var unknown_type
@@ -39,13 +39,13 @@ class TracksModelRanking extends baseModel
 	 * project id
 	 */
 	var $_project_id = null;
-	
+
 	function __construct($projectid = null)
 	{
 		parent::__construct();
-		
-		$projectid = $projectid ? $projectid : JRequest::getInt('p');
-		
+
+		$projectid = $projectid ? $projectid : JRequest::getInt('id');
+
 		if ($projectid) {
 			$this->setProjectId($projectid);
 		}
@@ -61,7 +61,7 @@ class TracksModelRanking extends baseModel
 		$this->_rankingtool = null;
 		return true;
 	}
-	
+
 	/**
 	 * Gets the project individuals ranking
 	 *
@@ -73,7 +73,7 @@ class TracksModelRanking extends baseModel
 		return $this->_getRankingTool()->getIndividualsRankings();
 	}
 
-    
+
 	function getIndividualRanking($project_id, $individual_id)
 	{
 		return $this->_getRankingTool()->getIndividualRanking($individual_id);

@@ -5,20 +5,20 @@
         <![CDATA[COM_TRACKS_Display_an_individual]]>
         </message>
     </layout>
-    
+
 		<!-- Add fields to the request variables for the layout. -->
 		<fields name="request">
 			<fieldset name="request">
-				
-				<field name="i" type="sql"
-					query="SELECT id AS value, CONCAT(last_name, ', ', first_name) AS i FROM #__tracks_individuals ORDER BY last_name, first_name"
+
+				<field name="id" type="sql"
+					query="SELECT id AS value, CONCAT(last_name, ', ', first_name) AS id FROM #__tracks_individuals ORDER BY last_name, first_name"
 					default=""
 					description="COM_TRACKS_Select_an_individual"
 					extension="com_tracks"
 					label="COM_TRACKS_Select_an_individual"
 					required="true"
 				/>
-				
+
 			</fieldset>
 		</fields>
 </metadata>

@@ -37,9 +37,9 @@ class TracksViewIndividual extends RViewSite
 		RHelperAsset::load('tracks.css');
 		$mainframe = JFactory::getApplication();
 
-		if ($this->getLayout() == 'form')
+		if ($this->getLayout() == 'edit')
 		{
-			$this->_displayForm($tpl);
+			$this->displayForm($tpl);
 
 			return;
 		}
@@ -50,10 +50,9 @@ class TracksViewIndividual extends RViewSite
 
 		$dispatcher = JDispatcher::getInstance();
 		JPluginHelper::importPlugin('tracks');
-
 		JPluginHelper::importPlugin('content');
 
-		$data = $this->get('Data');
+		$data = $this->get('Item');
 		$raceResults = $this->sortResultsByProject($this->get('RaceResults'));
 
 		$show_edit_link = ($user->id && $user->id == $data->user_id) || $user->authorise('core.manage', 'com_tracks');
@@ -64,7 +63,7 @@ class TracksViewIndividual extends RViewSite
 
 		$document->setTitle($data->first_name . ' ' . $data->last_name);
 
-		// allow content plugins
+		// Allow content plugins
 		$data->description = JHTML::_('content.prepare', $data->description);
 
 		$this->assignRef('data', $data);
@@ -89,72 +88,21 @@ class TracksViewIndividual extends RViewSite
 	}
 
 
-	function _displayForm($tpl)
+	protected function displayForm($tpl)
 	{
-		$mainframe = JFactory::getApplication();
-		$option = JRequest::getCmd('option');
-
-		$db = JFactory::getDBO();
-		$uri = JFactory::getURI();
 		$user = JFactory::getUser();
 
-		if (!$user->get('id'))
+		$this->form = $this->get('Form');
+		$this->item = $this->get('Item');
+
+		$this->canConfig = false;
+
+		if ($user->authorise('core.admin', 'com_tracks'))
 		{
-			$mainframe->redirect(JURI::base(), JText::_('COM_TRACKS_VIEW_INDIVIDUAL_PLEASE_LOGIN_TO_EDIT_PROFILE'), 'error');
+			$this->canConfig = true;
 		}
 
-		$profile = JModel::getInstance('profile', 'TracksModel');
-		$this->setModel($profile, true);
-
-		// Get the page/component configuration
-		$params = $mainframe->getParams();
-
-		$params->set('page_title', JText::_('COM_TRACKS_VIEW_INDIVIDUAL_TITLE'));
-		$document = JFactory::getDocument();
-		$document->setTitle($params->get('page_title'));
-
-		//get the individual
-		$object = $this->get('Data');
-		$isNew = ($object->id > 0) ? 0 : 1;
-
-		$lists = array();
-
-		// countries
-		$countries = array();
-		$countries[] = JHTML::_('select.option', '', JTEXT::_('COM_TRACKS_SELECT_COUNTRY'));
-		$countries = array_merge($countries, TrackslibHelperCountries::getCountryOptions());
-		$lists['countries'] = JHTML::_('select.genericlist', $countries, 'country_code', '', 'value', 'text', $object->country_code);
-
-		if ($user->authorise('core.manage', 'com_tracks')
-			|| ($object->user_id && ($user->id == $object->user_id))
-			|| ($isNew && $user->id)
-		)
-		{
-			$can_edit = true;
-		}
-		else
-		{
-			$can_edit = false;
-		}
-
-		if (!$can_edit)
-		{
-			JError::raiseError(403, JText::_('COM_TRACKS_ACCESS_FORBIDDEN'));
-			return;
-		}
-
-		// users list
-		$lists['users'] = TrackslibHelperTools::usersSelect('user_id', $object->user_id, 1, NULL, 'name', 0);
-
-		//editor
-		$editor = JFactory::getEditor();
-
-		$this->assignRef('editor', $editor);
-		$this->assignRef('lists', $lists);
-		$this->assignRef('object', $object);
-		$this->assignRef('params', $params);
-		$this->assignRef('user', $user);
-
+		// Display the template
 		parent::display($tpl);
 	}
 }

@@ -2,78 +2,78 @@
 <config>
 	<fieldset name="basic" label="COM_TRACKS_SETTINGS_BASIC_LABEL"
 		description="COM_TRACKS_SETTINGS_BASIC_DESC">
-		
-		<field type="radio" name="user_registration" default="0"
+
+		<field type="radio" name="user_registration" default="0" class="btn btn-group"
 			label="COM_TRACKS_Allow_users_registration" description="COM_TRACKS_Allow_user_to_create_a_tracks_profile">
 			<option value="0">COM_TRACKS_No</option>
 			<option value="1">COM_TRACKS_Yes</option>
 		</field>
-		
+
 		<field type="text" name="image_max_size" default="120"
 			label="COM_TRACKS_MAXIMAGESIZE" description="COM_TRACKS_MAXIMAGESIZEDESC" />
-			
+
 		<field type="text" name="default_individual_images_folder"
 			label="COM_TRACKS_SETTINGS_DEFAULT_IMAGE_FOLDER_INDIVIDUALS_LABEL"
 			description="COM_TRACKS_SETTINGS_DEFAULT_IMAGE_FOLDER_INDIVIDUALS_DESC"
 			default="tracks/individuals" />
-			
+
 		<field type="text" name="date_format" default="Y-m-d"
 			label="COM_TRACKS_SETTINGS_DATE_FORMAT_LABEL" description="COM_TRACKS_SETTINGS_DATE_FORMAT_DESC" />
-			
+
 	</fieldset>
 
 	<fieldset name="views" label="COM_TRACKS_SETTINGS_VIEWS_LABEL"
 		description="COM_TRACKS_SETTINGS_VIEWS_DESC">
 		<field type="spacer" default="INDIVIDUAL VIEW SETTINGS" />
-		<field type="radio" name="indview_showresults" default="1"
+		<field type="radio" name="indview_showresults" default="1" class="btn btn-group"
 			label="COM_TRACKS_SHOW_INDIVIDUAL_RESULTS" description="COM_TRACKS_SHOW_INDIVIDUAL_RESULTS_DESC">
 			<option value="0">COM_TRACKS_No</option>
 			<option value="1">COM_TRACKS_Yes</option>
 		</field>
-		<field type="radio" name="indview_results_showteam" default="1"
+		<field type="radio" name="indview_results_showteam" default="1" class="btn btn-group"
 			label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_TEAM" description="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_TEAM_DESC">
 			<option value="0">COM_TRACKS_No</option>
 			<option value="1">COM_TRACKS_Yes</option>
 		</field>
-		<field type="radio" name="indview_results_showproject" default="1"
+		<field type="radio" name="indview_results_showproject" default="1" class="btn btn-group"
 			label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_PROJECT" description="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_PROJECT_DESC">
 			<option value="0">COM_TRACKS_No</option>
 			<option value="1">COM_TRACKS_Yes</option>
 		</field>
 		<field type="radio" name="indview_results_showcompetition"
-			default="0" label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_COMPETITION"
+			default="0" label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_COMPETITION" class="btn btn-group"
 			description="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_COMPETITION_DESC">
 			<option value="0">COM_TRACKS_No</option>
 			<option value="1">COM_TRACKS_Yes</option>
 		</field>
-		<field type="radio" name="indview_results_showseason" default="0"
+		<field type="radio" name="indview_results_showseason" default="0" class="btn btn-group"
 			label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_SEASON" description="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_SEASON_DESC">
 			<option value="0">COM_TRACKS_No</option>
 			<option value="1">COM_TRACKS_Yes</option>
 		</field>
-		<field type="radio" name="indview_results_showrace" default="1"
+		<field type="radio" name="indview_results_showrace" default="1" class="btn btn-group"
 			label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_RACE" description="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_RACE_DESC">
 			<option value="0">COM_TRACKS_No</option>
 			<option value="1">COM_TRACKS_Yes</option>
 		</field>
-		<field type="radio" name="indview_results_onlypointssubrounds"
-			default="1" label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_ONLY_POINTS_SUBROUND"
-			description="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_ONLY_POINTS_SUBROUND">
+		<field type="radio" name="indview_results_onlypointssubrounds" class="btn btn-group"
+			default="1" label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_ONLY_POINTS_EVENT"
+			description="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_ONLY_POINTS_EVENT">
 			<option value="0">COM_TRACKS_No</option>
 			<option value="1">COM_TRACKS_Yes</option>
 		</field>
-		<field type="radio" name="indview_results_showperformance"
+		<field type="radio" name="indview_results_showperformance" class="btn btn-group"
 			default="1" label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_PERFORMANCE"
 			description="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_PERFORMANCE_DESC">
 			<option value="0">COM_TRACKS_No</option>
 			<option value="1">COM_TRACKS_Yes</option>
 		</field>
-		<field type="radio" name="indview_results_showrank" default="1"
+		<field type="radio" name="indview_results_showrank" default="1" class="btn btn-group"
 			label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_RANK" description="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_RANK_DESC">
 			<option value="0">COM_TRACKS_No</option>
 			<option value="1">COM_TRACKS_Yes</option>
 		</field>
-		<field type="radio" name="indview_results_points" default="1"
+		<field type="radio" name="indview_results_points" default="1" class="btn btn-group"
 			label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_POINTS" description="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_POINTS_DESC">
 			<option value="0">COM_TRACKS_No</option>
 			<option value="1">COM_TRACKS_Yes</option>
@@ -88,15 +88,15 @@
 
 
 		<field type="spacer" default="COM_TRACKS_RESULTS_VIEW_SETTINGS" />
-		<field type="radio" name="resultview_results_showrounddesc"
+		<field type="radio" name="resultview_results_showrounddesc" class="btn btn-group"
 			default="1" label="COM_TRACKS_RESULTS_VIEW_SHOW_ROUND_DESC"
 			description="COM_TRACKS_RESULTS_VIEW_SHOW_ROUND_DESC_DESC">
 			<option value="0">COM_TRACKS_No</option>
 			<option value="1">COM_TRACKS_Yes</option>
 		</field>
-		<field type="radio" name="resultview_results_showsubrounddesc"
-			default="1" label="COM_TRACKS_RESULTS_VIEW_SHOW_SUBROUND_DESC"
-			description="COM_TRACKS_RESULTS_VIEW_SHOW_SUBROUND_DESC_DESC">
+		<field type="radio" name="resultview_results_showsubrounddesc" class="btn btn-group"
+			default="1" label="COM_TRACKS_RESULTS_VIEW_SHOW_EVENT_DESC"
+			description="COM_TRACKS_RESULTS_VIEW_SHOW_EVENT_DESC_DESC">
 			<option value="0">COM_TRACKS_No</option>
 			<option value="1">COM_TRACKS_Yes</option>
 		</field>

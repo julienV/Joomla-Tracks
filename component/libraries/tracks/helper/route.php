@@ -28,7 +28,7 @@ class TrackslibHelperRoute
 		$parts = array( "option" => "com_tracks",
 		                "view"   => "roundresult" );
 		if ($id) {
-			$parts['pr'] = $id;
+			$parts['id'] = $id;
 		}
 		return self::buildUrl( $parts );
 	}
@@ -44,7 +44,7 @@ class TrackslibHelperRoute
 		$parts = array( "option" => "com_tracks",
 		                "view"   => "round" );
 		if ($id) {
-			$parts['r'] = $id;
+			$parts['id'] = $id;
 		}
 		return self::buildUrl( $parts );
 	}
@@ -54,7 +54,7 @@ class TrackslibHelperRoute
 		$parts = array( "option" => "com_tracks",
 		                "view"   => "individual" );
 		if ($id) {
-			$parts['i'] = $id;
+			$parts['id'] = $id;
 		}
 		if ($project) {
 			$parts['p'] = $project;
@@ -78,7 +78,7 @@ class TrackslibHelperRoute
 		$parts = array( "option" => "com_tracks",
 		                "view"   => "project" );
 		if ($id) {
-			$parts['p'] = $id;
+			$parts['id'] = $id;
 		}
 		return self::buildUrl( $parts );
 	}
@@ -88,7 +88,7 @@ class TrackslibHelperRoute
 		$parts = array( "option" => "com_tracks",
 		                "view"   => "team" );
 		if ($id) {
-			$parts['t'] = $id;
+			$parts['id'] = $id;
 		}
 		if ($project) {
 			$parts['p'] = $project;
@@ -125,7 +125,7 @@ class TrackslibHelperRoute
 		$parts = array( "option" => "com_tracks",
 		                "view"   => "ranking" );
 		if ($id) {
-			$parts['p'] = $id;
+			$parts['id'] = $id;
 		}
 		return self::buildUrl( $parts );
 	}
@@ -135,7 +135,7 @@ class TrackslibHelperRoute
 		$parts = array( "option" => "com_tracks",
 		                "view"   => "projectresults" );
 		if ($id) {
-			$parts['p'] = $id;
+			$parts['id'] = $id;
 		}
 		return self::buildUrl( $parts );
 	}
@@ -145,7 +145,7 @@ class TrackslibHelperRoute
 		$parts = array( "option" => "com_tracks",
 		                "view"   => "teamranking" );
 		if ($id) {
-			$parts['p'] = $id;
+			$parts['id'] = $id;
 		}
 		return self::buildUrl( $parts );
 	}
@@ -186,32 +186,32 @@ class TrackslibHelperRoute
 					switch ($query['view'])
 					{
 						case 'individual':
-							if ((int) @$item->query['i'] == (int) @$query['i']) {
+							if ((int) @$item->query['id'] == (int) @$query['id']) {
 								return $item;
 							}
 							break;
 
 						case 'ranking':
 						case 'teamranking':
-							if ((int) @$item->query['p'] == (int) @$query['p']) {
+							if ((int) @$item->query['id'] == (int) @$query['id']) {
 								return $item;
 							}
 							break;
 
 						case 'round':
-							if ((int) @$item->query['r'] == (int) @$query['r']) {
+							if ((int) @$item->query['id'] == (int) @$query['id']) {
 								return $item;
 							}
 						  break;
 
 						case 'roundresult':
-							if ((int) @$item->query['pr'] == (int) @$query['pr']) {
+							if ((int) @$item->query['id'] == (int) @$query['id']) {
 								return $item;
 							}
 						  break;
 
 						case 'team':
-							if ((int) @$item->query['t'] == (int) @$query['t']) {
+							if ((int) @$item->query['id'] == (int) @$query['id']) {
 								return $item;
 							}
 							break;

@@ -38,7 +38,7 @@ class TracksViewRound extends RViewSite
 		$mainframe = JFactory::getApplication();
 		$params = $mainframe->getParams();
 
-		$round_id = JRequest::getVar( 'r', 0, '', 'int' );
+		$round_id = $mainframe->input->getInt('id', 0);
 
 		$model = $this->getModel();
 		$round = $model->getRound( $round_id );
