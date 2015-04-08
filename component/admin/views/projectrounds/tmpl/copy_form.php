@@ -17,7 +17,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 $user 	= JFactory::getUser();
 $model = $this->getModel();
 
-FOFTemplateUtils::addCSS("media://com_tracks/css/tracksbackend.css");
+RHelperAsset::load('tracksbackend.css');
 
 JHTML::_('behavior.tooltip');
 ?>

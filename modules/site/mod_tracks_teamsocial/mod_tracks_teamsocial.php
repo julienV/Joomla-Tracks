@@ -15,15 +15,6 @@
 // No direct access
 defined('_JEXEC') or die('Restricted access');
 
-if (!defined('FOF_INCLUDED'))
-{
-	include_once JPATH_LIBRARIES.'/fof/include.php';
-	if(!defined('FOF_INCLUDED') || !class_exists('FOFForm', true))
-	{
-		throw new Exception('Your Akeeba Release System installation is broken; please re-install. Alternatively, extract the installation archive and copy the fof directory inside your site\'s libraries directory.', 500);
-	}
-}
-
 // Include the syndicate functions only once
 require_once (dirname(__FILE__). '/' .'helper.php');
 include_once (JPATH_SITE. '/' .'components'. '/' .'com_tracks'. '/' .'helpers'. '/' .'route.php');

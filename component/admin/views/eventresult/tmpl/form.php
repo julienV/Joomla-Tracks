@@ -19,7 +19,7 @@ $editor = JFactory::getEditor();
 $this->loadHelper('select');
 $this->loadHelper('filtering');
 
-FOFTemplateUtils::addCSS('media://com_tracks/css/tracksbackend.css');
+RHelperAsset::load('tracksbackend.css');
 $model = $this->getModel();
 
 $subround = $model->getSubroundInfo();
