@@ -311,7 +311,7 @@ class TrackslibHelperRoute
 
 		if ($id)
 		{
-			$parts['id'] = $id;
+			$parts['p'] = $id;
 		}
 
 		return self::buildUrl($parts);

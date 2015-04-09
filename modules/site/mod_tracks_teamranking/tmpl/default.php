@@ -48,7 +48,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
   </tbody>
 </table>
 <?php
-$link = JRoute::_( TrackslibHelperRoute::getTeamRankingRoute($project->slug) );
+$link = JRoute::_(TrackslibHelperRoute::getTeamRankingRoute($project->slug));
 ?>
 <a class="fulltablelink" href="<?php echo $link; ?>"
              title="<?php echo JText::_('MOD_TRACKS_TEAM_RANKING_View_full_table' ); ?>">

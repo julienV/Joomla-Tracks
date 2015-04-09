@@ -1,22 +1,20 @@
 <?php
 /**
-* @version    $Id: helper.php 120 2008-05-30 01:59:54Z julienv $
-* @package    JoomlaTracks
-* @subpackage TeamRankingModule
-* @copyright  Copyright (C) 2008 Julien Vonthron. All rights reserved.
-* @license    GNU/GPL, see LICENSE.php
-* Joomla Tracks is free software. This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-* See COPYRIGHT.php for copyright notices and details.
-*/
+ * @package     JoomlaTracks
+ * @subpackage  Modules.site
+ * @copyright   Copyright (C) 2008-2015 Julien Vonthron. All rights reserved.
+ * @license     GNU General Public License version 2 or later
+ */
 
-// no direct access
 defined('_JEXEC') or die('Restricted access');
 
-//require_once (JPATH_SITE. '/' .'components'. '/' .'com_tracks'. '/' .'helpers'. '/' .'route.php');
-
+/**
+ * Class modTracksTeamRanking
+ *
+ * @package     JoomlaTracks
+ * @subpackage  Modules.site
+ * @since       1.0
+ */
 class modTracksTeamRanking
 {
 	/**
@@ -24,28 +22,31 @@ class modTracksTeamRanking
 	 *
 	 * @var object
 	 */
-  var $_model = null;
+	protected $_model = null;
 
-  function _getModel($params)
-  {
-    if ( $this->_model == null )
-    {
-      require_once (JPATH_SITE. '/' .'components'. '/' .'com_tracks'. '/' .'models'. '/' .'teamranking.php');
-      $this->_model = new TracksModelTeamRanking();
-      $this->_model->setProjectId($params->get('project_id'));
-    }
-    return $this->_model;
-  }
-
-  function getList(&$params)
+	protected function _getModel($params)
 	{
-    $model = $this->_getModel($params);
+		if ($this->_model == null)
+		{
+			require_once JPATH_SITE . '/components/com_tracks/models/teamranking.php';
+			$this->_model = new TracksModelTeamRanking;
+			$this->_model->setProjectId($params->get('project_id'));
+		}
+
+		return $this->_model;
+	}
+
+	public function getList(&$params)
+	{
+		$model = $this->_getModel($params);
+
 		return $model->getTeamRankings();
 	}
 
-	function getProject(&$params)
+	public function getProject(&$params)
 	{
-	  $model = $this->_getModel($params);
-    return $model->getProject();
+		$model = $this->_getModel($params);
+
+		return $model->getProject();
 	}
 }
