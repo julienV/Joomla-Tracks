@@ -1,46 +1,43 @@
 <?php
 /**
-* @version    $Id: view.html.php 7 2008-01-30 10:37:37Z julienv $
-* @package    JoomlaTracks
-* @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
-* @license		GNU/GPL, see LICENSE.php
-* Joomla Tracks is free software. This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-* See COPYRIGHT.php for copyright notices and details.
-*/
+ * @package     Tracks
+ * @subpackage  Admin
+ * @copyright   Tracks (C) 2008-2015 Julien Vonthron. All rights reserved.
+ * @license     GNU General Public License version 2 or later
+ */
 
-// Check to ensure this file is included in Joomla!
-defined('_JEXEC') or die();
-
-jimport( 'joomla.application.component.view');
-
-require_once (JPATH_COMPONENT. '/' .'abstract'. '/' .'tracksview.php');
+defined('_JEXEC') or die('Restricted access');
 
 /**
- * HTML View class for the Tracks component
+ * HTML View class for Tracks about
  *
- * @static
- * @package		Tracks
- * @since 0.1
+ * @package     Tracks
+ * @subpackage  Admin
+ * @since       3.0
  */
-class TracksViewAbout extends TracksView
+class TracksViewAbout extends TrackslibViewAdmin
 {
-	function display($tpl = null)
+	/**
+	 * Get the page title
+	 *
+	 * @return  string  The title to display
+	 *
+	 * @since   0.9.1
+	 */
+	public function getTitle()
 	{
-		$mainframe = JFactory::getApplication();
-		$option = JRequest::getCmd('option');
+		return JText::_('COM_TRACKS_About_Tracks');
+	}
 
-        // Set toolbar items for the page
-        JToolBarHelper::title(   JText::_('COM_TRACKS_About_Tracks' ), 'help_header' );
-        JToolBarHelper::back();
+	/**
+	 * Get the tool-bar to render.
+	 *
+	 * @return  RToolbar
+	 */
+	public function getToolbar()
+	{
+		$toolbar = new RToolbar;
 
-        $db     = JFactory::getDBO();
-        $uri    = JFactory::getURI();
-        $user   = JFactory::getUser();
-
-        parent::display($tpl);
+		return $toolbar;
 	}
 }
-?>

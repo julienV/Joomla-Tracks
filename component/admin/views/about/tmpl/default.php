@@ -21,7 +21,6 @@ defined('_JEXEC') or die('Restricted access'); ?>
 		  <img src="<?php echo JURI::root() ?>media/com_tracks/images/tracks_logo_250.png"/>
 		</td>
 		<td>
-      <h2><?php echo JText::_('COM_TRACKS_About_Tracks'); ?></h2>
 		  <p><?php echo JText::_('COM_TRACKS_LICENSE'); ?></p>
 			<p>
 			Please visit our <a href="http://tracks.jlv-solutions.com/forum" target="_blank">forum for support</a>.
@@ -43,6 +42,4 @@ defined('_JEXEC') or die('Restricted access'); ?>
 		</td>
 	</tr>
 </table>
-
-Quickadd feature provided thanks to <a href="http://digitarald.de/project/autocompleter">digitarald.de</a>
 </div>
