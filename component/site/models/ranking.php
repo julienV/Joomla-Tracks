@@ -39,7 +39,7 @@ class TracksModelRanking extends baseModel
 	{
 		parent::__construct();
 
-		$this->setProjectId(JFactory::getApplication()->input->getInt('id', 0));
+		$this->setProjectId(JFactory::getApplication()->input->getInt('p', 0));
 	}
 
 	public function setProjectId($projectid)

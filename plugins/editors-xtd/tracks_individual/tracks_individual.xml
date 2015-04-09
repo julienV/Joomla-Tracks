@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="1.7" type="plugin" group="editors-xtd"
+<extension version="2.5" type="plugin" group="editors-xtd"
 	method="upgrade">
 	<name>PLG_TRACKS_INDIVIDUAL_EDITORXTD</name>
 	<author>Julien Vonthron</author>

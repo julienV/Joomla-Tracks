@@ -1,22 +1,20 @@
 <?php
 /**
-* @version    $Id: tracks.php 109 2008-05-24 11:05:07Z julienv $
-* @package    JoomlaTracks
-* @subpackage RankingModule
-* @copyright  Copyright (C) 2008 Julien Vonthron. All rights reserved.
-* @license    GNU/GPL, see LICENSE.php
-* Joomla Tracks is free software. This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-* See COPYRIGHT.php for copyright notices and details.
-*/
+ * @package     JoomlaTracks
+ * @subpackage  Modules.site
+ * @copyright   Copyright (C) 2008-2015 Julien Vonthron. All rights reserved.
+ * @license     GNU General Public License version 2 or later
+ */
 
-// no direct access
 defined('_JEXEC') or die('Restricted access');
 
-//require_once (JPATH_SITE. '/' .'components'. '/' .'com_tracks'. '/' .'helpers'. '/' .'route.php');
-
+/**
+ * Class modTracksRanking
+ *
+ * @package     JoomlaTracks
+ * @subpackage  Modules.site
+ * @since       1.0
+ */
 class modTracksRanking
 {
 	/**
@@ -24,28 +22,52 @@ class modTracksRanking
 	 *
 	 * @var object
 	 */
-  var $_model = null;
+	var $_model = null;
 
-  function _getModel($params)
-  {
-    if ( $this->_model == null )
-    {
-      require_once (JPATH_SITE. '/' .'components'. '/' .'com_tracks'. '/' .'models'. '/' .'ranking.php');
-      $this->_model = new TracksModelRanking();
-      $this->_model->setProjectId($params->get('project_id'));
-    }
-    return $this->_model;
-  }
-
-  function getList(&$params)
+	/**
+	 * Get model
+	 *
+	 * @param   array  $params  params
+	 *
+	 * @return object|TracksModelRanking
+	 */
+	protected function _getModel($params)
 	{
-    $model = $this->_getModel($params);
+		if ($this->_model == null)
+		{
+			require_once JPATH_SITE . '/components/com_tracks/models/ranking.php';
+			$this->_model = new TracksModelRanking;
+			$this->_model->setProjectId($params->get('project_id'));
+		}
+
+		return $this->_model;
+	}
+
+	/**
+	 * Get data
+	 *
+	 * @param   object  &$params  params
+	 *
+	 * @return array
+	 */
+	public function getList(&$params)
+	{
+		$model = $this->_getModel($params);
+
 		return $model->getRankings();
 	}
 
-	function getProject(&$params)
+	/**
+	 * Get project
+	 *
+	 * @param   object  &$params  params
+	 *
+	 * @return object
+	 */
+	public function getProject(&$params)
 	{
-	  $model = $this->_getModel($params);
-    return $model->getProject();
+		$model = $this->_getModel($params);
+
+		return $model->getProject();
 	}
 }

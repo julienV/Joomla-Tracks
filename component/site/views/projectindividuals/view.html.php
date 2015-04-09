@@ -37,7 +37,7 @@ class TracksViewProjectindividuals extends RViewSite
 		RHelperAsset::load('tracks.css');
 		$mainframe = JFactory::getApplication();
 
-		$project_id = $mainframe->input->getInt('id', 0);
+		$project_id = $mainframe->input->getInt('p', 0);
 		$params = $mainframe->getParams();
 
 		$model = $this->getModel();

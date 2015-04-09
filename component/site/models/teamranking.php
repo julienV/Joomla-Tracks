@@ -29,7 +29,7 @@ class TracksModelTeamRanking extends baseModel
 	{
 		parent::__construct();
 
-		$projectid = $projectid ? $projectid : JRequest::getInt('id');
+		$projectid = $projectid ? $projectid : JRequest::getInt('p');
 
 		if ($projectid) {
 			$this->setProjectId($projectid);

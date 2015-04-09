@@ -46,7 +46,7 @@ class TracksModelProjectresults extends baseModel
 	{
 		parent::__construct();
 
-		$projectid = $projectid ? $projectid : JRequest::getInt('id');
+		$projectid = $projectid ? $projectid : JFactory::getApplication()->input->getInt('p', 0);
 
 		if ($projectid) {
 			$this->setProjectId($projectid);

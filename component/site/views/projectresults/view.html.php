@@ -37,7 +37,7 @@ class TracksViewProjectresults extends RViewSite
 		RHelperAsset::load('tracks.css');
 		$mainframe = JFactory::getApplication();
 
-		$project_id = JRequest::getVar('p', 0, '', 'int');
+		$project_id = $mainframe->input->getInt('p', 0);
 
 		$data = $this->get('data');
 		$rounds = $this->get('rounds');

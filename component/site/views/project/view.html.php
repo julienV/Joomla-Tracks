@@ -37,9 +37,11 @@ class TracksViewProject extends RViewSite
 		RHelperAsset::load('tracks.css');
 		$mainframe = JFactory::getApplication();
 
+		$projectId = JFactory::getApplication()->input->getInt('p', 0);
+
 		$model = $this->getModel();
-		$results = $model->getResults(JRequest::getVar('id', 0, '', 'int'));
-		$project = $model->getProject(JRequest::getVar('id', 0, '', 'int'));
+		$results = $model->getResults($projectId);
+		$project = $model->getProject($projectId);
 		$params = $model->getParams();
 
 		$document = JFactory::getDocument();
@@ -55,5 +57,3 @@ class TracksViewProject extends RViewSite
 		parent::display($tpl);
 	}
 }
-
-?>

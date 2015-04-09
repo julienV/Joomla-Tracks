@@ -179,7 +179,7 @@ class TrackslibHelperRoute
 
 		if ($id)
 		{
-			$parts['id'] = $id;
+			$parts['p'] = $id;
 		}
 
 		return self::buildUrl($parts);
@@ -216,7 +216,7 @@ class TrackslibHelperRoute
 	/**
 	 * Get edit team route
 	 *
-	 * @param   int  $id       team id
+	 * @param   int  $id  team id
 	 *
 	 * @return string
 	 */
@@ -249,7 +249,7 @@ class TrackslibHelperRoute
 
 		if ($id)
 		{
-			$parts['id'] = $id;
+			$parts['p'] = $id;
 		}
 
 		return self::buildUrl($parts);
@@ -271,7 +271,7 @@ class TrackslibHelperRoute
 
 		if ($id)
 		{
-			$parts['id'] = $id;
+			$parts['p'] = $id;
 		}
 
 		return self::buildUrl($parts);
@@ -289,7 +289,7 @@ class TrackslibHelperRoute
 		$parts = array(
 			"option" => "com_tracks",
 			"view"   => "projectresults",
-			"id" => $id
+			"p" => $id
 		);
 
 		return self::buildUrl($parts);
@@ -369,7 +369,7 @@ class TrackslibHelperRoute
 
 						case 'ranking':
 						case 'teamranking':
-							if ((int) @$item->query['id'] == (int) @$query['id'])
+							if ((int) @$item->query['p'] == (int) @$query['p'])
 							{
 								return $item;
 							}
