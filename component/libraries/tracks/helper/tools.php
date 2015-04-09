@@ -291,8 +291,13 @@ abstract class TrackslibHelperTools
 		return $links;
 	}
 
+	/**
+	 * echo footer
+	 *
+	 * @return void
+	 */
 	public static function footer()
 	{
-		echo 'Tracks powered by <a href="http://www.jlv-solutions.com">JLV Solutions</a>';
+		echo 'Tracks powered by <a href="http://www.jlv-solutions.com" target="_blank">JLV Solutions</a>';
 	}
 }

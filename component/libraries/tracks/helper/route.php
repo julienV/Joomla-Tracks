@@ -217,22 +217,18 @@ class TrackslibHelperRoute
 	 * Get edit team route
 	 *
 	 * @param   int  $id       team id
-	 * @param   int  $project  the project id, if being edited from a project
 	 *
 	 * @return string
 	 */
-	public static function getTeamEditRoute($id = 0, $project = 0)
+	public static function getTeamEditRoute($id = 0)
 	{
-		$parts = array( "option" => "com_tracks",
-			"view"   => "teamedit",
-			"task" => "edit");
+		$parts = array(
+			"option" => "com_tracks",
+			"view"   => "team",
+			"task" => "team.edit"
+		);
 
 		$parts['id'] = $id;
-
-		if ($project)
-		{
-			$parts['project_id'] = $project;
-		}
 
 		return self::buildUrl($parts);
 	}

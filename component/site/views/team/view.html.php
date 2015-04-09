@@ -34,17 +34,24 @@ class TracksViewTeam extends RViewSite
 	 */
 	public function display($tpl = null)
 	{
+		if ($this->getLayout() == 'edit')
+		{
+			$this->displayForm($tpl);
+
+			return;
+		}
+
 		RHelperAsset::load('tracks.css');
 		$mainframe = JFactory::getApplication();
 
-		$id = JRequest::getVar('t', 0, '', 'int');
+		$id = JRequest::getVar('id', 0, '', 'int');
 
 		$model = $this->getModel();
-		$data = $model->getData($id);
+		$data = $model->getItem($id);
 
 		$individuals = $this->get('Individuals');
 
-		// parse description with content plugins
+		// Parse description with content plugins
 		$data->description = JHTML::_('content.prepare', $data->description);
 
 		$breadcrumbs = $mainframe->getPathWay();
@@ -56,9 +63,69 @@ class TracksViewTeam extends RViewSite
 		$user = JFactory::getUser();
 		$this->canEdit = $user->get('id') && ($user->authorise('core.manage', 'com_tracks') || $user->get('id') == $data->admin_id);
 
+		if ($data->picture)
+		{
+			$attribs['class'] = "pic";
+			$data->picture = JHTML::image(JURI::root() . $data->picture, $data->name, $attribs);
+		}
+
 		$this->data = $data;
 		$this->individuals = $individuals;
 
+		parent::display($tpl);
+	}
+
+	protected function displayForm($tpl)
+	{
+		RHelperAsset::load('tracks.css');
+
+		$user = JFactory::getUser();
+		$model = $this->getModel();
+
+		$this->form = $this->get('Form');
+		$this->item = $this->get('Item');
+		$this->user = $user;
+		$this->canEdit = $user->get('id') && ($user->authorise('core.manage', 'com_tracks') || $user->get('id') == $this->item->admin_id);
+
+		if (!$user->id || !$this->canEdit)
+		{
+			JFactory::getApplication()->redirect('index.php', 'not allowed !');
+		}
+
+		$attribs['class'] = "pic";
+
+		if ($this->item->picture)
+		{
+			$this->item->picture = JHTML::image(JURI::root() . $this->item->picture, $this->item->name, $attribs);
+		}
+		else
+		{
+			$this->item->picture = JHTML::image(JURI::root() . 'media/com_tracks/images/misc/tnnophoto.jpg', $this->item->name, $attribs);
+		}
+
+		if ($this->item->picture_small)
+		{
+			$this->item->picture_small = JHTML::image(JURI::root() . $this->item->picture_small, $this->item->name, $attribs);
+		}
+		else
+		{
+			$this->item->picture_small = JHTML::image(JURI::root() . 'media/com_tracks/images/misc/tnnophoto.jpg', $this->item->name, $attribs);
+		}
+
+		if ($this->item->vehicle_picture)
+		{
+			$this->item->vehicle_picture = JHTML::image(JURI::root() . $this->item->vehicle_picture, $this->item->vehicle_picture, $attribs);
+		}
+		else
+		{
+			$this->item->vehicle_picture = JHTML::image(JURI::root() . 'media/com_tracks/images/misc/tnnophoto.jpg', '', $attribs);
+		}
+
+		$this->title = $this->item->id ?
+			JText::_('COM_TRACKS_PAGETITLE_EDIT_TEAM') :
+			JText::_('COM_TRACKS_PAGETITLE_CREATE_TEAM');
+
+		// Display the template
 		parent::display($tpl);
 	}
 }

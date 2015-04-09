@@ -17,6 +17,11 @@
 			description="COM_TRACKS_SETTINGS_DEFAULT_IMAGE_FOLDER_INDIVIDUALS_DESC"
 			default="tracks/individuals" />
 
+		<field type="text" name="default_team_images_folder"
+			   label="COM_TRACKS_SETTINGS_DEFAULT_IMAGE_FOLDER_TEAMS_LABEL"
+			   description="COM_TRACKS_SETTINGS_DEFAULT_IMAGE_FOLDER_TEAMS_DESC"
+			   default="tracks/teams" />
+
 		<field type="text" name="date_format" default="Y-m-d"
 			label="COM_TRACKS_SETTINGS_DATE_FORMAT_LABEL" description="COM_TRACKS_SETTINGS_DATE_FORMAT_DESC" />
 

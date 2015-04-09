@@ -236,8 +236,4 @@ JHtml::_('behavior.formvalidation');
 		<?php echo JHtml::_('form.token'); ?>
 	</form>
 
-	<p class="copyright">
-		<?php echo TrackslibHelperTools::footer(); ?>
-	</p>
-
 </div><!-- end of tracks -->
