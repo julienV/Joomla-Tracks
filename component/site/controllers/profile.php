@@ -51,13 +51,14 @@ class TracksControllerProfile extends FOFController
 			}
 
 			// Redirect to individual edit
-			$link = JRoute::_('index.php?option=com_tracks&view=individualedit&task=add');
+			$link = JRoute::_(TrackslibHelperRoute::getEditIndividualRoute());
 		}
 		else
 		{
 			// Redirect to individual edit
-			$link = JRoute::_('index.php?option=com_tracks&view=individualedit&task=edit&id=' . $ind);
+			$link = JRoute::_(TrackslibHelperRoute::getEditIndividualRoute($ind));
 		}
+
 		$this->setRedirect($link);
 		$this->redirect();
 

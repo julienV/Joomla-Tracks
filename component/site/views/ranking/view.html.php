@@ -50,7 +50,7 @@ class TracksViewRanking extends RViewSite
 		$params->merge($viewparams);
 
 		$breadcrumbs = $mainframe->getPathWay();
-		$breadcrumbs->addItem($project->name . ' ' . JText::_('COM_TRACKS_Rankings'), 'index.php?option=com_tracks&view=ranking&p=' . $project_id);
+		$breadcrumbs->addItem($project->name . ' ' . JText::_('COM_TRACKS_Rankings'), TrackslibHelperRoute::getRankingRoute($project_id));
 
 		$document = JFactory::getDocument();
 		$document->setTitle($project->name . ' ' . JText::_('COM_TRACKS_Rankings'));

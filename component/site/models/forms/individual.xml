@@ -3,7 +3,6 @@
 	<fieldset name="basic_configuration"
 			  label="COM_TRACKS_INDIVIDUALS_GROUP_BASIC"
 			  description="COM_TRACKS_INDIVIDUALS_GROUP_BASIC_DESC"
-			  class="span6"
 			>
 
 		<field
@@ -30,6 +29,14 @@
 				required="false"/>
 
 		<field
+				name="assign_me"
+				type="checkbox"
+				label="COM_TRACKS_EDIT_INDIVIDUAL_ASSIGN_ME"
+				description="COM_TRACKS_EDIT_INDIVIDUAL_ASSIGN_ME_DESC"
+				class="inputbox"
+				required="false"/>
+
+		<field
 				name="nickname"
 				type="text"
 				label="COM_TRACKS_Nickname"
@@ -50,7 +57,7 @@
 				label="COM_TRACKS_COUNTRY"
 				description="COM_TRACKS_COUNTRY"
 				>
-			<option value="">JSELECT</option>
+			<option value="">COM_TRACKS_SELECT_COUNTRY</option>
 		</field>
 
 		<field
@@ -83,13 +90,8 @@
 
 		<field
 				name="user_id"
-				type="user"
-				class="inputbox"
-				default="0"
-				label="COM_TRACKS_User"
-				description="COM_TRACKS_User"
+				type="hidden"
 				/>
-
 
 		<field
 				name="picture"
@@ -165,18 +167,8 @@
 				label="COM_TRACKS_INDIVIDUAL_ADDRESS_COUNTRY"
 				description="COM_TRACKS_INDIVIDUAL_ADDRESS_COUNTRY_DESC"
 				>
-			<option value="">JSELECT</option>
+			<option value="">COM_TRACKS_SELECT_COUNTRY</option>
 		</field>
 
 	</fieldset>
-
-	<field
-			name="checked_out"
-			type="hidden"
-			filter="unset"/>
-
-	<field
-			name="checked_out_time"
-			type="hidden"
-			filter="unset"/>
 </form>

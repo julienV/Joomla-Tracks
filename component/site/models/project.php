@@ -40,11 +40,11 @@ class TracksModelProject extends baseModel
 
 	function setProjectId($projectid)
 	{
-		if ($this->_project_id == $projectid) {
+		if ($this->project_id == $projectid) {
 			return true;
 		}
-		$this->_project_id = intval($projectid);
-		$this->_rankingtool = null;
+		$this->project_id = intval($projectid);
+		$this->rankingtool = null;
 		return true;
 	}
 
@@ -102,7 +102,7 @@ class TracksModelProject extends baseModel
 			. ' FROM #__tracks_projects_rounds AS pr '
 			. ' INNER JOIN #__tracks_rounds AS r ON r.id = pr.round_id '
 			. ' WHERE pr.published = 1 '
-			. '   AND pr.project_id = ' . $this->_project_id
+			. '   AND pr.project_id = ' . $this->project_id
 			. ' ORDER BY pr.ordering ';
 
 			$this->_db->setQuery( $query );

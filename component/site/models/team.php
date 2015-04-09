@@ -87,7 +87,7 @@ class TracksModelTeam extends baseModel
 			       . ' INNER JOIN #__tracks_projects AS p ON pi.project_id = p.id '
 			       . ' INNER JOIN #__tracks_seasons AS s ON s.id = p.season_id '
 			       . ' WHERE pi.team_id = ' . $this->_db->Quote($this->_id)
-			       . ($this->_project_id ? ' AND p.id = '.$this->_db->Quote($this->_project_id) : '')
+			       . ($this->project_id ? ' AND p.id = '.$this->_db->Quote($this->project_id) : '')
 			       . ' ORDER BY p.ordering, i.last_name ASC '
 			       ;
 			$this->_db->setQuery($query);

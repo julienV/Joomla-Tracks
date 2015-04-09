@@ -46,7 +46,7 @@ class TracksViewTeamRanking extends RViewSite
 		$params = $mainframe->getParams('com_tracks');
 
 		$breadcrumbs = $mainframe->getPathWay();
-		$breadcrumbs->addItem($project->name . ' ' . JText::_('COM_TRACKS_Team_Rankings'), 'index.php?option=com_tracks&view=teamranking&p=' . $project_id);
+		$breadcrumbs->addItem($project->name . ' ' . JText::_('COM_TRACKS_Team_Rankings'), TrackslibHelperRoute::getTeamRankingRoute($project_id));
 
 		$document = JFactory::getDocument();
 		$document->setTitle($project->name . ' ' . JText::_('COM_TRACKS_Team_Rankings'));

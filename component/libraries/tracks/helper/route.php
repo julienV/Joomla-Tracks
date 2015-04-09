@@ -18,89 +18,206 @@ defined('_JEXEC') or die;
 class TrackslibHelperRoute
 {
 	/**
-	 * return link to details view of specified event
-	 * @param int $id
-	 * @param int $xref
+	 * return link to rounds list
+	 *
+	 * @return url
+	 */
+	public static function getRoundsRoute()
+	{
+		$parts = array(
+			"option" => "com_tracks",
+			"view"   => "rounds"
+		);
+
+		return self::buildUrl($parts);
+	}
+
+	/**
+	 * return link to teams list
+	 *
+	 * @return url
+	 */
+	public static function getTeamsRoute()
+	{
+		$parts = array(
+			"option" => "com_tracks",
+			"view"   => "teams"
+		);
+
+		return self::buildUrl($parts);
+	}
+
+	/**
+	 * return link to round results
+	 *
+	 * @param   int  $id  project round id
+	 *
 	 * @return url
 	 */
 	public static function getRoundResultRoute($id = 0)
 	{
-		$parts = array( "option" => "com_tracks",
-		                "view"   => "roundresult" );
-		if ($id) {
+		$parts = array(
+			"option" => "com_tracks",
+			"view"   => "roundresult"
+		);
+
+		if ($id)
+		{
 			$parts['id'] = $id;
 		}
-		return self::buildUrl( $parts );
+
+		return self::buildUrl($parts);
 	}
 
 	/**
-	 * return link to details view of specified event
-	 * @param int $id
-	 * @param int $xref
+	 * return link to round
+	 *
+	 * @param   int  $id  round id
+	 *
 	 * @return url
 	 */
 	public static function getRoundRoute($id = 0)
 	{
-		$parts = array( "option" => "com_tracks",
-		                "view"   => "round" );
-		if ($id) {
+		$parts = array(
+			"option" => "com_tracks",
+			"view"   => "round"
+		);
+
+		if ($id)
+		{
 			$parts['id'] = $id;
 		}
-		return self::buildUrl( $parts );
+
+		return self::buildUrl($parts);
 	}
 
+
+	/**
+	 * return link to individual
+	 *
+	 * @param   int  $id       ind id
+	 * @param   int  $project  project id
+	 *
+	 * @return url
+	 */
 	public static function getIndividualRoute($id = 0, $project = 0)
 	{
-		$parts = array( "option" => "com_tracks",
-		                "view"   => "individual" );
-		if ($id) {
+		$parts = array(
+			"option" => "com_tracks",
+			"view"   => "individual"
+		);
+
+		if ($id)
+		{
 			$parts['id'] = $id;
 		}
-		if ($project) {
+
+		if ($project)
+		{
 			$parts['p'] = $project;
 		}
-		return self::buildUrl( $parts );
+
+		return self::buildUrl($parts);
 	}
 
+	/**
+	 * return link to edit individual
+	 *
+	 * @param   int  $id  ind id
+	 *
+	 * @return url
+	 */
 	public static function getEditIndividualRoute($id = 0)
 	{
-		$parts = array( "option" => "com_tracks",
-		                "view"   => "individualedit",
-		                "task" => "edit" );
-		if ($id) {
+		$parts = array(
+			"option" => "com_tracks",
+			"view"   => "individual"
+		);
+
+		if ($id)
+		{
+			$parts['task'] = 'individual.edit';
 			$parts['id'] = $id;
 		}
-		return self::buildUrl( $parts );
+		else
+		{
+			$parts['task'] = 'individual.add';
+		}
+
+		return self::buildUrl($parts);
 	}
 
-	public static function getProjectRoute($id = 0)
+	/**
+	 * return link to individuals
+	 *
+	 * @param   int  $id       ind id
+	 * @param   int  $project  project id
+	 *
+	 * @return url
+	 */
+	public static function getIndividualsRoute($id = 0, $project = 0)
 	{
 		$parts = array( "option" => "com_tracks",
-		                "view"   => "project" );
-		if ($id) {
-			$parts['id'] = $id;
-		}
-		return self::buildUrl( $parts );
+			"view"   => "individuals" );
+
+		return self::buildUrl($parts);
 	}
 
+	/**
+	 * return link to project
+	 *
+	 * @param   int  $id  project id
+	 *
+	 * @return url
+	 */
+	public static function getProjectRoute($id)
+	{
+		$parts = array(
+			"option" => "com_tracks",
+			"view"   => "project"
+		);
+
+		if ($id)
+		{
+			$parts['id'] = $id;
+		}
+
+		return self::buildUrl($parts);
+	}
+
+	/**
+	 * return link to team
+	 *
+	 * @param   int  $id       team id
+	 * @param   int  $project  project id
+	 *
+	 * @return url
+	 */
 	public static function getTeamRoute($id = 0, $project = 0)
 	{
-		$parts = array( "option" => "com_tracks",
-		                "view"   => "team" );
-		if ($id) {
+		$parts = array(
+			"option" => "com_tracks",
+			"view"   => "team"
+		);
+
+		if ($id)
+		{
 			$parts['id'] = $id;
 		}
-		if ($project) {
+
+		if ($project)
+		{
 			$parts['p'] = $project;
 		}
-		return self::buildUrl( $parts );
+
+		return self::buildUrl($parts);
 	}
 
 	/**
 	 * Get edit team route
 	 *
-	 * @param   int  $id      team id
-	 * @param   int $project  the project id, if being edited from a project
+	 * @param   int  $id       team id
+	 * @param   int  $project  the project id, if being edited from a project
 	 *
 	 * @return string
 	 */
@@ -117,46 +234,108 @@ class TrackslibHelperRoute
 			$parts['project_id'] = $project;
 		}
 
-		return self::buildUrl( $parts );
+		return self::buildUrl($parts);
 	}
 
-	public static function getRankingRoute($id = 0)
+	/**
+	 * return link to ranking
+	 *
+	 * @param   int  $id  project id
+	 *
+	 * @return url
+	 */
+	public static function getRankingRoute($id)
 	{
-		$parts = array( "option" => "com_tracks",
-		                "view"   => "ranking" );
-		if ($id) {
+		$parts = array(
+			"option" => "com_tracks",
+			"view"   => "ranking"
+		);
+
+		if ($id)
+		{
 			$parts['id'] = $id;
 		}
-		return self::buildUrl( $parts );
+
+		return self::buildUrl($parts);
 	}
 
-	public static function getProjectResultRoute($id = 0)
+	/**
+	 * return link to results
+	 *
+	 * @param   int  $id  project id
+	 *
+	 * @return url
+	 */
+	public static function getProjectResultRoute($id)
 	{
-		$parts = array( "option" => "com_tracks",
-		                "view"   => "projectresults" );
-		if ($id) {
+		$parts = array(
+			"option" => "com_tracks",
+			"view"   => "projectresults"
+		);
+
+		if ($id)
+		{
 			$parts['id'] = $id;
 		}
-		return self::buildUrl( $parts );
+
+		return self::buildUrl($parts);
 	}
 
-	public static function getTeamRankingRoute($id = 0)
+	/**
+	 * return link to participants
+	 *
+	 * @param   int  $id  project id
+	 *
+	 * @return url
+	 */
+	public static function getParticipantsRoute($id)
 	{
-		$parts = array( "option" => "com_tracks",
-		                "view"   => "teamranking" );
-		if ($id) {
+		$parts = array(
+			"option" => "com_tracks",
+			"view"   => "projectresults",
+			"id" => $id
+		);
+
+		return self::buildUrl($parts);
+	}
+
+	/**
+	 * return link to team ranking
+	 *
+	 * @param   int  $id  project id
+	 *
+	 * @return url
+	 */
+	public static function getTeamRankingRoute($id)
+	{
+		$parts = array(
+			"option" => "com_tracks",
+			"view"   => "teamranking"
+		);
+
+		if ($id)
+		{
 			$parts['id'] = $id;
 		}
-		return self::buildUrl( $parts );
+
+		return self::buildUrl($parts);
 	}
 
-	public static function buildUrl($parts)
+	/**
+	 * build url
+	 *
+	 * @param   array  $parts  parts
+	 *
+	 * @return string
+	 */
+	protected static function buildUrl($parts)
 	{
-		if($item = self::_findItem($parts)) {
+		if ($item = self::_findItem($parts))
+		{
 			$parts['Itemid'] = $item->id;
-		};
+		}
 
-		return 'index.php?'.JURI::buildQuery( $parts );
+		return 'index.php?' . JURI::buildQuery($parts);
 	}
 
 	/**
@@ -165,8 +344,7 @@ class TrackslibHelperRoute
 	 * searches if a menuitem for this item exists
 	 * if not the first match will be returned
 	 *
-	 * @param array url parameters
-	 * @since 0.9
+	 * @param   array  $query  url parameters
 	 *
 	 * @return int Itemid
 	 */
@@ -179,45 +357,56 @@ class TrackslibHelperRoute
 
 		if ($items)
 		{
-			foreach($items as $item)
+			foreach ($items as $item)
 			{
 				if ((@$item->query['view'] == $query['view']))
 				{
 					switch ($query['view'])
 					{
 						case 'individual':
-							if ((int) @$item->query['id'] == (int) @$query['id']) {
+							if ((int) @$item->query['id'] == (int) @$query['id'])
+							{
 								return $item;
 							}
+
 							break;
 
 						case 'ranking':
 						case 'teamranking':
-							if ((int) @$item->query['id'] == (int) @$query['id']) {
+							if ((int) @$item->query['id'] == (int) @$query['id'])
+							{
 								return $item;
 							}
+
 							break;
 
 						case 'round':
-							if ((int) @$item->query['id'] == (int) @$query['id']) {
+							if ((int) @$item->query['id'] == (int) @$query['id'])
+							{
 								return $item;
 							}
-						  break;
+
+							break;
 
 						case 'roundresult':
-							if ((int) @$item->query['id'] == (int) @$query['id']) {
+							if ((int) @$item->query['id'] == (int) @$query['id'])
+							{
 								return $item;
 							}
-						  break;
+
+							break;
 
 						case 'team':
-							if ((int) @$item->query['id'] == (int) @$query['id']) {
+							if ((int) @$item->query['id'] == (int) @$query['id'])
+							{
 								return $item;
 							}
+
 							break;
 
 						default:
-							if (!isset($query['id']) || (int) @$item->query['id'] == (int) @$query['id']) {
+							if (!isset($query['id']) || (int) @$item->query['id'] == (int) @$query['id'])
+							{
 								return $item;
 							}
 					}
@@ -228,4 +417,3 @@ class TrackslibHelperRoute
 		return false;
 	}
 }
-?>

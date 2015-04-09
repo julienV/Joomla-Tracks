@@ -33,12 +33,12 @@ class TracksModelProjectresults extends baseModel
 	 * reference to ranking class
 	 * @var unknown_type
 	 */
-	var $_rankingtool = null;
+	var $rankingtool = null;
 
 	/**
 	 * project id
 	 */
-	var $_project_id = null;
+	protected $project_id = null;
 
 	var $_data = null;
 
@@ -55,12 +55,12 @@ class TracksModelProjectresults extends baseModel
 
 	public function setProjectId($projectid)
 	{
-		if ($this->_project_id == $projectid) {
+		if ($this->project_id == $projectid) {
 			return true;
 		}
-		$this->_project_id = intval($projectid);
+		$this->project_id = intval($projectid);
 		$this->project = null;
-		$this->_rankingtool = null;
+		$this->rankingtool = null;
 		return true;
 	}
 
@@ -71,6 +71,7 @@ class TracksModelProjectresults extends baseModel
 			$this->_data = $this->_getRankings();
 			$this->_getResults();
 		}
+
 		return $this->_data;
 	}
 
@@ -91,7 +92,7 @@ class TracksModelProjectresults extends baseModel
 		$query->join('INNER', '#__tracks_eventtypes AS srt ON srt.id = psr.type');
 		$query->join('INNER', '#__tracks_projects_rounds AS pr ON pr.id = psr.projectround_id');
 		$query->join('INNER', '#__tracks_rounds AS r ON r.id = pr.round_id');
-		$query->where('pr.project_id = '.$this->_project_id);
+		$query->where('pr.project_id = '.$this->project_id);
 		$query->where('srt.count_points > 0 ');
 		$query->where('pr.published = 1');
 		$query->where('psr.published = 1');
@@ -123,7 +124,6 @@ class TracksModelProjectresults extends baseModel
 		return $rounds;
 	}
 
-
 	protected function _getResults()
 	{
 		$db = JFactory::getDbo();
@@ -135,24 +135,25 @@ class TracksModelProjectresults extends baseModel
 		$query->join('INNER', '#__tracks_eventtypes AS srt ON srt.id = psr.type');
 		$query->join('INNER', '#__tracks_projects_rounds AS pr ON pr.id = psr.projectround_id');
 		$query->join('INNER', '#__tracks_rounds AS r ON r.id = pr.round_id');
-		$query->where('pr.project_id = '.$this->_project_id);
+		$query->where('pr.project_id = '.$this->project_id);
 		$query->where('pr.published = 1');
 		$query->where('psr.published = 1');
 		$db->setQuery($query);
 		$res = $db->loadObjectList();
 
-		if (!$res) {
+		if (!$res)
+		{
 			return false;
 		}
 
-		// index by individual, then event_id
-		$individuals = array();
 		foreach ($res as $r)
 		{
-			if (!isset($this->_data[$r->individual_id])) {
+			if (!isset($this->_data[$r->individual_id]))
+			{
 				continue;
 			}
-			@$this->_data[$r->individual_id]->results[$r->event_id] = $r->rank;
+
+			$this->_data[$r->individual_id]->results[$r->event_id] = $r->rank;
 		}
 
 		return $this->_data;

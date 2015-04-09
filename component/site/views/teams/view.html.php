@@ -42,8 +42,7 @@ class TracksViewTeams extends RViewSite
 		$document->setTitle(JText::_('COM_TRACKS_All_Teams'));
 
 		$breadcrumbs = $mainframe->getPathWay();
-		$breadcrumbs->addItem(JText::_('COM_TRACKS_All_Teams'),
-			'index.php?option=com_tracks&view=teams');
+		$breadcrumbs->addItem(JText::_('COM_TRACKS_All_Teams'), TrackslibHelperRoute::getTeamsRoute());
 
 		$this->assignRef('rows', $rows);
 

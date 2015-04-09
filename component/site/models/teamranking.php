@@ -25,22 +25,6 @@ require_once( 'base.php' );
  */
 class TracksModelTeamRanking extends baseModel
 {
-	/**
-	 * associated project
-	 */
-	var $project = null;
-
-	/**
-	 * reference to ranking class
-	 * @var unknown_type
-	 */
-	var $_rankingtool = null;
-
-	/**
-	 * project id
-	 */
-	var $_project_id = null;
-
 	function __construct($projectid = null)
 	{
 		parent::__construct();
@@ -54,12 +38,12 @@ class TracksModelTeamRanking extends baseModel
 
 	function setProjectId($projectid)
 	{
-		if ($this->_project_id == $projectid) {
+		if ($this->project_id == $projectid) {
 			return true;
 		}
-		$this->_project_id = intval($projectid);
+		$this->project_id = intval($projectid);
 		$this->project = null;
-		$this->_rankingtool = null;
+		$this->rankingtool = null;
 		return true;
 	}
 

@@ -27,28 +27,33 @@ class baseModel extends RModel
 	/**
 	 * associated project
 	 */
-	var $project = null;
+	protected $project = null;
 
-	var $_project_id = null;
+	protected $project_id = null;
 
 	/**
 	 * reference to ranking class
 	 * @var unknown_type
 	 */
-	var $_rankingtool = null;
+	protected $rankingtool = null;
 
-	var $_id = 0;
+	protected $_id = 0;
 
 	/**
 	 * caching for data
 	 */
-	var $_data = null;
+	protected $_data = null;
 
-	function __construct($config = array())
+	/**
+	 * Constructor
+	 *
+	 * @param   array  $config  An array of configuration options (name, state, dbo, table_path, ignore_request).
+	 */
+	public function __construct($config = array())
 	{
 		parent::__construct($config);
 
-		$project = JRequest::getInt('p');
+		$project = JFactory::getApplication()->input->getInt('p', 0);
 
 		$this->setProjectId($project);
 	}
@@ -60,7 +65,7 @@ class baseModel extends RModel
 	 *
 	 * @param int $id
 	 */
-	function setId($id)
+	public function setId($id)
 	{
 		$this->_id = (int) $id;
 		$this->_data = null;
@@ -71,9 +76,9 @@ class baseModel extends RModel
 	 *
 	 * @param int $id
 	 */
-	function setProjectId($id)
+	public function setProjectId($id)
 	{
-		$this->_project_id = (int) $id;
+		$this->project_id = (int) $id;
 		$this->project = null;
 	}
 
@@ -85,13 +90,13 @@ class baseModel extends RModel
 	 *
 	 * @return object project
 	 */
-	function getProject($project_id = 0)
+	public function getProject($project_id = 0)
 	{
 		if ($this->project && ($project_id == 0 || $project_id == $this->project->id))
 		{
 			return $this->project;
 		}
-		if ($project_id && $project_id != $this->_project_id)
+		if ($project_id && $project_id != $this->project_id)
 		{
 			$this->setProjectId($project_id);
 		}
@@ -103,7 +108,7 @@ class baseModel extends RModel
 			. ' FROM #__tracks_projects AS p '
 			. ' INNER JOIN #__tracks_seasons AS s ON s.id = p.season_id '
 			. ' INNER JOIN #__tracks_competitions AS c ON c.id = p.competition_id '
-			. ' WHERE p.id = ' . $this->_project_id;
+			. ' WHERE p.id = ' . $this->project_id;
 
 		$this->_db->setQuery($query);
 
@@ -133,7 +138,7 @@ class baseModel extends RModel
 		{
 			$query = ' SELECT settings '
 				. ' FROM #__tracks_project_settings '
-				. ' WHERE project_id = ' . $this->_db->Quote($this->_project_id)
+				. ' WHERE project_id = ' . $this->_db->Quote($this->project_id)
 				. '   AND xml = ' . $this->_db->Quote($xml);
 			$this->_db->setQuery($query);
 			if ($settings = $this->_db->loadObject())
@@ -151,19 +156,19 @@ class baseModel extends RModel
 
 	function _reset()
 	{
-		$this->_project_id = 0;
+		$this->project_id = 0;
 		$this->_id = 0;
 		$this->project = null;
 	}
 
 	function _getRankingTool()
 	{
-		if (empty($this->_rankingtool))
+		if (empty($this->rankingtool))
 		{
 			// sport specific, for later ?
 			require_once(JPATH_SITE . '/' . 'components' . '/' . 'com_tracks' . '/' . 'sports' . '/' . 'default' . '/' . 'rankingtool.php');
-			$this->_rankingtool = new TracksRankingTool($this->_project_id);
+			$this->rankingtool = new TracksRankingTool($this->project_id);
 		}
-		return $this->_rankingtool;
+		return $this->rankingtool;
 	}
 }

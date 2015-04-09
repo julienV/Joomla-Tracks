@@ -33,12 +33,24 @@ JHtml::_('behavior.formvalidation');
 					jQuery(this).find("label").off('click');
 				}
 			});
+
+			jQuery('#individual-save').click(function() {
+				var form = jQuery(this).parents('form');
+				form.find('input[name=task]').val('individual.save');
+				if (document.formvalidator.isValid(form)) {
+					form.submit();
+				}
+			});
 		});
 	</script>
 	<form
 		action="index.php?option=com_tracks&task=individual.edit&id=<?php echo $this->item->id; ?>"
 		method="post" name="adminForm" class="form-validate form-horizontal" id="adminForm">
 
+		<div class="toolbar">
+			<button type="button" class="btn btn-success" id="individual-save"><?php echo JText::_('COM_TRACKS_SAVE'); ?></php></button>
+			<button type="button" class="btn btn-danger" id="individual-cancel"><?php echo JText::_('COM_TRACKS_CANCEL'); ?></php></button>
+		</div>
 		<ul class="nav nav-tabs" id="individualTab">
 			<li class="active">
 				<a href="#basic" data-toggle="tab">
@@ -69,6 +81,14 @@ JHtml::_('behavior.formvalidation');
 						</div>
 						<div class="controls">
 							<?php echo $this->form->getInput('last_name'); ?>
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="control-label">
+							<?php echo $this->form->getLabel('assign_me'); ?>
+						</div>
+						<div class="controls">
+							<?php echo $this->form->getInput('assign_me'); ?>
 						</div>
 					</div>
 					<div class="control-group">
@@ -125,14 +145,6 @@ JHtml::_('behavior.formvalidation');
 						</div>
 						<div class="controls">
 							<?php echo $this->form->getInput('hometown'); ?>
-						</div>
-					</div>
-					<div class="control-group">
-						<div class="control-label">
-							<?php echo $this->form->getLabel('user_id'); ?>
-						</div>
-						<div class="controls">
-							<?php echo $this->form->getInput('user_id'); ?>
 						</div>
 					</div>
 					<div class="control-group">

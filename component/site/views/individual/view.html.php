@@ -58,8 +58,7 @@ class TracksViewIndividual extends RViewSite
 		$show_edit_link = ($user->id && $user->id == $data->user_id) || $user->authorise('core.manage', 'com_tracks');
 
 		$breadcrumbs = $mainframe->getPathWay();
-		$breadcrumbs->addItem($data->first_name . ' ' . $data->last_name,
-			'index.php?option=com_tracks&view=individual&i=' . $data->id);
+		$breadcrumbs->addItem($data->first_name . ' ' . $data->last_name, TrackslibHelperRoute::getEditIndividualRoute($data->id));
 
 		$document->setTitle($data->first_name . ' ' . $data->last_name);
 
@@ -101,6 +100,11 @@ class TracksViewIndividual extends RViewSite
 		{
 			$this->canConfig = true;
 		}
+
+		$this->title = $this->item->id ?
+			JText::_('COM_TRACKS_PAGETITLE_EDIT_INDIVIDUAL') :
+			JText::_('COM_TRACKS_PAGETITLE_CREATE_INDIVIDUAL');
+
 
 		// Display the template
 		parent::display($tpl);

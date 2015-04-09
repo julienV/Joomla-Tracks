@@ -46,7 +46,7 @@ class TracksViewIndividuals extends RViewSite
 
 		$breadcrumbs = $mainframe->getPathWay();
 		$breadcrumbs->addItem(JText::_('COM_TRACKS_All_Individuals'),
-			'index.php?option=com_tracks&view=individuals');
+			TrackslibHelperRoute::getIndividualsRoute());
 
 		$this->assignRef('rows', $rows);
 		$this->assignRef('params', $params);

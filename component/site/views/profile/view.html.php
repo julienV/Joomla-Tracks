@@ -54,7 +54,7 @@ class TracksViewProfile extends RViewSite
 
 			if ($params->get('user_registration'))
 			{
-				$mainframe->redirect('index.php?option=com_tracks&task=individual.add');
+				$mainframe->redirect(TrackslibHelperRoute::getEditIndividualRoute());
 			}
 			else
 			{
@@ -63,6 +63,6 @@ class TracksViewProfile extends RViewSite
 			}
 		}
 
-		$mainframe->redirect('index.php?option=com_tracks&view=individual&i=' . $data->id);
+		$mainframe->redirect(TrackslibHelperRoute::getIndividualRoute($data->id));
 	}
 }

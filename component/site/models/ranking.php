@@ -25,40 +25,34 @@ require_once( 'base.php' );
 class TracksModelRanking extends baseModel
 {
 	/**
-	 * associated project
-	 */
-	var $project = null;
-
-	/**
 	 * reference to ranking class
 	 * @var unknown_type
 	 */
-	var $_rankingtool = null;
+	var $rankingtool = null;
 
 	/**
-	 * project id
+	 * Constructor
+	 *
+	 * @param   array  $config  An array of configuration options (name, state, dbo, table_path, ignore_request).
 	 */
-	var $_project_id = null;
-
-	function __construct($projectid = null)
+	public function __construct($config = array())
 	{
 		parent::__construct();
 
-		$projectid = $projectid ? $projectid : JRequest::getInt('id');
-
-		if ($projectid) {
-			$this->setProjectId($projectid);
-		}
+		$this->setProjectId(JFactory::getApplication()->input->getInt('id', 0));
 	}
 
-	function setProjectId($projectid)
+	public function setProjectId($projectid)
 	{
-		if ($this->_project_id == $projectid) {
+		if ($this->project_id == $projectid)
+		{
 			return true;
 		}
-		$this->_project_id = intval($projectid);
+
+		$this->project_id = intval($projectid);
 		$this->project = null;
-		$this->_rankingtool = null;
+		$this->rankingtool = null;
+
 		return true;
 	}
 

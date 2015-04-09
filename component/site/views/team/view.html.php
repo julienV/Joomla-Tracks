@@ -48,8 +48,7 @@ class TracksViewTeam extends RViewSite
 		$data->description = JHTML::_('content.prepare', $data->description);
 
 		$breadcrumbs = $mainframe->getPathWay();
-		$breadcrumbs->addItem($data->name,
-			'index.php?option=com_tracks&view=team&i=' . $id);
+		$breadcrumbs->addItem($data->name, TrackslibHelperRoute::getTeamRoute($id));
 
 		$document = JFactory::getDocument();
 		$document->setTitle($data->name);

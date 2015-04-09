@@ -44,8 +44,7 @@ class TracksViewRounds extends RViewSite
 		$document->setTitle(JText::_('COM_TRACKS_All_rounds'));
 
 		$breadcrumbs = $mainframe->getPathWay();
-		$breadcrumbs->addItem(JText::_('COM_TRACKS_All_rounds'),
-			'index.php?option=com_tracks&view=rounds');
+		$breadcrumbs->addItem(JText::_('COM_TRACKS_All_rounds'), TrackslibHelperRoute::getRoundsRoute());
 
 		$this->assignRef('rows', $rows);
 

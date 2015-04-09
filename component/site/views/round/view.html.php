@@ -19,7 +19,6 @@ jimport( 'joomla.application.component.view');
 /**
  * HTML View class for the Tracks component
  *
- * @static
  * @package		Tracks
  * @since 0.1
  */
