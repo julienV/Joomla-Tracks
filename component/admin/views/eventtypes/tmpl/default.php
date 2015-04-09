@@ -34,7 +34,7 @@ $search = $this->state->get('filter.search');
 
 		if (pressbutton == 'eventtypes.delete')
 		{
-			var r = confirm('<?php echo JText::_("COM_TRACKS_EVENTTYPE_DELETE_COMFIRM")?>');
+			var r = confirm('<?php echo JText::_("COM_TRACKS_DELETE_CONFIRM")?>');
 			if (r == true)    form.submit();
 			else return false;
 		}

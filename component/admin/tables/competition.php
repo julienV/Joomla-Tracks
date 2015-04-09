@@ -96,7 +96,7 @@ class TracksTableCompetition extends RTable
 
 		$query->select('p.id');
 		$query->from('#__tracks_projects AS p');
-		$query->where('p.competition_id_id in (' . $pk . ')');
+		$query->where('p.competition_id in (' . $pk . ')');
 		$db->setQuery($query);
 		$res = $db->loadObject();
 

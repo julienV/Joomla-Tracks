@@ -41,7 +41,7 @@ if (($saveOrder) && ($this->canEdit))
 
 		if (pressbutton == 'events.delete')
 		{
-			var r = confirm('<?php echo JText::_("COM_TRACKS_EVENT_DELETE_COMFIRM")?>');
+			var r = confirm('<?php echo JText::_("COM_TRACKS_DELETE_CONFIRM")?>');
 			if (r == true)    form.submit();
 			else return false;
 		}
