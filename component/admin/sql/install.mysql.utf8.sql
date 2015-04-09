@@ -60,7 +60,8 @@ CREATE TABLE IF NOT EXISTS `#__tracks_teams` (
   `vehicle_picture` varchar(255) NULL,
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL,
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY  (`id`),
+  KEY `club_id` (`club_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `#__tracks_clubs` (
@@ -146,7 +147,9 @@ CREATE TABLE IF NOT EXISTS `#__tracks_projects_rounds` (
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL,
   `published` tinyint(1) NOT NULL,
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY  (`id`),
+  KEY `round_id` (`round_id`),
+  KEY `project_id` (`project_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `#__tracks_events` (
@@ -161,7 +164,9 @@ CREATE TABLE IF NOT EXISTS `#__tracks_events` (
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL,
   `published` tinyint(1) NOT NULL,
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY  (`id`),
+  KEY `projectround_id` (`projectround_id`),
+  KEY `type` (`type`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `#__tracks_participants` (
@@ -173,7 +178,10 @@ CREATE TABLE IF NOT EXISTS `#__tracks_participants` (
   `initial_points` int(11) NOT NULL,
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL,
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY  (`id`),
+  KEY `individual_id` (`individual_id`),
+  KEY `project_id` (`project_id`),
+  KEY `team_id` (`team_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `#__tracks_projects_teams` (
@@ -184,7 +192,9 @@ CREATE TABLE IF NOT EXISTS `#__tracks_projects_teams` (
   `initial_points` int(11) NOT NULL,
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL,
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY  (`id`),
+  KEY `team_id` (`team_id`),
+  KEY `project_id` (`project_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `#__tracks_events_results` (
@@ -200,7 +210,9 @@ CREATE TABLE IF NOT EXISTS `#__tracks_events_results` (
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL,
   PRIMARY KEY  (`id`),
-  UNIQUE KEY `event_individual` (`individual_id`,`event_id`)
+  KEY `individual_id` (`individual_id`),
+  KEY `team_id` (`team_id`),
+  KEY `event_id` (`event_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `#__tracks_project_settings` (
@@ -210,5 +222,6 @@ CREATE TABLE IF NOT EXISTS `#__tracks_project_settings` (
   `settings` text NULL,
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL,
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY  (`id`),
+  KEY `project_id` (`project_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
