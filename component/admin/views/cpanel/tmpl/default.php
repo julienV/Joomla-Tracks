@@ -23,12 +23,6 @@ $icons = array(
 );
 ?>
 
-<script type="text/javascript">
-	Joomla.submitbutton = function (pressbutton) {
-		submitbutton(pressbutton);
-	};
-</script>
-
 <div class="row-fluid">
 	<div class="span9 tracksDashboardMainIcons">
 		<?php $iconsRow = array_chunk($icons, 6); ?>
