@@ -95,7 +95,7 @@
 
 		<field
 				name="picture"
-				type="rmedia"
+				type="file"
 				label="COM_TRACKS_INDIVIDUALPICTURE"
 				description="COM_TRACKS_INDIVIDUALPICTUREDESC"
 				class="inputbox"
@@ -104,7 +104,7 @@
 
 		<field
 				name="picture_small"
-				type="rmedia"
+				type="file"
 				label="COM_TRACKS_INDIVIDUALSMALLPICTURE"
 				description="COM_TRACKS_INDIVIDUALSMALLPICTUREDESC"
 				class="inputbox"

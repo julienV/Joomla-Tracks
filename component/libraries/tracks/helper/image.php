@@ -276,7 +276,7 @@ class TrackslibHelperImage {
 	}
 
 
-	public static function check($file, $settings)
+	public static function check($file)
 	{
 		jimport('joomla.filesystem.file');
 
@@ -317,4 +317,48 @@ class TrackslibHelperImage {
 		return true;
 	}
 
+	/**
+	 * Sanitize the image file name and return an unique string
+	 *
+	 * @since  0.9
+	 * @author Christoph Lukes
+	 *
+	 * @param string $base_Dir the target directory
+	 * @param string $filename the unsanitized imagefile name
+	 *
+	 * @return string $filename the sanitized and unique image file name
+	 */
+	public static function sanitize($base_Dir, $filename)
+	{
+		jimport('joomla.filesystem.file');
+
+		//check for any leading/trailing dots and remove them (trailing shouldn't be possible cause of the getEXT check)
+		$filename = preg_replace("/^[.]*/", '', $filename);
+		$filename = preg_replace("/[.]*$/", '', $filename); //shouldn't be necessary, see above
+
+		//we need to save the last dot position cause preg_replace will also replace dots
+		$lastdotpos = strrpos($filename, '.');
+
+		//replace invalid characters
+		$chars = '[^0-9a-zA-Z()_-]';
+		$filename = strtolower(preg_replace("/$chars/", '_', $filename));
+
+		//get the parts before and after the dot (assuming we have an extension...check was done before)
+		$beforedot = substr($filename, 0, $lastdotpos);
+		$afterdot = substr($filename, $lastdotpos + 1);
+
+		//make a unique filename for the image and check it is not already taken
+		//if it is already taken keep trying till success
+		$now = time();
+
+		while (JFile::exists($base_Dir . $beforedot . '_' . $now . '.' . $afterdot))
+		{
+			$now++;
+		}
+
+		//create out of the seperated parts the new filename
+		$filename = $beforedot . '_' . $now . '.' . $afterdot;
+
+		return $filename;
+	}
 }

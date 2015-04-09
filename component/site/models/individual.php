@@ -96,6 +96,9 @@ class TracksModelIndividual extends RModelAdmin
 			$validData['user_id'] = JFactory::getUser()->get('id');
 		}
 
+		$validData = $this->getPicture($validData, $data, 'picture');
+		$validData = $this->getPicture($validData, $data, 'picture_small');
+
 		return $validData;
 	}
 
@@ -365,5 +368,63 @@ class TracksModelIndividual extends RModelAdmin
 	public function getId()
 	{
 		return $this->getState($this->getName() . '.id');
+	}
+
+	/**
+	 * Manage upload of picture
+	 *
+	 * @param   array   $validData  valid data
+	 * @param   array   $data       post data
+	 * @param   string  $field      field name
+	 *
+	 * @return array valid data
+	 */
+	protected function getPicture($validData, $data, $field)
+	{
+		$params = JComponentHelper::getParams('com_tracks');
+		$files = JFactory::getApplication()->input->files->get('jform', '', array());
+		$targetpath = 'images/' . $params->get('default_individual_images_folder', 'tracks/individuals');
+
+		if (!isset($files[$field]) || !$picture = $files[$field])
+		{
+			return false;
+		}
+
+		if (!empty($picture['name']))
+		{
+			$base_Dir = JPATH_SITE . '/' . $targetpath . '/';
+
+			if (!JFolder::exists($base_Dir))
+			{
+				JFolder::create($base_Dir);
+			}
+
+			// Check the image
+			$check = TrackslibHelperImage::check($picture);
+
+			if ($check === false)
+			{
+				$this->setError('IMAGE CHECK FAILED');
+
+				return false;
+			}
+
+			// Sanitize the image filename
+			$filename = TrackslibHelperImage::sanitize($base_Dir, $picture['name']);
+			$filepath = $base_Dir . $filename;
+
+			if (!JFile::upload($picture['tmp_name'], $filepath))
+			{
+				$this->setError(JText::_('COM_TRACKS_UPLOAD_FAILED'));
+
+				return false;
+			}
+			else
+			{
+				$validData[$field] = $targetpath . '/' . $filename;
+			}
+		}
+
+		return $validData;
 	}
 }

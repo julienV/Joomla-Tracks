@@ -41,11 +41,17 @@ JHtml::_('behavior.formvalidation');
 					form.submit();
 				}
 			});
+
+			jQuery('#individual-cancel').click(function() {
+				var form = jQuery(this).parents('form');
+				form.find('input[name=task]').val('individual.cancel');
+				form.submit();
+			});
 		});
 	</script>
 	<form
 		action="index.php?option=com_tracks&task=individual.edit&id=<?php echo $this->item->id; ?>"
-		method="post" name="adminForm" class="form-validate form-horizontal" id="adminForm">
+		method="post" name="adminForm" class="form-validate form-horizontal" id="adminForm" enctype="multipart/form-data">
 
 		<div class="toolbar">
 			<button type="button" class="btn btn-success" id="individual-save"><?php echo JText::_('COM_TRACKS_SAVE'); ?></php></button>
@@ -155,6 +161,7 @@ JHtml::_('behavior.formvalidation');
 						</div>
 						<div class="controls">
 							<?php echo $this->form->getInput('picture'); ?>
+							<span class="current-pic>"><?php echo ($this->item->picture) ? $this->item->picture : ''; ?></span>
 						</div>
 					</div>
 					<div class="control-group">
@@ -163,6 +170,7 @@ JHtml::_('behavior.formvalidation');
 						</div>
 						<div class="controls">
 							<?php echo $this->form->getInput('picture_small'); ?>
+							<span class="current-pic>"><?php echo ($this->item->picture_small) ? $this->item->picture_small : ''; ?></span>
 						</div>
 					</div>
 					<div class="control-group">

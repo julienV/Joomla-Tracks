@@ -34,14 +34,14 @@ $search = $this->state->get('filter.search');
 
 		if (pressbutton == 'individuals.delete')
 		{
-			var r = confirm('<?php echo JText::_("COM_TRACKS_INDIVIDUAL_DELETE_COMFIRM")?>');
+			var r = confirm('<?php echo JText::_("COM_TRACKS_INDIVIDUAL_DELETE_CONFIRM")?>');
 			if (r == true)    form.submit();
 			else return false;
 		}
 		form.submit();
 	}
 </script>
-<form action="index.php?option=com_tracks&view=individuals" class="admin" id="adminForm" method="post" name="adminForm">
+<form action="index.php?option=com_tracks&view=individuals" class="admin" id="adminForm" method="post" name="adminForm" >
 	<?php
 	echo RLayoutHelper::render(
 		'searchtools.default',
