@@ -31,7 +31,6 @@ class TracksModelIndividual extends RModelAdmin
 		$this->project_id = JFactory::getApplication()->input->getInt('p', 0);
 	}
 
-
 	/**
 	 * Method to get a single record.
 	 *
@@ -45,31 +44,98 @@ class TracksModelIndividual extends RModelAdmin
 
 		if ($item)
 		{
-			$attribs['class'] = "pic";
-
-			if ($item->picture != '')
-			{
-				$item->picture = JHTML::image(JURI::root() . $item->picture, $item->first_name . ' ' . $item->last_name, $attribs);
-			}
-			else
-			{
-				$item->picture = JHTML::image(JURI::root() . 'media/com_tracks/images/misc/tnnophoto.jpg', $item->first_name . ' ' . $item->last_name, $attribs);
-			}
-
-			if ($item->picture_small != '')
-			{
-				$item->picture_small = JHTML::image(JURI::root() . $item->picture_small, $item->first_name . ' ' . $item->last_name, $attribs);
-			}
-			else
-			{
-				$item->picture_small = JHTML::image(JURI::root() . 'media/com_tracks/images/misc/tnnophoto.jpg', $item->first_name . ' ' . $item->last_name, $attribs);
-			}
-
 			$item = $this->loadProjectDetails($item);
 		}
 
 		return $item;
 	}
+
+	/**
+	 * return individual id for user
+	 *
+	 * @return int
+	 */
+	public function getUserIndividual()
+	{
+		$user = JFactory::getUser();
+
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+
+		$query->select('id');
+		$query->from('#__tracks_individuals');
+		$query->where('user_id = ' . (int) $user->id);
+
+		$db->setQuery($query);
+		$res = $db->loadResult();
+
+		return $res;
+	}
+
+	/**
+	 * Method to validate the form data.
+	 * Each field error is stored in session and can be retrieved with getFieldError().
+	 * Once getFieldError() is called, the error is deleted from the session.
+	 *
+	 * @param   JForm   $form   The form to validate against.
+	 * @param   array   $data   The data to validate.
+	 * @param   string  $group  The name of the field group to validate.
+	 *
+	 * @return  mixed  Array of filtered data if valid, false otherwise.
+	 */
+	public function validate($form, $data, $group = null)
+	{
+		$validData = parent::validate($form, $data, $group);
+
+		if (!JFactory::getUser()->authorise('core.edit', 'com_tracks'))
+		{
+			$validData['user_id'] = JFactory::getUser()->get('id');
+		}
+		elseif (isset($data['assign_me']))
+		{
+			$validData['user_id'] = JFactory::getUser()->get('id');
+		}
+
+		return $validData;
+	}
+
+	/**
+	 * Can current user edit individual
+	 *
+	 * @param   object  $item  individual
+	 *
+	 * @return bool
+	 */
+	public function canEdit($item)
+	{
+		$user = JFactory::getUser();
+
+		if (!$item->id)
+		{
+			return $this->canCreate();
+		}
+		elseif (JFactory::getUser()->authorise('core.edit', 'com_tracks'))
+		{
+			return true;
+		}
+		else
+		{
+			return $item->user_id && $item->user_id == $user->get('id');
+		}
+
+	}
+
+	/**
+	 * Can the user create an individual
+	 *
+	 * @return bool
+	 */
+	public function canCreate()
+	{
+		return JComponentHelper::getParams('com_tracks')->get('user_registration')
+			|| JFactory::getUser()->authorise('core.edit', 'com_tracks');
+	}
+
 
 	/**
 	 * add info relevant to the individual in the current project, if a project is set

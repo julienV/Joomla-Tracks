@@ -83,6 +83,7 @@ JHtml::_('behavior.formvalidation');
 							<?php echo $this->form->getInput('last_name'); ?>
 						</div>
 					</div>
+					<?php if ((!$this->item->user_id) && (!$this->userIndividual) && $this->user->authorise('core.manage', 'com_tracks')): ?>
 					<div class="control-group">
 						<div class="control-label">
 							<?php echo $this->form->getLabel('assign_me'); ?>
@@ -91,6 +92,7 @@ JHtml::_('behavior.formvalidation');
 							<?php echo $this->form->getInput('assign_me'); ?>
 						</div>
 					</div>
+					<?php endif; ?>
 					<div class="control-group">
 						<div class="control-label">
 							<?php echo $this->form->getLabel('nickname'); ?>

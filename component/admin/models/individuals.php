@@ -54,6 +54,7 @@ class TracksModelIndividuals extends TrackslibModelList
 				'obj.country_code',
 				'id', 'obj.id',
 				'ordering', 'obj.ordering',
+				'u.username',
 			);
 		}
 
@@ -91,10 +92,12 @@ class TracksModelIndividuals extends TrackslibModelList
 			$this->getState('list.select',
 				array(
 					'obj.*',
+					'u.username',
 				)
 			)
 		);
 		$query->from($db->qn('#__tracks_individuals', 'obj'));
+		$query->join('LEFT', '#__users AS u ON u.id = obj.user_id');
 
 		// Filter: like / search
 		$search = $this->getState('filter.search', '');

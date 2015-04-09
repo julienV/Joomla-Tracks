@@ -88,11 +88,14 @@ $search = $this->state->get('filter.search');
 				<th class="title" width="auto">
 					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_FIRST_NAME', 'obj.first_name', $listDirn, $listOrder); ?>
 				</th>
-				<th class="title" width="auto">
+				<th width="auto">
 					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_ALIAS', 'obj.alias', $listDirn, $listOrder); ?>
 				</th>
 				<th width="10">
 					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_COUNTRY', 'obj.country_code', $listDirn, $listOrder); ?>
+				</th>
+				<th width="auto">
+					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_USER', 'u.username', $listDirn, $listOrder); ?>
 				</th>
 			</tr>
 			</thead>
@@ -136,7 +139,7 @@ $search = $this->state->get('filter.search');
 						<?php echo TrackslibHelperCountries::getCountryFlag($row->country_code); ?>
 					</td>
 					<td>
-						<?php echo $row->id; ?>
+						<?php echo $row->username; ?>
 					</td>
 				</tr>
 			<?php endforeach; ?>
