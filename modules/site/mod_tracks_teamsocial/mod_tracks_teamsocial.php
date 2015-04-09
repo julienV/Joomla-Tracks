@@ -1,25 +1,30 @@
 <?php
 /**
-* @version    $Id: tracks.php 109 2008-05-24 11:05:07Z julienv $
-* @package    JoomlaTracks
-* @subpackage RankingModule
-* @copyright  Copyright (C) 2008 Julien Vonthron. All rights reserved.
-* @license    GNU/GPL, see LICENSE.php
-* Joomla Tracks is free software. This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-* See COPYRIGHT.php for copyright notices and details.
-*/
+ * @package     JoomlaTracks
+ * @subpackage  Modules.site
+ * @copyright   Copyright (C) 2008-2015 Julien Vonthron. All rights reserved.
+ * @license     GNU General Public License version 2 or later
+ */
 
-// No direct access
 defined('_JEXEC') or die('Restricted access');
+
+$tracksLoader = JPATH_LIBRARIES . '/tracks/bootstrap.php';
+
+if (!file_exists($tracksLoader))
+{
+	throw new Exception(JText::_('COM_TRACKS_LIB_INIT_FAILED'), 404);
+}
+
+include_once $tracksLoader;
+
+// Bootstraps Tracks
+TrackslibBootstrap::bootstrap();
 
 // Include the syndicate functions only once
 require_once (dirname(__FILE__). '/' .'helper.php');
-include_once (JPATH_SITE. '/' .'components'. '/' .'com_tracks'. '/' .'helpers'. '/' .'route.php');
 
 $team_id = 0;
+
 // Find team id
 if ($params->get('team_id'))
 {
@@ -32,7 +37,7 @@ else
 
 	if ($input->getCmd('option', '') == 'com_tracks' && $input->getCmd('view', 'team'))
 	{
-		$team_id = $input->getInt('t', 0);
+		$team_id = $input->getInt('id', 0);
 	}
 }
 
@@ -42,11 +47,11 @@ if (!$team_id)
 	return;
 }
 
-$helper = new modTracksTeamsocial();
+$helper = new modTracksTeamsocial;
 
 $links = $helper->getTeamLinks($team_id);
 
-//add css file
+// Add css file
 $document = JFactory::getDocument();
 $document->addStyleSheet(JURI::base().'modules/mod_tracks_teamsocial/mod_tracks_teamsocial.css');
 
