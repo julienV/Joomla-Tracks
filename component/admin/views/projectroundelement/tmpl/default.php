@@ -99,7 +99,6 @@ $search = $this->state->get('filter.search');
 					</td>
 					<td>
 						<?php $itemTitle = JHTML::_('string.truncate', $row->name, 50, true, false); ?>
-						<a class="pointer" onclick="if (window.parent) window.parent.<?php echo $this->escape($this->function);?>('<?php echo $row->id; ?>', '<?php echo $this->escape(addslashes($row->name)); ?>');"><?php echo $itemTitle; ?></a>
 					</td>
 					<td>
 						<?php echo $row->project; ?>

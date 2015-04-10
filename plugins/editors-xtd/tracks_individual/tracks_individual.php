@@ -1,38 +1,43 @@
 <?php
 /**
- * @version    $Id: form.php 94 2008-05-02 10:28:05Z julienv $
- * @package    JoomlaTracks
- * @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
- * @license		GNU/GPL, see LICENSE.php
- * Joomla Tracks is free software. This version may have been modified pursuant
- * to the GNU General Public License, and as distributed it includes or
- * is derivative of works licensed under the GNU General Public License or
- * other free or open source software licenses.
- * See COPYRIGHT.php for copyright notices and details.
+ * @package     JoomlaTracks
+ * @subpackage  Plugins.site
+ * @copyright   Copyright (C) 2008-2015 Julien Vonthron. All rights reserved.
+ * @license     GNU General Public License version 2 or later
  */
 
-// no direct access
-defined( '_JEXEC' ) or die( 'Restricted access' );
+defined('_JEXEC') or die('Restricted access');
+
+$tracksLoader = JPATH_LIBRARIES . '/tracks/bootstrap.php';
+
+if (!file_exists($tracksLoader))
+{
+	throw new Exception(JText::_('COM_TRACKS_LIB_INIT_FAILED'), 404);
+}
+
+include_once $tracksLoader;
+
+// Bootstraps Tracks
+TrackslibBootstrap::bootstrap();
 
 jimport( 'joomla.plugin.plugin' );
 
 /**
- * Editor Pagebreak buton
+ * Editor Tracks individual buton
  *
- * @package Editors-xtd
- * @since 1.5
+ * @package     JoomlaTracks
+ * @subpackage  Plugins.site
+ * @since       1.0
  */
 class plgButtonTracks_individual extends JPlugin
 {
 	/**
 	 * Constructor
 	 *
-	 * @access      protected
-	 * @param       object  $subject The object to observe
-	 * @param       array   $config  An array that holds the plugin configuration
-	 * @since       1.5
+	 * @param   object  &$subject  The object to observe
+	 * @param   array   $config    An array that holds the plugin configuration
 	 */
-	public function __construct(& $subject, $config)
+	public function __construct(&$subject, $config)
 	{
 		parent::__construct($subject, $config);
 		$this->loadLanguage();
@@ -41,64 +46,51 @@ class plgButtonTracks_individual extends JPlugin
 	/**
 	 * Display the button
 	 *
-	 * @return object button
+	 * @param   string  $name  The name of the button to add
+	 *
+	 * @return object
 	 */
-	function onDisplayyyyy($name)
+	public function onDisplay($name)
 	{
-		$mainframe = JFactory::getApplication();
-
-		$doc = JFactory::getDocument();
-		$template = $mainframe->getTemplate();
-		
-		$declaration	="
-		.button2-left .tracks_individual 	{ background: url(media/com_tracks/images/indiv_editor_button.png) 100% 0 no-repeat; } ";
-		
-		$doc->addStyleDeclaration($declaration);
-
-		$link = 'index.php?option=com_tracks&amp;controller=individuals&amp;view=individuals&amp;layout=modal&amp;tmpl=component&amp;e_name='.$name;
-
-		JHTML::_('behavior.modal');
-
-		$button = new JObject();
-		$button->set('modal', true);
-		$button->set('link', $link);
-		$button->set('text', JText::_('PLG_TRACKS_INDIVIDUAL_EDITORXTD_BUTTON_LABEL'));
-		$button->set('name', 'tracks_individual');
-		$button->set('options', "{handler: 'iframe', size: {x: 600, y: 500}}");
-
-		return $button;
+		if (version_compare(JVERSION, '3.0', '<'))
+		{
+			return $this->displayJ2($name);
+		}
+		else
+		{
+			return $this->displayJ3($name);
+		}
 	}
+
 	/**
 	 * Display the button
 	 *
-	 * @return object button
+	 * @param   string  $name  The name of the button to add
+	 *
+	 * @return object
 	 */
-	function onDisplay($name)
+	public function displayJ2($name)
 	{
-		/*
-		 * Javascript to insert the link
-		 * View element calls jSelectIndividual when an individual is clicked
-		 * jSelectIndividual creates the link tag, sends it to the editor,
-		 * and closes the select frame.
-		 */
 		$js = "
 		function jSelectIndividual(id, lastname, firstname) {
 		  var title = firstname ? firstname+' '+lastname : lastname;
-			var tag = '<a href='+'\"index.php?option=com_tracks&amp;view=individual&amp;i='+id+'\">'+title+'</a>';
-			jInsertEditorText(tag, '".$name."');
+			var tag = '<a href='+'\"index.php?option=com_tracks&amp;view=individual&amp;id='+id+'\">'+title+'</a>';
+			jInsertEditorText(tag, '" . $name . "');
 			SqueezeBox.close();
 		}";
 
 		$doc = JFactory::getDocument();
 		$doc->addScriptDeclaration($js);
-		
+
 		$app = JFactory::getApplication();
-		if ($app->isAdmin()) {
-			$declaration	="
+
+		if ($app->isAdmin())
+		{
+			$declaration = "
 			.button2-left .tracks_individual 	{ background: url(media/com_tracks/images/indiv_editor_button.png) 100% 0 no-repeat; } ";
 			$doc->addStyleDeclaration($declaration);
 		}
-		
+
 		JHtml::_('behavior.modal');
 
 		/*
@@ -107,12 +99,52 @@ class plgButtonTracks_individual extends JPlugin
 		 */
 		$link = 'index.php?option=com_tracks&amp;view=individuals&amp;layout=modal&amp;tmpl=component';
 
-		$button = new JObject();
+		$button = new JObject;
 		$button->set('modal', true);
 		$button->set('link', $link);
 		$button->set('text', JText::_('PLG_TRACKS_INDIVIDUAL_EDITORXTD_BUTTON_LABEL'));
 		$button->set('name', 'tracks_individual');
 		$button->set('options', "{handler: 'iframe', size: {x: 770, y: 400}}");
+
+		return $button;
+	}
+
+	/**
+	 * Display the button
+	 *
+	 * @param   string  $name  The name of the button to add
+	 *
+	 * @return object
+	 */
+	protected function displayJ3($name)
+	{
+		$js = "
+		function jSelectIndividual(id, lastname, firstname, link)
+		{
+			var title = firstname ? firstname+' '+lastname : lastname;
+			var tag = '<a' + ' href=\"' + link + '\">' + title + '</a>';
+			jInsertEditorText(tag, '" . $name . "');
+			jModalClose();
+		}";
+
+		$doc = JFactory::getDocument();
+		$doc->addScriptDeclaration($js);
+
+		JHtml::_('behavior.modal');
+
+		/*
+		 * Use the built-in element view to select the article.
+		 * Currently uses blank class.
+		 */
+		$link = 'index.php?option=com_tracks&amp;view=individuals&amp;layout=modal&amp;tmpl=component&amp;' . JSession::getFormToken() . '=1';
+
+		$button = new JObject;
+		$button->modal = true;
+		$button->class = 'btn';
+		$button->link = $link;
+		$button->text = JText::_('PLG_TRACKS_INDIVIDUAL_EDITORXTD_BUTTON_LABEL');
+		$button->name = 'tracks-individual-add';
+		$button->options = "{handler: 'iframe', size: {x: 800, y: 500}}";
 
 		return $button;
 	}

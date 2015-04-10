@@ -1,101 +1,114 @@
 <?php
 /**
-* @version    $Id: default.php 140 2008-06-10 16:47:22Z julienv $
-* @package    JoomlaTracks
-* @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
-* @license		GNU/GPL, see LICENSE.php
-* Joomla Tracks is free software. This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-* See COPYRIGHT.php for copyright notices and details.
-*/
+ * @package     Tracks
+ * @subpackage  Admin
+ * @copyright   Tracks (C) 2008-2015 Julien Vonthron. All rights reserved.
+ * @license     GNU General Public License version 2 or later
+ */
+defined('_JEXEC') or die('Restricted access');
 
-defined('_JEXEC') or die('Restricted access'); ?>
+JHtml::_('behavior.keepalive');
+JHtml::_('rdropdown.init');
+JHtml::_('rbootstrap.tooltip');
+JHtml::_('rjquery.chosen', 'select');
 
-<?php
-$user 	= JFactory::getUser();
+$listOrder = $this->escape($this->state->get('list.ordering'));
+$listDirn = $this->escape($this->state->get('list.direction'));
 
-//Ordering allowed ?
-JHTML::_('behavior.tooltip');
+$user = JFactory::getUser();
+$userId = $user->id;
+$search = $this->state->get('filter.search');
 
-$function	= JRequest::getCmd('function', 'jSelectIndividual');
-
-$model = $this->getModel();
-$search = $model->getState('search');
+$function = JFactory::getApplication()->input->getCmd('function', 'jSelectIndividual');
 ?>
-
-<form action="<?php echo JRoute::_('index.php?option=com_tracks&view=individuals&layout=modal&tmpl=component&function='.$function);?>" method="post" name="adminForm" id="adminForm">
-	<table>
-	<tr>
-		<td align="left" width="100%">
-			<?php echo JText::_('COM_TRACKS_Filter' ); ?>:
-			<input type="text" name="search" id="search" value="<?php echo $search;?>" class="text_area" onchange="document.adminForm.submit();" />
-			<button onclick="this.form.submit();"><?php echo JText::_('COM_TRACKS_Go' ); ?></button>
-			<button onclick="document.getElementById('search').value='';this.form.submit();"><?php echo JText::_('COM_TRACKS_Reset' ); ?></button>
-		</td>
-	</tr>
-	</table>
-
-	<div id="editcell">
-		<table class="adminlist">
-		<thead>
+<form action="index.php?option=com_tracks&view=individuals&tmpl=component&function=<?php echo $function; ?>" class="admin" id="adminForm" method="post" name="adminForm" >
+	<?php
+	echo RLayoutHelper::render(
+		'searchtools.default',
+		array(
+			'view' => $this,
+			'options' => array(
+				'searchField' => 'search',
+				'searchFieldSelector' => '#filter_search',
+				'limitFieldSelector' => '#list_fields_limit',
+				'activeOrder' => $listOrder,
+				'activeDirection' => $listDirn
+			)
+		)
+	);
+	?>
+	<hr />
+	<?php if (empty($this->items)) : ?>
+		<div class="alert alert-info">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<div class="pagination-centered">
+				<h3><?php echo JText::_('COM_TRACKS_NOTHING_TO_DISPLAY'); ?></h3>
+			</div>
+		</div>
+	<?php else : ?>
+		<table class="table table-striped" id="table-items">
+			<thead>
 			<tr>
-				<th class="title">
-					<?php echo JHTML::_('grid.sort',  'COM_TRACKS_LAST_NAME', 'obj.last_name', $this->lists->order_Dir, $this->lists->order ); ?>
+				<th width="10" align="center">
+					<?php echo '#'; ?>
 				</th>
-				<th class="title">
-					<?php echo JHTML::_('grid.sort',  'COM_TRACKS_FIRST_NAME', 'obj.first_name', $this->lists->order_Dir, $this->lists->order ); ?>
+				<th class="title" width="auto">
+					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_LAST_NAME', 'obj.last_name', $listDirn, $listOrder); ?>
 				</th>
-	      <th class="title" nowrap="nowrap"><?php echo JText::_('COM_TRACKS_ALIAS'); ?></th>
-				<th width="1%" nowrap="nowrap">
-					<?php echo JHTML::_('grid.sort',  'ID', 'obj.id', $this->lists->order_Dir, $this->lists->order ); ?>
+				<th class="title" width="auto">
+					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_FIRST_NAME', 'obj.first_name', $listDirn, $listOrder); ?>
+				</th>
+				<th width="auto">
+					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_ALIAS', 'obj.alias', $listDirn, $listOrder); ?>
+				</th>
+				<th width="10">
+					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_COUNTRY', 'obj.country_code', $listDirn, $listOrder); ?>
+				</th>
+				<th width="auto">
+					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_USER', 'u.username', $listDirn, $listOrder); ?>
 				</th>
 			</tr>
-		</thead>
-		<tfoot>
-			<tr>
-				<td colspan="4">
-					<?php echo $this->pagination->getListFooter(); ?>
-				</td>
-			</tr>
-		</tfoot>
-		<tbody>
-		<?php
-		$k = 0;
-		for ($i=0, $n=count( $this->items ); $i < $n; $i++)
-		{
-			$row = $this->items[$i];
-			?>
-			<tr class="<?php echo "row$k"; ?>">
-				<td>
-					<a class="pointer"
-					   onclick="if (window.parent) window.parent.<?php echo $this->escape($function);?>('<?php
-					                    echo $row->id; ?>', '<?php
-					                    echo $this->escape(addslashes($row->last_name)); ?>', '<?php
-					                    echo $this->escape(addslashes($row->first_name)); ?>');"><?php echo $this->escape($row->last_name); ?></a>
-				</td>
-				<td>
-					<?php
-					echo $row->first_name;
-					?>
-				</td>
-	      <td align="center"><?php echo $row->alias;?></td>
-				<td align="center">
-					<?php echo $row->id; ?>
-				</td>
-			</tr>
-			<?php
-			$k = 1 - $k;
-		}
-		?>
-		</tbody>
+			</thead>
+			<tbody>
+			<?php $n = count($this->items); ?>
+			<?php foreach ($this->items as $i => $row) : ?>
+				<?php $link = 'index.php?option=com_tracks&view=individual&id=' . $row->id; ?>
+				<tr>
+					<td>
+						<?php echo $this->pagination->getRowOffset($i); ?>
+					</td>
+					<td>
+						<?php $itemTitle = $row->last_name; ?>
+						<a class="pointer" onclick="if (window.parent)
+							window.parent.<?php echo $this->escape($function);?>(
+							'<?php echo $row->id; ?>',
+							'<?php echo $this->escape(addslashes($row->last_name)); ?>',
+							'<?php echo $this->escape(addslashes($row->first_name)); ?>',
+							'<?php echo $this->escape(addslashes($link)); ?>');">
+							<?php echo $itemTitle; ?>
+						</a>
+					</td>
+					<td>
+						<?php echo $row->first_name; ?>
+					</td>
+					<td>
+						<?php echo $row->alias; ?>
+					</td>
+					<td>
+						<?php echo TrackslibHelperCountries::getCountryFlag($row->country_code); ?>
+					</td>
+					<td>
+						<?php echo $row->username; ?>
+					</td>
+				</tr>
+			<?php endforeach; ?>
+			</tbody>
 		</table>
-	</div>
-
-	<input type="hidden" name="task" value="" />
-	<input type="hidden" name="boxchecked" value="0" />
-	<input type="hidden" name="filter_order" value="<?php echo $this->lists->order; ?>" />
-	<input type="hidden" name="filter_order_Dir" value="<?php echo $this->lists->order_Dir; ?>" />
+		<?php echo $this->pagination->getPaginationLinks(null, array('showLimitBox' => false)); ?>
+	<?php endif; ?>
+	<input type="hidden" name="task" value=""/>
+	<input type="hidden" name="boxchecked" value="0"/>
+	<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>"/>
+	<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>"/>
+	<?php echo JHtml::_('form.token'); ?>
 </form>
-</div>
