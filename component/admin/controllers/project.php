@@ -29,6 +29,15 @@ class TracksControllerProject extends RControllerForm
 		$id	= $app->input->getInt('currentproject', 0);
 		$return = $app->input->get('return');
 
+		if ($return)
+		{
+			$this->setRedirect(base64_decode($return));
+		}
+		else
+		{
+			$this->setRedirect('index.php?option=com_tracks&view=projects');
+		}
+
 		// Update session value for project
 		if ($app->setUserState('currentproject', $id))
 		{
@@ -38,7 +47,5 @@ class TracksControllerProject extends RControllerForm
 		{
 			$this->setMessage(JText::_('COM_TRACKS_Error_while_selecting_project'), 'error');
 		}
-
-		$this->setRedirect(base64_decode($return));
 	}
 }

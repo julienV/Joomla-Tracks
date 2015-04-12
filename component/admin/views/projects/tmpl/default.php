@@ -160,6 +160,9 @@ if (($saveOrder) && ($this->canEdit))
 						<?php else : ?>
 							<?php echo JHtml::_('link', 'index.php?option=com_tracks&task=project.edit&id=' . $row->id, $itemTitle); ?>
 						<?php endif; ?>
+						 | <a href="<?php echo 'index.php?option=com_tracks&task=project.select&currentproject=' . $row->id;?>">
+							<?php echo JText::_('COM_TRACKS_SELECT'); ?>
+						</a>
 					</td>
 					<td>
 						<?php echo $row->competition_name; ?>
