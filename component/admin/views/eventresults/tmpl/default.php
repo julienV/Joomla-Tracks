@@ -122,14 +122,14 @@ RHelperAsset::load('tracksbackend.css');
 					<td>
 						<?php echo $row->team; ?>
 					</td>
-					<td class="ajaxupdate hasTooltip" object="performance" title="<?php echo RHtml::tooltipText(JText::_('COM_TRACKS_RESULTS_AJAXUPDATE_TIP')); ?>">
-						<div><?php echo $row->performance; ?></div>
+					<td class="result result-performance">
+						<input type="text" name="performance[]" value="<?php echo $row->performance; ?>"/>
 					</td>
-					<td class="ajaxupdate hasTooltip" object="rank" title="<?php echo RHtml::tooltipText(JText::_('COM_TRACKS_RESULTS_AJAXUPDATE_TIP')); ?>">
-						<div><?php echo $row->rank; ?></div>
+					<td class="result result-rank">
+						<input type="text" name="rank[]" value="<?php echo $row->rank; ?>"/>
 					</td>
-					<td class="ajaxupdate hasTooltip" object="bonuspoints" title="<?php echo RHtml::tooltipText(JText::_('COM_TRACKS_RESULTS_AJAXUPDATE_TIP')); ?>">
-						<div><?php echo $row->bonus_points; ?></div>
+					<td class="result result-bonus">
+						<input type="text" name="bonus_points[]" value="<?php echo $row->bonus_points; ?>"/>
 					</td>
 				</tr>
 			<?php endforeach; ?>

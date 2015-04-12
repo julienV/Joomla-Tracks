@@ -111,6 +111,9 @@ class TracksViewEventresults extends TrackslibViewAdmin
 		{
 			$edit = RToolbarBuilder::createEditButton('eventresult.edit');
 			$secondGroup->addButton($edit);
+
+			$rank = RToolbarBuilder::createStandardButton('eventresults.saveranks', JText::_('COM_TRACKS_SAVE_RESULTS'), 'save-results', 'icon-save');
+			$secondGroup->addButton($rank);
 		}
 
 		if ($user->authorise('core.delete', 'com_tracks'))

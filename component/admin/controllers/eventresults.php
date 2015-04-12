@@ -49,35 +49,27 @@ class TracksControllerEventresults extends RControllerAdmin
 
 	public function saveranks()
 	{
-		$option = $this->input->getCmd('option', 'com_tracks');
-
 		$cid = $this->input->getVar('cid', array(), 'post', 'array');
 		$rank = $this->input->getVar('rank', array(), 'post', 'array');
 		$bonus_points = $this->input->getVar('bonus_points', array(), 'post', 'array');
 		$performance = $this->input->getVar('performance', array(), 'post', 'array');
-		$individual = $this->input->getVar('individual', array(), 'post', 'array');
-		$team = $this->input->getVar('team', array(), 'post', 'array');
-		$event_id = $this->input->getVar('event_id', 0, 'post', 'int');
 
 		JArrayHelper::toInteger($cid);
 		JArrayHelper::toInteger($rank);
-		JArrayHelper::toInteger($individual);
-		JArrayHelper::toInteger($team);
 
-		$model = $this->getModel();
+		$model = $this->getModel('eventresults');
 
-		if ($model->saveranks($cid, $rank, $bonus_points, $performance, $individual, $team, $event_id))
+		try
 		{
-			$msg = 'Results saved';
-			$msgtype = 'message';
+			$model->saveranks($cid, $rank, $bonus_points, $performance);
+			$this->setMessage('COM_TRACKS_RESULTS_SAVED');
 		}
-		else
+		catch (RuntimeException $e)
 		{
-			$msg = 'Error saving results';
-			$msgtype = 'error';
+			$this->setMessage('COM_TRACKS_RESULTS_SAVE_ERROR' . ': ' . $e->getMessage(), 'error');
 		}
 
-		$this->setRedirect('index.php?option=com_tracks&view=eventresults&event_id=' . $event_id, $msg, $msgtype);
+		$this->setRedirect($this->getRedirectToListRoute());
 	}
 
 	/**

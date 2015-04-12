@@ -6,48 +6,21 @@
  */
 (function($){
 
-	var showInput = function() {
-		var value = $(this).text();
-		var input = $('<input type="text" name="update" value="' + value + '"/>')
-			.on('change blur', updateValue);
-		$(this).replaceWith(input);
-		input.focus();
-	};
-
-	var updateValue = function() {
-
-		var element = $(this);
-		var cell = $(this).parents('td');
-		var type = $(this).parents('td').attr('object');
-		var cb = $(this).parents('tr').find('[name="cid[]"]').val();
-
-		$.ajax({
-			url: 'index.php?option=com_tracks&task=eventresult.update&format=json',
-			data: {'cb' : cb, 'property' : type ,'value' : $(this).val()},
-			type : 'POST',
-			dataType: 'json',
-			beforeSend: function (xhr) {
-				cell.addClass('ajaxing');
-			},
-			error: function (xhr) {
-				alert('Updating value operation failed');
-			}
-		}).done(function(data) {
-			cell.removeClass('ajaxing');
-
-			if (data && (typeof(data.success) !== 'undefined')) {
-				var span = $('<div>' + data.success + '</div>')
-					.click(showInput);
-				element.replaceWith(span);
-			}
-			else {
-				alert('Updating value operation failed: ' + data.error);
-			}
-		});
-	};
-
 	$(function(){
-		$('.ajaxupdate div').click(showInput);
+		$('.result input').change(function(){
+			var row = $(this).parents('tr');
+
+			var checked = row.find('input[name="cid[]"]').attr('checked');
+
+			if (!checked) {
+				row.find('input[name="cid[]"]').attr('checked', 'checked');
+				var count = $('input[name="boxchecked"]').val();
+				$('input[name="boxchecked"]').val(count + 1);
+			}
+			row.addClass('needs-saving');
+
+			$('.save-results').removeClass('btn-default').addClass('btn-warning');
+		});
 	});
 
 })(jQuery);

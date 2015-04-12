@@ -226,26 +226,24 @@ class TracksModelEventResults extends RModelList
 	/**
 	 * Method to save ranks
 	 *
-	 * @access    public
-	 *
 	 * @return    boolean    True on success
-	 *
-	 * @since     1.5
 	 */
-	public function saveranks($cid = array(), $rank, $bonus_points, $performance, $individual, $team, $event_id)
+	public function saveranks($cid = array(), $rank, $bonus_points, $performance)
 	{
-		$row = $this->getTable('eventresult');
+		$row = $this->getTable('Eventresult', 'TracksTable');
 
 		// Update ordering values
 		for ($i = 0; $i < count($cid); $i++)
 		{
 			if (!$row->load((int) $cid[$i]))
 			{
-				// No entry yet for this player/round/project, create it
-				$row->reset();
-				$row->individual_id = $individual[$i];
-				$row->team_id = $team[$i];
-				$row->event_id = $event_id;
+				throw new RuntimeException('Result not found');
+			}
+
+			if ($row->rank != $rank[$i]
+				|| $row->bonus_points != $bonus_points[$i]
+				|| $row->performance != $performance[$i])
+			{
 				$row->rank = $rank[$i];
 				$row->bonus_points = $bonus_points[$i];
 				$row->performance = $performance[$i];
@@ -255,25 +253,6 @@ class TracksModelEventResults extends RModelList
 					$this->setError($this->_db->getErrorMsg());
 
 					return false;
-				}
-			}
-			else
-			{
-				if ($row->rank != $rank[$i]
-					|| $row->bonus_points != $bonus_points[$i]
-					|| $row->performance != $performance[$i])
-				{
-					$row->rank = $rank[$i];
-					$row->bonus_points = $bonus_points[$i];
-					$row->performance = $performance[$i];
-					$row->team_id = $team[$i];
-
-					if (!$row->store())
-					{
-						$this->setError($this->_db->getErrorMsg());
-
-						return false;
-					}
 				}
 			}
 		}
@@ -342,7 +321,7 @@ class TracksModelEventResults extends RModelList
 	 *
 	 * @throws RuntimeException
 	 */
-	protected function populateState($ordering = null, $direction = null)
+	protected function populateState($ordering = 'rank', $direction = 'ASC')
 	{
 		$event_id = JFactory::getApplication()->getUserStateFromRequest($this->context . '.event_id', 'event_id', 0, 'int');
 		$event_id = $event_id ? $event_id : JFactory::getApplication()->input->getInt('event_id', 0);
