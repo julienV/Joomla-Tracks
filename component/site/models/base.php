@@ -126,13 +126,11 @@ class baseModel extends RModel
 	function getParams($project_id = 0, $xml = '')
 	{
 		$project = $this->getProject($project_id);
+
 		if ($xml == '')
 		{
 			$params = new JRegistry;
 			$params->loadString($project->params);
-
-//        $file   = JPATH_COMPONENT_ADMINISTRATOR. '/' .'models'. '/' .'project.xml';
-//        $params = new JParameter( $project->params, $file );
 		}
 		else
 		{
@@ -141,6 +139,7 @@ class baseModel extends RModel
 				. ' WHERE project_id = ' . $this->_db->Quote($this->project_id)
 				. '   AND xml = ' . $this->_db->Quote($xml);
 			$this->_db->setQuery($query);
+
 			if ($settings = $this->_db->loadObject())
 			{
 				$params = new JRegistry;
@@ -151,6 +150,7 @@ class baseModel extends RModel
 				$params = false;
 			}
 		}
+
 		return $params;
 	}
 
