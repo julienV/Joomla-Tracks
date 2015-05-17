@@ -138,7 +138,7 @@
 			>
 		<field
 				name="vehicle_picture"
-				type="media"
+				type="rmedia"
 				label="COM_TRACKS_TEAM_VEHICLE_PICTURE"
 				description="COM_TRACKS_TEAM_VEHICLE_PICTURE_DESC"
 				class="inputbox"
