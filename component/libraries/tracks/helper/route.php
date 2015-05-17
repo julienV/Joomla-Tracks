@@ -346,8 +346,9 @@ class TrackslibHelperRoute
 	 */
 	protected static function _findItem($query)
 	{
+		$app = JFactory::getApplication();
 		$component = JComponentHelper::getComponent('com_tracks');
-		$menus	= JSite::getMenu();
+		$menus	= $app->getMenu('site');
 		$items	= $menus->getItems('component_id', $component->id);
 		$user 	= JFactory::getUser();
 

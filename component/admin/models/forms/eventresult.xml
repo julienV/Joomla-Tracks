@@ -20,7 +20,18 @@
 			label="COM_TRACKS_PARTICIPANT"
 			description="COM_TRACKS_PARTICIPANT"
 			class="inputbox"
-			required="true"/>
+			required="true">
+			<option value="">JSelect</option>
+		</field>
+
+		<field
+			name="team_id"
+			type="tracksparticipantteam"
+			label="COM_TRACKS_TEAM"
+			description="COM_TRACKS_TEAM"
+			class="inputbox">
+			<option value="">JSelect</option>
+		</field>
 
 		<field
 			name="rank"

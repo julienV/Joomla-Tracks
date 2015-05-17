@@ -17,6 +17,11 @@ defined('_JEXEC') or die();
  */
 class TracksControllerEventresult extends JControllerLegacy
 {
+	/**
+	 * Task Handler
+	 *
+	 * @return void
+	 */
 	public function update()
 	{
 		$model = $this->getModel('Eventresult');
@@ -30,6 +35,32 @@ class TracksControllerEventresult extends JControllerLegacy
 		{
 			$model->update($id, $property, $val);
 			$res->success = $val;
+		}
+		catch (Exception $e)
+		{
+			$res->error = $e->getMessage();
+		}
+
+		echo json_encode($res);
+		JFactory::getApplication()->close();
+	}
+
+	/**
+	 * Task Handler
+	 *
+	 * @return void
+	 */
+	public function participantteam()
+	{
+		$model = $this->getModel('Eventresult');
+		$individualId = $this->input->get('id');
+
+		$res = new stdclass;
+
+		try
+		{
+			$teamId = $model->getIndividualTeam($individualId);
+			$res->team_id = $teamId;
 		}
 		catch (Exception $e)
 		{

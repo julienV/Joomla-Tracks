@@ -39,6 +39,14 @@ JHtml::_('behavior.formvalidation');
 			</div>
 			<div class="control-group">
 				<div class="control-label">
+					<?php echo $this->form->getLabel('team_id'); ?>
+				</div>
+				<div class="controls">
+					<?php echo $this->form->getInput('team_id'); ?>
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="control-label">
 					<?php echo $this->form->getLabel('rank'); ?>
 				</div>
 				<div class="controls">

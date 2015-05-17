@@ -88,4 +88,24 @@ class TracksModelEventresult extends RModelAdmin
 
 		return true;
 	}
+
+	/**
+	 * get Individual Team
+	 *
+	 * @param   int  $individualId  individual id
+	 *
+	 * @return mixed
+	 */
+	public function getIndividualTeam($individualId)
+	{
+		$query = $this->_db->getQuery(true)
+			->select('team_id')
+			->from('#__tracks_participants')
+			->where('individual_id = ' . $individualId);
+
+		$this->_db->setQuery($query);
+		$res = $this->_db->loadResult();
+
+		return $res;
+	}
 }

@@ -43,6 +43,8 @@ class TracksViewEventresult extends TrackslibViewAdmin
 			$this->canConfig = true;
 		}
 
+		RHelperAsset::load('participantteam.js');
+
 		// Display the template
 		parent::display($tpl);
 	}

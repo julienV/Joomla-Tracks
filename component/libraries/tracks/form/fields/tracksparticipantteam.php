@@ -17,14 +17,14 @@ JFormHelper::loadFieldClass('list');
  * @subpackage  Library
  * @since       3.0
  */
-class JFormFieldTracksParticipant extends JFormFieldList
+class JFormFieldTracksParticipantteam extends JFormFieldList
 {
 	/**
 	 * The form field type.
 	 *
 	 * @var  string
 	 */
-	public $type = 'tracksparticipant';
+	public $type = 'tracksparticipantteam';
 
 	/**
 	 * A static cache.
@@ -76,14 +76,14 @@ class JFormFieldTracksParticipant extends JFormFieldList
 			$db = JFactory::getDbo();
 
 			$query = $db->getQuery(true)
-				->select(array($db->qn('i.id', 'value'), 'CONCAT_WS(", ", ' . $db->qn('i.last_name') . ', ' . $db->qn('i.first_name') . ') AS text'))
-				->from($db->qn('#__tracks_individuals', 'i'))
-				->join('INNER', $db->qn('#__tracks_participants', 'pa') . ' ON i.id = pa.individual_id')
+				->select(array($db->qn('t.id', 'value'), $db->qn('t.name', 'text')))
+				->from($db->qn('#__tracks_teams', 't'))
+				->join('INNER', $db->qn('#__tracks_participants', 'pa') . ' ON pa.team_id = t.id')
 				->join('INNER', $db->qn('#__tracks_projects_rounds', 'pr') . ' ON pr.project_id = pa.project_id')
 				->join('INNER', $db->qn('#__tracks_events', 'e') . ' ON e.projectround_id = pr.id')
 				->where('e.id = ' . $eventId)
-				->order('i.last_name ASC, i.first_name ASC')
-				->group('i.id');
+				->order('t.name ASC')
+				->group('t.id');
 
 			$db->setQuery($query);
 
