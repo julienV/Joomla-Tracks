@@ -8,17 +8,9 @@
 
 	$(function(){
 		$('.result input').change(function(){
-			var row = $(this).parents('tr');
-
-			var checked = row.find('input[name="cid[]"]').attr('checked');
-
-			if (!checked) {
-				row.find('input[name="cid[]"]').attr('checked', 'checked');
-				var count = $('input[name="boxchecked"]').val();
-				$('input[name="boxchecked"]').val(count + 1);
-			}
-			row.addClass('needs-saving');
-
+			var cbinputs = $(this).parents('table').find('input[name="cid[]"]');
+			cbinputs.attr('checked', 'checked');
+			$('input[name="boxchecked"]').val(cbinputs.length);
 			$('.save-results').removeClass('btn-default').addClass('btn-warning');
 		});
 	});

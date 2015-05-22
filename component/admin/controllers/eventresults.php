@@ -62,11 +62,11 @@ class TracksControllerEventresults extends RControllerAdmin
 		try
 		{
 			$model->saveranks($cid, $rank, $bonus_points, $performance);
-			$this->setMessage('COM_TRACKS_RESULTS_SAVED');
+			$this->setMessage(JText::_('COM_TRACKS_RESULTS_SAVED'));
 		}
 		catch (RuntimeException $e)
 		{
-			$this->setMessage('COM_TRACKS_RESULTS_SAVE_ERROR' . ': ' . $e->getMessage(), 'error');
+			$this->setMessage(JText::_('COM_TRACKS_RESULTS_SAVE_ERROR') . ': ' . $e->getMessage(), 'error');
 		}
 
 		$this->setRedirect($this->getRedirectToListRoute());

@@ -59,8 +59,8 @@
 		<if>
 			<equals arg1="${version}" arg2="dev" />
 			<then>
-				<gitversion workingcopy="${dirs.root}" propertyname="git.lastrevision" />
-				<gitdate workingcopy="${dirs.root}" propertyname="git.timestamp" />
+				<gitversion propertyname="git.lastrevision" />
+				<gitdate propertyname="git.timestamp" />
 				<!--<property name="version" value="rev${git.lastrevision}" override="true" />-->
 				<property name="version" value="${git.lastrevision}" override="true" />
 			</then>
