@@ -1,0 +1,14 @@
+ALTER TABLE `#__tracks_projects` ENGINE = InnoDB;
+ALTER TABLE `#__tracks_competitions` ENGINE = InnoDB;
+ALTER TABLE `#__tracks_seasons` ENGINE = InnoDB;
+ALTER TABLE `#__tracks_teams` ENGINE = InnoDB;
+ALTER TABLE `#__tracks_clubs` ENGINE = InnoDB;
+ALTER TABLE `#__tracks_individuals` ENGINE = InnoDB;
+ALTER TABLE `#__tracks_rounds` ENGINE = InnoDB;
+ALTER TABLE `#__tracks_eventtypes` ENGINE = InnoDB;
+ALTER TABLE `#__tracks_projects_rounds` ENGINE = InnoDB;
+ALTER TABLE `#__tracks_events` ENGINE = InnoDB;
+ALTER TABLE `#__tracks_participants` ENGINE = InnoDB;
+ALTER TABLE `#__tracks_projects_teams` ENGINE = InnoDB;
+ALTER TABLE `#__tracks_events_results` ENGINE = InnoDB;
+ALTER TABLE `#__tracks_project_settings` ENGINE = InnoDB;

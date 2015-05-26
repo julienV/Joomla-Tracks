@@ -15,7 +15,7 @@ defined('_JEXEC') or die();
  * @subpackage  Admin
  * @since       3.0
  */
-class TracksTableEvent extends RTable
+class TracksTableEvent extends TrackslibTable
 {
 	/**
 	 * The name of the table with category
@@ -56,6 +56,45 @@ class TracksTableEvent extends RTable
 
 			return false;
 		}
+
+		return true;
+	}
+
+	/**
+	 * Called before delete().
+	 *
+	 * @param   mixed  $pk  An optional primary key value to delete.  If not set the instance property value is used.
+	 *
+	 * @return  boolean  True on success.
+	 */
+	protected function beforeDelete($pk = null)
+	{
+		if (!parent::beforeDelete($pk))
+		{
+			return false;
+		}
+
+		return $this->deleteResults($pk);
+	}
+
+	/**
+	 * Delete project round events
+	 *
+	 * @param   mixed  $pk  An optional primary key value to delete.  If not set the instance property value is used.
+	 *
+	 * @return  boolean  True on success.
+	 */
+	protected function deleteResults($pk)
+	{
+		$pks = $this->getPkArray($pk);
+		$pks = implode(', ', RHelperArray::quote($pks));
+
+		$query = $this->_db->getQuery(true)
+			->delete('#__tracks_events_results')
+			->where('event_id IN (' . $pks. ')');
+
+		$this->_db->setQuery($query);
+		$this->_db->execute();
 
 		return true;
 	}

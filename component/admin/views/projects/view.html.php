@@ -94,6 +94,9 @@ class TracksViewProjects extends TrackslibViewAdmin
 		{
 			$new = RToolbarBuilder::createNewButton('project.add');
 			$firstGroup->addButton($new);
+
+			$copy = RToolbarBuilder::createCopyButton('projects.copy');
+			$firstGroup->addButton($copy);
 		}
 
 		if ($user->authorise('core.edit', 'com_tracks'))
