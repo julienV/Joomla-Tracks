@@ -15,7 +15,7 @@ JHtml::_('behavior.modal', 'a.modal');
 
 // Build the script
 $script = array();
-$script[] = '    function jSelectProjectround_' . $data['id'] . '(id, title, object) {';
+$script[] = '    function jSelectProjectround_' . $data['id'] . '(id, title) {';
 $script[] = '        document.id("' . $data['id'] . '_id").value = id;';
 $script[] = '        document.id("' . $data['id'] . '_name").value = title;';
 $script[] = '        SqueezeBox.close();';
