@@ -37,4 +37,58 @@ class TracksModelProjectround extends RModelAdmin
 
 		return parent::validate($form, $data, $group);
 	}
+
+	/**
+	 * Copy rounds from one project to the other
+	 *
+	 * @param   array  $cid          ids of rounds to copy
+	 * @param   int    $destination  destination project id
+	 *
+	 * @return void
+	 */
+	public function copy($cid, $destination)
+	{
+		if (empty($cid))
+		{
+			return;
+		}
+
+		foreach ($cid as $projectRoundId)
+		{
+			$projectRound = RTable::getAdminInstance('Projectround');
+			$projectRound->load($projectRoundId);
+
+			$new = clone $projectRound;
+			$new->id = null;
+			$new->project_id = $destination;
+			$new->store();
+
+			$this->copyEvents($projectRoundId, $new->id);
+		}
+	}
+
+	/**
+	 * Copy project round events from one project round to the other
+	 *
+	 * @param   int  $source       source project round id
+	 * @param   int  $destination  destination project round id
+	 *
+	 * @return void
+	 */
+	protected function copyEvents($source, $destination)
+	{
+		$query = $this->_db->getQuery(true)
+			->select('id')
+			->from('#__tracks_events')
+			->where('projectround_id = ' . $source);
+
+		$this->_db->setQuery($query);
+		$eventIds = $this->_db->loadColumn();
+
+		if ($eventIds)
+		{
+			$model = RModel::getAdminInstance('Event');
+			$model->copy($eventIds, $destination);
+		}
+	}
 }

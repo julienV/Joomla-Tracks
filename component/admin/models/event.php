@@ -43,4 +43,31 @@ class TracksModelEvent extends RModelAdmin
 
 		return $item;
 	}
+
+	/**
+	 * Copy events from one project round to the other
+	 *
+	 * @param   array  $cid          ids of events to copy
+	 * @param   int    $destination  destination project round id
+	 *
+	 * @return void
+	 */
+	public function copy($cid, $destination)
+	{
+		if (empty($cid))
+		{
+			return;
+		}
+
+		foreach ($cid as $id)
+		{
+			$event = RTable::getAdminInstance('Event');
+			$event->load($id);
+
+			$new = clone $event;
+			$new->id = null;
+			$new->projectround_id = $destination;
+			$new->store();
+		}
+	}
 }
