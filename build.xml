@@ -281,5 +281,48 @@
 			</filterchain>
         </copy>
 
+		<!-- Templates -->
+		<if>
+			<available file="overrides/site/" type="dir"/>
+			<then>
+				<copy todir="${www.dir}/templates/${www.template.site}" overwrite="true">
+					<fileset dir="${dirs.root}/overrides/site">
+						<include name="**"/>
+					</fileset>
+				</copy>
+			</then>
+		</if>
+		<if>
+			<available file="overrides/admin/" type="dir"/>
+			<then>
+				<copy todir="${www.dir}/administrator/templates/${www.template.admin}" overwrite="true">
+					<fileset dir="${dirs.root}/overrides/admin">
+						<include name="**"/>
+					</fileset>
+				</copy>
+			</then>
+		</if>
+
+		<!-- Mcv overrides -->
+		<if>
+			<available file="overrides/code/site/" type="dir"/>
+			<then>
+				<copy todir="${www.dir}/code/" overwrite="true">
+					<fileset dir="${dirs.root}/overrides/code/site">
+						<include name="**"/>
+					</fileset>
+				</copy>
+			</then>
+		</if>
+		<if>
+			<available file="overrides/code/admin/" type="dir"/>
+			<then>
+				<copy todir="${www.dir}/administrator/code/" overwrite="true">
+					<fileset dir="${dirs.root}/overrides/code/admin">
+						<include name="**"/>
+					</fileset>
+				</copy>
+			</then>
+		</if>
     </target>
 </project>
