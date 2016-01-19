@@ -1,0 +1,13 @@
+ALTER TABLE `#__tracks_competitions` ADD `params` text NOT NULL default '';
+ALTER TABLE `#__tracks_seasons` ADD `params` text NOT NULL default '';
+ALTER TABLE `#__tracks_teams` ADD `params` text NOT NULL default '';
+ALTER TABLE `#__tracks_clubs` ADD `params` text NOT NULL default '';
+ALTER TABLE `#__tracks_individuals` ADD `params` text NOT NULL default '';
+ALTER TABLE `#__tracks_rounds` ADD `params` text NOT NULL default '';
+ALTER TABLE `#__tracks_eventtypes` ADD `params` text NOT NULL default '';
+ALTER TABLE `#__tracks_projects_rounds` ADD `params` text NOT NULL default '';
+ALTER TABLE `#__tracks_events` ADD `params` text NOT NULL default '';
+ALTER TABLE `#__tracks_participants` ADD `params` text NOT NULL default '';
+ALTER TABLE `#__tracks_projects_teams` ADD `params` text NOT NULL default '';
+ALTER TABLE `#__tracks_events_results` ADD `params` text NOT NULL default '';
+ALTER TABLE `#__tracks_project_settings` ADD `params` text NOT NULL default '';
