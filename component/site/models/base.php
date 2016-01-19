@@ -180,7 +180,9 @@ class baseModel extends RModel
 			}
 			else
 			{
-				throw new RuntimeException('Missing ranking tool');
+				include_once JPATH_SITE . '/components/com_tracks/sports/default/rankingtool.php';
+
+				$this->rankingtool = new TracksRankingToolDefault($this->project_id);
 			}
 		}
 
