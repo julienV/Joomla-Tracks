@@ -122,7 +122,7 @@ class TracksModelEventResults extends RModelList
 
 		$query = $db->getQuery(true);
 
-		$query->select('rr.id, rr.individual_id, rr.team_id, rr.event_id, rr.rank');
+		$query->select('rr.id, rr.individual_id, rr.team_id, rr.event_id, rr.rank, rr.params');
 		$query->select('rr.performance, rr.bonus_points, rr.comment');
 		$query->select('CASE WHEN CHAR_LENGTH(rr.number) THEN rr.number ELSE pi.number END AS number');
 		$query->select('pi.id AS piid');
