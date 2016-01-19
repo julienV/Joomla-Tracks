@@ -20,7 +20,7 @@
 	<property name="dirs.bin.dbxsl" value="${dirs.bin}/dbxsl" />
 	<property name="dirs.bin.release" value="../release" />
 
-	<xmlproperty file="redCORE/redcore.xml" prefix="redCOREDetails" keepRoot="false" />
+	<xmlproperty file="redCORE/extensions/redcore.xml" prefix="redCOREDetails" keepRoot="false" />
 	<property
 			name="redCOREVersion"
 			value="${redCOREDetails.version}"
@@ -73,7 +73,7 @@
 	====================================================================================================
 	-->
 	<target name="copyredcore">
-		<phing phingfile="${dirs.root}/redCORE/redcore_copy_mandatory.xml"
+		<phing phingfile="${dirs.root}/redCORE/build/redcore_copy_mandatory.xml"
 			   target="copyframework"
 			   haltonfailure="true">
 			<property name="redcoretargetdir" value="${dirs.tmp}/component/redCORE" />
