@@ -13,6 +13,7 @@
 	<files>
 		<filename>bootstrap.php</filename>
 		<filename>tracks.xml</filename>
+		<folder>entity</folder>
 		<folder>form</folder>
 		<folder>helper</folder>
 		<folder>model</folder>

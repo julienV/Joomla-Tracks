@@ -73,8 +73,7 @@
 	<fields name="params">
 		<fieldset name="basic">
 			<field name="auto_time" type="text" default="1440" label="COM_TRACKS_Change_current_round_after" description=""/>
-			<field name="project_type" type="list" default="0" label="COM_TRACKS_Project_type" description="">
-				<option value="0">COM_TRACKS_Default</option>
+			<field name="project_type" type="tracks.sport" default="" label="COM_TRACKS_Project_type" description="">
 			</field>
 		</fieldset>
 		<fieldset name="Display">

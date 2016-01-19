@@ -123,7 +123,7 @@ class baseModel extends RModel
 		}
 	}
 
-	function getParams($project_id = 0, $xml = '')
+	public function getParams($project_id = 0, $xml = '')
 	{
 		$project = $this->getProject($project_id);
 
@@ -154,21 +154,36 @@ class baseModel extends RModel
 		return $params;
 	}
 
-	function _reset()
+	protected function _reset()
 	{
 		$this->project_id = 0;
 		$this->_id = 0;
 		$this->project = null;
 	}
 
-	function _getRankingTool()
+	protected function _getRankingTool()
 	{
 		if (empty($this->rankingtool))
 		{
-			// sport specific, for later ?
-			require_once(JPATH_SITE . '/' . 'components' . '/' . 'com_tracks' . '/' . 'sports' . '/' . 'default' . '/' . 'rankingtool.php');
-			$this->rankingtool = new TracksRankingTool($this->project_id);
+			$project = TrackslibEntityProject::load($this->project_id);
+			$project_type = $project->getProjectType();
+
+			$path = JPATH_SITE . '/components/com_tracks/sports/' . $project_type . '/rankingtool.php';
+
+			if (file_exists($path))
+			{
+				include_once $path;
+
+				$className = 'TracksRankingTool' . ucfirst($project_type);
+
+				$this->rankingtool = new $className($this->project_id);
+			}
+			else
+			{
+				throw new RuntimeException('Missing ranking tool');
+			}
 		}
+
 		return $this->rankingtool;
 	}
 }

@@ -17,6 +17,20 @@ if (!file_exists($redcoreLoader) || !JPluginHelper::isEnabled('system', 'redcore
 
 include_once $redcoreLoader;
 
+// Bootstraps redCORE
+RBootstrap::bootstrap();
+
+// Register library prefix
+RLoader::registerPrefix('Trackslib', __DIR__);
+
+// Make available the fields
+JFormHelper::addFieldPath(JPATH_LIBRARIES . '/tracks/form/field');
+JFormHelper::addFieldPath(JPATH_LIBRARIES . '/tracks/form/fields');
+
+// Make available the form rules
+JFormHelper::addRulePath(JPATH_LIBRARIES . '/tracks/form/rule');
+JFormHelper::addRulePath(JPATH_LIBRARIES . '/tracks/form/rules');
+
 /**
  * Tracks bootstrap class
  *
@@ -38,23 +52,11 @@ class TrackslibBootstrap
 			// Sets bootstrapped variable, to avoid bootstrapping rEDEVENT twice
 			define('TRACKS_BOOTSTRAPPED', 1);
 
-			// Bootstraps redCORE
-			RBootstrap::bootstrap();
-
 			// For Joomla! 2.5 compatibility we load bootstrap2
 			if (version_compare(JVERSION, '3.0', '<') && JFactory::getApplication()->input->get('view') == 'config')
 			{
 				RHtmlMedia::setFramework('bootstrap2');
 			}
-
-			// Register library prefix
-			RLoader::registerPrefix('Trackslib', __DIR__);
-
-			// Make available the fields
-			JFormHelper::addFieldPath(JPATH_LIBRARIES . '/tracks/form/fields');
-
-			// Make available the form rules
-			JFormHelper::addRulePath(JPATH_LIBRARIES . '/tracks/form/rules');
 		}
 	}
 }

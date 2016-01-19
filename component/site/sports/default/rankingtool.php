@@ -14,7 +14,7 @@
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die();
 
-class TracksRankingTool extends JObject {
+class TracksRankingToolDefault extends JObject {
 
 	/**
 	 * project id
@@ -223,7 +223,7 @@ class TracksRankingTool extends JObject {
 	{
 		if (empty($this->_results))
 		{
-			$query =  ' SELECT rr.individual_id as id, rr.rank, rr.bonus_points, rr.team_id, '
+			$query =  ' SELECT rr.individual_id as id, rr.rank, rr.bonus_points, rr.team_id, rr.params, '
 			. '   sr.projectround_id, srt.points_attribution, srt.count_points '
 			. ' FROM #__tracks_events_results AS rr '
 			. ' INNER JOIN #__tracks_events AS sr ON sr.id = rr.event_id '
