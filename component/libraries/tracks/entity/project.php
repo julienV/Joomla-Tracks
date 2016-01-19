@@ -31,6 +31,6 @@ class TrackslibEntityProject extends TrackslibEntityBase
 
 		$params = new JRegistry($item->params);
 
-		return $params->get('project_type', 'default');
+		return $params->get('project_type') ?: 'default';
 	}
 }
