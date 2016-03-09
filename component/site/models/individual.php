@@ -214,7 +214,7 @@ class TracksModelIndividual extends RModelAdmin
 			$query->where('srt.count_points = 1');
 		}
 
-		if ($params->get('indview_results_ordering', 1) == 0)
+		if ($params->get('indview_results_ordering', 'ASC') == 'DESC')
 		{
 			$query->order('s.ordering DESC, c.ordering DESC, p.ordering DESC, pr.ordering ASC, psr.ordering ASC');
 		}

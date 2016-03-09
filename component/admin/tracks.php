@@ -32,6 +32,7 @@ include_once $redcoreLoader;
 
 // Bootstraps redCORE
 RBootstrap::bootstrap();
+RHtmlMedia::setFramework('bootstrap3');
 
 // Register libraray
 RLoader::registerPrefix('Trackslib', JPATH_LIBRARIES . '/tracks');

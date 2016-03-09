@@ -99,6 +99,9 @@
 		<!-- Create the package -->
 		<tar basedir="${dirs.tmp}/component" destfile="${dirs.release}/com_tracks-${version}.tar.gz" includeemptydirs="true" compression="gzip" />
 		<zip basedir="${dirs.tmp}/component" destfile="${dirs.release}/com_tracks-${version}.zip" includeemptydirs="true" />
+		<!-- Light version without redcore -->
+		<delete dir="${dirs.tmp}/component/redCORE" quiet="yes" includeemptydirs="false" />
+		<zip basedir="${dirs.tmp}/component" destfile="${dirs.release}/com_tracks-${version}_no_redCORE.zip" includeemptydirs="true" />
 
 		<!-- admin modules -->
 		<foreach param="dirname" absparam="absname" target="zipfolder">

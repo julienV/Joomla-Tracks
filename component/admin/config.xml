@@ -83,12 +83,10 @@
 			<option value="0">COM_TRACKS_No</option>
 			<option value="1">COM_TRACKS_Yes</option>
 		</field>
-		<field type="list" name="indview_results_showrank" default="1"
+		<field type="list" name="indview_results_ordering" default="1"
 			label="COM_TRACKS_INDIVIDUAL_RESULTS_ORDERING" description="COM_TRACKS_INDIVIDUAL_RESULTS_ORDERING_DESC">
-			<option value="0">COM_TRACKS_INDIVIDUAL_RESULTS_ORDERING_ASC
-			</option>
-			<option value="1">COM_TRACKS_INDIVIDUAL_RESULTS_ORDERING_DES
-			</option>
+			<option value="ASC">COM_TRACKS_INDIVIDUAL_RESULTS_ORDERING_ASC</option>
+			<option value="DESC">COM_TRACKS_INDIVIDUAL_RESULTS_ORDERING_DES</option>
 		</field>
 
 
