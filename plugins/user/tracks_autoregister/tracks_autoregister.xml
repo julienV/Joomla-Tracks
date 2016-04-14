@@ -7,7 +7,8 @@
 	<authorUrl>http://www.jlv-solutions.com</authorUrl>
 	<copyright>(C) 2010 Julien Vonthron. All rights reserved.</copyright>
 	<license>http://www.gnu.org/licenses/gpl-3.0.html GNU/GPL</license>
-	<version>##VERSION##</version>
+	<version>3.0.1</version>
+	<tag>##VERSION##</tag>
 	<description>PLG_USER_TRACKS_AUTOREGISTER_XML_DESCRIPTION</description>
 
 	<files>

@@ -7,11 +7,12 @@
 	<name>mod_tracks_ranking</name>
  	<author>Julien Vonthron</author>
  	<authorEmail>julien.vonthron@gmail.com</authorEmail>
-   <authorUrl>http://www.jlv-solutions.com</authorUrl>	
+   <authorUrl>http://www.jlv-solutions.com</authorUrl>
 	<creationDate>##DATE##</creationDate>
  	<copyright>(C) 2008,2009,2010 Julien Vonthron. All rights reserved.</copyright>
  	<license>http://www.gnu.org/licenses/gpl.html</license>
-	<version>##VERSION##</version>
+	<version>3.0.1</version>
+	<tag>##VERSION##</tag>
 	<description>MOD_TRACKS_RANKING_DESC</description>
 	<files>
 		<filename module="mod_tracks_ranking">mod_tracks_ranking.php</filename>
@@ -19,10 +20,10 @@
     <filename>index.html</filename>
     <filename>helper.php</filename>
     <filename>tmpl/default.php</filename>
-    <filename>tmpl/index.html</filename>  
+    <filename>tmpl/index.html</filename>
     <folder>language</folder>
 	</files>
-	
+
 	<config>
 		<fields name="params">
 			<fieldset name="basic">
@@ -43,7 +44,7 @@
 		    <field name="picturesize" type="text" default="20" label="MOD_TRACKS_RANKING_picture_size_label" description="MOD_TRACKS_RANKING_picture_size_DESC" />
 
 		  </fieldset>
-		  
+
 			<fieldset
 				name="advanced">
 				<field
@@ -79,7 +80,7 @@
 			</fieldset>
 		</fields>
 	</config>
-	
+
 	<!-- UPDATESERVER DEFINITION -->
 	<updateservers>
 		<!-- Note: No spaces or linebreaks allowed between the server tags -->

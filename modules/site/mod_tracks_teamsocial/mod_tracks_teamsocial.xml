@@ -11,7 +11,8 @@
 	<creationDate>##DATE##</creationDate>
 	<copyright>(C) 2013 Julien Vonthron. All rights reserved.</copyright>
 	<license>http://www.gnu.org/licenses/gpl.html</license>
-	<version>##VERSION##</version>
+	<version>3.0.1</version>
+	<tag>##VERSION##</tag>
 	<description>MOD_TRACKS_TEAMSOCIAL_XML_DESC</description>
 	<files>
 		<filename module="mod_tracks_teamsocial">mod_tracks_teamsocial.php</filename>
