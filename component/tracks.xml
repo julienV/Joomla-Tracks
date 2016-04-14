@@ -8,7 +8,7 @@
 	<copyright>(C) 2008-2015 Julien Vonthron. All rights	reserved.</copyright>
 	<license>http://www.gnu.org/licenses/gpl.html</license>
 	<version>##VERSION##</version>
-	<redcore version="1.7.3" defaultFramework="bootstrap2"/>
+	<redcore version="1.8.3" defaultFramework="bootstrap2"/>
 	<description>COM_TRACKS_XML_DESC</description>
 
 	<!-- Runs on install/uninstall/update -->
