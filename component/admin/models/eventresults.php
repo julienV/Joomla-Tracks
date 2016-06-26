@@ -284,15 +284,34 @@ class TracksModelEventResults extends RModelList
 	{
 		$project_id = $this->getProjectId();
 
+		if (!$eventId = $this->getState('event_id'))
+		{
+			return false;
+		}
+
 		if ($project_id)
 		{
-			$query = ' INSERT IGNORE INTO #__tracks_events_results (individual_id, team_id, event_id) '
+			// Get current event participants
+			$query = $this->_db->getQuery(true)
+				->select('individual_id')
+				->from('#__tracks_events_results')
+				->where('event_id = ' . $eventId);
+			$this->_db->setQuery($query);
+			$current = $this->_db->loadColumn();
+
+			$this->_db->setQuery($query);
+			$res = $this->_db->loadObjectList();
+			$query = ' INSERT INTO #__tracks_events_results (individual_id, team_id, event_id) '
 				. ' SELECT pi.individual_id, pi.team_id, ' . $this->getState('event_id')
 				. ' FROM #__tracks_participants AS pi '
 				. ' WHERE pi.project_id = ' . $project_id;
-			$this->_db->setQuery($query);
 
-			$this->_db->execute();
+			if ($current)
+			{
+				$query .= ' AND pi.individual_id NOT IN (' . implode(', ', $current) . ')';
+			}
+
+			$this->_db->setQuery($query);
 
 			if (!$this->_db->execute())
 			{
