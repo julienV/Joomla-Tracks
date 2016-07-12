@@ -1,9 +1,78 @@
-.bzr
-.bzrignore
-.project
-.buildpath
-.settings
+# transifex
 .tx
 
 release
 build/build.properties
+
+# OSX
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# PHPStorm
+.idea/
+
+# Eclipse
+.buildpath
+.project
+.settings
+
+# Netbeans (custom)
+.netbeans/*
+/nbproject/*
+
+# Temp files
+*.tmp
+*.bak
+*.swp
+*~.nib
+*~
+
+# Phing build script
+build/build.properties
+phing-latest.phar
+.dist
+release
+
+# Build config
+gulp-config.json
+node_modules
+releases
+
+# Packages #
+*.zip
+*.tar.*
+
+# phpunit
+tests/unit/phpunit.xml
+
+# composer
+composer.phar
+tests/vendor/*
+
+# Robo
+robo.phar
+
+# Test related files
+tests/acceptance.suite.yml
+tests/functional.suite.yml
+tests/unit.suite.yml
+tests/joomla-cms3*
+tests/_output
+selenium-server-standalone.jar
+codecept.phar
+selenium.log
+selenium-errors.log
+tests/_support/_generated/*
+tests/checkers/phpcs/*
+
+# Never ignore
+!.gitignore
+!index.html
+!index.php
+

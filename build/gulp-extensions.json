@@ -1,0 +1,17 @@
+{
+	"components" : ["tracks"],
+	"libraries" : ["tracks"],
+	"modules" : {
+		"frontend" : [
+			"mod_tracks_ranking",
+			"mod_tracks_results",
+			"mod_tracks_teamranking",
+			"mod_tracks_teamsocial"
+		]
+	},
+	"plugins" : {
+		"editors-xtd" : ["tracks_individual"],
+		"search" : ["trackssearch"],
+		"user" : ["tracks_autoregister"]
+	}
+}
