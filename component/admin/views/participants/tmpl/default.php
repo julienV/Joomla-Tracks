@@ -86,10 +86,10 @@ $search = $this->state->get('filter.search');
 					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_NUMBER', 'obj.number', $listDirn, $listOrder); ?>
 				</th>
 				<th class="title" width="auto">
-					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_NAME', 'obj.name', $listDirn, $listOrder); ?>
+					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_NAME', 'i.last_name', $listDirn, $listOrder); ?>
 				</th>
 				<th class="title" width="auto">
-					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_TEAM', 'obj.team', $listDirn, $listOrder); ?>
+					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_TEAM', 'team', $listDirn, $listOrder); ?>
 				</th>
 			</tr>
 			</thead>
@@ -137,7 +137,5 @@ $search = $this->state->get('filter.search');
 	<?php endif; ?>
 	<input type="hidden" name="task" value=""/>
 	<input type="hidden" name="boxchecked" value="0"/>
-	<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>"/>
-	<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>"/>
 	<?php echo JHtml::_('form.token'); ?>
 </form>

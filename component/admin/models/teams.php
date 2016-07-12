@@ -51,8 +51,12 @@ class TracksModelTeams extends TrackslibModelList
 		{
 			$config['filter_fields'] = array(
 				'name', 'obj.name',
+				'short_name', 'obj.short_name',
+				'acronym', 'obj.acronym',
 				'id', 'obj.id',
 				'ordering', 'obj.ordering',
+				'obj.country_code',
+				'u.name'
 			);
 		}
 

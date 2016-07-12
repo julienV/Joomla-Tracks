@@ -53,6 +53,7 @@ class TracksModelProjectrounds extends TrackslibModelList
 				'name', 'r.name',
 				'start_date', 'obj.start_date',
 				'ordering', 'obj.ordering',
+				'obj.id', 'obj.published'
 			);
 		}
 

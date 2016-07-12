@@ -50,9 +50,10 @@ class TracksModelParticipants extends TrackslibModelList
 		if (empty($config['filter_fields']))
 		{
 			$config['filter_fields'] = array(
-				'name', 'obj.name',
+				'name', 'i.last_name',
 				'id', 'obj.id',
 				'ordering', 'obj.ordering',
+				'obj.number', 'team'
 			);
 		}
 

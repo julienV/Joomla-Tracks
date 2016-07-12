@@ -53,6 +53,7 @@ class TracksModelRounds extends TrackslibModelList
 				'name', 'obj.name',
 				'id', 'obj.id',
 				'ordering', 'obj.ordering',
+				'obj.published', 'obj.country'
 			);
 		}
 

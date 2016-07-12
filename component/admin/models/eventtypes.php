@@ -52,6 +52,7 @@ class TracksModelEventtypes extends TrackslibModelList
 				'name', 'obj.name',
 				'id', 'obj.id',
 				'ordering', 'obj.ordering',
+				'obj.count_points'
 			);
 		}
 

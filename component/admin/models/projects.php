@@ -54,6 +54,7 @@ class TracksModelProjects extends TrackslibModelList
 				'id', 'obj.id',
 				's.name', 'c.name',
 				'ordering', 'obj.ordering',
+				'obj.published', 'published'
 			);
 		}
 

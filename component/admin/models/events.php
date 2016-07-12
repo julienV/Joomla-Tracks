@@ -54,6 +54,7 @@ class TracksModelEvents extends TrackslibModelList
 				'id', 'obj.id',
 				'start_date', 'obj.start_date',
 				'ordering', 'obj.ordering',
+				'obj.published'
 			);
 		}
 

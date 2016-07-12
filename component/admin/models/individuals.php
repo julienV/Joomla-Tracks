@@ -50,6 +50,7 @@ class TracksModelIndividuals extends TrackslibModelList
 		{
 			$config['filter_fields'] = array(
 				'last_name', 'obj.last_name',
+				'obj.alias',
 				'first_name', 'obj.first_name',
 				'obj.country_code',
 				'id', 'obj.id',
