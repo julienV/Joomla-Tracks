@@ -1,5 +1,17 @@
 @CHARSET "UTF-8";
 
+.chzn-drop {
+	min-width: 150px !important;
+}
+
+.chzn-container-multi .chzn-choices li.search-field input[type="text"], .chzn-container-single .chzn-single {
+	width: 100% !important;
+}
+
+.redcore input[type=text], .redcore input[type=url], .redcore input[type=email] {
+	height: 20px !important;
+}
+
 form.eventresults td.ajaxupdate div {
 	height: 1em;
 	cursor: pointer;
