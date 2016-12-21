@@ -23,13 +23,12 @@ jimport( 'joomla.application.component.view');
  * @package		Tracks
  * @since 0.1
  */
-class TracksView extends JView
+class TracksView extends RViewBase
 {
     function display($tpl = null)
     {
-    	$document  = JFactory::getDocument();
-	    //add css and submenu to document
-	    $document->addStyleSheet(JUri::root() . 'media/com_tracks/css/tracksbackend.css');
+        RHelperAsset::load('tracksbackend.css', 'com_tracks');
+
     	parent::display($tpl);
     }
 }

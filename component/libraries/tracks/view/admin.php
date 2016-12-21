@@ -137,6 +137,8 @@ abstract class TrackslibViewAdmin extends RViewAdmin
 			$this->projectSwitch = $this->get('ProjectSwitchForm');
 		}
 
+		RHelperAsset::load('tracksbackend.css', 'com_tracks');
+
 		return parent::display($tpl);
 	}
 }
