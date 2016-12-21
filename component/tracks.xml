@@ -7,9 +7,9 @@
 	<creationDate>##DATE##</creationDate>
 	<copyright>(C) 2008-2015 Julien Vonthron. All rights	reserved.</copyright>
 	<license>http://www.gnu.org/licenses/gpl.html</license>
-	<version>3.0.2</version>
+	<version>3.0.3</version>
 	<tag>##VERSION##</tag>
-	<redcore version="1.8.7" defaultFramework="bootstrap2"/>
+	<redcore version="1.8.8" defaultFramework="bootstrap2"/>
 	<description>COM_TRACKS_XML_DESC</description>
 
 	<!-- Runs on install/uninstall/update -->
@@ -100,4 +100,8 @@
 	<libraries>
 		<library name="tracks"/>
 	</libraries>
+
+	<updateservers>
+		<server type="extension" priority="1" name="Tracks update">https://gist.githubusercontent.com/julienV/e17d59ccf8b329b4e8f6bdb09f392b3e/raw</server>
+	</updateservers>
 </extension>
