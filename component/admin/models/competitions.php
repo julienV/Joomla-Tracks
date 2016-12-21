@@ -53,6 +53,8 @@ class TracksModelCompetitions extends TrackslibModelList
 				'name', 'obj.name',
 				'id', 'obj.id',
 				'ordering', 'obj.ordering',
+				// for filters
+				'published',
 			);
 		}
 
