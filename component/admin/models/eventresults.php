@@ -286,6 +286,8 @@ class TracksModelEventResults extends RModelList
 
 		if (!$eventId = $this->getState('event_id'))
 		{
+			$this->setError('missing event_id');
+
 			return false;
 		}
 
@@ -296,11 +298,10 @@ class TracksModelEventResults extends RModelList
 				->select('individual_id')
 				->from('#__tracks_events_results')
 				->where('event_id = ' . $eventId);
+
 			$this->_db->setQuery($query);
 			$current = $this->_db->loadColumn();
 
-			$this->_db->setQuery($query);
-			$res = $this->_db->loadObjectList();
 			$query = ' INSERT INTO #__tracks_events_results (individual_id, team_id, event_id) '
 				. ' SELECT pi.individual_id, pi.team_id, ' . $this->getState('event_id')
 				. ' FROM #__tracks_participants AS pi '
