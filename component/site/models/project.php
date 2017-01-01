@@ -14,7 +14,7 @@ defined('_JEXEC') or die('Restricted access');
  * @package  Tracks
  * @since    0.1
  */
-class TracksModelProject extends TracksModelFrontbase
+class TracksModelProject extends TrackslibModelFrontbase
 {
 	var $_rounds = null;
 

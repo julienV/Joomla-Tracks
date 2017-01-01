@@ -131,7 +131,7 @@ class TracksRankingToolDefault extends JObject
 
 					if ($r->points_attribution && isset($points_attrib[$r->rank - 1]))
 					{
-						$points += (int) $points_attrib[$r->rank - 1];
+						$points += (float) $points_attrib[$r->rank - 1];
 					}
 
 					if ($r->rank > 0)

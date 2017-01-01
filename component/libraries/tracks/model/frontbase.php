@@ -16,7 +16,7 @@ jimport('joomla.application.component.model');
  * @package  Tracks
  * @since    0.1
  */
-class TracksModelFrontbase extends RModel
+class TrackslibModelFrontbase extends RModel
 {
 	/**
 	 * associated project

@@ -14,7 +14,7 @@ defined('_JEXEC') or die('Restricted access');
  * @package  Tracks
  * @since    0.1
  */
-class TracksModelProjects extends TracksModelFrontbase
+class TracksModelProjects extends TrackslibModelFrontbase
 {
 	/**
 	 * Gets the published projects (season and competition have to be published too)

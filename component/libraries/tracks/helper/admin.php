@@ -34,7 +34,7 @@ abstract class TrackslibHelperAdmin
 				'items' => array(
 					array(
 						'view' => 'projects',
-						'link' => 'index.php?option=com_tracks&view=events',
+						'link' => 'index.php?option=com_tracks&view=projects',
 						'icon' => 'icon-flag-checkered',
 						'text' => JText::_('COM_TRACKS_PROJECTS'),
 						'stats' => static::getProjectStats(),

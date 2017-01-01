@@ -14,7 +14,7 @@ defined('_JEXEC') or die('Restricted access');
  * @package  Tracks
  * @since    0.1
  */
-class TracksModelRound extends TracksModelFrontbase
+class TracksModelRound extends TrackslibModelFrontbase
 {
 	/**
 	 * Get round

@@ -14,7 +14,7 @@ defined('_JEXEC') or die('Restricted access');
  * @package  Tracks
  * @since    0.1
  */
-class TracksModelProfile extends TracksModelFrontbase
+class TracksModelProfile extends TrackslibModelFrontbase
 {
 	/** individual id **/
 	var $_id = 0;

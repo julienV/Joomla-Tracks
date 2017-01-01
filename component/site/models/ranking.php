@@ -14,7 +14,7 @@ defined('_JEXEC') or die('Restricted access');
  * @package  Tracks
  * @since    0.1
  */
-class TracksModelRanking extends TracksModelFrontbase
+class TracksModelRanking extends TrackslibModelFrontbase
 {
 	/**
 	 * reference to ranking class

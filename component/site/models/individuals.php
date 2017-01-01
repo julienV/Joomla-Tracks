@@ -14,7 +14,7 @@ defined('_JEXEC') or die('Restricted access');
  * @package  Tracks
  * @since    0.1
  */
-class TracksModelIndividuals extends TracksModelFrontbase
+class TracksModelIndividuals extends TrackslibModelFrontbase
 {
 	/**
 	 * Get data

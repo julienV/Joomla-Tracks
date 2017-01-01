@@ -14,7 +14,7 @@ defined('_JEXEC') or die('Restricted access');
  * @package  Tracks
  * @since    0.1
  */
-class TracksModelRoundResult extends TracksModelFrontbase
+class TracksModelRoundResult extends TrackslibModelFrontbase
 {
 	var $subrounds;
 
