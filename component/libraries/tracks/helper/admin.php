@@ -21,10 +21,9 @@ abstract class TrackslibHelperAdmin
 	 *
 	 * @return array
 	 */
-	public static function getAdminMenuItems()
+	public static function getAdminMenuItems($getCurrent = false)
 	{
 		$return = base64_encode('index.php?option=com_tracks');
-		$configurationLink = 'index.php?option=com_redcore&view=config&layout=edit&component=com_tracks&return=' . $return;
 
 		$items = array(
 			'structure' => array(
@@ -116,6 +115,36 @@ abstract class TrackslibHelperAdmin
 				)
 			),
 		);
+
+		if ($getCurrent && $currentproject = JFactory::getApplication()->getUserState('currentproject'))
+		{
+			$project = TrackslibEntityProject::load($currentproject);
+
+			$projectMenu = array(
+				'current' => array(
+					'icon' => 'icon-flag-checkered',
+					'text' => $project->name,
+					'items' => array(
+						array(
+							'view' => 'projectrounds',
+							'link' => 'index.php?option=com_tracks&view=projectrounds',
+							'icon' => 'icon-calendar-empty',
+							'text' => JText::_('COM_TRACKS_PROJECT_ROUNDS'),
+							'access' => 'core.edit'
+						),
+						array(
+							'view' => 'participants',
+							'link' => 'index.php?option=com_tracks&view=participants',
+							'icon' => 'icon-user',
+							'text' => JText::_('COM_TRACKS_PARTICIPANTS'),
+							'access' => 'core.edit'
+						),
+					)
+				)
+			);
+
+			$items = array_merge($projectMenu, $items);
+		}
 
 		JPluginHelper::importPlugin('tracks');
 		$dispatcher = RFactory::getDispatcher();
