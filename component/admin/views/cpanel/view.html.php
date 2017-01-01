@@ -48,6 +48,6 @@ class TracksViewCpanel extends TrackslibViewAdmin
 	 */
 	public function getTitle()
 	{
-		return JText::_('COM_TRACKS_CPANEL');
+		return false;
 	}
 }

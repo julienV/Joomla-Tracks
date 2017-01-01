@@ -14,7 +14,7 @@ defined('_JEXEC') or die('Restricted access');
  * @package  Tracks.Library
  * @since    3.0.5
  */
-abstract class TracksHelperAdmin
+abstract class TrackslibHelperAdmin
 {
 	/**
 	 * Return items for building menus
@@ -29,14 +29,14 @@ abstract class TracksHelperAdmin
 		$items = array(
 			'structure' => array(
 				'icon' => 'icon-flag-checkered',
-				'text' => JText::_('COM_TRACKS_CPANEL_TITLE_STRUCTURE'),
+				'text' => JText::_('COM_TRACKS_STRUCTURE'),
 				'items' => array(
 					array(
 						'view' => 'projects',
 						'link' => 'index.php?option=com_tracks&view=events',
 						'icon' => 'icon-flag-checkered',
 						'text' => JText::_('COM_TRACKS_PROJECTS'),
-						'count' => static::getProjectCount(),
+						'stats' => static::getProjectStats(),
 						'access' => 'core.edit'
 					),
 					array(
@@ -44,7 +44,7 @@ abstract class TracksHelperAdmin
 						'link' => 'index.php?option=com_tracks&view=competitions',
 						'icon' => 'icon-trophy',
 						'text' => JText::_('COM_TRACKS_COMPETITIONS'),
-						'count' => static::getCompetitionCount(),
+						'stats' => static::getCompetitionStats(),
 						'access' => 'core.edit'
 					),
 					array(
@@ -52,7 +52,7 @@ abstract class TracksHelperAdmin
 						'link' => 'index.php?option=com_tracks&view=seasons',
 						'icon' => 'icon-calendar',
 						'text' => JText::_('COM_TRACKS_SEASONS'),
-						'count' => static::getSeasonCount(),
+						'stats' => static::getSeasonStats(),
 						'access' => 'core.edit'
 					),
 					array(
@@ -60,15 +60,15 @@ abstract class TracksHelperAdmin
 						'link' => 'index.php?option=com_tracks&view=rounds',
 						'icon' => 'icon-map-marker',
 						'text' => JText::_('COM_TRACKS_ROUNDS'),
-						'count' => static::getRoundCount(),
+						'stats' => static::getRoundStats(),
 						'access' => 'core.edit'
 					),
 					array(
 						'view' => 'eventtypes',
 						'link' => 'index.php?option=com_tracks&view=eventtypes',
-						'icon' => 'icon-calendar-plus-o',
+						'icon' => 'icon-sort-by-attributes',
 						'text' => JText::_('COM_TRACKS_EVENTTYPES'),
-						'count' => static::getEventtypeCount(),
+						'stats' => static::getEventtypeStats(),
 						'access' => 'core.edit'
 					),
 				)
@@ -82,7 +82,7 @@ abstract class TracksHelperAdmin
 						'link' => 'index.php?option=com_tracks&view=individuals',
 						'icon' => 'icon-user',
 						'text' => JText::_('COM_TRACKS_INDIVIDUALS'),
-						'count' => static::getIndividualCount(),
+						'stats' => static::getIndividualStats(),
 						'access' => 'core.edit'
 					),
 					array(
@@ -90,7 +90,7 @@ abstract class TracksHelperAdmin
 						'link' => 'index.php?option=com_tracks&view=teams',
 						'icon' => 'icon-group',
 						'text' => JText::_('COM_TRACKS_TEAMS'),
-						'count' => static::getTeamsCount(),
+						'stats' => static::getTeamsStats(),
 						'access' => 'core.edit'
 					),
 				)
@@ -129,7 +129,7 @@ abstract class TracksHelperAdmin
 	 *
 	 * @return array
 	 */
-	public static function getProjectCount()
+	public static function getProjectStats()
 	{
 		$db = JFactory::getDbo();
 
@@ -147,7 +147,7 @@ abstract class TracksHelperAdmin
 	 *
 	 * @return array
 	 */
-	public static function getCompetitionCount()
+	public static function getCompetitionStats()
 	{
 		$db = JFactory::getDbo();
 
@@ -165,7 +165,7 @@ abstract class TracksHelperAdmin
 	 *
 	 * @return array
 	 */
-	public static function getSeasonCount()
+	public static function getSeasonStats()
 	{
 		$db = JFactory::getDbo();
 
@@ -183,7 +183,7 @@ abstract class TracksHelperAdmin
 	 *
 	 * @return array
 	 */
-	public static function getRoundCount()
+	public static function getRoundStats()
 	{
 		$db = JFactory::getDbo();
 
@@ -201,7 +201,7 @@ abstract class TracksHelperAdmin
 	 *
 	 * @return array
 	 */
-	public static function getEventtypeCount()
+	public static function getEventtypeStats()
 	{
 		$db = JFactory::getDbo();
 
@@ -219,7 +219,7 @@ abstract class TracksHelperAdmin
 	 *
 	 * @return array
 	 */
-	public static function getIndividualCount()
+	public static function getIndividualStats()
 	{
 		$db = JFactory::getDbo();
 
@@ -237,7 +237,7 @@ abstract class TracksHelperAdmin
 	 *
 	 * @return array
 	 */
-	public static function getTeamsCount()
+	public static function getTeamsStats()
 	{
 		$db = JFactory::getDbo();
 

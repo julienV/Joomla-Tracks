@@ -7,7 +7,7 @@
  */
 defined('_JEXEC') or die('Restricted access');
 
-$items = TracksHelperAdmin::getAdminMenuItems();
+$items = TrackslibHelperAdmin::getAdminMenuItems();
 
 $i = 1;
 ?>
@@ -34,8 +34,8 @@ $i = 1;
 												<div class="tracks-cpanel-icon">
 													<i class="<?= $item['icon'] ?> icon-5x"></i>
 												</div>
-												<?php if (!empty($item['count'])): ?>
-													<span class="badge tracks-cpanel-count"><?= $item['count'] ?></span>
+												<?php if (!empty($item['stats'])): ?>
+													<span class="badge tracks-cpanel-count"><?= $item['stats']['total'] ?></span>
 												<?php endif; ?>
 											</div>
 											<div class="tracks-cpanel-text">
@@ -58,7 +58,7 @@ $i = 1;
 						<?php echo JText::_('COM_TRACKS_VERSION'); ?>
 					</strong>
 					<span class="badge badge-success pull-right" title="<?php echo JText::_('COM_TRACKS_VERSION'); ?>">
-						<?php echo TracksHelperAdmin::getVersion(); ?>
+						<?php echo TrackslibHelperAdmin::getVersion(); ?>
 					</span>
 				</div>
 			</div>
