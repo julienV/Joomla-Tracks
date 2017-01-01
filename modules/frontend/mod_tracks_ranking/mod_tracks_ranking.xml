@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension
+	type="module"
+	version="1.7"
+	client="site"
+	method="upgrade">
+	<name>mod_tracks_ranking</name>
+ 	<author>Julien Vonthron</author>
+ 	<authorEmail>julien.vonthron@gmail.com</authorEmail>
+   <authorUrl>http://www.jlv-solutions.com</authorUrl>
+	<creationDate>##DATE##</creationDate>
+ 	<copyright>(C) 2008,2009,2010 Julien Vonthron. All rights reserved.</copyright>
+ 	<license>http://www.gnu.org/licenses/gpl.html</license>
+	<version>3.0.1</version>
+	<tag>##VERSION##</tag>
+	<description>MOD_TRACKS_RANKING_DESC</description>
+	<files>
+		<filename module="mod_tracks_ranking">mod_tracks_ranking.php</filename>
+		<filename>mod_tracks_ranking.css</filename>
+    <filename>index.html</filename>
+    <filename>helper.php</filename>
+    <filename>tmpl/default.php</filename>
+    <filename>tmpl/index.html</filename>
+    <folder>language</folder>
+	</files>
+
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="count" type="text" default="5" label="MOD_TRACKS_RANKING_Count" description="MOD_TRACKS_RANKING_The_number_of_rows_to_display" />
+		    <field name="usecurrent" type="radio" default="0" label="MOD_TRACKS_RANKING_use_current_label" description="MOD_TRACKS_RANKING_use_current_DESC">
+		      <option value="0">JNo</option>
+		      <option value="1">JYes</option>
+		    </field>
+				<field name="project_id" type="sql" default="" label="MOD_TRACKS_RANKING_Select_a_project" description="MOD_TRACKS_RANKING_SELECT_A_PROJECT_DESC" query="SELECT name AS project_id, id AS value FROM #__tracks_projects ORDER BY name ASC" />
+				<field name="showteams" type="radio" default="1" label="MOD_TRACKS_RANKING_Show_teams" description="">
+		      <option value="0">JNo</option>
+		      <option value="1">JYes</option>
+		    </field>
+		    <field name="showpicture" type="radio" default="1" label="MOD_TRACKS_RANKING_Show_picture_label" description="MOD_TRACKS_RANKING_Show_picture_DESC">
+		      <option value="0">JNo</option>
+		      <option value="1">JYes</option>
+		    </field>
+		    <field name="picturesize" type="text" default="20" label="MOD_TRACKS_RANKING_picture_size_label" description="MOD_TRACKS_RANKING_picture_size_DESC" />
+
+		  </fieldset>
+
+			<fieldset
+				name="advanced">
+				<field
+					name="layout"
+					type="modulelayout"
+					label="JFIELD_ALT_LAYOUT_LABEL"
+					description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+
+				<field
+					name="moduleclass_sfx"
+					type="text"
+					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+
+				<field
+					name="cache"
+					type="list"
+					default="1"
+					label="COM_MODULES_FIELD_CACHING_LABEL"
+					description="COM_MODULES_FIELD_CACHING_DESC">
+					<option
+						value="1">JGLOBAL_USE_GLOBAL</option>
+					<option
+						value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+
+				<field
+					name="cache_time"
+					type="text"
+					default="900"
+					label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+					description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
+			</fieldset>
+		</fields>
+	</config>
+
+	<!-- UPDATESERVER DEFINITION -->
+	<updateservers>
+		<!-- Note: No spaces or linebreaks allowed between the server tags -->
+		<server type="extension" priority="1" name="Tracks Update Site">http://www.jlv-solutions.com/updates/tracks-update.xml</server>
+	</updateservers>
+</extension>
