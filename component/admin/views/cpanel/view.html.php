@@ -36,6 +36,7 @@ class TracksViewCpanel extends TrackslibViewAdmin
 	public function display($tpl = null)
 	{
 		$this->user = JFactory::getUser();
+		$this->version = $this->get('Version');
 
 		parent::display($tpl);
 	}
