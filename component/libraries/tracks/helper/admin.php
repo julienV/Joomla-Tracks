@@ -27,7 +27,7 @@ abstract class TrackslibHelperAdmin
 
 		$items = array(
 			'structure' => array(
-				'icon' => 'icon-flag-checkered',
+				'icon' => 'icon-plus',
 				'text' => JText::_('COM_TRACKS_STRUCTURE'),
 				'items' => array(
 					array(
@@ -122,7 +122,7 @@ abstract class TrackslibHelperAdmin
 
 			$projectMenu = array(
 				'current' => array(
-					'icon' => 'icon-flag-checkered',
+					'icon' => 'icon-hand-right',
 					'text' => $project->name,
 					'items' => array(
 						array(
