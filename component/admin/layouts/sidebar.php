@@ -8,6 +8,8 @@
 
 defined('_JEXEC') or die();
 
+jimport('tracks.bootstrap');
+
 $user = JFactory::getUser();
 $active = null;
 $data = $displayData;
@@ -20,6 +22,8 @@ if (isset($data['active']))
 // Project switcher
 $uri = JUri::getInstance();
 $return = base64_encode('index.php' . $uri->toString(array('query')));
+
+RHelperAsset::load('tracksbackend.css', 'com_tracks');
 
 $icons = TrackslibHelperAdmin::getAdminMenuItems(true);
 ?>
