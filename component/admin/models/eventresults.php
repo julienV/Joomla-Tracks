@@ -226,9 +226,14 @@ class TracksModelEventResults extends RModelList
 	/**
 	 * Method to save ranks
 	 *
-	 * @return    boolean    True on success
+	 * @param   array  $cid           result ids
+	 * @param   array  $rank          ranks
+	 * @param   array  $bonus_points  bonus points
+	 * @param   array  $performance   performances
+	 *
+	 * @return bool
 	 */
-	public function saveranks($cid = array(), $rank, $bonus_points, $performance)
+	public function saveranks($cid, $rank, $bonus_points, $performance)
 	{
 		$row = $this->getTable('Eventresult', 'TracksTable');
 

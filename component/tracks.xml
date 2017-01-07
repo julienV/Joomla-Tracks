@@ -81,9 +81,7 @@
 			<filename>index.html</filename>
 			<filename>license.txt</filename>
 			<filename>tracks.php</filename>
-			<folder>abstract</folder>
 			<folder>controllers</folder>
-			<folder>elements</folder>
 			<folder>help</folder>
 			<folder>language</folder>
 			<folder>layouts</folder>

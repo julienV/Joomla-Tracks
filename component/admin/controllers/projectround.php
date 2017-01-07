@@ -17,6 +17,13 @@ defined('_JEXEC') or die();
  */
 class TracksControllerProjectround extends RControllerForm
 {
+	/**
+	 * Save a copy
+	 *
+	 * @return void
+	 *
+	 * @throws Exception
+	 */
 	public function savecopy()
 	{
 		$option     = $this->input->getCmd('option', '');
@@ -43,6 +50,8 @@ class TracksControllerProjectround extends RControllerForm
 
 	/**
 	 * Articles
+	 *
+	 * @return void
 	 */
 	public function element()
 	{
@@ -54,6 +63,7 @@ class TracksControllerProjectround extends RControllerForm
 
 	/**
 	 * display the copy form
+	 *
 	 * @return void
 	 */
 	public function copy()

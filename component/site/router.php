@@ -12,7 +12,7 @@
  *
  * @return array
  */
-function TracksBuildRoute(&$query)
+function tracksBuildRoute(&$query)
 {
 	$segments = array();
 
@@ -92,7 +92,7 @@ function TracksBuildRoute(&$query)
  *
  * @return array
  */
-function TracksParseRoute($segments)
+function tracksParseRoute($segments)
 {
 	$vars = array();
 

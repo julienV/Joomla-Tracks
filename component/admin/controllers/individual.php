@@ -30,6 +30,8 @@ class TracksControllerIndividual extends RControllerForm
 
 	/**
 	 * assign multiple individual to a project
+	 *
+	 * @return void
 	 */
 	public function assign()
 	{
@@ -69,7 +71,7 @@ class TracksControllerIndividual extends RControllerForm
 
 		foreach ($cid as $k => $id)
 		{
-			$row = new stdclass();
+			$row = new stdclass;
 			$row->individual_id = $cid[$k];
 			$row->team_id       = $team_id[$k];
 			$row->number        = $numbers[$k];
@@ -104,13 +106,15 @@ class TracksControllerIndividual extends RControllerForm
 
 	/**
 	 * individual element
+	 *
+	 * @return void
 	 */
 	public function element()
 	{
-		$model  = $this->getModel( 'individuals' );
-		$view = $this->getView( 'individuals', 'html' );
-		$view->setLayout( 'element' );
-		$view->setModel( $model, true );
+		$model  = $this->getModel('individuals');
+		$view = $this->getView('individuals', 'html');
+		$view->setLayout('element');
+		$view->setModel($model, true);
 		$view->display();
 	}
 }

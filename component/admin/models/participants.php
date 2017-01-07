@@ -93,7 +93,8 @@ class TracksModelParticipants extends TrackslibModelList
 					'obj.*',
 					'i.last_name, i.first_name',
 					't.name AS team'
-				))
+				)
+			)
 		);
 		$query->from($db->qn('#__tracks_participants', 'obj'));
 		$query->join('INNER', $db->qn('#__tracks_individuals', 'i') . ' ON ' . $db->qn('obj.individual_id') . ' = ' . $db->qn('i.id'));

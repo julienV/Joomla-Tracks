@@ -40,6 +40,11 @@ class TracksControllerEventresults extends RControllerAdmin
 		$this->setRedirect($this->getRedirectToListRoute());
 	}
 
+	/**
+	 * go back
+	 *
+	 * @return void
+	 */
 	public function back()
 	{
 		$model = $this->getModel('eventresults');
@@ -47,6 +52,11 @@ class TracksControllerEventresults extends RControllerAdmin
 		$this->setRedirect('index.php?option=com_tracks&view=events&projectround_id=' . $infos->projectround_id);
 	}
 
+	/**
+	 * save ranks
+	 *
+	 * @return void
+	 */
 	public function saveranks()
 	{
 		$cid = $this->input->getVar('cid', array(), 'post', 'array');

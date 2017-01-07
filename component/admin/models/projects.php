@@ -54,7 +54,7 @@ class TracksModelProjects extends TrackslibModelList
 				'id', 'obj.id',
 				's.name', 'c.name',
 				'ordering', 'obj.ordering',
-				// for filters
+				// For filters
 				'published', 'competition', 'season'
 			);
 		}

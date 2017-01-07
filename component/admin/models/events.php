@@ -130,7 +130,6 @@ class TracksModelEvents extends TrackslibModelList
 		return parent::populateState($ordering, $direction);
 	}
 
-
 	/**
 	 * Build an SQL query to load the list data.
 	 *

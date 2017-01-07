@@ -1,72 +1,52 @@
 <?php
 /**
-* @version    $Id: competition.php 10 2008-02-03 13:19:59Z julienv $ 
-* @package    JoomlaTracks
-* @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
-* @license		GNU/GPL, see LICENSE.php
-* Joomla Tracks is free software. This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-* See COPYRIGHT.php for copyright notices and details.
-*/
+ * @package     Tracks
+ * @subpackage  Admin
+ * @copyright   Tracks (C) 2008-2015 Julien Vonthron. All rights reserved.
+ * @license     GNU General Public License version 2 or later
+ */
 
-// no direct access
-defined('_JEXEC') or die('Restricted access');
+defined('_JEXEC') or die();
 
 // Include library dependencies
 jimport('joomla.filter.input');
 
 /**
-* Competitions Table class
-*
-* @package		Tracks
-* @since 0.1
-*/
-class TableProjectsetting extends JTable
+ * Competitions Table class
+ *
+ * @package  Tracks
+ * @since    0.1
+ */
+class TableProjectsetting extends TrackslibTable
 {
 	/**
-	 * Constructor
+	 * The name of the table
 	 *
-	 * @param object Database connector object
-	 * @since 1.0
+	 * @var string
 	 */
-	function __construct(& $db) {
-		parent::__construct('#__tracks_project_settings', 'id', $db);
-	}
+	protected $_tableName = 'tracks_project_settings';
 
 	/**
-	 * Overloaded check method to ensure data integrity
+	 * Method to bind an associative array or object to the JTable instance.This
+	 * method only binds properties that are publicly accessible and optionally
+	 * takes an array of properties to ignore when binding.
 	 *
-	 * @access public
-	 * @return boolean True on success
-	 * @since 1.0
+	 * @param   mixed  $src     An associative array or object to bind to the JTable instance.
+	 * @param   mixed  $ignore  An optional array or space separated list of properties to ignore while binding.
+	 *
+	 * @return  boolean  True on success.
+	 *
+	 * @throws  InvalidArgumentException
 	 */
-	function check()
+	public function bind($src, $ignore = array())
 	{
-		//should check name unicity
-		return true;
-	}
-	
+		if (key_exists('settings', $src) && is_array($src['settings']))
+		{
+			$registry = new JRegistry;
+			$registry->loadArray($src['settings']);
+			$array['settings'] = $registry->toString();
+		}
 
-  /**
-   * Overloaded bind function
-   *
-   * @acces public
-   * @param array $hash named array
-   * @return null|string  null is operation was satisfactory, otherwise returns an error
-   * @see JTable:bind
-   * @since 1.5
-   */
-  function bind($array, $ignore = '')
-  {
-    if (key_exists( 'settings', $array ) && is_array( $array['settings'] )) {
-      $registry = new JRegistry();
-      $registry->loadArray($array['settings']);
-      $array['settings'] = $registry->toString();
-    }
-    //print_r($array);exit;
-    return parent::bind($array, $ignore);
-  }
+		return parent::bind($src, $ignore);
+	}
 }
-?>

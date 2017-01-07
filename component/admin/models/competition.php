@@ -17,5 +17,4 @@ defined('_JEXEC') or die();
  */
 class TracksModelCompetition extends RModelAdmin
 {
-
 }
