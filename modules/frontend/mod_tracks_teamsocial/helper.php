@@ -15,7 +15,7 @@ defined('_JEXEC') or die('Restricted access');
  * @subpackage  Modules.site
  * @since       1.0
  */
-class modTracksTeamsocial
+class ModTracksTeamsocial
 {
 	/**
 	 * return items to display

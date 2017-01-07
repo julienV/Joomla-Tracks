@@ -1,13 +1,21 @@
 <?php
+/**
+ * @package     Tracks
+ * @subpackage  Admin
+ * @copyright   Tracks (C) 2008-2015 Julien Vonthron. All rights reserved.
+ * @license     GNU General Public License version 2 or later
+ */
 
-// Check to ensure this file is included in Joomla!
-defined( '_JEXEC' ) or die( 'Restricted access' );
+defined('_JEXEC') or die();
 
 jimport('joomla.filesystem.folder');
 JFormHelper::loadFieldClass('list');
 
 /**
- * Session form field class
+ * Country form field class
+ *
+ * @package  Tracks
+ * @since    1.0
  */
 class JFormFieldCountry extends JFormFieldList
 {

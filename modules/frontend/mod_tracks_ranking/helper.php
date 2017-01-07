@@ -15,7 +15,7 @@ defined('_JEXEC') or die('Restricted access');
  * @subpackage  Modules.site
  * @since       1.0
  */
-class modTracksRanking
+class ModTracksRanking
 {
 	/**
 	 * instance of the ranking model

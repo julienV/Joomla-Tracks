@@ -29,7 +29,7 @@ jimport('joomla.plugin.plugin');
  * @subpackage  Plugins.site
  * @since       1.0
  */
-class plgSearchTrackssearch extends JPlugin
+class PlgSearchTrackssearch extends JPlugin
 {
 	/**
 	 * Constructor

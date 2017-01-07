@@ -1,14 +1,12 @@
 <?php
 /**
- * @package    Tracks.Site
- * @copyright  Tracks (C) 2008-2015 Julien Vonthron. All rights reserved.
- * @license    GNU General Public License version 2 or later
+ * @package     Tracks
+ * @subpackage  Library
+ * @copyright   Tracks (C) 2008-2015 Julien Vonthron. All rights reserved.
+ * @license     GNU General Public License version 2 or later
  */
 
-// No direct access
-defined('_JEXEC') or die('Restricted access');
-
-jimport( 'joomla.application.component.view');
+defined('_JEXEC') or die;
 
 /**
  * HTML View class for the Tracks component

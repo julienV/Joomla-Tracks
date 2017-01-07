@@ -21,18 +21,21 @@ include_once $tracksLoader;
 TrackslibBootstrap::bootstrap();
 
 // Include the syndicate functions only once
-require_once (dirname(__FILE__). '/' .'helper.php');
+require_once dirname(__FILE__) . '/helper.php';
 
-$limit = intval( $params->get('count', 5) );
-$showteams = intval( $params->get('showteams', 1) );
-$showpoints = intval( $params->get('showpoints', 1) );
+$limit      = intval($params->get('count', 5));
+$showteams  = intval($params->get('showteams', 1));
+$showpoints = intval($params->get('showpoints', 1));
 
-if (!$params->get('project_id')) return JText::_('No_project_specified');
+if (!$params->get('project_id'))
+{
+	return JText::_('No_project_specified');
+}
 
-$helper = new modTracksResults();
+$helper = new ModTracksResults;
 
 $project = $helper->getProject($params);
-$round = $helper->getRound($params);
-$list = $helper->getList($params);
+$round   = $helper->getRound($params);
+$list    = $helper->getList($params);
 
-require(JModuleHelper::getLayoutPath('mod_tracks_results'));
+require JModuleHelper::getLayoutPath('mod_tracks_results');

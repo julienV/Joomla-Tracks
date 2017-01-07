@@ -87,4 +87,3 @@ class TracksControllerTeam extends RControllerForm
 		return ($item->admin_id && $item->admin_id == $user->id) || JFactory::getUser()->authorise('core.edit', 'com_tracks');
 	}
 }
-

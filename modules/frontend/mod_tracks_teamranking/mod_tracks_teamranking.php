@@ -30,7 +30,7 @@ if (!$params->get('project_id'))
 	return JText::_('MOD_TRACKS_TEAM_RANKING_No_project_specified');
 }
 
-$helper = new modTracksTeamRanking;
+$helper = new ModTracksTeamRanking;
 
 $project = $helper->getProject($params);
 
@@ -43,4 +43,4 @@ if (!$project)
 
 $list = $helper->getList($params);
 
-require(JModuleHelper::getLayoutPath('mod_tracks_teamranking'));
+require JModuleHelper::getLayoutPath('mod_tracks_teamranking');

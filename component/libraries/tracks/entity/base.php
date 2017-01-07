@@ -565,6 +565,7 @@ abstract class TrackslibEntityBase
 		}
 
 		$class = get_called_class();
+
 		if (empty(static::$instances[$class][$id]))
 		{
 			static::$instances[$class][$id] = new static($id);

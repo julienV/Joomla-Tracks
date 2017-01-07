@@ -19,6 +19,8 @@ abstract class TrackslibHelperAdmin
 	/**
 	 * Return items for building menus
 	 *
+	 * @param   bool  $getCurrent  get current
+	 *
 	 * @return array
 	 */
 	public static function getAdminMenuItems($getCurrent = false)

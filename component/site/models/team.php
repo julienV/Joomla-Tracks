@@ -1,54 +1,63 @@
 <?php
 /**
- * @version      $Id: roundresult.php 61 2008-04-24 15:20:36Z julienv $
- * @package      JoomlaTracks
- * @copyright    Copyright (C) 2008 Julien Vonthron. All rights reserved.
- * @license      GNU/GPL, see LICENSE.php
- * Joomla Tracks is free software. This version may have been modified pursuant
- * to the GNU General Public License, and as distributed it includes or
- * is derivative of works licensed under the GNU General Public License or
- * other free or open source software licenses.
- * See COPYRIGHT.php for copyright notices and details.
+ * @package    Tracks.Site
+ * @copyright  Tracks (C) 2008-2015 Julien Vonthron. All rights reserved.
+ * @license    GNU General Public License version 2 or later
  */
 
-// Check to ensure this file is included in Joomla!
-defined('_JEXEC') or die();
-
-jimport('joomla.application.component.model');
-require_once('base.php');
+// No direct access
+defined('_JEXEC') or die('Restricted access');
 
 /**
  * Joomla Tracks Component Front page Model
  *
- * @package     Tracks
- * @since       0.1
+ * @package  Tracks
+ * @since    0.1
  */
 class TracksModelTeam extends RModelAdmin
 {
 	protected $_id;
+
 	protected $project_id;
+
 	protected $_individuals;
 
+	/**
+	 * TracksModelTeam constructor.
+	 *
+	 * @param   array  $config  config
+	 */
 	public function __construct($config = array())
 	{
 		parent::__construct($config);
 
-		$id = JRequest::getInt('id');
+		$id      = JRequest::getInt('id');
 		$project = JRequest::getInt('p');
 
 		$this->setId($id);
 		$this->project_id = $project;
 	}
 
-
-	function setId($id)
+	/**
+	 * Set id
+	 *
+	 * @param   int  $id  id
+	 *
+	 * @return void
+	 */
+	public function setId($id)
 	{
-		$this->_id = (int) $id;
-		$this->_data = null;
+		$this->_id          = (int) $id;
+		$this->_data        = null;
 		$this->_individuals = null;
 	}
 
-	function getItem()
+	/**
+	 * get item
+	 *
+	 * @return mixed
+	 */
+	public function getItem()
 	{
 		if (empty($this->_data))
 		{
@@ -67,7 +76,12 @@ class TracksModelTeam extends RModelAdmin
 		return $this->_data;
 	}
 
-	function getIndividuals()
+	/**
+	 * get individuals
+	 *
+	 * @return array
+	 */
+	public function getIndividuals()
 	{
 		if (empty($this->_individuals))
 		{
@@ -84,19 +98,22 @@ class TracksModelTeam extends RModelAdmin
 			$this->_db->setQuery($query);
 			$res = $this->_db->loadObjectList();
 
-			// sort by projects
+			// Sort by projects
 			$proj = array();
+
 			foreach ((array) $res as $i)
 			{
 				if (!isset($proj[$i->project_id]))
 				{
 					$proj[$i->project_id] = array();
 				}
+
 				$proj[$i->project_id][] = $i;
 			}
 
 			$this->_individuals = $proj;
 		}
+
 		return $this->_individuals;
 	}
 
@@ -130,11 +147,13 @@ class TracksModelTeam extends RModelAdmin
 	 * @param   string  $field      field name
 	 *
 	 * @return array valid data
+	 *
+	 * @throws Exception
 	 */
 	protected function getPicture($validData, $data, $field)
 	{
-		$params = JComponentHelper::getParams('com_tracks');
-		$files = JFactory::getApplication()->input->files->get('jform', '', array());
+		$params     = JComponentHelper::getParams('com_tracks');
+		$files      = JFactory::getApplication()->input->files->get('jform', '', array());
 		$targetpath = 'images/' . $params->get('default_team_images_folder', 'tracks/teams');
 
 		if (!isset($files[$field]) || !$picture = $files[$field])

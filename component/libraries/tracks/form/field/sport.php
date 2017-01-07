@@ -37,7 +37,6 @@ class TracksFormFieldSport extends JFormFieldList
 
 		$folders = JFolder::folders(JPATH_SITE . '/components/com_tracks/sports');
 
-
 		foreach ($folders as $folder)
 		{
 			$options[] = array('value' => $folder, 'text' => $folder);

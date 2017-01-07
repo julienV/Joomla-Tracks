@@ -21,7 +21,7 @@ include_once $tracksLoader;
 TrackslibBootstrap::bootstrap();
 
 // Include the syndicate functions only once
-require_once (dirname(__FILE__). '/' .'helper.php');
+require_once dirname(__FILE__) . '/helper.php';
 
 $team_id = 0;
 
@@ -47,12 +47,12 @@ if (!$team_id)
 	return;
 }
 
-$helper = new modTracksTeamsocial;
+$helper = new ModTracksTeamsocial;
 
 $links = $helper->getTeamLinks($team_id);
 
 // Add css file
 $document = JFactory::getDocument();
-$document->addStyleSheet(JURI::base().'modules/mod_tracks_teamsocial/mod_tracks_teamsocial.css');
+$document->addStyleSheet(JURI::base() . 'modules/mod_tracks_teamsocial/mod_tracks_teamsocial.css');
 
-require(JModuleHelper::getLayoutPath('mod_tracks_teamsocial'));
+require JModuleHelper::getLayoutPath('mod_tracks_teamsocial');

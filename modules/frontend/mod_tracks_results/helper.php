@@ -15,7 +15,7 @@ defined('_JEXEC') or die('Restricted access');
  * @subpackage  Modules.site
  * @since       1.0
  */
-class modTracksResults
+class ModTracksResults
 {
 	/**
 	 * instance of the ranking model
@@ -31,6 +31,11 @@ class modTracksResults
 	 */
 	var $_round = null;
 
+	/**
+	 * Get model
+	 *
+	 * @return object|TracksModelRoundResult
+	 */
 	protected function _getModel()
 	{
 		if ($this->_model == null)
@@ -42,6 +47,13 @@ class modTracksResults
 		return $this->_model;
 	}
 
+	/**
+	 * Get list
+	 *
+	 * @param   JRegistry  &$params  params
+	 *
+	 * @return null
+	 */
 	public function getList(&$params)
 	{
 		$model = $this->_getModel();
@@ -58,6 +70,13 @@ class modTracksResults
 		}
 	}
 
+	/**
+	 * Get project
+	 *
+	 * @param   JRegistry  &$params  params
+	 *
+	 * @return object
+	 */
 	public function getProject(&$params)
 	{
 		$model = $this->_getModel();
@@ -65,6 +84,13 @@ class modTracksResults
 		return $model->getProject($params->get('project_id'));
 	}
 
+	/**
+	 * Get round
+	 *
+	 * @param   JRegistry  &$params  params
+	 *
+	 * @return object
+	 */
 	public function getRound(&$params)
 	{
 		if ($this->_round)
@@ -106,7 +132,8 @@ class modTracksResults
 				}
 				else
 				{
-					break; // rounds need to have at least a start date for this module !
+					// Rounds need to have at least a start date for this module !
+					break;
 				}
 
 				$this->_round = $r;

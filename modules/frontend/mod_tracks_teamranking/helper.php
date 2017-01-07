@@ -15,7 +15,7 @@ defined('_JEXEC') or die('Restricted access');
  * @subpackage  Modules.site
  * @since       1.0
  */
-class modTracksTeamRanking
+class ModTracksTeamRanking
 {
 	/**
 	 * instance of the ranking model
@@ -24,6 +24,13 @@ class modTracksTeamRanking
 	 */
 	protected $_model = null;
 
+	/**
+	 * Get model
+	 *
+	 * @param   JRegistry  $params  params
+	 *
+	 * @return object|TracksModelTeamRanking
+	 */
 	protected function _getModel($params)
 	{
 		if ($this->_model == null)
@@ -36,6 +43,13 @@ class modTracksTeamRanking
 		return $this->_model;
 	}
 
+	/**
+	 * Get List
+	 *
+	 * @param   JRegistry  &$params  params
+	 *
+	 * @return string
+	 */
 	public function getList(&$params)
 	{
 		$model = $this->_getModel($params);
@@ -43,6 +57,13 @@ class modTracksTeamRanking
 		return $model->getTeamRankings();
 	}
 
+	/**
+	 * Get Project
+	 *
+	 * @param   JRegistry  &$params  params
+	 *
+	 * @return string
+	 */
 	public function getProject(&$params)
 	{
 		$model = $this->_getModel($params);
