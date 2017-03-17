@@ -100,7 +100,7 @@ abstract class TrackslibHelperTools
 	 *
 	 * @return float points
 	 */
-	public function getSubroundPoints($result)
+	public static function getSubroundPoints($result)
 	{
 		$points = $result->bonus_points;
 
