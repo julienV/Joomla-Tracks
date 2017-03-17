@@ -99,17 +99,25 @@ class TracksViewParticipants extends TrackslibViewAdmin
 		if ($user->authorise('core.edit', 'com_tracks'))
 		{
 			$edit = RToolbarBuilder::createEditButton('participant.edit');
-			$secondGroup->addButton($edit);
+			$firstGroup->addButton($edit);
 		}
 
 		if ($user->authorise('core.delete', 'com_tracks'))
 		{
 			$delete = RToolbarBuilder::createDeleteButton('participants.delete');
-			$fourthGroup->addButton($delete);
+			$firstGroup->addButton($delete);
+		}
+
+		if ($user->authorise('core.edit', 'com_tracks'))
+		{
+			$button = RToolbarBuilder::createStandardButton(
+				'participants.addToAllEvents', JText::_('COM_TRACKS_PARTICIPANTS_ADD_TO_ALL_EVENTS'), '', 'icon-plus', true
+			);
+			$secondGroup->addButton($button);
 		}
 
 		$toolbar = new RToolbar;
-		$toolbar->addGroup($firstGroup)->addGroup($secondGroup)->addGroup($thirdGroup)->addGroup($fourthGroup);
+		$toolbar->addGroup($firstGroup)->addGroup($secondGroup);
 
 		return $toolbar;
 	}

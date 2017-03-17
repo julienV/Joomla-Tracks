@@ -62,6 +62,44 @@ class TracksModelParticipants extends TrackslibModelList
 	}
 
 	/**
+	 * Add a participant to all rounds
+	 *
+	 * @param   int  $participantId  participant id
+	 *
+	 * @return void
+	 */
+	public function addToAllRounds($participantId)
+	{
+		$db    = JFactory::getDbo();
+		$query = $db->getQuery(true)
+			->select('DISTINCT e.id AS event_id, p.individual_id, p.team_id, p.number')
+			->from('#__tracks_participants AS p')
+			->innerJoin('#__tracks_projects_rounds AS pr ON pr.project_id = p.project_id')
+			->innerJoin('#__tracks_events AS e ON e.projectround_id = pr.id')
+			->leftJoin('#__tracks_events_results AS rr ON rr.event_id = e.id AND rr.individual_id = p.individual_id AND rr.team_id = p.team_id')
+			->where('p.id = ' . (int) $participantId)
+			->where('rr.id IS NULL');
+
+		$db->setQuery($query);
+
+		if (!$res = $db->loadObjectList())
+		{
+			return;
+		}
+
+		foreach ($res as $row)
+		{
+			$table = $this->getTable('Eventresult', 'TracksTable');
+			$table->individual_id = $row->individual_id;
+			$table->team_id = $row->team_id;
+			$table->number = $row->number;
+			$table->event_id = $row->event_id;
+
+			$table->store();
+		}
+	}
+
+	/**
 	 * Method to get a store id based on model configuration state.
 	 *
 	 * @param   string  $id  A prefix for the store id.

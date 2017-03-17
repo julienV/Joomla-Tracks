@@ -17,4 +17,27 @@ defined('_JEXEC') or die();
  */
 class TracksControllerParticipants extends RControllerAdmin
 {
+	/**
+	 * Add selected participants to all project round events
+	 *
+	 * @return void
+	 */
+	public function addToAllEvents()
+	{
+		// Check for request forgeries.
+		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+
+		// Get the input
+		$pks = $this->input->post->get('cid', array(), 'array');
+
+		$model = $this->getModel('participants');
+
+		foreach ($pks as $participantId)
+		{
+			$model->addToAllRounds($participantId);
+		}
+
+		// Set redirect
+		$this->setRedirect($this->getRedirectToListRoute(), JText::_('COM_TRACKS_PARTICIPANTS_ADD_TO_ALL_EVENTS_SUCCESS'));
+	}
 }
