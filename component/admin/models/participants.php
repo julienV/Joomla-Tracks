@@ -53,6 +53,8 @@ class TracksModelParticipants extends TrackslibModelList
 				'name', 'obj.name',
 				'id', 'obj.id',
 				'ordering', 'obj.ordering',
+				'i.last_name', 'i.first_name',
+				'obj.number', 't.name',
 			);
 		}
 
@@ -121,5 +123,20 @@ class TracksModelParticipants extends TrackslibModelList
 		$query->order($db->escape($this->getState('list.ordering', 'i.last_name')) . ' ' . $db->escape($this->getState('list.direction', 'ASC')));
 
 		return $query;
+	}
+
+	/**
+	 * Method to auto-populate the model state.
+	 *
+	 * @param   string  $ordering   An optional ordering field.
+	 * @param   string  $direction  An optional direction (asc|desc).
+	 *
+	 * @return  void
+	 *
+	 * @since   1.0.0
+	 */
+	protected function populateState($ordering = null, $direction = null)
+	{
+		return parent::populateState($ordering ?: 'i.last_name', $direction ?: 'ASC');
 	}
 }
