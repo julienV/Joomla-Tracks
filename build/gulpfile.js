@@ -4,6 +4,8 @@ const config  = require('./config.js');
 // Release
 const release = require('./release.js');
 
+const langxml = require('./langxml.js');
+
 // Tests
 const phpcs = require('gulp-phpcs');
 gulp.task('phpcs', function () {

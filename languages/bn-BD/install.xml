@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="file" version="1.7.0" method="upgrade">
+	<name>Tracks bn-BD</name>
+	<author>Julien Vonthron</author>
+	<authorEmail>julien.vonthron@gmail.com</authorEmail>
+	<authorUrl>http://www.jlv-solutions.com</authorUrl>
+	<creationDate>##DATE##</creationDate>
+	<copyright>(C) 2008-2017 Julien Vonthron. All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl.html</license>
+	<version>3.0.5</version>
+	<tag>##VERSION##</tag>
+	<description>Tracks bn-BD</description>
+
+	<fileset>
+		<files folder="admin" target="administrator/language">
+			<folder>bn-BD</folder>
+		</files>
+		<files folder="site" target="language">
+			<folder>bn-BD</folder>
+		</files>
+	</fileset>
+</extension>
