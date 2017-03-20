@@ -25,7 +25,8 @@ gulp.task('release',
 	[
 		'release:tracks',
 		'release:plugins',
-		'release:modules'
+		'release:modules',
+		'release:languages'
 	], function() {
 		fs.readFile( '../component/tracks.xml', function(err, data) {
 			parser.parseString(data, function (err, result) {
