@@ -18,7 +18,7 @@ class TrackslibEntityProject extends TrackslibEntityBase
 	/**
 	 * Return project type
 	 *
-	 * @return bool|mixed
+	 * @return boolean|mixed
 	 */
 	public function getProjectType()
 	{
@@ -32,5 +32,29 @@ class TrackslibEntityProject extends TrackslibEntityBase
 		$params = new JRegistry($item->params);
 
 		return $params->get('project_type') ?: 'default';
+	}
+
+	/**
+	 * Get a param
+	 *
+	 * @param   string   $name     param name
+	 * @param   mixed    $default  default value if not found
+	 *
+	 * @return mixed
+	 *
+	 * @throws LogicException
+	 */
+	public function getParam($name, $default = null)
+	{
+		$item = $this->loadItem();
+
+		if (!$item)
+		{
+			throw new LogicException('Project not loaded in entity');
+		}
+
+		$params = new JRegistry($item->params);
+
+		return $params->get($name, $default);
 	}
 }

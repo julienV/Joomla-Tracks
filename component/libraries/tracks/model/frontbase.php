@@ -149,9 +149,9 @@ class TrackslibModelFrontbase extends RModel
 
 		$this->_db->setQuery($query);
 
-		if ($result = $this->_db->loadObjectList())
+		if ($result = $this->_db->loadObject())
 		{
-			$this->project = $result[0];
+			$this->project = $result;
 
 			return $this->project;
 		}

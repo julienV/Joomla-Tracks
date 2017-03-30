@@ -32,7 +32,7 @@ class TracksViewRanking extends RViewSite
 
 		$model = $this->getModel();
 		$rankings = $model->getRankings($project_id);
-		$project = $model->getProject($project_id);
+		$project = TrackslibEntityProject::load($project_id);
 
 		$params = $model->getParams($project_id);
 
