@@ -125,41 +125,42 @@ class TracksRankingToolDefault extends JObject
 				$points = $r->bonus_points;
 
 				// Points for the round only if countpoints is set to true
-				if ($r->count_points)
+				if ($r->count_points && $r->global_rank)
 				{
 					$points_attrib = explode(',', $r->points_attribution);
 
-					if ($r->points_attribution && isset($points_attrib[$r->rank - 1]))
+					if ($r->points_attribution && isset($points_attrib[$r->global_rank - 1]))
 					{
-						$points += (float) $points_attrib[$r->rank - 1];
-					}
-
-					// Add in Stats
-					if ($r->rank > 0 && $r->enable_stats)
-					{
-						// -> rank = 0 means 'did not participate'
-						if ($individuals[$r->id]->best_rank)
-						{
-							$individuals[$r->id]->best_rank = min($individuals[$r->id]->best_rank, $r->rank);
-						}
-						else
-						{
-							// Best_rank was 0, not a rank
-							$individuals[$r->id]->best_rank = $r->rank;
-						}
-
-						if ($r->rank == 1)
-						{
-							$individuals[$r->id]->wins++;
-						}
-
-						$individuals[$r->id]->finishes[] = $r->rank;
+						$points += (float) $points_attrib[$r->global_rank - 1];
 					}
 				}
 
 				$individuals[$r->id]->points += $points;
+
+				// Add in Stats
+				if ($r->rank > 0 && $r->enable_stats)
+				{
+					// -> rank = 0 means 'did not participate'
+					if ($individuals[$r->id]->best_rank)
+					{
+						$individuals[$r->id]->best_rank = min($individuals[$r->id]->best_rank, $r->global_rank);
+					}
+					else
+					{
+						// Best_rank was 0, not a rank
+						$individuals[$r->id]->best_rank = $r->global_rank;
+					}
+
+					if ($r->global_rank == 1)
+					{
+						$individuals[$r->id]->wins++;
+					}
+
+					$individuals[$r->id]->finishes[] = $r->global_rank;
+				}
 			}
 
+			// Project ranking
 			uasort($individuals, array($this, "orderRankings"));
 
 			$rank     = 1;
@@ -238,17 +239,21 @@ class TracksRankingToolDefault extends JObject
 	{
 		if (empty($this->_results))
 		{
-			$query = ' SELECT rr.individual_id as id, rr.rank, rr.bonus_points, rr.team_id, rr.params, '
-				. '   sr.projectround_id, srt.points_attribution, srt.count_points, srt.enable_stats '
-				. ' FROM #__tracks_events_results AS rr '
-				. ' INNER JOIN #__tracks_events AS sr ON sr.id = rr.event_id '
-				. ' INNER JOIN #__tracks_eventtypes AS srt ON srt.id = sr.type '
-				. ' INNER JOIN #__tracks_projects_rounds AS pr ON pr.id = sr.projectround_id '
-				. ' WHERE pr.project_id = ' . $this->_project_id
-				. '   AND pr.published = 1 '
-				. '   AND sr.published = 1 ';
+			$db    = JFactory::getDbo();
+			$query = $db->getQuery(true)
+				->select('rr.individual_id as id, rr.rank, rr.bonus_points, rr.team_id, rr.params')
+				->select('sr.projectround_id, sr.rank_offset')
+				->select('srt.points_attribution, srt.count_points, srt.enable_stats')
+				->select('(rr.rank + sr.rank_offset) AS global_rank')
+				->from('#__tracks_events_results AS rr')
+				->join('INNER', '#__tracks_events AS sr ON sr.id = rr.event_id')
+				->join('INNER', '#__tracks_eventtypes AS srt ON srt.id = sr.type')
+				->join('INNER', '#__tracks_projects_rounds AS pr ON pr.id = sr.projectround_id')
+				->where('pr.project_id = ' . $this->_project_id)
+				->where('pr.published = 1')
+				->where('sr.published = 1');
 
-			$this->_db->setQuery($query);
+			$db->setQuery($query);
 			$this->_results = $this->_db->loadObjectList();
 		}
 
@@ -320,31 +325,31 @@ class TracksRankingToolDefault extends JObject
 				{
 					$points_attrib = explode(',', $r->points_attribution);
 
-					if ($r->points_attribution && isset($points_attrib[$r->rank - 1]))
+					if ($r->points_attribution && isset($points_attrib[$r->global_rank - 1]))
 					{
-						$points += $points_attrib[$r->rank - 1];
-					}
-
-					// Add in Stats
-					if ($r->rank > 0 && $r->enable_stats)
-					{
-						if ($teams[$r->team_id]->best_rank)
-						{
-							$teams[$r->team_id]->best_rank = min($teams[$r->team_id]->best_rank, $r->rank);
-						}
-						else
-						{
-							$teams[$r->team_id]->best_rank = $r->rank;
-						}
-
-						if ($r->rank == 1)
-						{
-							$teams[$r->team_id]->wins++;
-						}
+						$points += $points_attrib[$r->global_rank - 1];
 					}
 				}
 
 				$teams[$r->team_id]->points += $points;
+
+				// Add in Stats
+				if ($r->rank > 0 && $r->enable_stats)
+				{
+					if ($teams[$r->team_id]->best_rank)
+					{
+						$teams[$r->team_id]->best_rank = min($teams[$r->team_id]->best_rank, $r->global_rank);
+					}
+					else
+					{
+						$teams[$r->team_id]->best_rank = $r->global_rank;
+					}
+
+					if ($r->global_rank == 1)
+					{
+						$teams[$r->team_id]->wins++;
+					}
+				}
 			}
 
 			uasort($teams, array($this, "orderTeamRankings"));

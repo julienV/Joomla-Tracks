@@ -55,6 +55,14 @@ JHtml::_('behavior.formvalidation');
 			</div>
 			<div class="control-group">
 				<div class="control-label">
+					<?php echo $this->form->getLabel('rank_offset'); ?>
+				</div>
+				<div class="controls">
+					<?php echo $this->form->getInput('rank_offset'); ?>
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="control-label">
 					<?php echo $this->form->getLabel('published'); ?>
 				</div>
 				<div class="controls">

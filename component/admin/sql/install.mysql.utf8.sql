@@ -169,6 +169,7 @@ CREATE TABLE IF NOT EXISTS `#__tracks_events` (
   `start_date` datetime NULL,
   `end_date` datetime NULL,
   `description` text NULL,
+  `rank_offset` INT(11) NOT NULL,
   `comment` text NULL,
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL,
