@@ -16,7 +16,6 @@ jimport('joomla.filter.output');
 
 $dispatcher = JDispatcher::getInstance();
 JPluginHelper::importPlugin('content');
-
 ?>
 <div id="tracks">
 
@@ -62,7 +61,7 @@ JPluginHelper::importPlugin('content');
 					<th><?php echo JText::_('COM_TRACKS_Team'); ?></th>
 				<?php endif; ?>
 				<th><?php echo JText::_('COM_TRACKS_Performance'); ?></th>
-				<?php if (!empty($subround->points_attribution)): ?>
+				<?php if (!empty($subround->count_points)): ?>
 					<th><?php echo JText::_('COM_TRACKS_Points'); ?></th>
 				<?php endif; ?>
 			</tr>
@@ -113,7 +112,7 @@ JPluginHelper::importPlugin('content');
 						</td>
 					<?php endif; ?>
 					<td><?php echo $result->performance; ?></td>
-					<?php if (!empty($subround->points_attribution)): ?>
+					<?php if (!empty($subround->count_points)): ?>
 						<td><?php echo $result->points + $result->bonus_points; ?></td>
 					<?php endif; ?>
 				</tr>

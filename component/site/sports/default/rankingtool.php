@@ -134,7 +134,8 @@ class TracksRankingToolDefault extends JObject
 						$points += (float) $points_attrib[$r->rank - 1];
 					}
 
-					if ($r->rank > 0)
+					// Add in Stats
+					if ($r->rank > 0 && $r->enable_stats)
 					{
 						// -> rank = 0 means 'did not participate'
 						if ($individuals[$r->id]->best_rank)
@@ -238,7 +239,7 @@ class TracksRankingToolDefault extends JObject
 		if (empty($this->_results))
 		{
 			$query = ' SELECT rr.individual_id as id, rr.rank, rr.bonus_points, rr.team_id, rr.params, '
-				. '   sr.projectround_id, srt.points_attribution, srt.count_points '
+				. '   sr.projectround_id, srt.points_attribution, srt.count_points, srt.enable_stats '
 				. ' FROM #__tracks_events_results AS rr '
 				. ' INNER JOIN #__tracks_events AS sr ON sr.id = rr.event_id '
 				. ' INNER JOIN #__tracks_eventtypes AS srt ON srt.id = sr.type '
@@ -324,7 +325,8 @@ class TracksRankingToolDefault extends JObject
 						$points += $points_attrib[$r->rank - 1];
 					}
 
-					if ($r->rank > 0)
+					// Add in Stats
+					if ($r->rank > 0 && $r->enable_stats)
 					{
 						if ($teams[$r->team_id]->best_rank)
 						{

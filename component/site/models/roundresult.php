@@ -109,7 +109,7 @@ class TracksModelRoundResult extends TrackslibModelFrontbase
 	{
 		if ($projectround_id)
 		{
-			$query = ' SELECT sr.*, srt.name AS typename, srt.points_attribution '
+			$query = ' SELECT sr.*, srt.name AS typename, srt.points_attribution, srt.count_points, srt.enable_stats '
 				. ' FROM #__tracks_events AS sr '
 				. ' INNER JOIN #__tracks_eventtypes AS srt ON srt.id = sr.type '
 				. ' WHERE sr.projectround_id = ' . $projectround_id
@@ -178,20 +178,23 @@ class TracksModelRoundResult extends TrackslibModelFrontbase
 			{
 				foreach ($result as $k => $r)
 				{
-					if ($r->rank > 0)
+					if (!empty($r->rank) || !empty($r->bonus_points) || !empty($r->performance))
 					{
 						$ranked = true;
 					}
 
-					$points_attrib = explode(',', $r->points_attribution);
+					if ($r->rank)
+					{
+						$points_attrib = explode(',', $r->points_attribution);
 
-					if (isset($points_attrib[$r->rank - 1]))
-					{
-						$result[$k]->points = $points_attrib[$r->rank - 1];
-					}
-					else
-					{
-						$result[$k]->points = 0;
+						if (isset($points_attrib[$r->rank - 1]))
+						{
+							$result[$k]->points += $points_attrib[$r->rank - 1];
+						}
+						else
+						{
+							$result[$k]->points = 0;
+						}
 					}
 				}
 			}

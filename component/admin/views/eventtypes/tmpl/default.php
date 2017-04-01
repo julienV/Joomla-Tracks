@@ -96,6 +96,9 @@ $search = $this->state->get('filter.search');
 				<th width="auto">
 					<?php echo JText::_('COM_TRACKS_POINTS'); ?>
 				</th>
+				<th width="auto">
+					<?php echo JText::_('COM_TRACKS_EVENTTYPE_ENABLE_STATS'); ?>
+				</th>
 				<th width="10">
 					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_ID', 'obj.id', $listDirn, $listOrder); ?>
 				</th>
@@ -139,6 +142,9 @@ $search = $this->state->get('filter.search');
 					</td>
 					<td>
 						<?php echo $row->points_attribution; ?>
+					</td>
+					<td>
+						<?php echo $row->enable_stats ? JText::_('JYES') : JText::_('JNO'); ?>
 					</td>
 					<td>
 						<?php echo $row->id; ?>

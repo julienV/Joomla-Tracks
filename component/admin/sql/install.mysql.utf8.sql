@@ -135,6 +135,7 @@ CREATE TABLE IF NOT EXISTS `#__tracks_eventtypes` (
   `note` varchar(100) NOT NULL,
   `count_points` tinyint(2) NOT NULL,
   `points_attribution` varchar(250) NOT NULL,
+  `enable_stats` tinyint(2) NOT NULL,
   `description` text NULL,
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL,
