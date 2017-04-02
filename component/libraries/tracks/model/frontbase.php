@@ -182,25 +182,8 @@ class TrackslibModelFrontbase extends RModel
 	{
 		if (empty($this->rankingtool))
 		{
-			$project      = TrackslibEntityProject::load($this->project_id);
-			$project_type = $project->getProjectType();
-
-			$path = JPATH_SITE . '/components/com_tracks/sports/' . $project_type . '/rankingtool.php';
-
-			if (file_exists($path))
-			{
-				include_once $path;
-
-				$className = 'TracksRankingTool' . ucfirst($project_type);
-
-				$this->rankingtool = new $className($this->project_id);
-			}
-			else
-			{
-				include_once JPATH_SITE . '/components/com_tracks/sports/default/rankingtool.php';
-
-				$this->rankingtool = new TracksRankingToolDefault($this->project_id);
-			}
+			$project = TrackslibEntityProject::getInstance($this->project_id);
+			$this->rankingtool = $project->getRankingTool();
 		}
 
 		return $this->rankingtool;

@@ -151,7 +151,7 @@ class TracksModelRoundResult extends TrackslibModelFrontbase
 	 */
 	public function _getSubroundResults($event_id = 0)
 	{
-		$query = ' SELECT rr.*, pr.project_id AS project_id, srt.points_attribution, srt.count_points, '
+		$query = ' SELECT rr.*, pr.project_id AS project_id, srt.points_attribution, srt.count_points, sr.rank_offset, '
 			. ' i.first_name, i.last_name, i.country_code, i.country_code, pi.number, '
 			. ' t.name AS team_name, t.short_name AS team_short_name, t.acronym AS team_acronym, t.picture_small AS team_logo, '
 			. ' CASE WHEN CHAR_LENGTH( i.alias ) THEN CONCAT_WS( \':\', i.id, i.alias ) ELSE i.id END AS slug, '
@@ -178,6 +178,8 @@ class TracksModelRoundResult extends TrackslibModelFrontbase
 			{
 				foreach ($result as $k => $r)
 				{
+					$result[$k]->points = 0;
+
 					if (!empty($r->rank) || !empty($r->bonus_points) || !empty($r->performance))
 					{
 						$ranked = true;
@@ -185,15 +187,12 @@ class TracksModelRoundResult extends TrackslibModelFrontbase
 
 					if ($r->rank)
 					{
+						$rank = $r->rank + $r->rank_offset;
 						$points_attrib = explode(',', $r->points_attribution);
 
-						if (isset($points_attrib[$r->rank - 1]))
+						if (isset($points_attrib[$rank - 1]))
 						{
-							$result[$k]->points += $points_attrib[$r->rank - 1];
-						}
-						else
-						{
-							$result[$k]->points = 0;
+							$result[$k]->points += $points_attrib[$rank - 1];
 						}
 					}
 				}

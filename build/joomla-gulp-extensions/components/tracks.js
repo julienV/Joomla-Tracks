@@ -53,7 +53,7 @@ gulp.task('clean:' + baseTask + ':media', function() {
 
 // Clean: plugins
 gulp.task('clean:' + baseTask + ':plugins', function() {
-
+	return del.sync(config.wwwDir + '/plugins/tracks_projecttype/default', {force : true});
 });
 
 // Copy
@@ -63,10 +63,8 @@ gulp.task('copy:' + baseTask,
 		'copy:' + baseTask + ':backend',
 		'copy:' + baseTask + ':media',
 		'copy:' + baseTask + ':plugins'
-	],
-	function() {
-		return true;
-});
+	]
+);
 
 // Copy: frontend
 gulp.task('copy:' + baseTask + ':frontend', ['clean:' + baseTask + ':frontend'], function() {

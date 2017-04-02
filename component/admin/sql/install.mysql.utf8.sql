@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS `#__tracks_projects` (
   `competition_id` int(11) NOT NULL,
   `season_id` int(11) NOT NULL,
   `admin_id` int(11) NOT NULL,
-  `type` tinyint(4) NOT NULL,
+  `type` varchar(100) NOT NULL default 'default',
   `params` text NOT NULL,
   `ordering` int(11) NOT NULL,
   `checked_out` int(11) NOT NULL,

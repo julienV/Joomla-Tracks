@@ -107,6 +107,9 @@ if (($saveOrder) && ($this->canEdit))
 				<th width="auto">
 					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_SEASON', 's.name', $listDirn, $listOrder); ?>
 				</th>
+				<th width="auto">
+					<?php echo JText::_('COM_TRACKS_PROJECT_TYPE_COL_HEADER'); ?>
+				</th>
 				<th width="10">
 					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_ID', 'obj.id', $listDirn, $listOrder); ?>
 				</th>
@@ -169,6 +172,9 @@ if (($saveOrder) && ($this->canEdit))
 					</td>
 					<td>
 						<?php echo $row->season_name; ?>
+					</td>
+					<td>
+						<?php echo $row->type; ?>
 					</td>
 					<td>
 						<?php echo $row->id; ?>

@@ -31,6 +31,8 @@ JFormHelper::addFieldPath(JPATH_LIBRARIES . '/tracks/form/fields');
 JFormHelper::addRulePath(JPATH_LIBRARIES . '/tracks/form/rule');
 JFormHelper::addRulePath(JPATH_LIBRARIES . '/tracks/form/rules');
 
+require_once __DIR__ . '/vendor/autoload.php';
+
 /**
  * Tracks bootstrap class
  *

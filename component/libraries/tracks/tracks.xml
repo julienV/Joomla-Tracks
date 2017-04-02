@@ -18,7 +18,10 @@
 		<folder>form</folder>
 		<folder>helper</folder>
 		<folder>model</folder>
+		<folder>rankingtool</folder>
+		<folder>src</folder>
 		<folder>table</folder>
+		<folder>vendor</folder>
 		<folder>view</folder>
 	</files>
 </extension>

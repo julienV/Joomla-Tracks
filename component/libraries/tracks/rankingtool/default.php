@@ -15,38 +15,40 @@ defined('_JEXEC') or die;
  * @subpackage  Library
  * @since       1.0
  */
-class TracksRankingToolDefault extends JObject
+class TrackslibRankingtoolDefault
 {
 	/**
 	 * project id
+	 *
+	 * @var integer
 	 */
-	var $_project_id = null;
+	protected $_project_id = null;
 
 	/**
 	 * associated project
 	 */
-	var $_project = null;
+	protected $_project = null;
 
 	/**
 	 * results
 	 */
-	var $_results = null;
+	protected $_results = null;
 
 	/**
 	 * init individuals
 	 */
-	var $_individuals = null;
+	protected $_individuals = null;
 
 	/**
 	 * init teams
 	 */
-	var $_teams = null;
+	protected $_teams = null;
 
 	/**
 	 * reference to database object
 	 * @var object
 	 */
-	var $_db = null;
+	protected $_db = null;
 
 	/**
 	 * Class constructor, overridden in descendant classes.
@@ -55,8 +57,6 @@ class TracksRankingToolDefault extends JObject
 	 */
 	public function __construct($projectid = null)
 	{
-		parent::__construct();
-
 		$this->_db = JFactory::getDBO();
 
 		if ($projectid)
@@ -122,7 +122,7 @@ class TracksRankingToolDefault extends JObject
 				}
 
 				// Always count the bonus points
-				$points = $r->bonus_points;
+				$points = $r->bonus_points ?: 0;
 
 				// Points for the round only if countpoints is set to true
 				if ($r->count_points && $r->global_rank)
