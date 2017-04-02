@@ -103,6 +103,35 @@ abstract class TrackslibEntityBase
 		{
 			return $this->item->$property;
 		}
+
+		if ('slug' == $property && null != $this->item)
+		{
+			if (!empty($this->item->alias))
+			{
+				return $this->id . '-' . $this->item->alias;
+			}
+
+			return $this->id;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Proxy item properties isset. This needs to be implemented for proper result when doing empty() check
+	 *
+	 * @param   string  $property  Property tried to access
+	 *
+	 * @return  boolean   true if it exists
+	 */
+	public function __isset($property)
+	{
+		if ('slug' == $property)
+		{
+			return true;
+		}
+
+		return null != $this->item && property_exists($this->item, $property);
 	}
 
 	/**
@@ -367,6 +396,35 @@ abstract class TrackslibEntityBase
 		$url = $this->getAddLink($itemId, false, false) . '&return=' . base64_encode(JUri::getInstance()->toString());
 
 		return $this->formatUrl($url, $routed, $xhtml);
+	}
+
+	/**
+	 * Get a param
+	 *
+	 * @param   string   $name     param name
+	 * @param   mixed    $default  default value if not found
+	 *
+	 * @return mixed
+	 *
+	 * @throws LogicException
+	 */
+	public function getParam($name, $default = null)
+	{
+		$item = $this->loadItem();
+
+		if (!$item)
+		{
+			throw new LogicException('Item loading error in entity');
+		}
+
+		if (!isset($item->params))
+		{
+			return $default;
+		}
+
+		$params = new JRegistry($item->params);
+
+		return $params->get($name, $default);
 	}
 
 	/**
@@ -809,6 +867,37 @@ abstract class TrackslibEntityBase
 		}
 
 		return $this;
+	}
+
+
+	/**
+	 * Load a collection from an array.
+	 *
+	 * @param   array  $items  Array containing entities data
+	 *
+	 * @return  self
+	 *
+	 * @throws  RuntimeException
+	 */
+	public static function loadArray(array $items)
+	{
+		$entities = array();
+
+		foreach ($items as $item)
+		{
+			$item = (object) $item;
+
+			if (!property_exists($item, 'id'))
+			{
+				throw new RuntimeException(JText::_('LIB_TRACKS_ENTITY_COLLECTION_ERROR_LOAD_ARRAY_REQUIRES_ID_PROPERTY'));
+			}
+
+			$entity = self::getInstance($item->id)->bind($item);
+
+			$entities[] = $entity;
+		}
+
+		return $entities;
 	}
 
 	/**

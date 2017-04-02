@@ -44,11 +44,12 @@ class TracksViewRoundResult extends RViewSite
 		$document = JFactory::getDocument();
 		$document->setTitle($round->name . ' - ' . $project->name);
 
-		$this->assignRef('results', $subroundresults);
-		$this->assignRef('round', $round);
-		$this->assignRef('project', $project);
-		$this->assignRef('projectparams', $projectparams);
-		$this->assignRef('params', $params);
+		$this->results = $subroundresults;
+		$this->round = $round;
+		$this->project = $project;
+		$this->projectround = TrackslibEntityProjectround::load($projectround_id);
+		$this->projectparams = $projectparams;
+		$this->params = $params;
 
 		parent::display($tpl);
 	}
