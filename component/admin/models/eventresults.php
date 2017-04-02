@@ -230,10 +230,11 @@ class TracksModelEventResults extends RModelList
 	 * @param   array  $rank          ranks
 	 * @param   array  $bonus_points  bonus points
 	 * @param   array  $performance   performances
+	 * @param   array  $number        number
 	 *
 	 * @return bool
 	 */
-	public function saveranks($cid, $rank, $bonus_points, $performance)
+	public function saveranks($cid, $rank, $bonus_points, $performance, $number)
 	{
 		$row = $this->getTable('Eventresult', 'TracksTable');
 
@@ -247,11 +248,13 @@ class TracksModelEventResults extends RModelList
 
 			if ($row->rank != $rank[$i]
 				|| $row->bonus_points != $bonus_points[$i]
-				|| $row->performance != $performance[$i])
+				|| $row->performance != $performance[$i]
+				|| $row->number != $number[$i])
 			{
 				$row->rank = $rank[$i];
 				$row->bonus_points = $bonus_points[$i];
 				$row->performance = $performance[$i];
+				$row->number = $number[$i] ?: $this->getParticipantNumber($cid[$i]);
 
 				if (!$row->store())
 				{
@@ -307,8 +310,8 @@ class TracksModelEventResults extends RModelList
 			$this->_db->setQuery($query);
 			$current = $this->_db->loadColumn();
 
-			$query = ' INSERT INTO #__tracks_events_results (individual_id, team_id, event_id) '
-				. ' SELECT pi.individual_id, pi.team_id, ' . $this->getState('event_id')
+			$query = ' INSERT INTO #__tracks_events_results (individual_id, team_id, event_id, `number`) '
+				. ' SELECT pi.individual_id, pi.team_id, ' . $this->getState('event_id') . ', `pi.number` '
 				. ' FROM #__tracks_participants AS pi '
 				. ' WHERE pi.project_id = ' . $project_id;
 
@@ -359,5 +362,28 @@ class TracksModelEventResults extends RModelList
 		$this->setState('event_id', $event_id);
 
 		return parent::populateState($ordering, $direction);
+	}
+
+	/**
+	 * Get default number of result participant
+	 *
+	 * @param   integer  $resultId  result id
+	 *
+	 * @return mixed
+	 */
+	private function getParticipantNumber($resultId)
+	{
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true)
+			->select('pp.number')
+			->from('#__tracks_events_results AS r')
+			->innerJoin('#__tracks_events AS e ON e.id = r.event_id')
+			->innerJoin('#__tracks_projects_rounds AS pr ON r.id = e.projectround_id')
+			->innerJoin('#__tracks_participants AS pp ON pp.individual_id = r.individual_id AND pp.project_id = pr.project_id')
+			->where('r.id = ' . $resultId);
+
+		$db->setQuery($query);
+
+		 return $db->loadResult();
 	}
 }

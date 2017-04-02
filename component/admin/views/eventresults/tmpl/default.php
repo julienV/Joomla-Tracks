@@ -112,8 +112,8 @@ RHelperAsset::load('tracksbackend.css');
 					<td>
 						<?php echo JHtml::_('grid.id', $i, $row->id); ?>
 					</td>
-					<td>
-						<?php echo $row->number; ?>
+					<td class="result result-number">
+						<input type="text" name="number[]" value="<?php echo $row->number; ?>" size="5"/>
 					</td>
 					<td>
 						<?php $itemTitle = $row->first_name ? $row->last_name . ', ' . $row->first_name : $row->last_name; ?>

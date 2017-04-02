@@ -31,6 +31,14 @@ JHtml::_('behavior.formvalidation');
 		<div class="row-fluid">
 			<div class="control-group">
 				<div class="control-label">
+					<?php echo $this->form->getLabel('number'); ?>
+				</div>
+				<div class="controls">
+					<?php echo $this->form->getInput('number'); ?>
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="control-label">
 					<?php echo $this->form->getLabel('individual_id'); ?>
 				</div>
 				<div class="controls">

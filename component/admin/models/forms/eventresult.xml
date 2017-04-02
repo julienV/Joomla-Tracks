@@ -41,6 +41,13 @@
 			class="inputbox"/>
 
 		<field
+			name="number"
+			type="text"
+			label="COM_TRACKS_NUMBER"
+			description="COM_TRACKS_NUMBER_desc"
+			class="inputbox"/>
+
+		<field
 			name="bonus_points"
 			type="text"
 			label="COM_TRACKS_Bonus_points"

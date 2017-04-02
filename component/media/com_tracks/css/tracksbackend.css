@@ -69,3 +69,8 @@ form.eventresults td.ajaxupdate div {
 	cursor: hover;
 	font-weight: bold !important;
 }
+
+.redcore .result-number input, .redcore .result-rank input, .redcore .result-bonus input {
+	width:4em;
+	text-align: right;
+}
