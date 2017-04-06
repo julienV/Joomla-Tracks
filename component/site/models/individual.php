@@ -249,7 +249,7 @@ class TracksModelIndividual extends RModelAdmin
 		$query->select('rr.rank, rr.performance, rr.bonus_points, pr.project_id')
 			->select('r.name AS roundname, r.id as pr')
 			->select('srt.name AS subroundname')
-			->select('srt.points_attribution, srt.count_points')
+			->select('srt.points_attribution, srt.count_points, psr.rank_offset')
 			->select('p.name AS projectname')
 			->select('c.name AS competitionname')
 			->select('s.name AS seasonname')

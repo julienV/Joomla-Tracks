@@ -106,12 +106,13 @@ abstract class TrackslibHelperTools
 
 		if (!empty($result->points_attribution) && $result->rank)
 		{
+			$rank = $result->rank + $result->rank_offset;
 			$points_attrib = explode(',', $result->points_attribution);
-			JArrayHelper::toInteger($points_attrib);
+			$points_attrib = array_map('floatval', $points_attrib);
 
-			if (isset($points_attrib[$result->rank - 1]))
+			if (isset($points_attrib[$rank - 1]))
 			{
-				$points += $points_attrib[$result->rank - 1];
+				$points += $points_attrib[$rank - 1];
 			}
 		}
 
