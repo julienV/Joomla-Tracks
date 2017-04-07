@@ -290,7 +290,7 @@ class TracksModelEventResults extends RModelList
 	 */
 	public function addAll()
 	{
-		$project_id = $this->getProjectId();
+		$projectId = $this->getProjectId();
 
 		if (!$eventId = $this->getState('event_id'))
 		{
@@ -299,7 +299,7 @@ class TracksModelEventResults extends RModelList
 			return false;
 		}
 
-		if ($project_id)
+		if ($projectId)
 		{
 			// Get current event participants
 			$query = $this->_db->getQuery(true)
@@ -310,15 +310,20 @@ class TracksModelEventResults extends RModelList
 			$this->_db->setQuery($query);
 			$current = $this->_db->loadColumn();
 
-			$query = ' INSERT INTO #__tracks_events_results (individual_id, team_id, event_id, `number`) '
-				. ' SELECT pi.individual_id, pi.team_id, ' . $this->getState('event_id') . ', `pi.number` '
-				. ' FROM #__tracks_participants AS pi '
-				. ' WHERE pi.project_id = ' . $project_id;
+			$subquery = $this->_db->getQuery(true)
+				->select('pi.individual_id, pi.team_id, ' . $this->getState('event_id') . ', pi.number')
+				->from('#__tracks_participants AS pi')
+				->where('pi.project_id = ' . $projectId);
 
 			if ($current)
 			{
-				$query .= ' AND pi.individual_id NOT IN (' . implode(', ', $current) . ')';
+				$subquery->where('pi.individual_id NOT IN (' . implode(', ', $current) . ')');
 			}
+
+			$query = $this->_db->getQuery(true)
+				->insert('#__tracks_events_results')
+				->columns('individual_id, team_id, event_id, `number`')
+				->values($subquery);
 
 			$this->_db->setQuery($query);
 
