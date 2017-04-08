@@ -7,7 +7,7 @@
 	<creationDate>##DATE##</creationDate>
 	<copyright>(C) 2008-2015 Julien Vonthron. All rights	reserved.</copyright>
 	<license>http://www.gnu.org/licenses/gpl.html</license>
-	<version>3.0.6</version>
+	<version>3.0.6.1</version>
 	<tag>##VERSION##</tag>
 	<redcore version="1.8.8" defaultFramework="bootstrap2"/>
 	<description>COM_TRACKS_XML_DESC</description>
