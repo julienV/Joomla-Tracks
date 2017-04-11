@@ -90,14 +90,14 @@ $search = $this->state->get('filter.search');
 				<th width="auto">
 					<?php echo JText::_('COM_TRACKS_NOTE'); ?>
 				</th>
-				<th width="10">
-					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_count_in_rankings', 'obj.count_points', $listDirn, $listOrder); ?>
-				</th>
-				<th width="auto">
-					<?php echo JText::_('COM_TRACKS_POINTS'); ?>
-				</th>
 				<th width="auto">
 					<?php echo JText::_('COM_TRACKS_EVENTTYPE_ENABLE_STATS'); ?>
+				</th>
+				<th width="auto">
+					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_count_in_rankings', 'obj.count_points', $listDirn, $listOrder); ?>
+				</th>
+				<th width="40%">
+					<?php echo JText::_('COM_TRACKS_POINTS'); ?>
 				</th>
 				<th width="10">
 					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_ID', 'obj.id', $listDirn, $listOrder); ?>
@@ -138,13 +138,13 @@ $search = $this->state->get('filter.search');
 						<?php echo $row->note; ?>
 					</td>
 					<td>
-						<?php echo $row->count_points; ?>
+						<?= $this->enableStatsToggle($row, $i); ?>
+					</td>
+					<td>
+						<?php echo $row->count_points ? '<i class="icon icon-ok"/>' : '<i class="icon icon-remove"/>'; ?>
 					</td>
 					<td>
 						<?php echo $row->points_attribution; ?>
-					</td>
-					<td>
-						<?php echo $row->enable_stats ? JText::_('JYES') : JText::_('JNO'); ?>
 					</td>
 					<td>
 						<?php echo $row->id; ?>

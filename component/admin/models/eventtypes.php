@@ -60,6 +60,33 @@ class TracksModelEventtypes extends TrackslibModelList
 	}
 
 	/**
+	 * Method to toggle enable_stats
+	 *
+	 * @param   array  $cid      ids to modify
+	 * @param   int    $enabled  set state on or off
+	 *
+	 * @return    boolean    True on success
+	 */
+	public function setStatsState($cid = array(), $enabled = 1)
+	{
+		if (count($cid))
+		{
+			$cids = implode(',', $cid);
+
+			$query = $this->_db->getQuery(true);
+
+			$query->update('#__tracks_eventtypes')
+				->set('enable_stats = ' . (int) $enabled)
+				->where('id IN (' . $cids . ')');
+
+			$this->_db->setQuery($query);
+			$this->_db->execute();
+		}
+
+		return true;
+	}
+
+	/**
 	 * Method to get a store id based on model configuration state.
 	 *
 	 * @param   string  $id  A prefix for the store id.
