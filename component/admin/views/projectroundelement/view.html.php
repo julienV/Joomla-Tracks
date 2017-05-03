@@ -55,6 +55,6 @@ class TracksViewProjectroundElement extends TrackslibViewAdmin
 	 */
 	public function getToolbar()
 	{
-		return false;
+		return parent::getToolbar();
 	}
 }

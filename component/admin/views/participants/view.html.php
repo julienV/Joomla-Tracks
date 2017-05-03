@@ -116,9 +116,9 @@ class TracksViewParticipants extends TrackslibViewAdmin
 			$secondGroup->addButton($button);
 		}
 
-		$toolbar = new RToolbar;
-		$toolbar->addGroup($firstGroup)->addGroup($secondGroup);
+		$this->toolbar = new RToolbar;
+		$this->toolbar->addGroup($firstGroup)->addGroup($secondGroup);
 
-		return $toolbar;
+		return parent::getToolbar();
 	}
 }

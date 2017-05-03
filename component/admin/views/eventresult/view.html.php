@@ -96,9 +96,9 @@ class TracksViewEventresult extends TrackslibViewAdmin
 
 		$group->addButton($cancel);
 
-		$toolbar = new RToolbar;
-		$toolbar->addGroup($group);
+		$this->toolbar = new RToolbar;
+		$this->toolbar->addGroup($group);
 
-		return $toolbar;
+		return parent::getToolbar();
 	}
 }
