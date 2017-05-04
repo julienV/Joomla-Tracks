@@ -39,7 +39,6 @@ class ModTracksLatestResults
 		$this->params = $params;
 	}
 
-
 	/**
 	 * Get model
 	 *

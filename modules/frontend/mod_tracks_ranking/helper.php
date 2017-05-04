@@ -22,7 +22,22 @@ class ModTracksRanking
 	 *
 	 * @var object
 	 */
-	var $_model = null;
+	var $model = null;
+
+	/**
+	 * @var JRegistry
+	 */
+	private $params;
+
+	/**
+	 * ModTracksRanking constructor.
+	 *
+	 * @param   JRegistry  $params  module parameters
+	 */
+	public function __construct($params)
+	{
+		$this->params = $params;
+	}
 
 	/**
 	 * Get model
@@ -31,16 +46,31 @@ class ModTracksRanking
 	 *
 	 * @return object|TracksModelRanking
 	 */
-	protected function _getModel($params)
+	protected function getModel()
 	{
-		if ($this->_model == null)
+		if ($this->model == null)
 		{
-			require_once JPATH_SITE . '/components/com_tracks/models/ranking.php';
-			$this->_model = new TracksModelRanking;
-			$this->_model->setProjectId($params->get('project_id'));
+			RModel::addIncludePath(JPATH_SITE . '/components/com_tracks/models');
+			$this->model = RModel::getFrontInstance('Ranking', array('ignore_request' => true), 'com_tracks');
+
+			if (!$projectId = $this->params->get('project_id'))
+			{
+				if ($this->params->get('uselatest'))
+				{
+					$event = $this->getLatestResultsEvent();
+					$projectId = $event ? $event->getProjectRound()->project_id : $this->params->get('project_id');
+				}
+			}
+
+			if (!$projectId)
+			{
+				throw new Exception('project id no set');
+			}
+
+			$this->model->setProjectId($projectId);
 		}
 
-		return $this->_model;
+		return $this->model;
 	}
 
 	/**
@@ -50,9 +80,9 @@ class ModTracksRanking
 	 *
 	 * @return array
 	 */
-	public function getList(&$params)
+	public function getList()
 	{
-		$model = $this->_getModel($params);
+		$model = $this->getModel();
 
 		return $model->getRankings();
 	}
@@ -64,10 +94,36 @@ class ModTracksRanking
 	 *
 	 * @return object
 	 */
-	public function getProject(&$params)
+	public function getProject()
 	{
-		$model = $this->_getModel($params);
+		$model = $this->getModel();
 
 		return $model->getProject();
+	}
+
+	/**
+	 * Get event with latest results
+	 *
+	 * @return TrackslibEntityEvent
+	 */
+	public function getLatestResultsEvent()
+	{
+			$db    = JFactory::getDbo();
+			$query = $db->getQuery(true)
+				->select('e.*')
+				->from('#__tracks_events_results AS res')
+				->innerJoin('#__tracks_events AS e ON e.id = res.event_id')
+				->order('modified_date DESC');
+
+			$db->setQuery($query);
+
+			if (!$res = $db->loadObject())
+			{
+				return false;
+			}
+
+			$entity = TrackslibEntityEvent::getInstance($res->id);
+
+			return $entity->bind($res);
 	}
 }

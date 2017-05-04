@@ -31,15 +31,15 @@ if ($params->get('usecurrent', 0) && JRequest::getInt('p'))
 	$params->set('project_id', JRequest::getInt('p'));
 }
 
-if (!$params->get('project_id'))
+$helper = new ModTracksRanking($params);
+
+$project = $helper->getProject();
+$list    = $helper->getList();
+
+if (!$project)
 {
 	return JText::_('No_project_specified');
 }
-
-$helper = new ModTracksRanking;
-
-$project = $helper->getProject($params);
-$list    = $helper->getList($params);
 
 // Add css file
 $document = JFactory::getDocument();

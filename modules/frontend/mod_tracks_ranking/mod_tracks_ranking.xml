@@ -32,7 +32,16 @@
 		      <option value="0">JNo</option>
 		      <option value="1">JYes</option>
 		    </field>
-				<field name="project_id" type="sql" default="" label="MOD_TRACKS_RANKING_Select_a_project" description="MOD_TRACKS_RANKING_SELECT_A_PROJECT_DESC" query="SELECT name AS project_id, id AS value FROM #__tracks_projects ORDER BY name ASC" />
+				<field name="uselatest" type="radio" default="0" label="MOD_TRACKS_RANKING_use_latest_label" description="MOD_TRACKS_RANKING_use_latest_DESC">
+					<option value="0">JNo</option>
+					<option value="1">JYes</option>
+				</field>
+				<field name="project_id" type="sql" default=""
+					   label="MOD_TRACKS_RANKING_Select_a_project"
+					   description="MOD_TRACKS_RANKING_SELECT_A_PROJECT_DESC"
+					   query="SELECT name AS project_id, id AS value FROM #__tracks_projects ORDER BY name ASC">
+					<option value="">JSelect</option>
+				</field>
 				<field name="showteams" type="radio" default="1" label="MOD_TRACKS_RANKING_Show_teams" description="">
 		      <option value="0">JNo</option>
 		      <option value="1">JYes</option>

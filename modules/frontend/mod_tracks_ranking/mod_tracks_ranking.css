@@ -30,6 +30,12 @@ padding-bottom:4px;
 text-align:left;
 }
 
+div.mod_tracksranking .project-name {
+   font-weight:bold;
+   font-size: 1.2em;
+   text-align: center;
+}
+
 div.mod_tracksranking table th, div.mod_tracksranking table td {
 background-color:#FFFFFF;
 border-collapse:collapse;
