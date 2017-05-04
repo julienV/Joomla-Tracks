@@ -6,6 +6,7 @@
 		"frontend" : [
 			"mod_tracks_ranking",
 			"mod_tracks_results",
+			"mod_tracks_latest_results",
 			"mod_tracks_teamranking",
 			"mod_tracks_teamsocial"
 		]

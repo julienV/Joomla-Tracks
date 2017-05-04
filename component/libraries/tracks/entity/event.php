@@ -31,4 +31,21 @@ class TrackslibEntityEvent extends TrackslibEntityBase
 
 		return TrackslibEntityProjectround::load($item->projectround_id);
 	}
+
+	/**
+	 * Return project type
+	 *
+	 * @return TrackslibEntityProject
+	 */
+	public function getEventtype()
+	{
+		$item = $this->loadItem();
+
+		if (!$item)
+		{
+			return false;
+		}
+
+		return TrackslibEntityEventtype::load($item->type);
+	}
 }

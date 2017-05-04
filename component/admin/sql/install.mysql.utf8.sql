@@ -222,6 +222,8 @@ CREATE TABLE IF NOT EXISTS `#__tracks_events_results` (
   `comment` text NULL,
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL,
+  `modified_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `modified_by` int(11) unsigned NOT NULL default '0',
   `params` text NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `individual_id` (`individual_id`),
