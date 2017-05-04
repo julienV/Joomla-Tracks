@@ -156,7 +156,7 @@ abstract class TrackslibViewAdmin extends RViewAdmin
 	{
 		if ($this->toolbar instanceof RToolbar)
 		{
-			JPluginHelper::getPlugin('tracks');
+			JPluginHelper::importPlugin('tracks');
 			RFactory::getDispatcher()->trigger('onTracksViewGetToolbar', array($this, &$this->toolbar));
 		}
 
