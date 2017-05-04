@@ -54,6 +54,13 @@
 					<option value="0">JNo</option>
 					<option value="1">JYes</option>
 				</field>
+
+				<field name="showperformance" type="radio" default="0"
+					   label="MOD_TRACKS_LATEST_RESULTS_SHOW_PERFORMANCE"
+					   description="MOD_TRACKS_LATEST_RESULTS_SHOW_PERFORMANCE_DESC">
+					<option value="0">JNo</option>
+					<option value="1">JYes</option>
+				</field>
 			</fieldset>
 
 			<fieldset

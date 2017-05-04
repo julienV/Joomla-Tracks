@@ -26,6 +26,7 @@ require_once dirname(__FILE__) . '/helper.php';
 $limit      = intval($params->get('count', 5));
 $showteams  = intval($params->get('showteams', 1));
 $showpoints = intval($params->get('showpoints', 1));
+$showperformance = intval($params->get('showperformance', 0));
 
 $helper = new ModTracksLatestResults($params);
 

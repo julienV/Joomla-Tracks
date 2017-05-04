@@ -23,6 +23,7 @@ $document->addScript( JURI::base() . 'modules/mod_tracks_latest_results/mod_trac
 	      <th><?php echo JText::_( 'MOD_TRACKS_LATEST_RESULTS_Individual' ); ?></th>
 	      <?php if ($showteams) { ?><th><?php echo JText::_( 'MOD_TRACKS_LATEST_RESULTS_Team' ); ?></th><?php } ?>
 	      <?php if ($showpoints) { ?><th><?php echo JText::_( 'MOD_TRACKS_LATEST_RESULTS_Points' ); ?></th><?php } ?>
+		    <?php if ($showperformance) { ?><th><?php echo JText::_( 'MOD_TRACKS_LATEST_RESULTS_PERFORMANCE' ); ?></th><?php } ?>
 	    </tr>
 		</thead>
 	  <tbody>
@@ -43,17 +44,22 @@ $document->addScript( JURI::base() . 'modules/mod_tracks_latest_results/mod_trac
 	                  . $rows->performance; ?>" class="mod-result-tip"><?php echo $rows->last_name; ?>
 	          </a>
 	        </td>
-	        <?php if ($showteams) { ?>
+	        <?php if ($showteams): ?>
 	        <td>
 	          <a href="<?php echo $link_team; ?>"
 	             title="<?php echo $rows->team_name . '::' . JText::_('MOD_TRACKS_LATEST_RESULTS_Click_for_details' ); ?>" class="mod-result-tip">
 	            <?php echo $rows->team_acronym; ?>
 	          </a>
 	        </td>
-	        <?php } ?>
-	        <?php if ($showpoints) { ?>
+	        <?php endif; ?>
+
+	        <?php if ($showpoints): ?>
 	        <td><?php echo $rows->points + $rows->bonus_points; ?></td>
-	        <?php } ?>
+	        <?php endif; ?>
+
+		      <?php if ($showperformance): ?>
+			      <td><?php echo $rows->performance; ?></td>
+		      <?php endif; ?>
 	      </tr>
 	      <?php
 	      if ( ++$count >= $limit ) {
