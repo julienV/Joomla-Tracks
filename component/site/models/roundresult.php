@@ -195,6 +195,7 @@ class TracksModelRoundResult extends TrackslibModelFrontbase
 					{
 						$rank = $r->rank + $r->rank_offset;
 						$points_attrib = explode(',', $r->points_attribution);
+						$points_attrib = array_map('floatval', $points_attrib);
 
 						if (isset($points_attrib[$rank - 1]))
 						{

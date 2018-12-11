@@ -9,7 +9,7 @@
 	<license>http://www.gnu.org/licenses/gpl.html</license>
 	<version>3.0.7</version>
 	<tag>##VERSION##</tag>
-	<redcore version="1.10.1" defaultFramework="bootstrap2"/>
+	<redcore version="1.10.6" defaultFramework="bootstrap2"/>
 	<description>COM_TRACKS_XML_DESC</description>
 
 	<!-- Runs on install/uninstall/update -->
@@ -53,7 +53,6 @@
 	</media>
 
 	<administration>
-
 		<!-- Administration Menu Section -->
 		<menu
 			img="../media/com_tracks/images/tracks_logo_16.png">COM_TRACKS_TRACKS</menu>

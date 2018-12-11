@@ -128,10 +128,11 @@ class TrackslibRankingtoolDefault
 				if ($r->count_points && $r->global_rank)
 				{
 					$points_attrib = explode(',', $r->points_attribution);
+					$points_attrib = array_map('floatval', $points_attrib);
 
 					if ($r->points_attribution && isset($points_attrib[$r->global_rank - 1]))
 					{
-						$points += (float) $points_attrib[$r->global_rank - 1];
+						$points += $points_attrib[$r->global_rank - 1];
 					}
 				}
 
@@ -324,6 +325,7 @@ class TrackslibRankingtoolDefault
 				if ($r->count_points)
 				{
 					$points_attrib = explode(',', $r->points_attribution);
+					$points_attrib = array_map('floatval', $points_attrib);
 
 					if ($r->points_attribution && isset($points_attrib[$r->global_rank - 1]))
 					{
