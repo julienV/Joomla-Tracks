@@ -21,8 +21,6 @@ jimport('joomla.plugin.plugin');
 
 jimport('tracks.bootstrap');
 
-require_once 'vendor/autoload.php';
-
 JLoader::registerNamespace('TracksF1', __DIR__ . '/lib', false, false, 'psr4');
 
 /**
@@ -56,6 +54,11 @@ class PlgTracks_importFormula1 extends JPlugin
 
 	public function onAjaxF1ImportSeason()
 	{
+		if (!class_exists('\GuzzleHttp\Client'))
+		{
+			require_once 'vendor/autoload.php';
+		}
+
 		$app    = Factory::getApplication();
 		$input  = $app->input;
 		$output =  new \TracksF1\Output\Html;
