@@ -8,6 +8,7 @@
  */
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Table\Table;
 use TracksF1\Import\Races;
 use TracksF1\Import\Drivers;
@@ -31,6 +32,28 @@ JLoader::registerNamespace('TracksF1', __DIR__ . '/lib', false, false, 'psr4');
  */
 class PlgTracks_importFormula1 extends JPlugin
 {
+	private $importer = 'formula1';
+
+	public function onTracksGetImporters(&$importers)
+	{
+		$importers[] = [
+			'id'          => $this->importer,
+			'name'        => 'Formula 1',
+			'description' => 'Imports data from https://ergast.com/',
+			'developer'   => 'Julien Vonthron',
+		];
+	}
+
+	public function onTracksGetImporterScreen($importer, &$html)
+	{
+		if ($importer !== $this->importer)
+		{
+			return;
+		}
+
+		$html = LayoutHelper::render('formula1.screen', null, __DIR__ . '/layouts');
+	}
+
 	public function onAjaxF1ImportSeason()
 	{
 		$app    = Factory::getApplication();

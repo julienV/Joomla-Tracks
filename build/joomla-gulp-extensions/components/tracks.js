@@ -21,7 +21,9 @@ var parser      = new xml2js.Parser();
 var baseTask  = 'components.tracks';
 var extPath   = '../component';
 var updateXmlPath = '../../update_server_xml/';
+var assetsPath = '../assets/components/tracks';
 var mediaPath = extPath + '/media/com_tracks';
+var wwwMediaPath = config.wwwDir + '/media/com_tracks';
 var pluginsPath = extPath + '/plugins';
 
 // Clean
@@ -99,15 +101,56 @@ gulp.task('copy:' + baseTask + ':plugins', ['clean:' + baseTask + ':plugins'], f
 		.pipe(gulp.dest(config.wwwDir + '/plugins'));
 });
 
+
+function compileLessFile(src, destinationFolder, options) {
+	return gulp.src(src)
+		.pipe(less(options))
+		.pipe(gulp.dest(mediaPath + '/' + destinationFolder))
+		.pipe(gulp.dest(wwwMediaPath + '/' + destinationFolder))
+		.pipe(minifyCSS())
+		.pipe(rename(function (path) {
+			path.basename += '.min';
+		}))
+		.pipe(gulp.dest(mediaPath + '/' + destinationFolder))
+		.pipe(gulp.dest(wwwMediaPath + '/' + destinationFolder))
+		.pipe(browserSync.reload({stream: true}));
+}
+
+// Less
+gulp.task('less:' + baseTask, function () {
+	return compileLessFile(
+		[
+			assetsPath + '/less/tracks.less',
+			assetsPath + '/less/tracksbackend.less'
+		],
+		'css',
+		{paths: ['../assets/components/tracks/less']}
+	);
+});
+
+function compileScripts(src, ouputFileName, destinationFolder) {
+	return gulp.src(src)
+		.pipe(concat(ouputFileName))
+		.pipe(gulp.dest(mediaPath + '/' + destinationFolder))
+		.pipe(gulp.dest(wwwMediaPath + '/' + destinationFolder))
+		.pipe(uglify().on('error', gutil.log))
+		.pipe(rename(function (path) {
+			path.basename += '.min';
+		}))
+		.pipe(gulp.dest(mediaPath + '/' + destinationFolder))
+		.pipe(gulp.dest(wwwMediaPath + '/' + destinationFolder))
+		.pipe(browserSync.reload({stream: true}));
+}
+
 // Watch
 gulp.task('watch:' + baseTask,
 	[
 		'watch:' + baseTask + ':frontend',
 		'watch:' + baseTask + ':backend',
 		'watch:' + baseTask + ':plugins',
-		'watch:' + baseTask + ':media'
+		'watch:' + baseTask + ':media',
 		//'watch:' + baseTask + ':scripts',
-		//'watch:' + baseTask + ':less'
+		'watch:' + baseTask + ':less'
 	],
 	function() {
 		return true;
@@ -139,6 +182,12 @@ gulp.task('watch:' + baseTask + ':plugins', function() {
 gulp.task('watch:' + baseTask + ':media', function() {
 	gulp.watch(extPath + '/media/**',
 		['copy:' + baseTask + ':media']);
+});
+
+// Watch: plugins
+gulp.task('watch:' + baseTask + ':less', function() {
+	gulp.watch(assetsPath + '/less/**',
+		['less:' + baseTask]);
 });
 
 gulp.task('update-sites:' + baseTask, function(){

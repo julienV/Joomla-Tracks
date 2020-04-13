@@ -13,6 +13,7 @@
 
 	<files>
 		<folder>language</folder>
+		<folder>layouts</folder>
 		<folder>lib</folder>
 		<folder>vendor</folder>
 		<file plugin="formula1">formula1.php</file>

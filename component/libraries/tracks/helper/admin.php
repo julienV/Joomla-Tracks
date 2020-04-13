@@ -101,6 +101,13 @@ abstract class TrackslibHelperAdmin
 				'text' => JText::_('COM_TRACKS_MORE'),
 				'items' => array(
 					array(
+						'view' => 'import',
+						'link' => 'index.php?option=com_tracks&view=import',
+						'icon' => 'icon-cloud-download',
+						'text' => JText::_('COM_TRACKS_MENU_IMPORT'),
+						'access' => 'core.edit'
+					),
+					array(
 						'view' => 'about',
 						'link' => 'index.php?option=com_tracks&view=about',
 						'icon' => 'icon-question',

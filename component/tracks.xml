@@ -5,9 +5,9 @@
 	<authorEmail>julien.vonthron@gmail.com</authorEmail>
 	<authorUrl>http://www.jlv-solutions.com</authorUrl>
 	<creationDate>##DATE##</creationDate>
-	<copyright>(C) 2008-2015 Julien Vonthron. All rights	reserved.</copyright>
+	<copyright>(C) 2008-2020 Julien Vonthron. All rights	reserved.</copyright>
 	<license>http://www.gnu.org/licenses/gpl.html</license>
-	<version>3.0.7</version>
+	<version>3.0.8</version>
 	<tag>##VERSION##</tag>
 	<redcore version="1.10.6" defaultFramework="bootstrap2"/>
 	<description>COM_TRACKS_XML_DESC</description>
@@ -99,6 +99,7 @@
 
 	<plugins>
 		<plugin name="default" group="tracks_projecttype" />
+		<plugin name="formula1" group="tracks_import" />
 	</plugins>
 
 	<updateservers>
