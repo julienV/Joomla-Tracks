@@ -1,9 +1,8 @@
 {
-    "name"       : "redCOMPONENT-COM/aesir",
-    "description": "a Joomla CCK with frontenders in mind",
+    "name"       : "tracks/test",
     "license"    : "GPL-2.0+",
     "require"    : {
-        "php": ">=5.3.10"
+        "php": ">=5.4"
     },
     "require-dev": {
       "squizlabs/php_codesniffer": "1.*",

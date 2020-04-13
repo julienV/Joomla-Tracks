@@ -20,7 +20,7 @@
   },
   "homepage": "http://www.jlv-solutions.com",
   "devDependencies": {
-    "browser-sync": "^2.8.2",
+    "browser-sync": "^2.26.7",
     "del": "^2.2.0",
     "fs": "0.0.2",
     "git-rev": "^0.2.1",
@@ -44,7 +44,7 @@
     "path": "^0.12.7",
     "require-dir": "^0.3.0",
     "run-sequence": "^1.1.5",
-    "xml2js": "^0.4.16",
+    "xml2js": "^0.4.23",
     "yargs": "^4.1.0"
   }
 }

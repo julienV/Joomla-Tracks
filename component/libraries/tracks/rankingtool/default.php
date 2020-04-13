@@ -197,7 +197,7 @@ class TrackslibRankingtoolDefault
 	{
 		if (empty($this->_individuals))
 		{
-			$query = ' SELECT i.id, i.first_name, i.last_name, i.country_code, i.picture_small, '
+			$query = ' SELECT i.id, i.first_name, i.last_name, i.country_code, i.picture_small, i.nickname, '
 				. ' pi.team_id, pi.number, '
 				. ' t.name AS team_name, t.short_name AS team_short_name, t.acronym AS team_acronym, t.picture_small AS team_logo,'
 				. ' CASE WHEN CHAR_LENGTH( i.alias ) THEN CONCAT_WS( \':\', i.id, i.alias ) ELSE i.id END AS slug, '

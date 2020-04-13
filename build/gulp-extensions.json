@@ -14,6 +14,7 @@
 	"plugins" : {
 		"editors-xtd" : ["tracks_individual"],
 		"search" : ["trackssearch"],
+		"tracks_import" : ["formula1"],
 		"user" : ["tracks_autoregister"]
 	}
 }

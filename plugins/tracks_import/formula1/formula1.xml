@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.5" type="plugin" group="tracks_import" method="upgrade">
+	<name>plg_tracks_import_formula1</name>
+	<author>Julien Vonthron</author>
+	<authorEmail>julien.vonthron@gmail.com</authorEmail>
+	<authorUrl>http://www.jlv-solutions.com</authorUrl>
+	<creationDate>##DATE##</creationDate>
+	<copyright>(C) 2020 Julien Vonthron. All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl.html</license>
+	<version>1.0.0</version>
+	<tag>##VERSION##</tag>
+	<description>PLG_tracks_import_formula1_XML_DESC</description>
+
+	<files>
+		<folder>language</folder>
+		<folder>lib</folder>
+		<folder>vendor</folder>
+		<file plugin="formula1">formula1.php</file>
+		<file>formula1.xml</file>
+	</files>
+
+	<config>
+		<fields name="params">
+		</fields>
+	</config>
+</extension>
