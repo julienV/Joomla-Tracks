@@ -45,26 +45,6 @@ class TracksViewIndividual extends RViewSite
 
 		$data = $this->get('Item');
 
-		$attribs['class'] = "pic";
-
-		if ($data->picture != '')
-		{
-			$data->picture = JHTML::image(JURI::root() . $data->picture, $data->first_name . ' ' . $data->last_name, $attribs);
-		}
-		else
-		{
-			$data->picture = JHTML::image(JURI::root() . 'media/com_tracks/images/misc/tnnophoto.jpg', $data->first_name . ' ' . $data->last_name, $attribs);
-		}
-
-		if ($data->picture_small != '')
-		{
-			$data->picture_small = JHTML::image(JURI::root() . $data->picture_small, $data->first_name . ' ' . $data->last_name, $attribs);
-		}
-		else
-		{
-			$data->picture_small = JHTML::image(JURI::root() . 'media/com_tracks/images/misc/tnnophoto.jpg', $data->first_name . ' ' . $data->last_name, $attribs);
-		}
-
 		$raceResults = $this->sortResultsByProject($this->get('RaceResults'));
 
 		$show_edit_link = ($user->id && $user->id == $data->user_id) || $user->authorise('core.manage', 'com_tracks');

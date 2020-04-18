@@ -62,9 +62,6 @@ table#tracksprofile th {
 #tracks .clear {
   clear: both;
 }
-#individualdetails {
-  /*clear:both;*/
-}
 div#tracks .copyright {
   font-size: 0.9em;
   text-align: center;
@@ -111,4 +108,36 @@ div.tracks-clear {
 }
 div.edit div.edit-pic {
   display: inline-block;
+}
+.tracks-individual__details {
+  background: #ECECEC;
+  padding: 20px 10px;
+  display: flex;
+}
+.tracks-individual__details__picture {
+  width: 200px;
+  padding: 0 10px;
+}
+.tracks-individual__details__picture i {
+  font-size: 150px;
+  width: 150px;
+  height: 150px;
+  margin: 0;
+  line-height: 150px;
+}
+.tracks-individual__details__picture img {
+  height: 150px;
+}
+.tracks-individual__details__list__item {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+}
+.tracks-individual__details__list__item__label {
+  font-weight: bold;
+  text-transform: uppercase;
+  width: 150px;
+}
+.tracks-individual__details__list__item__value {
+  flex-grow: 1;
 }

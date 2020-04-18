@@ -88,7 +88,7 @@ gulp.task('copy:' + baseTask + ':backend', ['clean:' + baseTask + ':backend'], f
 });
 
 // Copy: media
-gulp.task('copy:' + baseTask + ':media', ['clean:' + baseTask + ':media'], function() {
+gulp.task('copy:' + baseTask + ':media', function() {
 	return gulp.src(mediaPath + '/**')
 		.pipe(gulp.dest(config.wwwDir + '/media/com_tracks'));
 });

@@ -80,10 +80,6 @@ table#tracksprofile th {
   clear:both;
 }
 
-#individualdetails {
-  /*clear:both;*/
-}
-
 div#tracks .copyright {
   font-size: 0.9em; text-align: center;
   margin: 1em 0;
@@ -139,4 +135,49 @@ div.tracks-clear {
 
 div.edit div.edit-pic {
   display: inline-block;
+}
+
+.tracks-individual {
+  &__details {
+    background: @color-lightgrey;
+    padding: 20px 10px;
+    display: flex;
+    @image-size: 150px;
+
+    &__picture {
+      width: 200px;
+      padding: 0 10px;
+
+      i {
+        font-size: @image-size;
+        width: @image-size;
+        height: @image-size;
+        margin: 0;
+        line-height: @image-size;
+
+      }
+
+      img {
+        height: @image-size;
+      }
+    }
+
+    &__list {
+      &__item {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 0;
+
+        &__label {
+          font-weight: bold;
+          text-transform: uppercase;
+          width: 150px;
+        }
+
+        &__value {
+          flex-grow: 1;
+        }
+      }
+    }
+  }
 }
