@@ -126,7 +126,7 @@ class TracksModelEventResults extends RModelList
 		$query->select('rr.performance, rr.bonus_points, rr.comment');
 		$query->select('CASE WHEN CHAR_LENGTH(rr.number) THEN rr.number ELSE pi.number END AS number');
 		$query->select('pi.id AS piid');
-		$query->select('i.first_name, i.last_name');
+		$query->select('i.first_name, i.last_name, i.nickname');
 		$query->select('t.name AS team');
 
 		$query->from('#__tracks_events_results AS rr');
@@ -189,7 +189,7 @@ class TracksModelEventResults extends RModelList
 			else
 			{
 				$search = $db->Quote('%' . $db->escape($search, true) . '%');
-				$query->where('CONCAT(i.last_name, i.first_name) LIKE ' . $search);
+				$query->where('CONCAT(i.last_name, i.first_name, i.nickname) LIKE ' . $search);
 			}
 		}
 

@@ -118,6 +118,9 @@ RHelperAsset::load('tracksbackend.css');
 					<td>
 						<?php $itemTitle = $row->first_name ? $row->last_name . ', ' . $row->first_name : $row->last_name; ?>
 						<?php echo JHtml::_('link', 'index.php?option=com_tracks&task=eventresult.edit&id=' . $row->id . '&event_id=' . $row->event_id, $itemTitle); ?>
+						<?php if ($row->nickname): ?>
+							<br><small><?= $row->nickname ?></small>
+						<?php endif; ?>
 					</td>
 					<td>
 						<?php echo $row->team; ?>

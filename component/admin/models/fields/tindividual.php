@@ -56,7 +56,7 @@ class JFormFieldTIndividual extends JFormField
 			$db    = JFactory::getDbo();
 			$query = $db->getQuery(true);
 
-			$query->select('i.last_name, i.first_name');
+			$query->select('i.last_name, i.first_name, i.nickname');
 			$query->from('#__tracks_individuals AS i');
 			$query->where('i.id = ' . (int) $this->value);
 			$db->setQuery($query);

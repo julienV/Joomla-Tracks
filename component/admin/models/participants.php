@@ -53,7 +53,7 @@ class TracksModelParticipants extends TrackslibModelList
 				'name', 'obj.name',
 				'id', 'obj.id',
 				'ordering', 'obj.ordering',
-				'i.last_name', 'i.first_name',
+				'i.last_name', 'i.first_name', 'i.nickname',
 				'obj.number', 't.name',
 			);
 		}
@@ -131,7 +131,7 @@ class TracksModelParticipants extends TrackslibModelList
 				'list.select',
 				array(
 					'obj.*',
-					'i.last_name, i.first_name',
+					'i.last_name, i.first_name', 'i.nickname',
 					't.name AS team'
 				)
 			)

@@ -50,7 +50,7 @@ class TracksModelIndividuals extends TrackslibModelList
 		if (empty($config['filter_fields']))
 		{
 			$config['filter_fields'] = array(
-				'last_name', 'obj.last_name',
+				'last_name', 'obj.last_name', 'obj.nickname',
 				'first_name', 'obj.first_name',
 				'obj.country_code',
 				'id', 'obj.id',
@@ -112,7 +112,7 @@ class TracksModelIndividuals extends TrackslibModelList
 			else
 			{
 				$search = $db->Quote('%' . $db->escape($search, true) . '%');
-				$query->where('LOWER( CONCAT(obj.first_name, obj.last_name) ) LIKE ' . $search);
+				$query->where('LOWER( CONCAT(obj.first_name, obj.last_name, obj.nickname) ) LIKE ' . $search);
 			}
 		}
 
