@@ -27,14 +27,6 @@ RHelperAsset::load('tracksbackend.css', 'com_tracks');
 
 $icons = TrackslibHelperAdmin::getAdminMenuItems(true);
 ?>
-<script type="text/javascript">
-	(function($){
-		$(function(){
-			$('.tracks-sidebar .tracks-sidebar-item.active').parent().parent().addClass('in');
-		});
-	})(jQuery);
-</script>
-
 <?php if (isset($data['view']->projectSwitch)): ?>
 	<?php $form = $data['view']->projectSwitch; ?>
 	<form action="index.php?option=com_tracks&task=project.select&return=<?php echo $return; ?>" method="post" id="project-switch">
@@ -43,17 +35,17 @@ $icons = TrackslibHelperAdmin::getAdminMenuItems(true);
 <?php endif; ?>
 
 <?php if (!empty($icons)): ?>
-	<div class="accordion tracks-sidebar" id="tracksSideBarAccordion">
+	<div class="tracks-sidebar" id="tracksSideBarAccordion">
 		<?php $index = 0; ?>
 		<?php foreach ($icons as $group): ?>
 			<div class="accordion-group">
 				<div class="accordion-heading">
-					<a class="accordion-toggle" data-toggle="collapse" data-parent="#tracksSideBarAccordion" href="#collapse<?php echo $index ?>">
+					<a class="accordion-toggle" data-toggle="collapse" href="#collapse<?php echo $index ?>">
 						<i class="<?php echo $group['icon'];?>"></i>
 						<?php echo $group['text'];?>
 					</a>
 				</div>
-				<div id="collapse<?php echo $index ?>" class="accordion-body collapse">
+				<div id="collapse<?php echo $index ?>" class="accordion-body collapse in">
 					<?php if (!empty($group['items'])): ?>
 						<ul class="nav nav-tabs nav-stacked">
 							<?php foreach ($group['items'] as $icon): ?>
