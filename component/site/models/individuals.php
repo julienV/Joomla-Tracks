@@ -25,7 +25,7 @@ class TracksModelIndividuals extends TrackslibModelFrontbase
 	{
 		$ordering = JFactory::getApplication()->getParams('com_tracks')->get('ordering', 0);
 		$order    = $ordering ? ' ORDER BY i.first_name, i.last_name ASC ' : ' ORDER BY i.last_name ASC, i.first_name ASC ';
-		$query    = ' SELECT i.id, i.first_name, i.last_name, i.country_code, '
+		$query    = ' SELECT i.id, i.first_name, i.last_name, i.nickname, i.country_code, '
 			. ' CASE WHEN CHAR_LENGTH( i.alias ) THEN CONCAT_WS( \':\', i.id, i.alias ) ELSE i.id END AS slug '
 			. ' FROM #__tracks_individuals as i '
 			. $order;

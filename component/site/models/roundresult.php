@@ -157,7 +157,7 @@ class TracksModelRoundResult extends TrackslibModelFrontbase
 			->select('pr.project_id AS project_id')
 			->select('srt.points_attribution, srt.count_points')
 			->select('sr.rank_offset')
-			->select('i.first_name, i.last_name, i.country_code, i.country_code')
+			->select('i.first_name, i.last_name, i.nickname, i.country_code, i.country_code')
 			->select('CASE WHEN rr.number THEN rr.number ELSE pi.number END AS number')
 			->select('t.name AS team_name, t.short_name AS team_short_name, t.acronym AS team_acronym, t.picture_small AS team_logo')
 			->select('CASE WHEN CHAR_LENGTH( i.alias ) THEN CONCAT_WS( \':\', i.id, i.alias ) ELSE i.id END AS slug')
