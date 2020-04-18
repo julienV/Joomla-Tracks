@@ -50,7 +50,7 @@ class TracksModelProjectindividuals extends TrackslibModelFrontbase
 
 		$this->_db->setQuery($query);
 
-		$result = $this->_db->loadObjectList();
+		return $this->_db->loadObjectList();
 
 		$count = count($result);
 

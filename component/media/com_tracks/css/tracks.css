@@ -1,134 +1,114 @@
-@CHARSET "UTF-8";
-
 table.raceResults th {
-border-bottom:1px solid #ECECEC;
-padding-bottom:4px;
-text-align:left;
+  border-bottom: 1px solid #ECECEC;
+  padding-bottom: 4px;
+  text-align: left;
 }
-
-table.raceResults th, table.raceResults td {
-background-color:#FFFFFF;
-border-collapse:collapse;
-font-size:1.2em;
-line-height:1.2em;
-margin:0pt 0pt 1px;
-padding:2px 10px;
+table.raceResults th,
+table.raceResults td {
+  background-color: #FFFFFF;
+  border-collapse: collapse;
+  font-size: 1.2em;
+  line-height: 1.2em;
+  margin: 0 0 1px;
+  padding: 2px 10px;
 }
-
 table#tracksprofile th {
-	text-align: right;
-	width: 140px;
-	font-weight: bold;
-	background-color: #F6F6F6;
+  text-align: right;
+  width: 140px;
+  font-weight: bold;
+  background-color: #ECECEC;
 }
-
-#tracks ul.individualsGallery {
-	list-style-image:none;
-	list-style-position:outside;
-	list-style-type:none;
+.tracks__individualsGallery {
+  display: flex;
+  flex-wrap: wrap;
+  color: #005e8d;
 }
-
-#tracks ul.individualsGallery li {
-  background:#ECECEC none repeat scroll 0% 0%;
-	color:#FFFFFF;
-	float:left;
-	margin:0pt 5px 5px 0pt;
+.tracks__individualsGallery a {
+  color: #005e8d;
 }
-
-#tracks ul.individualsGallery li div {
-	background:#FFFFFF none repeat scroll 0% 0%;
-  text-align:center;
-	margin:5px;
+.tracks__individualsGallery__item {
+  width: 250px;
+  background: #ECECEC;
+  padding: 20px 10px;
+  margin: 5px;
+  text-align: center;
 }
-
-#tracks ul.individualsGallery .pic {
-  height:150px;
-  max-width:150px;
+.tracks__individualsGallery__item__splash i.pic {
+  font-size: 150px;
+  width: 150px;
+  height: 150px;
+  margin-left: .25em;
+  line-height: 150px;
 }
-
-#tracks ul.individualsGallery li div p {
-	margin:0pt;
-	padding:5px;
-  text-align:left;
+.tracks__individualsGallery__item__splash img.pic {
+  height: 150px;
 }
-
-#tracks ul.individualsGallery li div {
-  color:#014D93;
+.tracks__individualsGallery__item__desc {
+  padding: 20px 0 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-transform: uppercase;
 }
-
-#tracks ul.individualsGallery li div p span {
-  /*display:block;*/
+.tracks__individualsGallery__item__desc img {
+  margin-bottom: 0.3em;
 }
-
-#tracks ul.individualsGallery li div p span.individualnumber {
-  display:block;
-  float:left;
-  font-size:1.4em;
-  font-weight:bold;
+.tracks__individualsGallery__item__desc__nickname {
+  font-size: 0.8em;
+}
+.tracks__individualsGallery__item .individualnumber {
+  display: inline-block;
   margin-right: 5px;
 }
-
 #tracks .clear {
-  clear:both;
+  clear: both;
 }
-
 #individualdetails {
   /*clear:both;*/
 }
-
 div#tracks .copyright {
-font-size: 0.9em; text-align: center;
-margin: 1em 0;
-color: #aaa;
+  font-size: 0.9em;
+  text-align: center;
+  margin: 1em 0;
+  color: #aaa;
 }
-
 div#tracks table#namelist td {
   vertical-align: top;
 }
-
 div#tracks table#namelist .letter {
   font-size: 1.5em;
   font-weight: bold;
-  padding:5px;
+  padding: 5px;
 }
-
-div#individualpic img, div#teampic img{
-  border:1px;
-  float:left;
+div#individualpic img,
+div#teampic img {
+  border: 1px;
+  float: left;
 }
-
 #individualresults h3 {
-  margin-top:10px;
+  margin-top: 10px;
 }
-
 #tracks .icalbutton {
-  text-align:center;
+  text-align: center;
 }
-
 /* team view */
 div.project-inds {
-	padding-left: 5px;
+  padding-left: 5px;
 }
-
 div.project-inds span {
-	font-weight: bold;
-	font-size:1.2em;
+  font-weight: bold;
+  font-size: 1.2em;
 }
-
 div.project-inds div {
-	padding-left: 4px;
+  padding-left: 4px;
 }
-
 /* round view */
 img.round-image {
-	float:left;
-	padding-right: 5px;
+  float: left;
+  padding-right: 5px;
 }
-
 div.tracks-clear {
-	clear:both;
+  clear: both;
 }
-
 div.edit div.edit-pic {
-    display: inline-block;
+  display: inline-block;
 }

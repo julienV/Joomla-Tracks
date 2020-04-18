@@ -33,29 +33,27 @@ gulp.task('clean:' + baseTask,
 		'clean:' + baseTask + ':backend',
 		'clean:' + baseTask + ':media',
 		'clean:' + baseTask + ':plugins'
-	],
-	function() {
-		return true;
-});
+	]
+);
 
 // Clean: frontend
 gulp.task('clean:' + baseTask + ':frontend', function() {
-	del.sync(config.wwwDir + '/components/com_tracks', {force : true});
+	return del(config.wwwDir + '/components/com_tracks', {force : true});
 });
 
 // Clean: backend
 gulp.task('clean:' + baseTask + ':backend', function() {
-	del.sync(config.wwwDir + '/administrator/components/com_tracks', {force : true});
+	return del(config.wwwDir + '/administrator/components/com_tracks', {force : true});
 });
 
 // Clean: media
 gulp.task('clean:' + baseTask + ':media', function() {
-	del.sync(config.wwwDir + '/media/com_tracks', {force : true});
+	return del(config.wwwDir + '/media/com_tracks', {force : true});
 });
 
 // Clean: plugins
 gulp.task('clean:' + baseTask + ':plugins', function() {
-	return del.sync(config.wwwDir + '/plugins/tracks_projecttype/default', {force : true});
+	return del(config.wwwDir + '/plugins/tracks_projecttype/default', {force : true});
 });
 
 // Copy
@@ -151,20 +149,18 @@ gulp.task('watch:' + baseTask,
 		'watch:' + baseTask + ':media',
 		//'watch:' + baseTask + ':scripts',
 		'watch:' + baseTask + ':less'
-	],
-	function() {
-		return true;
-});
+	]
+);
 
 // Watch: frontend
 gulp.task('watch:' + baseTask + ':frontend', function() {
-	gulp.watch(extPath + '/site/**',
+	return gulp.watch(extPath + '/site/**',
 	['copy:' + baseTask + ':frontend']);
 });
 
 // Watch: backend
 gulp.task('watch:' + baseTask + ':backend', function() {
-	gulp.watch([
+	return gulp.watch([
 		extPath + '/admin/**',
 		extPath + '/tracks.xml',
 		extPath + '/install.php'
@@ -174,19 +170,19 @@ gulp.task('watch:' + baseTask + ':backend', function() {
 
 // Watch: plugins
 gulp.task('watch:' + baseTask + ':plugins', function() {
-	gulp.watch(extPath + '/plugins/**',
+	return gulp.watch(extPath + '/plugins/**',
 		['copy:' + baseTask + ':plugins']);
 });
 
 // Watch: plugins
 gulp.task('watch:' + baseTask + ':media', function() {
-	gulp.watch(extPath + '/media/**',
+	return gulp.watch(extPath + '/media/**',
 		['copy:' + baseTask + ':media']);
 });
 
 // Watch: plugins
 gulp.task('watch:' + baseTask + ':less', function() {
-	gulp.watch(assetsPath + '/less/**',
+	return gulp.watch(assetsPath + '/less/**',
 		['less:' + baseTask]);
 });
 

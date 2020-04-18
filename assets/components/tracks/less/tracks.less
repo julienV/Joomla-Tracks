@@ -1,0 +1,142 @@
+@color-lightgrey: #ECECEC;
+@color-blue: #005e8d;;
+
+table.raceResults th {
+  border-bottom:1px solid @color-lightgrey;
+  padding-bottom:4px;
+  text-align:left;
+}
+
+table.raceResults th, table.raceResults td {
+  background-color:#FFFFFF;
+  border-collapse:collapse;
+  font-size:1.2em;
+  line-height:1.2em;
+  margin:0 0 1px;
+  padding:2px 10px;
+}
+
+table#tracksprofile th {
+  text-align: right;
+  width: 140px;
+  font-weight: bold;
+  background-color: @color-lightgrey;
+}
+
+.tracks__individualsGallery {
+  display:flex;
+  flex-wrap: wrap;
+  color: @color-blue;
+  @image-size: 150px;
+
+  a {
+    color: @color-blue;
+  }
+
+  &__item {
+    width: 250px;
+    background: @color-lightgrey;
+    padding: 20px 10px;
+    margin: 5px;
+    text-align:center;
+
+    &__splash {
+      i.pic {
+        font-size: @image-size;
+        width: @image-size;
+        height: @image-size;
+        margin-left: .25em;
+        line-height: @image-size;
+      }
+
+      img.pic {
+        height: @image-size;
+      }
+    }
+
+    &__desc {
+      padding: 20px 0 10px;
+      font-size: 1.2em;
+      font-weight: bold;
+      text-transform: uppercase;
+
+      img {
+        margin-bottom: 0.3em;
+      }
+
+      &__nickname {
+        font-size: 0.8em;
+      }
+    }
+
+    .individualnumber {
+      display:inline-block;
+      margin-right: 5px;
+    }
+  }
+}
+
+#tracks .clear {
+  clear:both;
+}
+
+#individualdetails {
+  /*clear:both;*/
+}
+
+div#tracks .copyright {
+  font-size: 0.9em; text-align: center;
+  margin: 1em 0;
+  color: #aaa;
+}
+
+div#tracks table#namelist td {
+  vertical-align: top;
+}
+
+div#tracks table#namelist .letter {
+  font-size: 1.5em;
+  font-weight: bold;
+  padding:5px;
+}
+
+div#individualpic img, div#teampic img{
+  border:1px;
+  float:left;
+}
+
+#individualresults h3 {
+  margin-top:10px;
+}
+
+#tracks .icalbutton {
+  text-align:center;
+}
+
+/* team view */
+div.project-inds {
+  padding-left: 5px;
+}
+
+div.project-inds span {
+  font-weight: bold;
+  font-size:1.2em;
+}
+
+div.project-inds div {
+  padding-left: 4px;
+}
+
+/* round view */
+img.round-image {
+  float:left;
+  padding-right: 5px;
+}
+
+div.tracks-clear {
+  clear:both;
+}
+
+div.edit div.edit-pic {
+  display: inline-block;
+}
