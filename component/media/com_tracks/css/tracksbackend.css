@@ -128,3 +128,11 @@ form.eventresults td.ajaxupdate div {
 .tracks-import__importers__table thead {
   text-align: left;
 }
+.about-tracks {
+  display: flex;
+}
+.about-tracks__logo {
+  width: 250px;
+  text-align: center;
+  padding: 0px 30px;
+}
