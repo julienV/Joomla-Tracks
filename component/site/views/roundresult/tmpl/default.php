@@ -112,6 +112,13 @@ JPluginHelper::importPlugin('content');
 							<?php echo $result->first_name . ' ' . $result->last_name; ?>
 						</a>
 					</td>
+
+					<?php if ($this->projectparams->get('shownickname')): ?>
+						<td class="nickname">
+							<?= $result->nickname; ?>
+						</td>
+					<?php endif; ?>
+
 					<?php if ($this->projectparams->get('showteams') && $this->params->get('showteams', 1)): ?>
 						<td>
 							<?php if ($result->team_id): ?>

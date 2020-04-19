@@ -35,6 +35,7 @@ class TracksViewProjectresults extends RViewSite
 		$project = $this->get('project');
 
 		$params = $this->get('Params');
+
 		$params->merge(JComponentHelper::getParams('com_tracks'));
 
 		$title = JText::sprintf('COM_TRACKS_view_project_results', $project->name);

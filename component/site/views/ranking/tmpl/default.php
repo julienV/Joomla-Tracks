@@ -32,6 +32,10 @@ defined('_JEXEC') or die('Restricted access');
 
 			<th><?php echo JText::_('COM_TRACKS_Individual'); ?></th>
 
+			<?php if ($this->project->getParam('shownickname')): ?>
+				<th class="nickname"><?php echo JText::_('COM_TRACKS_nickname'); ?></th>
+			<?php endif; ?>
+
 			<?php if ($this->project->getParam('showteams', 1)): ?>
 				<th><?php echo JText::_('COM_TRACKS_Team'); ?></th>
 			<?php endif; ?>
@@ -90,6 +94,11 @@ defined('_JEXEC') or die('Restricted access');
 						<?php echo $ranking->first_name . ' ' . $ranking->last_name; ?>
 					</a>
 				</td>
+				<?php if ($this->project->getParam('shownickname')): ?>
+					<td class="nickname">
+						<?= $ranking->nickname; ?>
+					</td>
+				<?php endif; ?>
 				<?php if ($this->project->getParam('showteams', 1)): ?>
 					<td>
 						<?php if ($ranking->team_id): ?>
