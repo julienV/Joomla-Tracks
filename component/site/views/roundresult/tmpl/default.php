@@ -66,6 +66,9 @@ JPluginHelper::importPlugin('content');
 					<th><?php echo JText::_('COM_TRACKS_COUNTRY_SHORT'); ?></th>
 				<?php endif; ?>
 				<th><?php echo JText::_('COM_TRACKS_Individual'); ?></th>
+				<?php if ($this->projectparams->get('shownickname')): ?>
+					<th><?php echo JText::_('COM_TRACKS_nickname'); ?></th>
+				<?php endif; ?>
 				<?php if ($this->projectparams->get('showteams') && $this->params->get('showteams', 1)): ?>
 					<th><?php echo JText::_('COM_TRACKS_Team'); ?></th>
 				<?php endif; ?>
