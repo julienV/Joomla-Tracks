@@ -91,7 +91,7 @@ class TracksTableEvent extends TrackslibTable
 
 		$query = $this->_db->getQuery(true)
 			->delete('#__tracks_events_results')
-			->where('event_id IN (' . $pks. ')');
+			->where('event_id IN (' . $pks . ')');
 
 		$this->_db->setQuery($query);
 		$this->_db->execute();

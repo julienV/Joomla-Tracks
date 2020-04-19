@@ -112,12 +112,15 @@ RHelperAsset::load('tracksbackend.css');
 					<td>
 						<?php echo JHtml::_('grid.id', $i, $row->id); ?>
 					</td>
-					<td>
-						<?php echo $row->number; ?>
+					<td class="result result-number">
+						<input type="text" name="number[]" value="<?php echo $row->number; ?>" size="5"/>
 					</td>
 					<td>
 						<?php $itemTitle = $row->first_name ? $row->last_name . ', ' . $row->first_name : $row->last_name; ?>
 						<?php echo JHtml::_('link', 'index.php?option=com_tracks&task=eventresult.edit&id=' . $row->id . '&event_id=' . $row->event_id, $itemTitle); ?>
+						<?php if ($row->nickname): ?>
+							<br><small><?= $row->nickname ?></small>
+						<?php endif; ?>
 					</td>
 					<td>
 						<?php echo $row->team; ?>
@@ -139,8 +142,6 @@ RHelperAsset::load('tracksbackend.css');
 	<?php endif; ?>
 	<input type="hidden" name="task" value=""/>
 	<input type="hidden" name="boxchecked" value="0"/>
-	<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>"/>
-	<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>"/>
 	<input type="hidden" name="projectround_id" value="<?php echo $this->state->get('projectround_id'); ?>"/>
 	<?php echo JHtml::_('form.token'); ?>
 </form>

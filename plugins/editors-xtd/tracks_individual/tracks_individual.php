@@ -20,7 +20,7 @@ include_once $tracksLoader;
 // Bootstraps Tracks
 TrackslibBootstrap::bootstrap();
 
-jimport( 'joomla.plugin.plugin' );
+jimport('joomla.plugin.plugin');
 
 /**
  * Editor Tracks individual buton
@@ -29,7 +29,7 @@ jimport( 'joomla.plugin.plugin' );
  * @subpackage  Plugins.site
  * @since       1.0
  */
-class plgButtonTracks_individual extends JPlugin
+class PlgButtonTracks_Individual extends JPlugin
 {
 	/**
 	 * Constructor

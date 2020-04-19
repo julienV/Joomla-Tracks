@@ -16,35 +16,47 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 	<h2><?php echo $this->project->name . ' ' . JText::_('COM_TRACKS_Participants'); ?></h2>
 
-	<ul class="individualsGallery">
+	<div class="tracks__individualsGallery">
 		<?php
 		foreach ($this->individuals AS $obj)
 		{
-			$link_ind = JRoute::_(TrackslibHelperRoute::getIndividualRoute($obj->slug, $this->project->slug));
+			$link_ind  = JRoute::_(TrackslibHelperRoute::getIndividualRoute($obj->slug, $this->project->slug));
 			$link_team = JRoute::_(TrackslibHelperRoute::getTeamRoute($obj->teamslug, $this->project->slug));
 			?>
-			<li>
-				<div>
-					<a href="<?php echo $link_ind; ?>"
-					   title="<?php echo $obj->first_name . ' ' . $obj->last_name; ?>">
-						<?php echo $obj->picture; ?>
-					</a>
-
-					<p>
-						<span class="individualnumber">#<?php echo $obj->number; ?></span>
-						<a href="<?php echo $link_ind; ?>"
-						   title="<?php echo $obj->first_name . ' ' . $obj->last_name;; ?>">
-							<?php
-							// individual name
-							echo $obj->first_name . ' ' . $obj->last_name;
-							?>
+				<div class="tracks__individualsGallery__item">
+					<div class="tracks__individualsGallery__item__splash">
+						<a href="<?php echo $link_ind; ?>" class="tracks__individualsGallery__item__link"
+						   title="<?php echo $obj->first_name . ' ' . $obj->last_name; ?>">
+							<?php if (!$obj->picture): ?>
+								<i class="icon icon-user pic"></i>
+							<?php else: ?>
+								<img class="pic" src="<?= $obj->picture ?>" alt="<?php echo $obj->first_name . ' ' . $obj->last_name; ?>"/>
+							<?php endif; ?>
 						</a>
-						<?php if ($this->projectparams->get('showflag')): ?>
-							<?php if ($obj->country_code): ?>
-								<?php echo TrackslibHelperCountries::getCountryFlag($obj->country_code); ?>
-							<?php endif ?>
+					</div>
+
+					<div class="tracks__individualsGallery__item__desc">
+						<div class="tracks__individualsGallery__item__desc__namerow">
+							<span class="individualnumber">#<?php echo $obj->number; ?></span>
+							<a href="<?php echo $link_ind; ?>"
+							   title="<?php echo $obj->first_name . ' ' . $obj->last_name;; ?>">
+								<?php
+								// individual name
+								echo $obj->first_name . ' ' . $obj->last_name;
+								?>
+							</a>
+							<?php if ($this->projectparams->get('showflag')): ?>
+								<?php if ($obj->country_code): ?>
+									<?php echo TrackslibHelperCountries::getCountryFlag($obj->country_code); ?>
+								<?php endif ?>
+							<?php endif; ?>
+						</div>
+						<?php if ($this->projectparams->get('shownickname') && $obj->nickname): ?>
+							<div class="tracks__individualsGallery__item__desc__nickname">
+								<?= $obj->nickname ?>
+							</div>
 						<?php endif; ?>
-					</p>
+					</div>
 
 					<?php if ($obj->team_name && $this->projectparams->get('showteams') && $this->params->get('showteams', 1)) : ?>
 						<div>
@@ -54,11 +66,10 @@ defined('_JEXEC') or die('Restricted access'); ?>
 						</div>
 					<?php endif; ?>
 				</div>
-			</li>
 		<?php
 		}
 		?>
-	</ul>
+	</div>
 	<div class=clear></div>
 	<p class="copyright">
 		<?php echo TrackslibHelperTools::footer(); ?>

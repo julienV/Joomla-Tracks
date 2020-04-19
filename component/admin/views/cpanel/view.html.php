@@ -36,6 +36,7 @@ class TracksViewCpanel extends TrackslibViewAdmin
 	public function display($tpl = null)
 	{
 		$this->user = JFactory::getUser();
+		$this->version = $this->get('Version');
 
 		parent::display($tpl);
 	}
@@ -47,6 +48,6 @@ class TracksViewCpanel extends TrackslibViewAdmin
 	 */
 	public function getTitle()
 	{
-		return JText::_('COM_TRACKS_CPANEL');
+		return false;
 	}
 }

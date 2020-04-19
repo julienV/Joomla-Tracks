@@ -5,11 +5,11 @@
       <description>Tracks Component !</description>
       <element>com_tracks</element>
       <type>component</type>
-      <version>3.0.4</version>
+      <version>3.0.7</version>
 
-      <infourl title="Tracks">https://github.com/julienV/Joomla-Tracks/releases/tag/3.0.4</infourl>
+      <infourl title="Tracks">https://github.com/julienV/Joomla-Tracks/releases/tag/3.0.7</infourl>
       <downloads>
-         <downloadurl type="full" format="zip">https://github.com/julienV/Joomla-Tracks/releases/download/3.0.4/com_tracks-3.0.4.zip</downloadurl>
+         <downloadurl type="full" format="zip">https://github.com/julienV/Joomla-Tracks/releases/download/3.0.7/tracks-v3.0.7.zip</downloadurl>
       </downloads>
       <tags>
          <tag>stable</tag>
@@ -18,6 +18,6 @@
       <maintainer>JLV-Solutions</maintainer>
       <maintainerurl>http://www.jlv-solutions.com</maintainerurl>
       <section>tracks</section>
-      <targetplatform name="joomla" version="3.[0123456]"/>
+      <targetplatform name="joomla" version="3.[01234567]"/>
    </update>
 </updates>

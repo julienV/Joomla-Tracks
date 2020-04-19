@@ -11,8 +11,8 @@
  * See COPYRIGHT.php for copyright notices and details.
  */
 // no direct access
-defined('_JEXEC') or die('Restricted access'); ?>
-<?php
+defined('_JEXEC') or die('Restricted access');
+
 /**
  * return formated string for round start date - end date
  *
@@ -82,6 +82,7 @@ function formatRoundStartEnd($round)
 					<?php if ($result->winner): ?>
 						<?php foreach ($result->winner as $winner): ?>
 							<div class="winner"><?php echo $winner->first_name . ' ' . $winner->last_name
+									. ($this->params->get('shownickname', 0) && !empty($winner->nickname) ? ' - ' . $winner->nickname : '')
 									. ($this->params->get('showteams', 1) && $winner->team_name ? ' (' . $winner->team_name . ')' : ''); ?></div>
 						<?php endforeach; ?>
 					<?php endif; ?>

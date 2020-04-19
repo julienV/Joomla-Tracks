@@ -90,10 +90,13 @@ $search = $this->state->get('filter.search');
 				<th width="auto">
 					<?php echo JText::_('COM_TRACKS_NOTE'); ?>
 				</th>
-				<th width="10">
-					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_count_in_rankings', 'obj.count_points', $listDirn, $listOrder); ?>
+				<th width="auto">
+					<?php echo JText::_('COM_TRACKS_EVENTTYPE_ENABLE_STATS'); ?>
 				</th>
 				<th width="auto">
+					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_count_in_rankings', 'obj.count_points', $listDirn, $listOrder); ?>
+				</th>
+				<th width="40%">
 					<?php echo JText::_('COM_TRACKS_POINTS'); ?>
 				</th>
 				<th width="10">
@@ -135,7 +138,10 @@ $search = $this->state->get('filter.search');
 						<?php echo $row->note; ?>
 					</td>
 					<td>
-						<?php echo $row->count_points; ?>
+						<?= $this->enableStatsToggle($row, $i); ?>
+					</td>
+					<td>
+						<?php echo $row->count_points ? '<i class="icon icon-ok"/>' : '<i class="icon icon-remove"/>'; ?>
 					</td>
 					<td>
 						<?php echo $row->points_attribution; ?>
@@ -151,7 +157,5 @@ $search = $this->state->get('filter.search');
 	<?php endif; ?>
 	<input type="hidden" name="task" value=""/>
 	<input type="hidden" name="boxchecked" value="0"/>
-	<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>"/>
-	<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>"/>
 	<?php echo JHtml::_('form.token'); ?>
 </form>

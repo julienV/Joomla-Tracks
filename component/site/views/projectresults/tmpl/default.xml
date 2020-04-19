@@ -53,6 +53,15 @@
         <option value="1">COM_TRACKS_Yes</option>
 			</field>
 
+			<field name="shownickname" type="list"
+				   label="COM_TRACKS_Display_nickname"
+				   description="COM_TRACKS_Display_nickname"
+				   default="0"
+			>
+				<option value="0">COM_TRACKS_No</option>
+				<option value="1">COM_TRACKS_Yes</option>
+			</field>
+
 		</fieldset>
 	</fields>
 

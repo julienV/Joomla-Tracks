@@ -26,6 +26,7 @@ Desktop.ini
 *.swp
 *~.nib
 *~
+.directory
 
 # Phing build script
 build/build.properties
@@ -48,8 +49,7 @@ tests/unit/phpunit.xml
 
 # composer
 composer.phar
-tests/vendor/*
-libraries/redevent/vendor/*
+vendor
 
 # Robo
 robo.phar

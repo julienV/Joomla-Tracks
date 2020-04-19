@@ -70,6 +70,14 @@ JHtml::_('behavior.formvalidation');
 		</div>
 		<div class="control-group">
 			<div class="control-label">
+				<?php echo $this->form->getLabel('enable_stats'); ?>
+			</div>
+			<div class="controls">
+				<?php echo $this->form->getInput('enable_stats'); ?>
+			</div>
+		</div>
+		<div class="control-group">
+			<div class="control-label">
 				<?php echo $this->form->getLabel('description'); ?>
 			</div>
 			<div class="controls">

@@ -10,7 +10,8 @@
  * other free or open source software licenses.
  * See COPYRIGHT.php for copyright notices and details.
  */
-defined('_JEXEC') or die('Restricted access'); ?>
+defined('_JEXEC') or die('Restricted access');
+?>
 
 <div id="tracks">
 
@@ -30,6 +31,10 @@ defined('_JEXEC') or die('Restricted access'); ?>
 			<?php endif; ?>
 
 			<th class="name"><?php echo JText::_('COM_TRACKS_Individual'); ?></th>
+
+			<?php if ($this->params->get('shownickname')): ?>
+				<th class="nickname"><?php echo JText::_('COM_TRACKS_nickname'); ?></th>
+			<?php endif; ?>
 
 			<?php if ($this->params->get('showteams')): ?>
 				<th class="team"><?php echo JText::_('COM_TRACKS_Team'); ?></th>
@@ -72,6 +77,11 @@ defined('_JEXEC') or die('Restricted access'); ?>
 						<?php echo $ranking->first_name . ' ' . $ranking->last_name; ?>
 					</a>
 				</td>
+				<?php if ($this->params->get('shownickname')): ?>
+					<td class="nickname">
+						<?= $ranking->nickname; ?>
+					</td>
+				<?php endif; ?>
 				<?php if ($this->params->get('showteams')): ?>
 					<td class="team">
 						<?php if ($ranking->team_id): ?>

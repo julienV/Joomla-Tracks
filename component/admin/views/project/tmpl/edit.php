@@ -62,6 +62,14 @@ JHtml::_('rjquery.chosen', 'select');
 				</div>
 				<div class="control-group">
 					<div class="control-label">
+						<?php echo $this->form->getLabel('type'); ?>
+					</div>
+					<div class="controls">
+						<?php echo $this->form->getInput('type'); ?>
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="control-label">
 						<?php echo $this->form->getLabel('competition_id'); ?>
 					</div>
 					<div class="controls">

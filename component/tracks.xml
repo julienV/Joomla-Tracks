@@ -5,9 +5,9 @@
 	<authorEmail>julien.vonthron@gmail.com</authorEmail>
 	<authorUrl>http://www.jlv-solutions.com</authorUrl>
 	<creationDate>##DATE##</creationDate>
-	<copyright>(C) 2008-2015 Julien Vonthron. All rights	reserved.</copyright>
+	<copyright>(C) 2008-2020 Julien Vonthron. All rights	reserved.</copyright>
 	<license>http://www.gnu.org/licenses/gpl.html</license>
-	<version>3.0.4</version>
+	<version>3.0.9</version>
 	<tag>##VERSION##</tag>
 	<redcore version="1.10.6" defaultFramework="bootstrap2"/>
 	<description>COM_TRACKS_XML_DESC</description>
@@ -44,7 +44,6 @@
 		<folder>helpers</folder>
 		<folder>language</folder>
 		<folder>models</folder>
-		<folder>sports</folder>
 		<folder>views</folder>
 	</files>
 
@@ -54,7 +53,6 @@
 	</media>
 
 	<administration>
-
 		<!-- Administration Menu Section -->
 		<menu
 			img="../media/com_tracks/images/tracks_logo_16.png">COM_TRACKS_TRACKS</menu>
@@ -81,9 +79,7 @@
 			<filename>index.html</filename>
 			<filename>license.txt</filename>
 			<filename>tracks.php</filename>
-			<folder>abstract</folder>
 			<folder>controllers</folder>
-			<folder>elements</folder>
 			<folder>help</folder>
 			<folder>language</folder>
 			<folder>layouts</folder>
@@ -100,6 +96,11 @@
 	<libraries>
 		<library name="tracks"/>
 	</libraries>
+
+	<plugins>
+		<plugin name="default" group="tracks_projecttype" />
+		<plugin name="formula1" group="tracks_import" />
+	</plugins>
 
 	<updateservers>
 		<server type="extension" priority="1" name="Tracks update">https://gist.githubusercontent.com/julienV/e17d59ccf8b329b4e8f6bdb09f392b3e/raw</server>

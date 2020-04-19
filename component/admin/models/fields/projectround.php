@@ -34,7 +34,6 @@ class JFormFieldProjectround extends JFormField
 	 */
 	protected $type = 'projectround';
 
-
 	/**
 	 * Method to get the field input markup
 	 *
@@ -97,9 +96,9 @@ class JFormFieldProjectround extends JFormField
 				'title' => $title,
 				'value' => $this->value,
 				'required' => $this->required
-			)
-			,''
-			,array('component' => 'com_tracks')
+			),
+			'',
+			array('component' => 'com_tracks')
 		);
 	}
 }

@@ -1,0 +1,20 @@
+{
+	"components" : ["tracks"],
+	"libraries"  : ["tracks", "redcore"],
+	"media"      : ["redcore"],
+	"modules" : {
+		"frontend" : [
+			"mod_tracks_ranking",
+			"mod_tracks_results",
+			"mod_tracks_latest_results",
+			"mod_tracks_teamranking",
+			"mod_tracks_teamsocial"
+		]
+	},
+	"plugins" : {
+		"editors-xtd" : ["tracks_individual"],
+		"search" : ["trackssearch"],
+		"tracks_import" : ["formula1"],
+		"user" : ["tracks_autoregister"]
+	}
+}

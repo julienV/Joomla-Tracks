@@ -91,7 +91,6 @@ class TrackslibHelperRoute
 		return self::buildUrl($parts);
 	}
 
-
 	/**
 	 * return link to individual
 	 *

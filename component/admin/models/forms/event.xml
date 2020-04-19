@@ -35,6 +35,13 @@
 		<option value="0">COM_TRACKS_Select_a_event_type</option>
 	</field>
 
+	<field
+		name="rank_offset"
+		type="text"
+		label="COM_TRACKS_XML_FORM_EVENT_RANK_OFFSET"
+		description="COM_TRACKS_XML_FORM_EVENT_RANK_OFFSET_DESC"
+		default="0"
+	/>
 
 		<field
 			name="published"

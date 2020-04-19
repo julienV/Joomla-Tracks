@@ -7,48 +7,61 @@
  */
 defined('_JEXEC') or die('Restricted access');
 
-$return = base64_encode('index.php?option=com_tracks');
-$configurationLink = 'index.php?option=com_redcore&view=config&layout=edit&component=com_tracks&return=' . $return;
+$items = TrackslibHelperAdmin::getAdminMenuItems();
 
-$icons = array(
-	array('link' => 'index.php?option=com_tracks&view=projects', 'icon' => 'icon-flag-checkered', 'text' => JText::_('COM_TRACKS_PROJECTS'), 'access' => 'core.edit'),
-	array('link' => 'index.php?option=com_tracks&view=competitions', 'icon' => 'icon-trophy', 'text' => JText::_('COM_TRACKS_COMPETITIONS'), 'access' => 'core.edit'),
-	array('link' => 'index.php?option=com_tracks&view=seasons', 'icon' => 'icon-calendar', 'text' => JText::_('COM_TRACKS_seasons'), 'access' => 'core.edit'),
-	array('link' => 'index.php?option=com_tracks&view=teams', 'icon' => 'icon-group', 'text' => JText::_('COM_TRACKS_teams'), 'access' => 'core.edit'),
-	array('link' => 'index.php?option=com_tracks&view=individuals', 'icon' => 'icon-user', 'text' => JText::_('COM_TRACKS_individuals'), 'access' => 'core.edit'),
-	array('link' => 'index.php?option=com_tracks&view=rounds', 'icon' => 'icon-calendar-empty', 'text' => JText::_('COM_TRACKS_rounds'), 'access' => 'core.edit'),
-	array('link' => 'index.php?option=com_tracks&view=eventtypes', 'icon' => 'icon-ellipsis-vertical', 'text' => JText::_('COM_TRACKS_eventtypes'), 'access' => 'core.edit'),
-	array('link' => 'index.php?option=com_tracks&view=about', 'icon' => 'icon-question', 'text' => JText::_('COM_TRACKS_about'), 'access' => 'core.edit'),
-	array('link' => $configurationLink, 'icon' => 'icon-gears', 'text' => JText::_('COM_TRACKS_SETTINGS'), 'access' => 'core.manage'),
-);
+$i = 1;
 ?>
-
 <div class="row-fluid">
-	<div class="span9 tracksDashboardMainIcons">
-		<?php $iconsRow = array_chunk($icons, 6); ?>
-		<?php foreach ($iconsRow as $row) : ?>
-			<p></p>
-			<div class="row-fluid">
-				<?php foreach ($row as $icon) : ?>
-					<?php if ($this->user->authorise($icon['access'], 'com_tracks')): ?>
-						<div class="span2">
-							<a href="<?php echo $icon['link']; ?>" class="tracks-cpanel-icon-link">
-								<div class="tracks-cpanel-icon-wrapper">
-									<div class="tracks-cpanel-icon">
-										<i class="<?php echo $icon['icon']; ?> icon-5x"></i>
+	<div class="container" id="tracks-cpanel">
+		<div class="span9 tracksDashboardMainIcons">
+			<?php foreach ($items as $group): ?>
+				<div class="accordion-group navbar-inverse" id="tracks-cpanel-<?php echo $i;?>">
+					<div class="accordion-heading navbar-inner">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#tracks-cpanel-<?php echo $i;?>" href="#collapse-cpanel-<?php echo $i;?>">
+							<h4>
+								<i class="<?php echo $group['icon'];?>"></i>
+								<?php echo $group['text'];?>
+							</h4>
+						</a>
+					</div>
+					<div class="accordion-body collapse in" id="collapse-cpanel-<?php echo $i;?>">
+						<div class="row-fluid">
+							<?php foreach ($group['items'] as $item): ?>
+								<?php if ($this->user->authorise($item['access'], 'com_tracks')) :?>
+									<div class="span2">
+										<a href="<?= JRoute::_($item['link']); ?>" class="tracks-cpanel-icon-link">
+											<div class="tracks-cpanel-icon-wrapper">
+												<div class="tracks-cpanel-icon">
+													<i class="<?= $item['icon'] ?> icon-5x"></i>
+												</div>
+												<?php if (!empty($item['stats'])): ?>
+													<span class="badge tracks-cpanel-count"><?= $item['stats']['total'] ?></span>
+												<?php endif; ?>
+											</div>
+											<div class="tracks-cpanel-text">
+												<?=  $item['text']; ?>
+											</div>
+										</a>
 									</div>
-									<?php if (isset($icon['stat'])): ?>
-										<span class="badge tracks-cpanel-count"><?php echo $icon['stat'] ?></span>
-									<?php endif; ?>
-								</div>
-								<div class="tracks-cpanel-text">
-									<?php echo $icon['text']; ?>
-								</div>
-							</a>
+								<?php endif;?>
+							<?php endforeach;?>
 						</div>
-					<?php endif; ?>
-				<?php endforeach; ?>
+					</div>
+				</div>
+				<?php $i++;?>
+			<?php endforeach; ?>
+		</div>
+		<div class="span3 tracksDashboardSideIcons">
+			<div class="well">
+				<div>
+					<strong class="row-title">
+						<?php echo JText::_('COM_TRACKS_VERSION'); ?>
+					</strong>
+					<span class="badge badge-success pull-right" title="<?php echo JText::_('COM_TRACKS_VERSION'); ?>">
+						<?php echo TrackslibHelperAdmin::getVersion(); ?>
+					</span>
+				</div>
 			</div>
-		<?php endforeach; ?>
+		</div>
 	</div>
 </div>

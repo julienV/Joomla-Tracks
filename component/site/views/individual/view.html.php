@@ -1,27 +1,18 @@
 <?php
 /**
- * @version        $Id: view.html.php 77 2008-04-30 03:32:25Z julienv $
- * @package        JoomlaTracks
- * @copyright      Copyright (C) 2008 Julien Vonthron. All rights reserved.
- * @license        GNU/GPL, see LICENSE.php
- *                 Joomla Tracks is free software. This version may have been modified pursuant
- *                 to the GNU General Public License, and as distributed it includes or
- *                 is derivative of works licensed under the GNU General Public License or
- *                 other free or open source software licenses.
- *                 See COPYRIGHT.php for copyright notices and details.
+ * @package     Tracks
+ * @subpackage  Library
+ * @copyright   Tracks (C) 2008-2015 Julien Vonthron. All rights reserved.
+ * @license     GNU General Public License version 2 or later
  */
 
-// Check to ensure this file is included in Joomla!
-defined('_JEXEC') or die();
-
-jimport('joomla.application.component.view');
+defined('_JEXEC') or die;
 
 /**
  * HTML View class for the Tracks component
  *
- * @static
- * @package        Tracks
- * @since          0.1
+ * @package  Tracks
+ * @since    0.1
  */
 class TracksViewIndividual extends RViewSite
 {
@@ -54,26 +45,6 @@ class TracksViewIndividual extends RViewSite
 
 		$data = $this->get('Item');
 
-		$attribs['class'] = "pic";
-
-		if ($data->picture != '')
-		{
-			$data->picture = JHTML::image(JURI::root() . $data->picture, $data->first_name . ' ' . $data->last_name, $attribs);
-		}
-		else
-		{
-			$data->picture = JHTML::image(JURI::root() . 'media/com_tracks/images/misc/tnnophoto.jpg', $data->first_name . ' ' . $data->last_name, $attribs);
-		}
-
-		if ($data->picture_small != '')
-		{
-			$data->picture_small = JHTML::image(JURI::root() . $data->picture_small, $data->first_name . ' ' . $data->last_name, $attribs);
-		}
-		else
-		{
-			$data->picture_small = JHTML::image(JURI::root() . 'media/com_tracks/images/misc/tnnophoto.jpg', $data->first_name . ' ' . $data->last_name, $attribs);
-		}
-
 		$raceResults = $this->sortResultsByProject($this->get('RaceResults'));
 
 		$show_edit_link = ($user->id && $user->id == $data->user_id) || $user->authorise('core.manage', 'com_tracks');
@@ -95,18 +66,37 @@ class TracksViewIndividual extends RViewSite
 		parent::display($tpl);
 	}
 
-	function sortResultsByProject($results)
+	/**
+	 * Sort results
+	 *
+	 * @param   array  $results  results
+	 *
+	 * @return array
+	 */
+	public function sortResultsByProject($results)
 	{
 		$projects = array();
-		if (!count($results)) return $projects;
+
+		if (!count($results))
+		{
+			return $projects;
+		}
 
 		foreach ($results AS $r)
 		{
 			@$projects[$r->project_id][] = $r;
 		}
+
 		return $projects;
 	}
 
+	/**
+	 * Display form
+	 *
+	 * @param   string  $tpl  tpl
+	 *
+	 * @return void
+	 */
 	protected function displayForm($tpl)
 	{
 		$user = JFactory::getUser();

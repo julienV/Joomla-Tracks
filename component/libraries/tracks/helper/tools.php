@@ -95,91 +95,119 @@ abstract class TrackslibHelperTools
 
 	/**
 	 * return earned points from result object
-	 * @param object result (requires bonus_points, points_attribution, rank)
+	 *
+	 * @param   object  $result  result (requires bonus_points, points_attribution, rank)
+	 *
 	 * @return float points
 	 */
-	function getSubroundPoints($result)
+	public static function getSubroundPoints($result)
 	{
 		$points = $result->bonus_points;
+
 		if (!empty($result->points_attribution) && $result->rank)
 		{
+			$rank = $result->rank + $result->rank_offset;
 			$points_attrib = explode(',', $result->points_attribution);
-			JArrayHelper::toInteger($points_attrib);
-			if ( isset( $points_attrib[$result->rank-1] ) ) {
-				$points += $points_attrib[$result->rank-1];
+			$points_attrib = array_map('floatval', $points_attrib);
+
+			if (isset($points_attrib[$rank - 1]))
+			{
+				$points += $points_attrib[$rank - 1];
 			}
 		}
+
 		return $points;
 	}
 
 	/**
 	 * returns number of top 3 for ranking row object
-	 * @param object $rankingrow
+	 *
+	 * @param   object  $rankingrow  ranking rows
+	 *
 	 * @return int
 	 */
 	public static function getTop3($rankingrow)
 	{
 		$count = 0;
+
 		foreach ((array) $rankingrow->finishes as $pos)
 		{
-			if ($pos <= 3) {
+			if ($pos <= 3)
+			{
 				$count++;
 			}
 		}
+
 		return $count;
 	}
 
 	/**
 	 * returns number of top 5 for ranking row object
-	 * @param object $rankingrow
+	 *
+	 * @param   object  $rankingrow  ranking row
+	 *
 	 * @return int
 	 */
 	public static function getTop5($rankingrow)
 	{
 		$count = 0;
+
 		foreach ((array) $rankingrow->finishes as $pos)
 		{
-			if ($pos <= 5) {
+			if ($pos <= 5)
+			{
 				$count++;
 			}
 		}
+
 		return $count;
 	}
 
 	/**
 	 * returns number of top 10 for ranking row object
-	 * @param object $rankingrow
+	 *
+	 * @param   object  $rankingrow  ranking row
+	 *
 	 * @return int
 	 */
 	public static function getTop10($rankingrow)
 	{
 		$count = 0;
+
 		foreach ((array) $rankingrow->finishes as $pos)
 		{
-			if ($pos <= 10) {
+			if ($pos <= 10)
+			{
 				$count++;
 			}
 		}
+
 		return $count;
 	}
 
 	/**
 	 * returns average finish for ranking row object
-	 * @param object $rankingrow
+	 *
+	 * @param   object  $rankingrow  ranking rows
+	 * @param   int     $precision   precision
+	 *
 	 * @return int
 	 */
 	public static function getAverageFinish($rankingrow, $precision = 2)
 	{
-		if (!count($rankingrow->finishes)) {
+		if (!count($rankingrow->finishes))
+		{
 			return 0;
 		}
+
 		return round(array_sum($rankingrow->finishes) / count($rankingrow->finishes), 2);
 	}
 
 	/**
 	 * returns total number of starts to ranking subrounds
 	 *
-	 * @param   object  $rankingrow  ranking object
+	 * @param   object  $rankingrow  ranking rows
+	 *
 	 * @return int
 	 */
 	public static function getStarts($rankingrow)

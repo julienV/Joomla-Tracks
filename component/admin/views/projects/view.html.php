@@ -111,9 +111,9 @@ class TracksViewProjects extends TrackslibViewAdmin
 			$fourthGroup->addButton($delete);
 		}
 
-		$toolbar = new RToolbar;
-		$toolbar->addGroup($firstGroup)->addGroup($secondGroup)->addGroup($thirdGroup)->addGroup($fourthGroup);
+		$this->toolbar = new RToolbar;
+		$this->toolbar->addGroup($firstGroup)->addGroup($secondGroup)->addGroup($thirdGroup)->addGroup($fourthGroup);
 
-		return $toolbar;
+		return parent::getToolbar();
 	}
 }

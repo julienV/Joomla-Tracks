@@ -15,22 +15,31 @@ defined('_JEXEC') or die;
  */
 class TrackslibEntityProject extends TrackslibEntityBase
 {
+	protected $rankingTool;
+
 	/**
 	 * Return project type
 	 *
-	 * @return bool|mixed
+	 * @return boolean|mixed
 	 */
 	public function getProjectType()
 	{
-		$item = $this->loadItem();
+		return $this->type;
+	}
 
-		if (!$item)
+	/**
+	 * Get ranking tool for project
+	 *
+	 * @return TrackslibRankingtoolDefault
+	 */
+	public function getRankingTool()
+	{
+		if (empty($this->rankingTool))
 		{
-			return false;
+			JPluginHelper::importPlugin('tracks_projecttype');
+			RFactory::getDispatcher()->trigger('onTracksGetRankingTool', array($this->id, &$this->rankingTool));
 		}
 
-		$params = new JRegistry($item->params);
-
-		return $params->get('project_type') ?: 'default';
+		return clone $this->rankingTool;
 	}
 }

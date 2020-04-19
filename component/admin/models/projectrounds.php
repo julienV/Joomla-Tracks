@@ -42,8 +42,6 @@ class TracksModelProjectrounds extends TrackslibModelList
 	 * Constructor.
 	 *
 	 * @param   array  $config  Configs
-	 *
-	 * @see     JController
 	 */
 	public function __construct($config = array())
 	{
@@ -53,7 +51,7 @@ class TracksModelProjectrounds extends TrackslibModelList
 				'name', 'r.name',
 				'start_date', 'obj.start_date',
 				'ordering', 'obj.ordering',
-				// for filters
+				// For filters
 				'published',
 			);
 		}
@@ -80,13 +78,100 @@ class TracksModelProjectrounds extends TrackslibModelList
 		return array($res->name => false);
 	}
 
+	/**
+	 * Method to store item(s)
+	 *
+	 * @param   array  $cids        the project round ids to copy
+	 * @param   int    $project_id  the destination project id
+	 *
+	 * @return  boolean True on success
+	 *
+	 * @since   1.5
+	 */
+	public function assign($cids, $project_id)
+	{
+		$row = $this->getTable();
+
+		for ($i = 0, $n = count($cids); $i < $n; $i++)
+		{
+			$cid =& $cids[$i];
+
+			$query = 'SELECT *'
+				. ' FROM #__tracks_projects_rounds '
+				. ' WHERE id = ' . intval($cid);
+			$this->_db->setQuery($query);
+			$round = $this->_db->loadObject();
+
+			if (!$round)
+			{
+				JError::raise(500, 'Round not found. ' . $this->_db->getErrorMsg());
+			}
+
+			if (!$round)
+			{
+				break;
+			}
+
+			$row->reset();
+			$row->bind($round);
+			$row->id               = null;
+			$row->project_id       = $project_id;
+			$row->checked_out      = 0;
+			$row->checked_out_time = null;
+
+			// Store the item to the database
+			if (!$row->store())
+			{
+				$this->setError($this->_db->getErrorMsg());
+				JError::raise(500, 'Failed to copy round. ' . $this->_db->getErrorMsg());
+			}
+
+			// Now copy subrounds
+			$query = ' SELECT * '
+				. ' FROM #__tracks_projects_subrounds'
+				. ' WHERE projectround_id = ' . $cid;
+			$this->_db->setQuery($query);
+			$subrounds = $this->_db->loadObjectList();
+
+			if (is_array($subrounds))
+			{
+				$subround = $this->getTable('Subround');
+
+				foreach ($subrounds AS $s)
+				{
+					$subround->reset();
+					$subround->bind($s);
+					$subround->id               = null;
+					$subround->projectround_id  = $row->id;
+					$subround->checked_out      = 0;
+					$subround->checked_out_time = null;
+
+					if (!$subround->store())
+					{
+						$this->setError($this->_db->getErrorMsg());
+						JError::raise(500, 'Failed to copy subround. ' . $this->_db->getErrorMsg());
+					}
+				}
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * Method to auto-populate the model state.
+	 *
+	 * @param   string  $ordering   An optional ordering field.
+	 * @param   string  $direction  An optional direction (asc|desc).
+	 *
+	 * @return  void
+	 */
 	protected function populateState($ordering = 'ordering', $direction = 'asc')
 	{
 		$this->setState('project_id', TrackslibHelperTools::getCurrentProjectId());
 
 		parent::populateState($ordering, $direction);
 	}
-
 
 	/**
 	 * Method to get a store id based on model configuration state.
@@ -162,114 +247,5 @@ class TracksModelProjectrounds extends TrackslibModelList
 		$query->order($db->escape($this->getState('list.ordering', 'obj.ordering')) . ' ' . $db->escape($this->getState('list.direction', 'ASC')));
 
 		return $query;
-	}
-
-	/**
-	 * This method runs before the record with key value of $id is deleted from $table
-	 *
-	 * @param   integer  &$id     The ID of the record being deleted
-	 * @param   FOFTable &$table  The table instance used to delete the record
-	 *
-	 * @return  boolean
-	 */
-	protected function onBeforeDelete(&$id, &$table)
-	{
-		$db = $this->getDbo();
-
-		// delete subrounds and their results first
-		$query = ' DELETE rr, sr FROM #__tracks_projects_rounds AS r '
-			. ' INNER JOIN #__tracks_projects_subrounds AS sr ON r.id = sr.projectround_id '
-			. ' LEFT JOIN #__tracks_rounds_results AS rr ON  rr.subround_id = sr.id'
-			. ' WHERE r.id = ' . (int) $id;
-
-		$db->setQuery($query);
-		if (!$db->query())
-		{
-			$this->setError($db->getErrorMsg());
-			return false;
-		}
-
-		return true;
-	}
-
-	/**
-	 * Method to store item(s)
-	 *
-	 * @access  public
-	 *
-	 * @param array the project round ids to copy
-	 * @param int   the destination project id
-	 *
-	 * @return  boolean True on success
-	 * @since   1.5
-	 */
-	public function assign($cids, $project_id)
-	{
-		$row = $this->getTable();
-
-		$i = 0;
-		for ($i = 0, $n = count($cids); $i < $n; $i++)
-		{
-			$cid =& $cids[$i];
-
-			$query = 'SELECT *'
-				. ' FROM #__tracks_projects_rounds '
-				. ' WHERE id = ' . intval($cid);
-			$this->_db->setQuery($query);
-			$round = $this->_db->loadObject();
-			if (!$round)
-			{
-				JError::raise(500, 'Round not found. ' . $this->_db->getErrorMsg());
-			}
-			if (!$round)
-			{
-				// not found...
-				break;
-			}
-
-			$row->reset();
-			$row->bind($round);
-			$row->id = null;
-			$row->project_id = $project_id;
-			$row->checked_out = 0;
-			$row->checked_out_time = null;
-
-			// Store the item to the database
-			if (!$row->store())
-			{
-				$this->setError($this->_db->getErrorMsg());
-				JError::raise(500, 'Failed to copy round. ' . $this->_db->getErrorMsg());
-			}
-
-			// now copy subrounds
-			$query = ' SELECT * '
-				. ' FROM #__tracks_projects_subrounds'
-				. ' WHERE projectround_id = ' . $cid;
-			$this->_db->setQuery($query);
-			$subrounds = $this->_db->loadObjectList();
-
-			if (is_array($subrounds))
-			{
-				$subround = $this->getTable('Subround');
-
-				foreach ($subrounds AS $s)
-				{
-					$subround->reset();
-					$subround->bind($s);
-					$subround->id = null;
-					$subround->projectround_id = $row->id;
-					$subround->checked_out = 0;
-					$subround->checked_out_time = null;
-
-					if (!$subround->store())
-					{
-						$this->setError($this->_db->getErrorMsg());
-						JError::raise(500, 'Failed to copy subround. ' . $this->_db->getErrorMsg());
-					}
-				}
-			}
-		}
-
-		return true;
 	}
 }

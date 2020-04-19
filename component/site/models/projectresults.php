@@ -1,28 +1,20 @@
 <?php
 /**
-* @version    $Id: ranking.php 126 2008-06-05 21:17:18Z julienv $
-* @package    JoomlaTracks
-* @copyright	Copyright (C) 2008 Julien Vonthron. All rights reserved.
-* @license		GNU/GPL, see LICENSE.php
-* Joomla Tracks is free software. This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-* See COPYRIGHT.php for copyright notices and details.
-*/
+ * @package    Tracks.Site
+ * @copyright  Tracks (C) 2008-2015 Julien Vonthron. All rights reserved.
+ * @license    GNU General Public License version 2 or later
+ */
 
-// Check to ensure this file is included in Joomla!
-defined('_JEXEC') or die();
+// No direct access
+defined('_JEXEC') or die('Restricted access');
 
-jimport('joomla.application.component.model');
-require_once( 'base.php' );
 /**
  * Joomla Tracks Component Front page Model
  *
- * @package		Tracks
- * @since 0.1
+ * @package  Tracks
+ * @since    0.1
  */
-class TracksModelProjectresults extends baseModel
+class TracksModelProjectresults extends TrackslibModelFrontbase
 {
 	/**
 	 * associated project
@@ -35,35 +27,56 @@ class TracksModelProjectresults extends baseModel
 	 */
 	var $rankingtool = null;
 
+	var $_data = null;
+
 	/**
 	 * project id
 	 */
 	protected $project_id = null;
 
-	var $_data = null;
-
+	/**
+	 * TracksModelProjectresults constructor.
+	 *
+	 * @param   int  $projectid  project id
+	 */
 	public function __construct($projectid = null)
 	{
 		parent::__construct();
 
 		$projectid = $projectid ? $projectid : JFactory::getApplication()->input->getInt('p', 0);
 
-		if ($projectid) {
+		if ($projectid)
+		{
 			$this->setProjectId($projectid);
 		}
 	}
 
+	/**
+	 * Set project id
+	 *
+	 * @param   int  $projectid  project id
+	 *
+	 * @return bool
+	 */
 	public function setProjectId($projectid)
 	{
-		if ($this->project_id == $projectid) {
+		if ($this->project_id == $projectid)
+		{
 			return true;
 		}
-		$this->project_id = intval($projectid);
-		$this->project = null;
+
+		$this->project_id  = intval($projectid);
+		$this->project     = null;
 		$this->rankingtool = null;
+
 		return true;
 	}
 
+	/**
+	 * Get data
+	 *
+	 * @return array|null
+	 */
 	public function getData()
 	{
 		if (!$this->_data)
@@ -76,57 +89,23 @@ class TracksModelProjectresults extends baseModel
 	}
 
 	/**
-	 * return project rounds and subrounds
+	 * Gets the project individuals ranking
 	 *
-	 * @return array
+	 * @return array of objects
 	 */
-	public function getRounds()
+	protected function _getRankings()
 	{
-		$db = JFactory::getDbo();
-		$query = $db->getQuery(true);
-
-		$query->select('psr.id AS event_id, srt.name AS subround_name');
-		$query->select('r.id AS round_id, r.name AS round_name');
-		$query->select('CASE WHEN CHAR_LENGTH(r.short_name) THEN r.short_name ELSE r.name END AS short_name');
-		$query->from('#__tracks_events AS psr');
-		$query->join('INNER', '#__tracks_eventtypes AS srt ON srt.id = psr.type');
-		$query->join('INNER', '#__tracks_projects_rounds AS pr ON pr.id = psr.projectround_id');
-		$query->join('INNER', '#__tracks_rounds AS r ON r.id = pr.round_id');
-		$query->where('pr.project_id = '.$this->project_id);
-		$query->where('srt.count_points > 0 ');
-		$query->where('pr.published = 1');
-		$query->where('psr.published = 1');
-		$query->order('pr.ordering, psr.ordering');
-		$db->setQuery($query);
-		$res = $db->loadObjectList();
-
-		if (!$res) {
-			return false;
-		}
-
-		// group by rounds
-		$rounds = array();
-		foreach ($res as $r)
-		{
-			if (isset($rounds[$r->round_id])) {
-				$rounds[$r->round_id]->subrounds[] = $r;
-			}
-			else
-			{
-				$obj = new stdClass();
-				$obj->round_id   = $r->round_id;
-				$obj->round_name = $r->round_name;
-				$obj->short_name = $r->short_name;
-				$obj->subrounds = array($r);
-				$rounds[$r->round_id]= $obj;
-			}
-		}
-		return $rounds;
+		return $this->_getRankingTool()->getIndividualsRankings();
 	}
 
+	/**
+	 * Get results
+	 *
+	 * @return bool|null
+	 */
 	protected function _getResults()
 	{
-		$db = JFactory::getDbo();
+		$db    = JFactory::getDbo();
 		$query = $db->getQuery(true);
 
 		$query->select('psr.id AS event_id, rr.rank, rr.individual_id');
@@ -135,7 +114,7 @@ class TracksModelProjectresults extends baseModel
 		$query->join('INNER', '#__tracks_eventtypes AS srt ON srt.id = psr.type');
 		$query->join('INNER', '#__tracks_projects_rounds AS pr ON pr.id = psr.projectround_id');
 		$query->join('INNER', '#__tracks_rounds AS r ON r.id = pr.round_id');
-		$query->where('pr.project_id = '.$this->project_id);
+		$query->where('pr.project_id = ' . $this->project_id);
 		$query->where('pr.published = 1');
 		$query->where('psr.published = 1');
 		$db->setQuery($query);
@@ -159,17 +138,56 @@ class TracksModelProjectresults extends baseModel
 		return $this->_data;
 	}
 
-
 	/**
-	 * Gets the project individuals ranking
+	 * return project rounds and subrounds
 	 *
-	 * @param int project_id
-	 * @return array of objects
+	 * @return array
 	 */
-	protected function _getRankings()
+	public function getRounds()
 	{
-		return $this->_getRankingTool()->getIndividualsRankings();
+		$db    = JFactory::getDbo();
+		$query = $db->getQuery(true);
+
+		$query->select('psr.id AS event_id, srt.name AS subround_name');
+		$query->select('r.id AS round_id, r.name AS round_name');
+		$query->select('CASE WHEN CHAR_LENGTH(r.short_name) THEN r.short_name ELSE r.name END AS short_name');
+		$query->from('#__tracks_events AS psr');
+		$query->join('INNER', '#__tracks_eventtypes AS srt ON srt.id = psr.type');
+		$query->join('INNER', '#__tracks_projects_rounds AS pr ON pr.id = psr.projectround_id');
+		$query->join('INNER', '#__tracks_rounds AS r ON r.id = pr.round_id');
+		$query->where('pr.project_id = ' . $this->project_id);
+		$query->where('srt.count_points > 0 ');
+		$query->where('pr.published = 1');
+		$query->where('psr.published = 1');
+		$query->order('pr.ordering, psr.ordering');
+		$db->setQuery($query);
+		$res = $db->loadObjectList();
+
+		if (!$res)
+		{
+			return false;
+		}
+
+		// Group by rounds
+		$rounds = array();
+
+		foreach ($res as $r)
+		{
+			if (isset($rounds[$r->round_id]))
+			{
+				$rounds[$r->round_id]->subrounds[] = $r;
+			}
+			else
+			{
+				$obj                  = new stdClass;
+				$obj->round_id        = $r->round_id;
+				$obj->round_name      = $r->round_name;
+				$obj->short_name      = $r->short_name;
+				$obj->subrounds       = array($r);
+				$rounds[$r->round_id] = $obj;
+			}
+		}
+
+		return $rounds;
 	}
-
-
 }

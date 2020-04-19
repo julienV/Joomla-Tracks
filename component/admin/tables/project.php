@@ -102,7 +102,7 @@ class TracksTableProject extends TrackslibTable
 		$query = $this->_db->getQuery(true)
 			->select('id')
 			->from('#__tracks_projects_rounds')
-			->where('project_id IN (' . $pks. ')');
+			->where('project_id IN (' . $pks . ')');
 
 		$this->_db->setQuery($query);
 		$projectRoundIds = $this->_db->loadColumn();

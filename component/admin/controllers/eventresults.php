@@ -40,6 +40,11 @@ class TracksControllerEventresults extends RControllerAdmin
 		$this->setRedirect($this->getRedirectToListRoute());
 	}
 
+	/**
+	 * go back
+	 *
+	 * @return void
+	 */
 	public function back()
 	{
 		$model = $this->getModel('eventresults');
@@ -47,12 +52,18 @@ class TracksControllerEventresults extends RControllerAdmin
 		$this->setRedirect('index.php?option=com_tracks&view=events&projectround_id=' . $infos->projectround_id);
 	}
 
+	/**
+	 * save ranks
+	 *
+	 * @return void
+	 */
 	public function saveranks()
 	{
 		$cid = $this->input->getVar('cid', array(), 'post', 'array');
 		$rank = $this->input->getVar('rank', array(), 'post', 'array');
 		$bonus_points = $this->input->getVar('bonus_points', array(), 'post', 'array');
 		$performance = $this->input->getVar('performance', array(), 'post', 'array');
+		$number = $this->input->getVar('number', array(), 'post', 'array');
 
 		JArrayHelper::toInteger($cid);
 		JArrayHelper::toInteger($rank);
@@ -61,7 +72,7 @@ class TracksControllerEventresults extends RControllerAdmin
 
 		try
 		{
-			$model->saveranks($cid, $rank, $bonus_points, $performance);
+			$model->saveranks($cid, $rank, $bonus_points, $performance, $number);
 			$this->setMessage(JText::_('COM_TRACKS_RESULTS_SAVED'));
 		}
 		catch (RuntimeException $e)

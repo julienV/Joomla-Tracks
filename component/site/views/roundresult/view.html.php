@@ -1,34 +1,25 @@
 <?php
 /**
- * @version        $Id: view.html.php 77 2008-04-30 03:32:25Z julienv $
- * @package        JoomlaTracks
- * @copyright      Copyright (C) 2008 Julien Vonthron. All rights reserved.
- * @license        GNU/GPL, see LICENSE.php
- * Joomla Tracks is free software. This version may have been modified pursuant
- * to the GNU General Public License, and as distributed it includes or
- * is derivative of works licensed under the GNU General Public License or
- * other free or open source software licenses.
- * See COPYRIGHT.php for copyright notices and details.
+ * @package     Tracks
+ * @subpackage  Library
+ * @copyright   Tracks (C) 2008-2015 Julien Vonthron. All rights reserved.
+ * @license     GNU General Public License version 2 or later
  */
 
-// Check to ensure this file is included in Joomla!
-defined('_JEXEC') or die();
-
-jimport('joomla.application.component.view');
+defined('_JEXEC') or die;
 
 /**
  * HTML View class for the Tracks component
  *
- * @static
- * @package        Tracks
- * @since          0.1
+ * @package  Tracks
+ * @since    0.1
  */
 class TracksViewRoundResult extends RViewSite
 {
 	/**
 	 * Execute and display a template script.
 	 *
-	 * @param   string $tpl The name of the template file to parse; automatically searches through the template paths.
+	 * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
 	 *
 	 * @return  mixed  A string if successful, otherwise a Error object.
 	 */
@@ -53,16 +44,13 @@ class TracksViewRoundResult extends RViewSite
 		$document = JFactory::getDocument();
 		$document->setTitle($round->name . ' - ' . $project->name);
 
-		//print_r($subroundresults);exit;
-//		$this->assignRef('points_attrib', $points_attrib);
-		$this->assignRef('results', $subroundresults);
-		$this->assignRef('round', $round);
-		$this->assignRef('project', $project);
-		$this->assignRef('projectparams', $projectparams);
-		$this->assignRef('params', $params);
+		$this->results = $subroundresults;
+		$this->round = $round;
+		$this->project = $project;
+		$this->projectround = TrackslibEntityProjectround::load($projectround_id);
+		$this->projectparams = $projectparams;
+		$this->params = $params;
 
 		parent::display($tpl);
 	}
 }
-
-?>

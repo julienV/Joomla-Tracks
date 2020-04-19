@@ -8,6 +8,8 @@
 
 defined('_JEXEC') or die();
 
+jimport('tracks.bootstrap');
+
 $user = JFactory::getUser();
 $active = null;
 $data = $displayData;
@@ -17,32 +19,13 @@ if (isset($data['active']))
 	$active = $data['active'];
 }
 
-$icons = array(
-	array('view' => 'projects', 'icon' => 'icon-flag-checkered', 'text' => JText::_('COM_TRACKS_PROJECTS'), 'access' => 'core.edit'),
-	array('view' => 'competitions', 'icon' => 'icon-trophy', 'text' => JText::_('COM_TRACKS_COMPETITIONS'), 'access' => 'core.edit'),
-	array('view' => 'seasons', 'icon' => 'icon-calendar', 'text' => JText::_('COM_TRACKS_seasons'), 'access' => 'core.edit'),
-	array('view' => 'teams', 'icon' => 'icon-group', 'text' => JText::_('COM_TRACKS_teams'), 'access' => 'core.edit'),
-	array('view' => 'individuals', 'icon' => 'icon-user', 'text' => JText::_('COM_TRACKS_individuals'), 'access' => 'core.edit'),
-	array('view' => 'rounds', 'icon' => 'icon-calendar-empty', 'text' => JText::_('COM_TRACKS_rounds'), 'access' => 'core.edit'),
-	array('view' => 'eventtypes', 'icon' => 'icon-ellipsis-vertical', 'text' => JText::_('COM_TRACKS_eventtypes'), 'access' => 'core.edit'),
-	array('view' => 'about', 'icon' => 'icon-question', 'text' => JText::_('COM_TRACKS_about'), 'access' => 'core.edit'),
-	array('view' => 'configuration', 'icon' => 'icon-gears', 'text' => JText::_('COM_TRACKS_SETTINGS'), 'access' => 'core.manage'),
-);
-
-// Configuration link
+// Project switcher
 $uri = JUri::getInstance();
 $return = base64_encode('index.php' . $uri->toString(array('query')));
-$configurationLink = 'index.php?option=com_redcore&view=config&layout=edit&component=com_tracks&return=' . $return;
 
-if ($currentproject = JFactory::getApplication()->getUserState('currentproject'))
-{
+RHelperAsset::load('tracksbackend.css', 'com_tracks');
 
-	$projectIcons = array(
-		array('view' => 'projectrounds', 'icon' => 'icon-calendar-empty', 'text' => JText::_('COM_TRACKS_PROJECT_ROUNDS'), 'access' => 'core.edit'),
-		array('view' => 'participants', 'icon' => 'icon-user', 'text' => JText::_('COM_TRACKS_PARTICIPANTS'), 'access' => 'core.edit'),
-	);
-}
-
+$icons = TrackslibHelperAdmin::getAdminMenuItems(true);
 ?>
 <?php if (isset($data['view']->projectSwitch)): ?>
 	<?php $form = $data['view']->projectSwitch; ?>
@@ -51,42 +34,43 @@ if ($currentproject = JFactory::getApplication()->getUserState('currentproject')
 	</form>
 <?php endif; ?>
 
-<?php if ($currentproject): ?>
-<ul class="nav nav-pills nav-stacked tracks-sidebar">
-	<?php foreach ($projectIcons as $icon) : ?>
-		<?php if ($user->authorise($icon['access'], 'com_tracks')): ?>
-			<?php $class = ($active === $icon['view']) ? 'active' : ''; ?>
-			<li class="<?php echo $class; ?>">
-				<?php if ($icon['view'] == 'configuration') : ?>
-					<?php $link = $configurationLink; ?>
-				<?php else : ?>
-					<?php $link = JRoute::_('index.php?option=com_tracks&view=' . $icon['view']); ?>
-				<?php endif; ?>
-				<a href="<?php echo $link; ?>">
-					<i class="<?php echo $icon['icon']; ?>"></i>
-					<?php echo $icon['text']; ?>
-				</a>
-			</li>
-		<?php endif; ?>
-	<?php endforeach; ?>
-</ul>
+<?php if (!empty($icons)): ?>
+	<div class="tracks-sidebar" id="tracksSideBarAccordion">
+		<?php $index = 0; ?>
+		<?php foreach ($icons as $group): ?>
+			<div class="accordion-group">
+				<div class="accordion-heading">
+					<a class="accordion-toggle" data-toggle="collapse" href="#collapse<?php echo $index ?>">
+						<i class="<?php echo $group['icon'];?>"></i>
+						<?php echo $group['text'];?>
+					</a>
+				</div>
+				<div id="collapse<?php echo $index ?>" class="accordion-body collapse in">
+					<?php if (!empty($group['items'])): ?>
+						<ul class="nav nav-tabs nav-stacked">
+							<?php foreach ($group['items'] as $icon): ?>
+								<?php
+								$class = '';
+								$stat = (isset($icon['count'])) ? $icon['count'] : 0;
+								?>
+								<?php if ($active === $icon['view']): ?>
+									<?php $class = 'active'; ?>
+								<?php endif; ?>
+								<li class="tracks-sidebar-item <?php echo $class ?>">
+									<a href="<?php echo $icon['link'] ?>">
+										<i class="<?php echo $icon['icon'] ?>"></i>
+										<?php echo $icon['text'] ?>
+										<?php if ($stat): ?>
+											<span class="badge pull-right"><?php echo $stat; ?></span>
+										<?php endif;?>
+									</a>
+								</li>
+							<?php endforeach; ?>
+						</ul>
+					<?php endif; ?>
+				</div>
+			</div>
+			<?php $index++; ?>
+		<?php endforeach; ?>
+	</div>
 <?php endif; ?>
-
-<ul class="nav nav-pills nav-stacked tracks-sidebar">
-	<?php foreach ($icons as $icon) : ?>
-		<?php if ($user->authorise($icon['access'], 'com_tracks')): ?>
-			<?php $class = ($active === $icon['view']) ? 'active' : ''; ?>
-			<li class="<?php echo $class; ?>">
-				<?php if ($icon['view'] == 'configuration') : ?>
-					<?php $link = $configurationLink; ?>
-				<?php else : ?>
-					<?php $link = JRoute::_('index.php?option=com_tracks&view=' . $icon['view']); ?>
-				<?php endif; ?>
-				<a href="<?php echo $link; ?>">
-					<i class="<?php echo $icon['icon']; ?>"></i>
-					<?php echo $icon['text']; ?>
-				</a>
-			</li>
-		<?php endif; ?>
-	<?php endforeach; ?>
-</ul>

@@ -96,6 +96,11 @@ abstract class TrackslibViewAdmin extends RViewAdmin
 	protected $showProjectSwitch = true;
 
 	/**
+	 * @var  RToolbar
+	 */
+	protected $toolbar;
+
+	/**
 	 * Constructor
 	 *
 	 * @param   array  $config  A named configuration array for object construction.<br/>
@@ -140,5 +145,21 @@ abstract class TrackslibViewAdmin extends RViewAdmin
 		RHelperAsset::load('tracksbackend.css', 'com_tracks');
 
 		return parent::display($tpl);
+	}
+
+	/**
+	 * Get the toolbar to render.
+	 *
+	 * @return  RToolbar
+	 */
+	public function getToolbar()
+	{
+		if ($this->toolbar instanceof RToolbar)
+		{
+			JPluginHelper::importPlugin('tracks');
+			RFactory::getDispatcher()->trigger('onTracksViewGetToolbar', array($this, &$this->toolbar));
+		}
+
+		return $this->toolbar;
 	}
 }

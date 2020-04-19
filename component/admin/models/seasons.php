@@ -53,7 +53,7 @@ class TracksModelSeasons extends TrackslibModelList
 				'name', 'obj.name',
 				'id', 'obj.id',
 				'ordering', 'obj.ordering',
-				// for filters
+				// For filters
 				'published',
 			);
 		}

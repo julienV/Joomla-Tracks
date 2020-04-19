@@ -16,17 +16,25 @@ jimport('joomla.filter.output');
 
 $dispatcher = JDispatcher::getInstance();
 JPluginHelper::importPlugin('content');
-
 ?>
 <div id="tracks">
 
 	<h2><?php echo $this->round->name . ' - ' . $this->project->name; ?></h2>
 
-	<?php if ($this->params->get('resultview_results_showrounddesc', 1)): ?>
+	<?php if ($this->params->get('resultview_results_showrounddesc', 1) && !empty($this->round->description)): ?>
 		<div class="tracks-round-description">
 			<?php
 			// parse description with content plugins
 			echo JHTML::_('content.prepare', $this->round->description);
+			?>
+		</div>
+	<?php endif; ?>
+
+	<?php if (!empty($this->projectround->description)): ?>
+		<div class="tracks-projectround-description">
+			<?php
+			// Parse description with content plugins
+			echo JHTML::_('content.prepare', $this->projectround->description);
 			?>
 		</div>
 	<?php endif; ?>
@@ -37,7 +45,7 @@ JPluginHelper::importPlugin('content');
 		?>
 		<h3><?php echo $subround->typename; ?></h3>
 
-		<?php if ($this->params->get('resultview_results_showsubrounddesc', 1)): ?>
+		<?php if ($this->params->get('resultview_results_showsubrounddesc', 1) && !empty($subround->description)): ?>
 		<div class="tracks-round-description">
 			<?php
 			// parse description with content plugins
@@ -58,11 +66,14 @@ JPluginHelper::importPlugin('content');
 					<th><?php echo JText::_('COM_TRACKS_COUNTRY_SHORT'); ?></th>
 				<?php endif; ?>
 				<th><?php echo JText::_('COM_TRACKS_Individual'); ?></th>
+				<?php if ($this->projectparams->get('shownickname')): ?>
+					<th><?php echo JText::_('COM_TRACKS_nickname'); ?></th>
+				<?php endif; ?>
 				<?php if ($this->projectparams->get('showteams') && $this->params->get('showteams', 1)): ?>
 					<th><?php echo JText::_('COM_TRACKS_Team'); ?></th>
 				<?php endif; ?>
 				<th><?php echo JText::_('COM_TRACKS_Performance'); ?></th>
-				<?php if (!empty($subround->points_attribution)): ?>
+				<?php if (!empty($subround->count_points)): ?>
 					<th><?php echo JText::_('COM_TRACKS_Points'); ?></th>
 				<?php endif; ?>
 			</tr>
@@ -104,6 +115,13 @@ JPluginHelper::importPlugin('content');
 							<?php echo $result->first_name . ' ' . $result->last_name; ?>
 						</a>
 					</td>
+
+					<?php if ($this->projectparams->get('shownickname')): ?>
+						<td class="nickname">
+							<?= $result->nickname; ?>
+						</td>
+					<?php endif; ?>
+
 					<?php if ($this->projectparams->get('showteams') && $this->params->get('showteams', 1)): ?>
 						<td>
 							<?php if ($result->team_id): ?>
@@ -113,7 +131,7 @@ JPluginHelper::importPlugin('content');
 						</td>
 					<?php endif; ?>
 					<td><?php echo $result->performance; ?></td>
-					<?php if (!empty($subround->points_attribution)): ?>
+					<?php if (!empty($subround->count_points)): ?>
 						<td><?php echo $result->points + $result->bonus_points; ?></td>
 					<?php endif; ?>
 				</tr>

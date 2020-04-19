@@ -45,6 +45,16 @@
 		</field>
 
 		<field
+				name="enable_stats"
+				type="radio"
+				label="COM_TRACKS_EVENTTYPE_ENABLE_STATS"
+				description="COM_TRACKS_EVENTTYPE_ENABLE_STATS_DESC"
+				class="inputbox">
+			<option value="0">JNo</option>
+			<option value="1">JYes</option>
+		</field>
+
+		<field
 				name="points_attribution"
 				type="text"
 				label="COM_TRACKS_EVENTTYPE_POINTS_ATTRIBUTION"

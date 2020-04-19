@@ -17,5 +17,4 @@ defined('_JEXEC') or die();
  */
 class TracksControllerSeason extends RControllerForm
 {
-
 }

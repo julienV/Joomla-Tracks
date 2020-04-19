@@ -65,6 +65,5 @@ class TracksControllerProjects extends RControllerAdmin
 
 		// Set redirect
 		$this->setRedirect($this->getRedirectToListRoute($extensionURL));
-
 	}
 }

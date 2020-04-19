@@ -105,8 +105,8 @@
 
 		<!-- admin modules -->
 		<foreach param="dirname" absparam="absname" target="zipfolder">
-			<property name="myp" value="modules/admin" />
-		  	<fileset dir="${dirs.modules}/admin">
+			<property name="myp" value="modules/backend" />
+		  	<fileset dir="${dirs.modules}/backend">
 		  	<type type="dir"/>
 	        <depth max="0" min="0" />
 		  </fileset>
@@ -114,8 +114,8 @@
 
 		<!-- site modules -->
 		<foreach param="dirname" absparam="absname" target="zipfolder">
-			<property name="myp" value="modules/site" />
-		  	<fileset dir="${dirs.modules}/site">
+			<property name="myp" value="modules/frontend" />
+		  	<fileset dir="${dirs.modules}/frontend">
 		  	<type type="dir"/>
 	        <depth max="0" min="0" />
 		  </fileset>
@@ -244,7 +244,7 @@
 
         <!-- Modules - Site -->
         <copy todir="${www.dir}/modules" overwrite="true">
-            <fileset dir="${dirs.root}/modules/site">
+            <fileset dir="${dirs.root}/modules/frontend">
                 <include name="**" />
             </fileset>
 
@@ -258,7 +258,7 @@
 
         <!-- Modules - Admin -->
         <copy todir="${www.dir}/administrator/modules" overwrite="true">
-            <fileset dir="${dirs.root}/modules/admin">
+            <fileset dir="${dirs.root}/modules/backend">
                 <include name="**" />
             </fileset>
 

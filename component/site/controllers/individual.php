@@ -1,7 +1,7 @@
 <?php
 /**
  * @package     Tracks
- * @subpackage  Admin
+ * @subpackage  Site
  * @copyright   Tracks (C) 2008-2015 Julien Vonthron. All rights reserved.
  * @license     GNU General Public License version 2 or later
  */
@@ -88,4 +88,3 @@ class TracksControllerIndividual extends RControllerForm
 			|| JFactory::getUser()->authorise('core.edit', 'com_tracks');
 	}
 }
-

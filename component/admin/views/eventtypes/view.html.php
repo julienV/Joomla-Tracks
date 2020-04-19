@@ -108,9 +108,28 @@ class TracksViewEventtypes extends TrackslibViewAdmin
 			$fourthGroup->addButton($delete);
 		}
 
-		$toolbar = new RToolbar;
-		$toolbar->addGroup($firstGroup)->addGroup($secondGroup)->addGroup($thirdGroup)->addGroup($fourthGroup);
+		$this->toolbar = new RToolbar;
+		$this->toolbar->addGroup($firstGroup)->addGroup($secondGroup)->addGroup($thirdGroup)->addGroup($fourthGroup);
 
-		return $toolbar;
+		return parent::getToolbar();
+	}
+
+	/**
+	 * returns toggle html
+	 *
+	 * @param   object  $row      item data
+	 * @param   int     $i        row number
+	 * @param   bool    $allowed  is user allowed to perform action
+	 *
+	 * @return string html
+	 */
+	public static function enableStatsToggle($row, $i, $allowed = true)
+	{
+		$states = array(
+			1 => array('disableStats', '', 'COM_TRACKS_ENABLED', '', false, 'ok', 'ok'),
+			0 => array('enableStats', '', 'COM_TRACKS_DISABLED', '', false, 'remove', 'remove'),
+		);
+
+		return JHtml::_('rgrid.state', $states, $row->enable_stats, $i, 'eventtypes.', $allowed, true);
 	}
 }

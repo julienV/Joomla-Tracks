@@ -23,7 +23,14 @@ include_once $tracksLoader;
 // Bootstraps Tracks
 TrackslibBootstrap::bootstrap();
 
-class plgUserTracks_autoregister extends JPlugin
+/**
+ * Class PlgUserTracks_autoregister
+ *
+ * @package     JoomlaTracks
+ * @subpackage  Plugins.site
+ * @since       1.0
+ */
+class PlgUserTracks_Autoregister extends JPlugin
 {
 	/**
 	 * Constructor
