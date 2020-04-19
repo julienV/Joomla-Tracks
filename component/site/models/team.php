@@ -53,17 +53,23 @@ class TracksModelTeam extends RModelAdmin
 	}
 
 	/**
-	 * get item
+	 * Method to get a single record.
 	 *
-	 * @return mixed
+	 * @param   integer  $pk  The id of the primary key.
+	 *
+	 * @return  \JObject|boolean  Object on success, false on failure.
+	 *
+	 * @since   1.6
 	 */
-	public function getItem()
+	public function getItem($pk = null)
 	{
+		$pk = $pk ?: $this->_id;
+
 		if (empty($this->_data))
 		{
 			$query = ' SELECT t.* '
 				. ' FROM #__tracks_teams as t '
-				. ' WHERE t.id = ' . $this->_id;
+				. ' WHERE t.id = ' . (int) $pk;
 
 			$this->_db->setQuery($query);
 
