@@ -11,6 +11,12 @@ defined('_JEXEC') or die;
 JHtml::_('rbootstrap.tooltip');
 JHtml::_('rjquery.chosen', 'select');
 JHtml::_('behavior.formvalidation');
+
+/**
+ * @var RForm $form
+ */
+$form            = $this->form;
+$customFieldsets = $form->getFieldsets('com_fields');
 ?>
 <script type="text/javascript">
 	jQuery(document).ready(function()
@@ -77,6 +83,24 @@ JHtml::_('behavior.formvalidation');
 					<?php echo $this->form->getInput('performance'); ?>
 				</div>
 			</div>
+			<?php foreach ($customFieldsets as $fieldset): ?>
+				<?php if ($fieldset->label != 'JGLOBAL_FIELDS'): ?>
+					<div class="well fieldset-description">
+						<div class="fieldset-description__name"><?= $fieldset->label ?></div>
+						<div class="fieldset-description__content"><?=  $fieldset->description ?></div>
+					</div>
+				<?php endif; ?>
+				<?php foreach ($form->getFieldset($fieldset->name) as $field): ?>
+					<div class="control-group">
+						<div class="control-label">
+							<?php echo $field->label; ?>
+						</div>
+						<div class="controls">
+							<?php echo $field->input; ?>
+						</div>
+					</div>
+				<?php endforeach; ?>
+			<?php endforeach; ?>
 			<div class="control-group">
 				<div class="control-label">
 					<?php echo $this->form->getLabel('comment'); ?>

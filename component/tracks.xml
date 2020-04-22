@@ -81,6 +81,7 @@
 			<filename>tracks.php</filename>
 			<folder>controllers</folder>
 			<folder>help</folder>
+			<folder>helpers</folder>
 			<folder>language</folder>
 			<folder>layouts</folder>
 			<folder>models</folder>

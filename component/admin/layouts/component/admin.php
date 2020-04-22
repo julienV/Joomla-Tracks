@@ -236,7 +236,7 @@ else : ?>
 			</div>
 		</div>
 		<footer class="footer pagination-centered navbar navbar-fixed-bottom hidden-phone">
-			Copyright 2015 JLV-solutions.com. All rights reserved.
+			Copyright <?php echo date('Y') ?> JLV-solutions.com. All rights reserved.
 		</footer>
 	</div>
 <?php endif;
