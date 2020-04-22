@@ -56,14 +56,14 @@
 				name="competition_id"
 				type="trackscompetition"
 				label="COM_TRACKS_COMPETITION"
-				description="COM_TRACKS_PROJECT_COMPETITION_DESC">
+				description="COM_TRACKS_XML_PROJECT_COMPETITION_DESC">
 		</field>
 
 		<field
 				name="season_id"
 				type="tracksseason"
 				label="COM_TRACKS_SEASON"
-				description="COM_TRACKS_PROJECT_SEASON_DESC"
+				description="COM_TRACKS_XML_PROJECT_SEASON_DESC"
 				>
 		</field>
 
