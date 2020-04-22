@@ -28,7 +28,8 @@ abstract class TrackslibHelperAdmin
 		$return = base64_encode('index.php?option=com_tracks');
 
 		$items = array(
-			'structure' => array(
+			array(
+				'id'   => 'structure',
 				'icon' => 'icon-plus',
 				'text' => JText::_('COM_TRACKS_STRUCTURE'),
 				'items' => array(
@@ -74,7 +75,8 @@ abstract class TrackslibHelperAdmin
 					),
 				)
 			),
-			'participants' => array(
+			array(
+				'id'   => 'participants',
 				'icon' => 'icon-group',
 				'text' => JText::_('COM_TRACKS_PARTICIPANTS'),
 				'items' => array(
@@ -96,7 +98,8 @@ abstract class TrackslibHelperAdmin
 					),
 				)
 			),
-			'more' => array(
+			array(
+				'id'   => 'more',
 				'icon' => 'icon-gears',
 				'text' => JText::_('COM_TRACKS_MORE'),
 				'items' => array(
@@ -130,7 +133,8 @@ abstract class TrackslibHelperAdmin
 			$project = TrackslibEntityProject::load($currentproject);
 
 			$projectMenu = array(
-				'current' => array(
+				array(
+					'id'   => 'current',
 					'icon' => 'icon-hand-right',
 					'text' => $project->name,
 					'items' => array(
