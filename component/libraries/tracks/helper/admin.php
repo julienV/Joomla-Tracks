@@ -111,6 +111,13 @@ abstract class TrackslibHelperAdmin
 						'access' => 'core.edit'
 					),
 					array(
+						'view' => 'paid',
+						'link' => 'index.php?option=com_tracks&view=paid',
+						'icon' => 'icon-dollar',
+						'text' => JText::_('COM_TRACKS_MENU_PAID_EXTENSIONS'),
+						'access' => 'core.edit'
+					),
+					array(
 						'view' => 'about',
 						'link' => 'index.php?option=com_tracks&view=about',
 						'icon' => 'icon-question',
