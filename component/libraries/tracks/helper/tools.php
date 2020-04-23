@@ -244,7 +244,7 @@ abstract class TrackslibHelperTools
 	{
 		$links = array();
 
-		if (isset($team_object->url))
+		if (!empty($team_object->url))
 		{
 			$obj = new stdClass;
 			$obj->label = JText::_('COM_TRACKS_TEAM_SOCIAL_URL');
@@ -253,66 +253,66 @@ abstract class TrackslibHelperTools
 			$links['url'] = $obj;
 		}
 
-		if (isset($team_object->facebook))
+		if (!empty($team_object->facebook))
 		{
 			$obj = new stdClass;
 			$obj->label = JText::_('COM_TRACKS_TEAM_SOCIAL_facebook');
 			$obj->icon  = 'com_tracks/facebook_32.png';
-			$obj->link  = 'http://www.facebook.com/' . $team_object->facebook;
+			$obj->link  = $team_object->facebook;
 			$links['facebook'] = $obj;
 		}
 
-		if (isset($team_object->twitter))
+		if (!empty($team_object->twitter))
 		{
 			$obj = new stdClass;
 			$obj->label = JText::_('COM_TRACKS_TEAM_SOCIAL_twitter');
 			$obj->icon  = 'com_tracks/twitter_32.png';
-			$obj->link  = 'http://plus.google.com/' . $team_object->googleplus;
+			$obj->link  = $team_object->twitter;
 			$links['twitter'] = $obj;
 		}
 
-		if (isset($team_object->googleplus))
+		if (!empty($team_object->googleplus))
 		{
 			$obj = new stdClass;
 			$obj->label = JText::_('COM_TRACKS_TEAM_SOCIAL_googleplus');
 			$obj->icon  = 'com_tracks/googleplus_32.png';
-			$obj->link  = 'http://plus.google.com/' . $team_object->googleplus;
+			$obj->link  = $team_object->googleplus;
 			$links['googleplus'] = $obj;
 		}
 
-		if (isset($team_object->youtube))
+		if (!empty($team_object->youtube))
 		{
 			$obj = new stdClass;
 			$obj->label = JText::_('COM_TRACKS_TEAM_SOCIAL_youtube');
 			$obj->icon  = 'com_tracks/youtube_32.png';
-			$obj->link  = 'http://www.youtube.com/user/' . $team_object->youtube;
+			$obj->link  = $team_object->youtube;
 			$links['youtube'] = $obj;
 		}
 
-		if (isset($team_object->instagram))
+		if (!empty($team_object->instagram))
 		{
 			$obj = new stdClass;
 			$obj->label = JText::_('COM_TRACKS_TEAM_SOCIAL_instagram');
 			$obj->icon  = 'com_tracks/instagram_32.png';
-			$obj->link  = 'http://www.instagram.com/' . $team_object->instagram;
+			$obj->link  = $team_object->instagram;
 			$links['instagram'] = $obj;
 		}
 
-		if (isset($team_object->pinterest))
+		if (!empty($team_object->pinterest))
 		{
 			$obj = new stdClass;
 			$obj->label = JText::_('COM_TRACKS_TEAM_SOCIAL_pinterest');
 			$obj->icon  = 'com_tracks/pinterest_32.png';
-			$obj->link  = 'http://www.pinterest.com/' . $team_object->pinterest;
+			$obj->link  = $team_object->pinterest;
 			$links['pinterest'] = $obj;
 		}
 
-		if (isset($team_object->vimeo))
+		if (!empty($team_object->vimeo))
 		{
 			$obj = new stdClass;
 			$obj->label = JText::_('COM_TRACKS_TEAM_SOCIAL_vimeo');
 			$obj->icon  = 'com_tracks/vimeo_32.png';
-			$obj->link  = 'http://www.vimeo.com/' . $team_object->vimeo;
+			$obj->link  = $team_object->vimeo;
 			$links['vimeo'] = $obj;
 		}
 

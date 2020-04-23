@@ -10,6 +10,9 @@
  * other free or open source software licenses.
  * See COPYRIGHT.php for copyright notices and details.
  */
+
+use Joomla\CMS\HTML\HTMLHelper;
+
 defined('_JEXEC') or die('Restricted access'); ?>
 
 <div id="tracks">
@@ -28,7 +31,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 						<a href="<?php echo $link_ind; ?>" class="tracks__individualsGallery__item__link"
 						   title="<?php echo $obj->first_name . ' ' . $obj->last_name; ?>">
 							<?php if (!$obj->picture): ?>
-								<i class="icon icon-user pic"></i>
+								<?= HTMLHelper::image('com_tracks/individuals/placeholder_individual.png', $obj->first_name . ' ' . $obj->last_name, ['class' => 'pic'], true); ?>
 							<?php else: ?>
 								<img class="pic" src="<?= $obj->picture ?>" alt="<?php echo $obj->first_name . ' ' . $obj->last_name; ?>"/>
 							<?php endif; ?>

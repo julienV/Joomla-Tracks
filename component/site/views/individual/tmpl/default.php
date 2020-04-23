@@ -12,6 +12,8 @@
  */
 
 // no direct access
+use Joomla\CMS\HTML\HTMLHelper;
+
 defined('_JEXEC') or die('Restricted access');
 
 $link = null;
@@ -40,7 +42,7 @@ $res = $this->dispatcher->trigger('getProfileLink', array($this->data->user_id, 
 	<div class="tracks-individual__details">
 		<div class="tracks-individual__details__picture">
 			<?php if (empty($this->data->picture)): ?>
-				<i class="icon icon-user pic"></i>
+				<?= HTMLHelper::image('com_tracks/individuals/placeholder_individual.png', $this->data->first_name . ' ' . $this->data->last_name, null, true); ?>
 			<?php else: ?>
 				<img src="<?= $this->data->picture ?>" alt="<?php echo $this->data->first_name . ' ' . $this->data->last_name; ?>"/>
 			<?php endif; ?>
@@ -177,6 +179,20 @@ $res = $this->dispatcher->trigger('getProfileLink', array($this->data->user_id, 
 					</div>
 				</div>
 			<?php endif; ?>
+
+			<?php foreach ($this->data->jcfields as $customField): ?>
+				<?php if (!empty($customField->rawvalue)): ?>
+					<div class="tracks-individual__details__list__item">
+						<div class="tracks-individual__details__list__item__label">
+							<?php echo $customField->title; ?>:
+						</div>
+						<div class="tracks-individual__details__list__item__value">
+							<?php echo $customField->value; ?>
+						</div>
+					</div>
+				<?php endif; ?>
+			<?php endforeach; ?>
+
 			<?php if ($this->data->description): ?>
 				<div class="tracks-individual__details__list__item">
 					<div class="tracks-individual__details__list__item__value">

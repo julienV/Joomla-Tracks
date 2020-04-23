@@ -6,27 +6,47 @@
  * @license     GNU General Public License version 2 or later
  */
 
+use Joomla\CMS\Language\Text;
+
 defined('_JEXEC') or die;
 
 JHtml::_('rbootstrap.tooltip');
 JHtml::_('rjquery.chosen', 'select');
-JHtml::_('behavior.formvalidation');
+JHtml::_('behavior.formvalidator');
 
 /**
  * @var RForm $form
  */
 $form            = $this->form;
 $customFieldsets = $form->getFieldsets('com_fields');
+
+Text::script('LIB_TRACKS_VALIDATION_URL_INVALID');
 ?>
 <script type="text/javascript">
-	jQuery(document).ready(function()
-	{
-		// Disable click function on btn-group
-		jQuery(".btn-group").each(function(index){
-			if (jQuery(this).hasClass('disabled'))
-			{
-				jQuery(this).find("label").off('click');
+	Joomla.submitbutton = function (pressbutton) {
+		if (pressbutton == 'team.cancel') {
+			Joomla.submitform(pressbutton);
+		}
+		else {
+			var f = document.adminForm;
+			if (document.formvalidator.isValid(f)) {
+				Joomla.submitform(pressbutton);
 			}
+		}
+	}
+	jQuery(document).ready(function(){
+		document.formvalidator.setHandler('url', function(value, element) {
+			var expression = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
+			var regex = new RegExp(expression);
+
+			if (!regex.test(value)) {
+				element.get(0).setCustomValidity(Joomla.JText._('LIB_TRACKS_VALIDATION_URL_INVALID'))
+				return false;
+			}
+
+			element.get(0).setCustomValidity('');
+
+			return true;
 		});
 	});
 </script>
@@ -169,78 +189,16 @@ $customFieldsets = $form->getFieldsets('com_fields');
 
 		<div class="tab-pane" id="social">
 			<div class="row-fluid">
-				<div class="control-group">
-					<div class="control-label">
-						<?php echo $this->form->getLabel('url'); ?>
+				<?php foreach ($this->form->getFieldset('social') as $field): ?>
+					<div class="control-group">
+						<div class="control-label">
+							<?php echo $field->label; ?>
+						</div>
+						<div class="controls">
+							<?php echo $field->input; ?>
+						</div>
 					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('url'); ?>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="control-label">
-						<?php echo $this->form->getLabel('facebook'); ?>
-					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('facebook'); ?>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="control-label">
-						<?php echo $this->form->getLabel('twitter'); ?>
-					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('twitter'); ?>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="control-label">
-						<?php echo $this->form->getLabel('facebook'); ?>
-					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('facebook'); ?>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="control-label">
-						<?php echo $this->form->getLabel('googleplus'); ?>
-					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('googleplus'); ?>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="control-label">
-						<?php echo $this->form->getLabel('youtube'); ?>
-					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('youtube'); ?>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="control-label">
-						<?php echo $this->form->getLabel('instagram'); ?>
-					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('instagram'); ?>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="control-label">
-						<?php echo $this->form->getLabel('pinterest'); ?>
-					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('pinterest'); ?>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="control-label">
-						<?php echo $this->form->getLabel('vimeo'); ?>
-					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('vimeo'); ?>
-					</div>
-				</div>
+				<?php endforeach; ?>
 			</div>
 		</div>
 		<div class="tab-pane" id="custom">

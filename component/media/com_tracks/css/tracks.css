@@ -109,35 +109,84 @@ div.tracks-clear {
 div.edit div.edit-pic {
   display: inline-block;
 }
-.tracks-individual__details {
+.tracks-individual h2,
+.tracks-team h2 {
+  padding: 20px 0;
+}
+.tracks-individual__details,
+.tracks-team__details {
   background: #ECECEC;
   padding: 20px 10px;
   display: flex;
 }
-.tracks-individual__details__picture {
+.tracks-individual__details__picture,
+.tracks-team__details__picture {
   width: 200px;
   padding: 0 10px;
+  flex-shrink: 0;
 }
-.tracks-individual__details__picture i {
-  font-size: 150px;
-  width: 150px;
-  height: 150px;
+.tracks-individual__details__picture i,
+.tracks-team__details__picture i {
+  font-size: 180px;
+  width: 180px;
+  height: 180px;
   margin: 0;
-  line-height: 150px;
+  line-height: 180px;
 }
-.tracks-individual__details__picture img {
-  height: 150px;
+.tracks-individual__details__picture img,
+.tracks-team__details__picture img {
+  width: 180px;
 }
-.tracks-individual__details__list__item {
+.tracks-individual__details__list__item,
+.tracks-team__details__list__item {
   display: flex;
   justify-content: space-between;
   padding: 5px 0;
 }
-.tracks-individual__details__list__item__label {
+.tracks-individual__details__list__item__label,
+.tracks-team__details__list__item__label {
   font-weight: bold;
   text-transform: uppercase;
   width: 150px;
 }
-.tracks-individual__details__list__item__value {
+.tracks-individual__details__list__item__value,
+.tracks-team__details__list__item__value {
   flex-grow: 1;
+}
+.tracks-team__vehicle {
+  padding-top: 20px;
+}
+.tracks-team__vehicle__content {
+  padding: 20px 10px;
+  display: flex;
+}
+.tracks-team__vehicle__content__picture {
+  padding: 0 10px;
+  flex-shrink: 0;
+}
+.tracks-team__vehicle__content__picture img {
+  width: 250px;
+}
+.tracks-team__individuals__project {
+  padding: 10px 0;
+}
+.tracks-team__individuals__project__title {
+  padding: 10px;
+  margin-left: 10px;
+  font-weight: bold;
+  font-size: 1.1em;
+  background: #ECECEC;
+}
+.tracks-team__individuals__project__individuals {
+  padding: 0 10px;
+}
+.tracks-team__individuals__project__individuals__individual {
+  padding: 5px 10px;
+}
+.tracks-team__social__list {
+  display: flex;
+  flex-wrap: wrap;
+}
+.tracks-team__social__list__item {
+  padding: 5px 5px;
 }

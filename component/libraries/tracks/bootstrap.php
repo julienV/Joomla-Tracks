@@ -35,6 +35,10 @@ JTable::addIncludePath(JPATH_SITE . '/administrator/components/com_tracks/tables
 
 require_once __DIR__ . '/vendor/autoload.php';
 
+// Load library language
+$lang = JFactory::getLanguage();
+$lang->load('lib_tracks', __DIR__);
+
 /**
  * Tracks bootstrap class
  *

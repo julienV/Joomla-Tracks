@@ -11,25 +11,27 @@
  * See COPYRIGHT.php for copyright notices and details.
  */
 // no direct access
+use Joomla\CMS\Language\Text;
+
 defined('_JEXEC') or die('Restricted access');
 
-if ($this->data->vehicle_picture || $this->data->vehicle_description): ?>
+if (!empty($this->data->vehicle_picture) || !empty($this->data->vehicle_description)): ?>
 
-	<div id="teamvehicle">
-		<h2><?php echo JTExt::_('COM_TRACKS_VIEW_TEAM_VEHICLE'); ?></h2>
+	<div class="tracks-team__vehicle">
+		<h3><?php echo Text::_('COM_TRACKS_VIEW_TEAM_VEHICLE'); ?></h3>
 
+		<div class="tracks-team__vehicle__content">
 		<?php if ($this->data->vehicle_picture): ?>
-			<div id="vehicle-pic">
+			<div class="tracks-team__vehicle__content__picture">
 				<?php echo TrackslibHelperImage::modalimage(JPATH_SITE . '/' . $this->data->vehicle_picture, Jtext::_('COM_TRACKS_TEAM_VEHICLE_PICTURE'), 400); ?>
 			</div>
 		<?php endif; ?>
 
 		<?php if ($this->data->vehicle_description): ?>
-		<div id="vehicle-desc">
-			<?php echo $this->data->vehicle_description; ?>
-		</div>
+			<div class="tracks-team__vehicle__content__desc">
+				<?php echo $this->data->vehicle_description; ?>
+			</div>
 		<?php endif; ?>
+		</div>
 	</div>
-	<div class="clear"></div>
-
 <?php endif;

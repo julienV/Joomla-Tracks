@@ -6,6 +6,9 @@
  */
 
 // No direct access
+use Joomla\CMS\Factory;
+use Joomla\CMS\Plugin\PluginHelper;
+
 defined('_JEXEC') or die('Restricted access');
 
 /**
@@ -45,6 +48,10 @@ class TracksModelIndividual extends RModelAdmin
 		{
 			$item = $this->loadProjectDetails($item);
 		}
+
+		PluginHelper::importPlugin('tracks');
+		$params = null;
+		Factory::getApplication()->triggerEvent('onContentPrepare', ['com_tracks.individual', &$item, &$params]);
 
 		return $item;
 	}
