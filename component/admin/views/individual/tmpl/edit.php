@@ -6,6 +6,8 @@
  * @license     GNU General Public License version 2 or later
  */
 
+use Joomla\CMS\Plugin\PluginHelper;
+
 defined('_JEXEC') or die;
 
 JHtml::_('rbootstrap.tooltip');
@@ -16,7 +18,8 @@ JHtml::_('behavior.formvalidation');
  * @var RForm $form
  */
 $form            = $this->form;
-$customFieldsets = $form->getFieldsets('com_fields');
+$customFieldsets = PluginHelper::isEnabled('tracks', 'customfields')
+	? $form->getFieldsets('com_fields') : [];
 ?>
 <script type="text/javascript">
 	jQuery(document).ready(function()
@@ -210,6 +213,7 @@ $customFieldsets = $form->getFieldsets('com_fields');
 			</div>
 		</div>
 
+		<?php if (!empty($customFieldsets)): ?>
 		<div class="tab-pane" id="custom">
 			<div class="row-fluid">
 			<?php foreach ($customFieldsets as $fieldset): ?>
@@ -232,6 +236,7 @@ $customFieldsets = $form->getFieldsets('com_fields');
 			<?php endforeach; ?>
 			</div>
 		</div>
+		<?php endif; ?>
 	</div>
 	<?php echo $this->form->getInput('id'); ?>
 	<input type="hidden" name="task" value="" />

@@ -11,13 +11,16 @@
  * See COPYRIGHT.php for copyright notices and details.
  */
 // no direct access
+use Joomla\CMS\Plugin\PluginHelper;
+
 defined('_JEXEC') or die('Restricted access');
 jimport('joomla.filter.output');
 
 $dispatcher = JDispatcher::getInstance();
 JPluginHelper::importPlugin('content');
 
-$customFields = \FieldsHelper::getFields('com_tracks.eventresult');
+$enabledCustomFields = PluginHelper::isEnabled('tracks', 'customfields');
+$customFields        = $enabledCustomFields ? \FieldsHelper::getFields('com_tracks.eventresult') : [];
 ?>
 <div id="tracks">
 
@@ -86,7 +89,7 @@ $customFields = \FieldsHelper::getFields('com_tracks.eventresult');
 			$k = 0;
 			foreach ($subround->results AS $result)
 			{
-				$resultCustomFields = \FieldsHelper::getFields('com_tracks.eventresult', $result, true);
+				$resultCustomFields = $enabledCustomFields ? \FieldsHelper::getFields('com_tracks.eventresult', $result, true) : [];
 				$ind_slug = $result->individual_id . ':' . JFilterOutput::stringURLSafe($result->first_name . ' ' . $result->last_name);
 				$link_ind = JRoute::_(TrackslibHelperRoute::getIndividualRoute($ind_slug, $this->project->slug));
 				$team_slug = $result->team_id . ':' . JFilterOutput::stringURLSafe($result->team_name);

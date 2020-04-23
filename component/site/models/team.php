@@ -81,9 +81,13 @@ class TracksModelTeam extends RModelAdmin
 				$this->_data = $result;
 			}
 
-			PluginHelper::importPlugin('tracks');
-			$params = null;
-			Factory::getApplication()->triggerEvent('onContentPrepare', ['com_tracks.team', &$this->_data, &$params]);
+			if (PluginHelper::isEnabled('tracks', 'customfields'))
+			{
+				PluginHelper::importPlugin('tracks');
+				$params = null;
+				Factory::getApplication()->triggerEvent('onContentPrepare',
+					['com_tracks.team', &$this->_data, &$params]);
+			}
 		}
 
 		return $this->_data;

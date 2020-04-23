@@ -49,9 +49,12 @@ class TracksModelIndividual extends RModelAdmin
 			$item = $this->loadProjectDetails($item);
 		}
 
-		PluginHelper::importPlugin('tracks');
-		$params = null;
-		Factory::getApplication()->triggerEvent('onContentPrepare', ['com_tracks.individual', &$item, &$params]);
+		if (PluginHelper::isEnabled('tracks', 'customfields'))
+		{
+			PluginHelper::importPlugin('tracks');
+			$params = null;
+			Factory::getApplication()->triggerEvent('onContentPrepare', ['com_tracks.individual', &$item, &$params]);
+		}
 
 		return $item;
 	}

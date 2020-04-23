@@ -47,6 +47,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 				</div>
 			<?php endif; ?>
 
+			<?php if (!empty($this->data->jcfields)): ?>
 			<?php foreach ($this->data->jcfields as $customField): ?>
 				<?php if (!empty($customField->rawvalue)): ?>
 					<div class="tracks-team__details__list__item">
@@ -59,6 +60,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 					</div>
 				<?php endif; ?>
 			<?php endforeach; ?>
+			<?php endif; ?>
 			
 			<?php if ($this->data->description): ?>
 				<div class="tracks-team__details__list__item">

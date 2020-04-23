@@ -7,6 +7,7 @@
  */
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Plugin\PluginHelper;
 
 defined('_JEXEC') or die;
 
@@ -18,7 +19,8 @@ JHtml::_('behavior.formvalidator');
  * @var RForm $form
  */
 $form            = $this->form;
-$customFieldsets = $form->getFieldsets('com_fields');
+$customFieldsets = PluginHelper::isEnabled('tracks', 'customfields')
+	? $form->getFieldsets('com_fields') : [];
 
 Text::script('LIB_TRACKS_VALIDATION_URL_INVALID');
 ?>
@@ -201,6 +203,8 @@ Text::script('LIB_TRACKS_VALIDATION_URL_INVALID');
 				<?php endforeach; ?>
 			</div>
 		</div>
+
+		<?php if (!empty($customFieldsets)): ?>
 		<div class="tab-pane" id="custom">
 			<div class="row-fluid">
 				<?php foreach ($customFieldsets as $fieldset): ?>
@@ -223,6 +227,7 @@ Text::script('LIB_TRACKS_VALIDATION_URL_INVALID');
 				<?php endforeach; ?>
 			</div>
 		</div>
+		<?php endif; ?>
 	</div>
 	<?php echo $this->form->getInput('id'); ?>
 	<input type="hidden" name="task" value="" />

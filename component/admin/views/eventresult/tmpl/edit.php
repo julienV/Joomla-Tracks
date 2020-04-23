@@ -6,6 +6,8 @@
  * @license     GNU General Public License version 2 or later
  */
 
+use Joomla\CMS\Plugin\PluginHelper;
+
 defined('_JEXEC') or die;
 
 JHtml::_('rbootstrap.tooltip');
@@ -16,7 +18,8 @@ JHtml::_('behavior.formvalidation');
  * @var RForm $form
  */
 $form            = $this->form;
-$customFieldsets = $form->getFieldsets('com_fields');
+$customFieldsets = PluginHelper::isEnabled('tracks', 'customfields')
+	? $form->getFieldsets('com_fields') : [];
 ?>
 <script type="text/javascript">
 	jQuery(document).ready(function()
@@ -83,6 +86,7 @@ $customFieldsets = $form->getFieldsets('com_fields');
 					<?php echo $this->form->getInput('performance'); ?>
 				</div>
 			</div>
+			<?php if (!empty($customFieldsets)): ?>
 			<?php foreach ($customFieldsets as $fieldset): ?>
 				<?php if ($fieldset->label != 'JGLOBAL_FIELDS'): ?>
 					<div class="well fieldset-description">
@@ -101,6 +105,7 @@ $customFieldsets = $form->getFieldsets('com_fields');
 					</div>
 				<?php endforeach; ?>
 			<?php endforeach; ?>
+			<?php endif; ?>
 			<div class="control-group">
 				<div class="control-label">
 					<?php echo $this->form->getLabel('comment'); ?>
