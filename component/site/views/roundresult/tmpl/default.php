@@ -16,6 +16,8 @@ jimport('joomla.filter.output');
 
 $dispatcher = JDispatcher::getInstance();
 JPluginHelper::importPlugin('content');
+
+$customFields = \FieldsHelper::getFields('com_tracks.eventresult');
 ?>
 <div id="tracks">
 
@@ -73,6 +75,9 @@ JPluginHelper::importPlugin('content');
 					<th><?php echo JText::_('COM_TRACKS_Team'); ?></th>
 				<?php endif; ?>
 				<th><?php echo JText::_('COM_TRACKS_Performance'); ?></th>
+				<?php foreach ($customFields as $customField): ?>
+				    <th class="raceResults__<?= $customField->name ?>"><?= $customField->title ?></th>
+				<?php endforeach; ?>
 				<?php if (!empty($subround->count_points)): ?>
 					<th><?php echo JText::_('COM_TRACKS_Points'); ?></th>
 				<?php endif; ?>
@@ -81,6 +86,7 @@ JPluginHelper::importPlugin('content');
 			$k = 0;
 			foreach ($subround->results AS $result)
 			{
+				$resultCustomFields = \FieldsHelper::getFields('com_tracks.eventresult', $result, true);
 				$ind_slug = $result->individual_id . ':' . JFilterOutput::stringURLSafe($result->first_name . ' ' . $result->last_name);
 				$link_ind = JRoute::_(TrackslibHelperRoute::getIndividualRoute($ind_slug, $this->project->slug));
 				$team_slug = $result->team_id . ':' . JFilterOutput::stringURLSafe($result->team_name);
@@ -131,6 +137,9 @@ JPluginHelper::importPlugin('content');
 						</td>
 					<?php endif; ?>
 					<td><?php echo $result->performance; ?></td>
+					<?php foreach ($resultCustomFields as $customField): ?>
+						<td class="raceResults__<?= $customField->name ?>"><?= $customField->value ?></td>
+					<?php endforeach; ?>
 					<?php if (!empty($subround->count_points)): ?>
 						<td><?php echo $result->points + $result->bonus_points; ?></td>
 					<?php endif; ?>
