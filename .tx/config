@@ -19,6 +19,11 @@ file_filter = languages/<lang>/site/<lang>/<lang>.com_tracks.ini
 source_file = component/site/language/en-GB/en-GB.com_tracks.ini
 source_lang = en-GB
 
+[tracks.17-lib_tracks-ini]
+file_filter = languages/<lang>/site/<lang>/<lang>.lib_tracks.ini
+source_file = component/libraries/tracks/language/en-GB/en-GB.lib_tracks.ini
+source_lang = en-GB
+
 [tracks.17-plg_tracks_cb-ini]
 file_filter = languages/<lang>/site/<lang>/<lang>.plg_tracks_cb.ini
 source_file = 3pd/plugin_tracks_cb/language/en-GB/en-GB.plg_tracks_cb.ini
