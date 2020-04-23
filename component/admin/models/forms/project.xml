@@ -118,6 +118,27 @@
 				<option value="0">JNO</option>
 				<option value="1">JYES</option>
 			</field>
+			<field name="rk_show_custom_top"
+				   type="subform"
+				   multiple="true"
+				   label="COM_TRACKS_XML_PROJECT_PARAMS_RANKINGVIEW_SHOW_CUSTOM_TOP"
+				   description="COM_TRACKS_XML_PROJECT_PARAMS_RANKINGVIEW_SHOW_CUSTOM_TOP_DESC" >
+				<form>
+					<field
+							name="label"
+							type="text"
+							label="COM_TRACKS_XML_PROJECT_PARAMS_RANKINGVIEW_SHOW_CUSTOM_TOP_LABEL"
+							required="true"
+					/>
+					<field
+							name="top_rank"
+							type="number"
+							label="COM_TRACKS_XML_PROJECT_PARAMS_RANKINGVIEW_SHOW_CUSTOM_TOP_RANK"
+							default="10"
+							required="true"
+					/>
+				</form>
+			</field>
 			<field name="rk_show_average" type="radio" default="0"
 				   label="COM_TRACKS_XML_PROJECT_PARAMS_RANKINGVIEW_SHOW_AVERAGE"
 				   description="COM_TRACKS_XML_PROJECT_PARAMS_RANKINGVIEW_SHOW_AVERAGE_DESC" >

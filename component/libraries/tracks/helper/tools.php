@@ -128,17 +128,7 @@ abstract class TrackslibHelperTools
 	 */
 	public static function getTop3($rankingrow)
 	{
-		$count = 0;
-
-		foreach ((array) $rankingrow->finishes as $pos)
-		{
-			if ($pos <= 3)
-			{
-				$count++;
-			}
-		}
-
-		return $count;
+		return self::getCustomTop($rankingrow, 3);
 	}
 
 	/**
@@ -150,17 +140,7 @@ abstract class TrackslibHelperTools
 	 */
 	public static function getTop5($rankingrow)
 	{
-		$count = 0;
-
-		foreach ((array) $rankingrow->finishes as $pos)
-		{
-			if ($pos <= 5)
-			{
-				$count++;
-			}
-		}
-
-		return $count;
+		return self::getCustomTop($rankingrow, 5);
 	}
 
 	/**
@@ -172,11 +152,24 @@ abstract class TrackslibHelperTools
 	 */
 	public static function getTop10($rankingrow)
 	{
+		return self::getCustomTop($rankingrow, 10);
+	}
+
+	/**
+	 * returns number of top 10 for ranking row object
+	 *
+	 * @param   object   $rankingrow  ranking row
+	 * @param   integer  $rank        max rank for top
+	 *
+	 * @return integer
+	 */
+	public static function getCustomTop($rankingrow, $rank)
+	{
 		$count = 0;
 
 		foreach ((array) $rankingrow->finishes as $pos)
 		{
-			if ($pos <= 10)
+			if ($pos <= $rank)
 			{
 				$count++;
 			}
