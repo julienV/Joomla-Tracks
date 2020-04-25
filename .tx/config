@@ -4,77 +4,77 @@ lang_map = af_ZA: af-ZA, am_ET: am-ET, ar_AE: ar-AE, ar_BH: ar-BH, ar_DZ: ar-DZ,
 minimum_perc = 20
 type = INI
 
-[tracks.17-admin-com_tracks-ini]
+[tracks.admin-com_tracks-ini]
 file_filter = languages/<lang>/admin/<lang>/<lang>.com_tracks.ini
 source_file = component/admin/language/en-GB/en-GB.com_tracks.ini
 source_lang = en-GB
 
-[tracks.17-admin-com_tracks-sys-ini]
+[tracks.admin-com_tracks-sys-ini]
 file_filter = languages/<lang>/admin/<lang>/<lang>.com_tracks.sys.ini
 source_file = component/admin/language/en-GB/en-GB.com_tracks.sys.ini
 source_lang = en-GB
 
-[tracks.17-site-com_tracks-ini]
+[tracks.site-com_tracks-ini]
 file_filter = languages/<lang>/site/<lang>/<lang>.com_tracks.ini
 source_file = component/site/language/en-GB/en-GB.com_tracks.ini
 source_lang = en-GB
 
-[tracks.17-lib_tracks-ini]
+[tracks.lib_tracks-ini]
 file_filter = languages/<lang>/site/<lang>/<lang>.lib_tracks.ini
 source_file = component/libraries/tracks/language/en-GB/en-GB.lib_tracks.ini
 source_lang = en-GB
 
-[tracks.17-plg_tracks_cb-ini]
+[tracks.plg_tracks_cb-ini]
 file_filter = languages/<lang>/site/<lang>/<lang>.plg_tracks_cb.ini
 source_file = 3pd/plugin_tracks_cb/language/en-GB/en-GB.plg_tracks_cb.ini
 source_lang = en-GB
 
-[tracks.17-plg_tracks_jomsocial-ini]
+[tracks.plg_tracks_jomsocial-ini]
 file_filter = languages/<lang>/site/<lang>/<lang>.plg_tracks_jomsocial.ini
 source_file = 3pd/plugin_tracks_jomsocial/language/en-GB/en-GB.plg_tracks_jomsocial.ini
 source_lang = en-GB
 
-[tracks.17-plg_user_tracks_autoregister-ini]
+[tracks.plg_user_tracks_autoregister-ini]
 file_filter = languages/<lang>/site/<lang>/<lang>.plg_user_tracks_autoregister.ini
 source_file = plugins/user/tracks_autoregister/language/en-GB/en-GB.plg_user_tracks_autoregister.ini
 source_lang = en-GB
 
-[tracks.17-plg_search_trackssearch-ini]
+[tracks.plg_search_trackssearch-ini]
 file_filter = languages/<lang>/site/<lang>/<lang>.plg_search_trackssearch.ini
 source_file = plugins/search/trackssearch/language/en-GB/en-GB.plg_search_trackssearch.ini
 source_lang = en-GB
 
-[tracks.17-plg_search_trackssearch-sys-ini]
+[tracks.plg_search_trackssearch-sys-ini]
 file_filter = languages/<lang>/site/<lang>/<lang>.plg_search_trackssearch.sys.ini
 source_file = plugins/search/trackssearch/language/en-GB/en-GB.plg_search_trackssearch.sys.ini
 source_lang = en-GB
 
-[tracks.17-mod_tracks_teamranking-ini]
+[tracks.mod_tracks_teamranking-ini]
 file_filter = languages/<lang>/site/<lang>/<lang>.mod_tracks_teamranking.ini
 source_file = modules/frontend/mod_tracks_teamranking/language/en-GB/en-GB.mod_tracks_teamranking.ini
 source_lang = en-GB
 
-[tracks.17-mod_tracks_teamranking-sys-ini]
+[tracks.mod_tracks_teamranking-sys-ini]
 file_filter = languages/<lang>/site/<lang>/<lang>.mod_tracks_teamranking.sys.ini
 source_file = modules/frontend/mod_tracks_teamranking/language/en-GB/en-GB.mod_tracks_teamranking.sys.ini
 source_lang = en-GB
 
-[tracks.17-mod_tracks_results-ini]
+[tracks.mod_tracks_results-ini]
 file_filter = languages/<lang>/site/<lang>/<lang>.mod_tracks_results.ini
 source_file = modules/frontend/mod_tracks_results/language/en-GB/en-GB.mod_tracks_results.ini
 source_lang = en-GB
 
-[tracks.17-mod_tracks_results-sys-ini]
+[tracks.mod_tracks_results-sys-ini]
 file_filter = languages/<lang>/site/<lang>/<lang>.mod_tracks_results.sys.ini
 source_file = modules/frontend/mod_tracks_results/language/en-GB/en-GB.mod_tracks_results.sys.ini
 source_lang = en-GB
 
-[tracks.17-mod_tracks_ranking-ini]
+[tracks.mod_tracks_ranking-ini]
 file_filter = languages/<lang>/site/<lang>/<lang>.mod_tracks_ranking.ini
 source_file = modules/frontend/mod_tracks_ranking/language/en-GB/en-GB.mod_tracks_ranking.ini
 source_lang = en-GB
 
-[tracks.17-mod_tracks_ranking-sys-ini]
+[tracks.mod_tracks_ranking-sys-ini]
 file_filter = languages/<lang>/site/<lang>/<lang>.mod_tracks_ranking.sys.ini
 source_file = modules/frontend/mod_tracks_ranking/language/en-GB/en-GB.mod_tracks_ranking.sys.ini
 source_lang = en-GB

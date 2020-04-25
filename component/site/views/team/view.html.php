@@ -54,12 +54,6 @@ class TracksViewTeam extends RViewSite
 		$user = JFactory::getUser();
 		$this->canEdit = $user->get('id') && ($user->authorise('core.manage', 'com_tracks') || $user->get('id') == $data->admin_id);
 
-		if ($data->picture)
-		{
-			$attribs['class'] = "pic";
-			$data->picture = JHTML::image(JURI::root() . $data->picture, $data->name, $attribs);
-		}
-
 		$this->data = $data;
 		$this->individuals = $individuals;
 
