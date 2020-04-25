@@ -55,6 +55,25 @@ class TrackslibEntityProjectround extends TrackslibEntityBase
 	{
 		return 'index.php?option=com_tracks&view=roundresult';
 	}
+	/**
+	 * Get the item link
+	 *
+	 * @param   mixed    $itemId  Specify a custom itemId if needed. Default: joomla way to use active itemid
+	 * @param   boolean  $routed  Process URL with JRoute?
+	 * @param   boolean  $xhtml   Replace & by &amp; for XML compliance.
+	 *
+	 * @return  string
+	 */
+	public function getLink($itemId = 'inherit', $routed = true, $xhtml = true)
+	{
+		if (!$this->hasId())
+		{
+			return null;
+		}
 
+		$url = $this->getBaseUrl() . '&id=' . $this->getSlug() . '&p=' . $this->project_id
+			. $this->getLinkItemIdString($itemId);
 
+		return $this->formatUrl($url, $routed, $xhtml);
+	}
 }

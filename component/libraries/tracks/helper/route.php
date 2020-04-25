@@ -64,6 +64,9 @@ class TrackslibHelperRoute
 		if ($id)
 		{
 			$parts['id'] = $id;
+
+			$pr         = TrackslibEntityProjectround::load($id);
+			$parts['p'] = $pr->project_id;
 		}
 
 		return self::buildUrl($parts);
@@ -327,7 +330,7 @@ class TrackslibHelperRoute
 	{
 		if ($item = self::_findItem($parts))
 		{
-			$parts['Itemid'] = $item->id;
+			// $parts['Itemid'] = $item->id;
 		}
 
 		return 'index.php?' . JURI::buildQuery($parts);
