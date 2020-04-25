@@ -31,7 +31,8 @@ JFormHelper::addFieldPath(JPATH_LIBRARIES . '/tracks/form/fields');
 JFormHelper::addRulePath(JPATH_LIBRARIES . '/tracks/form/rule');
 JFormHelper::addRulePath(JPATH_LIBRARIES . '/tracks/form/rules');
 
-JTable::addIncludePath(JPATH_SITE . '/administrator/components/com_tracks/tables');
+JTable::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_tracks/tables');
+Joomla\CMS\MVC\Model\BaseDatabaseModel::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_tracks/models');
 
 JLoader::register('FieldsHelper', JPATH_ADMINISTRATOR . '/components/com_fields/helpers/fields.php');
 

@@ -212,7 +212,16 @@ class TracksModelProjectrounds extends TrackslibModelList
 		);
 		$query->from($db->qn('#__tracks_projects_rounds', 'obj'));
 		$query->join('inner', '#__tracks_rounds AS r on r.id = obj.round_id');
-		$query->where($db->qn('obj.project_id') . ' = ' . $this->getState('project_id'));
+
+		if ($this->getState('project_id'))
+		{
+			$query->where($db->qn('obj.project_id') . ' = ' . (int) $this->getState('project_id'));
+		}
+
+		if ($this->getState('filter.round_id'))
+		{
+			$query->where($db->qn('obj.round_id') . ' = ' . (int) $this->getState('filter.round_id'));
+		}
 
 		// Filter: like / search
 		$search = $this->getState('filter.search', '');

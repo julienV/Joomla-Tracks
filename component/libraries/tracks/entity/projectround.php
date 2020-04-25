@@ -11,6 +11,8 @@ defined('_JEXEC') or die;
 /**
  * Project round Entity.
  *
+ * @property integer id
+ *
  * @since  3.0.6
  */
 class TrackslibEntityProjectround extends TrackslibEntityBase
@@ -48,4 +50,11 @@ class TrackslibEntityProjectround extends TrackslibEntityBase
 
 		return TrackslibEntityRound::load($item->round_id);
 	}
+
+	protected function getBaseUrl()
+	{
+		return 'index.php?option=com_tracks&view=roundresult';
+	}
+
+
 }

@@ -101,7 +101,8 @@ div.project-inds div {
 /* round view */
 img.round-image {
   float: left;
-  padding-right: 5px;
+  padding-right: 25px;
+  padding-bottom: 10px;
 }
 div.tracks-clear {
   clear: both;
@@ -189,4 +190,17 @@ div.edit div.edit-pic {
 }
 .tracks-team__social__list__item {
   padding: 5px 5px;
+}
+.tracks-round .round-description__field {
+  padding: 10px 0;
+}
+.tracks-round .round-description__field__label {
+  font-weight: bold;
+}
+.tracks-round__events__list__event {
+  display: flex;
+  flex-wrap: wrap;
+}
+.tracks-round__events__list__event__project {
+  width: 200px;
 }

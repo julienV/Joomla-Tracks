@@ -15,4 +15,28 @@ defined('_JEXEC') or die;
  */
 class TrackslibEntityRound extends TrackslibEntityBase
 {
+	/**
+	 * Get project rounds
+	 *
+	 * @return TrackslibEntityProjectround[]
+	 */
+	public function getProjectrounds($state = [])
+	{
+		if (!$this->hasId())
+		{
+			return;
+		}
+
+		$state = array_merge(
+			[
+				'filter.round_id' => $this->id,
+				'list.limit'      => 0
+			],
+			$state
+		);
+
+		$model = JModelAdmin::getInstance('Projectrounds', 'TracksModel', ['ignore_request' => true]);
+
+		return $model->searchEntities($state);
+	}
 }
