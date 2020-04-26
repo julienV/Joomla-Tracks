@@ -6,6 +6,9 @@
  * @license     GNU General Public License version 2 or later
  */
 
+use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Text;
+
 defined('_JEXEC') or die;
 
 /**
@@ -137,6 +140,9 @@ abstract class TrackslibViewAdmin extends RViewAdmin
 	 */
 	public function display($tpl = null)
 	{
+		$title = !empty($this->getTitle()) ? 'Tracks: ' . $this->getTitle() : 'Tracks';
+		$this->setTitle($title);
+
 		if ($this->showProjectSwitch)
 		{
 			$this->projectSwitch = $this->get('ProjectSwitchForm');
@@ -161,5 +167,24 @@ abstract class TrackslibViewAdmin extends RViewAdmin
 		}
 
 		return $this->toolbar;
+	}
+
+	/**
+	 * Set document title
+	 *
+	 * @param   string  $title  title
+	 *
+	 * @return void
+	 *
+	 * @throws Exception
+	 */
+	protected function setTitle($title)
+	{
+		Factory::getDocument()
+			->setTitle(
+				strip_tags($title)
+				. ' - ' . Factory::getApplication()->get('sitename')
+				. ' - ' . Text::_('JADMINISTRATION')
+			);
 	}
 }
