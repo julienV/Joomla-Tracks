@@ -113,7 +113,7 @@ RHelperAsset::load('tracksbackend.css');
 						<?php echo JHtml::_('grid.id', $i, $row->id); ?>
 					</td>
 					<td class="result result-number">
-						<input type="text" name="number[]" value="<?php echo $row->number; ?>" size="5"/>
+						<input type="text" name="number[<?= $row->id ?>]" value="<?php echo $row->number; ?>" size="5"/>
 					</td>
 					<td>
 						<?php $itemTitle = $row->first_name ? $row->last_name . ', ' . $row->first_name : $row->last_name; ?>
@@ -126,13 +126,13 @@ RHelperAsset::load('tracksbackend.css');
 						<?php echo $row->team; ?>
 					</td>
 					<td class="result result-performance">
-						<input type="text" name="performance[]" value="<?php echo $row->performance; ?>"/>
+						<input type="text" name="performance[<?= $row->id ?>]" value="<?php echo $row->performance; ?>"/>
 					</td>
 					<td class="result result-rank">
-						<input type="text" name="rank[]" value="<?php echo $row->rank; ?>"/>
+						<input type="text" name="rank[<?= $row->id ?>]" value="<?php echo $row->rank; ?>"/>
 					</td>
 					<td class="result result-bonus">
-						<input type="text" name="bonus_points[]" value="<?php echo $row->bonus_points; ?>"/>
+						<input type="text" name="bonus_points[<?= $row->id ?>]" value="<?php echo $row->bonus_points; ?>"/>
 					</td>
 				</tr>
 			<?php endforeach; ?>

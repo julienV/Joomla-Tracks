@@ -122,10 +122,8 @@ class TracksModelEventResults extends RModelList
 
 		$query = $db->getQuery(true);
 
-		$query->select('rr.id, rr.individual_id, rr.team_id, rr.event_id, rr.rank, rr.params');
+		$query->select('rr.id, rr.individual_id, rr.team_id, rr.event_id, rr.rank, rr.number, rr.params');
 		$query->select('rr.performance, rr.bonus_points, rr.comment');
-		$query->select('CASE WHEN CHAR_LENGTH(rr.number) THEN rr.number ELSE pi.number END AS number');
-		$query->select('pi.id AS piid');
 		$query->select('i.first_name, i.last_name, i.nickname');
 		$query->select('t.name AS team');
 
@@ -133,8 +131,7 @@ class TracksModelEventResults extends RModelList
 		$query->join('inner', '#__tracks_events AS sr ON sr.id = rr.event_id');
 		$query->join('inner', '#__tracks_projects_rounds AS pr ON pr.id = sr.projectround_id');
 		$query->join('inner', '#__tracks_individuals AS i ON i.id = rr.individual_id');
-		$query->join('inner', '#__tracks_participants AS pi ON (pi.individual_id = rr.individual_id AND pr.project_id = pi.project_id )');
-		$query->join('left', '#__tracks_teams AS t ON t.id = pi.team_id');
+		$query->join('left', '#__tracks_teams AS t ON t.id = rr.team_id');
 		$query->join('left', '#__users AS u ON u.id = rr.checked_out');
 
 		$query->where('rr.event_id = ' . (int) $event_id);
@@ -234,34 +231,26 @@ class TracksModelEventResults extends RModelList
 	 *
 	 * @return bool
 	 */
-	public function saveranks($cid, $rank, $bonus_points, $performance, $number)
+	public function saveranks($data)
 	{
-		$row = $this->getTable('Eventresult', 'TracksTable');
+		$result = $this->getTable('Eventresult', 'TracksTable');
 
 		// Update ordering values
-		for ($i = 0; $i < count($cid); $i++)
+		foreach ($data as $row)
 		{
-			if (!$row->load((int) $cid[$i]))
+			if (!$result->load((int) $row['id']))
 			{
 				throw new RuntimeException('Result not found');
 			}
 
-			if ($row->rank != $rank[$i]
-				|| $row->bonus_points != $bonus_points[$i]
-				|| $row->performance != $performance[$i]
-				|| $row->number != $number[$i])
+			$result->bind($row);
+			$result->number = $result->number ?: $this->getParticipantNumber($result->id);
+
+			if (!$result->store())
 			{
-				$row->rank = $rank[$i];
-				$row->bonus_points = $bonus_points[$i];
-				$row->performance = $performance[$i];
-				$row->number = $number[$i] ?: $this->getParticipantNumber($cid[$i]);
+				$this->setError($result->getError());
 
-				if (!$row->store())
-				{
-					$this->setError($this->_db->getErrorMsg());
-
-					return false;
-				}
+				return false;
 			}
 		}
 
@@ -383,7 +372,7 @@ class TracksModelEventResults extends RModelList
 			->select('pp.number')
 			->from('#__tracks_events_results AS r')
 			->innerJoin('#__tracks_events AS e ON e.id = r.event_id')
-			->innerJoin('#__tracks_projects_rounds AS pr ON r.id = e.projectround_id')
+			->innerJoin('#__tracks_projects_rounds AS pr ON pr.id = e.projectround_id')
 			->innerJoin('#__tracks_participants AS pp ON pp.individual_id = r.individual_id AND pp.project_id = pr.project_id')
 			->where('r.id = ' . $resultId);
 
