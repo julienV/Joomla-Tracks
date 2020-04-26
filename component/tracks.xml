@@ -9,7 +9,7 @@
 	<license>http://www.gnu.org/licenses/gpl.html</license>
 	<version>3.0.11</version>
 	<tag>##VERSION##</tag>
-	<redcore version="1.10.6" defaultFramework="bootstrap2"/>
+	<redcore version="2.0.0"/>
 	<description>COM_TRACKS_XML_DESC</description>
 
 	<!-- Runs on install/uninstall/update -->
