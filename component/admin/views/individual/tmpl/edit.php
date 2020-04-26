@@ -94,6 +94,14 @@ $customFieldsets = PluginHelper::isEnabled('tracks', 'customfields')
 				</div>
 				<div class="control-group">
 					<div class="control-label">
+						<?php echo $this->form->getLabel('gender', 'params'); ?>
+					</div>
+					<div class="controls">
+						<?php echo $this->form->getInput('gender', 'params'); ?>
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="control-label">
 						<?php echo $this->form->getLabel('country_code'); ?>
 					</div>
 					<div class="controls">

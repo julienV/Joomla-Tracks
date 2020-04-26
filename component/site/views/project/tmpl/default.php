@@ -56,12 +56,15 @@ function formatRoundStartEnd($round)
 
 	<h2><?php echo $this->project->season_name . ' ' . $this->project->name . ' ' . JText::_('COM_TRACKS_Season_Summary'); ?></h2>
 
-	<table class="raceResults" cellspacing="0" cellpadding="0" summary="">
+	<table class="raceResults">
 		<tbody>
 		<tr>
-			<th><?php echo JText::_('COM_TRACKS_Round'); ?></th>
-			<th><?php echo JText::_('COM_TRACKS_Date'); ?></th>
-			<th><?php echo JText::_('COM_TRACKS_Winner'); ?></th>
+			<th class="raceResults__round"><?php echo JText::_('COM_TRACKS_Round'); ?></th>
+			<th class="raceResults__date"><?php echo JText::_('COM_TRACKS_Date'); ?></th>
+			<th class="raceResults__winner"><?php echo JText::_('COM_TRACKS_Winner'); ?></th>
+			<?php if ($this->params->get('showteams', 1)): ?>
+				<th class="raceResults__team"><?php echo JText::_('COM_TRACKS_TEAM'); ?></th>
+			<?php endif; ?>
 		</tr>
 		<?php
 		$k = 0;
@@ -70,23 +73,41 @@ function formatRoundStartEnd($round)
 			$link_round = JRoute::_(TrackslibHelperRoute::getRoundResultRoute($result->slug));
 			?>
 			<tr class="<?php echo($k++ % 2 ? 'd1' : 'd0'); ?>">
-				<td>
+				<td class="raceResults__round">
 					<a href="<?php echo $link_round; ?>" title="<?php echo JText::_('COM_TRACKS_Display') ?>">
 						<?php
 						echo $result->round_name;
 						?>
 					</a>
 				</td>
-				<td><?php echo formatRoundStartEnd($result); ?></td>
-				<td>
+				<td class="raceResults__date"><?php echo formatRoundStartEnd($result); ?></td>
+				<td class="raceResults__winner">
 					<?php if ($result->winner): ?>
 						<?php foreach ($result->winner as $winner): ?>
-							<div class="winner"><?php echo $winner->first_name . ' ' . $winner->last_name
-									. ($this->params->get('shownickname', 0) && !empty($winner->nickname) ? ' - ' . $winner->nickname : '')
-									. ($this->params->get('showteams', 1) && $winner->team_name ? ' (' . $winner->team_name . ')' : ''); ?></div>
+							<div class="winner">
+								<a href="<?= TrackslibHelperRoute::getIndividualRoute($winner->id) ?>">
+									<span class="winner__name">
+									<?= $winner->first_name . ' ' . $winner->last_name ?>
+									</span>
+									<?php if ($this->params->get('shownickname', 0) && !empty($winner->nickname)): ?>
+										<span class="winner__nickname">
+										(<?= $winner->nickname ?>)
+										</span>
+									<?php endif; ?>
+								</a>
+							</div>
 						<?php endforeach; ?>
 					<?php endif; ?>
 				</td>
+				<?php if ($this->params->get('showteams', 1)): ?>
+					<td class="raceResults__team">
+						<a href="<?= TrackslibHelperRoute::getTeamRoute($winner->team_id) ?>">
+							<span class="winner__team">
+							<?= $winner->team_name ?>
+							</span>
+						</a>
+					</td>
+				<?php endif; ?>
 			</tr>
 		<?php
 		}
