@@ -21,6 +21,12 @@ class TracksRouter extends JComponentRouterView
 {
 	protected $noIDs = false;
 
+	const SEGMENT_RANKING            = 'standings';
+	const SEGMENT_TEAMRANKING        = 'team-standings';
+	const SEGMENT_PROJECTINDIVIDUALS = 'participants';
+	const SEGMENT_PROJECTRESULTS     = 'results';
+	const SEGMENT_ROUNDRESULT        = 'result';
+
 	/**
 	 * Search Component router constructor
 	 *
@@ -29,8 +35,7 @@ class TracksRouter extends JComponentRouterView
 	 */
 	public function __construct($app = null, $menu = null)
 	{
-		$params = JComponentHelper::getParams('com_tracks');
-		$this->noIDs = (bool) $params->get('sef_ids');
+		$params      = JComponentHelper::getParams('com_tracks');
 
 		$individuals = new JComponentRouterViewconfiguration('individuals');
 		$this->registerView($individuals);
@@ -139,14 +144,7 @@ class TracksRouter extends JComponentRouterView
 	 */
 	public function getProjectindividualsSegment($id, $query)
 	{
-		$entity = TrackslibEntityProject::load($id);
-
-		if ($entity->isValid())
-		{
-			return [(int) $id => $entity->alias];
-		}
-
-		return [];
+		return [(int) $id => self::SEGMENT_PROJECTINDIVIDUALS];
 	}
 
 	/**
@@ -159,14 +157,7 @@ class TracksRouter extends JComponentRouterView
 	 */
 	public function getProjectresultsSegment($id, $query)
 	{
-		$entity = TrackslibEntityProject::load($id);
-
-		if ($entity->isValid())
-		{
-			return [(int) $id => $entity->alias];
-		}
-
-		return [];
+		return [(int) $id => self::SEGMENT_PROJECTRESULTS];
 	}
 
 	/**
@@ -179,7 +170,7 @@ class TracksRouter extends JComponentRouterView
 	 */
 	public function getRankingSegment($id, $query)
 	{
-		return [(int) $id => 'standings'];
+		return [(int) $id => self::SEGMENT_RANKING];
 	}
 
 	/**
@@ -216,7 +207,7 @@ class TracksRouter extends JComponentRouterView
 
 		if ($entity->isValid())
 		{
-			return [(int) $id => (int) $id . '-' . $entity->getRound()->alias];
+			return [(int) $id => self::SEGMENT_ROUNDRESULT . '-' . (int) $id . '-' . $entity->getRound()->alias];
 		}
 
 		return [];
@@ -252,7 +243,7 @@ class TracksRouter extends JComponentRouterView
 	 */
 	public function getTeamrankingSegment($id, $query)
 	{
-		return [(int) $id => 'team-standings'];
+		return [(int) $id => self::SEGMENT_TEAMRANKING];
 	}
 
 	/**
@@ -297,7 +288,12 @@ class TracksRouter extends JComponentRouterView
 	 */
 	public function getRankingId($segment, $query)
 	{
-		return $query['p'];
+		if ($segment == self::SEGMENT_RANKING)
+		{
+			return $query['p'];
+		}
+
+		return false;
 	}
 
 	/**
@@ -310,10 +306,10 @@ class TracksRouter extends JComponentRouterView
 	 */
 	public function getProjectindividualsId($segment, $query)
 	{
-		$table = Table::getInstance('Project', 'TracksTable');
-		$table->load(['alias' => $segment]);
-
-		return $table->id;
+		if ($segment == self::SEGMENT_PROJECTINDIVIDUALS)
+		{
+			return $query['p'];
+		}
 	}
 
 	/**
@@ -326,10 +322,10 @@ class TracksRouter extends JComponentRouterView
 	 */
 	public function getProjectresultsId($segment, $query)
 	{
-		$table = Table::getInstance('Project', 'TracksTable');
-		$table->load(['alias' => $segment]);
-
-		return $table->id;
+		if ($segment == self::SEGMENT_PROJECTRESULTS)
+		{
+			return $query['p'];
+		}
 	}
 
 	/**
@@ -358,7 +354,12 @@ class TracksRouter extends JComponentRouterView
 	 */
 	public function getRoundresultId($segment, $query)
 	{
-		return (int) $segment;
+		if (strpos($segment, self::SEGMENT_ROUNDRESULT . '-') !== 0)
+		{
+			return false;
+		}
+
+		return (int) substr($segment, strlen(self::SEGMENT_ROUNDRESULT) + 1);
 	}
 
 	/**
@@ -387,7 +388,12 @@ class TracksRouter extends JComponentRouterView
 	 */
 	public function getTeamrankingId($segment, $query)
 	{
-		return $query['p'];
+		if ($segment == self::SEGMENT_TEAMRANKING)
+		{
+			return $query['p'];
+		}
+
+		return false;
 	}
 }
 
