@@ -90,31 +90,20 @@ class TracksControllerProfile extends RControllerForm
 			|| JFactory::getUser()->authorise('core.edit', 'com_tracks');
 	}
 
-	/**
-	 * Function that allows child controller access to model data
-	 * after the data has been saved.
-	 *
-	 * @param   \JModelLegacy  $model      The data model object.
-	 * @param   array          $validData  The validated data.
-	 *
-	 * @return  void
-	 *
-	 * @since   1.6
-	 */
-	protected function postSaveHook(\JModelLegacy $model, $validData = array())
+	protected function getRedirectToListRoute($append = null)
 	{
 		$returnUrl = $this->input->get('return', '', 'Base64');
 
 		if ($returnUrl)
 		{
-			$returnUrl = base64_decode($returnUrl);
-
-			$this->setRedirect($returnUrl, false);
+			return parent::getRedirectToListRoute($append);
 		}
 		else
 		{
-			$id = $model->getState($model->getName() . '.id');
-			$this->setRedirect(Route::_(TrackslibHelperRoute::getIndividualRoute($id)));
+			$model = $this->getModel();
+			$id    = $this->input->getInt('id', $model->getState($model->getName() . '.id'));
+
+			return Route::_($id ? TrackslibHelperRoute::getIndividualRoute($id) : TrackslibHelperRoute::getIndividualsRoute());
 		}
 	}
 }

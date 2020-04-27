@@ -68,18 +68,10 @@ class TracksViewProfile extends RViewSite
 		{
 			$this->item->picture = JHTML::image(JURI::root() . $this->item->picture, $this->item->first_name . ' ' . $this->item->last_name, $attribs);
 		}
-		else
-		{
-			$this->item->picture = JHTML::image(JURI::root() . 'media/com_tracks/images/misc/tnnophoto.jpg', $this->item->first_name . ' ' . $this->item->last_name, $attribs);
-		}
 
 		if ($this->item->picture_small != '')
 		{
 			$this->item->picture_small = JHTML::image(JURI::root() . $this->item->picture_small, $this->item->first_name . ' ' . $this->item->last_name, $attribs);
-		}
-		else
-		{
-			$this->item->picture_small = JHTML::image(JURI::root() . 'media/com_tracks/images/misc/tnnophoto.jpg', $this->item->first_name . ' ' . $this->item->last_name, $attribs);
 		}
 
 		$this->title = $this->item->id ?

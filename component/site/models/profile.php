@@ -28,6 +28,7 @@ class TracksModelProfile extends RModelAdmin
 	 */
 	public function getItem($pk = null)
 	{
+		$pk   = $pk ?: $this->getUserIndividual();
 		$item = parent::getItem($pk);
 
 		if (PluginHelper::isEnabled('tracks', 'customfields'))
