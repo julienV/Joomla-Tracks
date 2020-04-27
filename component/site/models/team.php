@@ -6,6 +6,9 @@
  */
 
 // No direct access
+use Joomla\CMS\Factory;
+use Joomla\CMS\Plugin\PluginHelper;
+
 defined('_JEXEC') or die('Restricted access');
 
 /**
@@ -76,6 +79,14 @@ class TracksModelTeam extends RModelAdmin
 			if ($result = $this->_db->loadObject())
 			{
 				$this->_data = $result;
+			}
+
+			if (PluginHelper::isEnabled('tracks', 'customfields'))
+			{
+				PluginHelper::importPlugin('tracks');
+				$params = null;
+				Factory::getApplication()->triggerEvent('onContentPrepare',
+					['com_tracks.team', &$this->_data, &$params]);
 			}
 		}
 

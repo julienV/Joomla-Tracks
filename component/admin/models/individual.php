@@ -8,6 +8,8 @@
 
 defined('_JEXEC') or die();
 
+use Tracks\Model\ModelAdmin;
+
 /**
  * Tracks Component individuals Model
  *
@@ -15,6 +17,6 @@ defined('_JEXEC') or die();
  * @subpackage  Admin
  * @since       3.0
  */
-class TracksModelIndividual extends RModelAdmin
+class TracksModelIndividual extends ModelAdmin
 {
 }

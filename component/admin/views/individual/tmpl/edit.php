@@ -6,11 +6,20 @@
  * @license     GNU General Public License version 2 or later
  */
 
+use Joomla\CMS\Plugin\PluginHelper;
+
 defined('_JEXEC') or die;
 
 JHtml::_('rbootstrap.tooltip');
 JHtml::_('rjquery.chosen', 'select');
 JHtml::_('behavior.formvalidation');
+
+/**
+ * @var RForm $form
+ */
+$form            = $this->form;
+$customFieldsets = PluginHelper::isEnabled('tracks', 'customfields')
+	? $form->getFieldsets('com_fields') : [];
 ?>
 <script type="text/javascript">
 	jQuery(document).ready(function()
@@ -39,6 +48,13 @@ JHtml::_('behavior.formvalidation');
 				<strong><?php echo JText::_('COM_TRACKS_INDIVIDUALS_GROUP_ADDRESS'); ?></strong>
 			</a>
 		</li>
+		<?php if (!empty($customFieldsets)): ?>
+			<li>
+				<a href="#custom" data-toggle="tab">
+					<strong><?php echo JText::_('COM_TRACKS_CUSTOM_FIELDS'); ?></strong>
+				</a>
+			</li>
+		<?php endif; ?>
 	</ul>
 
 	<div class="tab-content">
@@ -197,6 +213,30 @@ JHtml::_('behavior.formvalidation');
 			</div>
 		</div>
 
+		<?php if (!empty($customFieldsets)): ?>
+		<div class="tab-pane" id="custom">
+			<div class="row-fluid">
+			<?php foreach ($customFieldsets as $fieldset): ?>
+				<?php if ($fieldset->label != 'JGLOBAL_FIELDS'): ?>
+					<div class="well fieldset-description">
+						<div class="fieldset-description__name"><?= $fieldset->label ?></div>
+						<div class="fieldset-description__content"><?=  $fieldset->description ?></div>
+					</div>
+				<?php endif; ?>
+				<?php foreach ($form->getFieldset($fieldset->name) as $field): ?>
+					<div class="control-group">
+						<div class="control-label">
+							<?php echo $field->label; ?>
+						</div>
+						<div class="controls">
+							<?php echo $field->input; ?>
+						</div>
+					</div>
+				<?php endforeach; ?>
+			<?php endforeach; ?>
+			</div>
+		</div>
+		<?php endif; ?>
 	</div>
 	<?php echo $this->form->getInput('id'); ?>
 	<input type="hidden" name="task" value="" />

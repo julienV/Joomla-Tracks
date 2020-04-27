@@ -33,7 +33,13 @@ JFormHelper::addRulePath(JPATH_LIBRARIES . '/tracks/form/rules');
 
 JTable::addIncludePath(JPATH_SITE . '/administrator/components/com_tracks/tables');
 
+JLoader::register('FieldsHelper', JPATH_ADMINISTRATOR . '/components/com_fields/helpers/fields.php');
+
 require_once __DIR__ . '/vendor/autoload.php';
+
+// Load library language
+$lang = JFactory::getLanguage();
+$lang->load('lib_tracks', __DIR__);
 
 /**
  * Tracks bootstrap class

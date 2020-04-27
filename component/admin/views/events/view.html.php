@@ -22,7 +22,7 @@ class TracksViewEvents extends TrackslibViewAdmin
 	 *
 	 * @var  string
 	 */
-	protected $componentLayout = 'component.adminproject';
+	protected $componentLayout = 'component.admin';
 
 	/**
 	 * Execute and display a template script.

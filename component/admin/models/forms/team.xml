@@ -165,56 +165,56 @@
 				type="url"
 				label="COM_TRACKS_TEAM_SOCIAL_URL"
 				description="COM_TRACKS_TEAM_SOCIAL_URL_DESC"
-				class="inputbox"/>
+				class="inputbox validate-url"
+				validate="url"/>
 
 		<field
 				name="facebook"
-				type="text"
+				type="url"
 				label="COM_TRACKS_TEAM_SOCIAL_FACEBOOK"
 				description="COM_TRACKS_TEAM_SOCIAL_FACEBOOK_DESC"
-				class="inputbox"/>
+				class="inputbox validate-url"
+				validate="url"/>
 
 		<field
 				name="twitter"
-				type="text"
+				type="url"
 				label="COM_TRACKS_TEAM_SOCIAL_TWITTER"
 				description="COM_TRACKS_TEAM_SOCIAL_TWITTER_DESC"
-				class="inputbox"/>
-
-		<field
-				name="googleplus"
-				type="text"
-				label="COM_TRACKS_TEAM_SOCIAL_GOOGLEPLUS"
-				description="COM_TRACKS_TEAM_SOCIAL_GOOGLEPLUS_DESC"
-				class="inputbox"/>
+				class="inputbox validate-url"
+				validate="url"/>
 
 		<field
 				name="youtube"
-				type="text"
+				type="url"
 				label="COM_TRACKS_TEAM_SOCIAL_YOUTUBE"
 				description="COM_TRACKS_TEAM_SOCIAL_YOUTUBE_DESC"
-				class="inputbox"/>
+				class="inputbox validate-url"
+				validate="url"/>
 
 		<field
 				name="instagram"
-				type="text"
+				type="url"
 				label="COM_TRACKS_TEAM_SOCIAL_INSTAGRAM"
 				description="COM_TRACKS_TEAM_SOCIAL_INSTAGRAM_DESC"
-				class="inputbox"/>
+				class="inputbox validate-url"
+				validate="url"/>
 
 		<field
 				name="pinterest"
-				type="text"
+				type="url"
 				label="COM_TRACKS_TEAM_SOCIAL_PINTEREST"
 				description="COM_TRACKS_TEAM_SOCIAL_PINTEREST_DESC"
-				class="inputbox"/>
+				class="inputbox validate-url"
+				validate="url"/>
 
 		<field
 				name="vimeo"
-				type="text"
+				type="url"
 				label="COM_TRACKS_TEAM_SOCIAL_VIMEO"
 				description="COM_TRACKS_TEAM_SOCIAL_VIMEO_DESC"
-				class="inputbox"/>
+				class="inputbox validate-url"
+				validate="url"/>
 
 	</fieldset>
 </form>

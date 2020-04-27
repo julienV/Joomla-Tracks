@@ -11,9 +11,11 @@
  * See COPYRIGHT.php for copyright notices and details.
  */
 defined('_JEXEC') or die('Restricted access');
+
+$customTops = $this->project->getParam('rk_show_custom_top') ?: [];
 ?>
 
-<div id="tracks">
+<div class="tracks-ranking">
 
 	<h2><?php echo $this->project->name . ' ' . JText::_('COM_TRACKS_Rankings'); ?></h2>
 
@@ -56,6 +58,12 @@ defined('_JEXEC') or die('Restricted access');
 				<th><?php echo JText::_('COM_TRACKS_TABLE_HEADER_TOP10'); ?></th>
 			<?php endif; ?>
 
+			<?php foreach ($customTops as $customTop): ?>
+			    <th class="tracks-ranking__custom-top">
+					<?= $customTop->label ?>
+				</th>
+			<?php endforeach; ?>
+
 			<?php if ($this->project->getParam('rk_show_average')): ?>
 				<th><?php echo JText::_('COM_TRACKS_TABLE_HEADER_AVERAGE'); ?></th>
 			<?php endif; ?>
@@ -70,7 +78,7 @@ defined('_JEXEC') or die('Restricted access');
 		$i = 0;
 		foreach ($this->rankings AS $ranking)
 		{
-			$link_ind = JRoute::_(TrackslibHelperRoute::getIndividualRoute($ranking->slug, $this->project->slug));
+			$link_ind  = JRoute::_(TrackslibHelperRoute::getIndividualRoute($ranking->slug, $this->project->slug));
 			$link_team = JRoute::_(TrackslibHelperRoute::getTeamRoute($ranking->teamslug, $this->project->slug));
 			?>
 			<tr class="<?php echo($i ? 'd1' : 'd0'); ?>">
@@ -123,6 +131,12 @@ defined('_JEXEC') or die('Restricted access');
 				<?php if ($this->project->getParam('rk_show_top10')): ?>
 					<td><?php echo TrackslibHelperTools::getTop10($ranking); ?></td>
 				<?php endif; ?>
+
+				<?php foreach ($customTops as $customTop): ?>
+					<td class="tracks-ranking__custom-top">
+						<?php echo TrackslibHelperTools::getCustomTop($ranking, $customTop->top_rank); ?>
+					</td>
+				<?php endforeach; ?>
 
 				<?php if ($this->project->getParam('rk_show_average')): ?>
 					<td><?php echo TrackslibHelperTools::getAverageFinish($ranking); ?></td>

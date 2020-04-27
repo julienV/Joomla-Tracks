@@ -15,19 +15,16 @@ defined('_JEXEC') or die('Restricted access');
 
 $socials = TrackslibHelperTools::getTeamSocialItems($this->data);
 
-if (count($socials)):
+if (!empty($socials)):
 ?>
-<div class="team-social">
+<div class="tracks-team__social">
 	<h3><?php echo JTExt::_('COM_TRACKS_TEAM_SOCIAL_LINKS'); ?></h3>
-	<ul>
+	<div class="tracks-team__social__list">
 		<?php foreach ($socials as $name => $s): ?>
-
-
-			<li class="ts-<?php echo $name; ?>"><span class="social-lbl"><?php echo $s->label; ?></span>
+			<div class="tracks-team__social__list__item ts-<?php echo $name; ?>">
 				<?php echo JHtml::link($s->link, JHtml::image($s->icon, $s->label, null, true)); ?>
-			</li>
-
+			</div>
 		<?php endforeach ;?>
-	</ul>
+	</div>
 </div>
 <?php endif;

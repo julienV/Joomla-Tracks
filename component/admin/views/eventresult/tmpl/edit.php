@@ -6,11 +6,20 @@
  * @license     GNU General Public License version 2 or later
  */
 
+use Joomla\CMS\Plugin\PluginHelper;
+
 defined('_JEXEC') or die;
 
 JHtml::_('rbootstrap.tooltip');
 JHtml::_('rjquery.chosen', 'select');
 JHtml::_('behavior.formvalidation');
+
+/**
+ * @var RForm $form
+ */
+$form            = $this->form;
+$customFieldsets = PluginHelper::isEnabled('tracks', 'customfields')
+	? $form->getFieldsets('com_fields') : [];
 ?>
 <script type="text/javascript">
 	jQuery(document).ready(function()
@@ -77,6 +86,26 @@ JHtml::_('behavior.formvalidation');
 					<?php echo $this->form->getInput('performance'); ?>
 				</div>
 			</div>
+			<?php if (!empty($customFieldsets)): ?>
+			<?php foreach ($customFieldsets as $fieldset): ?>
+				<?php if ($fieldset->label != 'JGLOBAL_FIELDS'): ?>
+					<div class="well fieldset-description">
+						<div class="fieldset-description__name"><?= $fieldset->label ?></div>
+						<div class="fieldset-description__content"><?=  $fieldset->description ?></div>
+					</div>
+				<?php endif; ?>
+				<?php foreach ($form->getFieldset($fieldset->name) as $field): ?>
+					<div class="control-group">
+						<div class="control-label">
+							<?php echo $field->label; ?>
+						</div>
+						<div class="controls">
+							<?php echo $field->input; ?>
+						</div>
+					</div>
+				<?php endforeach; ?>
+			<?php endforeach; ?>
+			<?php endif; ?>
 			<div class="control-group">
 				<div class="control-label">
 					<?php echo $this->form->getLabel('comment'); ?>

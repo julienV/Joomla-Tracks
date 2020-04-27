@@ -6,6 +6,8 @@
  * @license     GNU General Public License version 2 or later
  */
 
+use Tracks\Model\ModelAdmin;
+
 defined('_JEXEC') or die();
 
 /**
@@ -15,6 +17,6 @@ defined('_JEXEC') or die();
  * @subpackage  Admin
  * @since       3.0
  */
-class TracksModelTeam extends RModelAdmin
+class TracksModelTeam extends ModelAdmin
 {
 }

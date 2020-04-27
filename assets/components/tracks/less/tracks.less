@@ -137,16 +137,21 @@ div.edit div.edit-pic {
   display: inline-block;
 }
 
-.tracks-individual {
+.tracks-individual, .tracks-team {
+  h2 {
+    padding: 20px 0;
+  }
+
   &__details {
     background: @color-lightgrey;
     padding: 20px 10px;
     display: flex;
-    @image-size: 150px;
+    @image-size: 180px;
 
     &__picture {
       width: 200px;
       padding: 0 10px;
+      flex-shrink: 0;
 
       i {
         font-size: @image-size;
@@ -158,7 +163,7 @@ div.edit div.edit-pic {
       }
 
       img {
-        height: @image-size;
+        width: @image-size;
       }
     }
 
@@ -177,6 +182,57 @@ div.edit div.edit-pic {
         &__value {
           flex-grow: 1;
         }
+      }
+    }
+  }
+}
+
+.tracks-team {
+  &__vehicle {
+    padding-top: 20px;
+    &__content {
+      padding: 20px 10px;
+      display: flex;
+      @image-size: 250px;
+
+      &__picture {
+        padding: 0 10px;
+        flex-shrink: 0;
+
+        img {
+          width: @image-size;
+        }
+      }
+    }
+  }
+
+  &__individuals {
+    &__project {
+      padding: 10px 0;
+      &__title {
+        padding: 10px;
+        margin-left: 10px;
+        font-weight: bold;
+        font-size: 1.1em;
+        background: @color-lightgrey;
+      }
+
+      &__individuals {
+        padding: 0 10px;
+        &__individual {
+          padding: 5px 10px;
+        }
+      }
+    }
+  }
+
+  &__social {
+    &__list {
+      display: flex;
+      flex-wrap: wrap;
+
+      &__item {
+        padding: 5px 5px;
       }
     }
   }
