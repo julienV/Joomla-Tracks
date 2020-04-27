@@ -19,8 +19,6 @@ jimport('tracks.bootstrap');
  */
 class TracksRouter extends JComponentRouterView
 {
-	protected $noIDs = false;
-
 	const SEGMENT_RANKING            = 'standings';
 	const SEGMENT_TEAMRANKING        = 'team-standings';
 	const SEGMENT_PROJECTINDIVIDUALS = 'participants';
@@ -41,13 +39,16 @@ class TracksRouter extends JComponentRouterView
 		$this->registerView($individuals);
 
 		$individual = new JComponentRouterViewconfiguration('individual');
-		$individual->setKey('id')->setParent($individuals);
+		$individual->setKey('id')->setParent($individuals)->addLayout('edit');
 		$this->registerView($individual);
 
 		$this->registerView(new JComponentRouterViewconfiguration('profile'));
 
 		$projects = new JComponentRouterViewconfiguration('projects');
 		$this->registerView($projects);
+
+		$profile = new JComponentRouterViewconfiguration('profile');
+		$this->registerView($profile);
 
 		$project = new JComponentRouterViewconfiguration('project');
 		$project->setKey('p')->setParent($projects);
@@ -109,6 +110,10 @@ class TracksRouter extends JComponentRouterView
 		if ($entity->isValid())
 		{
 			return [(int) $id => $entity->alias];
+		}
+		elseif ($query['layout'] == 'edit')
+		{
+			return 'edit';
 		}
 
 		return [];

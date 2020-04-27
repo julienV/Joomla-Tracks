@@ -7,6 +7,8 @@
  */
 
 // Check to ensure this file is included in Joomla!
+use Joomla\CMS\Router\Route;
+
 defined('_JEXEC') or die();
 
 /**
@@ -15,50 +17,104 @@ defined('_JEXEC') or die();
  * @package  Tracks
  * @since    2.0
  */
-class TracksControllerProfile extends FOFController
+class TracksControllerProfile extends RControllerForm
 {
 	/**
-	 * redirects to correct view...
+	 * Add an individual
 	 *
-	 * @return bool
-	 *
-	 * @throws Exception
+	 * @return  mixed  True if the record can be added, a error object if not.
 	 */
-	public function onBeforeAdd()
+	public function add()
 	{
-		$user = JFactory::getUser();
-
-		if (!($user))
+		if (!JFactory::getUser()->get('id'))
 		{
-			throw new Exception('access not allowed', 403);
+			$this->setRedirect(JURI::base(), JText::_('COM_TRACKS_Please_login_to_be_able_to_edit_your_tracks_profile'), 'error');
+			$this->redirect();
 		}
 
-		// If the user is logged, check if he already has a profile
-		$model = FOFModel::getTmpInstance('IndividualEdits', 'TracksModel');
-		$ind = $model->getUserIndividual($user->get('id'));
+		return parent::add();
+	}
 
-		if (!$ind)
+	/**
+	 * Edit an individual
+	 *
+	 * @param   string  $key     key
+	 * @param   string  $urlVar  urlvar
+	 *
+	 * @return bool
+	 */
+	public function edit($key = null, $urlVar = null)
+	{
+		if (!JFactory::getUser()->get('id'))
 		{
-			$allow_register = JComponentHelper::getParams('com_tracks')->get('user_registration', 0);
+			$this->setRedirect(JURI::base(), JText::_('COM_TRACKS_Please_login_to_be_able_to_edit_your_tracks_profile'), 'error');
+			$this->redirect();
+		}
 
-			if (!$allow_register)
-			{
-				throw new Exception('Create individuals not allowed', 403);
-			}
+		return parent::edit($key, $urlVar);
+	}
 
-			// Redirect to individual edit
-			$link = JRoute::_(TrackslibHelperRoute::getEditIndividualRoute());
+	/**
+	 * Method to check if you can add a new record.
+	 *
+	 * Extended classes can override this if necessary.
+	 *
+	 * @param   array  $data  An array of input data.
+	 *
+	 * @return  boolean
+	 *
+	 * @since   12.2
+	 */
+	protected function allowAdd($data = array())
+	{
+		return JComponentHelper::getParams('com_tracks')->get('user_registration');
+	}
+
+	/**
+	 * Method to check if you can add a new record.
+	 *
+	 * Extended classes can override this if necessary.
+	 *
+	 * @param   array   $data  An array of input data.
+	 * @param   string  $key   The name of the key for the primary key; default is id.
+	 *
+	 * @return  boolean
+	 */
+	protected function allowEdit($data = array(), $key = 'id')
+	{
+		$model = $this->getModel();
+		$item = $model->getItem($data[$key]);
+		$user = JFactory::getUser();
+
+		return JComponentHelper::getParams('com_tracks')->get('user_registration') && $item->user_id == $user->id
+			|| JFactory::getUser()->authorise('core.edit', 'com_tracks');
+	}
+
+	/**
+	 * Function that allows child controller access to model data
+	 * after the data has been saved.
+	 *
+	 * @param   \JModelLegacy  $model      The data model object.
+	 * @param   array          $validData  The validated data.
+	 *
+	 * @return  void
+	 *
+	 * @since   1.6
+	 */
+	protected function postSaveHook(\JModelLegacy $model, $validData = array())
+	{
+		$returnUrl = $this->input->get('return', '', 'Base64');
+
+		if ($returnUrl)
+		{
+			$returnUrl = base64_decode($returnUrl);
+
+			$this->setRedirect($returnUrl, false);
 		}
 		else
 		{
-			// Redirect to individual edit
-			$link = JRoute::_(TrackslibHelperRoute::getEditIndividualRoute($ind));
+			$id = $model->getState($model->getName() . '.id');
+			$this->setRedirect(Route::_(TrackslibHelperRoute::getIndividualRoute($id)));
 		}
-
-		$this->setRedirect($link);
-		$this->redirect();
-
-		// We shouldn't arrive at that point ;)
-		return false;
 	}
 }

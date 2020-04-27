@@ -6,6 +6,8 @@
  * @license     GNU General Public License version 2 or later
  */
 
+use Joomla\CMS\Language\Text;
+
 defined('_JEXEC') or die;
 
 /**
@@ -25,35 +27,66 @@ class TracksViewProfile extends RViewSite
 	 */
 	public function display($tpl = null)
 	{
-		$mainframe = JFactory::getApplication();
 		$user = JFactory::getUser();
 
 		if (!$user->id)
 		{
-			print JText::_('COM_TRACKS_You_must_register_to_access_this_page');
+			print Text::_('COM_TRACKS_You_must_register_to_access_this_page');
 
 			return;
 		}
 
+		return $this->displayForm($tpl);
+	}
+
+	/**
+	 * Display form
+	 *
+	 * @param   string  $tpl  tpl
+	 *
+	 * @return void
+	 */
+	protected function displayForm($tpl)
+	{
+		$user = JFactory::getUser();
 		$model = $this->getModel();
-		$data = $model->getData($user->id);
 
-		if (!$data->id)
+		$this->form = $this->get('Form');
+		$this->item = $this->get('Item');
+		$this->user = $user;
+		$this->userIndividual = $this->get('UserIndividual');
+		$this->canEdit = $model->canEdit($this->item);
+
+		if (!$user->id || !$this->canEdit)
 		{
-			// No tracks individual associated to profile
-			$params = $mainframe->getParams('com_tracks');
-
-			if ($params->get('user_registration'))
-			{
-				$mainframe->redirect(TrackslibHelperRoute::getEditIndividualRoute());
-			}
-			else
-			{
-				$msg = JText::_('COM_TRACKS_No_tracks_individual_associated_to_your_account');
-				$mainframe->redirect('index.php?option=com_tracks', $msg);
-			}
+			JFactory::getApplication()->redirect('index.php', 'not allowed !');
 		}
 
-		$mainframe->redirect(TrackslibHelperRoute::getIndividualRoute($data->id));
+		$attribs['class'] = "pic";
+
+		if ($this->item->picture != '')
+		{
+			$this->item->picture = JHTML::image(JURI::root() . $this->item->picture, $this->item->first_name . ' ' . $this->item->last_name, $attribs);
+		}
+		else
+		{
+			$this->item->picture = JHTML::image(JURI::root() . 'media/com_tracks/images/misc/tnnophoto.jpg', $this->item->first_name . ' ' . $this->item->last_name, $attribs);
+		}
+
+		if ($this->item->picture_small != '')
+		{
+			$this->item->picture_small = JHTML::image(JURI::root() . $this->item->picture_small, $this->item->first_name . ' ' . $this->item->last_name, $attribs);
+		}
+		else
+		{
+			$this->item->picture_small = JHTML::image(JURI::root() . 'media/com_tracks/images/misc/tnnophoto.jpg', $this->item->first_name . ' ' . $this->item->last_name, $attribs);
+		}
+
+		$this->title = $this->item->id ?
+			JText::_('COM_TRACKS_PAGETITLE_EDIT_INDIVIDUAL') :
+			JText::_('COM_TRACKS_PAGETITLE_CREATE_INDIVIDUAL');
+
+		// Display the template
+		parent::display($tpl);
 	}
 }

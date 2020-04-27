@@ -6,6 +6,9 @@
  */
 
 // No direct access
+use Joomla\CMS\Factory;
+use Joomla\CMS\Plugin\PluginHelper;
+
 defined('_JEXEC') or die('Restricted access');
 
 /**
@@ -14,114 +17,336 @@ defined('_JEXEC') or die('Restricted access');
  * @package  Tracks
  * @since    0.1
  */
-class TracksModelProfile extends TrackslibModelFrontbase
+class TracksModelProfile extends RModelAdmin
 {
-	/** individual id **/
-	var $_id = 0;
-
-	var $_userid;
-
-	var $_data = null;
-
 	/**
-	 * Constructor
+	 * Method to get a single record.
 	 *
-	 * @param   array  $config  An array of configuration options (name, state, dbo, table_path, ignore_request).
+	 * @param   integer  $pk  The id of the primary key.
+	 *
+	 * @return  mixed    Object on success, false on failure.
 	 */
-	public function __construct($config = array())
+	public function getItem($pk = null)
 	{
-		parent::__construct();
+		$item = parent::getItem($pk);
 
-		$this->_id = JRequest::getInt('i');
+		if (PluginHelper::isEnabled('tracks', 'customfields'))
+		{
+			PluginHelper::importPlugin('tracks');
+			$params = null;
+			Factory::getApplication()->triggerEvent('onContentPrepare', ['com_tracks.individual', &$item, &$params]);
+		}
+
+		return $item;
 	}
 
 	/**
-	 * Get data
+	 * return individual id for user
 	 *
-	 * @return bool|mixed|null
+	 * @return int
 	 */
-	public function getData()
+	public function getUserIndividual()
 	{
 		$user = JFactory::getUser();
 
-		if ($this->_id)
+		$db    = JFactory::getDbo();
+		$query = $db->getQuery(true);
+
+		$query->select('id');
+		$query->from('#__tracks_individuals');
+		$query->where('user_id = ' . (int) $user->id);
+
+		$db->setQuery($query);
+		$res = $db->loadResult();
+
+		return $res;
+	}
+
+	/**
+	 * Method to validate the form data.
+	 * Each field error is stored in session and can be retrieved with getFieldError().
+	 * Once getFieldError() is called, the error is deleted from the session.
+	 *
+	 * @param   JForm   $form   The form to validate against.
+	 * @param   array   $data   The data to validate.
+	 * @param   string  $group  The name of the field group to validate.
+	 *
+	 * @return  mixed  Array of filtered data if valid, false otherwise.
+	 */
+	public function validate($form, $data, $group = null)
+	{
+		$validData = parent::validate($form, $data, $group);
+
+		if (!JFactory::getUser()->authorise('core.edit', 'com_tracks'))
 		{
-			$query = ' SELECT i.* '
-				. ' FROM #__tracks_individuals as i '
-				. ' WHERE i.id = ' . $this->_id;
+			$validData['user_id'] = JFactory::getUser()->get('id');
 		}
-		elseif ($user->get('id'))
+		elseif (isset($data['assign_me']))
 		{
-			$query = ' SELECT i.* '
-				. ' FROM #__tracks_individuals as i '
-				. ' WHERE i.user_id = ' . $user->get('id');
+			$validData['user_id'] = JFactory::getUser()->get('id');
+		}
+
+		$validData = $this->getPicture($validData, $data, 'picture');
+		$validData = $this->getPicture($validData, $data, 'picture_small');
+
+		return $validData;
+	}
+
+	/**
+	 * Manage upload of picture
+	 *
+	 * @param   array   $validData  valid data
+	 * @param   array   $data       post data
+	 * @param   string  $field      field name
+	 *
+	 * @return array valid data
+	 */
+	protected function getPicture($validData, $data, $field)
+	{
+		$params     = JComponentHelper::getParams('com_tracks');
+		$files      = JFactory::getApplication()->input->files->get('jform', '', array());
+		$targetpath = 'images/' . $params->get('default_individual_images_folder', 'tracks/individuals');
+
+		if (!isset($files[$field]) || !$picture = $files[$field])
+		{
+			return false;
+		}
+
+		if (!empty($picture['name']))
+		{
+			$base_Dir = JPATH_SITE . '/' . $targetpath . '/';
+
+			if (!JFolder::exists($base_Dir))
+			{
+				JFolder::create($base_Dir);
+			}
+
+			// Check the image
+			$check = TrackslibHelperImage::check($picture);
+
+			if ($check === false)
+			{
+				$this->setError('IMAGE CHECK FAILED');
+
+				return false;
+			}
+
+			// Sanitize the image filename
+			$filename = TrackslibHelperImage::sanitize($base_Dir, $picture['name']);
+			$filepath = $base_Dir . $filename;
+
+			if (!JFile::upload($picture['tmp_name'], $filepath))
+			{
+				$this->setError(JText::_('COM_TRACKS_UPLOAD_FAILED'));
+
+				return false;
+			}
+			else
+			{
+				$validData[$field] = $targetpath . '/' . $filename;
+			}
+		}
+
+		return $validData;
+	}
+
+	/**
+	 * Can current user edit individual
+	 *
+	 * @param   object  $item  individual
+	 *
+	 * @return bool
+	 */
+	public function canEdit($item)
+	{
+		$user = JFactory::getUser();
+
+		if (!$item->id)
+		{
+			return $this->canCreate();
+		}
+		elseif (JFactory::getUser()->authorise('core.edit', 'com_tracks'))
+		{
+			return true;
 		}
 		else
 		{
-			JError::raiseError(403, JText::_('COM_TRACKS_ERROR_MUST_BE_LOGGED'));
+			return $item->user_id && $item->user_id == $user->get('id');
+		}
+	}
+
+	/**
+	 * Can the user create an individual
+	 *
+	 * @return bool
+	 */
+	public function canCreate()
+	{
+		return JComponentHelper::getParams('com_tracks')->get('user_registration')
+			|| JFactory::getUser()->authorise('core.edit', 'com_tracks');
+	}
+
+	/**
+	 * Method to store the individual data
+	 *
+	 * @param   array   $data           data
+	 * @param   string  $picture        picture path
+	 * @param   string  $picture_small  small picture path
+	 *
+	 * @return bool
+	 */
+	public function store($data, $picture, $picture_small)
+	{
+		// Require the base controller
+		$table  = $this->getTable('individual');
+		$params = JComponentHelper::getParams('com_tracks');
+
+		$user     = JFactory::getUser();
+		$username = $user->get('username');
+
+		if ($data['id'])
+		{
+			$table->load($data['id']);
+
+			if ($table->user_id != $user->get('id') && !$user->authorise('core.manage', 'com_tracks'))
+			{
+				JError::raiseError(403, JText::_('COM_TRACKS_ACCESS_NOT_ALLOWED'));
+			}
+		}
+
+		// Bind the form fields to the user table
+		if (!$table->bind($data))
+		{
+			$this->setError($this->_db->getErrorMsg());
 
 			return false;
 		}
 
-		$this->_db->setQuery($query);
+		$targetpath = 'images' . '/' . $params->get('default_individual_images_folder', 'tracks/individuals');
 
-		if ($result = $this->_db->loadObject())
+		jimport('joomla.filesystem.file');
+		jimport('joomla.filesystem.folder');
+
+		if (!empty($picture['name']))
 		{
-			$this->_data      = $result;
-			$attribs['class'] = "pic";
+			$base_Dir = JPATH_SITE . '/' . $targetpath . '/';
 
-			if ($this->_data->picture != '')
+			if (!JFolder::exists($base_Dir))
 			{
-				$this->_data->picture = JHTML::image(JURI::root() . $this->_data->picture, $this->_data->first_name . ' ' . $this->_data->last_name, $attribs);
+				JFolder::create($base_Dir);
+			}
+
+			// Check the image
+			$check = ImageSelect::check($picture);
+
+			if ($check === false)
+			{
+				$this->setError('IMAGE CHECK FAILED');
+
+				return false;
+			}
+
+			// Sanitize the image filename
+			$filename = ImageSelect::sanitize($base_Dir, $picture['name']);
+			$filepath = $base_Dir . $filename;
+
+			if (!JFile::upload($picture['tmp_name'], $filepath))
+			{
+				$this->setError(JText::_('COM_TRACKS_UPLOAD_FAILED'));
+
+				return false;
 			}
 			else
 			{
-				$this->_data->picture = JHTML::image(JURI::root() . 'media/com_tracks/images/misc/tnnophoto.jpg', $this->_data->first_name . ' ' . $this->_data->last_name, $attribs);
-			}
-
-			if ($this->_data->picture_small != '')
-			{
-				$this->_data->picture_small = JHTML::image(JURI::root() . $this->_data->picture_small, $this->_data->first_name . ' ' . $this->_data->last_name, $attribs);
-			}
-			else
-			{
-				$this->_data->picture_small = JHTML::image(JURI::root() . 'media/com_tracks/images/misc/tnnophoto.jpg', $this->_data->first_name . ' ' . $this->_data->last_name, $attribs);
+				$table->picture = $targetpath . '/' . $filename;
 			}
 		}
+		else
+		{
+			// Keep image if edited and left blank
+			unset($table->picture);
+		}
+		// End image upload if
 
-		return $this->_data;
+		if (!empty($picture_small['name']))
+		{
+			jimport('joomla.filesystem.file');
+
+			$base_Dir = JPATH_SITE . '/' . $targetpath . '/' . 'small' . '/';
+
+			if (!JFolder::exists($base_Dir))
+			{
+				JFolder::create($base_Dir);
+			}
+
+			// Check the image
+			$check = ImageSelect::check($picture_small);
+
+			if ($check === false)
+			{
+				$this->setError('IMAGE CHECK FAILED');
+
+				return false;
+			}
+
+			// Sanitize the image filename
+			$filename = ImageSelect::sanitize($base_Dir, $picture_small['name']);
+			$filepath = $base_Dir . $filename;
+
+			if (!JFile::upload($picture_small['tmp_name'], $filepath))
+			{
+				$this->setError(JText::_('COM_TRACKS_UPLOAD_FAILED'));
+
+				return false;
+			}
+			else
+			{
+				$table->picture_small = $targetpath . '/' . 'small' . '/' . $filename;
+			}
+		}
+		else
+		{
+			// Keep image if edited and left blank
+			unset($table->picture_small);
+		}
+		// End image upload if
+
+		// Store the individual to the database
+		if (!$table->save($data))
+		{
+			$this->setError($user->getError());
+
+			return false;
+		}
+
+		$this->id = $table->id;
+
+		return $this->id;
 	}
-
 	/**
-	 * Init data
+	 * Method to get a table object, load it if necessary.
 	 *
-	 * @return bool
+	 * @param   string  $name     The table name. Optional.
+	 * @param   string  $prefix   The class prefix. Optional.
+	 * @param   array   $options  Configuration array for model. Optional.
+	 *
+	 * @return  \JTable  A \JTable object
+	 *
+	 * @since   3.0
+	 * @throws  \Exception
 	 */
-	public function _initData()
+	public function getTable($name = '', $prefix = 'TracksTable', $options = array())
 	{
-		$object                   = new stdClass;
-		$object->id               = 0;
-		$object->last_name        = "";
-		$object->first_name       = "";
-		$object->nickname         = "";
-		$object->dob              = null;
-		$object->height           = null;
-		$object->weight           = null;
-		$object->hometown         = null;
-		$object->country          = null;
-		$object->user_id          = 0;
-		$object->picture          = null;
-		$object->picture_small    = null;
-		$object->address          = null;
-		$object->postcode         = null;
-		$object->city             = null;
-		$object->state            = null;
-		$object->country_code     = null;
-		$object->description      = null;
-		$object->checked_out      = 0;
-		$object->checked_out_time = 0;
-		$this->_data              = $object;
+		if (empty($name))
+		{
+			$name = 'Individual';
+		}
 
-		return (boolean) $this->_data;
+		if ($table = $this->_createTable($name, $prefix, $options))
+		{
+			return $table;
+		}
+
+		throw new \Exception(\JText::sprintf('JLIB_APPLICATION_ERROR_TABLE_NAME_NOT_SUPPORTED', $name), 0);
 	}
 }
