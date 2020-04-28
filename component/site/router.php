@@ -92,7 +92,7 @@ class TracksRouter extends JComponentRouterView
 
 		$this->attachRule(new JComponentRouterRulesMenu($this));
 		$this->attachRule(new JComponentRouterRulesStandard($this));
-		$this->attachRule(new JComponentRouterRulesNomenu($this));
+		$this->attachRule(new \Tracks\Router\Rules\NomenuRules($this));
 	}
 
 	/**
