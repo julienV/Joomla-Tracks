@@ -18,7 +18,6 @@ JHtml::_('rbootstrap.tooltip');
 JHtml::_('rjquery.chosen', 'select');
 JHtml::_('behavior.formvalidation');
 ?>
-
 <div id="tracks">
 	<!-- Title -->
 	<h2><?php echo JText::_('COM_TRACKS_PAGETITLE_EDIT_INDIVIDUAL'); ?></h2>

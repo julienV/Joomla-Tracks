@@ -6,6 +6,7 @@
  * @license     GNU General Public License version 2 or later
  */
 
+use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 
 defined('_JEXEC') or die;
@@ -50,6 +51,7 @@ class TracksViewProfile extends RViewSite
 	{
 		$user = JFactory::getUser();
 		$model = $this->getModel();
+		$app  = Factory::getApplication();
 
 		$this->form = $this->get('Form');
 		$this->item = $this->get('Item');
@@ -61,6 +63,20 @@ class TracksViewProfile extends RViewSite
 		{
 			JFactory::getApplication()->redirect('index.php', 'not allowed !');
 		}
+
+		$model = $this->getModel();
+
+		if (!$model->checkout($this->item->id))
+		{
+			// Redirect back to the view screen.
+			$app->redirect(
+				TrackslibHelperRoute::getIndividualRoute($this->item->id),
+				JText::sprintf('JLIB_APPLICATION_ERROR_CHECKOUT_FAILED', $model->getError()),
+				'error'
+			);
+		}
+
+		$app->setUserState('com_tracks.edit.profile.id', [$this->item->id]);
 
 		$attribs['class'] = "pic";
 
