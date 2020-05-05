@@ -14,8 +14,6 @@
 // no direct access
 defined('_JEXEC') or die('Restricted access');
 
-JHTML::_('behavior.tooltip', '.mod-ranking-tip', array('className' => 'tip-mod-ranking'));
-
 $img_dir = JPATH_SITE.'/';
 ?>
 <div class="mod_tracksranking">
@@ -45,15 +43,15 @@ $img_dir = JPATH_SITE.'/';
 	            <?php echo TrackslibHelperImage::modalimage($img_dir.$ranking->picture_small, $ranking->first_name, 20); ?>
 	            <?php endif; ?>
 	          <a href="<?php echo $link_ind; ?>"
-	             title="<?php echo $ranking->last_name.($ranking->first_name ? ', '.$ranking->first_name : ''); ?>::" class="mod-ranking-tip">
+	             title="<?php echo $ranking->last_name.($ranking->first_name ? ', '.$ranking->first_name : ''); ?>">
 	          <?php echo $ranking->last_name; ?>
 	          </a>
 	        </td>
 	        <?php if ($showteams) { ?>
 	        <td>
 	          <a href="<?php echo $link_team; ?>"
-	             title="<?php echo JText::_( 'MOD_TRACKS_RANKING_Details' ); ?>">
-	            <?php echo $ranking->team_acronym; ?>
+	             title="<?= $ranking->team_name ?>">
+	            <?php echo $ranking->team_acronym ?: $ranking->team_name; ?>
 	          </a>
 	        </td>
 	        <?php } ?>

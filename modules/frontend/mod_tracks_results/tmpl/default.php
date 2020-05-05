@@ -22,7 +22,7 @@ $document->addScript( JURI::base() . 'modules/mod_tracks_results/mod_tracks_resu
 ?>
 
 <div class="mod_tracksresults">
-<div id="roundname"><?php echo $round->name . ' - ' . $list->typename; ?></div>
+<div class="roundname"><?php echo $round->name . ' - ' . $list->typename; ?></div>
 <?php if ($list->results): ?>
 <table cellspacing="0" cellpadding="0" summary="">
 	<thead>
@@ -55,7 +55,7 @@ $document->addScript( JURI::base() . 'modules/mod_tracks_results/mod_tracks_resu
         <td>
           <a href="<?php echo $link_team; ?>"
              title="<?php echo $rows->team_name . '::' . JText::_('MOD_TRACKS_RESULTS_Click_for_details' ); ?>" class="mod-result-tip">
-            <?php echo $rows->team_acronym; ?>
+            <?php echo $rows->team_acronym ?: $rows->team_name; ?>
           </a>
         </td>
         <?php } ?>

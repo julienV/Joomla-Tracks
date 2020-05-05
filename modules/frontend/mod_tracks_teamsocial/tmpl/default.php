@@ -15,7 +15,7 @@
 defined('_JEXEC') or die('Restricted access');
 
 JHtml::_('behavior.tooltip');
-?>Tracks team link
+?>
 <div class="mod_tracks_teamsocial">
 	<ul>
 		<?php foreach ($links as $name => $s): ?>

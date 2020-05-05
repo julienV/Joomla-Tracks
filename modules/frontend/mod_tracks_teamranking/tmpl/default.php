@@ -12,46 +12,48 @@
 * See COPYRIGHT.php for copyright notices and details.
 */
 // no direct access
-defined('_JEXEC') or die('Restricted access'); ?>
-<div class="mod_tracksranking<?php echo $params->get('moduleclass_sfx'); ?>">
+defined('_JEXEC') or die('Restricted access');
 
-<table class="raceResults" cellspacing="0" cellpadding="0" summary="">
-  <tbody>
-    <tr>
-      <th><?php echo JText::_( 'MOD_TRACKS_TEAM_RANKING_Pos' ); ?></th>
-      <th><?php echo JText::_( 'MOD_TRACKS_TEAM_RANKING_Team' ); ?></th>
-      <th><?php echo JText::_( 'MOD_TRACKS_TEAM_RANKING_Points' ); ?></th>
-    </tr>
-    <?php
-    $rank = 1;
-    $count = 0;
-    foreach( $list AS $ranking )
-    {
-      $link_team = JRoute::_( TrackslibHelperRoute::getTeamRoute($ranking->slug, $project->slug) );
-      ?>
-      <tr>
-        <td><?php echo $rank++; ?></td>
-        <td>
-          <a href="<?php echo $link_team; ?>"
-             title="<?php echo JText::_( 'MOD_TRACKS_TEAM_RANKING_Details' ); ?>">
-            <?php echo $ranking->team_name; ?>
-          </a>
-        </td>
-        <td><?php echo $ranking->points; ?></td>
-      </tr>
-      <?php
-      if ( ++$count >= $limit ) {
-        break;
-      }
-    }
-    ?>
-  </tbody>
-</table>
-<?php
-$link = JRoute::_(TrackslibHelperRoute::getTeamRankingRoute($project->slug));
+JHtml::stylesheet('mod_tracks_teamranking/style.css', array('relative' => true));
 ?>
-<a class="fulltablelink" href="<?php echo $link; ?>"
-             title="<?php echo JText::_('MOD_TRACKS_TEAM_RANKING_View_full_table' ); ?>">
-            <?php echo JText::_('MOD_TRACKS_TEAM_RANKING_View_full_table' ); ?>
-</a>
+<div class="mod_tracks_teamranking">
+	<div class="project-name"><?php echo $project->name; ?></div>
+
+	<table cellspacing="0" cellpadding="0" summary="">
+	  <tbody>
+		<tr>
+		  <th><?php echo JText::_( 'MOD_TRACKS_TEAM_RANKING_Pos' ); ?></th>
+		  <th><?php echo JText::_( 'MOD_TRACKS_TEAM_RANKING_Team' ); ?></th>
+		  <th><?php echo JText::_( 'MOD_TRACKS_TEAM_RANKING_Points' ); ?></th>
+		</tr>
+		<?php
+		$rank = 1;
+		$count = 0;
+		foreach( $list AS $ranking )
+		{
+		  $link_team = JRoute::_( TrackslibHelperRoute::getTeamRoute($ranking->slug, $project->slug) );
+		  ?>
+		  <tr>
+			<td><?php echo $rank++; ?></td>
+			<td>
+			  <a href="<?php echo $link_team; ?>"
+				 title="<?php echo $ranking->team_name; ?>">
+				<?php echo $ranking->team_name; ?>
+			  </a>
+			</td>
+			<td><?php echo $ranking->points; ?></td>
+		  </tr>
+		  <?php
+		  if ( ++$count >= $limit ) {
+			break;
+		  }
+		}
+		?>
+	  </tbody>
+	</table>
+
+	<a class="fulltablelink" href="<?= JRoute::_(TrackslibHelperRoute::getTeamRankingRoute($project->slug)) ?>"
+				 title="<?php echo JText::_('MOD_TRACKS_TEAM_RANKING_View_full_table' ); ?>">
+				<?php echo JText::_('MOD_TRACKS_TEAM_RANKING_View_full_table' ); ?>
+	</a>
 </div>

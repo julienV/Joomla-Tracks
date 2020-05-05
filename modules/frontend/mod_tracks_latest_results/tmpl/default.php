@@ -8,13 +8,12 @@
 // no direct access
 defined('_JEXEC') or die('Restricted access');
 
-JHTML::_('behavior.tooltip', '.mod-result-tip', array('className' => 'tip-mod-result'));
 $document = JFactory::getDocument();
 $document->addStyleSheet( JURI::base() . 'modules/mod_tracks_latest_results/mod_tracks_latest_results.css' );
 $document->addScript( JURI::base() . 'modules/mod_tracks_latest_results/mod_tracks_latest_results.js' );
 ?>
 	<div class="mod_tracksresults">
-	<div id="roundname"><?php echo $projectRound->getRound()->name . ' - ' . $event->getEventtype()->name; ?></div>
+	<div class="roundname"><?php echo $projectRound->getRound()->name . ' - ' . $event->getEventtype()->name; ?></div>
 	<?php if ($list): ?>
 	<table cellspacing="0" cellpadding="0" summary="">
 		<thead>
@@ -40,15 +39,15 @@ $document->addScript( JURI::base() . 'modules/mod_tracks_latest_results/mod_trac
 	        <td>
 	          <a href="<?php echo $link_ind; ?>"
 	             title="<?php
-	              echo trim($rows->first_name . ' ' . $rows->last_name).'::'
-	                  . $rows->performance; ?>" class="mod-result-tip"><?php echo $rows->last_name; ?>
+	              echo trim($rows->first_name . ' ' . $rows->last_name).' - '
+	                  . $rows->performance; ?>"><?php echo $rows->last_name; ?>
 	          </a>
 	        </td>
 	        <?php if ($showteams): ?>
 	        <td>
 	          <a href="<?php echo $link_team; ?>"
-	             title="<?php echo $rows->team_name . '::' . JText::_('MOD_TRACKS_LATEST_RESULTS_Click_for_details' ); ?>" class="mod-result-tip">
-	            <?php echo $rows->team_acronym; ?>
+	             title="<?php echo $rows->team_name . ' - ' . JText::_('MOD_TRACKS_LATEST_RESULTS_Click_for_details' ); ?>">
+	            <?php echo $rows->team_acronym ?: $rows->team_name; ?>
 	          </a>
 	        </td>
 	        <?php endif; ?>
