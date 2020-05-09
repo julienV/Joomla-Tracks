@@ -1,4 +1,4 @@
-var base = require('../baseplugin');
+var base = require('../basecomponentplugin');
 var path = require('path');
 
 var name = path.basename(__filename).replace('.js', '');

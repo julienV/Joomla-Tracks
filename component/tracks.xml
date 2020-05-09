@@ -99,9 +99,20 @@
 	</libraries>
 
 	<plugins>
-		<plugin name="default" group="tracks_projecttype" />
-		<plugin name="formula1" group="tracks_import" />
+		<plugin group="editors-xtd" name="tracks_individual"  disabled="true"/>
+		<plugin group="search" name="trackssearch"  disabled="true"/>
+		<plugin group="tracks_projecttype" name="default" />
+		<plugin group="tracks_import" name="formula1" />
+		<plugin group="user" name="tracks_autoregister" disabled="true"/>
 	</plugins>
+
+	<modules>
+		<module client="frontend" name="mod_tracks_latest_results" />
+		<module client="frontend" name="mod_tracks_ranking" />
+		<module client="frontend" name="mod_tracks_results" />
+		<module client="frontend" name="mod_tracks_teamranking" />
+		<module client="frontend" name="mod_tracks_teamsocial" />
+	</modules>
 
 	<updateservers>
 		<server type="extension" priority="1" name="Tracks update">https://gist.githubusercontent.com/julienV/e17d59ccf8b329b4e8f6bdb09f392b3e/raw</server>
