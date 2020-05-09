@@ -1,0 +1,51 @@
+3.0.12
+ *  Package modules and plugins directly with component
+ *  breadcrumb in project view backend
+ *  Fix project display or winning team when no winner yet
+ *  Fix round date display in project view
+ *  Updating modules
+ *  Added rel noopener to link to jlv-solutions
+ *  checkin profile in view
+ *  fixed db format for dob to datetime
+ *  Added gender for individual, and option to show/hide gender and dob in frontend
+ *  window title in backend
+ *  round result breadcrumb
+ *  Fixed double display of participants in results if they have multiple teams
+ *  Added view website button in admin backend
+ *  fixed multiple listing of same participant in results if has more than 1 team assigned
+ *  require and ship with redCORE 2.0.0
+ *  changed tracks requirement to joomla 3.5
+ *  implementation of new joomla router
+ *  Enhanced Round view
+
+ 3.0.11
+ *  Fixed team picture display
+ *  lang update
+
+ 3.0.10
+ *  do not show custom fields if disabled
+ *  Added updated server for customfields
+ *  #66 implemented custom top for rankings
+ *  Display custom fields in results
+ *  Implementation of custom fields for teams and results in frontend
+ *  Implementation of custom fields for teams and results in backend
+ *  Implementation of custom fields for individual in backend
+ *  #66 fix missing strings in project settings
+ *  #66 fix wrong string in config
+
+ 3.0.9
+ *  about page update
+ *  fixed missing col th
+ *  display nickname column if set in frontend
+ *  warning fix
+ *  better layout for individual view
+ *  accordion not collapsed initially on backend
+ *  better look for project participants view
+ *  Display nickname in backend
+ *  include nicknmane in frontend models
+
+ 3.0.8
+ *  better backend for import plugins
+ *  Added formula1 import plugin
+ *  fixed warning with point_attributions value
+ *  redCORE bump to 1.10.6
