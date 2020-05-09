@@ -18,7 +18,7 @@ var replace     = require('gulp-replace');
 
 module.exports.addPlugin = function (group, name) {
 	var baseTask  = 'plugins.' + group + '.' + name;
-	var extPath   = '../compenent/plugins/' + group + '/' + name;
+	var extPath   = '../component/plugins/' + group + '/' + name;
 	var mediaPath = extPath + '/media';
 
 	// Clean
