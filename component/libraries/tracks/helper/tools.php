@@ -319,6 +319,6 @@ abstract class TrackslibHelperTools
 	 */
 	public static function footer()
 	{
-		echo 'Tracks powered by <a href="http://www.jlv-solutions.com" target="_blank" rel="noopener">JLV Solutions</a>';
+		echo 'Tracks powered by <a href="https://www.jlv-solutions.com" target="_blank" rel="noopener">JLV Solutions</a>';
 	}
 }
