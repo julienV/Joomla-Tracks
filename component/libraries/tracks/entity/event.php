@@ -18,7 +18,7 @@ class TrackslibEntityEvent extends TrackslibEntityBase
 	/**
 	 * Return project type
 	 *
-	 * @return TrackslibEntityProject
+	 * @return TrackslibEntityProjectround
 	 */
 	public function getProjectRound()
 	{

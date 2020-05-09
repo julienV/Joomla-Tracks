@@ -142,3 +142,9 @@ form.eventresults td.ajaxupdate div {
   text-align: center;
   padding: 0px 30px;
 }
+.project-breadcrumb {
+  padding: 10px 10px;
+  margin: 10px 0 20px;
+  background-color: #e2e1e1;
+  border-radius: 10px;
+}

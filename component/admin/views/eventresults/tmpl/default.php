@@ -21,6 +21,10 @@ $search = $this->state->get('filter.search');
 
 RHelperAsset::load('eventresults.js');
 RHelperAsset::load('tracksbackend.css');
+
+$event        = TrackslibEntityEvent::load($this->state->get('event_id'));
+$projectRound = $event->getProjectRound();
+$project      = $projectRound->getProject();
 ?>
 <script type="text/javascript">
 	Joomla.submitbutton = function (pressbutton)
@@ -44,6 +48,11 @@ RHelperAsset::load('tracksbackend.css');
 		form.submit();
 	}
 </script>
+<div class="project-breadcrumb">
+	<a href="index.php?option=com_tracks&view=projectrounds"><?= $project->name ?></a>
+	/ <a href="index.php?option=com_tracks&view=events&projectround_id=<?= $projectRound->id ?>"><?= $projectRound->getRound()->name ?></a>
+	/ <?= $event->getEventtype()->name ?>
+</div>
 <form action="index.php?option=com_tracks&view=eventresults&event_id=<?php echo $this->state->get('event_id'); ?>" class="admin eventresults" id="adminForm" method="post" name="adminForm">
 	<?php
 	echo RLayoutHelper::render(
