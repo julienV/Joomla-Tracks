@@ -12,44 +12,6 @@
  */
 // no direct access
 defined('_JEXEC') or die('Restricted access');
-
-/**
- * return formated string for round start date - end date
- *
- * @param object round (must have variables start_date, end_date)
- *
- * @return string html
- */
-function formatRoundStartEnd($round)
-{
-	if ($round->start_date && $round->start_date != '0000-00-00 00:00:00')
-	{
-		if ($round->end_date && $round->end_date != '0000-00-00 00:00:00')
-		{
-			// both dates are defined.
-			$format_end = 'j F Y';
-			if (JHTML::date($round->start_date, 'Ym') == JHTML::date($round->end_date, 'Ym'))
-			{
-				// no need to display twice the month and year here
-				$format_start = 'j';
-			}
-			else
-			{
-				$format_start = 'j F Y';
-			}
-			return JHTML::date($round->start_date, $format_start) . ' - ' . JHTML::date($round->end_date, $format_end);
-		}
-		else
-		{
-			return JHTML::date($round->start_date, 'j F Y');
-		}
-	}
-	else
-	{
-		return '';
-	}
-}
-
 ?>
 
 <div id="tracks">
@@ -80,7 +42,7 @@ function formatRoundStartEnd($round)
 						?>
 					</a>
 				</td>
-				<td class="raceResults__date"><?php echo formatRoundStartEnd($result); ?></td>
+				<td class="raceResults__date"><?php echo Tracks\Helper\Helper::formatRoundStartEnd($result); ?></td>
 				<td class="raceResults__winner">
 					<?php if ($result->winner): ?>
 						<?php foreach ($result->winner as $winner): ?>
