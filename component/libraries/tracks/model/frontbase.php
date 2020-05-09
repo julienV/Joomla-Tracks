@@ -6,6 +6,8 @@
  */
 
 // No direct access
+use Tracks\Rankingtool\RankingtoolInterface;
+
 defined('_JEXEC') or die('Restricted access');
 
 jimport('joomla.application.component.model');
@@ -27,7 +29,7 @@ class TrackslibModelFrontbase extends RModel
 
 	/**
 	 * reference to ranking class
-	 * @var unknown_type
+	 * @var RankingtoolInterface
 	 */
 	protected $rankingtool = null;
 
@@ -176,7 +178,7 @@ class TrackslibModelFrontbase extends RModel
 	/**
 	 * Get ranking tool
 	 *
-	 * @return TracksRankingToolDefault|unknown_type
+	 * @return RankingtoolInterface
 	 */
 	protected function _getRankingTool()
 	{

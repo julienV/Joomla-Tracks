@@ -6,6 +6,8 @@
  * @license     GNU General Public License version 2 or later
  */
 
+use Tracks\Rankingtool\RankingtoolInterface;
+
 defined('_JEXEC') or die;
 
 /**
@@ -34,7 +36,7 @@ class TrackslibEntityProject extends TrackslibEntityBase
 	/**
 	 * Get ranking tool for project
 	 *
-	 * @return TrackslibRankingtoolDefault
+	 * @return RankingtoolInterface
 	 */
 	public function getRankingTool()
 	{
