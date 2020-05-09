@@ -17,6 +17,7 @@
 		<folder>entity</folder>
 		<folder>form</folder>
 		<folder>helper</folder>
+		<folder>language</folder>
 		<folder>model</folder>
 		<folder>rankingtool</folder>
 		<folder>src</folder>
