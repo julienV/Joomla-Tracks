@@ -63,11 +63,16 @@ defined('_JEXEC') or die('Restricted access');
 				</td>
 				<?php if ($this->params->get('showteams', 1)): ?>
 					<td class="raceResults__team">
-						<a href="<?= TrackslibHelperRoute::getTeamRoute($winner->team_id) ?>">
-							<span class="winner__team">
-							<?= $winner->team_name ?>
-							</span>
-						</a>
+						<?php if ($result->winner): ?>
+							<?php foreach ($result->winner as $winner): ?>
+								<div class="winner">
+									<a href="<?= TrackslibHelperRoute::getTeamRoute($winner->team_id) ?>">
+									<span class="winner__team">
+									<?= $winner->team_name ?>
+									</a>
+								</div>
+							<?php endforeach; ?>
+						<?php endif; ?>
 					</td>
 				<?php endif; ?>
 			</tr>
