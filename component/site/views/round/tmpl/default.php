@@ -20,7 +20,7 @@ $entity        = TrackslibEntityRound::load($this->round->id);
 $projectRounds = $entity->getProjectrounds(
 	[
 		'filter.published' => 1,
-		'list.order'       => 'obj.start_date',
+		'list.ordering'    => 'obj.start_date',
 		'list.direction'   => 'desc',
 	]
 );
@@ -49,20 +49,55 @@ $projectRounds = $entity->getProjectrounds(
 	<section class="tracks-round__events">
 		<h3><?= Text::_('COM_TRACKS_ROUND_EVENTS') ?></h3>
 
-		<div class="tracks-round__events__list">
+		<table class="tracks-round__events__list">
+			<thead>
+				<tr>
+					<th class="tracks-round__events__list__event__project"><?= Text::_('COM_TRACKS_COMPETITION') ?></th>
+					<th class="tracks-round__events__list__event__date"><?= Text::_('COM_TRACKS_DATE') ?></th>
+					<th class="tracks-round__events__list__event__winners"><?= Text::_('COM_TRACKS_WINNER') ?></th>
+				</tr>
+			</thead>
+			<tbody>
 			<?php foreach ($projectRounds as $projectRound): ?>
-				<div class="tracks-round__events__list__event">
-					<div class="tracks-round__events__list__event__project">
+				<tr class="tracks-round__events__list__event">
+					<td class="tracks-round__events__list__event__project">
 						<a href="<?= $projectRound->getLink() ?>">
 							<?= $projectRound->getProject()->name; ?>
 						</a>
-					</div>
-					<div class="tracks-round__events__list__event__date">
+					</td>
+					<td class="tracks-round__events__list__event__date">
 						<?= $projectRound->getDate('start_date', Config::get('date_format', 'Y-m-d')) ?>
-					</div>
-				</div>
+					</td>
+					<td class="tracks-round__events__list__event__winners">
+						<?php $winners = $projectRound->getWinner(); ?>
+						<?php if (!empty($winners)): ?>
+							<?php foreach ($winners as $winner): ?>
+							<div class="tracks-round__events__list__event__winners__winner">
+								<a href="<?= TrackslibHelperRoute::getIndividualRoute($winner->id) ?>">
+										<span class="tracks-round__events__list__event__winners__winner__name">
+										<?= $winner->first_name . ' ' . $winner->last_name ?>
+										</span>
+									<?php if ($this->params->get('shownickname', 0) && !empty($winner->nickname)): ?>
+										<span class="tracks-round__events__list__event__winners__winner__nickname">
+											(<?= $winner->nickname ?>)
+										</span>
+									<?php endif; ?>
+								</a>
+								<?php if ($projectRound->getProject()->getParam('showteams', 1)): ?>
+								- <a href="<?= TrackslibHelperRoute::getTeamRoute($winner->team_id) ?>">
+									<span class="winner__team">
+									<?= $winner->team_name ?>
+									</span>
+									</a>
+								<?php endif; ?>
+							</div>
+						<?php endforeach; ?>
+						<?php endif; ?>
+					</td>
+				</tr>
 			<?php endforeach; ?>
-		</div>
+			</tbody>
+		</table>
 	</section>
 	<?php endif; ?>
 

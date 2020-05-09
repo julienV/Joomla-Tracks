@@ -197,10 +197,23 @@ div.edit div.edit-pic {
 .tracks-round .round-description__field__label {
   font-weight: bold;
 }
-.tracks-round__events__list__event {
-  display: flex;
-  flex-wrap: wrap;
+.tracks-round__events__list table {
+  width: 100%;
+}
+.tracks-round__events__list th {
+  border-bottom: 1px solid #ECECEC;
+  padding-bottom: 4px;
+  text-align: left;
+}
+.tracks-round__events__list th,
+.tracks-round__events__list td {
+  background-color: #FFFFFF;
+  border-collapse: collapse;
+  font-size: 1.2em;
+  line-height: 1.2em;
+  margin: 0 0 1px;
+  padding: 5px 10px 5px 0;
 }
 .tracks-round__events__list__event__project {
-  width: 200px;
+  min-width: 200px;
 }

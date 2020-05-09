@@ -76,4 +76,20 @@ class TrackslibEntityProjectround extends TrackslibEntityBase
 
 		return $this->formatUrl($url, $routed, $xhtml);
 	}
+
+	/**
+	 * Get round winners
+	 *
+	 * @return array
+	 */
+	public function getWinner()
+	{
+		return array_filter(
+			$rankings = $this->getProject()->getRankingTool()->getIndividualsRankings($this->id),
+			function ($result)
+			{
+				return $result->rank == 1;
+			}
+		);
+	}
 }

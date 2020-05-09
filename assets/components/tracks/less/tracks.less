@@ -250,12 +250,27 @@ div.edit div.edit-pic {
     }
   }
 
-  &__events__list__event {
-    display: flex;
-    flex-wrap: wrap;
+  &__events__list {
+    table {
+      width: 100%;
+    }
+    th {
+      border-bottom:1px solid @color-lightgrey;
+      padding-bottom:4px;
+      text-align:left;
+    }
 
-    &__project {
-      width: 200px
+    th, td {
+      background-color:#FFFFFF;
+      border-collapse:collapse;
+      font-size:1.2em;
+      line-height:1.2em;
+      margin:0 0 1px;
+      padding:5px 10px 5px 0;
+    }
+
+    &__event__project {
+      min-width: 200px
     }
   }
 }

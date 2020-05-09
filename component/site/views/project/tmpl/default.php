@@ -69,6 +69,7 @@ defined('_JEXEC') or die('Restricted access');
 									<a href="<?= TrackslibHelperRoute::getTeamRoute($winner->team_id) ?>">
 									<span class="winner__team">
 									<?= $winner->team_name ?>
+									</span>
 									</a>
 								</div>
 							<?php endforeach; ?>
