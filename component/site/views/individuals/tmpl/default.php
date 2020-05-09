@@ -13,8 +13,7 @@
 // no direct access
 defined('_JEXEC') or die('Restricted access'); ?>
 
-<div id="tracks">
-
+<div class="tracks-individuals">
 	<!-- Title -->
 	<h2><?php echo JText::_('COM_TRACKS_All_Individuals'); ?></h2>
 
@@ -29,14 +28,12 @@ defined('_JEXEC') or die('Restricted access'); ?>
 		}
 
 		$first = $this->params->get('ordering') ? 'first_name' : 'last_name';
-
 		?>
 
-		<table id="namelist">
-			<tr>
+		<div class="tracks-individuals__list">
 				<?php $letter = $this->firstLetter($column[0][0]->$first); ?>
 				<?php foreach ($column as $k => $c): ?>
-					<td>
+					<div class="tracks-individuals__list__column">
 						<?php if ($k == 0): ?>
 							<div class="letter"><?php echo $letter; ?></div>
 						<?php endif; ?>
@@ -63,10 +60,9 @@ defined('_JEXEC') or die('Restricted access'); ?>
 							<br/>
 						<?php
 						} ?>
-					</td>
+					</div>
 				<?php endforeach; ?>
-			</tr>
-		</table>
+		</div>
 	<?php endif; ?>
 	<p class="copyright">
 		<?php echo TrackslibHelperTools::footer(); ?>

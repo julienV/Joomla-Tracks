@@ -68,14 +68,6 @@ div#tracks .copyright {
   margin: 1em 0;
   color: #aaa;
 }
-div#tracks table#namelist td {
-  vertical-align: top;
-}
-div#tracks table#namelist .letter {
-  font-size: 1.5em;
-  font-weight: bold;
-  padding: 5px;
-}
 div#individualpic img,
 div#teampic img {
   border: 1px;
@@ -216,4 +208,21 @@ div.edit div.edit-pic {
 }
 .tracks-round__events__list__event__project {
   min-width: 200px;
+}
+.tracks-individuals__list,
+.tracks-rounds__list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+.tracks-individuals__list > div,
+.tracks-rounds__list > div {
+  padding-right: 30px;
+}
+.tracks-individuals__list > div .letter,
+.tracks-rounds__list > div .letter {
+  font-weight: bold;
+  font-size: 2em;
+  padding: 15px 0;
+  text-transform: uppercase;
 }

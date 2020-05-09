@@ -11,53 +11,48 @@
 * See COPYRIGHT.php for copyright notices and details.
 */
  // no direct access
-defined('_JEXEC') or die('Restricted access'); ?>
-
-<div id="tracks">
-<!-- Title -->
-<h2><?php echo JText::_('COM_TRACKS_All_rounds' ); ?></h2>
-
-<?php if ( $total = count( $this->rows ) ) : ?>
-<?php
-$columns = array();
-$i = 0;
-foreach ($this->rows as $r)
-{
-  $column[floor($i/$total*3)][] = $r;
-  $i++;
-}
+defined('_JEXEC') or die('Restricted access');
 ?>
+<div class="tracks-rounds">
+	<!-- Title -->
+	<h2><?php echo JText::_('COM_TRACKS_All_rounds' ); ?></h2>
 
-<table id="namelist">
-  <tr>
-    <?php $letter = strtoupper(substr($column[0][0]->name, 0, 1)); ?>
-    <?php foreach ($column as $k => $c): ?>
-    <td>
-      <?php if ($k == 0): ?>
-      <div class="letter"><?php echo $letter; ?></div>
-      <?php endif; ?>
-      <?php
-      foreach ($c as $r)
-      {
-        $link_round = JRoute::_( TrackslibHelperRoute::getRoundRoute($r->slug) );
-        if ($letter != strtoupper(substr($r->name, 0, 1)))
-        {
-          $letter = strtoupper(substr($r->name, 0, 1)); ?>
-          <div class="letter"><?php echo $letter; ?></div>
-          <?php
-        }
-        ?>
-        <a href="<?php echo $link_round; ?>" title ="<?php echo JText::_('COM_TRACKS_Display_details' ) ?>">
-          <?php echo $r->name; ?>
-          </a>
-          <br />
-          <?php
-      } ?>
-    </td>
-    <?php endforeach; ?>
-  </tr>
-</table>
-<?php endif; ?>
+	<?php if ( $total = count( $this->rows ) ) : ?>
+		<?php
+		$columns = array();
+		$i = 0;
+		foreach ($this->rows as $r)
+		{
+		  $column[floor($i/$total*3)][] = $r;
+		  $i++;
+		}
+		?>
+
+		<div class="tracks-rounds__list">
+			<?php $letter = strtoupper(substr($column[0][0]->name, 0, 1)); ?>
+			<?php foreach ($column as $k => $c): ?>
+				<div class="tracks-rounds__list__column">
+					<?php if ($k == 0): ?>
+						<div class="letter"><?php echo $letter; ?></div>
+					<?php endif; ?>
+
+					<?php foreach ($c as $r):
+						$link_round = JRoute::_( TrackslibHelperRoute::getRoundRoute($r->slug) );
+						if ($letter != strtoupper(substr($r->name, 0, 1))):
+							$letter = strtoupper(substr($r->name, 0, 1)); ?>
+							<div class="letter"><?php echo $letter; ?></div>
+						<?php
+						endif;
+						?>
+						<a href="<?php echo $link_round; ?>" title ="<?php echo JText::_('COM_TRACKS_Display_details' ) ?>">
+							<?php echo $r->name; ?>
+						</a>
+						<br />
+					<?php endforeach; ?>
+				</div>
+			<?php endforeach; ?>
+		</div>
+	<?php endif; ?>
 
 <p class="copyright">
   <?php echo TrackslibHelperTools::footer( ); ?>
