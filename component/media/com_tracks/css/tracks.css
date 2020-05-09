@@ -210,17 +210,20 @@ div.edit div.edit-pic {
   min-width: 200px;
 }
 .tracks-individuals__list,
-.tracks-rounds__list {
+.tracks-rounds__list,
+.tracks-teams__list {
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 40px;
 }
 .tracks-individuals__list > div,
-.tracks-rounds__list > div {
+.tracks-rounds__list > div,
+.tracks-teams__list > div {
   padding-right: 30px;
 }
 .tracks-individuals__list > div .letter,
-.tracks-rounds__list > div .letter {
+.tracks-rounds__list > div .letter,
+.tracks-teams__list > div .letter {
   font-weight: bold;
   font-size: 2em;
   padding: 15px 0;
