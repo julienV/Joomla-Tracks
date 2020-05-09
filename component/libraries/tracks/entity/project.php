@@ -6,10 +6,16 @@
  * @license     GNU General Public License version 2 or later
  */
 
+use Tracks\Rankingtool\RankingtoolInterface;
+
 defined('_JEXEC') or die;
 
 /**
  * Project Entity.
+ *
+ * @property integer $id
+ * @property integer $competition_id
+ * @property integer $season_ids
  *
  * @since  3.0
  */
@@ -30,7 +36,7 @@ class TrackslibEntityProject extends TrackslibEntityBase
 	/**
 	 * Get ranking tool for project
 	 *
-	 * @return TrackslibRankingtoolDefault
+	 * @return RankingtoolInterface
 	 */
 	public function getRankingTool()
 	{
@@ -41,5 +47,25 @@ class TrackslibEntityProject extends TrackslibEntityBase
 		}
 
 		return clone $this->rankingTool;
+	}
+
+	/**
+	 * Get competition
+	 *
+	 * @return TrackslibEntityCompetition
+	 */
+	public function getCompetition ()
+	{
+		return TrackslibEntityCompetition::load($this->competition_id);
+	}
+
+	/**
+	 * Get season
+	 *
+	 * @return TrackslibEntitySeason
+	 */
+	public function getSeason ()
+	{
+		return TrackslibEntitySeason::load($this->season_id);
 	}
 }

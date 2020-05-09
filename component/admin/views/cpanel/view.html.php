@@ -6,6 +6,8 @@
  * @license     GNU General Public License version 2 or later
  */
 
+use Joomla\CMS\Language\Text;
+
 defined('_JEXEC') or die();
 
 /**

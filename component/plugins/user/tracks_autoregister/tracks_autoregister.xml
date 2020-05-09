@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.7" type="plugin" group="user" method="upgrade">
+	<name>PLG_USER_TRACKS_AUTOREGISTER</name>
+	<creationDate>##DATE##</creationDate>
+	<author>Julien Vonthron</author>
+	<authorEmail>jlv@jlv-solutions.com</authorEmail>
+	<authorUrl>http://www.jlv-solutions.com</authorUrl>
+	<copyright>(C) 2010 Julien Vonthron. All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-3.0.html GNU/GPL</license>
+	<version>3.0.12</version>
+	<tag>##VERSION##</tag>
+	<description>PLG_USER_TRACKS_AUTOREGISTER_XML_DESCRIPTION</description>
+
+	<files>
+		<filename plugin="tracks_autoregister">tracks_autoregister.php</filename>
+		<filename>index.html</filename>
+		<folder>language</folder>
+	</files>
+
+	<config>
+		<fields name="params">
+			<field name="map_name" type="list" default="0" label="PLG_TRACKS_AUTOREG_MAP"
+				   description="PLG_TRACKS_AUTOREG_MAP_DESC">
+				<option value="0">PLG_TRACKS_AUTOREG_MAP_NAME</option>
+				<option value="1">PLG_TRACKS_AUTOREG_MAP_USERNAME</option>
+			</field>
+			<field name="split_name" type="radio" default="1" label="PLG_TRACKS_AUTOREG_SPLIT"
+				   description="PLG_TRACKS_AUTOREG_SPLIT_DESC">
+				<option value="0">No</option>
+				<option value="1">Yes</option>
+			</field>
+			<field name="map_nickname" type="list" default="2" label="PLG_TRACKS_AUTOREG_MAP_NICK"
+				   description="PLG_TRACKS_AUTOREG_MAP_NICK_DESC">
+				<option value="0">No</option>
+				<option value="1">PLG_TRACKS_AUTOREG_MAP_NAME</option>
+				<option value="2">PLG_TRACKS_AUTOREG_MAP_USERNAME</option>
+			</field>
+		</fields>
+	</config>
+</extension>

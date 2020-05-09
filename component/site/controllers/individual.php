@@ -6,6 +6,8 @@
  * @license     GNU General Public License version 2 or later
  */
 
+use Joomla\CMS\Router\Route;
+
 defined('_JEXEC') or die();
 
 /**
@@ -86,5 +88,33 @@ class TracksControllerIndividual extends RControllerForm
 
 		return JComponentHelper::getParams('com_tracks')->get('user_registration') && $item->user_id == $user->id
 			|| JFactory::getUser()->authorise('core.edit', 'com_tracks');
+	}
+
+	/**
+	 * Function that allows child controller access to model data
+	 * after the data has been saved.
+	 *
+	 * @param   \JModelLegacy  $model      The data model object.
+	 * @param   array          $validData  The validated data.
+	 *
+	 * @return  void
+	 *
+	 * @since   1.6
+	 */
+	protected function postSaveHook(\JModelLegacy $model, $validData = array())
+	{
+		$returnUrl = $this->input->get('return', '', 'Base64');
+
+		if ($returnUrl)
+		{
+			$returnUrl = base64_decode($returnUrl);
+
+			$this->setRedirect($returnUrl, false);
+		}
+		else
+		{
+			$id = $model->getState($model->getName() . '.id');
+			$this->setRedirect(Route::_(TrackslibHelperRoute::getIndividualRoute($id)));
+		}
 	}
 }

@@ -15,7 +15,7 @@
 		"editors-xtd" : ["tracks_individual"],
 		"search" : ["trackssearch"],
 		"tracks_import" : ["formula1"],
-		"tracks" : ["customfields"],
+		"tracks_projecttype" : ["default"],
 		"user" : ["tracks_autoregister"]
 	}
 }

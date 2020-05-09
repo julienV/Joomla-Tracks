@@ -97,6 +97,9 @@ $search = $this->state->get('filter.search');
 				<th width="auto">
 					<?php echo JHTML::_('rsearchtools.sort', 'COM_TRACKS_USER', 'u.username', $listDirn, $listOrder); ?>
 				</th>
+				<th width="1">
+					<?php echo JHTML::_('rsearchtools.sort', 'ID', 'obj.id', $listDirn, $listOrder); ?>
+				</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -141,6 +144,9 @@ $search = $this->state->get('filter.search');
 					</td>
 					<td>
 						<?php echo $row->username; ?>
+					</td>
+					<td>
+						<?php echo $row->id; ?>
 					</td>
 				</tr>
 			<?php endforeach; ?>

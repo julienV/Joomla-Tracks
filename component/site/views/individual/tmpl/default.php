@@ -13,11 +13,14 @@
 
 // no direct access
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
+use Tracks\Helper\Config;
 
 defined('_JEXEC') or die('Restricted access');
 
 $link = null;
 $res = $this->dispatcher->trigger('getProfileLink', array($this->data->user_id, &$link));
+$extra = new \Joomla\Registry\Registry($this->data->params);
 ?>
 <div id="tracks" class="tracks-individual">
 	<!-- Title -->
@@ -27,8 +30,8 @@ $res = $this->dispatcher->trigger('getProfileLink', array($this->data->user_id, 
 		<div id="editprofile"class="tracks-individual__editprofile">
 			<a
 				href="<?php echo JRoute::_(TrackslibHelperRoute::getEditIndividualRoute($this->data->id)); ?>"
-				title="<?php echo JText::_('COM_TRACKS_Edit_profile') ?>">
-				<?php echo JText::_('COM_TRACKS_Edit_profile'); ?>
+				title="<?php echo Text::_('COM_TRACKS_Edit_profile') ?>">
+				<?php echo Text::_('COM_TRACKS_Edit_profile'); ?>
 			</a>
 		</div>
 	<?php endif; ?>
@@ -52,7 +55,7 @@ $res = $this->dispatcher->trigger('getProfileLink', array($this->data->user_id, 
 			<?php if (!empty($this->data->projectdata->number)): ?>
 				<div class="tracks-individual__details__list__item">
 					<div class="tracks-individual__details__list__item__label">
-							<?php echo JText::_('COM_TRACKS_INDIVIDUAL_NUMBER'); ?>:
+							<?php echo Text::_('COM_TRACKS_INDIVIDUAL_NUMBER'); ?>:
 					</div>
 					<div class="tracks-individual__details__list__item__value">
 						<?php echo $this->data->projectdata->number; ?>
@@ -62,7 +65,7 @@ $res = $this->dispatcher->trigger('getProfileLink', array($this->data->user_id, 
 			<?php if (!empty($this->data->projectdata->team_name)): ?>
 				<div class="tracks-individual__details__list__item">
 					<div class="tracks-individual__details__list__item__label">
-						<?php echo JText::_('COM_TRACKS_INDIVIDUAL_TEAM'); ?>:
+						<?php echo Text::_('COM_TRACKS_INDIVIDUAL_TEAM'); ?>:
 					</div>
 					<div class="tracks-individual__details__list__item__value">
 							<?php echo JHTML::link(TrackslibHelperRoute::getTeamRoute($this->data->projectdata->teamslug, $this->data->projectdata->projectslug), $this->data->projectdata->team_name); ?>
@@ -72,17 +75,47 @@ $res = $this->dispatcher->trigger('getProfileLink', array($this->data->user_id, 
 			<?php if (!empty($this->data->nickname)): ?>
 				<div class="tracks-individual__details__list__item">
 					<div class="tracks-individual__details__list__item__label">
-						<?php echo JText::_('COM_TRACKS_Nickname'); ?>:
+						<?php echo Text::_('COM_TRACKS_Nickname'); ?>:
 					</div>
 					<div class="tracks-individual__details__list__item__value">
 						<?php echo $this->data->nickname; ?>
 					</div>
 				</div>
 			<?php endif; ?>
+			<?php if ($this->data->country_code): ?>
+				<div class="tracks-individual__details__list__item">
+					<div class="tracks-individual__details__list__item__label">
+						<?php echo Text::_('COM_TRACKS_Country'); ?>:
+					</div>
+					<div class="tracks-individual__details__list__item__value">
+						<?php echo TrackslibHelperCountries::getCountryFlag($this->data->country_code); ?>
+					</div>
+				</div>
+			<?php endif; ?>
+			<?php if (TrackslibHelperTools::isValidDate($this->data->dob) && Config::get('show_dob', 1)): ?>
+				<div class="tracks-individual__details__list__item">
+					<div class="tracks-individual__details__list__item__label">
+						<?php echo Text::_('COM_TRACKS_Date_of_birth'); ?>:
+					</div>
+					<div class="tracks-individual__details__list__item__value">
+						<?php echo TrackslibHelperTools::formatDate($this->data->dob); ?>
+					</div>
+				</div>
+			<?php endif; ?>
+			<?php if (!empty($extra->get('gender')) && Config::get('show_gender', 1)): ?>
+				<div class="tracks-individual__details__list__item">
+					<div class="tracks-individual__details__list__item__label">
+						<?php echo Text::_('LIB_TRACKS_GENDER'); ?>:
+					</div>
+					<div class="tracks-individual__details__list__item__value">
+						<?php echo Text::_('LIB_TRACKS_GENDER_' . $extra->get('gender')); ?>
+					</div>
+				</div>
+			<?php endif; ?>
 			<?php if (!empty($this->data->height)): ?>
 				<div class="tracks-individual__details__list__item">
 					<div class="tracks-individual__details__list__item__label">
-						<?php echo JText::_('COM_TRACKS_Height'); ?>:
+						<?php echo Text::_('COM_TRACKS_Height'); ?>:
 					</div>
 					<div class="tracks-individual__details__list__item__value">
 							<?php echo $this->data->height; ?>
@@ -92,37 +125,17 @@ $res = $this->dispatcher->trigger('getProfileLink', array($this->data->user_id, 
 			<?php if ($this->data->weight): ?>
 			<div class="tracks-individual__details__list__item">
 				<div class="tracks-individual__details__list__item__label">
-					<?php echo JText::_('COM_TRACKS_Weight'); ?>:
+					<?php echo Text::_('COM_TRACKS_Weight'); ?>:
 				</div>
 				<div class="tracks-individual__details__list__item__value">
 					<?php echo $this->data->weight; ?>
 				</div>
 			</div>
 			<?php endif; ?>
-			<?php if ($this->data->country_code): ?>
-				<div class="tracks-individual__details__list__item">
-					<div class="tracks-individual__details__list__item__label">
-						<?php echo JText::_('COM_TRACKS_Country'); ?>:
-					</div>
-					<div class="tracks-individual__details__list__item__value">
-						<?php echo TrackslibHelperCountries::getCountryFlag($this->data->country_code); ?>
-					</div>
-				</div>
-			<?php endif; ?>
-			<?php if (TrackslibHelperTools::isValidDate($this->data->dob)): ?>
-				<div class="tracks-individual__details__list__item">
-					<div class="tracks-individual__details__list__item__label">
-						<?php echo JText::_('COM_TRACKS_Date_of_birth'); ?>:
-					</div>
-					<div class="tracks-individual__details__list__item__value">
-						<?php echo TrackslibHelperTools::formatDate($this->data->dob); ?>
-					</div>
-				</div>
-			<?php endif; ?>
 			<?php if ($this->data->hometown): ?>
 				<div class="tracks-individual__details__list__item">
 					<div class="tracks-individual__details__list__item__label">
-						<?php echo JText::_('COM_TRACKS_Hometown'); ?>:
+						<?php echo Text::_('COM_TRACKS_Hometown'); ?>:
 					</div>
 					<div class="tracks-individual__details__list__item__value">
 						<?php echo $this->data->hometown; ?>
@@ -132,7 +145,7 @@ $res = $this->dispatcher->trigger('getProfileLink', array($this->data->user_id, 
 			<?php if ($this->data->address): ?>
 				<div class="tracks-individual__details__list__item">
 					<div class="tracks-individual__details__list__item__label">
-						<?php echo JText::_('COM_TRACKS_Address'); ?>:
+						<?php echo Text::_('COM_TRACKS_Address'); ?>:
 					</div>
 					<div class="tracks-individual__details__list__item__value">
 						<?php echo $this->data->address; ?>
@@ -142,7 +155,7 @@ $res = $this->dispatcher->trigger('getProfileLink', array($this->data->user_id, 
 			<?php if ($this->data->postcode): ?>
 				<div class="tracks-individual__details__list__item">
 					<div class="tracks-individual__details__list__item__label">
-						<?php echo JText::_('COM_TRACKS_Postcode'); ?>:
+						<?php echo Text::_('COM_TRACKS_Postcode'); ?>:
 					</div>
 					<div class="tracks-individual__details__list__item__value">
 						<?php echo $this->data->postcode; ?>
@@ -152,7 +165,7 @@ $res = $this->dispatcher->trigger('getProfileLink', array($this->data->user_id, 
 			<?php if ($this->data->city): ?>
 				<div class="tracks-individual__details__list__item">
 					<div class="tracks-individual__details__list__item__label">
-						<?php echo JText::_('COM_TRACKS_City'); ?>:
+						<?php echo Text::_('COM_TRACKS_City'); ?>:
 					</div>
 					<div class="tracks-individual__details__list__item__value">
 						<?php echo $this->data->city; ?>
@@ -162,7 +175,7 @@ $res = $this->dispatcher->trigger('getProfileLink', array($this->data->user_id, 
 			<?php if ($this->data->state): ?>
 				<div class="tracks-individual__details__list__item">
 					<div class="tracks-individual__details__list__item__label">
-						<?php echo JText::_('COM_TRACKS_State'); ?>:
+						<?php echo Text::_('COM_TRACKS_State'); ?>:
 					</div>
 					<div class="tracks-individual__details__list__item__value">
 						<?php echo $this->data->state; ?>
@@ -172,7 +185,7 @@ $res = $this->dispatcher->trigger('getProfileLink', array($this->data->user_id, 
 			<?php if ($this->data->country): ?>
 				<div class="tracks-individual__details__list__item">
 					<div class="tracks-individual__details__list__item__label">
-						<?php echo JText::_('COM_TRACKS_Country'); ?>:
+						<?php echo Text::_('COM_TRACKS_Country'); ?>:
 					</div>
 					<div class="tracks-individual__details__list__item__value">
 						<?php echo $this->data->country; ?>

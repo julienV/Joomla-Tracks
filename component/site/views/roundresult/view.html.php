@@ -39,6 +39,7 @@ class TracksViewRoundResult extends RViewSite
 		$projectparams = $model->getParams($project->id);
 
 		$breadcrumbs = $mainframe->getPathWay();
+		$breadcrumbs->addItem($project->name, TrackslibHelperRoute::getProjectRoute($project->id));
 		$breadcrumbs->addItem($round->name, TrackslibHelperRoute::getRoundResultRoute($projectround_id));
 
 		$document = JFactory::getDocument();

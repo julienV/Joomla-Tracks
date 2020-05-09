@@ -126,7 +126,8 @@ div.project-inds div {
 /* round view */
 img.round-image {
   float:left;
-  padding-right: 5px;
+  padding-right: 25px;
+  padding-bottom: 10px;
 }
 
 div.tracks-clear {
@@ -234,6 +235,27 @@ div.edit div.edit-pic {
       &__item {
         padding: 5px 5px;
       }
+    }
+  }
+}
+
+.tracks-round {
+  .round-description {
+    &__field {
+      padding: 10px 0;
+
+      &__label {
+        font-weight: bold;
+      }
+    }
+  }
+
+  &__events__list__event {
+    display: flex;
+    flex-wrap: wrap;
+
+    &__project {
+      width: 200px
     }
   }
 }

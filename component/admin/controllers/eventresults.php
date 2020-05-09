@@ -6,6 +6,8 @@
  * @license     GNU General Public License version 2 or later
  */
 
+use Joomla\Utilities\ArrayHelper;
+
 defined('_JEXEC') or die();
 
 /**
@@ -59,20 +61,33 @@ class TracksControllerEventresults extends RControllerAdmin
 	 */
 	public function saveranks()
 	{
-		$cid = $this->input->getVar('cid', array(), 'post', 'array');
-		$rank = $this->input->getVar('rank', array(), 'post', 'array');
-		$bonus_points = $this->input->getVar('bonus_points', array(), 'post', 'array');
-		$performance = $this->input->getVar('performance', array(), 'post', 'array');
-		$number = $this->input->getVar('number', array(), 'post', 'array');
+		$cid          = $this->input->get('cid', array(), 'post', 'array');
+		$rank         = $this->input->get('rank', array(), 'post', 'array');
+		$bonus_points = $this->input->get('bonus_points', array(), 'post', 'array');
+		$performance  = $this->input->get('performance', array(), 'post', 'array');
+		$number       = $this->input->get('number', array(), 'post', 'array');
 
-		JArrayHelper::toInteger($cid);
-		JArrayHelper::toInteger($rank);
+		ArrayHelper::toInteger($cid);
+		ArrayHelper::toInteger($rank);
 
 		$model = $this->getModel('eventresults');
 
+		$data = [];
+
+		foreach ($cid as $resultId)
+		{
+			$data[] = [
+				'id'           => $resultId,
+				'rank'         => $rank[$resultId],
+				'bonus_points' => $bonus_points[$resultId],
+				'performance'  => $performance[$resultId],
+				'number'       => $number[$resultId]
+			];
+		}
+
 		try
 		{
-			$model->saveranks($cid, $rank, $bonus_points, $performance, $number);
+			$model->saveranks($data);
 			$this->setMessage(JText::_('COM_TRACKS_RESULTS_SAVED'));
 		}
 		catch (RuntimeException $e)

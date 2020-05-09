@@ -8,9 +8,12 @@
 
 	$(function(){
 		$('.result input').change(function(){
-			var cbinputs = $(this).parents('table').find('input[name="cid[]"]');
-			cbinputs.attr('checked', 'checked');
-			$('input[name="boxchecked"]').val(cbinputs.length);
+			var cbinput = $(this).parents('tr').find('input[name="cid[]"]');
+
+			if (!cbinput.prop('checked')) {
+				cbinput.click();
+			}
+
 			$('.save-results').removeClass('btn-default').addClass('btn-warning');
 		});
 	});

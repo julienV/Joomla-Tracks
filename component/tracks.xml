@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="component" version="2.5.0" method="upgrade">
+<extension type="component" version="3.5.0" method="upgrade">
 	<name>COM_TRACKS</name>
 	<author>Julien Vonthron</author>
 	<authorEmail>julien.vonthron@gmail.com</authorEmail>
@@ -7,9 +7,9 @@
 	<creationDate>##DATE##</creationDate>
 	<copyright>(C) 2008-2020 Julien Vonthron. All rights	reserved.</copyright>
 	<license>http://www.gnu.org/licenses/gpl.html</license>
-	<version>3.0.11</version>
+	<version>3.0.12</version>
 	<tag>##VERSION##</tag>
-	<redcore version="1.10.6" defaultFramework="bootstrap2"/>
+	<redcore version="2.0.0"/>
 	<description>COM_TRACKS_XML_DESC</description>
 
 	<!-- Runs on install/uninstall/update -->
@@ -99,9 +99,20 @@
 	</libraries>
 
 	<plugins>
-		<plugin name="default" group="tracks_projecttype" />
-		<plugin name="formula1" group="tracks_import" />
+		<plugin group="editors-xtd" name="tracks_individual"  disabled="true"/>
+		<plugin group="search" name="trackssearch"  disabled="true"/>
+		<plugin group="tracks_projecttype" name="default" />
+		<plugin group="tracks_import" name="formula1" />
+		<plugin group="user" name="tracks_autoregister" disabled="true"/>
 	</plugins>
+
+	<modules>
+		<module client="frontend" name="mod_tracks_latest_results" />
+		<module client="frontend" name="mod_tracks_ranking" />
+		<module client="frontend" name="mod_tracks_results" />
+		<module client="frontend" name="mod_tracks_teamranking" />
+		<module client="frontend" name="mod_tracks_teamsocial" />
+	</modules>
 
 	<updateservers>
 		<server type="extension" priority="1" name="Tracks update">https://gist.githubusercontent.com/julienV/e17d59ccf8b329b4e8f6bdb09f392b3e/raw</server>

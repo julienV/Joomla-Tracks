@@ -6,6 +6,8 @@
  * @license     GNU General Public License version 2 or later
  */
 
+use Tracks\Rankingtool\RankingtoolInterface;
+
 defined('_JEXEC') or die;
 
 /**
@@ -15,7 +17,7 @@ defined('_JEXEC') or die;
  * @subpackage  Library
  * @since       1.0
  */
-class TrackslibRankingtoolDefault
+class TrackslibRankingtoolDefault implements RankingtoolInterface
 {
 	/**
 	 * project id
@@ -167,6 +169,7 @@ class TrackslibRankingtoolDefault
 			$rank     = 1;
 			$previous = null;
 
+			// Get the real ranks after ordering (manage ties)
 			foreach ($individuals as $k => $value)
 			{
 				if ($previous && self::orderRankingsNoAlpha($previous, $value) == 0)

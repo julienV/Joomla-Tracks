@@ -6,6 +6,8 @@
  */
 
 // No direct access
+use Joomla\Utilities\ArrayHelper;
+
 defined('_JEXEC') or die('Restricted access');
 
 /**
@@ -58,37 +60,30 @@ class TracksModelProject extends TrackslibModelFrontbase
 	/**
 	 * Get results
 	 *
-	 * @param   int  $project_id  project id
+	 * @param   int  $projectId  project id
 	 *
 	 * @return mixed|null
 	 */
-	public function getResults($project_id = 0)
+	public function getResults($projectId = 0)
 	{
-		if ($project_id)
+		if ($projectId)
 		{
-			$results          = $this->getRounds($project_id);
-			$projectround_ids = array();
+			$rounds  = $this->getRounds($projectId);
+			$winners = $this->getWinners();
 
-			foreach ($results as $r)
-			{
-				$projectround_ids[] = $r->projectround_id;
-			}
-
-			$winners = $this->getWinners($projectround_ids);
-
-			foreach ($results as $k => $r)
+			foreach ($rounds as $k => $r)
 			{
 				if (isset($winners[$r->projectround_id]))
 				{
-					$results[$k]->winner = $winners[$r->projectround_id];
+					$rounds[$k]->winner = $winners[$r->projectround_id];
 				}
 				else
 				{
-					$results[$k]->winner = array();
+					$rounds[$k]->winner = array();
 				}
 			}
 
-			return $results;
+			return $rounds;
 		}
 	}
 
@@ -122,27 +117,20 @@ class TracksModelProject extends TrackslibModelFrontbase
 	/**
 	 * Gets winner of each round, indexed by projectround_id
 	 *
-	 * @param   int  $project_id  project id
-	 *
 	 * @return the results to be displayed to the user
 	 */
-	public function getWinners($project_id)
+	public function getWinners()
 	{
 		$rounds           = $this->getRounds();
-		$projectround_ids = array();
-
-		foreach ($rounds as $r)
-		{
-			$projectround_ids[] = $r->projectround_id;
-		}
+		$projectroundIds = ArrayHelper::getColumn($rounds, 'projectround_id');
 
 		$winners = array();
 
-		if (count($projectround_ids))
+		if (count($projectroundIds))
 		{
 			$rankingtool = $this->_getRankingTool();
 
-			foreach ($projectround_ids as $pr)
+			foreach ($projectroundIds as $pr)
 			{
 				$ranking = $rankingtool->getIndividualsRankings($pr);
 				$first   = reset($ranking);

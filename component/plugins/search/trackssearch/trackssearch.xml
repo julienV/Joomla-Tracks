@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.7" type="plugin" group="search" method="upgrade">
+	<name>Search - Tracks</name>
+	<author>Julien Vonthron</author>
+	<authorEmail>julien.vonthron@gmail.com</authorEmail>
+	<authorUrl>http://www.jlv-solutions.com</authorUrl>
+	<creationDate>##DATE##</creationDate>
+	<copyright>(C) 2008,2009,2010 Julien Vonthron. All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl.html</license>
+	<version>3.0.12</version>
+	<tag>##VERSION##</tag>
+	<description>PLG_TRACKS_SEARCH_DESC</description>
+
+	<files>
+		<filename plugin="trackssearch">trackssearch.php</filename>
+		<filename>index.html</filename>
+		<folder>language</folder>
+	</files>
+
+	<config>
+		<fields name="params">
+
+			<fieldset name="basic">
+				<field name="search_limit" type="text"
+					   size="5" default="50"
+					   label="PLG_TRACKS_SEARCH_Search_Limit"
+					   description="PLG_TRACKS_SEARCH_Number_of_Search_items_to_return"/>
+
+			</fieldset>
+		</fields>
+	</config>
+
+</extension>

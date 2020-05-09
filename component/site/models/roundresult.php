@@ -158,7 +158,6 @@ class TracksModelRoundResult extends TrackslibModelFrontbase
 			->select('srt.points_attribution, srt.count_points')
 			->select('sr.rank_offset')
 			->select('i.first_name, i.last_name, i.nickname, i.country_code, i.country_code')
-			->select('CASE WHEN rr.number THEN rr.number ELSE pi.number END AS number')
 			->select('t.name AS team_name, t.short_name AS team_short_name, t.acronym AS team_acronym, t.picture_small AS team_logo')
 			->select('CASE WHEN CHAR_LENGTH( i.alias ) THEN CONCAT_WS( \':\', i.id, i.alias ) ELSE i.id END AS slug')
 			->select('CASE WHEN CHAR_LENGTH( t.alias ) THEN CONCAT_WS( \':\', t.id, t.alias ) ELSE t.id END AS teamslug')
@@ -167,7 +166,6 @@ class TracksModelRoundResult extends TrackslibModelFrontbase
 			->innerJoin('#__tracks_eventtypes AS srt ON srt.id = sr.type')
 			->innerJoin('#__tracks_projects_rounds AS pr ON pr.id = sr.projectround_id')
 			->innerJoin('#__tracks_individuals AS i ON i.id = rr.individual_id')
-			->innerJoin('#__tracks_participants AS pi ON pi.individual_id = rr.individual_id AND pi.project_id = pr.project_id')
 			->leftJoin('#__tracks_teams AS t ON t.id = rr.team_id')
 			->where('rr.event_id = ' . $event_id);
 

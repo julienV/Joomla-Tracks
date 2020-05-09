@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `#__tracks_individuals` (
   `nickname` varchar(20) NOT NULL,
   `height` varchar(10) NULL,
   `weight` varchar(10) NULL,
-  `dob` date NULL,
+  `dob` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `hometown` varchar(50) NULL,
   `country_code` varchar(3) NULL,
   `user_id` int(11) NOT NULL,

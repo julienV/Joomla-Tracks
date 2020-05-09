@@ -25,6 +25,9 @@ if (($saveOrder) && ($this->canEdit))
 {
 	JHTML::_('rsortablelist.sortable', 'table-items', 'adminForm', strtolower($listDirn), $saveOrderUrl, false, true);
 }
+
+$projectRound = TrackslibEntityProjectround::load($this->state->get('projectround_id'));
+$project      = $projectRound->getProject();
 ?>
 <script type="text/javascript">
 	Joomla.submitbutton = function (pressbutton)
@@ -48,6 +51,11 @@ if (($saveOrder) && ($this->canEdit))
 		form.submit();
 	}
 </script>
+
+<div class="project-breadcrumb">
+	<a href="index.php?option=com_tracks&view=projectrounds"><?= $project->name ?></a>
+	/ <?= $projectRound->getRound()->name ?>
+</div>
 <form action="index.php?option=com_tracks&view=events&projectround_id=<?php echo $this->state->get('projectround_id'); ?>" class="admin" id="adminForm" method="post" name="adminForm">
 	<?php
 	echo RLayoutHelper::render(

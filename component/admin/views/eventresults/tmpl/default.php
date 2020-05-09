@@ -21,6 +21,10 @@ $search = $this->state->get('filter.search');
 
 RHelperAsset::load('eventresults.js');
 RHelperAsset::load('tracksbackend.css');
+
+$event        = TrackslibEntityEvent::load($this->state->get('event_id'));
+$projectRound = $event->getProjectRound();
+$project      = $projectRound->getProject();
 ?>
 <script type="text/javascript">
 	Joomla.submitbutton = function (pressbutton)
@@ -44,6 +48,11 @@ RHelperAsset::load('tracksbackend.css');
 		form.submit();
 	}
 </script>
+<div class="project-breadcrumb">
+	<a href="index.php?option=com_tracks&view=projectrounds"><?= $project->name ?></a>
+	/ <a href="index.php?option=com_tracks&view=events&projectround_id=<?= $projectRound->id ?>"><?= $projectRound->getRound()->name ?></a>
+	/ <?= $event->getEventtype()->name ?>
+</div>
 <form action="index.php?option=com_tracks&view=eventresults&event_id=<?php echo $this->state->get('event_id'); ?>" class="admin eventresults" id="adminForm" method="post" name="adminForm">
 	<?php
 	echo RLayoutHelper::render(
@@ -113,7 +122,7 @@ RHelperAsset::load('tracksbackend.css');
 						<?php echo JHtml::_('grid.id', $i, $row->id); ?>
 					</td>
 					<td class="result result-number">
-						<input type="text" name="number[]" value="<?php echo $row->number; ?>" size="5"/>
+						<input type="text" name="number[<?= $row->id ?>]" value="<?php echo $row->number; ?>" size="5"/>
 					</td>
 					<td>
 						<?php $itemTitle = $row->first_name ? $row->last_name . ', ' . $row->first_name : $row->last_name; ?>
@@ -126,13 +135,13 @@ RHelperAsset::load('tracksbackend.css');
 						<?php echo $row->team; ?>
 					</td>
 					<td class="result result-performance">
-						<input type="text" name="performance[]" value="<?php echo $row->performance; ?>"/>
+						<input type="text" name="performance[<?= $row->id ?>]" value="<?php echo $row->performance; ?>"/>
 					</td>
 					<td class="result result-rank">
-						<input type="text" name="rank[]" value="<?php echo $row->rank; ?>"/>
+						<input type="text" name="rank[<?= $row->id ?>]" value="<?php echo $row->rank; ?>"/>
 					</td>
 					<td class="result result-bonus">
-						<input type="text" name="bonus_points[]" value="<?php echo $row->bonus_points; ?>"/>
+						<input type="text" name="bonus_points[<?= $row->id ?>]" value="<?php echo $row->bonus_points; ?>"/>
 					</td>
 				</tr>
 			<?php endforeach; ?>

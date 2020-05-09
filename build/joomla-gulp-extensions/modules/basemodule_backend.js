@@ -17,7 +17,7 @@ var path       	= require('path');
 
 module.exports.addModule = function (name) {
 	var baseTask  = 'modules.backend.' + name;
-	var extPath   = '../modules/backend/' + name;
+	var extPath   = '../component/modules/backend/' + name;
 	var mediaPath = extPath + '/media';
 
 	// Clean

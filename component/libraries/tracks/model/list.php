@@ -6,6 +6,8 @@
  * @license     GNU General Public License version 2 or later
  */
 
+use Joomla\String\Inflector;
+
 defined('_JEXEC') or die;
 
 /**
@@ -38,5 +40,54 @@ abstract class TrackslibModelList extends RModelList
 		$form->bind(array('currentproject' => $current));
 
 		return $form;
+	}
+
+	/**
+	 * Search
+	 *
+	 * @param   array  $state  state
+	 *
+	 * @return array
+	 */
+	public function search($state)
+	{
+		foreach ($state as $key => $value)
+		{
+			$this->setState($key, $value);
+		}
+
+		return $this->getItems();
+	}
+
+	/**
+	 * Search and return as entities
+	 *
+	 * @param   array  $state  state
+	 *
+	 * @return array
+	 * @throws Exception
+	 */
+	public function searchEntities($state)
+	{
+		$items = $this->search($state);
+
+		if (empty($items))
+		{
+			return $items;
+		}
+
+		$entities    = [];
+		$inflector   = Inflector::getInstance();
+		$entityClass = 'TrackslibEntity' . ucfirst($inflector->toSingular($this->getName()));
+
+		foreach ($items as $item)
+		{
+			$entity = $entityClass::getInstance($item->id);
+			$entity->bind($item);
+
+			$entities[] = $entity;
+		}
+
+		return $entities;
 	}
 }
