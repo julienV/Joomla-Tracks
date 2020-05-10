@@ -12,6 +12,10 @@ require_once JPATH_SITE . '/administrator/components/com_tracks/models/participa
 
 /**
  * Individual Entity.
+ * @property int    $id
+ * @property string $first_name
+ * @property string $last_name
+ * @property string $nickname
  *
  * @since  __deploy_version__
  */
@@ -83,5 +87,27 @@ class TrackslibEntityIndividual extends TrackslibEntityBase
 		}
 
 		return $stats;
+	}
+
+	/**
+	 * Get name from first and last name
+	 *
+	 * @return string
+	 */
+	public function getFullName()
+	{
+		$name = [];
+
+		if ($this->first_name)
+		{
+			$name[] = $this->first_name;
+		}
+
+		if ($this->last_name)
+		{
+			$name[] = $this->last_name;
+		}
+
+		return implode(' ', $name);
 	}
 }

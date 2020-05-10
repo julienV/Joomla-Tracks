@@ -12,8 +12,13 @@
 */
  // no direct access
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Router\Route;
 
-defined('_JEXEC') or die('Restricted access'); ?>
+defined('_JEXEC') or die('Restricted access');
+
+$team = TrackslibEntityTeam::load($this->data->id);
+?>
 
 <div id="tracks" class="tracks-team">
 	<!-- Title -->
@@ -74,24 +79,63 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 	<?php echo $this->loadTemplate('vehicle'); ?>
 
-	<?php if (!empty($this->individuals)): ?>
+	<?php if (!empty($team->getProjects())): ?>
 	<section class="tracks-team__individuals">
 		<h3 class="tracks-team__individuals__title">
-			<?php echo JTExt::_('COM_TRACKS_VIEW_TEAM_INDIVIDUALS'); ?>
+			<?= Text::_('COM_TRACKS_VIEW_TEAM_INDIVIDUALS'); ?>
 		</h3>
-		<?php foreach ($this->individuals as $proj): ?>
+		<?php foreach ($team->getProjects() as $project): ?>
 		<div class="tracks-team__individuals__project">
 			<div class="tracks-team__individuals__project__title">
-				<?php echo current($proj)->project_name; ?>
+				<a href="<?= Route::_(TrackslibHelperRoute::getProjectRoute($project->id)) ?>">
+					<?php echo $project->name; ?>
+				</a>
 			</div>
-			<div class="tracks-team__individuals__project__individuals">
-			<?php foreach ($proj as $i): ?>
-				<?php $text = ($i->number ? $i->number.' ' : '').$i->first_name.' '.$i->last_name; ?>
-				<div class="tracks-team__individuals__project__individuals__individual">
-					<?php echo JHTML::link(TrackslibHelperRoute::getIndividualRoute($i->slug, $i->projectslug), $text); ?>
-				</div>
-			<?php endforeach; ?>
-			</div>
+			<table class="tracks-team__individuals__project__individuals">
+				<thead>
+					<tr>
+						<th class="tracks-team__individuals__project__individuals__name">
+						</th>
+						<th class="tracks-team__individuals__project__individuals__rank">
+							<?= Text::_('COM_TRACKS_RANK'); ?>
+						</th>
+						<th class="tracks-team__individuals__project__individuals__points">
+							<?= Text::_('COM_TRACKS_POINTS'); ?>
+						</th>
+						<th class="tracks-team__individuals__project__individuals__wins">
+							<?= Text::_('COM_TRACKS_WINS'); ?>
+						</th>
+						<th class="tracks-team__individuals__project__individuals__podiums">
+							<?= Text::_('COM_TRACKS_TABLE_HEADER_TOP3'); ?>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+				<?php foreach ($team->getProjectParticipants($project->id) as $participant): ?>
+					<tr>
+						<td class="tracks-team__individuals__project__individuals__name">
+							<a href="<?= Route::_(TrackslibHelperRoute::getIndividualRoute($participant->individual_id)) ?>">
+								<?php if ($participant->number): ?>
+								<span class="tracks-team__individuals__project__individuals__name__number"><?= $participant->number ?></span>
+								<?php endif; ?><?= $participant->getFullName() ?>
+							</a>
+						</td>
+						<td class="tracks-team__individuals__project__individuals__rank">
+							<?= $participant->getRank() ?>
+						</td>
+						<td class="tracks-team__individuals__project__individuals__points">
+							<?= $participant->getPoints() ?>
+						</td>
+						<td class="tracks-team__individuals__project__individuals__wins">
+							<?= $participant->getTop(1) ?>
+						</td>
+						<td class="tracks-team__individuals__project__individuals__podiums">
+							<?= $participant->getTop(3) ?>
+						</td>
+					</tr>
+				<?php endforeach; ?>
+				</tbody>
+			</table>
 		</div>
 		<?php endforeach; ?>
 	</section>

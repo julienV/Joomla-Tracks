@@ -133,6 +133,10 @@ div.edit div.edit-pic {
     padding: 20px 0;
   }
 
+  h3 {
+    padding: 10px 0;
+  }
+
   &__details {
     background: @color-lightgrey;
     padding: 20px 10px;
@@ -202,16 +206,27 @@ div.edit div.edit-pic {
       padding: 10px 0;
       &__title {
         padding: 10px;
-        margin-left: 10px;
         font-weight: bold;
         font-size: 1.1em;
         background: @color-lightgrey;
       }
 
       &__individuals {
-        padding: 0 10px;
-        &__individual {
-          padding: 5px 10px;
+        margin-left: 10px;
+        padding: 10px;
+
+        td, th {
+          padding: 5px 10px 5px;
+        }
+
+        td {
+          text-align: right;
+        }
+
+        td&__name {
+          padding-left: 0px;
+          padding-right: 20px;
+          text-align: left;
         }
       }
     }

@@ -56,7 +56,7 @@ class TrackslibEntityParticipant extends TrackslibEntityBase
 	/**
 	 * Get individual
 	 *
-	 * @return bool|TrackslibEntityProject
+	 * @return boolean|TrackslibEntityIndividual
 	 */
 	public function getIndividual()
 	{
@@ -66,5 +66,67 @@ class TrackslibEntityParticipant extends TrackslibEntityBase
 		}
 
 		return TrackslibEntityIndividual::load($this->individual_id);
+	}
+
+	/**
+	 * Get name from first and last name
+	 *
+	 * @return string
+	 */
+	public function getFullName()
+	{
+		return $this->getIndividual()->getFullName();
+	}
+
+	/**
+	 * Get full ranking data object
+	 *
+	 * @return array
+	 */
+	public function getRankingData()
+	{
+		return $this->getProject()->getRankingTool()->getIndividualRanking($this->individual_id);
+	}
+
+	/**
+	 * Get rank
+	 *
+	 * @return mixed
+	 */
+	public function getRank()
+	{
+		return $this->getRankingData()->rank;
+	}
+
+	/**
+	 * Get points
+	 *
+	 * @return mixed
+	 */
+	public function getPoints()
+	{
+		return $this->getRankingData()->points;
+	}
+
+	/**
+	 * Get wins
+	 *
+	 * @return int
+	 */
+	public function getWins()
+	{
+		return TrackslibHelperTools::getCustomTop($this->getRankingData(), 1);
+	}
+
+	/**
+	 * Get finishes below rank
+	 *
+	 * @param   int  $rank  rank limit
+	 *
+	 * @return int
+	 */
+	public function getTop($rank)
+	{
+		return TrackslibHelperTools::getCustomTop($this->getRankingData(), $rank);
 	}
 }
