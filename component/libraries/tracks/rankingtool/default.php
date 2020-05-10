@@ -354,6 +354,8 @@ class TrackslibRankingtoolDefault implements RankingtoolInterface
 					{
 						$teams[$r->team_id]->wins++;
 					}
+
+					$teams[$r->team_id]->finishes[] = $r->global_rank;
 				}
 			}
 
@@ -414,6 +416,7 @@ class TrackslibRankingtoolDefault implements RankingtoolInterface
 				$results[$i]->points    = 0;
 				$results[$i]->best_rank = 0;
 				$results[$i]->wins      = 0;
+				$results[$i]->finishes  = array();
 				$results[$i]->rank      = null;
 			}
 		}

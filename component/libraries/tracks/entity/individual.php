@@ -47,9 +47,15 @@ class TrackslibEntityIndividual extends TrackslibEntityBase
 		);
 	}
 
+	/**
+	 * Get stats
+	 *
+	 * @return array
+	 */
 	public function getStats()
 	{
 		$participants = $this->getParticipants();
+
 		$stats = [
 			'projects' => count($participants),
 			'results'  => [],
