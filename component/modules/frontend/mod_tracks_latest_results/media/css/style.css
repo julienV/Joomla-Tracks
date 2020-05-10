@@ -1,37 +1,37 @@
-.mod_tracksresults {
+.mod_tracks_latest_results {
   padding: 20px;
-  max-width: 300px;
+  max-width: 500px;
 }
-.mod_tracksresults__roundname {
+.mod_tracks_latest_results__roundname {
   padding: 5px 0;
   margin-bottom: 5px;
   font-size: 1.2em;
   text-align: center;
 }
-.mod_tracksresults__roundname__name {
+.mod_tracks_latest_results__roundname__name {
   font-weight: bold;
 }
-.mod_tracksresults__eventtype {
+.mod_tracks_latest_results__eventtype {
   text-align: center;
   font-weight: bold;
   padding: 5px 0;
   margin-bottom: 5px;
 }
-.mod_tracksresults table {
+.mod_tracks_latest_results table {
   width: 100%;
 }
-.mod_tracksresults table th {
+.mod_tracks_latest_results table th {
   border-bottom: 1px solid #ECECEC;
   padding-bottom: 4px;
   text-align: left;
 }
-.mod_tracksresults table th,
-.mod_tracksresults table td {
+.mod_tracks_latest_results table th,
+.mod_tracks_latest_results table td {
   border-collapse: collapse;
   margin: 0pt 0pt 1px;
   padding: 2px 10px;
 }
-.mod_tracksresults .fulltablelink {
+.mod_tracks_latest_results .fulltablelink {
   display: block;
   padding: 10px 0;
   text-align: center;

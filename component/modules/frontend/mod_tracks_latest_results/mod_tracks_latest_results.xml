@@ -24,7 +24,6 @@
 	<!-- media files -->
 	<media folder="media" destination="mod_tracks_latest_results">
 		<folder>css</folder>
-		<folder>js</folder>
 	</media>
 
 	<config>
@@ -36,6 +35,12 @@
 					   query="SELECT id AS value, name AS subroundtype_id FROM #__tracks_eventtypes ORDER BY name ASC">
 					<option value="">JSelect</option>
 				</field>
+
+				<field name="date_format"
+					   type="text"
+					   default=""
+					   label="MOD_TRACKS_LATEST_RESULTS_DATE_FORMAT"
+					   description="MOD_TRACKS_LATEST_RESULTS_DATE_FORMAT_DESC"/>
 
 				<field name="count" type="text" default="5"
 					   label="MOD_TRACKS_LATEST_RESULTS_COUNT"

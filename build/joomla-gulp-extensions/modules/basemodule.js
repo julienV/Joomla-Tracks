@@ -20,7 +20,7 @@ module.exports.addModule = function (name) {
 	const baseTask  = 'modules.frontend.' + name;
 	const extPath   = '../component/modules/frontend/' + name;
 	const mediaPath = extPath + '/media';
-	const assetsPath = '../assets/components/modules/frontend/' + name;
+	const assetsPath = '../assets/components/modules/' + name;
 
 	function compileLessFile(src, destinationFolder, options) {
 		return gulp.src(src)

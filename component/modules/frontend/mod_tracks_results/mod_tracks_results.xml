@@ -26,7 +26,6 @@
 	<!-- media files -->
 	<media folder="media" destination="mod_tracks_results">
 		<folder>css</folder>
-		<folder>js</folder>
 	</media>
 
 	<config>
@@ -46,6 +45,7 @@
 					   default=""
 					   label="MOD_TRACKS_RESULTS_DATE_FORMAT"
 					   description="MOD_TRACKS_RESULTS_DATE_FORMAT_DESC"/>
+
 				<field name="showteams" type="radio" default="1" label="MOD_TRACKS_RESULTS_Show_teams" description="">
 					<option value="0">JNo</option>
 					<option value="1">JYes</option>

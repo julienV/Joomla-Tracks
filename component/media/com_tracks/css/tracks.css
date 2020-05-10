@@ -5,7 +5,6 @@ table.raceResults th {
 }
 table.raceResults th,
 table.raceResults td {
-  background-color: #FFFFFF;
   border-collapse: collapse;
   font-size: 1.2em;
   line-height: 1.2em;
@@ -16,7 +15,6 @@ table#tracksprofile th {
   text-align: right;
   width: 140px;
   font-weight: bold;
-  background-color: #ECECEC;
 }
 .tracks__individualsGallery {
   display: flex;
@@ -199,7 +197,6 @@ div.edit div.edit-pic {
 }
 .tracks-round__events__list th,
 .tracks-round__events__list td {
-  background-color: #FFFFFF;
   border-collapse: collapse;
   font-size: 1.2em;
   line-height: 1.2em;

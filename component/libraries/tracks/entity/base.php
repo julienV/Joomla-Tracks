@@ -6,6 +6,8 @@
  * @license     GNU General Public License version 2 or later
  */
 
+use Tracks\Helper\Helper;
+
 defined('_JEXEC') or die;
 
 /**
@@ -498,6 +500,11 @@ abstract class TrackslibEntityBase
 		if (!$item || !property_exists($item, $itemProperty))
 		{
 			return null;
+		}
+
+		if (!Helper::parseDatetime($item->{$itemProperty}) && !Helper::parseDate($item->{$itemProperty}))
+		{
+			return false;
 		}
 
 		if ($format && $translateFormat)
