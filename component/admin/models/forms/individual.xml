@@ -30,6 +30,17 @@
 				required="false"/>
 
 		<field
+				name="team_id"
+				type="sql"
+				label="COM_TRACKS_Team"
+				description="COM_TRACKS_Team"
+				class="inputbox"
+				query="SELECT id AS value, name AS team_id FROM #__tracks_teams ORDER BY name ASC "
+		>
+			<option value="">COM_TRACKS_Select_a_team</option>
+		</field>
+
+		<field
 				name="nickname"
 				type="text"
 				label="COM_TRACKS_Nickname"

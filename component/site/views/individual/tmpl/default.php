@@ -14,13 +14,14 @@
 // no direct access
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
+use Joomla\Registry\Registry;
 use Tracks\Helper\Config;
 
 defined('_JEXEC') or die('Restricted access');
 
 $link = null;
 $res = $this->dispatcher->trigger('getProfileLink', array($this->data->user_id, &$link));
-$extra = new \Joomla\Registry\Registry($this->data->params);
+$extra = new Registry($this->data->params);
 ?>
 <div id="tracks" class="tracks-individual">
 	<!-- Title -->
@@ -62,13 +63,14 @@ $extra = new \Joomla\Registry\Registry($this->data->params);
 					</div>
 				</div>
 			<?php endif; ?>
-			<?php if (!empty($this->data->projectdata->team_name)): ?>
+			<?php if (!empty($this->data->team_id)): ?>
+				<?php $team = TrackslibEntityTeam::load($this->data->team_id); ?>
 				<div class="tracks-individual__details__list__item">
 					<div class="tracks-individual__details__list__item__label">
 						<?php echo Text::_('COM_TRACKS_INDIVIDUAL_TEAM'); ?>:
 					</div>
 					<div class="tracks-individual__details__list__item__value">
-							<?php echo JHTML::link(TrackslibHelperRoute::getTeamRoute($this->data->projectdata->teamslug, $this->data->projectdata->projectslug), $this->data->projectdata->team_name); ?>
+							<?php echo JHTML::link(TrackslibHelperRoute::getTeamRoute($team->id), $team->name); ?>
 					</div>
 				</div>
 			<?php endif; ?>

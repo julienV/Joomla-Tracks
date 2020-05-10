@@ -11,7 +11,9 @@ CREATE TABLE IF NOT EXISTS `#__tracks_projects` (
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL,
   `published` tinyint(1) NOT NULL,
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY  (`id`),
+  KEY `competition_id` (`competition_id`),
+  KEY `season_id` (`season_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `#__tracks_competitions` (
@@ -88,6 +90,7 @@ CREATE TABLE IF NOT EXISTS `#__tracks_clubs` (
 
 CREATE TABLE IF NOT EXISTS `#__tracks_individuals` (
   `id` int(11) NOT NULL auto_increment,
+  `team_id` int(11) NOT NULL,
   `last_name` varchar(40) NOT NULL,
   `first_name` varchar(20) NOT NULL,
   `alias` varchar(100) NOT NULL default '',
@@ -109,7 +112,8 @@ CREATE TABLE IF NOT EXISTS `#__tracks_individuals` (
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL,
   `params` text NOT NULL,
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY  (`id`),
+  KEY `team_id` (`team_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `#__tracks_rounds` (
