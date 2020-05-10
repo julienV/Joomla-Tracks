@@ -1,25 +1,37 @@
-var gulp = require('gulp');
+const gulp = require('gulp');
 
-var config = require('../../config.js');
+const config = require('../../config.js');
 
 // Dependencies
-var browserSync = require('browser-sync');
-var minifyCSS   = require('gulp-minify-css');
-var rename      = require('gulp-rename');
-var del         = require('del');
-var less        = require('gulp-less');
-var uglify      = require('gulp-uglify');
-var zip         = require('gulp-zip');
-var fs          = require('fs');
-var xml2js      = require('xml2js');
-var parser      = new xml2js.Parser();
-var path       	= require('path');
-var replace     = require('gulp-replace');
+const browserSync = require('browser-sync');
+const rename      = require('gulp-rename');
+const del         = require('del');
+const less        = require('gulp-less');
+const minifyCSS   = require('gulp-minify-css');
+const uglify      = require('gulp-uglify');
+const zip         = require('gulp-zip');
+const fs          = require('fs');
+const xml2js      = require('xml2js');
+const parser      = new xml2js.Parser();
+const path        = require('path');
+const replace     = require('gulp-replace');
 
 module.exports.addModule = function (name) {
-	var baseTask  = 'modules.frontend.' + name;
-	var extPath   = '../component/modules/frontend/' + name;
-	var mediaPath = extPath + '/media';
+	const baseTask  = 'modules.frontend.' + name;
+	const extPath   = '../component/modules/frontend/' + name;
+	const mediaPath = extPath + '/media';
+	const assetsPath = '../assets/components/modules/frontend/' + name;
+
+	function compileLessFile(src, destinationFolder, options) {
+		return gulp.src(src)
+			.pipe(less(options))
+			.pipe(gulp.dest(mediaPath + '/' + destinationFolder))
+			.pipe(minifyCSS())
+			.pipe(rename(function (path) {
+				path.basename += '.min';
+			}))
+			.pipe(gulp.dest(mediaPath + '/' + destinationFolder));
+	}
 
 	// Clean
 	gulp.task('clean:' + baseTask, ['clean:' + baseTask + ':media'], function() {
@@ -51,11 +63,23 @@ module.exports.addModule = function (name) {
 			.pipe(browserSync.reload({stream:true}));
 	});
 
+	// Less
+	gulp.task('less:' + baseTask, function () {
+		return compileLessFile(
+			[
+				assetsPath + '/less/**/*.less'
+			],
+			'css',
+			{paths: [path.join(assetsPath, 'less')]}
+		);
+	});
+
 	// Watch
 	gulp.task('watch:' + baseTask,
 		[
 			'watch:' + baseTask + ':module',
-			'watch:' + baseTask + ':media'
+			'watch:' + baseTask + ':media',
+			'watch:' + baseTask + ':less'
 		],
 		function() {
 		});
@@ -74,6 +98,13 @@ module.exports.addModule = function (name) {
 		gulp.watch([
 			extPath + '/media/**'
 		], ['copy:' + baseTask + ':media']);
+	});
+
+	// Watch: Module
+	gulp.task('watch:' + baseTask + ':less', function() {
+		gulp.watch([
+			assetsPath + '/less/**'
+		], ['less:' + baseTask]);
 	});
 
 	// Update site xml

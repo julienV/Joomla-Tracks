@@ -35,6 +35,18 @@ abstract class Helper
 
 		return ($valid['warning_count'] == 0 && $valid['error_count'] == 0) ? Factory::getDate($date) : false;
 	}
+	/**
+	 * Get parsed date
+	 *
+	 * @param   string  $date    date to parse
+	 * @param   string  $format  date time format
+	 *
+	 * @return \Joomla\CMS\Date\Date|boolean
+	 */
+	public static function parseDatetime($date, $format = 'Y-m-d H:i:s')
+	{
+		return self::parseDate($date, $format);
+	}
 
 	/**
 	 * Return formated start-end date of a round

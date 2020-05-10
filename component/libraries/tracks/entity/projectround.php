@@ -12,6 +12,9 @@ defined('_JEXEC') or die;
  * Project round Entity.
  *
  * @property integer id
+ * @property integer project_id
+ * @property integer round_id
+ * @property string  start_date
  *
  * @since  3.0.6
  */

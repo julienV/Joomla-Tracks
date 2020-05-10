@@ -6,6 +6,8 @@
  * @license     GNU General Public License version 2 or later
  */
 
+use Tracks\Helper\Helper;
+
 defined('_JEXEC') or die('Restricted access');
 
 /**
@@ -27,7 +29,7 @@ class ModTracksResults
 	/**
 	 * Round to display
 	 *
-	 * @var object
+	 * @var TrackslibEntityProjectround
 	 */
 	var $_round = null;
 
@@ -50,15 +52,15 @@ class ModTracksResults
 	/**
 	 * Get list
 	 *
-	 * @param   JRegistry  &$params  params
+	 * @param   JRegistry  $params  params
 	 *
 	 * @return null
 	 */
-	public function getList(&$params)
+	public function getList($params)
 	{
 		$model = $this->_getModel();
 		$round = $this->getRound($params);
-		$result = $model->getSubrounds($round->projectround_id, $params->get('subroundtype_id'));
+		$result = $model->getSubrounds($round->id, $params->get('subroundtype_id'));
 
 		if ($result)
 		{
@@ -73,59 +75,56 @@ class ModTracksResults
 	/**
 	 * Get project
 	 *
-	 * @param   JRegistry  &$params  params
+	 * @param   JRegistry  $params  params
 	 *
 	 * @return object
 	 */
-	public function getProject(&$params)
+	public function getProject($params)
 	{
-		$model = $this->_getModel();
-
-		return $model->getProject($params->get('project_id'));
+		return TrackslibEntityProject::load($params->get('project_id'));
 	}
 
 	/**
-	 * Get round
+	 * Get latest round
 	 *
-	 * @param   JRegistry  &$params  params
+	 * @param   JRegistry  $params  params
 	 *
-	 * @return object
+	 * @return TrackslibEntityProjectround
 	 */
-	public function getRound(&$params)
+	public function getRound($params)
 	{
 		if ($this->_round)
 		{
 			return $this->_round;
 		}
 
-		$db = JFactory::getDBO();
+		$db = \JFactory::getDbo();
+		$query = $db->getQuery(true)
+			->select('pr.*')
+			->from('#__tracks_projects_rounds AS pr')
+			->where('pr.project_id = ' . (int) $params->get('project_id'))
+			->where('pr.published = 1')
+			->order('pr.start_date ASC, pr.ordering ASC');
 
-		$sql = ' SELECT pr.id AS projectround_id, pr.start_date, pr.end_date, pr.round_id, '
-			. ' r.name, '
-			. ' CASE WHEN CHAR_LENGTH( r.alias ) THEN CONCAT_WS( \':\', r.id, r.alias ) ELSE r.id END AS slug '
-			. ' FROM #__tracks_projects_rounds AS pr '
-			. ' INNER JOIN #__tracks_rounds AS r ON r.id = pr.round_id '
-			. ' WHERE project_id = ' . $params->get('project_id')
-			. '   AND pr.published = 1 '
-			. ' ORDER BY start_date ASC, pr.ordering ASC ';
-		$db->setQuery($sql);
-		$rounds = $db->loadObjectList();
+		$db->setQuery($query);
 
-		if ($db->getErrorNum())
+		/**
+		 * @var TrackslibEntityProjectround[] $projectRounds
+		 */
+		$projectRounds = TrackslibEntityProjectround::loadArray($db->loadObjectList());
+
+		if (!empty($projectRounds))
 		{
-			echo $db->getErrorMsg();
-		}
-
-		if ($rounds)
-		{
-			$this->_round = $rounds[0];
+			$this->_round = $projectRounds[0];
 
 			// Advance round until round start date is in the future.
-			foreach ($rounds as $r)
+			foreach ($projectRounds as $r)
 			{
-				if ($r->start_date != '0000-00-00 00:00:00')
+				$date = Helper::parseDatetime($r->start_date);
+
+				if ($date)
 				{
-					if (strtotime($r->start_date) > time())
+					if ($date->getTimestamp() > time())
 					{
 						break;
 					}

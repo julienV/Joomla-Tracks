@@ -16,14 +16,18 @@
 	<description>MOD_TRACKS_RESULTS_DESC</description>
 	<files>
 		<filename module="mod_tracks_results">mod_tracks_results.php</filename>
-		<filename>mod_tracks_results.css</filename>
-		<filename>mod_tracks_results.js</filename>
 		<filename>index.html</filename>
 		<filename>helper.php</filename>
 		<filename>tmpl/default.php</filename>
 		<filename>tmpl/index.html</filename>
 		<folder>language</folder>
 	</files>
+
+	<!-- media files -->
+	<media folder="media" destination="mod_tracks_results">
+		<folder>css</folder>
+		<folder>js</folder>
+	</media>
 
 	<config>
 		<fields name="params">
@@ -36,6 +40,12 @@
 				<field name="subroundtype_id" type="sql" default="0" label="MOD_TRACKS_RESULTS_Select_a_subround_type"
 					   description="MOD_TRACKS_RESULTS_Select_a_subround_type"
 					   query="SELECT id AS value, name AS subroundtype_id FROM #__tracks_eventtypes ORDER BY name ASC"/>
+
+				<field name="date_format"
+					   type="text"
+					   default=""
+					   label="MOD_TRACKS_RESULTS_DATE_FORMAT"
+					   description="MOD_TRACKS_RESULTS_DATE_FORMAT_DESC"/>
 				<field name="showteams" type="radio" default="1" label="MOD_TRACKS_RESULTS_Show_teams" description="">
 					<option value="0">JNo</option>
 					<option value="1">JYes</option>

@@ -1,0 +1,39 @@
+.mod_tracksresults {
+  padding: 20px;
+  max-width: 300px;
+}
+.mod_tracksresults__roundname {
+  padding: 5px 0;
+  margin-bottom: 5px;
+  font-size: 1.2em;
+  text-align: center;
+}
+.mod_tracksresults__roundname__name {
+  font-weight: bold;
+}
+.mod_tracksresults__eventtype {
+  text-align: center;
+  font-weight: bold;
+  padding: 5px 0;
+  margin-bottom: 5px;
+}
+.mod_tracksresults table {
+  width: 100%;
+}
+.mod_tracksresults table th {
+  border-bottom: 1px solid #ECECEC;
+  padding-bottom: 4px;
+  text-align: left;
+}
+.mod_tracksresults table th,
+.mod_tracksresults table td {
+  background-color: #FFFFFF;
+  border-collapse: collapse;
+  margin: 0pt 0pt 1px;
+  padding: 2px 10px;
+}
+.mod_tracksresults .fulltablelink {
+  display: block;
+  padding: 10px 0;
+  text-align: center;
+}

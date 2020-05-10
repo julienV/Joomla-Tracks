@@ -34,8 +34,9 @@ if (!$params->get('project_id'))
 
 $helper = new ModTracksResults;
 
-$project = $helper->getProject($params);
-$round   = $helper->getRound($params);
-$list    = $helper->getList($params);
+$project   = $helper->getProject($params);
+$round     = $helper->getRound($params);
+$list      = $helper->getList($params);
+$eventType = TrackslibEntityEventtype::load((int) $params->get('subroundtype_id'));
 
 require JModuleHelper::getLayoutPath('mod_tracks_results');
