@@ -51,8 +51,4 @@ $helper = new ModTracksTeamsocial;
 
 $links = $helper->getTeamLinks($team_id);
 
-// Add css file
-$document = JFactory::getDocument();
-$document->addStyleSheet(JURI::base() . 'modules/mod_tracks_teamsocial/mod_tracks_teamsocial.css');
-
 require JModuleHelper::getLayoutPath('mod_tracks_teamsocial');

@@ -41,8 +41,4 @@ if (!$project)
 	return JText::_('No_project_specified');
 }
 
-// Add css file
-$document = JFactory::getDocument();
-$document->addStyleSheet(JURI::base() . 'modules/mod_tracks_ranking/mod_tracks_ranking.css');
-
 require JModuleHelper::getLayoutPath('mod_tracks_ranking');

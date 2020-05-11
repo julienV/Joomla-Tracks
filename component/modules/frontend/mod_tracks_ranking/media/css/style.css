@@ -1,23 +1,23 @@
-.mod_tracks_teamranking table {
+.mod_tracksranking table {
   border-collapse: collapse;
 }
-.mod_tracks_teamranking table th,
-.mod_tracks_teamranking table td {
+.mod_tracksranking table th,
+.mod_tracksranking table td {
   margin: 0pt 0pt 1px;
   padding: 2px 10px;
 }
-.mod_tracks_teamranking table th {
+.mod_tracksranking table th {
   border-bottom: 1px solid #ECECEC;
   padding-bottom: 4px;
   text-align: left;
 }
-.mod_tracks_teamranking .project-name {
+.mod_tracksranking .project-name {
   font-weight: bold;
   font-size: 1.2em;
   text-align: center;
   padding: 10px 0;
 }
-.mod_tracks_teamranking .fulltablelink {
+.mod_tracksranking .fulltablelink {
   display: block;
   padding: 10px 0;
   text-align: center;

@@ -15,6 +15,8 @@
 defined('_JEXEC') or die('Restricted access');
 
 $img_dir = JPATH_SITE.'/';
+
+JHtml::stylesheet('mod_tracks_ranking/style.css', array('relative' => true));
 ?>
 <div class="mod_tracksranking">
 	<div class="project-name"><?php echo $project->name; ?></div>

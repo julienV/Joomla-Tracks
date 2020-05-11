@@ -16,13 +16,15 @@
 	<description>MOD_TRACKS_TEAMSOCIAL_XML_DESC</description>
 	<files>
 		<filename module="mod_tracks_teamsocial">mod_tracks_teamsocial.php</filename>
-		<filename>mod_tracks_teamsocial.css</filename>
-		<filename>index.html</filename>
 		<filename>helper.php</filename>
-		<filename>tmpl/default.php</filename>
-		<filename>tmpl/index.html</filename>
 		<folder>language</folder>
+		<folder>tmpl</folder>
 	</files>
+
+	<!-- media files -->
+	<media folder="media" destination="mod_tracks_teamsocial">
+		<folder>css</folder>
+	</media>
 
 	<config>
 		<fields name="params">

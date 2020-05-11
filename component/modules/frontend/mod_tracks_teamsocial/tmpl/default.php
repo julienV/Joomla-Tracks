@@ -15,6 +15,8 @@
 defined('_JEXEC') or die('Restricted access');
 
 JHtml::_('behavior.tooltip');
+JHtml::stylesheet('mod_tracks_teamsocial/style.css', array('relative' => true));
+
 ?>
 <div class="mod_tracks_teamsocial">
 	<ul>
