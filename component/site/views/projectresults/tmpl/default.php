@@ -11,11 +11,14 @@
  * See COPYRIGHT.php for copyright notices and details.
  */
 defined('_JEXEC') or die('Restricted access');
+
+use Tracks\Layout\LayoutHelper;
 ?>
 
 <div id="tracks">
 
 	<h2 class="tracks-title"><?php echo $this->title; ?></h2>
+	<?= LayoutHelper::render('project.navigation', ['project' => $this->project]) ?>
 
 	<table class="raceResults" cellspacing="0" cellpadding="0" summary="">
 		<thead>

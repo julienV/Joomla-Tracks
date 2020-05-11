@@ -12,6 +12,7 @@
  */
 // no direct access
 use Joomla\CMS\Plugin\PluginHelper;
+use Tracks\Layout\LayoutHelper;
 
 defined('_JEXEC') or die('Restricted access');
 jimport('joomla.filter.output');
@@ -25,6 +26,7 @@ $customFields        = $enabledCustomFields ? \FieldsHelper::getFields('com_trac
 <div id="tracks">
 
 	<h2 class="tracks-title"><?php echo $this->round->name . ' - ' . $this->project->name; ?></h2>
+	<?= LayoutHelper::render('project.navigation', ['project' => $this->project]) ?>
 
 	<?php if ($this->params->get('resultview_results_showrounddesc', 1) && !empty($this->round->description)): ?>
 		<div class="tracks-round-description">

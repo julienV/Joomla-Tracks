@@ -12,12 +12,14 @@
  */
 
 use Joomla\CMS\HTML\HTMLHelper;
+use Tracks\Layout\LayoutHelper;
 
 defined('_JEXEC') or die('Restricted access'); ?>
 
 <div id="tracks">
 
 	<h2 class="tracks-title"><?php echo $this->project->name . ' ' . JText::_('COM_TRACKS_Participants'); ?></h2>
+	<?= LayoutHelper::render('project.navigation', ['project' => $this->project]) ?>
 
 	<div class="tracks__individualsGallery">
 		<?php
