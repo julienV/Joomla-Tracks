@@ -1,3 +1,19 @@
+3.0.13
+ *  Place modules css in media folder for easier override
+ *  Added project navigation to frontend project views
+ *  Added individuals stats to team view
+ *  Style clean up
+ *  Fixed warning in latest results module
+ *  Removed unused updateserver reference for modules
+ *  Added team stats
+ *  Add team to individual
+ *  styling of teams view
+ *  fix missing language strings
+ *  https for link to jlv-solutions
+ *  styling of rounds and individuals lists
+ *  show history of winners in round view
+ *  Modifications for profile module
+
 3.0.12
  *  Package modules and plugins directly with component
  *  breadcrumb in project view backend

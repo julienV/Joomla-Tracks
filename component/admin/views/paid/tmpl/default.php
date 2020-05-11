@@ -15,6 +15,11 @@ $extensions = [
 		'name'        => 'Custom fields plugin',
 		'description' => 'Integrate Joomla custom fields to Tracks',
 		'link'        => 'https://jlv-solutions.com/products/tracks/tracks-custom-fields'
+	],
+	[
+		'name'        => 'Individual and paid modules',
+		'description' => 'Display individual and team information anywere on your site',
+		'link'        => 'https://jlv-solutions.com/products/tracks/individual-and-team-modules'
 	]
 ];
 ?>
