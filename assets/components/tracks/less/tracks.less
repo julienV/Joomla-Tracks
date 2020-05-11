@@ -2,6 +2,8 @@
 @color-blue: #005e8d;;
 
 table.raceResults {
+  border-collapse: collapse;
+
   th {
     border-bottom: 1px solid @color-lightgrey;
     padding-bottom: 4px;
@@ -204,11 +206,17 @@ div.edit div.edit-pic {
   &__individuals {
     &__project {
       padding: 10px 0;
-      &__title {
+      &__header {
+        display:flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
         padding: 10px;
-        font-weight: bold;
-        font-size: 1.1em;
         background: @color-lightgrey;
+
+        &__title {
+          font-weight: bold;
+          font-size: 1.1em;
+        }
       }
 
       &__individuals {
@@ -279,21 +287,24 @@ div.edit div.edit-pic {
   }
 }
 
-.tracks-individuals, .tracks-rounds, .tracks-teams {
-  &__list {
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 40px;
+.tracks-alpha-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
 
-    &>div {
-      .letter {
-        font-weight: bold;
-        font-size: 2em;
-        padding: 15px 0;
-        text-transform: uppercase;
-      }
-
-      padding-right: 30px;
-    }
+  &__column {
+    padding-right: 30px;
   }
+
+  &__letter {
+    font-weight: bold;
+    font-size: 2em;
+    padding: 15px 0;
+    text-transform: uppercase;
+  }
+}
+
+.tracks-project-nav {
+  padding-bottom: 10px;
+  opacity: 0.7;
 }

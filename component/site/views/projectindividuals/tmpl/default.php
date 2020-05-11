@@ -17,7 +17,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 <div id="tracks">
 
-	<h2><?php echo $this->project->name . ' ' . JText::_('COM_TRACKS_Participants'); ?></h2>
+	<h2 class="tracks-title"><?php echo $this->project->name . ' ' . JText::_('COM_TRACKS_Participants'); ?></h2>
 
 	<div class="tracks__individualsGallery">
 		<?php

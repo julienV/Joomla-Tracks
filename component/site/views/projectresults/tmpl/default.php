@@ -15,7 +15,7 @@ defined('_JEXEC') or die('Restricted access');
 
 <div id="tracks">
 
-	<h2><?php echo $this->title; ?></h2>
+	<h2 class="tracks-title"><?php echo $this->title; ?></h2>
 
 	<table class="raceResults" cellspacing="0" cellpadding="0" summary="">
 		<thead>

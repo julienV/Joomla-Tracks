@@ -20,7 +20,7 @@ JHtml::_('behavior.formvalidation');
 ?>
 <div id="tracks">
 	<!-- Title -->
-	<h2><?php echo JText::_('COM_TRACKS_PAGETITLE_EDIT_INDIVIDUAL'); ?></h2>
+	<h2 class="tracks-title"><?php echo JText::_('COM_TRACKS_PAGETITLE_EDIT_INDIVIDUAL'); ?></h2>
 
 	<script type="text/javascript">
 		jQuery(document).ready(function()

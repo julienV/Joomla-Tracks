@@ -8,7 +8,7 @@
 defined('_JEXEC') or die('Restricted access'); ?>
 
 <div id="tracks">
-	<h2><?php echo JText::_('COM_TRACKS_project_list') ?></h2>
+	<h2 class="tracks-title"><?php echo JText::_('COM_TRACKS_project_list') ?></h2>
 
 	<table class="raceResults">
 		<thead>

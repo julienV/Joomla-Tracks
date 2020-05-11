@@ -13,9 +13,9 @@
 // no direct access
 defined('_JEXEC') or die('Restricted access'); ?>
 
-<div class="tracks-individuals">
+<div id="tracks" class="tracks-individuals">
 	<!-- Title -->
-	<h2><?php echo JText::_('COM_TRACKS_All_Individuals'); ?></h2>
+	<h2 class="tracks-title"><?php echo JText::_('COM_TRACKS_All_Individuals'); ?></h2>
 
 	<?php if ($total = count($this->rows)) : ?>
 		<?php
@@ -30,12 +30,12 @@ defined('_JEXEC') or die('Restricted access'); ?>
 		$first = $this->params->get('ordering') ? 'first_name' : 'last_name';
 		?>
 
-		<div class="tracks-individuals__list">
+		<div class="tracks-alpha-list">
 				<?php $letter = $this->firstLetter($column[0][0]->$first); ?>
 				<?php foreach ($column as $k => $c): ?>
-					<div class="tracks-individuals__list__column">
+					<div class="tracks-alpha-list__column">
 						<?php if ($k == 0): ?>
-							<div class="letter"><?php echo $letter; ?></div>
+							<div class="tracks-alpha-list__letter"><?php echo $letter; ?></div>
 						<?php endif; ?>
 						<?php
 						foreach ($c as $r)
@@ -45,11 +45,11 @@ defined('_JEXEC') or die('Restricted access'); ?>
 							if ($l != $letter)
 							{
 								$letter = $l; ?>
-								<div class="letter"><?php echo $letter; ?></div>
+								<div class="tracks-alpha-list__letter"><?php echo $letter; ?></div>
 							<?php
 							}
 							?>
-							<a href="<?php echo $link_round; ?>"
+							<a class="tracks-alpha-list__link" href="<?php echo $link_round; ?>"
 							   title="<?php echo JText::_('COM_TRACKS_Display_details') ?>">
 								<?php if ($this->params->get('ordering')): ?>
 									<?php echo $r->first_name . ', ' . $r->last_name; ?>

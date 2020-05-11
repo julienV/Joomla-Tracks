@@ -1,3 +1,6 @@
+table.raceResults {
+  border-collapse: collapse;
+}
 table.raceResults th {
   border-bottom: 1px solid #ECECEC;
   padding-bottom: 4px;
@@ -104,6 +107,10 @@ div.edit div.edit-pic {
 .tracks-team h2 {
   padding: 20px 0;
 }
+.tracks-individual h3,
+.tracks-team h3 {
+  padding: 10px 0;
+}
 .tracks-individual__details,
 .tracks-team__details {
   background: #ECECEC;
@@ -161,18 +168,32 @@ div.edit div.edit-pic {
 .tracks-team__individuals__project {
   padding: 10px 0;
 }
-.tracks-team__individuals__project__title {
+.tracks-team__individuals__project__header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   padding: 10px;
-  margin-left: 10px;
-  font-weight: bold;
-  font-size: 1.1em;
   background: #ECECEC;
 }
-.tracks-team__individuals__project__individuals {
-  padding: 0 10px;
+.tracks-team__individuals__project__header__title {
+  font-weight: bold;
+  font-size: 1.1em;
 }
-.tracks-team__individuals__project__individuals__individual {
-  padding: 5px 10px;
+.tracks-team__individuals__project__individuals {
+  margin-left: 10px;
+  padding: 10px;
+}
+.tracks-team__individuals__project__individuals td,
+.tracks-team__individuals__project__individuals th {
+  padding: 5px 10px 5px;
+}
+.tracks-team__individuals__project__individuals td {
+  text-align: right;
+}
+td.tracks-team__individuals__project__individuals__name {
+  padding-left: 0px;
+  padding-right: 20px;
+  text-align: left;
 }
 .tracks-team__social__list {
   display: flex;
@@ -206,23 +227,21 @@ div.edit div.edit-pic {
 .tracks-round__events__list__event__project {
   min-width: 200px;
 }
-.tracks-individuals__list,
-.tracks-rounds__list,
-.tracks-teams__list {
+.tracks-alpha-list {
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 40px;
 }
-.tracks-individuals__list > div,
-.tracks-rounds__list > div,
-.tracks-teams__list > div {
+.tracks-alpha-list__column {
   padding-right: 30px;
 }
-.tracks-individuals__list > div .letter,
-.tracks-rounds__list > div .letter,
-.tracks-teams__list > div .letter {
+.tracks-alpha-list__letter {
   font-weight: bold;
   font-size: 2em;
   padding: 15px 0;
   text-transform: uppercase;
+}
+.tracks-project-nav {
+  padding-bottom: 10px;
+  opacity: 0.7;
 }

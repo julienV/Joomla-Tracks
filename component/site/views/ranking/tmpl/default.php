@@ -10,14 +10,19 @@
  * other free or open source software licenses.
  * See COPYRIGHT.php for copyright notices and details.
  */
+
+use Tracks\Layout\LayoutHelper;
+
 defined('_JEXEC') or die('Restricted access');
 
 $customTops = $this->project->getParam('rk_show_custom_top') ?: [];
 ?>
 
-<div class="tracks-ranking">
+<div id="tracks" class="tracks-ranking">
 
-	<h2><?php echo $this->project->name . ' ' . JText::_('COM_TRACKS_Rankings'); ?></h2>
+	<h2 class="tracks-title"><?php echo $this->project->name . ' ' . JText::_('COM_TRACKS_Rankings'); ?></h2>
+
+	<?= LayoutHelper::render('project.navigation', ['project' => $this->project]) ?>
 
 	<table class="raceResults" cellspacing="0" cellpadding="0" summary="">
 		<thead>

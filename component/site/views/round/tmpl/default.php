@@ -25,14 +25,14 @@ $projectRounds = $entity->getProjectrounds(
 	]
 );
 ?>
-<div id="tracks<?php echo $this->params->get('pageclass_sfx'); ?>" class="tracks-round">
+<div id="tracks" class="tracks-round">
 	<?php if ($this->params->get('show_page_heading', 1)) : ?>
 	<h1>
 		<?php echo $this->escape($this->params->get('page_heading')); ?>
 	</h1>
 	<?php endif; ?>
 
-	<h2><?php echo $this->round->name; ?></h2>
+	<h2 class="tracks-title"><?php echo $this->round->name; ?></h2>
 
 	<!-- Content -->
 	<div class="round-description">

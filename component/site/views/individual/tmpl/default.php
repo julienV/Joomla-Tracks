@@ -25,7 +25,7 @@ $extra = new Registry($this->data->params);
 ?>
 <div id="tracks" class="tracks-individual">
 	<!-- Title -->
-	<h2><?php echo $this->data->first_name . ' ' . $this->data->last_name; ?></h2>
+	<h2 class="tracks-title"><?php echo $this->data->first_name . ' ' . $this->data->last_name; ?></h2>
 
 	<?php if ($this->show_edit_link): ?>
 		<div id="editprofile"class="tracks-individual__editprofile">

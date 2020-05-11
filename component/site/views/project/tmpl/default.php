@@ -11,12 +11,16 @@
  * See COPYRIGHT.php for copyright notices and details.
  */
 // no direct access
+use Tracks\Layout\LayoutHelper;
+
 defined('_JEXEC') or die('Restricted access');
 ?>
 
 <div id="tracks">
 
-	<h2><?php echo $this->project->season_name . ' ' . $this->project->name . ' ' . JText::_('COM_TRACKS_Season_Summary'); ?></h2>
+	<h2 class="tracks-title"><?php echo $this->project->season_name . ' ' . $this->project->name . ' ' . JText::_('COM_TRACKS_Season_Summary'); ?></h2>
+
+	<?= LayoutHelper::render('project.navigation', ['project' => $this->project]) ?>
 
 	<table class="raceResults">
 		<tbody>

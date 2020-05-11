@@ -13,10 +13,10 @@
 // no direct access
 defined('_JEXEC') or die('Restricted access'); ?>
 
-<div class="tracks-teams">
+<div id="tracks" class="tracks-teams">
 
 	<!-- Title -->
-	<h2><?php echo JText::_('COM_TRACKS_All_Teams'); ?></h2>
+	<h2 class="tracks-title"><?php echo JText::_('COM_TRACKS_All_Teams'); ?></h2>
 
 	<?php if ($total = count($this->rows)) : ?>
 		<?php
@@ -29,12 +29,12 @@ defined('_JEXEC') or die('Restricted access'); ?>
 		}
 		?>
 
-		<div class="tracks-teams__list">
+		<div class="tracks-alpha-list">
 			<?php $letter = strtoupper(substr($column[0][0]->name, 0, 1)); ?>
 			<?php foreach ($column as $k => $c): ?>
-				<div class="tracks-teams__list__column">
+				<div class="tracks-alpha-list__column">
 					<?php if ($k == 0): ?>
-						<div class="letter"><?php echo $letter; ?></div>
+						<div class="tracks-alpha-list__letter"><?php echo $letter; ?></div>
 					<?php endif; ?>
 					<?php
 					foreach ($c as $r)
@@ -43,11 +43,11 @@ defined('_JEXEC') or die('Restricted access'); ?>
 						if ($letter != strtoupper(substr($r->name, 0, 1)))
 						{
 							$letter = strtoupper(substr($r->name, 0, 1)); ?>
-							<div class="letter"><?php echo $letter; ?></div>
+							<div class="tracks-alpha-list__letter"><?php echo $letter; ?></div>
 							<?php
 						}
 						?>
-						<a href="<?php echo $link_round; ?>"
+						<a class="tracks-alpha-list__link" href="<?php echo $link_round; ?>"
 						   title="<?php echo JText::_('COM_TRACKS_Display_details') ?>">
 							<?php echo $r->name; ?>
 						</a>

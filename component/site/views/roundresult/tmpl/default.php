@@ -24,7 +24,7 @@ $customFields        = $enabledCustomFields ? \FieldsHelper::getFields('com_trac
 ?>
 <div id="tracks">
 
-	<h2><?php echo $this->round->name . ' - ' . $this->project->name; ?></h2>
+	<h2 class="tracks-title"><?php echo $this->round->name . ' - ' . $this->project->name; ?></h2>
 
 	<?php if ($this->params->get('resultview_results_showrounddesc', 1) && !empty($this->round->description)): ?>
 		<div class="tracks-round-description">

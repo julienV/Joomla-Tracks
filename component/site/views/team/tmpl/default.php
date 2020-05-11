@@ -22,7 +22,7 @@ $team = TrackslibEntityTeam::load($this->data->id);
 
 <div id="tracks" class="tracks-team">
 	<!-- Title -->
-	<h2><?php echo $this->data->name; ?></h2>
+	<h2 class="tracks-title"><?php echo $this->data->name; ?></h2>
 		<?php if ($this->canEdit): ?>
 			<?php
 				$url = TrackslibHelperRoute::getTeamEditRoute($this->data->id);
@@ -82,14 +82,23 @@ $team = TrackslibEntityTeam::load($this->data->id);
 	<?php if (!empty($team->getProjects())): ?>
 	<section class="tracks-team__individuals">
 		<h3 class="tracks-team__individuals__title">
-			<?= Text::_('COM_TRACKS_VIEW_TEAM_INDIVIDUALS'); ?>
+			<?= Text::_('COM_TRACKS_VIEW_TEAM_HISTORY'); ?>
 		</h3>
 		<?php foreach ($team->getProjects() as $project): ?>
+		<?php $ranking = $project->getRankingTool()->getTeamRanking($team->id) ?>
 		<div class="tracks-team__individuals__project">
-			<div class="tracks-team__individuals__project__title">
-				<a href="<?= Route::_(TrackslibHelperRoute::getProjectRoute($project->id)) ?>">
-					<?php echo $project->name; ?>
-				</a>
+			<div class="tracks-team__individuals__project__header">
+				<div class="tracks-team__individuals__project__header__title">
+					<a href="<?= Route::_(TrackslibHelperRoute::getProjectRoute($project->id)) ?>">
+						<?php echo $project->name; ?>
+					</a>
+				</div>
+				<div class="tracks-team__individuals__project__header__stats">
+					<?= Text::_('COM_TRACKS_RANK'); ?>: <?= $ranking->rank ?> |
+					<?= Text::_('COM_TRACKS_POINTS'); ?>: <?= $ranking->points ?> |
+					<?= Text::_('COM_TRACKS_WINS'); ?>: <?= TrackslibHelperTools::getCustomTop($ranking, 1) ?> |
+					<?= Text::_('COM_TRACKS_TABLE_HEADER_TOP3'); ?>: <?= TrackslibHelperTools::getCustomTop($ranking, 3) ?>
+				</div>
 			</div>
 			<table class="tracks-team__individuals__project__individuals">
 				<thead>
