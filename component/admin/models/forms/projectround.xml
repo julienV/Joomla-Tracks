@@ -23,6 +23,7 @@
 				name="start_date"
 				type="calendar"
 				format="%Y-%m-%d %H:%M:%S"
+				filter="user_utc"
 				label="COM_TRACKS_Round_start"
 				description="COM_TRACKS_Round_start"
 				class="inputbox"/>
@@ -31,6 +32,7 @@
 				name="end_date"
 				type="calendar"
 				format="%Y-%m-%d %H:%M:%S"
+				filter="user_utc"
 				label="COM_TRACKS_Round_end"
 				description="COM_TRACKS_Round_end"
 				class="inputbox"/>

@@ -35,6 +35,7 @@ abstract class Helper
 
 		return ($valid['warning_count'] == 0 && $valid['error_count'] == 0) ? Factory::getDate($date) : false;
 	}
+
 	/**
 	 * Get parsed date
 	 *

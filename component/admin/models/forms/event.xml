@@ -13,6 +13,7 @@
 		label="COM_TRACKS_Round_start"
 		description="COM_TRACKS_Round_start"
 		format="%Y-%m-%d %H:%M:%S"
+		filter="user_utc"
 		/>
 
 	<field
@@ -21,6 +22,7 @@
 		label="COM_TRACKS_Round_end"
 		description="COM_TRACKS_Round_end"
 		format="%Y-%m-%d %H:%M:%S"
+		filter="user_utc"
 		/>
 
 	<field
