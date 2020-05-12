@@ -25,27 +25,6 @@ class TracksModelRound extends TrackslibModelFrontbase
 	 */
 	public function getRound($round_id)
 	{
-		if ($round_id)
-		{
-			$query = ' SELECT r.* '
-				. ' FROM #__tracks_rounds AS r '
-				. ' WHERE r.id = ' . $round_id
-				. ' AND r.published = 1 ';
-
-			$this->_db->setQuery($query);
-
-			if ($result = $this->_db->loadObjectList())
-			{
-				return $result[0];
-			}
-			else
-			{
-				return $result;
-			}
-		}
-		else
-		{
-			return null;
-		}
+		return $this->getItem($round_id);
 	}
 }

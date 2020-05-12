@@ -53,6 +53,9 @@ class TracksModelIndividual extends RModelAdmin
 		{
 			PluginHelper::importPlugin('tracks');
 			$params = null;
+
+			// Dummy add $text to prevent a warning in onContentPrepare modules
+			$item->text = null;
 			Factory::getApplication()->triggerEvent('onContentPrepare', ['com_tracks.individual', &$item, &$params]);
 		}
 

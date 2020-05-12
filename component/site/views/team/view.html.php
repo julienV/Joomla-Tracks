@@ -27,26 +27,19 @@ class TracksViewTeam extends RViewSite
 	{
 		if ($this->getLayout() == 'edit')
 		{
-			$this->displayForm($tpl);
-
-			return;
+			return $this->displayForm($tpl);
 		}
 
-		RHelperAsset::load('tracks.css');
 		$mainframe = JFactory::getApplication();
 
-		$id = JRequest::getVar('id', 0, '', 'int');
-
 		$model = $this->getModel();
-		$data = $model->getItem($id);
-
-		$individuals = $this->get('Individuals');
+		$data  = $model->getItem();
 
 		// Parse description with content plugins
 		$data->description = JHTML::_('content.prepare', $data->description);
 
 		$breadcrumbs = $mainframe->getPathWay();
-		$breadcrumbs->addItem($data->name, TrackslibHelperRoute::getTeamRoute($id));
+		$breadcrumbs->addItem($data->name, TrackslibHelperRoute::getTeamRoute($data->id));
 
 		$document = JFactory::getDocument();
 		$document->setTitle($data->name);
@@ -55,7 +48,6 @@ class TracksViewTeam extends RViewSite
 		$this->canEdit = $user->get('id') && ($user->authorise('core.manage', 'com_tracks') || $user->get('id') == $data->admin_id);
 
 		$this->data = $data;
-		$this->individuals = $individuals;
 
 		parent::display($tpl);
 	}

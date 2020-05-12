@@ -26,36 +26,6 @@ class TracksModelTeam extends RModelAdmin
 	protected $_individuals;
 
 	/**
-	 * TracksModelTeam constructor.
-	 *
-	 * @param   array  $config  config
-	 */
-	public function __construct($config = array())
-	{
-		parent::__construct($config);
-
-		$id      = JRequest::getInt('id');
-		$project = JRequest::getInt('p');
-
-		$this->setId($id);
-		$this->project_id = $project;
-	}
-
-	/**
-	 * Set id
-	 *
-	 * @param   int  $id  id
-	 *
-	 * @return void
-	 */
-	public function setId($id)
-	{
-		$this->_id          = (int) $id;
-		$this->_data        = null;
-		$this->_individuals = null;
-	}
-
-	/**
 	 * Method to get a single record.
 	 *
 	 * @param   integer  $pk  The id of the primary key.
@@ -66,31 +36,19 @@ class TracksModelTeam extends RModelAdmin
 	 */
 	public function getItem($pk = null)
 	{
-		$pk = $pk ?: $this->_id;
+		$item = parent::getItem($pk);
 
-		if (empty($this->_data))
+		if (PluginHelper::isEnabled('tracks', 'customfields'))
 		{
-			$query = ' SELECT t.* '
-				. ' FROM #__tracks_teams as t '
-				. ' WHERE t.id = ' . (int) $pk;
+			PluginHelper::importPlugin('tracks');
+			$params = null;
 
-			$this->_db->setQuery($query);
-
-			if ($result = $this->_db->loadObject())
-			{
-				$this->_data = $result;
-			}
-
-			if (PluginHelper::isEnabled('tracks', 'customfields'))
-			{
-				PluginHelper::importPlugin('tracks');
-				$params = null;
-				Factory::getApplication()->triggerEvent('onContentPrepare',
-					['com_tracks.team', &$this->_data, &$params]);
-			}
+			// Dummy add $text to prevent a warning in onContentPrepare modules
+			$item->text = null;
+			Factory::getApplication()->triggerEvent('onContentPrepare', ['com_tracks.team', &$item, &$params]);
 		}
 
-		return $this->_data;
+		return $item;
 	}
 
 	/**

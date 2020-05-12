@@ -18,6 +18,7 @@ use Joomla\CMS\Router\Route;
 defined('_JEXEC') or die('Restricted access');
 
 $team = TrackslibEntityTeam::load($this->data->id);
+RHelperAsset::load('tracks.css');
 ?>
 
 <div id="tracks" class="tracks-team">

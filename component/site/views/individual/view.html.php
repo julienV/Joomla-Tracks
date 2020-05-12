@@ -77,14 +77,14 @@ class TracksViewIndividual extends RViewSite
 	{
 		$projects = array();
 
-		if (!count($results))
+		if (!empty($results))
 		{
 			return $projects;
 		}
 
 		foreach ($results AS $r)
 		{
-			@$projects[$r->project_id][] = $r;
+			$projects[$r->project_id][] = $r;
 		}
 
 		return $projects;
