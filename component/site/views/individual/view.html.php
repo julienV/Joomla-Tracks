@@ -77,7 +77,7 @@ class TracksViewIndividual extends RViewSite
 	{
 		$projects = array();
 
-		if (!empty($results))
+		if (empty($results))
 		{
 			return $projects;
 		}
