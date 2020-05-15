@@ -1,2 +1,7 @@
 Tracks Racing League Management for Joomla
 ==========================================
+
+Transifex translation
+---------------------
+push files: tx push -s
+get translations: tx pull --all

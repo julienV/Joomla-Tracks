@@ -24,14 +24,17 @@ file_filter = languages/<lang>/site/<lang>/<lang>.lib_tracks.ini
 source_file = component/libraries/tracks/language/en-GB/en-GB.lib_tracks.ini
 source_lang = en-GB
 
-[tracks.plg_tracks_cb-ini]
-file_filter = languages/<lang>/site/<lang>/<lang>.plg_tracks_cb.ini
-source_file = 3pd/plugin_tracks_cb/language/en-GB/en-GB.plg_tracks_cb.ini
+
+; =========== PLUGINS ============
+
+[tracks.plg_editors-xtd_tracks_individual-ini]
+file_filter = languages/<lang>/site/<lang>/<lang>.plg_editors-xtd_tracks_individual.ini
+source_file = component/plugins/editors-xtd/tracks_individual/language/en-GB/en-GB.plg_editors-xtd_tracks_individual.ini
 source_lang = en-GB
 
-[tracks.plg_user_tracks_autoregister-ini]
-file_filter = languages/<lang>/site/<lang>/<lang>.plg_user_tracks_autoregister.ini
-source_file = component/plugins/user/tracks_autoregister/language/en-GB/en-GB.plg_user_tracks_autoregister.ini
+[tracks.plg_editors-xtd_tracks_individual-sys-ini]
+file_filter = languages/<lang>/site/<lang>/<lang>.plg_editors-xtd_tracks_individual.sys.ini
+source_file = component/plugins/editors-xtd/tracks_individual/language/en-GB/en-GB.plg_editors-xtd_tracks_individual.ini
 source_lang = en-GB
 
 [tracks.plg_search_trackssearch-ini]
@@ -44,14 +47,68 @@ file_filter = languages/<lang>/site/<lang>/<lang>.plg_search_trackssearch.sys.in
 source_file = component/plugins/search/trackssearch/language/en-GB/en-GB.plg_search_trackssearch.sys.ini
 source_lang = en-GB
 
-[tracks.mod_tracks_teamranking-ini]
-file_filter = languages/<lang>/site/<lang>/<lang>.mod_tracks_teamranking.ini
-source_file = component/modules/frontend/mod_tracks_teamranking/language/en-GB/en-GB.mod_tracks_teamranking.ini
+[tracks.plg_tracks_import_formula1-ini]
+file_filter = languages/<lang>/site/<lang>/<lang>.plg_tracks_import_formula1.ini
+source_file = component/plugins/tracks_import/formula1/language/en-GB/en-GB.plg_tracks_import_formula1.ini
 source_lang = en-GB
 
-[tracks.mod_tracks_teamranking-sys-ini]
-file_filter = languages/<lang>/site/<lang>/<lang>.mod_tracks_teamranking.sys.ini
-source_file = component/modules/frontend/mod_tracks_teamranking/language/en-GB/en-GB.mod_tracks_teamranking.sys.ini
+[tracks.plg_tracks_import_formula1-sys-ini]
+file_filter = languages/<lang>/site/<lang>/<lang>.plg_tracks_import_formula1.sys.ini
+source_file = component/plugins/tracks_import/formula1/language/en-GB/en-GB.plg_tracks_import_formula1.sys.ini
+source_lang = en-GB
+
+[tracks.plg_tracks_projecttype_default-ini]
+file_filter = languages/<lang>/site/<lang>/<lang>.plg_tracks_projecttype_default.ini
+source_file = component/plugins/tracks_projecttype/default/language/en-GB/en-GB.plg_tracks_projecttype_default.ini
+source_lang = en-GB
+
+[tracks.plg_tracks_projecttype_default-sys-ini]
+file_filter = languages/<lang>/site/<lang>/<lang>.plg_tracks_projecttype_default.sys.ini
+source_file = component/plugins/tracks_projecttype/default/language/en-GB/en-GB.plg_tracks_projecttype_default.sys.ini
+source_lang = en-GB
+
+[tracks.plg_user_tracks_autoregister-ini]
+file_filter = languages/<lang>/site/<lang>/<lang>.plg_user_tracks_autoregister.ini
+source_file = component/plugins/user/tracks_autoregister/language/en-GB/en-GB.plg_user_tracks_autoregister.ini
+source_lang = en-GB
+
+[tracks.plg_user_tracks_autoregister-sys-ini]
+file_filter = languages/<lang>/site/<lang>/<lang>.plg_user_tracks_autoregister.sys.ini
+source_file = component/plugins/user/tracks_autoregister/language/en-GB/en-GB.plg_user_tracks_autoregister.sys.ini
+source_lang = en-GB
+
+; =========== PLUGINS 3pd ============
+
+[tracks.plg_tracks_cb-ini]
+file_filter = languages/<lang>/site/<lang>/<lang>.plg_tracks_cb.ini
+source_file = 3pd/plugin_tracks_cb/language/en-GB/en-GB.plg_tracks_cb.ini
+source_lang = en-GB
+
+[tracks.plg_tracks_cb-sys-ini]
+file_filter = languages/<lang>/site/<lang>/<lang>.plg_tracks_cb.sys.ini
+source_file = 3pd/plugin_tracks_cb/language/en-GB/en-GB.plg_tracks_cb.sys.ini
+source_lang = en-GB
+
+; =========== MODULES ============
+
+[tracks.mod_tracks_latest_results-ini]
+file_filter = languages/<lang>/site/<lang>/<lang>.mod_tracks_latest_results.ini
+source_file = component/modules/frontend/mod_tracks_latest_results/language/en-GB/en-GB.mod_tracks_latest_results.ini
+source_lang = en-GB
+
+[tracks.mod_tracks_latest_results-sys-ini]
+file_filter = languages/<lang>/site/<lang>/<lang>.mod_tracks_latest_results.sys.ini
+source_file = component/modules/frontend/mod_tracks_latest_results/language/en-GB/en-GB.mod_tracks_latest_results.sys.ini
+source_lang = en-GB
+
+[tracks.mod_tracks_ranking-ini]
+file_filter = languages/<lang>/site/<lang>/<lang>.mod_tracks_ranking.ini
+source_file = component/modules/frontend/mod_tracks_ranking/language/en-GB/en-GB.mod_tracks_ranking.ini
+source_lang = en-GB
+
+[tracks.mod_tracks_ranking-sys-ini]
+file_filter = languages/<lang>/site/<lang>/<lang>.mod_tracks_ranking.sys.ini
+source_file = component/modules/frontend/mod_tracks_ranking/language/en-GB/en-GB.mod_tracks_ranking.sys.ini
 source_lang = en-GB
 
 [tracks.mod_tracks_results-ini]
@@ -64,13 +121,23 @@ file_filter = languages/<lang>/site/<lang>/<lang>.mod_tracks_results.sys.ini
 source_file = component/modules/frontend/mod_tracks_results/language/en-GB/en-GB.mod_tracks_results.sys.ini
 source_lang = en-GB
 
-[tracks.mod_tracks_ranking-ini]
-file_filter = languages/<lang>/site/<lang>/<lang>.mod_tracks_ranking.ini
-source_file = component/modules/frontend/mod_tracks_ranking/language/en-GB/en-GB.mod_tracks_ranking.ini
+[tracks.mod_tracks_teamranking-ini]
+file_filter = languages/<lang>/site/<lang>/<lang>.mod_tracks_teamranking.ini
+source_file = component/modules/frontend/mod_tracks_teamranking/language/en-GB/en-GB.mod_tracks_teamranking.ini
 source_lang = en-GB
 
-[tracks.mod_tracks_ranking-sys-ini]
-file_filter = languages/<lang>/site/<lang>/<lang>.mod_tracks_ranking.sys.ini
-source_file = component/modules/frontend/mod_tracks_ranking/language/en-GB/en-GB.mod_tracks_ranking.sys.ini
+[tracks.mod_tracks_teamranking-sys-ini]
+file_filter = languages/<lang>/site/<lang>/<lang>.mod_tracks_teamranking.sys.ini
+source_file = component/modules/frontend/mod_tracks_teamranking/language/en-GB/en-GB.mod_tracks_teamranking.sys.ini
+source_lang = en-GB
+
+[tracks.mod_tracks_teamsocial-ini]
+file_filter = languages/<lang>/site/<lang>/<lang>.mod_tracks_teamsocial.ini
+source_file = component/modules/frontend/mod_tracks_teamsocial/language/en-GB/en-GB.mod_tracks_teamsocial.ini
+source_lang = en-GB
+
+[tracks.mod_tracks_teamsocial-sys-ini]
+file_filter = languages/<lang>/site/<lang>/<lang>.mod_tracks_teamsocial.sys.ini
+source_file = component/modules/frontend/mod_tracks_teamsocial/language/en-GB/en-GB.mod_tracks_teamsocial.sys.ini
 source_lang = en-GB
 
