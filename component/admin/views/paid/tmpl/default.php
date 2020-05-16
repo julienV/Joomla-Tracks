@@ -20,7 +20,12 @@ $extensions = [
 		'name'        => 'Individual and paid modules',
 		'description' => 'Display individual and team information anywere on your site',
 		'link'        => 'https://jlv-solutions.com/products/tracks/individual-and-team-modules'
-	]
+	],
+	[
+		'name'        => 'Upcoming events ticker',
+		'description' => 'Display upcoming events, with a big ticker',
+		'link'        => 'https://jlv-solutions.com/products/tracks/tracks-upcoming-events-ticker'
+	],
 ];
 ?>
 <div class="tracks-paid">
