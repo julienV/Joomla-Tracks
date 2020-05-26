@@ -25,6 +25,6 @@ class TracksModelRound extends TrackslibModelFrontbase
 	 */
 	public function getRound($round_id)
 	{
-		return $this->getItem($round_id);
+		return TrackslibEntityRound::load($round_id);
 	}
 }

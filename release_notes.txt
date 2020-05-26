@@ -1,3 +1,9 @@
+3.0.14
+ *  fixing missing language string
+ *  Fixing wrong check in indivual form
+ *  Fixed onContentPrepare warnings
+ *  Fixed save time in gmt in db
+
 3.0.13
  *  Place modules css in media folder for easier override
  *  Added project navigation to frontend project views
