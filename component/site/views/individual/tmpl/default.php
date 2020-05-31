@@ -220,6 +220,14 @@ $extra = new Registry($this->data->params);
 		</div>
 	</div>
 
+	<?php if ($this->params->get('indview_show_stats', 1)): ?>
+		<?php echo $this->loadTemplate('stats'); ?>
+	<?php endif; ?>
+
+	<?php if ($this->params->get('indview_show_ranks', 1)): ?>
+		<?php echo $this->loadTemplate('rankings'); ?>
+	<?php endif; ?>
+
 	<?php if ($this->params->get('indview_showresults', 1)): ?>
 		<?php echo $this->loadTemplate('results'); ?>
 	<?php endif; ?>

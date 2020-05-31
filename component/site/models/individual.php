@@ -260,6 +260,7 @@ class TracksModelIndividual extends RModelAdmin
 		$query = $this->_db->getQuery(true);
 
 		$query->select('rr.rank, rr.performance, rr.bonus_points, pr.project_id')
+			->select('CASE WHEN rr.number THEN rr.number ELSE part.number END AS number')
 			->select('r.name AS roundname, r.id as pr')
 			->select('srt.name AS subroundname')
 			->select('srt.points_attribution, srt.count_points, psr.rank_offset')
@@ -270,6 +271,7 @@ class TracksModelIndividual extends RModelAdmin
 			->select('CASE WHEN CHAR_LENGTH( r.alias ) THEN CONCAT_WS( \':\', pr.id, r.alias ) ELSE pr.id END AS prslug')
 			->select('CASE WHEN CHAR_LENGTH( r.alias ) THEN CONCAT_WS( \':\', r.id, r.alias ) ELSE r.id END AS rslug')
 			->from('#__tracks_events_results AS rr')
+			->leftJoin('#__tracks_participants AS part ON part.individual_id = rr.individual_id AND part.team_id = rr.team_id')
 			->join('INNER', '#__tracks_events AS psr ON psr.id = rr.event_id')
 			->join('INNER', '#__tracks_eventtypes AS srt ON srt.id = psr.type')
 			->join('INNER', '#__tracks_projects_rounds AS pr ON pr.id = psr.projectround_id')
@@ -281,7 +283,8 @@ class TracksModelIndividual extends RModelAdmin
 			->where('rr.individual_id = ' . $this->_db->Quote($pk))
 			->where('p.published')
 			->where('pr.published')
-			->where('psr.published');
+			->where('psr.published')
+			->group('rr.id');
 
 		if ($params->get('indview_results_onlypointssubrounds', 1))
 		{
@@ -290,11 +293,11 @@ class TracksModelIndividual extends RModelAdmin
 
 		if ($params->get('indview_results_ordering', 'ASC') == 'DESC')
 		{
-			$query->order('s.ordering DESC, c.ordering DESC, p.ordering DESC, pr.ordering ASC, psr.ordering ASC');
+			$query->order('p.ordering DESC, pr.ordering ASC, psr.ordering ASC');
 		}
 		else
 		{
-			$query->order('s.ordering ASC, c.ordering ASC, p.ordering ASC, pr.ordering ASC, psr.ordering ASC');
+			$query->order('p.ordering ASC, pr.ordering ASC, psr.ordering ASC');
 		}
 
 		$this->_db->setQuery($query);

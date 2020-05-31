@@ -28,7 +28,7 @@ class TrackslibEntityIndividual extends TrackslibEntityBase
 	 *
 	 * @return TrackslibEntityParticipant[]
 	 */
-	public function getParticipants($ordering = 'project.ordering desc')
+	public function getParticipants($ordering = 'project.ordering asc')
 	{
 		$db    = \JFactory::getDbo();
 		$query = $db->getQuery(true)
@@ -82,10 +82,10 @@ class TrackslibEntityIndividual extends TrackslibEntityBase
 				'ranking'     => $ranking
 			];
 
-			$stats['starts'] += count($ranking->finishes);
-			$stats['points']   += $ranking->points;
-			$stats['wins']     += TrackslibHelperTools::getCustomTop($ranking, 1);
-			$stats['podiums']  += TrackslibHelperTools::getCustomTop($ranking, 3);
+			$stats['starts']  += count($ranking->finishes);
+			$stats['points']  += $ranking->points;
+			$stats['wins']    += TrackslibHelperTools::getCustomTop($ranking, 1);
+			$stats['podiums'] += TrackslibHelperTools::getCustomTop($ranking, 3);
 		}
 
 		return $stats;

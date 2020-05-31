@@ -20,7 +20,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 	<div id="individualresults">
 		<?php if (count($this->results)): ?>
 			<?php foreach ($this->results as $k => $project): ?>
-				<h3>
+				<h4>
 					<?php echo $project[0]->projectname; ?>
 					<?php if ($this->params->get('indview_results_showcompetition',
 							1) || $this->params->get('indview_results_showseason', 1))
@@ -40,10 +40,13 @@ defined('_JEXEC') or die('Restricted access'); ?>
 						echo $html;
 					}
 					?>
-				</h3>
+				</h4>
 				<table class="raceResults">
 					<thead>
 					<tr>
+						<?php if ($this->params->get('indview_results_show_number', 0)): ?>
+							<th><?php echo JText::_('COM_TRACKS_NUMBER_SHORT'); ?></th>
+						<?php endif; ?>
 						<?php if ($this->params->get('indview_results_showteam', 1)): ?>
 							<th><?php echo JText::_('COM_TRACKS_TEAM'); ?></th>
 						<?php endif; ?>
@@ -65,6 +68,9 @@ defined('_JEXEC') or die('Restricted access'); ?>
 					<tbody>
 					<?php foreach ($project as $result): ?>
 						<tr<?php echo($result->rank == 1 ? 'class="winner"' : ''); ?>>
+							<?php if ($this->params->get('indview_results_show_number', 0)): ?>
+								<td><?php echo $result->number; ?></td>
+							<?php endif; ?>
 							<?php if ($this->params->get('indview_results_showteam', 1)): ?>
 								<td><?php echo $result->teamname; ?></td>
 							<?php endif; ?>

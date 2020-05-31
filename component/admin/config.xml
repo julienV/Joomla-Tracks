@@ -29,77 +29,6 @@
 
 	<fieldset name="views" label="COM_TRACKS_SETTINGS_VIEWS_LABEL"
 		description="COM_TRACKS_SETTINGS_VIEWS_DESC">
-		<field type="spacer" default="INDIVIDUAL VIEW SETTINGS" />
-		<field type="radio" name="show_dob" default="1" class="btn btn-group"
-			   label="COM_TRACKS_SETTING_SHOW_DOB" description="COM_TRACKS_SETTING_SHOW_DOB_DESC">
-			<option value="0">JNO</option>
-			<option value="1">JYES</option>
-		</field>
-		<field type="radio" name="show_gender" default="1" class="btn btn-group"
-			   label="COM_TRACKS_SETTING_SHOW_GENDER" description="COM_TRACKS_SETTING_SHOW_GENDER_DESC">
-			<option value="0">JNO</option>
-			<option value="1">JYES</option>
-		</field>
-		<field type="radio" name="indview_showresults" default="1" class="btn btn-group"
-			label="COM_TRACKS_SHOW_INDIVIDUAL_RESULTS" description="COM_TRACKS_SHOW_INDIVIDUAL_RESULTS_DESC">
-			<option value="0">COM_TRACKS_No</option>
-			<option value="1">COM_TRACKS_Yes</option>
-		</field>
-		<field type="radio" name="indview_results_showteam" default="1" class="btn btn-group"
-			label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_TEAM" description="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_TEAM_DESC">
-			<option value="0">COM_TRACKS_No</option>
-			<option value="1">COM_TRACKS_Yes</option>
-		</field>
-		<field type="radio" name="indview_results_showproject" default="1" class="btn btn-group"
-			label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_PROJECT" description="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_PROJECT_DESC">
-			<option value="0">COM_TRACKS_No</option>
-			<option value="1">COM_TRACKS_Yes</option>
-		</field>
-		<field type="radio" name="indview_results_showcompetition"
-			default="0" label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_COMPETITION" class="btn btn-group"
-			description="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_COMPETITION_DESC">
-			<option value="0">COM_TRACKS_No</option>
-			<option value="1">COM_TRACKS_Yes</option>
-		</field>
-		<field type="radio" name="indview_results_showseason" default="0" class="btn btn-group"
-			label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_SEASON" description="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_SEASON_DESC">
-			<option value="0">COM_TRACKS_No</option>
-			<option value="1">COM_TRACKS_Yes</option>
-		</field>
-		<field type="radio" name="indview_results_showrace" default="1" class="btn btn-group"
-			label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_RACE" description="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_RACE_DESC">
-			<option value="0">COM_TRACKS_No</option>
-			<option value="1">COM_TRACKS_Yes</option>
-		</field>
-		<field type="radio" name="indview_results_onlypointssubrounds" class="btn btn-group"
-			default="1" label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_ONLY_POINTS_EVENT"
-			description="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_ONLY_POINTS_EVENT">
-			<option value="0">COM_TRACKS_No</option>
-			<option value="1">COM_TRACKS_Yes</option>
-		</field>
-		<field type="radio" name="indview_results_showperformance" class="btn btn-group"
-			default="1" label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_PERFORMANCE"
-			description="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_PERFORMANCE_DESC">
-			<option value="0">COM_TRACKS_No</option>
-			<option value="1">COM_TRACKS_Yes</option>
-		</field>
-		<field type="radio" name="indview_results_showrank" default="1" class="btn btn-group"
-			label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_RANK" description="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_RANK_DESC">
-			<option value="0">COM_TRACKS_No</option>
-			<option value="1">COM_TRACKS_Yes</option>
-		</field>
-		<field type="radio" name="indview_results_points" default="1" class="btn btn-group"
-			label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_POINTS" description="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_POINTS_DESC">
-			<option value="0">COM_TRACKS_No</option>
-			<option value="1">COM_TRACKS_Yes</option>
-		</field>
-		<field type="list" name="indview_results_ordering" default="1"
-			label="COM_TRACKS_INDIVIDUAL_RESULTS_ORDERING" description="COM_TRACKS_INDIVIDUAL_RESULTS_ORDERING_DESC">
-			<option value="ASC">COM_TRACKS_INDIVIDUAL_RESULTS_ORDERING_ASC</option>
-			<option value="DESC">COM_TRACKS_INDIVIDUAL_RESULTS_ORDERING_DES</option>
-		</field>
-
-
 		<field type="spacer" default="COM_TRACKS_RESULTS_VIEW_SETTINGS" />
 		<field type="radio" name="resultview_results_showrounddesc" class="btn btn-group"
 			default="1" label="COM_TRACKS_RESULTS_VIEW_SHOW_ROUND_DESC"
@@ -116,6 +45,7 @@
 	</fieldset>
 
 	<fieldset name="individual" label="COM_TRACKS_SETTINGS_INDIVIDUAL_LABEL">
+		<field type="spacer" label="COM_TRACKS_SETTINGS_INDIVIDUAL_DETAILS_LABEL" />
 		<field
 			name="nickname_over_name"
 			type="radio"
@@ -203,6 +133,99 @@
 		>
 			<option value="0">JNO</option>
 			<option value="1">JYES</option>
+		</field>
+
+		<field type="spacer" label="COM_TRACKS_SETTINGS_INDIVIDUAL_VIEW_LABEL" />
+		<field type="radio" name="show_dob" default="1" class="btn btn-group"
+			   label="COM_TRACKS_SETTING_SHOW_DOB" description="COM_TRACKS_SETTING_SHOW_DOB_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+		<field type="radio" name="show_gender" default="1" class="btn btn-group"
+			   label="COM_TRACKS_SETTING_SHOW_GENDER" description="COM_TRACKS_SETTING_SHOW_GENDER_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+		<field type="radio" name="indview_show_stats" default="1" class="btn btn-group"
+			   label="COM_TRACKS_SETTINGS_INDVIEW_SHOW_STATS" description="COM_TRACKS_SETTINGS_INDVIEW_SHOW_STATS_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+		<field type="radio" name="indview_show_ranks" default="1" class="btn btn-group"
+			   label="COM_TRACKS_SETTINGS_INDVIEW_SHOW_RANKS" description="COM_TRACKS_SETTINGS_INDVIEW_SHOW_RANKS_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+		<field type="number" name="indview_ranking_limit" default="5"
+			   showon="indview_show_ranks:1"
+			   label="COM_TRACKS_SETTINGS_INDVIEW_RANKING_LIMIT"
+			   description="COM_TRACKS_SETTINGS_INDVIEW_RANKING_LIMIT_DESC"/>
+
+		<field type="radio" name="indview_showresults" default="1" class="btn btn-group"
+			   label="COM_TRACKS_SHOW_INDIVIDUAL_RESULTS" description="COM_TRACKS_SHOW_INDIVIDUAL_RESULTS_DESC">
+			<option value="0">COM_TRACKS_No</option>
+			<option value="1">COM_TRACKS_Yes</option>
+		</field>
+
+		<field type="radio" name="indview_results_show_number" default="0" class="btn btn-group"
+			   label="COM_TRACKS_SETTINGS_INDVIEW_RESULTS_SHOW_NUMBER"
+			   description="COM_TRACKS_SETTINGS_INDVIEW_RESULTS_SHOW_NUMBER_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+
+		<field type="radio" name="indview_results_showteam" default="1" class="btn btn-group"
+			   label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_TEAM" description="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_TEAM_DESC">
+			<option value="0">COM_TRACKS_No</option>
+			<option value="1">COM_TRACKS_Yes</option>
+		</field>
+		<field type="radio" name="indview_results_showproject" default="1" class="btn btn-group"
+			   label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_PROJECT" description="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_PROJECT_DESC">
+			<option value="0">COM_TRACKS_No</option>
+			<option value="1">COM_TRACKS_Yes</option>
+		</field>
+		<field type="radio" name="indview_results_showcompetition"
+			   default="0" label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_COMPETITION" class="btn btn-group"
+			   description="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_COMPETITION_DESC">
+			<option value="0">COM_TRACKS_No</option>
+			<option value="1">COM_TRACKS_Yes</option>
+		</field>
+		<field type="radio" name="indview_results_showseason" default="0" class="btn btn-group"
+			   label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_SEASON" description="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_SEASON_DESC">
+			<option value="0">COM_TRACKS_No</option>
+			<option value="1">COM_TRACKS_Yes</option>
+		</field>
+		<field type="radio" name="indview_results_showrace" default="1" class="btn btn-group"
+			   label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_RACE" description="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_RACE_DESC">
+			<option value="0">COM_TRACKS_No</option>
+			<option value="1">COM_TRACKS_Yes</option>
+		</field>
+		<field type="radio" name="indview_results_onlypointssubrounds" class="btn btn-group"
+			   default="1" label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_ONLY_POINTS_EVENT"
+			   description="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_ONLY_POINTS_EVENT">
+			<option value="0">COM_TRACKS_No</option>
+			<option value="1">COM_TRACKS_Yes</option>
+		</field>
+		<field type="radio" name="indview_results_showperformance" class="btn btn-group"
+			   default="1" label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_PERFORMANCE"
+			   description="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_PERFORMANCE_DESC">
+			<option value="0">COM_TRACKS_No</option>
+			<option value="1">COM_TRACKS_Yes</option>
+		</field>
+		<field type="radio" name="indview_results_showrank" default="1" class="btn btn-group"
+			   label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_RANK" description="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_RANK_DESC">
+			<option value="0">COM_TRACKS_No</option>
+			<option value="1">COM_TRACKS_Yes</option>
+		</field>
+		<field type="radio" name="indview_results_points" default="1" class="btn btn-group"
+			   label="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_POINTS" description="COM_TRACKS_INDIVIDUAL_RESULTS_SHOW_POINTS_DESC">
+			<option value="0">COM_TRACKS_No</option>
+			<option value="1">COM_TRACKS_Yes</option>
+		</field>
+		<field type="list" name="indview_results_ordering" default="1"
+			   label="COM_TRACKS_INDIVIDUAL_RESULTS_ORDERING" description="COM_TRACKS_INDIVIDUAL_RESULTS_ORDERING_DESC">
+			<option value="ASC">COM_TRACKS_INDIVIDUAL_RESULTS_ORDERING_ASC</option>
+			<option value="DESC">COM_TRACKS_INDIVIDUAL_RESULTS_ORDERING_DES</option>
 		</field>
 	</fieldset>
 
