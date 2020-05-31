@@ -1,13 +1,17 @@
-table.raceResults {
+table.raceResults,
+.tracks-table {
   border-collapse: collapse;
 }
-table.raceResults th {
+table.raceResults th,
+.tracks-table th {
   border-bottom: 1px solid #ECECEC;
   padding-bottom: 4px;
   text-align: left;
 }
 table.raceResults th,
-table.raceResults td {
+.tracks-table th,
+table.raceResults td,
+.tracks-table td {
   border-collapse: collapse;
   font-size: 1.2em;
   line-height: 1.2em;

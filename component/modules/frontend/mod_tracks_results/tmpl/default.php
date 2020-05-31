@@ -93,7 +93,7 @@ JHtml::stylesheet('mod_tracks_results/style.css', array('relative' => true));
 		<div class="no_res alert alert-info"><?php echo JText::_('MOD_TRACKS_RESULTS_NO_RESULTS'); ?></div>
 	<?php endif; ?>
 	<?php
-	$link = JRoute::_(TrackslibHelperRoute::getRoundResultRoute($round->projectround_id));
+	$link = JRoute::_(TrackslibHelperRoute::getRoundResultRoute($round->id));
 	?>
 	<a class="fulltablelink" href="<?php echo $link; ?>"
 	   title="<?php echo JText::_('MOD_TRACKS_RESULTS_View_full_table'); ?>">
