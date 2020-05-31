@@ -113,8 +113,97 @@
 			<option value="0">COM_TRACKS_No</option>
 			<option value="1">COM_TRACKS_Yes</option>
 		</field>
+	</fieldset>
 
-
+	<fieldset name="individual" label="COM_TRACKS_SETTINGS_INDIVIDUAL_LABEL">
+		<field
+			name="nickname_over_name"
+			type="radio"
+			class="btn btn-group"
+			default="0"
+			label="COM_TRACKS_SETTING_NICKNAME_OVER_NAME"
+			description="COM_TRACKS_SETTING_NICKNAME_OVER_NAME_DESC"
+		>
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+		<field
+				name="enable_individual_nickname"
+				type="radio"
+				class="btn btn-group"
+				default="1"
+				label="COM_TRACKS_SETTING_ENABLE_INDIVIDUAL_NICKNAME"
+				description="COM_TRACKS_SETTING_ENABLE_INDIVIDUAL_NICKNAME_DESC"
+		>
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+		<field
+				name="enable_individual_gender"
+				type="radio"
+				class="btn btn-group"
+				default="1"
+				label="COM_TRACKS_SETTING_ENABLE_INDIVIDUAL_GENDER"
+				description="COM_TRACKS_SETTING_ENABLE_INDIVIDUAL_GENDER_DESC"
+		>
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+		<field
+				name="enable_individual_height"
+				type="radio"
+				class="btn btn-group"
+				default="1"
+				label="COM_TRACKS_SETTING_ENABLE_INDIVIDUAL_HEIGHT"
+				description="COM_TRACKS_SETTING_ENABLE_INDIVIDUAL_HEIGHT_DESC"
+		>
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+		<field
+				name="enable_individual_weight"
+				type="radio"
+				class="btn btn-group"
+				default="1"
+				label="COM_TRACKS_SETTING_ENABLE_INDIVIDUAL_WEIGHT"
+				description="COM_TRACKS_SETTING_ENABLE_INDIVIDUAL_WEIGHT_DESC"
+		>
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+		<field
+				name="enable_individual_dob"
+				type="radio"
+				class="btn btn-group"
+				default="1"
+				label="COM_TRACKS_SETTING_ENABLE_INDIVIDUAL_DOB"
+				description="COM_TRACKS_SETTING_ENABLE_INDIVIDUAL_DOB_DESC"
+		>
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+		<field
+				name="enable_individual_hometown"
+				type="radio"
+				class="btn btn-group"
+				default="1"
+				label="COM_TRACKS_SETTING_ENABLE_INDIVIDUAL_HOMETOWN"
+				description="COM_TRACKS_SETTING_ENABLE_INDIVIDUAL_HOMETOWN_DESC"
+		>
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+		<field
+				name="enable_individual_address"
+				type="radio"
+				class="btn btn-group"
+				default="1"
+				label="COM_TRACKS_SETTING_ENABLE_INDIVIDUAL_ADDRESS"
+				description="COM_TRACKS_SETTING_ENABLE_INDIVIDUAL_ADDRESS_DESC"
+		>
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
 	</fieldset>
 
 	<fieldset name="permissions" label="JCONFIG_PERMISSIONS_LABEL"

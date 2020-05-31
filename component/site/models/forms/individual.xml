@@ -182,4 +182,16 @@
 		</field>
 
 	</fieldset>
+
+	<fields name="params">
+		<field name="gender"
+			   type="list"
+			   label="LIB_TRACKS_GENDER"
+		>
+			<option value="">JSELECT</option>
+			<option value="male">LIB_TRACKS_GENDER_MALE</option>
+			<option value="female">LIB_TRACKS_GENDER_FEMALE</option>
+			<option value="other">LIB_TRACKS_GENDER_OTHER</option>
+		</field>
+	</fields>
 </form>

@@ -13,6 +13,7 @@
 
 // no direct access
 use Joomla\CMS\Plugin\PluginHelper;
+use Tracks\Helper\Config;
 
 defined('_JEXEC') or die('Restricted access');
 
@@ -71,11 +72,13 @@ $customFieldsets = PluginHelper::isEnabled('tracks', 'customfields')
 					<strong><?php echo JText::_('COM_TRACKS_INDIVIDUAL'); ?></strong>
 				</a>
 			</li>
+			<?php if (Config::getConfig()->get('enable_individual_address', 1)): ?>
 			<li>
 				<a href="#address" data-toggle="tab">
 					<strong><?php echo JText::_('COM_TRACKS_INDIVIDUALS_GROUP_ADDRESS'); ?></strong>
 				</a>
 			</li>
+			<?php endif; ?>
 			<?php if (!empty($customFieldsets)): ?>
 				<li>
 					<a href="#custom" data-toggle="tab">
@@ -104,6 +107,16 @@ $customFieldsets = PluginHelper::isEnabled('tracks', 'customfields')
 							<?php echo $this->form->getInput('last_name'); ?>
 						</div>
 					</div>
+					<?php if (Config::getConfig()->get('enable_individual_gender', 1)): ?>
+						<div class="control-group">
+							<div class="control-label">
+								<?php echo $this->form->getLabel('gender', 'params'); ?>
+							</div>
+							<div class="controls">
+								<?php echo $this->form->getInput('gender', 'params'); ?>
+							</div>
+						</div>
+					<?php endif; ?>
 					<?php if ((!$this->item->user_id) && (!$this->userIndividual) && $this->user->authorise('core.manage', 'com_tracks')): ?>
 					<div class="control-group">
 						<div class="control-label">
@@ -114,6 +127,7 @@ $customFieldsets = PluginHelper::isEnabled('tracks', 'customfields')
 						</div>
 					</div>
 					<?php endif; ?>
+					<?php if (Config::getConfig()->get('enable_individual_nickname', 1)): ?>
 					<div class="control-group">
 						<div class="control-label">
 							<?php echo $this->form->getLabel('nickname'); ?>
@@ -122,6 +136,7 @@ $customFieldsets = PluginHelper::isEnabled('tracks', 'customfields')
 							<?php echo $this->form->getInput('nickname'); ?>
 						</div>
 					</div>
+					<?php endif; ?>
 					<div class="control-group">
 						<div class="control-label">
 							<?php echo $this->form->getLabel('alias'); ?>
@@ -146,6 +161,7 @@ $customFieldsets = PluginHelper::isEnabled('tracks', 'customfields')
 							<?php echo $this->form->getInput('country_code'); ?>
 						</div>
 					</div>
+					<?php if (Config::getConfig()->get('enable_individual_height', 1)): ?>
 					<div class="control-group">
 						<div class="control-label">
 							<?php echo $this->form->getLabel('height'); ?>
@@ -154,6 +170,8 @@ $customFieldsets = PluginHelper::isEnabled('tracks', 'customfields')
 							<?php echo $this->form->getInput('height'); ?>
 						</div>
 					</div>
+					<?php endif; ?>
+					<?php if (Config::getConfig()->get('enable_individual_weight', 1)): ?>
 					<div class="control-group">
 						<div class="control-label">
 							<?php echo $this->form->getLabel('weight'); ?>
@@ -162,6 +180,8 @@ $customFieldsets = PluginHelper::isEnabled('tracks', 'customfields')
 							<?php echo $this->form->getInput('weight'); ?>
 						</div>
 					</div>
+					<?php endif; ?>
+					<?php if (Config::getConfig()->get('enable_individual_dob', 1)): ?>
 					<div class="control-group">
 						<div class="control-label">
 							<?php echo $this->form->getLabel('dob'); ?>
@@ -170,6 +190,8 @@ $customFieldsets = PluginHelper::isEnabled('tracks', 'customfields')
 							<?php echo $this->form->getInput('dob'); ?>
 						</div>
 					</div>
+					<?php endif; ?>
+					<?php if (Config::getConfig()->get('enable_individual_hometown', 1)): ?>
 					<div class="control-group">
 						<div class="control-label">
 							<?php echo $this->form->getLabel('hometown'); ?>
@@ -178,6 +200,7 @@ $customFieldsets = PluginHelper::isEnabled('tracks', 'customfields')
 							<?php echo $this->form->getInput('hometown'); ?>
 						</div>
 					</div>
+					<?php endif; ?>
 					<div class="control-group">
 						<div class="control-label">
 							<?php echo $this->form->getLabel('picture'); ?>
@@ -207,6 +230,7 @@ $customFieldsets = PluginHelper::isEnabled('tracks', 'customfields')
 				</div>
 			</div>
 
+			<?php if (Config::getConfig()->get('enable_individual_address', 1)): ?>
 			<div class="tab-pane" id="address">
 				<div class="well fieldset-description"><?php echo JText::_('COM_TRACKS_INDIVIDUALS_GROUP_ADDRESS_DESC'); ?></div>
 				<div class="row-fluid">
@@ -252,6 +276,7 @@ $customFieldsets = PluginHelper::isEnabled('tracks', 'customfields')
 					</div>
 				</div>
 			</div>
+			<?php endif; ?>
 
 			<?php if (!empty($customFieldsets)): ?>
 				<div class="tab-pane" id="custom">

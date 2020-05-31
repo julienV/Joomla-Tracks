@@ -13,6 +13,7 @@
 
 // no direct access
 use Joomla\CMS\Plugin\PluginHelper;
+use Tracks\Helper\Config;
 
 defined('_JEXEC') or die('Restricted access');
 
@@ -44,7 +45,7 @@ $customFieldsets = PluginHelper::isEnabled('tracks', 'customfields')
 
 			jQuery('#individual-save').click(function() {
 				var form = jQuery(this).parents('form');
-				form.find('input[name=task]').val('profile.save');
+				form.find('input[name=task]').val('individualform.save');
 				if (document.formvalidator.isValid(form)) {
 					form.submit();
 				}
@@ -52,14 +53,14 @@ $customFieldsets = PluginHelper::isEnabled('tracks', 'customfields')
 
 			jQuery('#individual-cancel').click(function() {
 				var form = jQuery(this).parents('form');
-				form.find('input[name=task]').val('profile.cancel');
+				form.find('input[name=task]').val('individualform.cancel');
 				form.submit();
 			});
 		});
 	</script>
 	<form
-		action="index.php?option=com_tracks&task=profile.edit&id=<?php echo $this->item->id; ?>"
-		method="post" name="adminForm" class="form-validate form-horizontal" id="adminForm" enctype="multipart/form-data">
+			action="index.php?option=com_tracks&task=individualform.edit&id=<?php echo $this->item->id; ?>"
+			method="post" name="adminForm" class="form-validate form-horizontal" id="adminForm" enctype="multipart/form-data">
 
 		<div class="toolbar">
 			<button type="button" class="btn btn-success" id="individual-save"><?php echo JText::_('COM_TRACKS_SAVE'); ?></php></button>
@@ -71,11 +72,13 @@ $customFieldsets = PluginHelper::isEnabled('tracks', 'customfields')
 					<strong><?php echo JText::_('COM_TRACKS_INDIVIDUAL'); ?></strong>
 				</a>
 			</li>
-			<li>
-				<a href="#address" data-toggle="tab">
-					<strong><?php echo JText::_('COM_TRACKS_INDIVIDUALS_GROUP_ADDRESS'); ?></strong>
-				</a>
-			</li>
+			<?php if (Config::getConfig()->get('enable_individual_address', 1)): ?>
+				<li>
+					<a href="#address" data-toggle="tab">
+						<strong><?php echo JText::_('COM_TRACKS_INDIVIDUALS_GROUP_ADDRESS'); ?></strong>
+					</a>
+				</li>
+			<?php endif; ?>
 			<?php if (!empty($customFieldsets)): ?>
 				<li>
 					<a href="#custom" data-toggle="tab">
@@ -104,24 +107,36 @@ $customFieldsets = PluginHelper::isEnabled('tracks', 'customfields')
 							<?php echo $this->form->getInput('last_name'); ?>
 						</div>
 					</div>
-					<?php if ((!$this->item->user_id) && (!$this->userIndividual) && $this->user->authorise('core.manage', 'com_tracks')): ?>
-					<div class="control-group">
-						<div class="control-label">
-							<?php echo $this->form->getLabel('assign_me'); ?>
+					<?php if (Config::getConfig()->get('enable_individual_gender', 1)): ?>
+						<div class="control-group">
+							<div class="control-label">
+								<?php echo $this->form->getLabel('gender', 'params'); ?>
+							</div>
+							<div class="controls">
+								<?php echo $this->form->getInput('gender', 'params'); ?>
+							</div>
 						</div>
-						<div class="controls">
-							<?php echo $this->form->getInput('assign_me'); ?>
-						</div>
-					</div>
 					<?php endif; ?>
-					<div class="control-group">
-						<div class="control-label">
-							<?php echo $this->form->getLabel('nickname'); ?>
+					<?php if ((!$this->item->user_id) && (!$this->userIndividual) && $this->user->authorise('core.manage', 'com_tracks')): ?>
+						<div class="control-group">
+							<div class="control-label">
+								<?php echo $this->form->getLabel('assign_me'); ?>
+							</div>
+							<div class="controls">
+								<?php echo $this->form->getInput('assign_me'); ?>
+							</div>
 						</div>
-						<div class="controls">
-							<?php echo $this->form->getInput('nickname'); ?>
+					<?php endif; ?>
+					<?php if (Config::getConfig()->get('enable_individual_nickname', 1)): ?>
+						<div class="control-group">
+							<div class="control-label">
+								<?php echo $this->form->getLabel('nickname'); ?>
+							</div>
+							<div class="controls">
+								<?php echo $this->form->getInput('nickname'); ?>
+							</div>
 						</div>
-					</div>
+					<?php endif; ?>
 					<div class="control-group">
 						<div class="control-label">
 							<?php echo $this->form->getLabel('alias'); ?>
@@ -146,38 +161,46 @@ $customFieldsets = PluginHelper::isEnabled('tracks', 'customfields')
 							<?php echo $this->form->getInput('country_code'); ?>
 						</div>
 					</div>
-					<div class="control-group">
-						<div class="control-label">
-							<?php echo $this->form->getLabel('height'); ?>
+					<?php if (Config::getConfig()->get('enable_individual_height', 1)): ?>
+						<div class="control-group">
+							<div class="control-label">
+								<?php echo $this->form->getLabel('height'); ?>
+							</div>
+							<div class="controls">
+								<?php echo $this->form->getInput('height'); ?>
+							</div>
 						</div>
-						<div class="controls">
-							<?php echo $this->form->getInput('height'); ?>
+					<?php endif; ?>
+					<?php if (Config::getConfig()->get('enable_individual_weight', 1)): ?>
+						<div class="control-group">
+							<div class="control-label">
+								<?php echo $this->form->getLabel('weight'); ?>
+							</div>
+							<div class="controls">
+								<?php echo $this->form->getInput('weight'); ?>
+							</div>
 						</div>
-					</div>
-					<div class="control-group">
-						<div class="control-label">
-							<?php echo $this->form->getLabel('weight'); ?>
+					<?php endif; ?>
+					<?php if (Config::getConfig()->get('enable_individual_dob', 1)): ?>
+						<div class="control-group">
+							<div class="control-label">
+								<?php echo $this->form->getLabel('dob'); ?>
+							</div>
+							<div class="controls">
+								<?php echo $this->form->getInput('dob'); ?>
+							</div>
 						</div>
-						<div class="controls">
-							<?php echo $this->form->getInput('weight'); ?>
+					<?php endif; ?>
+					<?php if (Config::getConfig()->get('enable_individual_hometown', 1)): ?>
+						<div class="control-group">
+							<div class="control-label">
+								<?php echo $this->form->getLabel('hometown'); ?>
+							</div>
+							<div class="controls">
+								<?php echo $this->form->getInput('hometown'); ?>
+							</div>
 						</div>
-					</div>
-					<div class="control-group">
-						<div class="control-label">
-							<?php echo $this->form->getLabel('dob'); ?>
-						</div>
-						<div class="controls">
-							<?php echo $this->form->getInput('dob'); ?>
-						</div>
-					</div>
-					<div class="control-group">
-						<div class="control-label">
-							<?php echo $this->form->getLabel('hometown'); ?>
-						</div>
-						<div class="controls">
-							<?php echo $this->form->getInput('hometown'); ?>
-						</div>
-					</div>
+					<?php endif; ?>
 					<div class="control-group">
 						<div class="control-label">
 							<?php echo $this->form->getLabel('picture'); ?>
@@ -207,51 +230,53 @@ $customFieldsets = PluginHelper::isEnabled('tracks', 'customfields')
 				</div>
 			</div>
 
-			<div class="tab-pane" id="address">
-				<div class="well fieldset-description"><?php echo JText::_('COM_TRACKS_INDIVIDUALS_GROUP_ADDRESS_DESC'); ?></div>
-				<div class="row-fluid">
-					<div class="control-group">
-						<div class="control-label">
-							<?php echo $this->form->getLabel('address'); ?>
+			<?php if (Config::getConfig()->get('enable_individual_address', 1)): ?>
+				<div class="tab-pane" id="address">
+					<div class="well fieldset-description"><?php echo JText::_('COM_TRACKS_INDIVIDUALS_GROUP_ADDRESS_DESC'); ?></div>
+					<div class="row-fluid">
+						<div class="control-group">
+							<div class="control-label">
+								<?php echo $this->form->getLabel('address'); ?>
+							</div>
+							<div class="controls">
+								<?php echo $this->form->getInput('address'); ?>
+							</div>
 						</div>
-						<div class="controls">
-							<?php echo $this->form->getInput('address'); ?>
+						<div class="control-group">
+							<div class="control-label">
+								<?php echo $this->form->getLabel('postcode'); ?>
+							</div>
+							<div class="controls">
+								<?php echo $this->form->getInput('postcode'); ?>
+							</div>
 						</div>
-					</div>
-					<div class="control-group">
-						<div class="control-label">
-							<?php echo $this->form->getLabel('postcode'); ?>
+						<div class="control-group">
+							<div class="control-label">
+								<?php echo $this->form->getLabel('city'); ?>
+							</div>
+							<div class="controls">
+								<?php echo $this->form->getInput('city'); ?>
+							</div>
 						</div>
-						<div class="controls">
-							<?php echo $this->form->getInput('postcode'); ?>
+						<div class="control-group">
+							<div class="control-label">
+								<?php echo $this->form->getLabel('state'); ?>
+							</div>
+							<div class="controls">
+								<?php echo $this->form->getInput('state'); ?>
+							</div>
 						</div>
-					</div>
-					<div class="control-group">
-						<div class="control-label">
-							<?php echo $this->form->getLabel('city'); ?>
-						</div>
-						<div class="controls">
-							<?php echo $this->form->getInput('city'); ?>
-						</div>
-					</div>
-					<div class="control-group">
-						<div class="control-label">
-							<?php echo $this->form->getLabel('state'); ?>
-						</div>
-						<div class="controls">
-							<?php echo $this->form->getInput('state'); ?>
-						</div>
-					</div>
-					<div class="control-group">
-						<div class="control-label">
-							<?php echo $this->form->getLabel('country'); ?>
-						</div>
-						<div class="controls">
-							<?php echo $this->form->getInput('country'); ?>
+						<div class="control-group">
+							<div class="control-label">
+								<?php echo $this->form->getLabel('country'); ?>
+							</div>
+							<div class="controls">
+								<?php echo $this->form->getInput('country'); ?>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			<?php endif; ?>
 
 			<?php if (!empty($customFieldsets)): ?>
 				<div class="tab-pane" id="custom">
