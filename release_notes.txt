@@ -1,3 +1,13 @@
+3.0.16
+ *  Fix wrong link to table error in mod_tracks_result
+ *  Added rankings and stats in individual view
+ *  Global parameter to use nickname instead of full name in frontend display
+ *  Disable extra individual fields in global settings
+ *  Fixes for edit individual in frontend
+
+3.0.15
+ *  Fix round display bug
+
 3.0.14
  *  fixing missing language string
  *  Fixing wrong check in indivual form
