@@ -75,7 +75,7 @@ $projectRounds = $entity->getProjectrounds(
 							<div class="tracks-round__events__list__event__winners__winner">
 								<a href="<?= TrackslibHelperRoute::getIndividualRoute($winner->id) ?>">
 										<span class="tracks-round__events__list__event__winners__winner__name">
-										<?= $winner->first_name . ' ' . $winner->last_name ?>
+										<?= TrackslibHelperTools::formatIndividualName($winner) ?>
 										</span>
 									<?php if ($this->params->get('shownickname', 0) && !empty($winner->nickname)): ?>
 										<span class="tracks-round__events__list__event__winners__winner__nickname">

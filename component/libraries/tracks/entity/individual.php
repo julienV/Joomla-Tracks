@@ -6,6 +6,8 @@
  * @license     GNU General Public License version 2 or later
  */
 
+use Tracks\Helper\Config;
+
 defined('_JEXEC') or die;
 
 require_once JPATH_SITE . '/administrator/components/com_tracks/models/participants.php';
@@ -96,6 +98,11 @@ class TrackslibEntityIndividual extends TrackslibEntityBase
 	 */
 	public function getFullName()
 	{
+		if (Config::get('nickname_over_name', 0))
+		{
+			return $this->nickname;
+		}
+
 		$name = [];
 
 		if ($this->first_name)

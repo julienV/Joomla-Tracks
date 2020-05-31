@@ -71,7 +71,7 @@ class TracksViewProject extends JViewLegacy
 
 			if ($result->winner && $result->winner->last_name)
 			{
-				$winner = JText::_('COM_TRACKS_Winner') . $result->winner->first_name . ' ' . $result->winner->last_name;
+				$winner = JText::_('COM_TRACKS_Winner') . TrackslibHelperTools::formatIndividualName($result->winner);
 
 				if ($result->winner->team_name)
 				{

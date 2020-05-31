@@ -30,7 +30,7 @@ class TracksTableIndividual extends RTable
 	 */
 	public function check()
 	{
-		$alias = JFilterOutput::stringURLSafe($this->first_name . '-' . $this->last_name);
+		$alias = JFilterOutput::stringURLSafe($this->nickname ?: $this->first_name . '-' . $this->last_name);
 
 		if (empty($this->alias) || $this->alias === $alias)
 		{

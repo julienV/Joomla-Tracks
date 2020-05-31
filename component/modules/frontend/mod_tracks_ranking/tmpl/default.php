@@ -42,11 +42,11 @@ JHtml::stylesheet('mod_tracks_ranking/style.css', array('relative' => true));
 	        <td><?php echo $rank++; ?></td>
 	        <td>
 	            <?php if ($params->get('showpicture', 1) && $ranking->picture_small): ?>
-	            <?php echo TrackslibHelperImage::modalimage($img_dir.$ranking->picture_small, $ranking->first_name, 20); ?>
+	            <?php echo TrackslibHelperImage::modalimage($img_dir.$ranking->picture_small, TrackslibHelperTools::formatIndividualName($ranking), 20); ?>
 	            <?php endif; ?>
 	          <a href="<?php echo $link_ind; ?>"
-	             title="<?php echo $ranking->last_name.($ranking->first_name ? ', '.$ranking->first_name : ''); ?>">
-	          <?php echo $ranking->last_name; ?>
+	             title="<?php echo TrackslibHelperTools::formatIndividualName($ranking); ?>">
+	          <?php echo TrackslibHelperTools::formatIndividualName($ranking); ?>
 	          </a>
 	        </td>
 	        <?php if ($showteams) { ?>

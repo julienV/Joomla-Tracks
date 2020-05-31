@@ -50,9 +50,9 @@ class TracksViewIndividual extends RViewSite
 		$show_edit_link = ($user->id && $user->id == $data->user_id) || $user->authorise('core.manage', 'com_tracks');
 
 		$breadcrumbs = $mainframe->getPathWay();
-		$breadcrumbs->addItem($data->first_name . ' ' . $data->last_name, TrackslibHelperRoute::getEditIndividualRoute($data->id));
+		$breadcrumbs->addItem(TrackslibHelperTools::formatIndividualName($data), TrackslibHelperRoute::getEditIndividualRoute($data->id));
 
-		$document->setTitle($data->first_name . ' ' . $data->last_name);
+		$document->setTitle(TrackslibHelperTools::formatIndividualName($data));
 
 		// Allow content plugins
 		$data->description = JHTML::_('content.prepare', $data->description);
@@ -117,20 +117,20 @@ class TracksViewIndividual extends RViewSite
 
 		if ($this->item->picture != '')
 		{
-			$this->item->picture = JHTML::image(JURI::root() . $this->item->picture, $this->item->first_name . ' ' . $this->item->last_name, $attribs);
+			$this->item->picture = JHTML::image(JURI::root() . $this->item->picture, TrackslibHelperTools::formatIndividualName($item), $attribs);
 		}
 		else
 		{
-			$this->item->picture = JHTML::image(JURI::root() . 'media/com_tracks/images/misc/tnnophoto.jpg', $this->item->first_name . ' ' . $this->item->last_name, $attribs);
+			$this->item->picture = JHTML::image(JURI::root() . 'media/com_tracks/images/misc/tnnophoto.jpg', TrackslibHelperTools::formatIndividualName($item), $attribs);
 		}
 
 		if ($this->item->picture_small != '')
 		{
-			$this->item->picture_small = JHTML::image(JURI::root() . $this->item->picture_small, $this->item->first_name . ' ' . $this->item->last_name, $attribs);
+			$this->item->picture_small = JHTML::image(JURI::root() . $this->item->picture_small, TrackslibHelperTools::formatIndividualName($item), $attribs);
 		}
 		else
 		{
-			$this->item->picture_small = JHTML::image(JURI::root() . 'media/com_tracks/images/misc/tnnophoto.jpg', $this->item->first_name . ' ' . $this->item->last_name, $attribs);
+			$this->item->picture_small = JHTML::image(JURI::root() . 'media/com_tracks/images/misc/tnnophoto.jpg', TrackslibHelperTools::formatIndividualName($item), $attribs);
 		}
 
 		$this->title = $this->item->id ?

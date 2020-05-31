@@ -92,7 +92,7 @@ $customFields        = $enabledCustomFields ? \FieldsHelper::getFields('com_trac
 			foreach ($subround->results AS $result)
 			{
 				$resultCustomFields = $enabledCustomFields ? \FieldsHelper::getFields('com_tracks.eventresult', $result, true) : [];
-				$ind_slug = $result->individual_id . ':' . JFilterOutput::stringURLSafe($result->first_name . ' ' . $result->last_name);
+				$ind_slug = $result->individual_id . ':' . JFilterOutput::stringURLSafe(TrackslibHelperTools::formatIndividualName($result));
 				$link_ind = JRoute::_(TrackslibHelperRoute::getIndividualRoute($ind_slug, $this->project->slug));
 				$team_slug = $result->team_id . ':' . JFilterOutput::stringURLSafe($result->team_name);
 				$link_team = JRoute::_(TrackslibHelperRoute::getTeamRoute($team_slug));
@@ -123,7 +123,7 @@ $customFields        = $enabledCustomFields ? \FieldsHelper::getFields('com_trac
 					<td>
 						<a href="<?php echo $link_ind; ?>"
 						   title="<?php echo JText::_('COM_TRACKS_Details'); ?>">
-							<?php echo $result->first_name . ' ' . $result->last_name; ?>
+							<?php echo TrackslibHelperTools::formatIndividualName($result); ?>
 						</a>
 					</td>
 

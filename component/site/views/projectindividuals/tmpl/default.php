@@ -31,11 +31,11 @@ defined('_JEXEC') or die('Restricted access'); ?>
 				<div class="tracks__individualsGallery__item">
 					<div class="tracks__individualsGallery__item__splash">
 						<a href="<?php echo $link_ind; ?>" class="tracks__individualsGallery__item__link"
-						   title="<?php echo $obj->first_name . ' ' . $obj->last_name; ?>">
+						   title="<?php echo TrackslibHelperTools::formatIndividualName($obj); ?>">
 							<?php if (!$obj->picture): ?>
-								<?= HTMLHelper::image('com_tracks/individuals/placeholder_individual.png', $obj->first_name . ' ' . $obj->last_name, ['class' => 'pic'], true); ?>
+								<?= HTMLHelper::image('com_tracks/individuals/placeholder_individual.png', TrackslibHelperTools::formatIndividualName($obj), ['class' => 'pic'], true); ?>
 							<?php else: ?>
-								<img class="pic" src="<?= $obj->picture ?>" alt="<?php echo $obj->first_name . ' ' . $obj->last_name; ?>"/>
+								<img class="pic" src="<?= $obj->picture ?>" alt="<?php echo TrackslibHelperTools::formatIndividualName($obj); ?>"/>
 							<?php endif; ?>
 						</a>
 					</div>
@@ -44,10 +44,10 @@ defined('_JEXEC') or die('Restricted access'); ?>
 						<div class="tracks__individualsGallery__item__desc__namerow">
 							<span class="individualnumber">#<?php echo $obj->number; ?></span>
 							<a href="<?php echo $link_ind; ?>"
-							   title="<?php echo $obj->first_name . ' ' . $obj->last_name;; ?>">
+							   title="<?php echo TrackslibHelperTools::formatIndividualName($obj); ?>">
 								<?php
 								// individual name
-								echo $obj->first_name . ' ' . $obj->last_name;
+								echo TrackslibHelperTools::formatIndividualName($obj);
 								?>
 							</a>
 							<?php if ($this->projectparams->get('showflag')): ?>

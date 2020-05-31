@@ -63,8 +63,8 @@ JHtml::stylesheet('mod_tracks_results/style.css', array('relative' => true));
 					<td>
 						<a href="<?php echo $link_ind; ?>"
 						   title="<?php
-						   echo trim($rows->first_name . ' ' . $rows->last_name) . '::'
-							   . $rows->performance; ?>" class="mod-result-tip"><?php echo $rows->last_name; ?>
+						   echo trim(TrackslibHelperTools::formatIndividualName($rows)) . '::'
+							   . $rows->performance; ?>" class="mod-result-tip"><?php echo TrackslibHelperTools::formatIndividualName($rows); ?>
 						</a>
 					</td>
 					<?php if ($showteams) { ?>

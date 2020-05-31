@@ -77,7 +77,7 @@ use Tracks\Layout\LayoutHelper;
 				<td class="name">
 					<a href="<?php echo $link_ind; ?>"
 					   title="<?php echo JText::_('COM_TRACKS_Details'); ?>">
-						<?php echo $ranking->first_name . ' ' . $ranking->last_name; ?>
+						<?php echo TrackslibHelperTools::formatIndividualName($ranking); ?>
 					</a>
 				</td>
 				<?php if ($this->params->get('shownickname')): ?>

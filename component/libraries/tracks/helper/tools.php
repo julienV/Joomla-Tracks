@@ -6,6 +6,8 @@
  * @license     GNU General Public License version 2 or later
  */
 
+use Tracks\Helper\Config;
+
 defined('_JEXEC') or die;
 
 /**
@@ -310,6 +312,23 @@ abstract class TrackslibHelperTools
 		}
 
 		return $links;
+	}
+
+	/**
+	 * Format name from first_name, last_name, and nickname
+	 *
+	 * @param   object  $data  data
+	 *
+	 * @return string
+	 */
+	public static function formatIndividualName($data)
+	{
+		if (!Config::get('nickname_over_name', 0))
+		{
+			return (!empty($data->first_name) ? $data->first_name . ' ' : '') . $data->last_name;
+		}
+
+		return $data->nickname;
 	}
 
 	/**

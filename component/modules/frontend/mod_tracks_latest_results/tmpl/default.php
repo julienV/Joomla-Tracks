@@ -58,7 +58,7 @@ $date = $event->getDate('start_date', $params->get('date_format'))
 					<td>
 						<a href="<?php echo $link_ind; ?>"
 						   title="<?php
-						   echo trim($rows->first_name . ' ' . $rows->last_name) . ' - '
+						   echo trim(TrackslibHelperTools::formatIndividualName($rows)) . ' - '
 							   . $rows->performance; ?>"><?php echo $rows->last_name; ?>
 						</a>
 					</td>

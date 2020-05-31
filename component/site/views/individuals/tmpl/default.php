@@ -11,7 +11,17 @@
  * See COPYRIGHT.php for copyright notices and details.
  */
 // no direct access
-defined('_JEXEC') or die('Restricted access'); ?>
+defined('_JEXEC') or die('Restricted access');
+
+$useNickname = \Tracks\Helper\Config::get('nickname_over_name', 0);
+
+if ($useNickname)
+{
+	usort($this->rows, function ($a, $b) {
+		return strcasecmp($a->nickname, $b->nickname);
+	});
+}
+?>
 
 <div id="tracks" class="tracks-individuals">
 	<!-- Title -->
@@ -27,7 +37,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 			$i++;
 		}
 
-		$first = $this->params->get('ordering') ? 'first_name' : 'last_name';
+		$first = $useNickname ? 'nickname' : ($this->params->get('ordering') ? 'first_name' : 'last_name');
 		?>
 
 		<div class="tracks-alpha-list">
@@ -51,7 +61,9 @@ defined('_JEXEC') or die('Restricted access'); ?>
 							?>
 							<a class="tracks-alpha-list__link" href="<?php echo $link_round; ?>"
 							   title="<?php echo JText::_('COM_TRACKS_Display_details') ?>">
-								<?php if ($this->params->get('ordering')): ?>
+								<?php if ($useNickname): ?>
+									<?php echo $r->nickname; ?>
+								<?php elseif ($this->params->get('ordering')): ?>
 									<?php echo $r->first_name . ', ' . $r->last_name; ?>
 								<?php else: ?>
 									<?php echo $r->last_name . ', ' . $r->first_name; ?>

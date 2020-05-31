@@ -53,7 +53,7 @@ defined('_JEXEC') or die('Restricted access');
 							<div class="winner">
 								<a href="<?= TrackslibHelperRoute::getIndividualRoute($winner->id) ?>">
 									<span class="winner__name">
-									<?= $winner->first_name . ' ' . $winner->last_name ?>
+									<?= TrackslibHelperTools::formatIndividualName($winner) ?>
 									</span>
 									<?php if ($this->params->get('shownickname', 0) && !empty($winner->nickname)): ?>
 										<span class="winner__nickname">

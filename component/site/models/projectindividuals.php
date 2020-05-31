@@ -51,24 +51,5 @@ class TracksModelProjectindividuals extends TrackslibModelFrontbase
 		$this->_db->setQuery($query);
 
 		return $this->_db->loadObjectList();
-
-		$count = count($result);
-
-		for ($i = 0; $i < $count; $i++)
-		{
-			$obj              =& $result[$i];
-			$attribs['class'] = "pic";
-
-			if ($obj->picture != '')
-			{
-				$obj->picture = JHTML::image(JURI::root() . $obj->picture, $obj->first_name . ' ' . $obj->last_name, $attribs);
-			}
-			else
-			{
-				$obj->picture = JHTML::image(JURI::root() . 'media/com_tracks/images/misc/tnnophoto.jpg', $obj->first_name . ' ' . $obj->last_name, $attribs);
-			}
-		}
-
-		return $result;
 	}
 }
