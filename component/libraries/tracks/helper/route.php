@@ -133,17 +133,17 @@ class TrackslibHelperRoute
 	{
 		$parts = array(
 			"option" => "com_tracks",
-			"view"   => "profile"
+			"view"   => "individualform"
 		);
 
 		if ($id)
 		{
-			$parts['task'] = 'profile.edit';
+			$parts['task'] = 'individualform.edit';
 			$parts['id'] = $id;
 		}
 		else
 		{
-			$parts['task'] = 'profile.add';
+			$parts['task'] = 'individualform.add';
 		}
 
 		return self::buildUrl($parts);

@@ -17,7 +17,7 @@ defined('_JEXEC') or die('Restricted access');
  * @package  Tracks
  * @since    0.1
  */
-class TracksModelProfile extends RModelAdmin
+class TracksModelIndividualform extends RModelAdmin
 {
 	protected $context = 'com_tracks';
 
@@ -34,7 +34,6 @@ class TracksModelProfile extends RModelAdmin
 	 */
 	public function getItem($pk = null)
 	{
-		$pk   = $pk ?: $this->getUserIndividual();
 		$item = parent::getItem($pk);
 
 		if (PluginHelper::isEnabled('tracks', 'customfields'))
@@ -48,28 +47,6 @@ class TracksModelProfile extends RModelAdmin
 		}
 
 		return $item;
-	}
-
-	/**
-	 * return individual id for user
-	 *
-	 * @return int
-	 */
-	public function getUserIndividual()
-	{
-		$user = JFactory::getUser();
-
-		$db    = JFactory::getDbo();
-		$query = $db->getQuery(true);
-
-		$query->select('id');
-		$query->from('#__tracks_individuals');
-		$query->where('user_id = ' . (int) $user->id);
-
-		$db->setQuery($query);
-		$res = $db->loadResult();
-
-		return $res;
 	}
 
 	/**
@@ -358,5 +335,27 @@ class TracksModelProfile extends RModelAdmin
 		}
 
 		throw new \Exception(\JText::sprintf('JLIB_APPLICATION_ERROR_TABLE_NAME_NOT_SUPPORTED', $name), 0);
+	}
+
+	/**
+	 * return individual id for user
+	 *
+	 * @return int
+	 */
+	public function getUserIndividual()
+	{
+		$user = JFactory::getUser();
+
+		$db    = JFactory::getDbo();
+		$query = $db->getQuery(true);
+
+		$query->select('id');
+		$query->from('#__tracks_individuals');
+		$query->where('user_id = ' . (int) $user->id);
+
+		$db->setQuery($query);
+		$res = $db->loadResult();
+
+		return $res;
 	}
 }

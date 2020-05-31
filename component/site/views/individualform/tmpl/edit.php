@@ -44,7 +44,7 @@ $customFieldsets = PluginHelper::isEnabled('tracks', 'customfields')
 
 			jQuery('#individual-save').click(function() {
 				var form = jQuery(this).parents('form');
-				form.find('input[name=task]').val('profile.save');
+				form.find('input[name=task]').val('individualform.save');
 				if (document.formvalidator.isValid(form)) {
 					form.submit();
 				}
@@ -52,13 +52,13 @@ $customFieldsets = PluginHelper::isEnabled('tracks', 'customfields')
 
 			jQuery('#individual-cancel').click(function() {
 				var form = jQuery(this).parents('form');
-				form.find('input[name=task]').val('profile.cancel');
+				form.find('input[name=task]').val('individualform.cancel');
 				form.submit();
 			});
 		});
 	</script>
 	<form
-		action="index.php?option=com_tracks&task=profile.edit&id=<?php echo $this->item->id; ?>"
+		action="index.php?option=com_tracks&task=individualform.edit&id=<?php echo $this->item->id; ?>"
 		method="post" name="adminForm" class="form-validate form-horizontal" id="adminForm" enctype="multipart/form-data">
 
 		<div class="toolbar">

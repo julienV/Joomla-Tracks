@@ -50,6 +50,10 @@ class TracksRouter extends JComponentRouterView
 		$profile = new JComponentRouterViewconfiguration('profile');
 		$this->registerView($profile);
 
+		$individualForm = new JComponentRouterViewconfiguration('individualform');
+		$individualForm->setKey('id');
+		$this->registerView($individualForm);
+
 		$project = new JComponentRouterViewconfiguration('project');
 		$project->setKey('p')->setParent($projects);
 		$this->registerView($project);
@@ -117,6 +121,19 @@ class TracksRouter extends JComponentRouterView
 		}
 
 		return [];
+	}
+
+	/**
+	 * Method to get the segment(s)
+	 *
+	 * @param   string  $id     ID of the object to retrieve the segments for
+	 * @param   array   $query  The request that is built right now
+	 *
+	 * @return  array|string  The segments of this item
+	 */
+	public function getIndividualformSegment($id, $query)
+	{
+		return $this->getIndividualSegment($id, $query);
 	}
 
 	/**
@@ -265,6 +282,19 @@ class TracksRouter extends JComponentRouterView
 		$table->load(['alias' => $segment]);
 
 		return $table->id;
+	}
+
+	/**
+	 * Method to get the id for a view
+	 *
+	 * @param   string  $segment  Segment to retrieve the ID for
+	 * @param   array   $query    The request that is parsed right now
+	 *
+	 * @return  mixed   The id of this item or false
+	 */
+	public function getIndividualformId($segment, $query)
+	{
+		return $this->getIndividualId($segment, $query);
 	}
 
 	/**
