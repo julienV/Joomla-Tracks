@@ -36,7 +36,7 @@ if (!empty($results) && $params->get('indview_ranking_limit'))
 			<th class="tracks-individual-rankings__head tracks-individual-rankings__head--title">
 				<?= Text::_('COM_TRACKS_INDIVIDUAL_RESULTS_COL_TITLE') ?>
 			</th>
-			<?php if ($params->get('show_individual_team', 1)): ?>
+			<?php if ($params->get('indview_results_showteam', 1)): ?>
 				<th class="tracks-individual-rankings__head tracks-individual-rankings__head--team">
 					<?= Text::_('COM_TRACKS_INDIVIDUAL_RESULTS_COL_TEAM') ?>
 				</th>
