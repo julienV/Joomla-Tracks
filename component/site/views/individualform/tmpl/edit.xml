@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-	<layout title="COM_TRACKS_individualform_LAYOUT">
+	<layout title="COM_TRACKS_individualform_LAYOUT" hidden="true">
 		<message>
 			<![CDATA[COM_TRACKS_individualform_LAYOUT_DESC]]>
 		</message>
