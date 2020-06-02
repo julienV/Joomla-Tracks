@@ -104,7 +104,7 @@ gulp.task('clean:release', function(){
 
 gulp.task('release:languages', ['prepare:release'], function() {
 	const langPath = '../languages';
-	const releaseDir = path.join(config.release_dir, 'language');
+	const releaseDir = path.join(config.release_dir, 'tracks_languages_UNZIP_FIRST');
 
 	const folders = fs.readdirSync(langPath)
 		.map(function(file) {
