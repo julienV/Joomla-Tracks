@@ -49,52 +49,8 @@ class TracksViewProfile extends RViewSite
 	 */
 	protected function displayForm($tpl)
 	{
-		$user = JFactory::getUser();
-		$model = $this->getModel();
-		$app  = Factory::getApplication();
-
-		$this->form = $this->get('Form');
-		$this->item = $this->get('Item');
-		$this->user = $user;
 		$this->userIndividual = $this->get('UserIndividual');
-		$this->canEdit = $model->canEdit($this->item);
 
-		if (!$user->id || !$this->canEdit)
-		{
-			JFactory::getApplication()->redirect('index.php', 'not allowed !');
-		}
-
-		$model = $this->getModel();
-
-		if (!$model->checkout($this->item->id))
-		{
-			// Redirect back to the view screen.
-			$app->redirect(
-				TrackslibHelperRoute::getIndividualRoute($this->item->id),
-				JText::sprintf('JLIB_APPLICATION_ERROR_CHECKOUT_FAILED', $model->getError()),
-				'error'
-			);
-		}
-
-		$app->setUserState('com_tracks.edit.profile.id', [$this->item->id]);
-
-		$attribs['class'] = "pic";
-
-		if ($this->item->picture != '')
-		{
-			$this->item->picture = JHTML::image(JURI::root() . $this->item->picture, $this->item->first_name . ' ' . $this->item->last_name, $attribs);
-		}
-
-		if ($this->item->picture_small != '')
-		{
-			$this->item->picture_small = JHTML::image(JURI::root() . $this->item->picture_small, $this->item->first_name . ' ' . $this->item->last_name, $attribs);
-		}
-
-		$this->title = $this->item->id ?
-			JText::_('COM_TRACKS_PAGETITLE_EDIT_INDIVIDUAL') :
-			JText::_('COM_TRACKS_PAGETITLE_CREATE_INDIVIDUAL');
-
-		// Display the template
-		parent::display($tpl);
+		Factory::getApplication()->redirect(TrackslibHelperRoute::getEditIndividualRoute($this->userIndividual));
 	}
 }

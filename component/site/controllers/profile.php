@@ -20,6 +20,11 @@ defined('_JEXEC') or die();
 class TracksControllerProfile extends RControllerForm
 {
 	/**
+	 * @var string
+	 */
+	protected $text_prefix = 'COM_TRACKS_INDIVIDUAL';
+
+	/**
 	 * Add an individual
 	 *
 	 * @return  mixed  True if the record can be added, a error object if not.

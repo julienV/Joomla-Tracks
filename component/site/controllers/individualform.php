@@ -21,6 +21,11 @@ defined('_JEXEC') or die();
 class TracksControllerIndividualform extends RControllerForm
 {
 	/**
+	 * @var string
+	 */
+	protected $text_prefix = 'COM_TRACKS_INDIVIDUAL';
+
+	/**
 	 * Method to check if you can add a new record.
 	 *
 	 * Extended classes can override this if necessary.
@@ -33,7 +38,7 @@ class TracksControllerIndividualform extends RControllerForm
 	 */
 	protected function allowAdd($data = array())
 	{
-		return Factory::getUser()->authorise('core.manage', 'com_tracks');
+		return $this->getModel()->canCreate();
 	}
 
 	/**
