@@ -1,3 +1,10 @@
+3.0.16.2
+ *  Fixed profile edit/save in frontend
+ *  Hide edit individual form menu
+
+3.0.16.1
+ *  Fix team column in individual raking history
+
 3.0.16
  *  Fix wrong link to table error in mod_tracks_result
  *  Added rankings and stats in individual view
